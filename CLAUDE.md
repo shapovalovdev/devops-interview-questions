@@ -8,6 +8,12 @@ The coordinator validates finished agents, integrates shared changes, closes ver
 
 No task is complete until repository validation and GitHub Actions pass.
 
+## Published site and completion report
+
+The public database is published at `https://shapovalovdev.github.io/devops-interview-questions/`.
+
+After each task, comment on its GitHub issue with the Pages URL, relevant Theme or certification link, commit or pull request, successful CI URL, Question count, verification result, and any required human-review state. The coordinator assigns the highest-priority unblocked queued issue whenever an agent slot becomes free.
+
 ## Agent skills
 
 ### Issue tracker

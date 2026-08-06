@@ -13,6 +13,20 @@ Keep a maximum of three implementation subagents active at once. Resolve shared 
 
 Every Question task must update or extend automated validation for its new behavior. A task is not complete until the repository test suite and GitHub Actions pass.
 
+## Published site and completion report
+
+The public database is published at `https://shapovalovdev.github.io/devops-interview-questions/`.
+
+After every task finishes, post a completion comment on its GitHub issue containing:
+
+- the GitHub Pages URL and the relevant Theme or certification page;
+- the commit SHA or pull request;
+- the successful GitHub Actions URL;
+- Question count and verification status;
+- any required human review state.
+
+Keep every queued issue eligible for automatic assignment. The coordinator fills each available agent slot from the highest-priority unblocked issue.
+
 ## Agent skills
 
 ### Issue tracker
