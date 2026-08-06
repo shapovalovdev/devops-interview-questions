@@ -3,7 +3,7 @@ title: Design a useful service dashboard
 theme: observability
 difficulty: junior
 type: scenario
-tags: [observability, monitoring, reliability, troubleshooting]
+tags: [observability, monitoring, reliability, troubleshooting, prometheus, pca]
 sources:
   - url: https://sre.google/workbook/monitoring/
     source_type: official-docs

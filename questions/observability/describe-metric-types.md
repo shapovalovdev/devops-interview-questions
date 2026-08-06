@@ -3,7 +3,7 @@ title: Choose a counter, gauge, histogram, or summary
 theme: observability
 difficulty: junior
 type: theory
-tags: [observability, monitoring, prometheus, reliability]
+tags: [observability, monitoring, prometheus, reliability, pca]
 sources:
   - url: https://prometheus.io/docs/concepts/metric_types/
     source_type: official-docs

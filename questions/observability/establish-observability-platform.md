@@ -3,7 +3,7 @@ title: Establish an observability platform product
 theme: observability
 difficulty: staff
 type: scenario
-tags: [observability, platform-engineering, governance, reliability]
+tags: [observability, platform-engineering, governance, reliability, prometheus, pca]
 sources:
   - url: https://opentelemetry.io/docs/what-is-opentelemetry/
     source_type: official-docs

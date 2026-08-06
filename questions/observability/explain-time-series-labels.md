@@ -3,7 +3,7 @@ title: Explain a metrics time series and its labels
 theme: observability
 difficulty: junior
 type: theory
-tags: [observability, monitoring, prometheus]
+tags: [observability, monitoring, prometheus, pca]
 sources:
   - url: https://prometheus.io/docs/concepts/data_model/
     source_type: official-docs

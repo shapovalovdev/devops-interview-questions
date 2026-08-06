@@ -3,7 +3,7 @@ title: Combine black-box and white-box monitoring
 theme: observability
 difficulty: middle
 type: theory
-tags: [observability, monitoring, reliability, troubleshooting]
+tags: [observability, monitoring, reliability, troubleshooting, prometheus, pca]
 sources:
   - url: https://sre.google/sre-book/monitoring-distributed-systems/
     source_type: official-docs

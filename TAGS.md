@@ -12,6 +12,6 @@ Use lowercase kebab-case tags. Give every question one or more technology or con
 
 ## Certifications
 
-`cka`, `ckad`, `cks`, `ica`, `kcna`, `kcsa`
+`cka`, `ckad`, `cks`, `ica`, `kcna`, `kcsa`, `pca`
 
 Propose a new tag only when an existing tag cannot express the concept clearly.

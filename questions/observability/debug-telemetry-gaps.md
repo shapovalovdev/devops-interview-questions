@@ -3,7 +3,7 @@ title: Debug gaps in production telemetry
 theme: observability
 difficulty: senior
 type: troubleshooting
-tags: [observability, monitoring, debugging, troubleshooting]
+tags: [observability, monitoring, debugging, troubleshooting, prometheus, pca]
 sources:
   - url: https://opentelemetry.io/docs/collector/resiliency/
     source_type: official-docs

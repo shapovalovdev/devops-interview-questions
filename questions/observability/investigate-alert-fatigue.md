@@ -3,7 +3,7 @@ title: Reduce alert fatigue without hiding risk
 theme: observability
 difficulty: senior
 type: scenario
-tags: [observability, monitoring, incident-response, reliability]
+tags: [observability, monitoring, incident-response, reliability, prometheus, pca]
 sources:
   - url: https://sre.google/sre-book/monitoring-distributed-systems/
     source_type: official-docs

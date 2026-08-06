@@ -20,6 +20,7 @@ CONTAINER_NETWORKING_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "st
 ICA_MINIMUM_QUESTIONS = 15
 CKAD_MINIMUM_QUESTIONS = 20
 CKS_MINIMUM_QUESTIONS = 19
+PCA_MINIMUM_QUESTIONS = 25
 
 
 def front_matter(path: Path) -> dict[str, str]:
@@ -67,6 +68,7 @@ def main() -> None:
     ica_questions = 0
     ckad_questions = 0
     cks_questions = 0
+    pca_questions = 0
     for path in question_files:
         fields = front_matter(path)
         required = {"title", "theme", "difficulty", "type", "tags"}
@@ -117,6 +119,8 @@ def main() -> None:
             cks_questions += 1
         if "ica" in question_tags:
             ica_questions += 1
+        if "pca" in question_tags:
+            pca_questions += 1
         expected_catalog.add(path.relative_to(ROOT).with_suffix(".html").as_posix())
 
     assert set(catalog) == expected_catalog, "Website catalog must contain every active Question exactly once"
@@ -140,6 +144,9 @@ def main() -> None:
     assert "ica" in tags, "ICA certification tag must be documented in TAGS.md"
     assert (ROOT / "docs/certifications/ica.md").is_file(), "ICA certification map is required"
     assert ica_questions >= ICA_MINIMUM_QUESTIONS, f"ICA requires at least {ICA_MINIMUM_QUESTIONS} mapped Questions, got {ica_questions}"
+    assert "pca" in tags, "PCA certification tag must be documented in TAGS.md"
+    assert (ROOT / "docs/certifications/pca.md").is_file(), "PCA certification map is required"
+    assert pca_questions >= PCA_MINIMUM_QUESTIONS, f"PCA requires at least {PCA_MINIMUM_QUESTIONS} mapped Questions, got {pca_questions}"
     print(f"Validated {len(question_files)} active Questions and {len(catalog)} website records.")
 
 

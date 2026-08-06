@@ -3,7 +3,7 @@ title: Validate telemetry data quality after a release
 theme: observability
 difficulty: middle
 type: troubleshooting
-tags: [observability, monitoring, deployment, troubleshooting]
+tags: [observability, monitoring, deployment, troubleshooting, prometheus, pca]
 sources:
   - url: https://opentelemetry.io/docs/concepts/observability-primer/
     source_type: official-docs

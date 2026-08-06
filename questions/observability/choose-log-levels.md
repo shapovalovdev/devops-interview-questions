@@ -3,7 +3,7 @@ title: Choose useful application log levels
 theme: observability
 difficulty: junior
 type: scenario
-tags: [observability, logging, troubleshooting, security]
+tags: [observability, logging, troubleshooting, security, pca]
 sources:
   - url: https://opentelemetry.io/docs/specs/otel/logs/data-model/
     source_type: official-docs

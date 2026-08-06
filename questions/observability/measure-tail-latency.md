@@ -3,7 +3,7 @@ title: Measure and improve tail latency
 theme: observability
 difficulty: senior
 type: troubleshooting
-tags: [observability, monitoring, reliability, troubleshooting]
+tags: [observability, monitoring, reliability, troubleshooting, prometheus, pca]
 sources:
   - url: https://prometheus.io/docs/practices/histograms/
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Govern an organization-wide SLO program
 theme: observability
 difficulty: staff
 type: scenario
-tags: [observability, monitoring, governance, reliability]
+tags: [observability, monitoring, governance, reliability, prometheus, pca]
 sources:
   - url: https://sre.google/workbook/implementing-slos/
     source_type: official-docs

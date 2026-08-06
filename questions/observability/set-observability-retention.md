@@ -3,7 +3,7 @@ title: Set telemetry retention and query-cost controls
 theme: observability
 difficulty: senior
 type: scenario
-tags: [observability, monitoring, logging, cost-optimization]
+tags: [observability, monitoring, logging, cost-optimization, prometheus, pca]
 sources:
   - url: https://sre.google/workbook/monitoring/
     source_type: official-docs

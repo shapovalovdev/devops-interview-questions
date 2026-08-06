@@ -3,7 +3,7 @@ title: Instrument a distributed trace for an API request
 theme: observability
 difficulty: middle
 type: scenario
-tags: [observability, monitoring, debugging, troubleshooting]
+tags: [observability, monitoring, debugging, troubleshooting, pca]
 sources:
   - url: https://opentelemetry.io/docs/concepts/signals/traces/
     source_type: official-docs

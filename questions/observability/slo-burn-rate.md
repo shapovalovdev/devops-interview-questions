@@ -3,7 +3,7 @@ title: Explain an SLO error-budget burn-rate alert
 theme: observability
 difficulty: senior
 type: theory
-tags: [observability, monitoring, reliability, incident-response]
+tags: [observability, monitoring, reliability, incident-response, prometheus, pca]
 sources:
   - url: https://sre.google/workbook/alerting-on-slos/
     source_type: official-docs

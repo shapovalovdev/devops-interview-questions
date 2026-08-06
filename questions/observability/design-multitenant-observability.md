@@ -3,7 +3,7 @@ title: Design multi-tenant observability boundaries
 theme: observability
 difficulty: staff
 type: scenario
-tags: [observability, security, governance, platform-engineering]
+tags: [observability, security, governance, platform-engineering, prometheus, pca]
 sources:
   - url: https://opentelemetry.io/docs/security/
     source_type: official-docs

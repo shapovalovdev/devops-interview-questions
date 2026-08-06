@@ -3,7 +3,7 @@ title: Design trace sampling without losing incidents
 theme: observability
 difficulty: middle
 type: scenario
-tags: [observability, monitoring, troubleshooting, cost-optimization]
+tags: [observability, monitoring, troubleshooting, cost-optimization, pca]
 sources:
   - url: https://opentelemetry.io/docs/concepts/sampling/
     source_type: official-docs

@@ -28,6 +28,8 @@ Every `*.md` file under `questions/<theme>/` is an active Question. It must appe
 
 `tests/validate_certification_question_workflow.py` validates the reusable certification workflow itself: its official-curriculum mapping, canonical-tag, original-content, source-and-blog, catalog, validation, CI, and issue-closure requirements; its issue template; and realistic workflow eval prompts.
 
+`tests/validate_questions.py` also requires the PCA certification tag, PCA map, and at least 25 active Questions carrying the canonical `pca` tag. This prevents the PCA study path from silently disappearing during catalog or content changes.
+
 ## Delivery gate
 
 The `Validate question database` GitHub Actions workflow runs both checks for pushes to `main` and pull requests. GitHub Pages continues to publish from `main`; repository branch protection can require this workflow before future merges.

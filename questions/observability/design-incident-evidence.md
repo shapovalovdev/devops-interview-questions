@@ -3,7 +3,7 @@ title: Design an incident evidence strategy
 theme: observability
 difficulty: staff
 type: scenario
-tags: [observability, incident-response, governance, security]
+tags: [observability, incident-response, governance, security, prometheus, pca]
 sources:
   - url: https://sre.google/workbook/incident-response/
     source_type: official-docs

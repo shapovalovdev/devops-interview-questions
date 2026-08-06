@@ -3,7 +3,7 @@ title: Use recording rules for expensive PromQL
 theme: observability
 difficulty: middle
 type: scenario
-tags: [observability, monitoring, prometheus, reliability]
+tags: [observability, monitoring, prometheus, reliability, pca]
 sources:
   - url: https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/
     source_type: official-docs
