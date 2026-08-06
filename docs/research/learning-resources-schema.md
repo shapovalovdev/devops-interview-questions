@@ -31,3 +31,13 @@ It then follows every unique URL when run with `--check-live`.
   use a descriptive link title.
 - A 12-month review cycle applies. Replace a redirected, inaccessible, or no
   longer relevant resource after review.
+
+## Live-check behavior
+
+The CI validator first sends `HEAD`, then retries with `GET` when a host rejects
+`HEAD` with a common method or bot-policy response (`403`, `405`, `406`, or
+`501`). A successful GET is accepted. A `403`, `429`, or other non-2xx/3xx
+result after that retry remains a failed link: it is not silently treated as
+valid merely because an anti-bot system may be involved. Replace it with an
+equally relevant, publicly readable resource or record why human review is
+required before adding it to the audited manifest.

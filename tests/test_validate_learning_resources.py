@@ -1,6 +1,18 @@
 import unittest
+from unittest.mock import patch
+from urllib.error import HTTPError
 
-from validate_learning_resources import REQUIRED_CATEGORIES, coverage_report, load_manifest, resource_links
+from validate_learning_resources import REQUIRED_CATEGORIES, coverage_report, fetch_status, load_manifest, resource_links
+
+
+class Response:
+    status = 200
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        return False
 
 
 class LearningResourcesParserTests(unittest.TestCase):
@@ -32,6 +44,12 @@ class LearningResourcesParserTests(unittest.TestCase):
         report = coverage_report(load_manifest())
         self.assertRegex(report, r"Learning-resource audit coverage: \d+/\d+ Questions")
         self.assertIn("Audited Themes:", report)
+
+    def test_live_check_retries_get_when_host_rejects_head(self) -> None:
+        head_rejected = HTTPError("https://example.test", 403, "forbidden", None, None)
+        with patch("urllib.request.urlopen", side_effect=[head_rejected, Response()]) as open_url:
+            self.assertEqual(200, fetch_status("https://example.test", 1))
+        self.assertEqual(["HEAD", "GET"], [call.args[0].method for call in open_url.call_args_list])
 
 
 if __name__ == "__main__":

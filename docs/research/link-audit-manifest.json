@@ -5,6 +5,106 @@
     {
       "question": "questions/linux/cron-versus-systemd-timers.md",
       "related_materials": "docs/related-materials/linux.md"
+    },
+    {
+      "question": "questions/sre/assign-incident-roles.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/build-reliability-roadmap.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/classify-alert-urgency.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/coordinate-major-incident.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/define-service-reliability.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/define-sre-engagement-model.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/define-user-journey-sli.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/design-multiwindow-burn-alert.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/design-organizational-incident-program.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/design-reliable-launch.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/establish-oncall-handoff.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/establish-service-ownership.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/explain-error-budget.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/govern-error-budget-policy.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/manage-critical-state.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/measure-and-reduce-toil.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/monitor-distributed-service.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/plan-service-capacity.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/prevent-cascading-failures.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/protect-service-from-overload.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/run-production-readiness-review.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/test-disaster-recovery.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/triage-production-incident.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/write-actionable-runbook.md",
+      "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/sre/write-blameless-postmortem.md",
+      "related_materials": "docs/related-materials/sre.md"
     }
   ]
 }
