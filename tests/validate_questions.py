@@ -12,6 +12,8 @@ SECURITY_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
 SHELL_SCRIPTING_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
 HARDWARE_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
 STORAGE_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
+QUEUE_MESSAGING_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
+ADVANCED_CONTAINERS_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
 
 
 def front_matter(path: Path) -> dict[str, str]:
@@ -51,6 +53,8 @@ def main() -> None:
     shell_scripting_difficulties: dict[str, int] = {difficulty: 0 for difficulty in SHELL_SCRIPTING_DISTRIBUTION}
     hardware_difficulties: dict[str, int] = {difficulty: 0 for difficulty in HARDWARE_DISTRIBUTION}
     storage_difficulties: dict[str, int] = {difficulty: 0 for difficulty in STORAGE_DISTRIBUTION}
+    queue_messaging_difficulties: dict[str, int] = {difficulty: 0 for difficulty in QUEUE_MESSAGING_DISTRIBUTION}
+    advanced_containers_difficulties: dict[str, int] = {difficulty: 0 for difficulty in ADVANCED_CONTAINERS_DISTRIBUTION}
     for path in question_files:
         fields = front_matter(path)
         required = {"title", "theme", "difficulty", "type", "tags"}
@@ -63,13 +67,16 @@ def main() -> None:
         assert set(question_tags) <= tags, f"{path}: uses a Tag missing from TAGS.md"
         content = path.read_text(encoding="utf-8")
         assert "## Answer guide" in content, f"{path}: missing answer guide"
-        if fields["theme"] in {"containers", "observability", "security", "shell-scripting", "hardware", "storage"}:
-            assert re.search(r"^sources:\n  - url: https://", content, re.MULTILINE), f"{path}: missing HTTPS primary source metadata"
-            assert re.search(r"^    source_type: (standard|official-docs|official-api)$", content, re.MULTILINE), f"{path}: invalid source type"
-            assert re.search(r"^    verified_on: \d{4}-\d{2}-\d{2}$", content, re.MULTILINE), f"{path}: missing source verification date"
-            assert len(re.findall(r"^- .*\[.*\]\(https://", content, re.MULTILINE)) >= 2, f"{path}: requires primary and further-reading references"
-            if fields["theme"] in {"shell-scripting", "storage"}:
-                assert re.search(r"^- Further reading \(blog\): .*\(https://", content, re.MULTILINE), f"{path}: requires a labeled complementary blog post"
+        answer = content.split("## Answer guide", 1)[1].split("## References", 1)[0]
+        answer_words = re.findall(r"[A-Za-z0-9][A-Za-z0-9'-]*", answer)
+        assert len(answer_words) >= 60, f"{path}: answer guide is too short for a full answer"
+        assert len(re.findall(r"^- ", answer, re.MULTILINE)) >= 3, f"{path}: answer guide requires direct answer, constraints, and operational guidance"
+        assert re.search(r"^sources:\n  - url: https://", content, re.MULTILINE), f"{path}: missing HTTPS primary source metadata"
+        assert re.search(r"^    source_type: (standard|official-docs|official-api)$", content, re.MULTILINE), f"{path}: invalid source type"
+        assert re.search(r"^    verified_on: \d{4}-\d{2}-\d{2}$", content, re.MULTILINE), f"{path}: missing source verification date"
+        assert "## References" in content, f"{path}: missing References section"
+        assert re.search(r"^- \[.*\]\(https://", content, re.MULTILINE), f"{path}: requires a primary reference"
+        assert re.search(r"^- Further reading \(blog\): .*\(https://", content, re.MULTILINE), f"{path}: requires a labeled complementary blog post"
         if fields["theme"] == "containers":
             container_difficulties[fields["difficulty"]] += 1
         if fields["theme"] == "observability":
@@ -82,6 +89,10 @@ def main() -> None:
             hardware_difficulties[fields["difficulty"]] += 1
         if fields["theme"] == "storage":
             storage_difficulties[fields["difficulty"]] += 1
+        if fields["theme"] == "queue-messaging":
+            queue_messaging_difficulties[fields["difficulty"]] += 1
+        if fields["theme"] == "advanced-containers":
+            advanced_containers_difficulties[fields["difficulty"]] += 1
         expected_catalog.add(path.relative_to(ROOT).with_suffix(".html").as_posix())
 
     assert set(catalog) == expected_catalog, "Website catalog must contain every active Question exactly once"
@@ -91,6 +102,8 @@ def main() -> None:
     assert shell_scripting_difficulties == SHELL_SCRIPTING_DISTRIBUTION, f"shell-scripting must contain {SHELL_SCRIPTING_DISTRIBUTION}, got {shell_scripting_difficulties}"
     assert hardware_difficulties == HARDWARE_DISTRIBUTION, f"hardware must contain {HARDWARE_DISTRIBUTION}, got {hardware_difficulties}"
     assert storage_difficulties == STORAGE_DISTRIBUTION, f"storage must contain {STORAGE_DISTRIBUTION}, got {storage_difficulties}"
+    assert queue_messaging_difficulties == QUEUE_MESSAGING_DISTRIBUTION, f"queue-messaging must contain {QUEUE_MESSAGING_DISTRIBUTION}, got {queue_messaging_difficulties}"
+    assert advanced_containers_difficulties == ADVANCED_CONTAINERS_DISTRIBUTION, f"advanced-containers must contain {ADVANCED_CONTAINERS_DISTRIBUTION}, got {advanced_containers_difficulties}"
     print(f"Validated {len(question_files)} active Questions and {len(catalog)} website records.")
 
 

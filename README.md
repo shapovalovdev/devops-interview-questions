@@ -27,6 +27,7 @@ devops_questions/
 │   ├── logging/                   # structured event records and correlation
 │   ├── networking/                # DNS, TCP, and HTTP
 │   ├── observability/             # metrics, logs, traces, and alerts
+│   ├── queue-messaging/           # Kafka, RabbitMQ, and event delivery
 │   ├── shell-scripting/           # safe command-line automation
 │   ├── security/                  # secrets and supply-chain security
 │   ├── storage/                   # filesystems and persistent data
