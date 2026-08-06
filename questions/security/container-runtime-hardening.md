@@ -3,7 +3,7 @@ title: Harden a container runtime workload
 theme: security
 difficulty: middle
 type: scenario
-tags: [security, containers, least-privilege, linux]
+tags: [security, containers, least-privilege, linux, kcsa]
 sources:
   - url: https://csrc.nist.gov/pubs/sp/800/190/final
     source_type: standard

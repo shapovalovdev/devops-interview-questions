@@ -3,7 +3,7 @@ title: Enforce Kubernetes Pod Security Standards
 theme: security
 difficulty: middle
 type: scenario
-tags: [security, kubernetes, containers, least-privilege]
+tags: [security, kubernetes, containers, least-privilege, kcsa]
 sources:
   - url: https://kubernetes.io/docs/concepts/security/pod-security-standards/
     source_type: official-docs

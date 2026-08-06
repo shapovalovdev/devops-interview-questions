@@ -3,7 +3,7 @@ title: Attach and verify build provenance
 theme: advanced-containers
 difficulty: middle
 type: scenario
-tags: [containers, docker, images, supply-chain, security]
+tags: [containers, docker, images, supply-chain, security, kcsa]
 sources:
   - url: https://docs.docker.com/build/metadata/attestations/slsa-provenance/
     source_type: official-docs

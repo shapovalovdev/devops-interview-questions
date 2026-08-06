@@ -3,7 +3,7 @@ title: Design production network segmentation
 theme: security
 difficulty: senior
 type: scenario
-tags: [security, networking, least-privilege, reliability]
+tags: [security, networking, least-privilege, reliability, kcsa]
 sources:
   - url: https://csrc.nist.gov/pubs/sp/800/207/final
     source_type: standard

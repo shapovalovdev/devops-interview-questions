@@ -3,7 +3,7 @@ title: Respond to a leaked production secret
 theme: security
 difficulty: middle
 type: troubleshooting
-tags: [security, incident-response, logging, least-privilege]
+tags: [security, incident-response, logging, least-privilege, kcsa]
 sources:
   - url: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Establish a security platform risk model
 theme: security
 difficulty: staff
 type: scenario
-tags: [security, governance, platform-engineering, reliability]
+tags: [security, governance, platform-engineering, reliability, kcsa]
 sources:
   - url: https://www.nist.gov/cyberframework
     source_type: standard

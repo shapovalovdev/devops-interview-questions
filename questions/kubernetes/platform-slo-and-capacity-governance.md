@@ -3,7 +3,7 @@ title: Set Kubernetes platform SLO and capacity governance
 theme: kubernetes
 difficulty: staff
 type: scenario
-tags: [kubernetes, observability, capacity-planning, reliability, governance]
+tags: [kubernetes, observability, capacity-planning, reliability, governance, kcsa, cka]
 sources:
   - url: https://kubernetes.io/docs/concepts/cluster-administration/cluster-autoscaling/
     source_type: official-docs

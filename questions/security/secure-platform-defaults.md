@@ -3,7 +3,7 @@ title: Deliver secure platform defaults at scale
 theme: security
 difficulty: staff
 type: scenario
-tags: [security, platform-engineering, automation, governance]
+tags: [security, platform-engineering, automation, governance, kcsa]
 sources:
   - url: https://csrc.nist.gov/pubs/sp/800/218/final
     source_type: standard

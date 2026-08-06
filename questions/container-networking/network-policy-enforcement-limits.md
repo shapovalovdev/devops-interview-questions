@@ -3,7 +3,7 @@ title: Validate Kubernetes NetworkPolicy enforcement
 theme: container-networking
 difficulty: senior
 type: scenario
-tags: [containers, kubernetes, networking, security, least-privilege]
+tags: [containers, kubernetes, networking, security, least-privilege, kcsa]
 sources:
   - url: https://kubernetes.io/docs/concepts/services-networking/network-policies/
     source_type: official-docs

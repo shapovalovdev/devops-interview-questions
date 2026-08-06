@@ -3,7 +3,7 @@ title: Govern security-control exceptions
 theme: security
 difficulty: staff
 type: scenario
-tags: [security, governance, delivery, reliability]
+tags: [security, governance, delivery, reliability, kcsa]
 sources:
   - url: https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
     source_type: standard

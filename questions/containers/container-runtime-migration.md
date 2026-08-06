@@ -3,7 +3,7 @@ title: Lead a container runtime migration
 theme: containers
 difficulty: staff
 type: scenario
-tags: [containers, docker, container-runtime, reliability, platform-engineering, governance]
+tags: [containers, docker, container-runtime, reliability, platform-engineering, governance, kcsa]
 sources:
   - url: https://github.com/opencontainers/runtime-spec/blob/main/README.md
     source_type: standard

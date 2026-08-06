@@ -3,7 +3,7 @@ title: Design a production Kubernetes policy exception process
 theme: kubernetes
 difficulty: staff
 type: scenario
-tags: [kubernetes, security, governance, delivery, reliability]
+tags: [kubernetes, security, governance, delivery, reliability, kcsa, cka]
 sources:
   - url: https://kubernetes.io/docs/concepts/security/security-checklist/
     source_type: official-docs
