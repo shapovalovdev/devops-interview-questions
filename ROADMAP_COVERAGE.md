@@ -6,6 +6,8 @@ This map uses the DevOps roadmap as a coverage guide, not as copied content. Eac
 | --- | --- |
 | Hardware and remote management | `hardware` |
 | Linux and operating systems | `linux` |
+| Linux networking | `linux-networking` |
+| Linux processes | `processes` |
 | Storage and filesystems | `storage` |
 | Networked storage | `network-storage` |
 | Shell and scripting | `shell-scripting` |
@@ -26,6 +28,8 @@ This map uses the DevOps roadmap as a coverage guide, not as copied content. Eac
 | Distributed systems | `distributed-systems` |
 | Web servers and proxies | `web-servers` |
 | Security and supply chain | `security` |
+| Cross-domain troubleshooting | `troubleshooting` |
+| Linux troubleshooting | `linux-troubleshooting` |
 
 ## Coverage rule
 
