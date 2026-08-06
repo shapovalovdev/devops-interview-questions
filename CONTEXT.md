@@ -71,3 +71,7 @@ _Avoid_: Backend architecture
 **Network storage**:
 The canonical Theme for storage accessed over a network, including NFS, SMB, iSCSI, SAN, NAS, and object-storage operational trade-offs.
 _Avoid_: Local filesystems, generic cloud
+
+**Certification tag**:
+A normalized label that maps a canonical Question to one or more CNCF or Linux Foundation certification programs without duplicating the Question.
+_Avoid_: Certification-specific copy
