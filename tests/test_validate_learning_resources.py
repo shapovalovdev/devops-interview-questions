@@ -1,6 +1,6 @@
 import unittest
 
-from validate_learning_resources import REQUIRED_CATEGORIES, resource_links
+from validate_learning_resources import REQUIRED_CATEGORIES, coverage_report, load_manifest, resource_links
 
 
 class LearningResourcesParserTests(unittest.TestCase):
@@ -27,6 +27,11 @@ class LearningResourcesParserTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(AssertionError, "categories"):
             resource_links(f"## What to learn next\n\n{bullets}\n", "fixture")
+
+    def test_coverage_report_states_audited_scope(self) -> None:
+        report = coverage_report(load_manifest())
+        self.assertRegex(report, r"Learning-resource audit coverage: \d+/\d+ Questions")
+        self.assertIn("Audited Themes:", report)
 
 
 if __name__ == "__main__":

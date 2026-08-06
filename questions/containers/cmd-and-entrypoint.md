@@ -23,6 +23,7 @@ How do `CMD` and `ENTRYPOINT` interact, and which form best supports a container
 
 ## References
 
+- [Dockerfile reference: ENTRYPOINT](https://docs.docker.com/reference/dockerfile/#entrypoint)
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Dockerfile reference: ENTRYPOINT and CMD interaction](https://docs.docker.com/reference/dockerfile/#understand-how-cmd-and-entrypoint-interact)
 - [Further reading: Docker Docs on running containers](https://docs.docker.com/engine/containers/run/)

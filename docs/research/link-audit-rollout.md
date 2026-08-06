@@ -19,3 +19,13 @@ not claim that unlisted legacy Questions already have five reviewed links.
 The current CI gate prevents an audited Question from publishing with malformed
 or unreachable curated links. It is intentionally staged so it does not accept
 unreviewed, machine-generated links merely to make the legacy catalog pass.
+
+## Current measured scope
+
+Run `python3 tests/validate_learning_resources.py --report` for the
+authoritative count at the checked-out commit. CI prints the same count after a
+live audit. The staged gate is deliberately **not** evidence that every active
+Question has five reviewed resources: only paths in the manifest have received
+manual resource curation and live checks. Every active Question is, however,
+structurally checked for complete primary-source metadata and for each declared
+primary source to be linked from its `References` section.

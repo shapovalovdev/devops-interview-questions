@@ -30,6 +30,26 @@ def front_matter(path: Path) -> dict[str, str]:
     return fields
 
 
+def primary_source_urls(content: str, path: Path) -> set[str]:
+    """Return declared source URLs while enforcing complete source records.
+
+    The intentionally small front-matter parser above reads scalar Question
+    fields.  Source records are a YAML list, so validate them separately rather
+    than accidentally treating a URL from an incomplete record as verified.
+    """
+    source_block = re.search(r"^sources:\n([\s\S]*?)(?=^[A-Za-z][\w-]*:|^---$)", content, re.MULTILINE)
+    assert source_block, f"{path}: missing primary source metadata"
+    records = re.findall(
+        r"^  - url: (https://[^\s]+)\n"
+        r"    source_type: (standard|official-docs|official-api)\n"
+        r"    verified_on: (\d{4}-\d{2}-\d{2})$",
+        source_block.group(1),
+        re.MULTILINE,
+    )
+    assert records, f"{path}: every primary source requires URL, approved type, and ISO review date"
+    return {url for url, _, _ in records}
+
+
 def known_tags() -> set[str]:
     text = (ROOT / "TAGS.md").read_text(encoding="utf-8")
     return set(re.findall(r"`([a-z0-9-]+)`", text))
@@ -68,12 +88,17 @@ def validate_question(path: Path, tags: set[str]) -> tuple[dict[str, str], set[s
     answer_words = re.findall(r"[A-Za-z0-9][A-Za-z0-9'-]*", answer)
     assert len(answer_words) >= 60, f"{path}: answer guide is too short for a full answer"
     assert len(re.findall(r"^- ", answer, re.MULTILINE)) >= 3, f"{path}: answer guide requires direct answer, constraints, and operational guidance"
-    assert re.search(r"^sources:\n  - url: https://", content, re.MULTILINE), f"{path}: missing HTTPS primary source metadata"
-    assert re.search(r"^    source_type: (standard|official-docs|official-api)$", content, re.MULTILINE), f"{path}: invalid source type"
-    assert re.search(r"^    verified_on: \d{4}-\d{2}-\d{2}$", content, re.MULTILINE), f"{path}: missing source verification date"
+    sources = primary_source_urls(content, path)
     assert "## References" in content, f"{path}: missing References section"
     assert re.search(r"^- \[.*\]\(https://", content, re.MULTILINE), f"{path}: requires a primary reference"
     assert re.search(r"^- Further reading \(blog\): .*\(https://", content, re.MULTILINE), f"{path}: requires a labeled complementary blog post"
+    references = content.split("## References", 1)[1].split("## What to learn next", 1)[0]
+    reference_urls = set(re.findall(r"\]\((https://[^)\s]+)\)", references))
+    missing_primary_references = sources - reference_urls
+    assert not missing_primary_references, (
+        f"{path}: every declared primary source must appear in References; missing "
+        f"{sorted(missing_primary_references)}"
+    )
     return fields, question_tags
 
 

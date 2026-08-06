@@ -13,6 +13,7 @@ import argparse
 import json
 import re
 import sys
+from collections import Counter
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -81,6 +82,25 @@ def validate_scope(manifest: dict) -> set[str]:
     return urls
 
 
+def coverage_report(manifest: dict) -> str:
+    """Return a truthful count of curated Questions, grouped by canonical Theme."""
+    all_questions = sorted((ROOT / "questions").glob("*/*.md"))
+    audited = {ROOT / item["question"] for item in manifest["audited_questions"]}
+    assert audited <= set(all_questions), "link-audit manifest contains a non-active Question"
+    by_theme = Counter(path.parent.name for path in audited)
+    total_by_theme = Counter(path.parent.name for path in all_questions)
+    theme_counts = ", ".join(
+        f"{theme} {by_theme[theme]}/{total_by_theme[theme]}"
+        for theme in sorted(total_by_theme)
+        if by_theme[theme]
+    ) or "none"
+    percent = (len(audited) / len(all_questions) * 100) if all_questions else 0
+    return (
+        f"Learning-resource audit coverage: {len(audited)}/{len(all_questions)} Questions "
+        f"({percent:.1f}%). Audited Themes: {theme_counts}."
+    )
+
+
 def fetch_status(url: str, timeout: float) -> int:
     """Use HEAD first, then GET for hosts which do not implement HEAD correctly."""
     headers = {"User-Agent": USER_AGENT}
@@ -112,6 +132,7 @@ def validate_live(urls: set[str], timeout: float) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check-live", action="store_true", help="perform HTTP checks after schema validation")
+    parser.add_argument("--report", action="store_true", help="print staged-audit coverage without HTTP requests")
     parser.add_argument("--timeout", type=float, default=15.0)
     args = parser.parse_args()
 
@@ -119,6 +140,8 @@ def main() -> None:
     if args.check_live:
         validate_live(urls, args.timeout)
     print(f"Validated {len(urls)} unique curated learning-resource URLs.")
+    if args.report or args.check_live:
+        print(coverage_report(load_manifest()))
 
 
 if __name__ == "__main__":
