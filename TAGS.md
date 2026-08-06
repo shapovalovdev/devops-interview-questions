@@ -4,7 +4,7 @@ Use lowercase kebab-case tags. Give every question one or more technology or con
 
 ## Technologies and concepts
 
-`ansible`, `aws`, `bash`, `build-cache`, `build-secrets`, `cgroups`, `ci-cd`, `cloud`, `configuration-management`, `container-runtime`, `containers`, `cost-optimization`, `databases`, `dns`, `docker`, `dockerfile`, `filesystem`, `git`, `github-actions`, `governance`, `hardware`, `healthchecks`, `http`, `iam`, `image-digests`, `image-tags`, `images`, `infrastructure-as-code`, `kubernetes`, `least-privilege`, `linux`, `logging`, `multi-platform`, `multi-stage-builds`, `networking`, `nginx`, `observability`, `platform-engineering`, `postgresql`, `prometheus`, `registries`, `resource-limits`, `rootless`, `scripting`, `security`, `shell`, `signals`, `storage`, `supply-chain`, `tcp`, `terraform`, `tls`, `version-control`, `volumes`, `web-server`
+`ansible`, `aws`, `bash`, `build-cache`, `build-secrets`, `capacity-planning`, `cgroups`, `ci-cd`, `cloud`, `configuration-management`, `container-runtime`, `containers`, `cost-optimization`, `databases`, `dns`, `docker`, `dockerfile`, `filesystem`, `git`, `github-actions`, `governance`, `hardware`, `healthchecks`, `http`, `iam`, `image-digests`, `image-tags`, `images`, `infrastructure-as-code`, `kubernetes`, `least-privilege`, `linux`, `logging`, `multi-platform`, `multi-stage-builds`, `networking`, `nginx`, `observability`, `platform-engineering`, `postgresql`, `prometheus`, `registries`, `resource-limits`, `rootless`, `scripting`, `security`, `shell`, `signals`, `storage`, `supply-chain`, `tcp`, `terraform`, `tls`, `version-control`, `volumes`, `web-server`
 
 ## Practices
 

@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 QUESTIONS = ROOT / "questions"
 ALLOWED_DIFFICULTIES = {"junior", "middle", "senior", "staff"}
 ALLOWED_TYPES = {"theory", "scenario", "troubleshooting"}
+CONTAINER_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
 
 
 def front_matter(path: Path) -> dict[str, str]:
@@ -39,6 +40,7 @@ def main() -> None:
     assert len(catalog) == len(set(catalog)), "Website catalog contains duplicate paths"
 
     expected_catalog = set()
+    container_difficulties: dict[str, int] = {difficulty: 0 for difficulty in CONTAINER_DISTRIBUTION}
     for path in question_files:
         fields = front_matter(path)
         required = {"title", "theme", "difficulty", "type", "tags"}
@@ -49,10 +51,18 @@ def main() -> None:
         question_tags = re.findall(r"[a-z0-9-]+", fields["tags"])
         assert question_tags, f"{path}: requires at least one Tag"
         assert set(question_tags) <= tags, f"{path}: uses a Tag missing from TAGS.md"
-        assert "## Answer guide" in path.read_text(encoding="utf-8"), f"{path}: missing answer guide"
+        content = path.read_text(encoding="utf-8")
+        assert "## Answer guide" in content, f"{path}: missing answer guide"
+        if fields["theme"] == "containers":
+            container_difficulties[fields["difficulty"]] += 1
+            assert re.search(r"^sources:\n  - url: https://", content, re.MULTILINE), f"{path}: missing HTTPS primary source metadata"
+            assert re.search(r"^    source_type: (standard|official-docs|official-api)$", content, re.MULTILINE), f"{path}: invalid source type"
+            assert re.search(r"^    verified_on: \d{4}-\d{2}-\d{2}$", content, re.MULTILINE), f"{path}: missing source verification date"
+            assert len(re.findall(r"^- \[[^]]+\]\(https://", content, re.MULTILINE)) >= 2, f"{path}: requires primary and further-reading references"
         expected_catalog.add(path.relative_to(ROOT).with_suffix(".html").as_posix())
 
     assert set(catalog) == expected_catalog, "Website catalog must contain every active Question exactly once"
+    assert container_difficulties == CONTAINER_DISTRIBUTION, f"containers must contain {CONTAINER_DISTRIBUTION}, got {container_difficulties}"
     print(f"Validated {len(question_files)} active Questions and {len(catalog)} website records.")
 
 
