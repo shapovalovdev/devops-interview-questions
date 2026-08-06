@@ -21,6 +21,8 @@ jobs:
         run: |
           python tests/validate_certification_question_workflow.py
           python tests/validate_questions.py
+          python tests/validate_learning_resources.py --check-live
+          python tests/test_validate_learning_resources.py
 
   validate-site:
     name: Validate website behavior

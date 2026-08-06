@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "policy": "Each listed Question has been manually curated and live-checked. Do not add a Question until all five links have been reviewed for relevance and ownership.",
+  "audited_questions": [
+    {
+      "question": "questions/linux/cron-versus-systemd-timers.md",
+      "related_materials": "docs/related-materials/linux.md"
+    }
+  ]
+}

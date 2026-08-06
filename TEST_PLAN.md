@@ -26,6 +26,15 @@ Every `*.md` file under `questions/<theme>/` is an active Question. It must appe
 
 `tests/site_check.py` loads the public website interface locally in a headless browser. It verifies catalog rendering, search, theme filtering, and that all card links target `.html` pages.
 
+`tests/validate_learning_resources.py` validates the staged curated-learning
+audit. For every Question in `docs/research/link-audit-manifest.json`, it
+requires exactly five categorized, unique HTTPS resources in `## What to learn
+next`, validates the matching Theme related-materials page, and follows every
+unique URL in CI. `tests/test_validate_learning_resources.py` covers the parser
+rules for the five-category schema and duplicate-link rejection. The staged
+rollout and the path to global enforcement are recorded in
+`docs/research/link-audit-rollout.md`.
+
 `tests/validate_certification_question_workflow.py` validates the reusable certification workflow itself: its official-curriculum mapping, canonical-tag, original-content, source-and-blog, catalog, validation, CI, and issue-closure requirements; its issue template; and realistic workflow eval prompts.
 
 `tests/validate_questions.py` also requires the PCA certification tag, PCA map, and at least 25 active Questions carrying the canonical `pca` tag. This prevents the PCA study path from silently disappearing during catalog or content changes.

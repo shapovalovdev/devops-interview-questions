@@ -22,6 +22,14 @@ When is a systemd timer preferable to cron for a host task, and what reliability
 
 ## References
 
-- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [systemd.timer: timer unit semantics](https://www.freedesktop.org/software/systemd/man/latest/systemd.timer.html)
 - Further reading: [crontab(5): cron table format](https://man7.org/linux/man-pages/man5/crontab.5.html)
+- Further reading (blog): [Julien Enselme — systemd timers](https://www.jujens.eu/posts/en/2025/Feb/01/systemd-timers/)
+
+## What to learn next
+
+- Official documentation: [systemd.timer unit semantics](https://www.freedesktop.org/software/systemd/man/latest/systemd.timer.html)
+- Manual or specification: [crontab(5) cron table format](https://man7.org/linux/man-pages/man5/crontab.5.html)
+- Maintainer or personal blog: [Julien Enselme — systemd timers](https://www.jujens.eu/posts/en/2025/Feb/01/systemd-timers/)
+- Technical blog: [LinuxBlog.io — systemd timers as a cron alternative](https://linuxblog.io/systemd-timers-alternative-cron-linux/)
+- Hands-on guide: [FOSS Linux — scheduling tasks with systemd timers](https://www.fosslinux.com/48317/scheduling-tasks-systemd-timers-linux.htm)
