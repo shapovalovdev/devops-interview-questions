@@ -55,6 +55,13 @@ original-content boundary, and explicit gap policy. CKNE is not activated in the
 content manifest until its two remaining unique objectives and their catalog
 entries are integrated together with the certification tag.
 
+`tests/test_cnpe_curriculum_map.py` guards the CNPE public curriculum map: the
+two official sources, all five weighted domains, the original-content boundary,
+and the explicit no-duplicate decision. It also verifies that every mapped
+canonical Question exists and retains source metadata, References, and a
+complementary technical blog. CNPE remains unpublished as a filter until the
+coordinator atomically integrates its tag, manifest entry, and catalog records.
+
 The manifest currently includes the PCA and CAPA study paths, along with the
 other published certification maps. Adding a certification requires one
 manifest entry, a documented tag, a curriculum map, and mapped Questions;
