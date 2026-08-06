@@ -22,12 +22,12 @@ sources:
 
 - [Linux kernel: memory management concepts](https://www.kernel.org/doc/html/latest/admin-guide/mm/concepts.html)
 - [Linux kernel: pressure stall information](https://www.kernel.org/doc/html/latest/accounting/psi.html)
-- Further reading (blog): [Brendan Gregg — Linux Memory Analysis](https://www.brendangregg.com/blog/2014-09-11/linux-page-cache-hit-ratio.html)
+- Further reading (personal blog): [Brendan Gregg — Analyzing a High Rate of Paging](https://www.brendangregg.com/blog/2021-08-30/high-rate-of-paging.html)
 
 ## What to learn next
 
 - Official documentation: [Linux PSI documentation](https://www.kernel.org/doc/html/latest/accounting/psi.html)
 - Manual or specification: [proc meminfo documentation](https://www.kernel.org/doc/html/latest/filesystems/proc.html)
-- Maintainer or personal blog: [Brendan Gregg — page cache](https://www.brendangregg.com/blog/2014-09-11/linux-page-cache-hit-ratio.html)
+- Maintainer or personal blog: [Brendan Gregg — high-rate paging analysis](https://www.brendangregg.com/blog/2021-08-30/high-rate-of-paging.html)
 - Technical blog: [Meta Engineering](https://engineering.fb.com/)
 - Hands-on guide: [cgroup v2 memory controller](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html)

@@ -22,12 +22,12 @@ sources:
 
 - [Brendan Gregg: Performance Methodologies](https://www.brendangregg.com/methodology.html)
 - [Google SRE Workbook](https://sre.google/workbook/)
-- Further reading (blog): [Brendan Gregg — Benchmarking Crisis](https://www.brendangregg.com/blog/2018-01-18/the-benchmarking-crisis.html)
+- Further reading (personal blog): [Brendan Gregg — Benchmarking Checklist](https://www.brendangregg.com/blog/2018-06-30/benchmarking-checklist.html)
 
 ## What to learn next
 
 - Official documentation: [Google SRE workbook](https://sre.google/workbook/)
 - Manual or specification: [fio documentation](https://fio.readthedocs.io/en/latest/)
-- Maintainer or personal blog: [Brendan Gregg — benchmarking](https://www.brendangregg.com/blog/2018-01-18/the-benchmarking-crisis.html)
+- Maintainer or personal blog: [Brendan Gregg — active benchmarking](https://www.brendangregg.com/activebenchmarking.html)
 - Technical blog: [AWS Builders' Library](https://aws.amazon.com/builders-library/)
 - Hands-on guide: [k6 documentation](https://grafana.com/docs/k6/latest/)

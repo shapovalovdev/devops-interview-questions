@@ -22,12 +22,12 @@ sources:
 
 - [Linux kernel: NUMA memory policy](https://www.kernel.org/doc/html/latest/admin-guide/mm/numa_memory_policy.html)
 - [numactl manual](https://man7.org/linux/man-pages/man8/numactl.8.html)
-- Further reading (blog): [Brendan Gregg — NUMA](https://www.brendangregg.com/blog/2015-12-03/linux-perf-analysis-in-60s.html)
+- Further reading (personal blog): [Brendan Gregg — Linux performance analysis in 60s](https://www.brendangregg.com/blog/2015-12-03/linux-perf-60s-video.html)
 
 ## What to learn next
 
 - Official documentation: [Linux NUMA policy](https://www.kernel.org/doc/html/latest/admin-guide/mm/numa_memory_policy.html)
 - Manual or specification: [numactl manual](https://man7.org/linux/man-pages/man8/numactl.8.html)
-- Maintainer or personal blog: [Brendan Gregg — Linux performance](https://www.brendangregg.com/blog/2015-12-03/linux-perf-analysis-in-60s.html)
-- Technical blog: [Intel Community](https://community.intel.com/)
+- Maintainer or personal blog: [Brendan Gregg — Linux performance](https://www.brendangregg.com/blog/2015-12-03/linux-perf-60s-video.html)
+- Technical blog: [Cloudflare Blog](https://blog.cloudflare.com/)
 - Hands-on guide: [Linux perf tools](https://www.brendangregg.com/perf.html)

@@ -21,8 +21,8 @@ sources:
 ## References
 
 - [Brendan Gregg: Performance Methodologies](https://www.brendangregg.com/methodology.html)
-- [Google SRE Workbook: Load Balancing](https://sre.google/workbook/load-balancing-frontend/)
-- Further reading (blog): [Brendan Gregg — The Benchmarking Crisis](https://www.brendangregg.com/blog/2018-01-18/the-benchmarking-crisis.html)
+- [Google SRE Book: Handling Overload](https://sre.google/sre-book/handling-overload/)
+- Further reading (personal blog): [Brendan Gregg — Active Benchmarking](https://www.brendangregg.com/activebenchmarking.html)
 
 ## What to learn next
 

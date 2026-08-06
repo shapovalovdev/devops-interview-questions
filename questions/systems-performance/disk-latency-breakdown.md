@@ -22,12 +22,12 @@ sources:
 
 - [Linux kernel: I/O statistics fields](https://www.kernel.org/doc/html/latest/admin-guide/iostats.html)
 - [iostat manual](https://man7.org/linux/man-pages/man1/iostat.1.html)
-- Further reading (blog): [Brendan Gregg — Disk I/O](https://www.brendangregg.com/blog/2015-05-15/iosnoop-for-linux.html)
+- Further reading (personal blog): [Brendan Gregg — iosnoop for Linux](https://www.brendangregg.com/blog/2014-07-16/iosnoop-for-linux.html)
 
 ## What to learn next
 
 - Official documentation: [Linux block layer documentation](https://www.kernel.org/doc/html/latest/block/index.html)
 - Manual or specification: [iostat manual](https://man7.org/linux/man-pages/man1/iostat.1.html)
-- Maintainer or personal blog: [Brendan Gregg — iosnoop](https://www.brendangregg.com/blog/2015-05-15/iosnoop-for-linux.html)
+- Maintainer or personal blog: [Brendan Gregg — iosnoop](https://www.brendangregg.com/blog/2014-07-16/iosnoop-for-linux.html)
 - Technical blog: [AWS Storage Blog](https://aws.amazon.com/blogs/storage/)
 - Hands-on guide: [fio documentation](https://fio.readthedocs.io/en/latest/)

@@ -22,12 +22,12 @@ sources:
 
 - [Linux kernel: out of memory handling](https://www.kernel.org/doc/html/latest/mm/oom.html)
 - [Linux kernel: cgroup v2 memory controller](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html)
-- Further reading (blog): [Brendan Gregg — Linux OOM Killer](https://www.brendangregg.com/blog/2018-08-31/linux-oom-killer.html)
+- Further reading (personal blog): [Brendan Gregg — Analyzing a High Rate of Paging](https://www.brendangregg.com/blog/2021-08-30/high-rate-of-paging.html)
 
 ## What to learn next
 
 - Official documentation: [Linux OOM handling](https://www.kernel.org/doc/html/latest/mm/oom.html)
 - Manual or specification: [systemd-oomd manual](https://www.freedesktop.org/software/systemd/man/latest/systemd-oomd.service.html)
-- Maintainer or personal blog: [Brendan Gregg — OOM killer](https://www.brendangregg.com/blog/2018-08-31/linux-oom-killer.html)
+- Maintainer or personal blog: [Brendan Gregg — memory-pressure investigation](https://www.brendangregg.com/blog/2021-08-30/high-rate-of-paging.html)
 - Technical blog: [Elastic Blog](https://www.elastic.co/blog/)
 - Hands-on guide: [Kubernetes resource management](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)

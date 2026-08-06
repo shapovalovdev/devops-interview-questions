@@ -29,5 +29,5 @@ sources:
 - Official documentation: [perf security](https://www.kernel.org/doc/html/latest/admin-guide/perf-security.html)
 - Manual or specification: [perf stat manual](https://man7.org/linux/man-pages/man1/perf-stat.1.html)
 - Maintainer or personal blog: [Brendan Gregg — perf](https://www.brendangregg.com/perf.html)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
+- Technical blog: [Datadog Engineering](https://www.datadoghq.com/blog/engineering/)
 - Hands-on guide: [perf tutorial](https://perf.wiki.kernel.org/)

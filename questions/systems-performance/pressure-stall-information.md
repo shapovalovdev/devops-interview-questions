@@ -22,12 +22,12 @@ sources:
 
 - [Linux kernel: PSI](https://www.kernel.org/doc/html/latest/accounting/psi.html)
 - [Linux kernel: cgroup v2](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html)
-- Further reading (blog): [Brendan Gregg — Linux Pressure Stall Information](https://www.brendangregg.com/blog/2018-08-31/linux-psi.html)
+- Further reading (personal blog): [Brendan Gregg — Analyzing a High Rate of Paging](https://www.brendangregg.com/blog/2021-08-30/high-rate-of-paging.html)
 
 ## What to learn next
 
 - Official documentation: [Linux PSI](https://www.kernel.org/doc/html/latest/accounting/psi.html)
 - Manual or specification: [proc pressure interface](https://www.kernel.org/doc/html/latest/filesystems/proc.html)
-- Maintainer or personal blog: [Brendan Gregg — PSI](https://www.brendangregg.com/blog/2018-08-31/linux-psi.html)
+- Maintainer or personal blog: [Brendan Gregg — memory-pressure investigation](https://www.brendangregg.com/blog/2021-08-30/high-rate-of-paging.html)
 - Technical blog: [Meta Engineering](https://engineering.fb.com/)
 - Hands-on guide: [Prometheus node exporter](https://github.com/prometheus/node_exporter)

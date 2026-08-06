@@ -22,12 +22,12 @@ sources:
 
 - [Linux kernel: memory management concepts](https://www.kernel.org/doc/html/latest/admin-guide/mm/concepts.html)
 - [fsync manual](https://man7.org/linux/man-pages/man2/fsync.2.html)
-- Further reading (blog): [Brendan Gregg — Linux Page Cache Hit Ratio](https://www.brendangregg.com/blog/2014-09-11/linux-page-cache-hit-ratio.html)
+- Further reading (personal blog): [Brendan Gregg — Linux Page Cache Hit Ratio](https://www.brendangregg.com/blog/2014-12-31/linux-page-cache-hit-ratio.html)
 
 ## What to learn next
 
 - Official documentation: [Linux filesystem documentation](https://www.kernel.org/doc/html/latest/filesystems/index.html)
 - Manual or specification: [open manual](https://man7.org/linux/man-pages/man2/open.2.html)
-- Maintainer or personal blog: [Brendan Gregg — page cache](https://www.brendangregg.com/blog/2014-09-11/linux-page-cache-hit-ratio.html)
+- Maintainer or personal blog: [Brendan Gregg — page cache](https://www.brendangregg.com/blog/2014-12-31/linux-page-cache-hit-ratio.html)
 - Technical blog: [Cloudflare Blog](https://blog.cloudflare.com/)
 - Hands-on guide: [fio documentation](https://fio.readthedocs.io/en/latest/)

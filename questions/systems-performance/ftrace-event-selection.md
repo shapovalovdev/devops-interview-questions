@@ -22,12 +22,12 @@ sources:
 
 - [Linux kernel: ftrace](https://www.kernel.org/doc/html/latest/trace/ftrace.html)
 - [Linux kernel: trace events](https://www.kernel.org/doc/html/latest/trace/events.html)
-- Further reading (blog): [Brendan Gregg — ftrace](https://www.brendangregg.com/blog/2019-11-13/learn-ebpf-tracing.html)
+- Further reading (personal blog): [Brendan Gregg — Choosing a Linux tracer](https://www.brendangregg.com/blog/2015-07-08/choosing-a-linux-tracer.html)
 
 ## What to learn next
 
 - Official documentation: [Linux ftrace](https://www.kernel.org/doc/html/latest/trace/ftrace.html)
 - Manual or specification: [trace-cmd documentation](https://trace-cmd.org/)
-- Maintainer or personal blog: [Brendan Gregg — tracing](https://www.brendangregg.com/blog/2019-11-13/learn-ebpf-tracing.html)
-- Technical blog: [Oracle Linux Blog](https://blogs.oracle.com/linux/)
+- Maintainer or personal blog: [Brendan Gregg — tracing](https://www.brendangregg.com/blog/2015-07-08/choosing-a-linux-tracer.html)
+- Technical blog: [Datadog Engineering](https://www.datadoghq.com/blog/engineering/)
 - Hands-on guide: [trace-cmd](https://trace-cmd.org/)

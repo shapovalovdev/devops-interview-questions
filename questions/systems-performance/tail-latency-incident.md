@@ -22,12 +22,12 @@ sources:
 
 - [Google SRE Book: Monitoring Distributed Systems](https://sre.google/sre-book/monitoring-distributed-systems/)
 - [OpenTelemetry metrics specification](https://opentelemetry.io/docs/specs/otel/metrics/)
-- Further reading (blog): [Brendan Gregg — The Tail at Scale](https://www.brendangregg.com/blog/2015-02-10/tail-at-scale.html)
+- Further reading (personal blog): [Brendan Gregg — Performance Methodologies](https://www.brendangregg.com/methodology.html)
 
 ## What to learn next
 
 - Official documentation: [OpenTelemetry metrics](https://opentelemetry.io/docs/specs/otel/metrics/)
 - Manual or specification: [Prometheus histogram practices](https://prometheus.io/docs/practices/histograms/)
-- Maintainer or personal blog: [Brendan Gregg — tail at scale](https://www.brendangregg.com/blog/2015-02-10/tail-at-scale.html)
+- Maintainer or personal blog: [Brendan Gregg — Performance Methodologies](https://www.brendangregg.com/methodology.html)
 - Technical blog: [Google Cloud Blog](https://cloud.google.com/blog/)
 - Hands-on guide: [Grafana histogram visualization](https://grafana.com/docs/grafana/latest/)

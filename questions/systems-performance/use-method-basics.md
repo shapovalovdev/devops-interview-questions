@@ -21,12 +21,12 @@ sources:
 ## References
 
 - [Brendan Gregg: The USE Method](https://www.brendangregg.com/usemethod.html)
-- Further reading (blog): [Brendan Gregg — Linux Performance Analysis in 60 Seconds](https://www.brendangregg.com/blog/2015-12-03/linux-perf-analysis-in-60s.html)
+- Further reading (personal blog): [Brendan Gregg — Linux Performance Analysis in 60 Seconds](https://www.brendangregg.com/blog/2015-12-03/linux-perf-60s-video.html)
 
 ## What to learn next
 
 - Official documentation: [Linux kernel documentation](https://www.kernel.org/doc/html/latest/)
 - Manual or specification: [procps vmstat manual](https://man7.org/linux/man-pages/man8/vmstat.8.html)
 - Maintainer or personal blog: [Brendan Gregg — USE Method](https://www.brendangregg.com/usemethod.html)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
+- Technical blog: [Datadog Engineering](https://www.datadoghq.com/blog/engineering/)
 - Hands-on guide: [Linux perf tools tutorial](https://www.brendangregg.com/perf.html)

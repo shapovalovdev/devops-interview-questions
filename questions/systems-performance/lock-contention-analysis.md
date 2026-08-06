@@ -29,5 +29,5 @@ sources:
 - Official documentation: [Linux locking](https://www.kernel.org/doc/html/latest/locking/index.html)
 - Manual or specification: [perf lock manual](https://man7.org/linux/man-pages/man1/perf-lock.1.html)
 - Maintainer or personal blog: [Brendan Gregg — off-CPU analysis](https://www.brendangregg.com/offcpuanalysis.html)
-- Technical blog: [Uber Engineering](https://www.uber.com/blog/engineering/)
+- Technical blog: [Datadog Engineering](https://www.datadoghq.com/blog/engineering/)
 - Hands-on guide: [perf tools](https://www.brendangregg.com/perf.html)

@@ -21,13 +21,13 @@ sources:
 ## References
 
 - [Google SRE Book: Handling Overload](https://sre.google/sre-book/handling-overload/)
-- [Google SRE Workbook: Addressing Cascading Failures](https://sre.google/workbook/addressing-cascading-failures/)
-- Further reading (blog): [Brendan Gregg — Queueing Theory](https://www.brendangregg.com/blog/2016-03-07/queueing-theory.html)
+- [Google SRE Workbook](https://sre.google/workbook/)
+- Further reading (personal blog): [Brendan Gregg — Performance Methodologies](https://www.brendangregg.com/methodology.html)
 
 ## What to learn next
 
 - Official documentation: [Google SRE: Handling overload](https://sre.google/sre-book/handling-overload/)
 - Manual or specification: [RFC 9110 HTTP semantics](https://www.rfc-editor.org/rfc/rfc9110)
-- Maintainer or personal blog: [Brendan Gregg — Queueing Theory](https://www.brendangregg.com/blog/2016-03-07/queueing-theory.html)
+- Maintainer or personal blog: [Brendan Gregg — Performance Methodologies](https://www.brendangregg.com/methodology.html)
 - Technical blog: [AWS Builders' Library](https://aws.amazon.com/builders-library/)
 - Hands-on guide: [Grafana latency histograms](https://grafana.com/docs/grafana/latest/)

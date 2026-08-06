@@ -22,12 +22,12 @@ sources:
 
 - [RFC 9293: Transmission Control Protocol](https://www.rfc-editor.org/rfc/rfc9293)
 - [ss manual](https://man7.org/linux/man-pages/man8/ss.8.html)
-- Further reading (blog): [Brendan Gregg — TCP Performance](https://www.brendangregg.com/blog/2016-09-01/linux-tcp-bcc.html)
+- Further reading (personal blog): [Brendan Gregg — Linux eBPF tracing tools](https://www.brendangregg.com/ebpf.html)
 
 ## What to learn next
 
 - Official documentation: [IETF TCP RFC index](https://www.rfc-editor.org/rfc/rfc9293)
 - Manual or specification: [ss manual](https://man7.org/linux/man-pages/man8/ss.8.html)
-- Maintainer or personal blog: [Brendan Gregg — TCP tools](https://www.brendangregg.com/blog/2016-09-01/linux-tcp-bcc.html)
+- Maintainer or personal blog: [Brendan Gregg — TCP tracing tools](https://www.brendangregg.com/ebpf.html)
 - Technical blog: [Cloudflare Blog](https://blog.cloudflare.com/)
 - Hands-on guide: [Wireshark TCP analysis](https://www.wireshark.org/docs/)

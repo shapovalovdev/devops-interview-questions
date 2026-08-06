@@ -29,5 +29,5 @@ sources:
 - Official documentation: [Linux perf security](https://www.kernel.org/doc/html/latest/admin-guide/perf-security.html)
 - Manual or specification: [perf record manual](https://man7.org/linux/man-pages/man1/perf-record.1.html)
 - Maintainer or personal blog: [Brendan Gregg — perf](https://www.brendangregg.com/perf.html)
-- Technical blog: [Red Hat Performance Blog](https://www.redhat.com/en/blog/channel/performance)
+- Technical blog: [Red Hat Blog](https://www.redhat.com/en/blog)
 - Hands-on guide: [perf wiki](https://perf.wiki.kernel.org/)

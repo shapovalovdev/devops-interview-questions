@@ -22,12 +22,12 @@ sources:
 
 - [Linux kernel scheduler documentation](https://www.kernel.org/doc/html/latest/scheduler/index.html)
 - [getrusage manual](https://man7.org/linux/man-pages/man2/getrusage.2.html)
-- Further reading (blog): [Brendan Gregg — Context Switches](https://www.brendangregg.com/blog/2014-12-31/the-hidden-costs-of-context-switches.html)
+- Further reading (personal blog): [Brendan Gregg — perf sched for CPU scheduler analysis](https://www.brendangregg.com/blog/2017-03-16/perf-sched.html)
 
 ## What to learn next
 
 - Official documentation: [Linux scheduler](https://www.kernel.org/doc/html/latest/scheduler/index.html)
 - Manual or specification: [perf sched manual](https://man7.org/linux/man-pages/man1/perf-sched.1.html)
-- Maintainer or personal blog: [Brendan Gregg — context switches](https://www.brendangregg.com/blog/2014-12-31/the-hidden-costs-of-context-switches.html)
-- Technical blog: [Red Hat Performance Blog](https://www.redhat.com/en/blog/channel/performance)
+- Maintainer or personal blog: [Brendan Gregg — perf sched](https://www.brendangregg.com/blog/2017-03-16/perf-sched.html)
+- Technical blog: [Red Hat Blog](https://www.redhat.com/en/blog)
 - Hands-on guide: [perf tools](https://www.brendangregg.com/perf.html)

@@ -29,5 +29,5 @@ sources:
 - Official documentation: [Google incident management](https://sre.google/sre-book/managing-incidents/)
 - Manual or specification: [OpenTelemetry tracing specification](https://opentelemetry.io/docs/specs/otel/trace/)
 - Maintainer or personal blog: [Brendan Gregg — methodologies](https://www.brendangregg.com/methodology.html)
-- Technical blog: [Etsy Code as Craft](https://www.etsy.com/codeascraft)
+- Technical blog: [Datadog Engineering](https://www.datadoghq.com/blog/engineering/)
 - Hands-on guide: [Google SRE workbook](https://sre.google/workbook/)
