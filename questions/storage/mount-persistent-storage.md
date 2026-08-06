@@ -3,7 +3,7 @@ title: Mount persistent storage safely on Linux
 theme: storage
 difficulty: junior
 type: scenario
-tags: [linux, storage, filesystem, reliability]
+tags: [linux, storage, filesystem, reliability, lfcs]
 sources:
   - url: https://man7.org/linux/man-pages/man8/mount.8.html
     source_type: official-docs

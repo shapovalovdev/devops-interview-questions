@@ -3,7 +3,7 @@ title: Operate NFS shared storage safely
 theme: storage
 difficulty: middle
 type: scenario
-tags: [storage, networking, linux, reliability]
+tags: [storage, networking, linux, reliability, lfcs]
 sources:
   - url: https://www.rfc-editor.org/rfc/rfc8881.html
     source_type: standard

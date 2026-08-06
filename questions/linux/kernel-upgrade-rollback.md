@@ -3,7 +3,7 @@ title: Plan a production Linux kernel upgrade and rollback
 theme: linux
 difficulty: senior
 type: scenario
-tags: [linux, deployment, reliability, troubleshooting]
+tags: [linux, deployment, reliability, troubleshooting, lfcs]
 sources:
   - url: https://www.kernel.org/doc/html/latest/admin-guide/README.html
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Respond to a filesystem mounted read-only after errors
 theme: linux
 difficulty: middle
 type: scenario
-tags: [linux, filesystem, storage, troubleshooting]
+tags: [linux, filesystem, storage, troubleshooting, lfcs]
 sources:
   - url: https://www.kernel.org/doc/html/latest/admin-guide/ext4.html
     source_type: official-docs

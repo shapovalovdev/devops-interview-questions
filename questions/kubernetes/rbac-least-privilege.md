@@ -3,7 +3,7 @@ title: Design least-privilege Kubernetes RBAC
 theme: kubernetes
 difficulty: middle
 type: scenario
-tags: [kubernetes, security, least-privilege, governance, cks, kcsa, cka, ckad, kcna]
+tags: [kubernetes, security, least-privilege, governance, cks, kcsa, cka, ckad, kcna, cnpe]
 sources:
   - url: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
     source_type: official-docs

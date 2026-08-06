@@ -3,7 +3,7 @@ title: Build a self-service storage platform with guardrails
 theme: storage
 difficulty: staff
 type: scenario
-tags: [storage, platform-engineering, governance, security, reliability]
+tags: [storage, platform-engineering, governance, security, reliability, cnpe]
 sources:
   - url: https://kubernetes.io/docs/concepts/storage/storage-classes/
     source_type: official-docs

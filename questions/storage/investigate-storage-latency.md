@@ -3,7 +3,7 @@ title: Investigate a storage latency incident
 theme: storage
 difficulty: middle
 type: troubleshooting
-tags: [storage, monitoring, troubleshooting, reliability]
+tags: [storage, monitoring, troubleshooting, reliability, lfcs]
 sources:
   - url: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-performance.html
     source_type: official-docs

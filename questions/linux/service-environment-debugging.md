@@ -3,7 +3,7 @@ title: Debug an application that works in a shell but fails as a service
 theme: linux
 difficulty: middle
 type: troubleshooting
-tags: [linux, debugging, troubleshooting]
+tags: [linux, debugging, troubleshooting, lfcs]
 sources:
   - url: https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html
     source_type: official-docs

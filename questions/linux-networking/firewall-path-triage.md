@@ -3,7 +3,7 @@ title: Triage a Linux host firewall path
 theme: linux-networking
 difficulty: middle
 type: troubleshooting
-tags: [linux, networking, security, troubleshooting]
+tags: [linux, networking, security, troubleshooting, lfcs]
 sources:
   - url: https://docs.kernel.org/networking/netfilter-sysctl.html
     source_type: official-docs

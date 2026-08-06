@@ -3,7 +3,7 @@ title: Explain Linux DNS resolver configuration
 theme: linux-networking
 difficulty: junior
 type: theory
-tags: [linux, networking, dns, troubleshooting]
+tags: [linux, networking, dns, troubleshooting, lfcs]
 sources:
   - url: https://man7.org/linux/man-pages/man5/resolv.conf.5.html
     source_type: official-docs

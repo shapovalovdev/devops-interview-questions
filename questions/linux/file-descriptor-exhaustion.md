@@ -3,7 +3,7 @@ title: Diagnose too many open files in a Linux service
 theme: linux
 difficulty: middle
 type: troubleshooting
-tags: [linux, debugging, troubleshooting]
+tags: [linux, debugging, troubleshooting, lfcs]
 sources:
   - url: https://man7.org/linux/man-pages/man2/getrlimit.2.html
     source_type: official-docs

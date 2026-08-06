@@ -3,7 +3,7 @@ title: Manage a libvirt virtual machine change safely
 theme: linux
 difficulty: senior
 type: scenario
-tags: [linux, virtualization, operations, change-management]
+tags: [linux, virtualization, operations, change-management, lfcs]
 sources:
   - url: https://libvirt.org/formatdomain.html
     source_type: official-docs

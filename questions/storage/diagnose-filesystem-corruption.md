@@ -3,7 +3,7 @@ title: Respond to suspected filesystem corruption
 theme: storage
 difficulty: middle
 type: troubleshooting
-tags: [storage, filesystem, linux, incident-response, troubleshooting]
+tags: [storage, filesystem, linux, incident-response, troubleshooting, lfcs]
 sources:
   - url: https://www.kernel.org/doc/html/latest/filesystems/ext4/
     source_type: official-docs

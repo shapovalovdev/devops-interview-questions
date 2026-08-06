@@ -3,7 +3,7 @@ title: Debug a Linux `Permission denied` failure for a service
 theme: linux-troubleshooting
 difficulty: junior
 type: troubleshooting
-tags: [linux, permissions, selinux, troubleshooting]
+tags: [linux, permissions, selinux, troubleshooting, lfcs]
 sources:
   - url: https://man7.org/linux/man-pages/man2/open.2.html
     source_type: official-docs

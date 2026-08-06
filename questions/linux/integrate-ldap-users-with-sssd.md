@@ -3,7 +3,7 @@ title: Integrate LDAP users through SSSD safely
 theme: linux
 difficulty: senior
 type: scenario
-tags: [linux, security, permissions, operations]
+tags: [linux, security, permissions, operations, lfcs]
 sources:
   - url: https://sssd.io/docs/introduction.html
     source_type: official-docs

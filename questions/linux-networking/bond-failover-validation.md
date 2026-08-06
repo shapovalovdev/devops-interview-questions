@@ -3,7 +3,7 @@ title: Validate Linux bond failover behavior
 theme: linux-networking
 difficulty: middle
 type: scenario
-tags: [linux, networking, availability, troubleshooting]
+tags: [linux, networking, availability, troubleshooting, lfcs]
 sources:
   - url: https://www.kernel.org/doc/html/latest/networking/bonding.html
     source_type: official-docs

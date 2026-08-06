@@ -3,7 +3,7 @@ title: Design a Kubernetes audit policy for security detection
 theme: kubernetes
 difficulty: senior
 type: scenario
-tags: [kubernetes, security, logging, observability, incident-response, cks]
+tags: [kubernetes, security, logging, observability, incident-response, cks, cnpe]
 sources:
   - url: https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Interpret a high Linux load average
 theme: linux
 difficulty: middle
 type: troubleshooting
-tags: [linux, monitoring, troubleshooting]
+tags: [linux, monitoring, troubleshooting, lfcs]
 sources:
   - url: https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html
     source_type: official-docs

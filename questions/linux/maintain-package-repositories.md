@@ -3,7 +3,7 @@ title: Maintain package repositories without breaking fleet updates
 theme: linux
 difficulty: middle
 type: troubleshooting
-tags: [linux, operations, troubleshooting, security]
+tags: [linux, operations, troubleshooting, security, lfcs]
 sources:
   - url: https://docs.fedoraproject.org/en-US/quick-docs/dnf/
     source_type: official-docs

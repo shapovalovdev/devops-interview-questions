@@ -3,7 +3,7 @@ title: Respond to sustained swap activity
 theme: linux-performance
 difficulty: middle
 type: troubleshooting
-tags: [linux, performance, memory, troubleshooting, reliability]
+tags: [linux, performance, memory, troubleshooting, reliability, lfcs]
 sources:
   - url: https://www.kernel.org/doc/html/latest/admin-guide/mm/concepts.html
     source_type: official-docs

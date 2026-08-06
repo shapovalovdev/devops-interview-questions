@@ -3,7 +3,7 @@ title: Inspect Linux interface state and addresses
 theme: linux-networking
 difficulty: junior
 type: troubleshooting
-tags: [linux, networking, troubleshooting]
+tags: [linux, networking, troubleshooting, lfcs]
 sources:
   - url: https://man7.org/linux/man-pages/man8/ip.8.html
     source_type: official-docs

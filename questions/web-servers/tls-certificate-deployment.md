@@ -3,7 +3,7 @@ title: Deploy a TLS certificate on a web server
 theme: web-servers
 difficulty: junior
 type: scenario
-tags: [tls, certificates, http, web-server]
+tags: [tls, certificates, http, web-server, lfcs]
 sources:
   - url: https://nginx.org/en/docs/http/configuring_https_servers.html
     source_type: official-docs

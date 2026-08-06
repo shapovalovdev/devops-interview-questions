@@ -3,7 +3,7 @@ title: Configure LVM storage for a growing service
 theme: linux
 difficulty: middle
 type: scenario
-tags: [linux, storage, filesystem, operations]
+tags: [linux, storage, filesystem, operations, lfcs]
 sources:
   - url: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/configuring_and_managing_logical_volumes/basic-logical-volume-management
     source_type: official-docs

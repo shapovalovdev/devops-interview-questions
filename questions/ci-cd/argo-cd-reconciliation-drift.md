@@ -3,7 +3,7 @@ title: Respond to Argo CD drift without masking an incident
 theme: ci-cd
 difficulty: senior
 type: troubleshooting
-tags: [ci-cd, kubernetes, argo, argo-cd, capa, troubleshooting, reliability]
+tags: [ci-cd, kubernetes, argo, argo-cd, capa, troubleshooting, reliability, cnpe]
 sources:
   - url: https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/
     source_type: official-docs

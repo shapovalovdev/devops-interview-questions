@@ -3,7 +3,7 @@ title: Explain Linux permissions and umask
 theme: linux
 difficulty: junior
 type: theory
-tags: [linux, security, least-privilege]
+tags: [linux, security, least-privilege, lfcs]
 sources:
   - url: https://man7.org/linux/man-pages/man2/umask.2.html
     source_type: official-docs

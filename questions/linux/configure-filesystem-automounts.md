@@ -3,7 +3,7 @@ title: Configure filesystem automounts without hiding a dependency failure
 theme: linux
 difficulty: middle
 type: scenario
-tags: [linux, storage, filesystem, operations]
+tags: [linux, storage, filesystem, operations, lfcs]
 sources:
   - url: https://man7.org/linux/man-pages/man5/autofs.5.html
     source_type: official-docs

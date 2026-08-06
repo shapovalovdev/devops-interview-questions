@@ -3,7 +3,7 @@ title: Apply Linux capabilities instead of full root privilege
 theme: linux
 difficulty: senior
 type: scenario
-tags: [linux, security, least-privilege]
+tags: [linux, security, least-privilege, lfcs]
 sources:
   - url: https://man7.org/linux/man-pages/man7/capabilities.7.html
     source_type: official-docs

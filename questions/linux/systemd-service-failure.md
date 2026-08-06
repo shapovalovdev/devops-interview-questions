@@ -3,7 +3,7 @@ title: Diagnose a systemd service that repeatedly fails
 theme: linux
 difficulty: middle
 type: troubleshooting
-tags: [linux, debugging, troubleshooting]
+tags: [linux, debugging, troubleshooting, lfcs]
 sources:
   - url: https://www.freedesktop.org/software/systemd/man/latest/systemctl.html
     source_type: official-docs

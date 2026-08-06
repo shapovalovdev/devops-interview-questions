@@ -3,7 +3,7 @@ title: Diagnose a per-process resource limit
 theme: processes
 difficulty: middle
 type: troubleshooting
-tags: [linux, processes, limits, file-descriptors, capacity-planning]
+tags: [linux, processes, limits, file-descriptors, capacity-planning, lfcs]
 sources:
   - url: https://man7.org/linux/man-pages/man2/getrlimit.2.html
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Explain Linux process states during an incident
 theme: linux
 difficulty: junior
 type: theory
-tags: [linux, debugging, troubleshooting]
+tags: [linux, debugging, troubleshooting, lfcs]
 sources:
   - url: https://man7.org/linux/man-pages/man1/ps.1.html
     source_type: official-docs

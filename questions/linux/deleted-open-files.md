@@ -3,7 +3,7 @@ title: Recover disk space held by deleted open files
 theme: linux
 difficulty: middle
 type: troubleshooting
-tags: [linux, filesystem, troubleshooting]
+tags: [linux, filesystem, troubleshooting, lfcs]
 sources:
   - url: https://man7.org/linux/man-pages/man5/proc_pid_fd.5.html
     source_type: official-docs

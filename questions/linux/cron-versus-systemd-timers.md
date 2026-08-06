@@ -3,7 +3,7 @@ title: Choose between cron and systemd timers
 theme: linux
 difficulty: middle
 type: scenario
-tags: [linux, automation, reliability]
+tags: [linux, automation, reliability, lfcs]
 sources:
   - url: https://www.freedesktop.org/software/systemd/man/latest/systemd.timer.html
     source_type: official-docs

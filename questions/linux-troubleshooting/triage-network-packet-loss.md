@@ -3,7 +3,7 @@ title: Triage packet loss from a Linux host to a critical dependency
 theme: linux-troubleshooting
 difficulty: middle
 type: troubleshooting
-tags: [linux, networking, tcp, packet-loss, troubleshooting]
+tags: [linux, networking, tcp, packet-loss, troubleshooting, lfcs]
 sources:
   - url: https://www.kernel.org/doc/html/latest/networking/scaling.html
     source_type: official-docs

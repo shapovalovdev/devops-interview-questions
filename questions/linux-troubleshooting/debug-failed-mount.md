@@ -3,7 +3,7 @@ title: Debug a failed network or local mount at boot
 theme: linux-troubleshooting
 difficulty: middle
 type: troubleshooting
-tags: [linux, filesystem, systemd, mount, troubleshooting]
+tags: [linux, filesystem, systemd, mount, troubleshooting, lfcs]
 sources:
   - url: https://www.freedesktop.org/software/systemd/man/latest/systemd.mount.html
     source_type: official-docs

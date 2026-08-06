@@ -3,7 +3,7 @@ title: Govern telemetry cost across teams
 theme: observability
 difficulty: staff
 type: scenario
-tags: [observability, governance, cost-optimization, platform-engineering, prometheus, pca]
+tags: [observability, governance, cost-optimization, platform-engineering, prometheus, pca, cnpe]
 sources:
   - url: https://prometheus.io/docs/practices/naming/
     source_type: official-docs

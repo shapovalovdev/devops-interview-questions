@@ -3,7 +3,7 @@ title: Establish safe service-mesh platform guardrails
 theme: service-mesh
 difficulty: staff
 type: scenario
-tags: [service-mesh, istio, kubernetes, platform-engineering, security, governance, reliability]
+tags: [service-mesh, istio, kubernetes, platform-engineering, security, governance, reliability, cnpe]
 sources:
   - url: https://istio.io/latest/docs/ops/best-practices/security/
     source_type: official-docs
