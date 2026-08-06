@@ -55,3 +55,15 @@ _Avoid_: Obscure senior trivia
 **Queue messaging**:
 The canonical Theme for message brokers and event-streaming systems, including RabbitMQ and Kafka.
 _Avoid_: Generic networking, application queue
+
+**Service mesh**:
+The canonical Theme for service-to-service traffic management, identity, and policy systems such as Istio and Linkerd.
+_Avoid_: Generic Kubernetes networking
+
+**Backend architecture**:
+The canonical Theme for application-service boundaries, APIs, persistence design, and operational architecture.
+_Avoid_: Generic programming
+
+**Distributed systems**:
+The canonical Theme for coordination, consistency, replication, fault tolerance, and system-wide trade-offs.
+_Avoid_: Backend architecture

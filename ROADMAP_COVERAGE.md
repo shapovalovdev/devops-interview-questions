@@ -20,6 +20,9 @@ This map uses the DevOps roadmap as a coverage guide, not as copied content. Eac
 | Observability and alerting | `observability` |
 | Logging | `logging` |
 | Queues and event streaming | `queue-messaging` |
+| Service mesh | `service-mesh` |
+| Backend architecture | `backend-architecture` |
+| Distributed systems | `distributed-systems` |
 | Web servers and proxies | `web-servers` |
 | Security and supply chain | `security` |
 
