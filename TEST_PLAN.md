@@ -62,6 +62,12 @@ canonical Question exists and retains source metadata, References, and a
 complementary technical blog. CNPE remains unpublished as a filter until the
 coordinator atomically integrates its tag, manifest entry, and catalog records.
 
+`tests/test_cnpa_curriculum_map.py` guards the CNPA public curriculum map: its
+official Linux Foundation source and six weighted domains, original-content
+boundary, direct IDP/DORA gap policy, and source-verified canonical links. CNPA
+is not activated as a filter until the coordinator atomically integrates its
+tag, manifest entry, and catalog records.
+
 The manifest currently includes the PCA and CAPA study paths, along with the
 other published certification maps. Adding a certification requires one
 manifest entry, a documented tag, a curriculum map, and mapped Questions;
