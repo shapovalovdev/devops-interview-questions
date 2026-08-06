@@ -31,4 +31,4 @@ How would you triage sustained runnable-task growth on a Linux host?
 - Manual or specification: [sched(7)](https://man7.org/linux/man-pages/man7/sched.7.html)
 - Maintainer or personal blog: [Brendan Gregg — perf examples](https://www.brendangregg.com/perf.html)
 - Technical blog: [Cloudflare Blog](https://blog.cloudflare.com/)
-- Hands-on guide: [perf sched](https://www.brendangregg.com/perf.html)
+- Hands-on guide: [perf-sched(1) manual](https://man7.org/linux/man-pages/man1/perf-sched.1.html)

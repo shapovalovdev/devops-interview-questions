@@ -305,6 +305,106 @@
     {
       "question": "questions/linux-troubleshooting/triage-network-packet-loss.md",
       "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-performance/cgroup-memory-limit-triage.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/context-switch-analysis.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/cpu-run-queue-triage.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/cpu-throttling-diagnosis.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/cpu-utilization-basics.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/disk-space-versus-inodes.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/file-descriptor-exhaustion.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/iowait-interpretation.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/kernel-samepage-merging.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/load-average-meaning.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/memory-available-basics.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/network-retransmission-triage.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/noisy-neighbor-policy.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/numa-locality.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/observability-overhead-governance.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/oom-killer-analysis.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/page-cache-reclaim.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/perf-sampling-safety.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/performance-baseline-program.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/performance-capacity-model.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/performance-incident-command.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/pressure-stall-information.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/softirq-saturation.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/swap-activity-response.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/linux-performance/vmstat-first-pass.md",
+      "related_materials": "docs/related-materials/linux-performance.md"
     }
   ]
 }
