@@ -1,0 +1,27 @@
+---
+title: Design trace sampling without losing incidents
+theme: observability
+difficulty: middle
+type: scenario
+tags: [observability, monitoring, troubleshooting, cost-optimization]
+sources:
+  - url: https://opentelemetry.io/docs/concepts/sampling/
+    source_type: official-docs
+    verified_on: 2026-08-06
+---
+
+# Design trace sampling without losing incidents
+
+How would you reduce trace cost while retaining useful incident evidence?
+
+## Answer guide
+
+- Start with head sampling when a fixed predictable rate is sufficient, or use tail sampling when decisions need final attributes such as error status or latency.
+- Always retain or preferentially retain error, high-latency, and selected critical-journey traces, then document the sampling decision in trace metadata and dashboards.
+- Estimate volume from request rate, spans per request, attribute size, and retention; validate that sampling produces representative data for normal traffic too.
+- Sampling is not a privacy control and cannot recover spans dropped before a tail decision. Sampling every error can still overwhelm storage during a broad outage, so apply bounded policies.
+
+## References
+
+- [OpenTelemetry: Sampling](https://opentelemetry.io/docs/concepts/sampling/)
+- [Further reading: OpenTelemetry Collector tail sampling processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/tailsamplingprocessor)

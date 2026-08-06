@@ -1,0 +1,27 @@
+---
+title: Diagnose missing trace context across services
+theme: observability
+difficulty: middle
+type: troubleshooting
+tags: [observability, debugging, troubleshooting, security]
+sources:
+  - url: https://www.w3.org/TR/trace-context/
+    source_type: standard
+    verified_on: 2026-08-06
+---
+
+# Diagnose missing trace context across services
+
+Traces split at a service boundary. How do you diagnose and fix context propagation?
+
+## Answer guide
+
+- Check that the caller injects and the receiver extracts the same propagation format, for example W3C Trace Context `traceparent`, on the actual HTTP, messaging, or RPC carrier.
+- Ensure middleware runs at the correct boundary and that asynchronous work captures and restores context rather than creating an unrelated root span.
+- Test a request end-to-end and inspect headers and resulting parent/trace IDs, while respecting gateways that intentionally remove untrusted headers.
+- Treat external trace context as untrusted and do not put secrets or personal data in propagated baggage. A missing parent must not make the service fail its user request.
+
+## References
+
+- [W3C Trace Context](https://www.w3.org/TR/trace-context/)
+- [Further reading: OpenTelemetry propagators](https://opentelemetry.io/docs/specs/otel/context/api-propagators/)

@@ -1,0 +1,27 @@
+---
+title: Measure and improve tail latency
+theme: observability
+difficulty: senior
+type: troubleshooting
+tags: [observability, monitoring, reliability, troubleshooting]
+sources:
+  - url: https://prometheus.io/docs/practices/histograms/
+    source_type: official-docs
+    verified_on: 2026-08-06
+---
+
+# Measure and improve tail latency
+
+Average latency is stable, but users report occasional slowness. How do you investigate tail latency?
+
+## Answer guide
+
+- Measure latency distributions with a histogram and evaluate a high quantile appropriate to the user journey, segmented by operation, dependency, region, and workload where labels remain bounded.
+- Correlate slow buckets with traces, saturation, queueing, garbage collection, connection pools, and downstream duration; compare before and after a release or traffic shift.
+- Choose histogram buckets around SLO boundaries so quantile estimates are useful for the action you need to take.
+- An average masks outliers, and a client-side summary cannot generally be aggregated across replicas. Do not promise an exact percentile when bucket granularity only permits an estimate.
+
+## References
+
+- [Prometheus histogram and summary practices](https://prometheus.io/docs/practices/histograms/)
+- [Further reading: Google SRE—Addressing cascading failures](https://sre.google/sre-book/addressing-cascading-failures/)
