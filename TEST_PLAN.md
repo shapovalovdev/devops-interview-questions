@@ -24,6 +24,16 @@ Every `*.md` file under `questions/<theme>/` is an active Question. It must appe
   article;
 - exactly one matching entry in the website catalog, using a Pages-rendered `.html` URL.
 
+`config/content-manifest.json` is the single coverage contract. The CI validator
+checks that every canonical Theme is declared, tracks its delivery state, and
+enforces the exact 25-Question `5 junior / 10 middle / 5 senior / 5 staff`
+mix for complete Themes. In-progress Themes may never exceed that target or
+any difficulty allocation; overlapping Questions must be retired or reassigned
+before the Theme is marked complete. Planned Themes cannot contain active
+Questions. The same manifest declares every published certification tag, its
+curriculum map, and its minimum mapped Question count. Certification IDs are
+for tags and maps, never canonical Theme folders.
+
 `tests/site_check.py` loads the public website interface locally in a headless browser. It verifies catalog rendering, search, theme filtering, and that all card links target `.html` pages.
 
 `tests/validate_learning_resources.py` validates the staged curated-learning
@@ -37,8 +47,16 @@ rollout and the path to global enforcement are recorded in
 
 `tests/validate_certification_question_workflow.py` validates the reusable certification workflow itself: its official-curriculum mapping, canonical-tag, original-content, source-and-blog, catalog, validation, CI, and issue-closure requirements; its issue template; and realistic workflow eval prompts.
 
-`tests/validate_questions.py` also requires the PCA certification tag, PCA map, and at least 25 active Questions carrying the canonical `pca` tag. This prevents the PCA study path from silently disappearing during catalog or content changes.
+Certification-map invariants additionally require the published CCA curriculum map and at least 20 active Questions carrying the documented `cca` tag.
+
+The manifest currently includes the PCA and CAPA study paths, along with the
+other published certification maps. Adding a certification requires one
+manifest entry, a documented tag, a curriculum map, and mapped Questions;
+otherwise CI fails.
 
 ## Delivery gate
 
-The `Validate question database` GitHub Actions workflow runs both checks for pushes to `main` and pull requests. GitHub Pages continues to publish from `main`; repository branch protection can require this workflow before future merges.
+The `Validate question database` GitHub Actions workflow runs the manifest,
+content, certification-workflow, and website checks for pushes to `main` and
+pull requests. GitHub Pages continues to publish from `main`; repository branch
+protection can require this workflow before future merges.

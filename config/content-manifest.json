@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "theme_policy": {
+    "target_question_count": 25,
+    "difficulty_distribution": {
+      "junior": 5,
+      "middle": 10,
+      "senior": 5,
+      "staff": 5
+    }
+  },
+  "themes": [
+    {"name": "advanced-containers", "state": "complete"},
+    {"name": "backend-architecture", "state": "planned"},
+    {"name": "certification-last-minute-review", "state": "planned"},
+    {"name": "ci-cd", "state": "in-progress"},
+    {"name": "cloud", "state": "complete"},
+    {"name": "configuration-management", "state": "complete"},
+    {"name": "container-networking", "state": "in-progress"},
+    {"name": "containers", "state": "complete"},
+    {"name": "databases", "state": "complete"},
+    {"name": "distributed-systems", "state": "planned"},
+    {"name": "hardware", "state": "complete"},
+    {"name": "infrastructure-as-code", "state": "complete"},
+    {"name": "kubernetes", "state": "in-progress"},
+    {"name": "linux", "state": "complete"},
+    {"name": "linux-networking", "state": "complete"},
+    {"name": "linux-performance", "state": "planned"},
+    {"name": "linux-troubleshooting", "state": "planned"},
+    {"name": "logging", "state": "in-progress"},
+    {"name": "network-storage", "state": "planned"},
+    {"name": "networking", "state": "complete"},
+    {"name": "observability", "state": "in-progress"},
+    {"name": "performance-engineering", "state": "planned"},
+    {"name": "processes", "state": "planned"},
+    {"name": "queue-messaging", "state": "complete"},
+    {"name": "security", "state": "complete"},
+    {"name": "service-mesh", "state": "in-progress"},
+    {"name": "shell-scripting", "state": "complete"},
+    {"name": "sre", "state": "planned"},
+    {"name": "storage", "state": "complete"},
+    {"name": "systems-performance", "state": "planned"},
+    {"name": "troubleshooting", "state": "planned"},
+    {"name": "version-control", "state": "in-progress"},
+    {"name": "web-servers", "state": "in-progress"}
+  ],
+  "certifications": [
+    {"tag": "capa", "map": "docs/certifications/capa.md", "minimum_questions": 12},
+    {"tag": "cca", "map": "docs/certifications/cca.md", "minimum_questions": 20},
+    {"tag": "cka", "map": "docs/certifications/cka.md", "minimum_questions": 25},
+    {"tag": "ckad", "map": "docs/certifications/ckad.md", "minimum_questions": 20},
+    {"tag": "cks", "map": "docs/certifications/cks.md", "minimum_questions": 19},
+    {"tag": "ica", "map": "docs/certifications/ica.md", "minimum_questions": 15},
+    {"tag": "kcna", "map": "docs/certifications/kcna.md", "minimum_questions": 15},
+    {"tag": "kcsa", "map": "docs/certifications/kcsa.md", "minimum_questions": 20},
+    {"tag": "pca", "map": "docs/certifications/pca.md", "minimum_questions": 25}
+  ]
+}
