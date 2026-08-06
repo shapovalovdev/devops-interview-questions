@@ -24,3 +24,11 @@ When should a Kafka topic use time/size retention, log compaction, or both?
 
 - [Apache Kafka log compaction](https://kafka.apache.org/documentation/#compaction)
 - Further reading (blog): [Kafka log compaction](https://www.confluent.io/blog/log-compaction-in-apache-kafka-key-benefits-and-best-practices/)
+
+## What to learn next
+
+- Official documentation: [Apache Kafka log compaction](https://kafka.apache.org/documentation/#compaction)
+- Manual or specification: [Apache Kafka protocol](https://kafka.apache.org/protocol)
+- Maintainer or personal blog: [Matthias J. Sax — Gently Down the Stream](https://www.gentlydownthe.stream/)
+- Technical blog: [Confluent technical blog](https://www.confluent.io/blog/)
+- Hands-on guide: [Confluent Kafka tutorials](https://developer.confluent.io/tutorials/)

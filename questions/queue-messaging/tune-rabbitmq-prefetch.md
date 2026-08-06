@@ -24,3 +24,11 @@ What does RabbitMQ prefetch control and how do you set it safely?
 
 - [RabbitMQ consumer prefetch](https://www.rabbitmq.com/docs/consumer-prefetch)
 - Further reading (blog): [RabbitMQ prefetch explained](https://www.rabbitmq.com/blog/2012/04/25/rabbitmq-performance-measurements-part-2)
+
+## What to learn next
+
+- Official documentation: [RabbitMQ consumer prefetch](https://www.rabbitmq.com/docs/consumer-prefetch)
+- Manual or specification: [AMQP 0-9-1 specification](https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf)
+- Maintainer or personal blog: [RabbitMQ team — RabbitMQ engineering blog](https://www.rabbitmq.com/blog/)
+- Technical blog: [CloudAMQP technical blog](https://www.cloudamqp.com/blog/)
+- Hands-on guide: [RabbitMQ consumer guide](https://www.rabbitmq.com/docs/consumers)

@@ -28,3 +28,11 @@ How would you decide whether the platform should offer Kafka, RabbitMQ, both, or
 - [Apache Kafka concepts and terms](https://kafka.apache.org/documentation/#intro_concepts_and_terms)
 - [RabbitMQ queues](https://www.rabbitmq.com/docs/queues)
 - Further reading (blog): [Kafka versus RabbitMQ](https://www.confluent.io/blog/kafka-vs-rabbitmq/)
+
+## What to learn next
+
+- Official documentation: [AsyncAPI documentation](https://www.asyncapi.com/docs)
+- Manual or specification: [AsyncAPI specification](https://www.asyncapi.com/docs/reference/specification/latest)
+- Maintainer or personal blog: [Ben Stopford — distributed-systems articles](https://www.confluent.io/blog/author/ben-stopford/)
+- Technical blog: [Redpanda engineering blog](https://www.redpanda.com/blog)
+- Hands-on guide: [AsyncAPI tutorials](https://www.asyncapi.com/docs/tutorials)

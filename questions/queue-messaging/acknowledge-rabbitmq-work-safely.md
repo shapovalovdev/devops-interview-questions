@@ -24,3 +24,11 @@ Where should a worker acknowledge a RabbitMQ delivery that writes to a database?
 
 - [RabbitMQ consumer acknowledgements](https://www.rabbitmq.com/docs/confirms)
 - Further reading (blog): [RabbitMQ reliability guide](https://www.rabbitmq.com/blog/2020/11/10/using-python-rabbitmq-client-libraries)
+
+## What to learn next
+
+- Official documentation: [RabbitMQ consumer acknowledgements](https://www.rabbitmq.com/docs/confirms)
+- Manual or specification: [AMQP 0-9-1 specification](https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf)
+- Maintainer or personal blog: [RabbitMQ team — RabbitMQ engineering blog](https://www.rabbitmq.com/blog/)
+- Technical blog: [CloudAMQP technical blog](https://www.cloudamqp.com/blog/)
+- Hands-on guide: [RabbitMQ tutorials](https://www.rabbitmq.com/tutorials)

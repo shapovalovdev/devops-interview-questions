@@ -24,3 +24,11 @@ What must a Kafka disaster-recovery design define beyond replicating topic data 
 
 - [Apache Kafka replication](https://kafka.apache.org/documentation/#replication)
 - Further reading (blog): [Multi-region Kafka patterns](https://www.confluent.io/blog/multi-datacenter-replication-with-apache-kafka/)
+
+## What to learn next
+
+- Official documentation: [Apache Kafka replication](https://kafka.apache.org/documentation/#replication)
+- Manual or specification: [Apache Kafka protocol](https://kafka.apache.org/protocol)
+- Maintainer or personal blog: [Matthias J. Sax — Gently Down the Stream](https://www.gentlydownthe.stream/)
+- Technical blog: [Confluent technical blog](https://www.confluent.io/blog/)
+- Hands-on guide: [Confluent Kafka tutorials](https://developer.confluent.io/tutorials/)

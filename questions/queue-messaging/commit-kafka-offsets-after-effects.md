@@ -24,3 +24,11 @@ What offset-commit order should a Kafka consumer use when it writes a record to 
 
 - [Apache Kafka consumer configuration](https://kafka.apache.org/documentation/#consumerconfigs)
 - Further reading (blog): [Kafka consumer design](https://docs.confluent.io/kafka/design/consumer-design.html)
+
+## What to learn next
+
+- Official documentation: [Apache Kafka consumer configuration](https://kafka.apache.org/documentation/#consumerconfigs)
+- Manual or specification: [Apache Kafka protocol](https://kafka.apache.org/protocol)
+- Maintainer or personal blog: [Matthias J. Sax — Gently Down the Stream](https://www.gentlydownthe.stream/)
+- Technical blog: [Confluent technical blog](https://www.confluent.io/blog/)
+- Hands-on guide: [Confluent Kafka tutorials](https://developer.confluent.io/tutorials/)

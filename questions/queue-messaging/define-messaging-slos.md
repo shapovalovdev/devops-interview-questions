@@ -28,3 +28,11 @@ Which SLOs make a shared messaging platform useful without promising business ou
 - [Apache Kafka monitoring](https://kafka.apache.org/documentation/#basic_ops_monitoring)
 - [RabbitMQ monitoring](https://www.rabbitmq.com/docs/monitoring)
 - Further reading (blog): [Monitoring Kafka](https://www.confluent.io/blog/monitor-kafka-cluster-with-prometheus-grafana/)
+
+## What to learn next
+
+- Official documentation: [Apache Kafka monitoring](https://kafka.apache.org/documentation/#basic_ops_monitoring)
+- Manual or specification: [AsyncAPI specification](https://www.asyncapi.com/docs/reference/specification/latest)
+- Maintainer or personal blog: [Ben Stopford — distributed-systems articles](https://www.confluent.io/blog/author/ben-stopford/)
+- Technical blog: [Redpanda engineering blog](https://www.redpanda.com/blog)
+- Hands-on guide: [AsyncAPI tutorials](https://www.asyncapi.com/docs/tutorials)

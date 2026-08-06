@@ -28,3 +28,11 @@ What do delivery semantics mean, and why is “exactly once” usually incomplet
 - [Apache Kafka message delivery semantics](https://kafka.apache.org/documentation/#semantics)
 - [RabbitMQ publisher confirms and consumer acknowledgements](https://www.rabbitmq.com/docs/confirms)
 - Further reading (blog): [Kafka data access semantics](https://www.confluent.io/blog/apache-kafka-data-access-semantics-consumers-and-membership/)
+
+## What to learn next
+
+- Official documentation: [Apache Kafka message delivery semantics](https://kafka.apache.org/documentation/#semantics)
+- Manual or specification: [AsyncAPI specification](https://www.asyncapi.com/docs/reference/specification/latest)
+- Maintainer or personal blog: [Ben Stopford — distributed-systems articles](https://www.confluent.io/blog/author/ben-stopford/)
+- Technical blog: [Redpanda engineering blog](https://www.redpanda.com/blog)
+- Hands-on guide: [AsyncAPI tutorials](https://www.asyncapi.com/docs/tutorials)

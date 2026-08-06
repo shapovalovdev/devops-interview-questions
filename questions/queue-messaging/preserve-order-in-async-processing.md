@@ -28,3 +28,11 @@ An order service must process state changes for each order in sequence. How do y
 - [Apache Kafka concepts and terms](https://kafka.apache.org/documentation/#intro_concepts_and_terms)
 - [RabbitMQ queues](https://www.rabbitmq.com/docs/queues)
 - Further reading (blog): [Kafka partitioning](https://www.confluent.io/blog/how-choose-number-topics-partitions-kafka-cluster/)
+
+## What to learn next
+
+- Official documentation: [Apache Kafka concepts and terms](https://kafka.apache.org/documentation/#intro_concepts_and_terms)
+- Manual or specification: [AsyncAPI specification](https://www.asyncapi.com/docs/reference/specification/latest)
+- Maintainer or personal blog: [Ben Stopford — distributed-systems articles](https://www.confluent.io/blog/author/ben-stopford/)
+- Technical blog: [Redpanda engineering blog](https://www.redpanda.com/blog)
+- Hands-on guide: [AsyncAPI tutorials](https://www.asyncapi.com/docs/tutorials)

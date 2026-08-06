@@ -24,3 +24,11 @@ How does a RabbitMQ publisher route a message to the right consumer?
 
 - [RabbitMQ exchanges and bindings](https://www.rabbitmq.com/docs/exchanges)
 - Further reading (blog): [RabbitMQ topic exchanges](https://www.rabbitmq.com/blog/2010/09/14/very-fast-and-scalable-topic-routing-part-1)
+
+## What to learn next
+
+- Official documentation: [RabbitMQ exchanges and bindings](https://www.rabbitmq.com/docs/exchanges)
+- Manual or specification: [AMQP 0-9-1 specification](https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf)
+- Maintainer or personal blog: [RabbitMQ team — RabbitMQ engineering blog](https://www.rabbitmq.com/blog/)
+- Technical blog: [CloudAMQP technical blog](https://www.cloudamqp.com/blog/)
+- Hands-on guide: [RabbitMQ tutorials](https://www.rabbitmq.com/tutorials)

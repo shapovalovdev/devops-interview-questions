@@ -28,3 +28,11 @@ How should a platform team govern messaging capacity without surprising product 
 - [Apache Kafka operations](https://kafka.apache.org/documentation/#basic_ops)
 - [RabbitMQ memory alarms](https://www.rabbitmq.com/docs/memory)
 - Further reading (blog): [Kafka capacity planning](https://www.confluent.io/blog/how-to-choose-the-right-number-of-kafka-partitions/)
+
+## What to learn next
+
+- Official documentation: [Apache Kafka operations](https://kafka.apache.org/documentation/#basic_ops)
+- Manual or specification: [AsyncAPI specification](https://www.asyncapi.com/docs/reference/specification/latest)
+- Maintainer or personal blog: [Ben Stopford — distributed-systems articles](https://www.confluent.io/blog/author/ben-stopford/)
+- Technical blog: [Redpanda engineering blog](https://www.redpanda.com/blog)
+- Hands-on guide: [AsyncAPI tutorials](https://www.asyncapi.com/docs/tutorials)

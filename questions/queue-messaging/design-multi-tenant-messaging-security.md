@@ -28,3 +28,11 @@ What boundaries are needed when several teams share Kafka or RabbitMQ?
 - [Apache Kafka security](https://kafka.apache.org/documentation/#security)
 - [RabbitMQ access control](https://www.rabbitmq.com/docs/access-control)
 - Further reading (blog): [Kafka security best practices](https://www.confluent.io/blog/apache-kafka-security-authorization-authentication-encryption/)
+
+## What to learn next
+
+- Official documentation: [Apache Kafka security](https://kafka.apache.org/documentation/#security)
+- Manual or specification: [AsyncAPI specification](https://www.asyncapi.com/docs/reference/specification/latest)
+- Maintainer or personal blog: [Ben Stopford — distributed-systems articles](https://www.confluent.io/blog/author/ben-stopford/)
+- Technical blog: [Redpanda engineering blog](https://www.redpanda.com/blog)
+- Hands-on guide: [AsyncAPI tutorials](https://www.asyncapi.com/docs/tutorials)

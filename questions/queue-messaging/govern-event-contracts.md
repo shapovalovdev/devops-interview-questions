@@ -24,3 +24,11 @@ How do you make shared events dependable as the number of producers and consumer
 
 - [Apache Kafka concepts and terms](https://kafka.apache.org/documentation/#intro_concepts_and_terms)
 - Further reading (blog): [Data contracts for event streams](https://www.confluent.io/blog/data-contracts-stream-governance/)
+
+## What to learn next
+
+- Official documentation: [Apache Kafka concepts and terms](https://kafka.apache.org/documentation/#intro_concepts_and_terms)
+- Manual or specification: [Apache Kafka protocol](https://kafka.apache.org/protocol)
+- Maintainer or personal blog: [Matthias J. Sax — Gently Down the Stream](https://www.gentlydownthe.stream/)
+- Technical blog: [Confluent technical blog](https://www.confluent.io/blog/)
+- Hands-on guide: [Confluent Kafka tutorials](https://developer.confluent.io/tutorials/)

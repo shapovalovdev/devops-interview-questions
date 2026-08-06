@@ -28,3 +28,11 @@ How do you choose partition count for a new high-volume Kafka topic?
 - [Apache Kafka design](https://kafka.apache.org/documentation/#design)
 - [Apache Kafka operations](https://kafka.apache.org/documentation/#basic_ops)
 - Further reading (blog): [Choosing Kafka partitions](https://www.confluent.io/blog/how-choose-number-topics-partitions-kafka-cluster/)
+
+## What to learn next
+
+- Official documentation: [Apache Kafka design](https://kafka.apache.org/documentation/#design)
+- Manual or specification: [Apache Kafka protocol](https://kafka.apache.org/protocol)
+- Maintainer or personal blog: [Matthias J. Sax — Gently Down the Stream](https://www.gentlydownthe.stream/)
+- Technical blog: [Confluent technical blog](https://www.confluent.io/blog/)
+- Hands-on guide: [Confluent Kafka tutorials](https://developer.confluent.io/tutorials/)

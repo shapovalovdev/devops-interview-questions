@@ -24,3 +24,11 @@ Why do Kafka consumer rebalances interrupt work, and how should an application r
 
 - [Apache Kafka consumer configuration](https://kafka.apache.org/documentation/#consumerconfigs)
 - Further reading (blog): [Kafka consumer group IDs](https://www.confluent.io/blog/dynamic-vs-static-kafka-consumer-rebalancing/)
+
+## What to learn next
+
+- Official documentation: [Apache Kafka consumer configuration](https://kafka.apache.org/documentation/#consumerconfigs)
+- Manual or specification: [Apache Kafka protocol](https://kafka.apache.org/protocol)
+- Maintainer or personal blog: [Matthias J. Sax — Gently Down the Stream](https://www.gentlydownthe.stream/)
+- Technical blog: [Confluent technical blog](https://www.confluent.io/blog/)
+- Hands-on guide: [Confluent Kafka tutorials](https://developer.confluent.io/tutorials/)

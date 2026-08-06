@@ -24,3 +24,11 @@ How can a Kafka application safely read records, transform them, and publish der
 
 - [Apache Kafka message delivery semantics](https://kafka.apache.org/documentation/#semantics)
 - Further reading (blog): [Exactly-once semantics in Kafka](https://www.confluent.io/blog/enabling-exactly-once-kafka-streams/)
+
+## What to learn next
+
+- Official documentation: [Apache Kafka message delivery semantics](https://kafka.apache.org/documentation/#semantics)
+- Manual or specification: [Apache Kafka protocol](https://kafka.apache.org/protocol)
+- Maintainer or personal blog: [Matthias J. Sax — Gently Down the Stream](https://www.gentlydownthe.stream/)
+- Technical blog: [Confluent technical blog](https://www.confluent.io/blog/)
+- Hands-on guide: [Confluent Kafka tutorials](https://developer.confluent.io/tutorials/)

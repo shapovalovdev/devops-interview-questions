@@ -24,3 +24,11 @@ When would you choose a RabbitMQ quorum queue rather than a classic queue?
 
 - [RabbitMQ quorum queues](https://www.rabbitmq.com/docs/quorum-queues)
 - Further reading (blog): [RabbitMQ quorum queues](https://www.rabbitmq.com/blog/2019/08/28/quorum-queues-local-delivery)
+
+## What to learn next
+
+- Official documentation: [RabbitMQ quorum queues](https://www.rabbitmq.com/docs/quorum-queues)
+- Manual or specification: [AMQP 0-9-1 specification](https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf)
+- Maintainer or personal blog: [RabbitMQ team — RabbitMQ engineering blog](https://www.rabbitmq.com/blog/)
+- Technical blog: [CloudAMQP technical blog](https://www.cloudamqp.com/blog/)
+- Hands-on guide: [RabbitMQ tutorials](https://www.rabbitmq.com/tutorials)

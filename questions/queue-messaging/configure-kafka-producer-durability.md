@@ -24,3 +24,11 @@ How would you configure a Kafka producer for durable business events, and what l
 
 - [Apache Kafka producer configuration](https://kafka.apache.org/documentation/#producerconfigs)
 - Further reading (blog): [Apache Kafka producer internals](https://www.confluent.io/blog/kafka-producer-internals-preparing-event-data/)
+
+## What to learn next
+
+- Official documentation: [Apache Kafka producer configuration](https://kafka.apache.org/documentation/#producerconfigs)
+- Manual or specification: [Apache Kafka protocol](https://kafka.apache.org/protocol)
+- Maintainer or personal blog: [Matthias J. Sax — Gently Down the Stream](https://www.gentlydownthe.stream/)
+- Technical blog: [Confluent technical blog](https://www.confluent.io/blog/)
+- Hands-on guide: [Confluent Kafka tutorials](https://developer.confluent.io/tutorials/)

@@ -24,3 +24,11 @@ Consumer lag is growing. What do you investigate before scaling consumers?
 
 - [Apache Kafka monitoring](https://kafka.apache.org/documentation/#basic_ops_monitoring)
 - Further reading (blog): [Kafka consumer lag monitoring](https://www.confluent.io/blog/kafka-lag-monitoring-and-metrics-at-appsflyer/)
+
+## What to learn next
+
+- Official documentation: [Apache Kafka monitoring](https://kafka.apache.org/documentation/#basic_ops_monitoring)
+- Manual or specification: [Apache Kafka protocol](https://kafka.apache.org/protocol)
+- Maintainer or personal blog: [Matthias J. Sax — Gently Down the Stream](https://www.gentlydownthe.stream/)
+- Technical blog: [Confluent technical blog](https://www.confluent.io/blog/)
+- Hands-on guide: [Confluent Kafka tutorials](https://developer.confluent.io/tutorials/)

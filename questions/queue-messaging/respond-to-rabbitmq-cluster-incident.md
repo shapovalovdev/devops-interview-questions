@@ -28,3 +28,11 @@ During a node outage, publishers time out and a quorum queue has no leader. What
 - [RabbitMQ clustering](https://www.rabbitmq.com/docs/clustering)
 - [RabbitMQ quorum queues](https://www.rabbitmq.com/docs/quorum-queues)
 - Further reading (blog): [RabbitMQ quorum queue recovery](https://www.rabbitmq.com/blog/2020/04/20/rabbitmq-3.8.3-quorum-queue-improvements)
+
+## What to learn next
+
+- Official documentation: [RabbitMQ clustering](https://www.rabbitmq.com/docs/clustering)
+- Manual or specification: [AMQP 0-9-1 specification](https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf)
+- Maintainer or personal blog: [RabbitMQ team — RabbitMQ engineering blog](https://www.rabbitmq.com/blog/)
+- Technical blog: [CloudAMQP technical blog](https://www.cloudamqp.com/blog/)
+- Hands-on guide: [RabbitMQ tutorials](https://www.rabbitmq.com/tutorials)
