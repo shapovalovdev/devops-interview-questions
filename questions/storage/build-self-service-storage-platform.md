@@ -24,4 +24,4 @@ How would you let product teams provision storage quickly without losing reliabi
 ## References
 
 - [Kubernetes StorageClasses](https://kubernetes.io/docs/concepts/storage/storage-classes/)
-- Further reading (blog): [AWS Storage Blog: storage platform patterns](https://aws.amazon.com/blogs/storage/)
+- Further reading (blog): [AWS Storage Blog: storage platform patterns](https://aws.amazon.com/blogs/storage/uncover-new-performance-insights-using-amazon-ebs-detailed-performance-statistics/)

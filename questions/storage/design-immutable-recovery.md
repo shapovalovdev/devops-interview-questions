@@ -24,4 +24,4 @@ How do you protect backup data when a compromised administrator may try to delet
 ## References
 
 - [Amazon S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)
-- Further reading (blog): [AWS Storage Blog: ransomware-resilient storage](https://aws.amazon.com/blogs/storage/)
+- Further reading (blog): [AWS Storage Blog: ransomware-resilient storage](https://aws.amazon.com/blogs/storage/uncover-new-performance-insights-using-amazon-ebs-detailed-performance-statistics/)

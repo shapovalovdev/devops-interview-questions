@@ -24,4 +24,4 @@ What operational checks are needed before placing a production shared workload o
 ## References
 
 - [RFC 8881: NFS version 4.1](https://www.rfc-editor.org/rfc/rfc8881.html)
-- Further reading (blog): [AWS Storage Blog: shared file storage patterns](https://aws.amazon.com/blogs/storage/)
+- Further reading (blog): [AWS Storage Blog: shared file storage patterns](https://aws.amazon.com/blogs/storage/uncover-new-performance-insights-using-amazon-ebs-detailed-performance-statistics/)

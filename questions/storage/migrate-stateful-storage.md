@@ -24,4 +24,4 @@ What plan would you use to move a production stateful service to new storage?
 ## References
 
 - [PostgreSQL backup and restore](https://www.postgresql.org/docs/current/backup.html)
-- Further reading (blog): [AWS Storage Blog: storage migration patterns](https://aws.amazon.com/blogs/storage/)
+- Further reading (blog): [AWS Storage Blog: storage migration patterns](https://aws.amazon.com/blogs/storage/uncover-new-performance-insights-using-amazon-ebs-detailed-performance-statistics/)

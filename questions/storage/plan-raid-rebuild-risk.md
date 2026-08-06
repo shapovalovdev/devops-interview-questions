@@ -24,4 +24,4 @@ An array is degraded after one member fails. How do you manage the rebuild safel
 ## References
 
 - [Linux MD RAID administration guide](https://www.kernel.org/doc/html/latest/admin-guide/md.html)
-- Further reading (blog): [AWS Storage Blog: resilient storage operations](https://aws.amazon.com/blogs/storage/)
+- Further reading (blog): [AWS Storage Blog: resilient storage operations](https://aws.amazon.com/blogs/storage/uncover-new-performance-insights-using-amazon-ebs-detailed-performance-statistics/)

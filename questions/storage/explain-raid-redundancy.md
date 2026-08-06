@@ -24,4 +24,4 @@ What problem does RAID solve, and why is it not a backup strategy?
 ## References
 
 - [Linux MD RAID administration guide](https://www.kernel.org/doc/html/latest/admin-guide/md.html)
-- Further reading (blog): [AWS Storage Blog: resilient storage architecture](https://aws.amazon.com/blogs/storage/)
+- Further reading (blog): [AWS Storage Blog: resilient storage architecture](https://aws.amazon.com/blogs/storage/uncover-new-performance-insights-using-amazon-ebs-detailed-performance-statistics/)

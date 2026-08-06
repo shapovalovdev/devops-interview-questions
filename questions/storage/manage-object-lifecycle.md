@@ -24,4 +24,4 @@ How do you reduce object-storage cost without unexpectedly deleting recoverable 
 ## References
 
 - [Amazon S3 lifecycle configuration](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html)
-- Further reading (blog): [AWS Storage Blog: S3 lifecycle cost optimization](https://aws.amazon.com/blogs/storage/)
+- Further reading (blog): [AWS Storage Blog: S3 lifecycle cost optimization](https://aws.amazon.com/blogs/storage/uncover-new-performance-insights-using-amazon-ebs-detailed-performance-statistics/)
