@@ -24,3 +24,11 @@ How would you govern risky database changes while allowing teams to ship frequen
 
 - [PostgreSQL documentation: modifying tables](https://www.postgresql.org/docs/current/ddl-alter.html)
 - Further reading (blog): [pganalyze: database migration locking topics](https://pganalyze.com/blog)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: modifying tables](https://www.postgresql.org/docs/current/ddl-alter.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — PostgreSQL migrations and operations](https://pganalyze.com/blog)
+- Hands-on guide: [PostgreSQL ALTER TABLE reference](https://www.postgresql.org/docs/current/sql-altertable.html)

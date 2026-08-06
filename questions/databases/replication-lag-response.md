@@ -24,3 +24,11 @@ How would you investigate a PostgreSQL standby that is falling behind?
 
 - [PostgreSQL documentation: warm standby and streaming replication](https://www.postgresql.org/docs/current/warm-standby.html)
 - Further reading (blog): [pganalyze: Postgres replication topics](https://pganalyze.com/blog)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: warm standby and streaming replication](https://www.postgresql.org/docs/current/warm-standby.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — PostgreSQL replication articles](https://pganalyze.com/blog)
+- Hands-on guide: [PostgreSQL replication monitoring views](https://www.postgresql.org/docs/current/monitoring-stats.html)

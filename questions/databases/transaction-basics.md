@@ -24,3 +24,11 @@ Why should related database changes be made in one transaction?
 
 - [PostgreSQL documentation: transactions](https://www.postgresql.org/docs/current/tutorial-transactions.html)
 - Further reading (blog): [pganalyze: connection tracing and idle transactions](https://pganalyze.com/blog/postgres-connection-tracing-wait-event-analysis-and-vacuum-monitoring)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: transactions tutorial](https://www.postgresql.org/docs/current/tutorial-transactions.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — connection tracing and idle transactions](https://pganalyze.com/blog/postgres-connection-tracing-wait-event-analysis-and-vacuum-monitoring)
+- Hands-on guide: [PostgreSQL transaction isolation](https://www.postgresql.org/docs/current/transaction-iso.html)

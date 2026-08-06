@@ -24,3 +24,11 @@ What is your first response when PostgreSQL reports possible data corruption?
 
 - [PostgreSQL documentation: backup and restore](https://www.postgresql.org/docs/current/backup.html)
 - Further reading (blog): [pganalyze: Postgres operational practices](https://pganalyze.com/blog)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: backup and restore](https://www.postgresql.org/docs/current/backup.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — PostgreSQL operations](https://pganalyze.com/blog)
+- Hands-on guide: [PostgreSQL pg_verifybackup reference](https://www.postgresql.org/docs/current/app-pgverifybackup.html)

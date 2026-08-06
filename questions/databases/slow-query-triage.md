@@ -24,3 +24,11 @@ What evidence would you collect before changing a slow query or its indexes?
 
 - [PostgreSQL documentation: using EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html)
 - Further reading (blog): [pganalyze: index selection](https://pganalyze.com/blog/how-postgres-chooses-index)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: using EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — how PostgreSQL chooses an index](https://pganalyze.com/blog/how-postgres-chooses-index)
+- Hands-on guide: [PostgreSQL EXPLAIN reference](https://www.postgresql.org/docs/current/sql-explain.html)

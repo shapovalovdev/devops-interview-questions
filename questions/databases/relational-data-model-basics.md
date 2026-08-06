@@ -24,3 +24,11 @@ What problem do primary keys, foreign keys, and constraints solve in a relationa
 
 - [PostgreSQL documentation: constraints](https://www.postgresql.org/docs/current/ddl-constraints.html)
 - Further reading (blog): [pganalyze: Postgres constraints and data integrity](https://pganalyze.com/blog)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: constraints](https://www.postgresql.org/docs/current/ddl-constraints.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — PostgreSQL data integrity articles](https://pganalyze.com/blog)
+- Hands-on guide: [PostgreSQL data definition tutorial](https://www.postgresql.org/docs/current/ddl.html)

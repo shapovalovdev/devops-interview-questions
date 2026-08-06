@@ -24,3 +24,11 @@ Why can an idle or long-running transaction become a production problem in Postg
 
 - [PostgreSQL documentation: concurrency control](https://www.postgresql.org/docs/current/mvcc.html)
 - Further reading (blog): [pganalyze: idle transaction monitoring](https://pganalyze.com/blog/postgres-connection-tracing-wait-event-analysis-and-vacuum-monitoring)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: concurrency control](https://www.postgresql.org/docs/current/mvcc.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — connection tracing and idle transactions](https://pganalyze.com/blog/postgres-connection-tracing-wait-event-analysis-and-vacuum-monitoring)
+- Hands-on guide: [PostgreSQL transaction isolation guide](https://www.postgresql.org/docs/current/transaction-iso.html)

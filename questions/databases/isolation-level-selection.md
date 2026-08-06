@@ -24,3 +24,11 @@ How would you choose an isolation level for a workflow that must not oversell in
 
 - [PostgreSQL documentation: transaction isolation](https://www.postgresql.org/docs/current/transaction-iso.html)
 - Further reading (blog): [pganalyze: Postgres transaction and concurrency topics](https://pganalyze.com/blog)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: transaction isolation](https://www.postgresql.org/docs/current/transaction-iso.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — PostgreSQL concurrency articles](https://pganalyze.com/blog)
+- Hands-on guide: [PostgreSQL transaction tutorial](https://www.postgresql.org/docs/current/tutorial-transactions.html)

@@ -24,3 +24,11 @@ How would you plan a PostgreSQL major-version upgrade for a critical service?
 
 - [PostgreSQL documentation: upgrading](https://www.postgresql.org/docs/current/upgrading.html)
 - Further reading (blog): [pganalyze: zero-downtime Postgres upgrades](https://pganalyze.com/blog)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: upgrading a cluster](https://www.postgresql.org/docs/current/upgrading.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — PostgreSQL upgrade articles](https://pganalyze.com/blog)
+- Hands-on guide: [PostgreSQL pg_upgrade reference](https://www.postgresql.org/docs/current/pgupgrade.html)

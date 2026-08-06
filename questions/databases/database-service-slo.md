@@ -24,3 +24,11 @@ How would you define service objectives for a shared PostgreSQL platform?
 
 - [PostgreSQL documentation: monitoring database activity](https://www.postgresql.org/docs/current/monitoring.html)
 - Further reading (blog): [pganalyze: Postgres monitoring improvements](https://pganalyze.com/blog/postgres13-better-performance-monitoring-usability)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: monitoring database activity](https://www.postgresql.org/docs/current/monitoring.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — PostgreSQL monitoring improvements](https://pganalyze.com/blog/postgres13-better-performance-monitoring-usability)
+- Hands-on guide: [PostgreSQL monitoring statistics](https://www.postgresql.org/docs/current/monitoring-stats.html)

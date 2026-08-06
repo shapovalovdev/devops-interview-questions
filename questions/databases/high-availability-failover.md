@@ -24,3 +24,11 @@ What must a PostgreSQL failover design decide before an outage occurs?
 
 - [PostgreSQL documentation: warm standby and streaming replication](https://www.postgresql.org/docs/current/warm-standby.html)
 - Further reading (blog): [pganalyze: Postgres replication topics](https://pganalyze.com/blog)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: warm standby and streaming replication](https://www.postgresql.org/docs/current/warm-standby.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — PostgreSQL replication articles](https://pganalyze.com/blog)
+- Hands-on guide: [PostgreSQL synchronous replication configuration](https://www.postgresql.org/docs/current/runtime-config-replication.html)

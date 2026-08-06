@@ -24,3 +24,11 @@ Why can adding more application connections make a PostgreSQL service slower?
 
 - [PostgreSQL documentation: connection settings](https://www.postgresql.org/docs/current/runtime-config-connection.html)
 - Further reading (blog): [pganalyze: connection tracing](https://pganalyze.com/blog/postgres-connection-tracing-wait-event-analysis-and-vacuum-monitoring)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: connection settings](https://www.postgresql.org/docs/current/runtime-config-connection.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — connection tracing and idle transactions](https://pganalyze.com/blog/postgres-connection-tracing-wait-event-analysis-and-vacuum-monitoring)
+- Hands-on guide: [PostgreSQL server configuration](https://www.postgresql.org/docs/current/config-setting.html)

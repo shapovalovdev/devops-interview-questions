@@ -24,3 +24,11 @@ How would you recover a PostgreSQL service to immediately before an accidental d
 
 - [PostgreSQL documentation: continuous archiving and PITR](https://www.postgresql.org/docs/current/continuous-archiving.html)
 - Further reading (blog): [pganalyze: Postgres backup topics](https://pganalyze.com/blog)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: continuous archiving and PITR](https://www.postgresql.org/docs/current/continuous-archiving.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — PostgreSQL backup and recovery articles](https://pganalyze.com/blog)
+- Hands-on guide: [PostgreSQL pg_basebackup reference](https://www.postgresql.org/docs/current/app-pgbasebackup.html)

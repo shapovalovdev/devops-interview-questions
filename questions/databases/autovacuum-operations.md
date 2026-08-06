@@ -24,3 +24,11 @@ Why is autovacuum necessary, and how would you tune it responsibly?
 
 - [PostgreSQL documentation: routine vacuuming](https://www.postgresql.org/docs/current/routine-vacuuming.html)
 - Further reading (blog): [pganalyze: exploring VACUUM](https://pganalyze.com/blog/exploring-postgres-vacuum-with-vacuum-simulator)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: routine vacuuming](https://www.postgresql.org/docs/current/routine-vacuuming.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — PostgreSQL performance and operations](https://pganalyze.com/blog)
+- Hands-on guide: [PostgreSQL tutorial](https://www.postgresql.org/docs/current/tutorial.html)

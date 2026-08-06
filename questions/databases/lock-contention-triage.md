@@ -24,3 +24,11 @@ How do you investigate a request pile-up caused by PostgreSQL locks?
 
 - [PostgreSQL documentation: explicit locking](https://www.postgresql.org/docs/current/explicit-locking.html)
 - Further reading (blog): [pganalyze: lock monitoring](https://pganalyze.com/blog/postgres-lock-monitoring)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: explicit locking](https://www.postgresql.org/docs/current/explicit-locking.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — PostgreSQL lock monitoring](https://pganalyze.com/blog/postgres-lock-monitoring)
+- Hands-on guide: [PostgreSQL lock monitoring views](https://www.postgresql.org/docs/current/view-pg-locks.html)

@@ -24,3 +24,11 @@ When should a large PostgreSQL table be partitioned, and what must the design pr
 
 - [PostgreSQL documentation: table partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html)
 - Further reading (blog): [pganalyze: partitioning risk at high counts](https://pganalyze.com/blog)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: table partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — PostgreSQL partitioning articles](https://pganalyze.com/blog)
+- Hands-on guide: [PostgreSQL CREATE TABLE reference](https://www.postgresql.org/docs/current/sql-createtable.html)

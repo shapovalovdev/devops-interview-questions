@@ -25,3 +25,11 @@ Why can an index speed up a query yet still make an application slower overall?
 
 - [PostgreSQL documentation: introduction to indexes](https://www.postgresql.org/docs/current/indexes-intro.html)
 - Further reading (blog): [pganalyze: Postgres index selection](https://pganalyze.com/blog/how-postgres-chooses-index)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: introduction to indexes](https://www.postgresql.org/docs/current/indexes-intro.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — how PostgreSQL chooses an index](https://pganalyze.com/blog/how-postgres-chooses-index)
+- Hands-on guide: [PostgreSQL index types](https://www.postgresql.org/docs/current/indexes-types.html)

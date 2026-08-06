@@ -24,3 +24,11 @@ How should an application authenticate to PostgreSQL safely?
 
 - [PostgreSQL documentation: client authentication](https://www.postgresql.org/docs/current/client-authentication.html)
 - Further reading (blog): [pganalyze: PostgreSQL security](https://pganalyze.com/postgresql-security)
+
+## What to learn next
+
+- Official documentation: [PostgreSQL: client authentication](https://www.postgresql.org/docs/current/client-authentication.html)
+- Manual or specification: [PostgreSQL 18 documentation](https://www.postgresql.org/docs/current/)
+- Maintainer or personal blog: [Hironobu Suzuki — The Internals of PostgreSQL](https://www.interdb.jp/pg/)
+- Technical blog: [pganalyze — PostgreSQL security](https://pganalyze.com/postgresql-security)
+- Hands-on guide: [PostgreSQL client authentication configuration](https://www.postgresql.org/docs/current/auth-pg-hba-conf.html)
