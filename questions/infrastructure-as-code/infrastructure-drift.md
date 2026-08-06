@@ -4,6 +4,10 @@ theme: infrastructure-as-code
 difficulty: middle
 type: scenario
 tags: [terraform, infrastructure-as-code, reliability, troubleshooting]
+sources:
+  - url: https://developer.hashicorp.com/terraform/cli/commands/plan
+    source_type: official-docs
+    verified_on: 2026-08-06
 ---
 
 # Detect and handle infrastructure drift
@@ -12,6 +16,12 @@ How do you identify a manually changed cloud resource that no longer matches dec
 
 ## Answer guide
 
-- Run a plan or equivalent comparison against the remote system.
-- Establish whether the declaration or the live change is intended before applying changes.
-- Import, update declaration, or reconcile deliberately; prevent repeated manual edits with access and workflow controls.
+- Run `terraform plan` with normal refresh behavior to compare the configuration, prior state, and remote objects. For an intentional out-of-band change, use a reviewed `-refresh-only` plan to inspect proposed state updates without changing infrastructure.
+- First establish whether the configuration or the live change represents the intended end state; do not let an automated apply decide that business question.
+- Reconcile deliberately: update configuration and apply, import an unmanaged object where supported, or restore the approved configuration. Restrict routine manual changes and record emergency changes to prevent recurring drift.
+- Do not use the deprecated `terraform refresh` as an unattended repair step: it updates state automatically and bad provider credentials can produce misleading state changes.
+
+## References
+
+- [Terraform: plan command](https://developer.hashicorp.com/terraform/cli/commands/plan)
+- [Terraform: refresh-only mode tutorial](https://developer.hashicorp.com/terraform/tutorials/state/refresh)

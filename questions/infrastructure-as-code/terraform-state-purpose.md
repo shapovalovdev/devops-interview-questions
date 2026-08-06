@@ -4,6 +4,10 @@ theme: infrastructure-as-code
 difficulty: middle
 type: theory
 tags: [terraform, infrastructure-as-code, automation, reliability]
+sources:
+  - url: https://developer.hashicorp.com/terraform/language/state
+    source_type: official-docs
+    verified_on: 2026-08-06
 ---
 
 # Why does Terraform use state?
@@ -12,7 +16,12 @@ What information does Terraform state hold, and what practices protect it in a t
 
 ## Answer guide
 
-- State maps declared resource addresses to real infrastructure and attributes needed to calculate changes.
-- Use a shared remote backend with access control, encryption, versioning, and locking where supported.
-- Treat state as sensitive because it can contain secret values.
-- Review plans and use controlled recovery processes instead of ad-hoc state edits.
+- State maps a resource address in configuration to its remote object and retains metadata Terraform needs to plan changes. Without that mapping Terraform cannot reliably determine what it manages.
+- A team should store state in a remote backend with restrictive access and a recovery/versioning policy. Use a backend that supports locking where concurrent writers are possible; Terraform locking depends on the selected backend.
+- Treat state and saved plans as sensitive: they can contain credentials or values marked sensitive. Do not commit state or backend credentials to source control.
+- Review plans, use the `terraform state` subcommands only under a controlled recovery procedure, and never directly edit the state JSON. A stale, lost, or concurrently modified state can lead to duplicate resources or destructive changes.
+
+## References
+
+- [Terraform: State](https://developer.hashicorp.com/terraform/language/state)
+- [Terraform: State locking](https://developer.hashicorp.com/terraform/language/state/locking)
