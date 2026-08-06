@@ -19,8 +19,9 @@ def main() -> None:
         "Advanced Traffic Management | 20%",
         "Network Security and Policy | 25%",
         "Observability | 15%",
-        "multi-interface Pod configuration Question is required",
-        "LLM-traffic routing Question is required",
+        "Completed original gap Questions",
+        "multus-multi-interface-pod-troubleshooting.md",
+        "gateway-api-llm-inference-routing.md",
         "Multus CNI documentation",
         "Gateway API Inference Extension documentation",
         "`ckne`",
@@ -28,6 +29,40 @@ def main() -> None:
     missing = [item for item in required if item not in text]
     assert not missing, f"CKNE curriculum map is missing: {', '.join(missing)}"
     print("Validated public CKNE curriculum map and explicit gap policy.")
+
+
+def test_ckne_gap_questions_are_source_verified_and_ready_for_catalog_integration() -> None:
+    """The map must not claim coverage until its two original gap files exist."""
+    question_paths = [
+        ROOT / "questions/container-networking/multus-multi-interface-pod-troubleshooting.md",
+        ROOT / "questions/service-mesh/gateway-api-llm-inference-routing.md",
+    ]
+    required = {
+        "multus-multi-interface-pod-troubleshooting.md": [
+            "theme: container-networking",
+            "ckne",
+            "default-route",
+            "NetworkAttachmentDefinition",
+            "IPAM",
+            "Further reading (blog):",
+        ],
+        "gateway-api-llm-inference-routing.md": [
+            "theme: service-mesh",
+            "ckne",
+            "InferencePool",
+            "Endpoint Picker",
+            "Core Gateway API",
+            "Further reading (blog):",
+        ],
+    }
+    for path in question_paths:
+        assert path.is_file(), f"missing CKNE gap Question: {path}"
+        text = path.read_text(encoding="utf-8")
+        assert text.count("https://") >= 7, f"{path}: needs primary and five learning sources"
+        assert "## What to learn next" in text
+        assert "## References" in text
+        missing = [item for item in required[path.name] if item not in text]
+        assert not missing, f"{path}: missing CKNE acceptance content: {missing}"
 
 
 if __name__ == "__main__":
