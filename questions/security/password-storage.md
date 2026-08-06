@@ -26,3 +26,11 @@ How should an application store user passwords, and why is encryption alone not 
 - Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [OWASP: Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)
 - [NIST SP 800-63B: Authentication](https://pages.nist.gov/800-63-3/sp800-63b.html)
+
+## What to learn next
+
+- Official documentation: [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- Manual or specification: [NIST SP 800-53 security controls](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
+- Maintainer or personal blog: [Scott Helme — practical web security](https://scotthelme.co.uk/)
+- Technical blog: [Cloudflare Blog — security](https://blog.cloudflare.com/tag/security/)
+- Hands-on guide: [OWASP WebGoat](https://owasp.org/www-project-webgoat/)

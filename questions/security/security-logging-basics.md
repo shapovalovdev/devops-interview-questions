@@ -26,3 +26,11 @@ Which events should a service log for security investigations, and what must nev
 - Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [NIST SP 800-92: Guide to Computer Security Log Management](https://csrc.nist.gov/pubs/sp/800/92/final)
 - [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+
+## What to learn next
+
+- Official documentation: [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- Manual or specification: [NIST SP 800-53 security controls](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
+- Maintainer or personal blog: [Scott Helme — practical web security](https://scotthelme.co.uk/)
+- Technical blog: [Cloudflare Blog — security](https://blog.cloudflare.com/tag/security/)
+- Hands-on guide: [OWASP WebGoat](https://owasp.org/www-project-webgoat/)

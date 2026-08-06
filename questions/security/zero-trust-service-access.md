@@ -26,3 +26,11 @@ How would you replace network-location trust between services with explicit acce
 - Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [NIST SP 800-207A: Zero Trust for Cloud-Native Applications](https://csrc.nist.gov/pubs/sp/800/207/a/final)
 - [NIST SP 800-207: Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final)
+
+## What to learn next
+
+- Official documentation: [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- Manual or specification: [NIST SP 800-53 security controls](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
+- Maintainer or personal blog: [Scott Helme — practical web security](https://scotthelme.co.uk/)
+- Technical blog: [Cloudflare Blog — security](https://blog.cloudflare.com/tag/security/)
+- Hands-on guide: [OWASP WebGoat](https://owasp.org/www-project-webgoat/)

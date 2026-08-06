@@ -26,3 +26,11 @@ What makes a patch-management process safe instead of simply installing every up
 - Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [NIST SP 800-40 Rev. 4: Enterprise Patch Management Planning](https://csrc.nist.gov/pubs/sp/800/40/r4/final)
 - [CISA: Known Exploited Vulnerabilities Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)
+
+## What to learn next
+
+- Official documentation: [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- Manual or specification: [NIST SP 800-53 security controls](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
+- Maintainer or personal blog: [Scott Helme — practical web security](https://scotthelme.co.uk/)
+- Technical blog: [Cloudflare Blog — security](https://blog.cloudflare.com/tag/security/)
+- Hands-on guide: [OWASP WebGoat](https://owasp.org/www-project-webgoat/)

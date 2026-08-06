@@ -26,3 +26,11 @@ What evidence should a deployment policy require before allowing a container ima
 - Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [SLSA: Provenance](https://slsa.dev/spec/v1.1/provenance)
 - [NIST SP 800-190: Application Container Security Guide](https://csrc.nist.gov/pubs/sp/800/190/final)
+
+## What to learn next
+
+- Official documentation: [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- Manual or specification: [NIST SP 800-53 security controls](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
+- Maintainer or personal blog: [Scott Helme — practical web security](https://scotthelme.co.uk/)
+- Technical blog: [Cloudflare Blog — security](https://blog.cloudflare.com/tag/security/)
+- Hands-on guide: [OWASP WebGoat](https://owasp.org/www-project-webgoat/)
