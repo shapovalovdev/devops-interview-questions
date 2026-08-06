@@ -26,3 +26,11 @@ A newly started container stops in seconds. What evidence do you collect before 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker CLI reference: docker container logs](https://docs.docker.com/reference/cli/docker/container/logs/)
 - [Further reading: Docker CLI reference: docker container inspect](https://docs.docker.com/reference/cli/docker/container/inspect/)
+
+## What to learn next
+
+- Official documentation: [Docker Docs — what is a container?](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/)
+- Manual or specification: [OCI Image Format specification](https://github.com/opencontainers/image-spec/blob/main/spec.md)
+- Maintainer or personal blog: [Ivan Velichko — learning containers from the bottom up](https://iximiuz.com/en/posts/container-learning-path/)
+- Technical blog: [Red Hat — what is a Linux container?](https://www.redhat.com/en/topics/containers/whats-a-linux-container)
+- Hands-on guide: [Rootless Containers — free online book](https://rootless.vagmi.ca/)

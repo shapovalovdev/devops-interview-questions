@@ -26,3 +26,11 @@ How can a build fetch a private dependency without baking its credential into th
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Build secrets](https://docs.docker.com/build/building/secrets/)
 - [Further reading: Docker build checks for secrets in ARG or ENV](https://docs.docker.com/reference/build-checks/secrets-used-in-arg-or-env/)
+
+## What to learn next
+
+- Official documentation: [Docker Docs — what is a container?](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/)
+- Manual or specification: [OCI Image Format specification](https://github.com/opencontainers/image-spec/blob/main/spec.md)
+- Maintainer or personal blog: [Ivan Velichko — learning containers from the bottom up](https://iximiuz.com/en/posts/container-learning-path/)
+- Technical blog: [Red Hat — what is a Linux container?](https://www.redhat.com/en/topics/containers/whats-a-linux-container)
+- Hands-on guide: [Rootless Containers — free online book](https://rootless.vagmi.ca/)
