@@ -1,0 +1,13 @@
+window.questions = [
+  { title: "Explain the Linux boot sequence", theme: "linux", difficulty: "middle", type: "theory", tags: ["linux", "troubleshooting"], path: "questions/linux/linux-boot-sequence.md" },
+  { title: "Trace a DNS lookup from an application to an answer", theme: "networking", difficulty: "middle", type: "theory", tags: ["dns", "networking", "troubleshooting"], path: "questions/networking/dns-resolution-path.md" },
+  { title: "Distinguish a container image from a running container", theme: "containers", difficulty: "junior", type: "theory", tags: ["containers", "docker", "images"], path: "questions/containers/container-image-and-runtime.md" },
+  { title: "Trace traffic to a published container port", theme: "container-networking", difficulty: "middle", type: "troubleshooting", tags: ["containers", "docker", "networking", "tcp"], path: "questions/container-networking/published-port-traffic-path.md" },
+  { title: "Design a Dockerfile for predictable cache reuse", theme: "advanced-containers", difficulty: "middle", type: "scenario", tags: ["docker", "images", "containers", "automation"], path: "questions/advanced-containers/image-layer-cache-design.md" },
+  { title: "Explain a Kubernetes Deployment rollout and rollback", theme: "kubernetes", difficulty: "middle", type: "scenario", tags: ["kubernetes", "deployment", "rolling-update", "reliability"], path: "questions/kubernetes/deployment-rollout-and-rollback.md" },
+  { title: "Design CI/CD quality gates for a service", theme: "ci-cd", difficulty: "middle", type: "scenario", tags: ["ci-cd", "delivery", "deployment", "automation", "security"], path: "questions/ci-cd/pipeline-quality-gates.md" },
+  { title: "Why does Terraform use state?", theme: "infrastructure-as-code", difficulty: "middle", type: "theory", tags: ["terraform", "infrastructure-as-code", "automation", "reliability"], path: "questions/infrastructure-as-code/terraform-state-purpose.md" },
+  { title: "Compare metrics, logs, and traces during an incident", theme: "observability", difficulty: "middle", type: "theory", tags: ["observability", "monitoring", "debugging", "incident-response"], path: "questions/observability/three-observability-signals.md" },
+  { title: "Apply least privilege to a cloud workload identity", theme: "cloud", difficulty: "middle", type: "scenario", tags: ["aws", "iam", "cloud", "security", "least-privilege"], path: "questions/cloud/least-privilege-workload-identity.md" },
+  { title: "Describe a secure secret-management lifecycle", theme: "security", difficulty: "middle", type: "theory", tags: ["security", "kubernetes", "least-privilege", "automation"], path: "questions/security/secret-management-lifecycle.md" }
+];
