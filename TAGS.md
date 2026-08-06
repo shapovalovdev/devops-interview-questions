@@ -4,10 +4,10 @@ Use lowercase kebab-case tags. Give every question one or more technology or con
 
 ## Technologies and concepts
 
-`ansible`, `aws`, `bash`, `cgroups`, `ci-cd`, `cloud`, `configuration-management`, `containers`, `databases`, `dns`, `docker`, `filesystem`, `git`, `github-actions`, `hardware`, `http`, `iam`, `images`, `infrastructure-as-code`, `kubernetes`, `linux`, `logging`, `networking`, `nginx`, `observability`, `postgresql`, `prometheus`, `scripting`, `security`, `shell`, `storage`, `tcp`, `terraform`, `tls`, `version-control`, `web-server`
+`ansible`, `aws`, `bash`, `build-cache`, `build-secrets`, `cgroups`, `ci-cd`, `cloud`, `configuration-management`, `container-runtime`, `containers`, `cost-optimization`, `databases`, `dns`, `docker`, `dockerfile`, `filesystem`, `git`, `github-actions`, `governance`, `hardware`, `healthchecks`, `http`, `iam`, `image-digests`, `image-tags`, `images`, `infrastructure-as-code`, `kubernetes`, `least-privilege`, `linux`, `logging`, `multi-platform`, `multi-stage-builds`, `networking`, `nginx`, `observability`, `platform-engineering`, `postgresql`, `prometheus`, `registries`, `resource-limits`, `rootless`, `scripting`, `security`, `shell`, `signals`, `storage`, `supply-chain`, `tcp`, `terraform`, `tls`, `version-control`, `volumes`, `web-server`
 
 ## Practices
 
-`automation`, `availability`, `debugging`, `delivery`, `deployment`, `incident-response`, `least-privilege`, `monitoring`, `reliability`, `rolling-update`, `supply-chain`, `troubleshooting`
+`automation`, `availability`, `capacity-planning`, `debugging`, `delivery`, `deployment`, `incident-response`, `least-privilege`, `monitoring`, `reliability`, `rolling-update`, `supply-chain`, `troubleshooting`
 
 Propose a new tag only when an existing tag cannot express the concept clearly.
