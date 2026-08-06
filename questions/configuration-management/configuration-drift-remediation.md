@@ -1,0 +1,27 @@
+---
+title: Design safe configuration drift remediation
+theme: configuration-management
+difficulty: senior
+type: scenario
+tags: [ansible, automation, configuration-management, reliability, security]
+sources:
+  - url: https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_checkmode.html
+    source_type: official-docs
+    verified_on: 2026-08-06
+---
+
+# Design safe configuration drift remediation
+
+How should a team detect and remediate configuration drift without overwriting a necessary emergency change?
+
+## Answer guide
+
+- Define the desired state in reviewed version control, then measure drift with scheduled check-mode reports or purpose-built compliance checks. Classify drift by risk and owner before automatically changing critical systems.
+- Investigate whether drift is unauthorized, an unrecorded emergency repair, provider behavior, or an incomplete automation model. Legitimate changes should be incorporated into the source of truth rather than repeatedly overwritten.
+- Automate low-risk, reversible convergence with audit records and alerting. Require approval and a canary for changes affecting access, data, network boundaries, or high-availability controls.
+- Continuous remediation can fight a human incident response or propagate a bad desired state quickly. Provide pause controls, exception expiry, and post-remediation validation that confirms service behavior as well as file content.
+
+## References
+
+- [Ansible documentation: check mode and diff mode](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_checkmode.html)
+- Further reading (blog): [Red Hat: configuration drift and automation](https://www.redhat.com/en/blog/configuration-drift-ansible)
