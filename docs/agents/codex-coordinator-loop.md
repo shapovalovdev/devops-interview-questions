@@ -4,7 +4,7 @@ The Codex coordinator is the repository's active-session work dispatcher. It kee
 
 ## Cadence
 
-While the Codex session is active, the coordinator checks the work queue at least every 10 minutes and whenever an agent reports completion. It must:
+While the Codex session is active, the coordinator checks the work queue at least every 10 minutes and whenever an agent reports completion. At every check, it must spawn a dedicated subagent for each available implementation slot, choosing the highest-priority unblocked `ready-for-agent` GitHub issue. It must then:
 
 1. inspect active subagents and their completion reports;
 2. validate the shared worktree, relevant automated tests, and GitHub Actions state;
