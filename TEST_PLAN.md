@@ -26,6 +26,8 @@ Every `*.md` file under `questions/<theme>/` is an active Question. It must appe
 
 `tests/site_check.py` loads the public website interface locally in a headless browser. It verifies catalog rendering, search, theme filtering, and that all card links target `.html` pages.
 
+`tests/validate_certification_question_workflow.py` validates the reusable certification workflow itself: its official-curriculum mapping, canonical-tag, original-content, source-and-blog, catalog, validation, CI, and issue-closure requirements; its issue template; and realistic workflow eval prompts.
+
 ## Delivery gate
 
 The `Validate question database` GitHub Actions workflow runs both checks for pushes to `main` and pull requests. GitHub Pages continues to publish from `main`; repository branch protection can require this workflow before future merges.

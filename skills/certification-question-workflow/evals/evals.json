@@ -1,0 +1,41 @@
+{
+  "skill_name": "certification-question-workflow",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Add KCNA certification coverage to this public DevOps Question database. Map the current official curriculum, reuse shared questions where appropriate, and add original gaps.",
+      "expected_output": "A KCNA issue and map that use the official curriculum, canonical kcna tags, source-verified original Questions, catalog integration, tests, CI, and a clear close/review outcome.",
+      "files": [],
+      "expectations": [
+        "Uses an official KCNA curriculum source and records its review date.",
+        "Uses canonical shared Questions rather than duplicating fundamentals.",
+        "Requires question-verifier source metadata and complementary blog reading.",
+        "Requires catalog, local tests, GitHub Actions, and issue lifecycle evidence."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "A new Kubernetes networking certification is still changing. Create practice coverage without copying exam questions and leave it ready for maintainer review.",
+      "expected_output": "An original, review-gated certification workflow that maps the latest official objectives, handles an evolving program, validates Questions and discovery, and does not prematurely close the issue.",
+      "files": [],
+      "expectations": [
+        "Avoids real or confidential exam-content reproduction.",
+        "Rechecks a changing official curriculum before final CI.",
+        "Keeps shared Questions canonical and uses certification tags.",
+        "Leaves review-gated work open with explicit reviewer instructions."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "The CKS map exists but links several untagged questions and the website omits two new question cards. Repair the certification coverage task.",
+      "expected_output": "A repair plan and implementation that aligns map links and certification tags, updates the catalog, adds durable automated checks, runs CI, and reports the issue lifecycle outcome.",
+      "files": [],
+      "expectations": [
+        "Checks that every mapped Question carries the certification tag.",
+        "Adds every active Question exactly once to the .html catalog.",
+        "Extends repository validation for durable certification invariants.",
+        "Does not close the issue until GitHub Actions passes."
+      ]
+    }
+  ]
+}

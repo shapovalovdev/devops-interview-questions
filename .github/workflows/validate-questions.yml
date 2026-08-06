@@ -18,7 +18,9 @@ jobs:
         with:
           python-version: '3.13'
       - name: Validate Markdown sources and catalog coverage
-        run: python tests/validate_questions.py
+        run: |
+          python tests/validate_certification_question_workflow.py
+          python tests/validate_questions.py
 
   validate-site:
     name: Validate website behavior
