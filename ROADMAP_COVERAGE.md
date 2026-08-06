@@ -7,6 +7,7 @@ This map uses the DevOps roadmap as a coverage guide, not as copied content. Eac
 | Hardware and remote management | `hardware` |
 | Linux and operating systems | `linux` |
 | Storage and filesystems | `storage` |
+| Networked storage | `network-storage` |
 | Shell and scripting | `shell-scripting` |
 | Networking and web protocols | `networking` |
 | Version control | `version-control` |

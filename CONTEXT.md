@@ -67,3 +67,7 @@ _Avoid_: Generic programming
 **Distributed systems**:
 The canonical Theme for coordination, consistency, replication, fault tolerance, and system-wide trade-offs.
 _Avoid_: Backend architecture
+
+**Network storage**:
+The canonical Theme for storage accessed over a network, including NFS, SMB, iSCSI, SAN, NAS, and object-storage operational trade-offs.
+_Avoid_: Local filesystems, generic cloud
