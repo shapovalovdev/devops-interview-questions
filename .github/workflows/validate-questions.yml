@@ -21,6 +21,7 @@ jobs:
         run: |
           python tests/validate_content_manifest.py
           python tests/validate_certification_question_workflow.py
+          python tests/test_cnpe_curriculum_map.py
           python tests/validate_questions.py
           python tests/validate_learning_resources.py --check-live
           python tests/test_validate_learning_resources.py
