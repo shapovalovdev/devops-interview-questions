@@ -23,5 +23,6 @@ What is the difference between an image tag and an image digest, and when should
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker CLI reference: pull by digest](https://docs.docker.com/reference/cli/docker/image/pull/#pull-an-image-by-digest-immutable-identifier)
 - [Further reading: OCI Image Format specification](https://github.com/opencontainers/image-spec/blob/main/README.md)

@@ -26,6 +26,7 @@ How would you introduce IPv6 to an IPv4 production service with measurable risk 
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 8200: IPv6 specification](https://www.rfc-editor.org/rfc/rfc8200.html)
 - [RFC 6724: Default address selection for IPv6](https://www.rfc-editor.org/rfc/rfc6724.html)
 - [RIPE NCC IPv6 documentation](https://www.ripe.net/publications/docs/ripe-554/)

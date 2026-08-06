@@ -23,5 +23,6 @@ Multiple teams will run untrusted build and workload images. How do you decide w
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Docker security](https://docs.docker.com/engine/security/)
 - [Further reading: Docker Docs on runtime privileges](https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities)

@@ -22,5 +22,6 @@ How do owner, group, other permissions and umask affect a newly created file, an
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [umask(2): file creation mask](https://man7.org/linux/man-pages/man2/umask.2.html)
 - Further reading: [path_resolution(7): pathname permission checks](https://man7.org/linux/man-pages/man7/path_resolution.7.html)

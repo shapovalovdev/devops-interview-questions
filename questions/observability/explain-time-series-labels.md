@@ -23,5 +23,6 @@ What is a metrics time series, and how should labels be chosen?
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Prometheus: Data model](https://prometheus.io/docs/concepts/data_model/)
 - [Further reading: Prometheus metric and label naming](https://prometheus.io/docs/practices/naming/)

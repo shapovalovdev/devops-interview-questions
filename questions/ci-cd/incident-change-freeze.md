@@ -22,5 +22,6 @@ When should an incident commander pause deployments, and when may a change conti
 
 ## References
 
+- Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [Google SRE Book: Managing incidents](https://sre.google/sre-book/managing-incidents/)
 - [Further reading: Google SRE Workbook—canarying releases](https://sre.google/workbook/canarying-releases/)

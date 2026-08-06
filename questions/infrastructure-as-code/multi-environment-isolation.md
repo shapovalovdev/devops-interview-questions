@@ -23,5 +23,6 @@ How should an organization separate development, staging, and production Terrafo
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: Workspaces](https://developer.hashicorp.com/terraform/language/state/workspaces)
 - [Terraform: State](https://developer.hashicorp.com/terraform/language/state)

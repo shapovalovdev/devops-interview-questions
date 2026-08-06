@@ -22,5 +22,6 @@ Which signals should control promotion of a small canary release?
 
 ## References
 
+- Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [Google SRE Workbook: Canarying releases](https://sre.google/workbook/canarying-releases/)
 - [Further reading: Kubernetes—Deployment rolling updates](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)

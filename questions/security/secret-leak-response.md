@@ -23,5 +23,6 @@ What should the on-call team do after finding a production credential in a publi
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
 - [GitHub: Removing sensitive data from a repository](https://docs.github.com/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)

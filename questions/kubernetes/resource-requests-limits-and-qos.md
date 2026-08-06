@@ -23,5 +23,6 @@ How do requests and limits affect scheduling and runtime behavior?
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Resource management for Pods and containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 - [Kubernetes: Pod QoS classes](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/)

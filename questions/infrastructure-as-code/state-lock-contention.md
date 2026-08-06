@@ -23,5 +23,6 @@ What do you do when Terraform cannot acquire a state lock in a shared environmen
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: State locking](https://developer.hashicorp.com/terraform/language/state/locking)
 - [Terraform: Backend configuration](https://developer.hashicorp.com/terraform/language/backend)

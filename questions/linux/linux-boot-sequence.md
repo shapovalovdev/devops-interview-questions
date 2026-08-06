@@ -23,5 +23,6 @@ Starting when firmware hands off control, explain the major stages that bring a 
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [systemd bootup sequence](https://www.freedesktop.org/software/systemd/man/latest/bootup.html)
 - Further reading: [systemd special targets](https://www.freedesktop.org/software/systemd/man/latest/systemd.special.html)

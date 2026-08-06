@@ -23,5 +23,6 @@ How do you permit necessary exceptions to platform security policy without norma
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Security checklist](https://kubernetes.io/docs/concepts/security/security-checklist/)
 - [Kubernetes: Admission controllers](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)

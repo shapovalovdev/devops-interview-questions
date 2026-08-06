@@ -23,5 +23,6 @@ Which security headers would you evaluate for a web application, and why must th
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [OWASP: HTTP Headers Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html)
 - [MDN: HTTP headers](https://developer.mozilla.org/docs/Web/HTTP/Reference/Headers)

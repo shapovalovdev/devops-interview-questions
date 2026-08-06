@@ -23,5 +23,6 @@ Which events should a service log for security investigations, and what must nev
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [NIST SP 800-92: Guide to Computer Security Log Management](https://csrc.nist.gov/pubs/sp/800/92/final)
 - [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)

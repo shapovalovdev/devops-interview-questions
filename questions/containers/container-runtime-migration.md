@@ -23,5 +23,6 @@ Your organization must migrate workloads to a different OCI-compatible container
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [OCI Runtime Specification](https://github.com/opencontainers/runtime-spec/blob/main/README.md)
 - [Further reading: OCI Image Format specification](https://github.com/opencontainers/image-spec/blob/main/README.md)

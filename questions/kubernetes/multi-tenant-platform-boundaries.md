@@ -23,5 +23,6 @@ How would you decide whether teams can safely share a Kubernetes cluster?
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Multi-tenancy](https://kubernetes.io/docs/concepts/security/multi-tenancy/)
 - [Kubernetes: Security checklist](https://kubernetes.io/docs/concepts/security/security-checklist/)

@@ -23,5 +23,6 @@ When should you use `for_each` instead of `count` for repeated resources?
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: for_each meta-argument](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each)
 - [Terraform: count meta-argument](https://developer.hashicorp.com/terraform/language/meta-arguments/count)

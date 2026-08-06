@@ -23,5 +23,6 @@ The API server is intermittently unavailable. How do you investigate without mak
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Debugging clusters](https://kubernetes.io/docs/tasks/debug/debug-cluster/)
 - [Kubernetes: Operating etcd clusters](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/)

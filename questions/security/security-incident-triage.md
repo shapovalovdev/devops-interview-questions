@@ -23,5 +23,6 @@ What is the first operational response when monitoring suggests an account or wo
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [NIST SP 800-61 Rev. 2: Computer Security Incident Handling Guide](https://csrc.nist.gov/pubs/sp/800/61/r2/final)
 - [CISA: Incident Response](https://www.cisa.gov/topics/cyber-threats-and-advisories/incident-response)

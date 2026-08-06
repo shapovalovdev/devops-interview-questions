@@ -26,6 +26,7 @@ Why can a reachable destination still fail for a stateful service after a route 
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 1812: Requirements for IPv4 routers](https://www.rfc-editor.org/rfc/rfc1812.html)
 - [RFC 4632: CIDR and longest-match routing](https://www.rfc-editor.org/rfc/rfc4632.html)
 - [Cloudflare learning: What is routing?](https://www.cloudflare.com/learning/network-layer/what-is-routing/)

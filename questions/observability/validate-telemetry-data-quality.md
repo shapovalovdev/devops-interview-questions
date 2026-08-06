@@ -23,5 +23,6 @@ How do you determine whether a release broke observability rather than the servi
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [OpenTelemetry: Observability primer](https://opentelemetry.io/docs/concepts/observability-primer/)
 - [Further reading: Prometheus instrumentation practices](https://prometheus.io/docs/practices/instrumentation/)

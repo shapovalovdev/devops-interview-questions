@@ -23,5 +23,6 @@ How does a Deployment replace application Pods safely, and what would make you r
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 - [Kubernetes: Rolling update Deployment](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/)

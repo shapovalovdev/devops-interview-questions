@@ -26,6 +26,7 @@ What guarantees does TCP provide that UDP does not, and when can UDP still be ap
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 9293: Transmission Control Protocol](https://www.rfc-editor.org/rfc/rfc9293.html)
 - [RFC 768: User Datagram Protocol](https://www.rfc-editor.org/rfc/rfc768.html)
 - [Cloudflare learning: What is UDP?](https://www.cloudflare.com/learning/ddos/glossary/user-datagram-protocol-udp/)

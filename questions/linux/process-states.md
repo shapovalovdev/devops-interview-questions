@@ -22,5 +22,6 @@ What do common process states mean, and why should an operator inspect them befo
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [ps(1): process status codes](https://man7.org/linux/man-pages/man1/ps.1.html)
 - Further reading: [proc(5): process information pseudo-filesystem](https://man7.org/linux/man-pages/man5/proc.5.html)

@@ -23,5 +23,6 @@ How would you limit lateral movement between production services without breakin
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [NIST SP 800-207: Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final)
 - [NIST SP 800-41: Guidelines on Firewalls and Firewall Policy](https://csrc.nist.gov/pubs/sp/800/41/r1/final)

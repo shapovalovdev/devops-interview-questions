@@ -23,5 +23,6 @@ A service repeatedly restarts after a release. Describe a safe triage sequence t
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker CLI reference: docker container inspect](https://docs.docker.com/reference/cli/docker/container/inspect/)
 - [Further reading: Docker Docs on container logs](https://docs.docker.com/reference/cli/docker/container/logs/)

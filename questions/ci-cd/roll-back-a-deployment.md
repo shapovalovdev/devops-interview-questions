@@ -22,5 +22,6 @@ What makes a rollback fast and safe when a newly deployed service is harmful?
 
 ## References
 
+- Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [Kubernetes: Deployments and rollout history](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 - [Further reading: Google SRE Workbook—canarying releases](https://sre.google/workbook/canarying-releases/)

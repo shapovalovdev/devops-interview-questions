@@ -23,5 +23,6 @@ How should you order Dockerfile steps to speed builds without hiding dependency 
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Optimize cache usage](https://docs.docker.com/build/cache/optimize/)
 - [Further reading: Docker Docs on cache invalidation](https://docs.docker.com/build/cache/invalidation/)

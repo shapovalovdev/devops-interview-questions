@@ -23,5 +23,6 @@ Traces split at a service boundary. How do you diagnose and fix context propagat
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [W3C Trace Context](https://www.w3.org/TR/trace-context/)
 - [Further reading: OpenTelemetry propagators](https://opentelemetry.io/docs/specs/otel/context/api-propagators/)

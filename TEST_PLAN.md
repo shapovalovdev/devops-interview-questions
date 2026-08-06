@@ -17,6 +17,11 @@ Every `*.md` file under `questions/<theme>/` is an active Question. It must appe
 - canonical Theme matching its parent folder;
 - at least one normalized Tag, with every Tag present in `TAGS.md`;
 - an answer guide;
+- a full answer guide: at least three answer bullets and 60 words, covering the
+  direct answer, constraints, and operational guidance;
+- primary-source metadata (HTTPS URL, permitted source type, and ISO verification
+  date), a supporting reference, and a separately labeled complementary blog
+  article;
 - exactly one matching entry in the website catalog, using a Pages-rendered `.html` URL.
 
 `tests/site_check.py` loads the public website interface locally in a headless browser. It verifies catalog rendering, search, theme filtering, and that all card links target `.html` pages.

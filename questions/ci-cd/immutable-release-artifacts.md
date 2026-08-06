@@ -22,5 +22,6 @@ Why is rebuilding “the same version” at deployment time risky, and what trac
 
 ## References
 
+- Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [SLSA: Build security levels and provenance](https://slsa.dev/spec/v1.0/levels)
 - [Further reading: GitHub Docs—artifact attestations](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations)

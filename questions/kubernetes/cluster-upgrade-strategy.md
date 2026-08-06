@@ -23,5 +23,6 @@ What is a safe upgrade strategy for a production Kubernetes cluster?
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Version Skew Policy](https://kubernetes.io/releases/version-skew-policy/)
 - [Kubernetes: Safely drain a node](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)

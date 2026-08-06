@@ -23,5 +23,6 @@ Which SLOs and health signals would you use for a shared Linux platform, and how
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [systemd: system and service manager concepts](https://www.freedesktop.org/software/systemd/man/latest/systemd.html)
 - Further reading: [Linux kernel: pressure stall information](https://www.kernel.org/doc/html/latest/accounting/psi.html)

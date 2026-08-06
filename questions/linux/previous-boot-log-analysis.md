@@ -22,5 +22,6 @@ A host is healthy now but failed to start a dependency during its prior boot. Ho
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [journalctl: select records by boot](https://www.freedesktop.org/software/systemd/man/latest/journalctl.html)
 - Further reading: [systemd: manager and unit concepts](https://www.freedesktop.org/software/systemd/man/latest/systemd.html)

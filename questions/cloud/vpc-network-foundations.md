@@ -23,5 +23,6 @@ What does an Amazon VPC provide, and what must be configured before a workload i
 
 ## References
 
+- Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [Amazon VPC User Guide: What is Amazon VPC?](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
 - [Further reading: VPC route tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)

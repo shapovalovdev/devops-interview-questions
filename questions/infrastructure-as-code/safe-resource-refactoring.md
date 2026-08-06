@@ -23,5 +23,6 @@ How do you move a resource into a module or rename it without recreating product
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: Refactoring](https://developer.hashicorp.com/terraform/language/modules/develop/refactoring)
 - [Terraform: moved block reference](https://developer.hashicorp.com/terraform/language/block/moved)

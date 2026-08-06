@@ -23,5 +23,6 @@ How would you rotate a database credential used by production workloads in AWS?
 
 ## References
 
+- Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS Secrets Manager: rotate secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html)
 - [Further reading: Secrets Manager rotation Lambda functions](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_lambda-functions.html)

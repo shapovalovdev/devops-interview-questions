@@ -22,5 +22,6 @@ What must be true before switching production traffic from blue to green?
 
 ## References
 
+- Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [Google Cloud: Deployment and testing strategies](https://cloud.google.com/architecture/application-deployment-and-testing-strategies)
 - [Further reading: Kubernetes—Deployment rolling updates](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)

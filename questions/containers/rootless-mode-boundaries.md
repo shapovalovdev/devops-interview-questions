@@ -23,5 +23,6 @@ When is Docker rootless mode useful, and what compatibility constraints must you
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Rootless mode](https://docs.docker.com/engine/security/rootless/)
 - [Further reading: Docker Docs on rootless limitations](https://docs.docker.com/engine/security/rootless/#known-limitations)

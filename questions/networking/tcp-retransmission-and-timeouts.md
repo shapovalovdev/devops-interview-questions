@@ -26,6 +26,7 @@ What does a rising TCP retransmission rate mean, and what evidence do you need b
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 6298: Computing TCP's Retransmission Timer](https://www.rfc-editor.org/rfc/rfc6298.html)
 - [RFC 5681: TCP Congestion Control](https://www.rfc-editor.org/rfc/rfc5681.html)
 - [Cloudflare learning: What is packet loss?](https://www.cloudflare.com/learning/performance/what-is-packet-loss/)

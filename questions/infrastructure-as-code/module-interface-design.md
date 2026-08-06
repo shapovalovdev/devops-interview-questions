@@ -23,5 +23,6 @@ What makes a Terraform module safe to reuse across teams and environments?
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: Developing modules](https://developer.hashicorp.com/terraform/language/modules/develop)
 - [Terraform: Module composition](https://developer.hashicorp.com/terraform/language/modules/develop/composition)

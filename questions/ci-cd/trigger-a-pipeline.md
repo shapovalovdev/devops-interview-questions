@@ -22,5 +22,6 @@ Which events should trigger validation, release, and production deployment workf
 
 ## References
 
+- Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Events that trigger workflows](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows)
 - [Further reading: GitHub Docs—secure use reference](https://docs.github.com/en/actions/reference/security/secure-use)

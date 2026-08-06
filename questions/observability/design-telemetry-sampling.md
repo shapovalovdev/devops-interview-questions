@@ -23,5 +23,6 @@ How would you reduce trace cost while retaining useful incident evidence?
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [OpenTelemetry: Sampling](https://opentelemetry.io/docs/concepts/sampling/)
 - [Further reading: OpenTelemetry Collector tail sampling processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/tailsamplingprocessor)

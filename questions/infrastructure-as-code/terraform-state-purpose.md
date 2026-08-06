@@ -23,5 +23,6 @@ What information does Terraform state hold, and what practices protect it in a t
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: State](https://developer.hashicorp.com/terraform/language/state)
 - [Terraform: State locking](https://developer.hashicorp.com/terraform/language/state/locking)

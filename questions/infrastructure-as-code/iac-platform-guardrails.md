@@ -23,5 +23,6 @@ How would you set organization-wide IaC guardrails while preserving teams' deliv
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [HCP Terraform: Policy enforcement](https://developer.hashicorp.com/terraform/cloud-docs/policy-enforcement)
 - [Terraform: Modules](https://developer.hashicorp.com/terraform/language/modules)

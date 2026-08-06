@@ -22,5 +22,6 @@ How should a pipeline create a release version that users can trace back to code
 
 ## References
 
+- Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [Semantic Versioning specification](https://semver.org/)
 - [Further reading: Git—tag documentation](https://git-scm.com/docs/git-tag)

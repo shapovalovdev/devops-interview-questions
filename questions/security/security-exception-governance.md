@@ -23,5 +23,6 @@ What makes a security exception process safe enough to unblock a production deli
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [NIST SP 800-53 Rev. 5: Security and Privacy Controls](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
 - [NIST Cybersecurity Framework 2.0](https://www.nist.gov/cyberframework)

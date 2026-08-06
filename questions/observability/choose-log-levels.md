@@ -23,5 +23,6 @@ How should a service choose log levels without turning production logs into nois
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [OpenTelemetry Logs data model](https://opentelemetry.io/docs/specs/otel/logs/data-model/)
 - [Further reading: OpenTelemetry logging concepts](https://opentelemetry.io/docs/concepts/signals/logs/)

@@ -22,5 +22,6 @@ What does mounting do, and why should an operator identify the filesystem type b
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [mount(2): attach a filesystem](https://man7.org/linux/man-pages/man2/mount.2.html)
 - Further reading: [mount_namespaces(7)](https://man7.org/linux/man-pages/man7/mount_namespaces.7.html)

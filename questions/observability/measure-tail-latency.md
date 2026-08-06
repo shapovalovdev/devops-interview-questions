@@ -23,5 +23,6 @@ Average latency is stable, but users report occasional slowness. How do you inve
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Prometheus histogram and summary practices](https://prometheus.io/docs/practices/histograms/)
 - [Further reading: Google SRE—Addressing cascading failures](https://sre.google/sre-book/addressing-cascading-failures/)

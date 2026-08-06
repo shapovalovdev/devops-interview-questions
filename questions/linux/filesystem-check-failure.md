@@ -22,5 +22,6 @@ An application volume becomes read-only after kernel filesystem errors. What is 
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [Linux kernel: ext4 administration guide](https://www.kernel.org/doc/html/latest/admin-guide/ext4.html)
 - Further reading: [mount(8): filesystem mount options](https://man7.org/linux/man-pages/man8/mount.8.html)

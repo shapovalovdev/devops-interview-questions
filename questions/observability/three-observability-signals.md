@@ -23,5 +23,6 @@ How do metrics, logs, and traces complement each other when diagnosing a product
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [OpenTelemetry: Observability primer](https://opentelemetry.io/docs/concepts/observability-primer/)
 - [Further reading: OpenTelemetry log correlation](https://opentelemetry.io/docs/specs/otel/logs/)

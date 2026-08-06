@@ -23,5 +23,6 @@ What controls would you design so production accepts only explainable container 
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Build attestations](https://docs.docker.com/build/metadata/attestations/)
 - [Further reading: SLSA provenance](https://slsa.dev/provenance/)

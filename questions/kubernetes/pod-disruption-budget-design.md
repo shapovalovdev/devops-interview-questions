@@ -23,5 +23,6 @@ How do you protect availability during node drain without blocking all maintenan
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Specifying a disruption budget](https://kubernetes.io/docs/tasks/run-application/configure-pdb/)
 - [Kubernetes: Disruptions](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/)

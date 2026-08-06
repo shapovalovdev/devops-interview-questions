@@ -23,5 +23,6 @@ As a staff engineer, how would you define a safe, measurable lifecycle for opera
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [Linux kernel administration guide](https://www.kernel.org/doc/html/latest/admin-guide/README.html)
 - Further reading: [systemd system update specification](https://uapi-group.org/specifications/specs/systemd_system_update_specification/)

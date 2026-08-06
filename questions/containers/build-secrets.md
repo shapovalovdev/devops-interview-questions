@@ -23,5 +23,6 @@ How can a build fetch a private dependency without baking its credential into th
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Build secrets](https://docs.docker.com/build/building/secrets/)
 - [Further reading: Docker build checks for secrets in ARG or ENV](https://docs.docker.com/reference/build-checks/secrets-used-in-arg-or-env/)

@@ -23,5 +23,6 @@ What do namespaces isolate, and what do they not isolate?
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 - [Kubernetes: Resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/)

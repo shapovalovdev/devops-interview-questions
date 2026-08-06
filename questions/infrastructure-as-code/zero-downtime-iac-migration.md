@@ -23,5 +23,6 @@ How would you migrate a critical service resource when its configuration require
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: lifecycle meta-argument](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle)
 - [Terraform: Resource behavior](https://developer.hashicorp.com/terraform/language/resources/behavior)

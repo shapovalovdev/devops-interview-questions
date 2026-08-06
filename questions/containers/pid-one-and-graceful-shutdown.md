@@ -23,5 +23,6 @@ Why does PID 1 matter in a container, and how do you prevent a stop request from
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Dockerfile reference: shell-form ENTRYPOINT and signals](https://docs.docker.com/reference/dockerfile/#shell-form-entrypoint-example)
 - [Further reading: Docker Docs on stop signals](https://docs.docker.com/reference/dockerfile/#stopsignal)

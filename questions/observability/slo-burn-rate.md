@@ -23,5 +23,6 @@ What does a burn-rate alert measure, and why can it be better than alerting on a
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Google SRE Workbook: Alerting on SLOs](https://sre.google/workbook/alerting-on-slos/)
 - [Further reading: Google SRE Workbook—Monitoring](https://sre.google/workbook/monitoring/)

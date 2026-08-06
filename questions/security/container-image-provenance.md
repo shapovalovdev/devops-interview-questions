@@ -23,5 +23,6 @@ What evidence should a deployment policy require before allowing a container ima
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [SLSA: Provenance](https://slsa.dev/spec/v1.1/provenance)
 - [NIST SP 800-190: Application Container Security Guide](https://csrc.nist.gov/pubs/sp/800/190/final)

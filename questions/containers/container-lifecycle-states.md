@@ -23,5 +23,6 @@ What happens when a container's main process exits, and how should you choose a 
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Start containers automatically](https://docs.docker.com/engine/containers/start-containers-automatically/)
 - [Further reading: Docker Docs on container lifecycle](https://docs.docker.com/engine/containers/run/)

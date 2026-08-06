@@ -23,5 +23,6 @@ Which IPv4 ranges are private, and what must you plan before connecting two priv
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 1918: Address Allocation for Private Internets](https://www.rfc-editor.org/rfc/rfc1918.html)
 - [Cloudflare learning: What is a private IP address?](https://www.cloudflare.com/learning/network-layer/what-is-a-private-ip-address/)

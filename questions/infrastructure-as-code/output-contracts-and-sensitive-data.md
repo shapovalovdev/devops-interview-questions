@@ -23,5 +23,6 @@ What should a module output, and how do you avoid turning outputs into a secret-
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: Output values](https://developer.hashicorp.com/terraform/language/values/outputs)
 - [Terraform: Manage sensitive data](https://developer.hashicorp.com/terraform/language/manage-sensitive-data)

@@ -23,5 +23,6 @@ What is the difference between a container image and a container created from it
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: What is an image?](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/)
 - [Further reading: Docker Docs on container storage](https://docs.docker.com/engine/storage/)

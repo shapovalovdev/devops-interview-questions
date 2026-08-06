@@ -23,5 +23,6 @@ What must a production plan-review workflow establish before it applies infrastr
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: plan command](https://developer.hashicorp.com/terraform/cli/commands/plan)
 - [Terraform: apply command](https://developer.hashicorp.com/terraform/cli/commands/apply)

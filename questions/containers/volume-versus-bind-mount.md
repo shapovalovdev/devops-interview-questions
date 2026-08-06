@@ -23,5 +23,6 @@ How do Docker-managed volumes differ from bind mounts, and which would you use f
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Volumes](https://docs.docker.com/engine/storage/volumes/)
 - [Further reading: Docker Docs on bind mounts](https://docs.docker.com/engine/storage/bind-mounts/)

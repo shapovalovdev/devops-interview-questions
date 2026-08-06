@@ -22,5 +22,6 @@ How should a CI job cache dependencies while preserving correctness and isolatio
 
 ## References
 
+- Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Caching dependencies](https://docs.github.com/en/actions/how-tos/writing-workflows/choosing-what-your-workflow-does/caching-dependencies-to-speed-up-workflows)
 - [Further reading: GitHub Docs—dependency caching reference](https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching)

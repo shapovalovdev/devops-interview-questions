@@ -22,5 +22,6 @@ An executable succeeds interactively but fails under systemd. What differences d
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [systemd.exec: execution environment and sandboxing](https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html)
 - Further reading: [systemd.service: service unit configuration](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)

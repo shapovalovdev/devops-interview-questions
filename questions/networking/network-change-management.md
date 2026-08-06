@@ -26,6 +26,7 @@ What delivery system would you use for high-impact routing, firewall, or DNS cha
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 1812: Router requirements](https://www.rfc-editor.org/rfc/rfc1812.html)
 - [Google SRE Book: Release Engineering](https://sre.google/sre-book/release-engineering/)
 - [Google SRE Workbook: Canarying releases](https://sre.google/workbook/canarying-releases/)

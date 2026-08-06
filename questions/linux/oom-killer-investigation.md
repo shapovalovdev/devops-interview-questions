@@ -22,5 +22,6 @@ What evidence distinguishes an OOM kill from an ordinary process crash, and what
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [Linux kernel: out-of-memory handling](https://www.kernel.org/doc/html/latest/mm/oom.html)
 - Further reading: [Linux kernel: cgroup v2 memory controller](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html)

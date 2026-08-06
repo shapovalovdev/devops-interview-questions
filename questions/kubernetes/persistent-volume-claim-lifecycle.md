@@ -23,5 +23,6 @@ How do PersistentVolumes, PersistentVolumeClaims, StorageClasses, and reclaim po
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 - [Kubernetes: Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)

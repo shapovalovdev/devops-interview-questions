@@ -26,6 +26,7 @@ How do you plan network capacity so a utilization graph does not hide saturation
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 5681: TCP Congestion Control](https://www.rfc-editor.org/rfc/rfc5681.html)
 - [Google SRE Book: Monitoring Distributed Systems](https://sre.google/sre-book/monitoring-distributed-systems/)
 - [Google SRE Workbook: Addressing overload](https://sre.google/workbook/addressing-overload/)

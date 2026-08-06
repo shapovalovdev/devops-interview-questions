@@ -26,6 +26,7 @@ A client cannot establish HTTPS with a service. Which parts of the TLS handshake
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 8446: The Transport Layer Security Protocol Version 1.3](https://www.rfc-editor.org/rfc/rfc8446.html)
 - [RFC 6066: TLS extensions, including Server Name Indication](https://www.rfc-editor.org/rfc/rfc6066.html)
 - [Mozilla SSL Configuration Generator](https://ssl-config.mozilla.org/)

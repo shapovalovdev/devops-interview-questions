@@ -23,5 +23,6 @@ Metrics and traces disappear during peak traffic. How do you investigate without
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [OpenTelemetry Collector resiliency](https://opentelemetry.io/docs/collector/resiliency/)
 - [Further reading: OpenTelemetry Collector monitoring](https://opentelemetry.io/docs/collector/internal-telemetry/)

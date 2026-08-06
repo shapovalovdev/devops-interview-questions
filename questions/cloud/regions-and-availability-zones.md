@@ -23,5 +23,6 @@ What is the distinction between an AWS Region and an Availability Zone, and how 
 
 ## References
 
+- Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS Infrastructure Security: Availability Zones](https://docs.aws.amazon.com/whitepapers/latest/aws-infrastructure-security/availability-zones.html)
 - [Further reading: AWS Regions and Availability Zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)

@@ -23,5 +23,6 @@ How would you lead a migration from controller-specific Ingress configuration to
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/)
 - [Kubernetes: Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)

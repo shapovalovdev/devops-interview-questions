@@ -23,5 +23,6 @@ A newly started container stops in seconds. What evidence do you collect before 
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker CLI reference: docker container logs](https://docs.docker.com/reference/cli/docker/container/logs/)
 - [Further reading: Docker CLI reference: docker container inspect](https://docs.docker.com/reference/cli/docker/container/inspect/)

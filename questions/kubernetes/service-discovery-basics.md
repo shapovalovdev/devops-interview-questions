@@ -23,5 +23,6 @@ Why should an application call a Service name instead of a Pod IP?
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Service](https://kubernetes.io/docs/concepts/services-networking/service/)
 - [Kubernetes: DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)

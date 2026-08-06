@@ -26,6 +26,7 @@ How would you let workloads reach necessary external services while controlling 
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [NIST SP 800-207: Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final)
 - [RFC 1918: Private addressing boundaries](https://www.rfc-editor.org/rfc/rfc1918.html)
 - [CISA: Zero Trust Maturity Model](https://www.cisa.gov/resources-tools/resources/zero-trust-maturity-model)

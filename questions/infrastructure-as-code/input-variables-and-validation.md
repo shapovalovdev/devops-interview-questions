@@ -23,5 +23,6 @@ How should a reusable Terraform module expose and validate input variables?
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: Input variables](https://developer.hashicorp.com/terraform/language/values/variables)
 - [Terraform: Type constraints](https://developer.hashicorp.com/terraform/language/expressions/type-constraints)

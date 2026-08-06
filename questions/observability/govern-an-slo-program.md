@@ -23,5 +23,6 @@ How would you make SLOs influence delivery decisions across many services?
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Google SRE Workbook: Implementing SLOs](https://sre.google/workbook/implementing-slos/)
 - [Further reading: Google SRE Workbook—Error budget policy example](https://sre.google/workbook/error-budget-policy/)

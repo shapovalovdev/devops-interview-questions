@@ -26,6 +26,7 @@ A production name was changed to a bad target. How do you restore service while 
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 1034: DNS concepts and caching](https://www.rfc-editor.org/rfc/rfc1034.html)
 - [RFC 2308: Negative caching](https://www.rfc-editor.org/rfc/rfc2308.html)
 - [ICANN: DNS security and stability](https://www.icann.org/en/stability-security)

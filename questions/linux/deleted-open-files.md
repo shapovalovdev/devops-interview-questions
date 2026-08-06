@@ -22,5 +22,6 @@ Why can a filesystem remain full after a large log file is deleted, and how do y
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [proc_pid_fd(5): file descriptors for a process](https://man7.org/linux/man-pages/man5/proc_pid_fd.5.html)
 - Further reading: [unlink(2): removing a directory entry](https://man7.org/linux/man-pages/man2/unlink.2.html)

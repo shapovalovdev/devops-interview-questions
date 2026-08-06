@@ -4,6 +4,10 @@ theme: logging
 difficulty: middle
 type: scenario
 tags: [logging, observability, debugging, incident-response]
+sources:
+  - url: https://opentelemetry.io/docs/specs/semconv/general/recording-errors/
+    source_type: official-docs
+    verified_on: 2026-08-06
 ---
 
 # Design structured logs for request correlation
@@ -12,6 +16,12 @@ Which fields should a service emit so an operator can follow one failed request 
 
 ## Answer guide
 
-- Emit a stable request or trace identifier and propagate it downstream.
-- Include timestamp, severity, service identity, operation, and useful non-secret context.
-- Use structured fields rather than parsing free-form messages; avoid credentials and personal data.
+- Emit a stable trace or request identifier at the ingress boundary and propagate trace context to downstream calls; include the trace/span identifiers in logs so operators can pivot between logs, traces, and the affected service.
+- Record a timestamp, severity, service identity/version, operation, outcome or error type, and narrowly scoped diagnostic fields. Use structured fields with stable names and types instead of parsing prose.
+- Treat logging as a data-exposure boundary: scrub credentials, tokens, and unnecessary personal data before export, and use access control and retention policies appropriate to the data that remains.
+- Correlation is only useful when propagation survives asynchronous boundaries and sampling. Define how message IDs, retries, and sampled-away traces are represented, and test a failed request end to end.
+
+## References
+
+- [OpenTelemetry semantic conventions: recording errors](https://opentelemetry.io/docs/specs/semconv/general/recording-errors/)
+- Further reading (blog): [Honeycomb: the lost art of structured logging](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)

@@ -23,5 +23,6 @@ Why should an application repository define a `.dockerignore` file, and what mus
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: .dockerignore files](https://docs.docker.com/build/concepts/context/#dockerignore-files)
 - [Further reading: Docker Docs on build context](https://docs.docker.com/build/concepts/context/)

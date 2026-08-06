@@ -23,5 +23,6 @@ How would you give a workload a credential and rotate it without overexposing it
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
 - [Kubernetes: Good practices for Secrets](https://kubernetes.io/docs/concepts/security/secrets-good-practices/)

@@ -22,5 +22,6 @@ How should a pipeline use an environment approval without turning every release 
 
 ## References
 
+- Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Control deployments](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/control-deployments)
 - [Further reading: GitHub Docs—deployment environments](https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments)

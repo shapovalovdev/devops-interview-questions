@@ -23,5 +23,6 @@ How should a platform team make the secure path the easy path for hundreds of se
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [NIST SP 800-218: Secure Software Development Framework](https://csrc.nist.gov/pubs/sp/800/218/final)
 - [NIST Cybersecurity Framework 2.0](https://www.nist.gov/cyberframework)

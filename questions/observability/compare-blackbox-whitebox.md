@@ -23,5 +23,6 @@ How do black-box and white-box monitoring differ, and why use both?
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Google SRE: Monitoring distributed systems](https://sre.google/sre-book/monitoring-distributed-systems/)
 - [Further reading: Google SRE Workbook—Monitoring](https://sre.google/workbook/monitoring/)

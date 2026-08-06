@@ -23,5 +23,6 @@ How should a platform team reduce rapidly increasing telemetry cost without maki
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Prometheus: Metric and label naming](https://prometheus.io/docs/practices/naming/)
 - [Further reading: Google SRE Workbook—Monitoring](https://sre.google/workbook/monitoring/)

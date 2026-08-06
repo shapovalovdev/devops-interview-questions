@@ -23,5 +23,6 @@ How would you prevent recurring CPU, memory, and I/O contention across a shared 
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [Linux kernel: cgroup v2 resource controls](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html)
 - Further reading: [Linux kernel: PSI pressure stall information](https://www.kernel.org/doc/html/latest/accounting/psi.html)

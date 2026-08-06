@@ -22,5 +22,6 @@ How do Linux capabilities reduce privilege for a service, and what are their lim
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [capabilities(7): Linux capability model](https://man7.org/linux/man-pages/man7/capabilities.7.html)
 - Further reading: [systemd.exec: CapabilityBoundingSet](https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html)

@@ -22,5 +22,6 @@ How do you roll out a kernel update safely across a production fleet?
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [Linux kernel administration guide](https://www.kernel.org/doc/html/latest/admin-guide/README.html)
 - Further reading: [systemd boot loader specification](https://uapi-group.org/specifications/specs/boot_loader_specification/)

@@ -23,5 +23,6 @@ What should the landing dashboard for an on-call service contain?
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Google SRE Workbook: Monitoring](https://sre.google/workbook/monitoring/)
 - [Further reading: Google SRE—Monitoring distributed systems](https://sre.google/sre-book/monitoring-distributed-systems/)

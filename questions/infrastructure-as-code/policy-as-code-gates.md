@@ -23,5 +23,6 @@ How would you add policy-as-code without creating an unreviewable delivery bottl
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [HCP Terraform: Policy enforcement](https://developer.hashicorp.com/terraform/cloud-docs/policy-enforcement)
 - [Terraform: JSON output format](https://developer.hashicorp.com/terraform/internals/json-format)

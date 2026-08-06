@@ -23,5 +23,6 @@ When should you create a Prometheus recording rule, and how do you operate it sa
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Prometheus: Defining recording rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/)
 - [Further reading: Prometheus recording-rule naming](https://prometheus.io/docs/practices/rules/)

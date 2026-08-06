@@ -16,9 +16,10 @@ A production host no longer responds on its network interface. What out-of-band 
 
 ## Answer guide
 
-- Use a management controller such as IPMI, iDRAC, or iLO to inspect console output, health sensors, and power state.
-- Preserve logs and assess blast radius before issuing a reset.
-- Distinguish a host fault from an upstream network, DNS, or authentication failure.
+- Use a management controller such as IPMI, iDRAC, or iLO to inspect console output, health sensors, and power state without relying on the host operating system or production network. It is the recovery channel when normal SSH, agents, or in-band networking are unavailable.
+- First confirm the exact asset, maintenance authority, and service impact. Preserve controller events and console output, then try the least disruptive approved action; an out-of-band reset can corrupt in-flight writes just as a physical reset can.
+- After restoring access, validate boot, storage, networking, and workload health through normal monitoring. Distinguish a host fault from an upstream network, DNS, or authentication failure, and investigate the root cause rather than treating remote access as the fix.
+- Access to the controller is highly privileged. Restrict it with separate identities, MFA where supported, network segmentation, audited sessions, and tested break-glass procedures; an unreachable or compromised management network defeats the recovery plan.
 
 ## References
 

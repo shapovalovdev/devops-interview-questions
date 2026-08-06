@@ -23,5 +23,6 @@ How would you define service objectives and capacity ownership for a shared Kube
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Cluster autoscaling](https://kubernetes.io/docs/concepts/cluster-administration/cluster-autoscaling/)
 - [Kubernetes: Resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/)

@@ -23,5 +23,6 @@ How would you prove that a Kubernetes platform can recover from control-plane or
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Operating etcd clusters](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/)
 - [Kubernetes: Disaster recovery for clusters](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/)

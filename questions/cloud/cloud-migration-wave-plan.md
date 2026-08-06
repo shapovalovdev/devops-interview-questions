@@ -23,5 +23,6 @@ How do you migrate a group of applications to cloud infrastructure without treat
 
 ## References
 
+- Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS Prescriptive Guidance: migration strategy](https://docs.aws.amazon.com/prescriptive-guidance/latest/migration-strategy/welcome.html)
 - [Further reading: AWS migration readiness guide](https://docs.aws.amazon.com/prescriptive-guidance/latest/migration-readiness/welcome.html)

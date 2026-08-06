@@ -23,5 +23,6 @@ When should you use a counter, gauge, histogram, or summary metric?
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Prometheus: Metric types](https://prometheus.io/docs/concepts/metric_types/)
 - [Further reading: Prometheus histogram best practices](https://prometheus.io/docs/practices/histograms/)

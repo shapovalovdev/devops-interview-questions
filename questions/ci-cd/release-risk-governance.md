@@ -22,5 +22,6 @@ How would you make release controls proportionate to risk across many services?
 
 ## References
 
+- Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [Google SRE Workbook: Canarying releases](https://sre.google/workbook/canarying-releases/)
 - [Further reading: Google SRE Book—service level objectives](https://sre.google/sre-book/service-level-objectives/)

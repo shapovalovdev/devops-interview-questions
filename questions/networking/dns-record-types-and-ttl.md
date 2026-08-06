@@ -26,6 +26,7 @@ How do A, AAAA, CNAME, and TTL choices affect a service migration?
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 1034: DNS resource records and aliases](https://www.rfc-editor.org/rfc/rfc1034.html)
 - [RFC 2181: Clarifications to the DNS specification](https://www.rfc-editor.org/rfc/rfc2181.html)
 - [Cloudflare learning: What is a DNS TTL?](https://www.cloudflare.com/learning/dns/dns-records/dns-ttl/)

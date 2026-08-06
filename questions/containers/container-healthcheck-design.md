@@ -23,5 +23,6 @@ What should a Docker `HEALTHCHECK` test, and what should not depend on it?
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Dockerfile reference: HEALTHCHECK](https://docs.docker.com/reference/dockerfile/#healthcheck)
 - [Further reading: Docker Docs on health status events](https://docs.docker.com/reference/cli/docker/system/events/)

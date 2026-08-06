@@ -23,5 +23,6 @@ What controls should a platform require from source change to production artifac
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [SLSA specification](https://slsa.dev/spec/v1.1/)
 - [NIST SP 800-218: Secure Software Development Framework](https://csrc.nist.gov/pubs/sp/800/218/final)

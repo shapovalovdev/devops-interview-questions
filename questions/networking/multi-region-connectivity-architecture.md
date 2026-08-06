@@ -26,6 +26,7 @@ How do you choose connectivity and addressing boundaries for multi-region servic
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [NIST SP 800-207: Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final)
 - [RFC 4632: CIDR strategy](https://www.rfc-editor.org/rfc/rfc4632.html)
 - [AWS Well-Architected: Reliability Pillar](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html)

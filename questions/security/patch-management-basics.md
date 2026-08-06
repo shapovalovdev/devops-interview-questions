@@ -23,5 +23,6 @@ What makes a patch-management process safe instead of simply installing every up
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [NIST SP 800-40 Rev. 4: Enterprise Patch Management Planning](https://csrc.nist.gov/pubs/sp/800/40/r4/final)
 - [CISA: Known Exploited Vulnerabilities Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)

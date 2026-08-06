@@ -23,5 +23,6 @@ How do IaaS, PaaS, and SaaS change a team's operational responsibilities?
 
 ## References
 
+- Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS overview: cloud service models](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/amazon-web-services-cloud-platform.html)
 - [Further reading: AWS shared responsibility model](https://aws.amazon.com/compliance/shared-responsibility-model/)

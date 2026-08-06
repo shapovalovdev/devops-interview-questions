@@ -23,5 +23,6 @@ How would you migrate a team from local Terraform state to a remote backend safe
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: Backend configuration](https://developer.hashicorp.com/terraform/language/backend)
 - [Terraform: State](https://developer.hashicorp.com/terraform/language/state)

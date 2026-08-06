@@ -23,5 +23,6 @@ How do you get both reproducible builds and timely base-image security updates?
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Pin base image versions](https://docs.docker.com/build/building/best-practices/#pin-base-image-versions)
 - [Further reading: Docker Docs on image security best practices](https://docs.docker.com/build/building/best-practices/#build-and-test-your-images-in-ci)

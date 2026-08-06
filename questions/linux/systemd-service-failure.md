@@ -22,5 +22,6 @@ A systemd service enters a failed state after repeated restarts. How do you diag
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [systemctl: unit status and failure handling](https://www.freedesktop.org/software/systemd/man/latest/systemctl.html)
 - Further reading: [systemd.service: service unit settings](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)

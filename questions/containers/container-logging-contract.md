@@ -23,5 +23,6 @@ How should an application emit logs in a containerized service, and what belongs
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Configure logging drivers](https://docs.docker.com/engine/logging/)
 - [Further reading: Docker Docs on the local logging driver](https://docs.docker.com/engine/logging/drivers/local/)

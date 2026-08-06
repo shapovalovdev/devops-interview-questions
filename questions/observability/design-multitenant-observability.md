@@ -23,5 +23,6 @@ How would you give many teams observability access while preventing cross-tenant
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [OpenTelemetry security](https://opentelemetry.io/docs/security/)
 - [Further reading: OpenTelemetry context propagation security](https://opentelemetry.io/docs/concepts/context-propagation/)

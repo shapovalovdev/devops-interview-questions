@@ -23,5 +23,6 @@ What controls should protect a CI runner that executes code from many repositori
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [GitHub Actions: Security hardening](https://docs.github.com/actions/security-for-github-actions/security-guides/security-hardening-your-deployments)
 - [OpenSSF: Secure Software Development](https://bestpractices.coreinfrastructure.org/)

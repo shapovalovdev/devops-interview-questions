@@ -23,5 +23,6 @@ An application reports “too many open files.” How do you find the leaking re
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [getrlimit(2): resource limits](https://man7.org/linux/man-pages/man2/getrlimit.2.html)
 - Further reading: [proc_pid_fd(5): process file-descriptor directory](https://man7.org/linux/man-pages/man5/proc_pid_fd.5.html)

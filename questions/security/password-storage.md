@@ -23,5 +23,6 @@ How should an application store user passwords, and why is encryption alone not 
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [OWASP: Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)
 - [NIST SP 800-63B: Authentication](https://pages.nist.gov/800-63-3/sp800-63b.html)

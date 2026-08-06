@@ -23,5 +23,6 @@ How would you build a shared observability platform without forcing every team i
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [OpenTelemetry: What is OpenTelemetry?](https://opentelemetry.io/docs/what-is-opentelemetry/)
 - [Further reading: OpenTelemetry semantic conventions](https://opentelemetry.io/docs/concepts/semantic-conventions/)

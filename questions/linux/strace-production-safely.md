@@ -22,5 +22,6 @@ How can `strace` help diagnose a hung process, and what operational risks must y
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [strace(1): system-call tracer](https://man7.org/linux/man-pages/man1/strace.1.html)
 - Further reading: [proc_pid_stack(5): kernel stack for a process](https://man7.org/linux/man-pages/man5/proc_pid_stack.5.html)

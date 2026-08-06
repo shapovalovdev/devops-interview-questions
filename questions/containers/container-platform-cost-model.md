@@ -23,5 +23,6 @@ How would you reduce container-platform cost without encouraging teams to under-
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Runtime resource constraints](https://docs.docker.com/engine/containers/resource_constraints/)
 - [Further reading: Docker Docs on CPU limits](https://docs.docker.com/engine/containers/resource_constraints/#cpu)

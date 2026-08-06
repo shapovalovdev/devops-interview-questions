@@ -23,5 +23,6 @@ What properties must a backup and recovery design have to support a ransomware i
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [CISA: StopRansomware Guide](https://www.cisa.gov/stopransomware/ransomware-guide)
 - [NIST SP 800-34: Contingency Planning Guide](https://csrc.nist.gov/pubs/sp/800/34/r1/final)

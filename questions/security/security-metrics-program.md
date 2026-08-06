@@ -23,5 +23,6 @@ Which metrics should a staff engineer use to improve a security platform without
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [NIST Cybersecurity Framework 2.0](https://www.nist.gov/cyberframework)
 - [CISA: Known Exploited Vulnerabilities Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)

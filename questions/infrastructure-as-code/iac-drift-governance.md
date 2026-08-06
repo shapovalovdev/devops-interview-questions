@@ -23,5 +23,6 @@ What operating model detects and reduces IaC drift without blocking incident res
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: plan command](https://developer.hashicorp.com/terraform/cli/commands/plan)
 - [Terraform: refresh-only mode tutorial](https://developer.hashicorp.com/terraform/tutorials/state/refresh)

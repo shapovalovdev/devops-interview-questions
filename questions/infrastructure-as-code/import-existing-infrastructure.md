@@ -23,5 +23,6 @@ How do you bring a manually created production resource under Terraform control 
 
 ## References
 
+- Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: Import resources overview](https://developer.hashicorp.com/terraform/language/import)
 - [Terraform: Import existing infrastructure](https://developer.hashicorp.com/terraform/cli/import)

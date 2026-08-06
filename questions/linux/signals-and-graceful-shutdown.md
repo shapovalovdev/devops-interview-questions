@@ -22,5 +22,6 @@ What should a Linux service do when it receives a termination request during dep
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [signal(7): signal dispositions and delivery](https://man7.org/linux/man-pages/man7/signal.7.html)
 - Further reading: [systemd.service: service stop behavior](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)

@@ -22,5 +22,6 @@ When can nice levels help a production host, and what should you verify before c
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [sched(7): Linux scheduling overview](https://man7.org/linux/man-pages/man7/sched.7.html)
 - Further reading: [nice(1): adjust scheduling priority](https://man7.org/linux/man-pages/man1/nice.1.html)

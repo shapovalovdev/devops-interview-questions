@@ -23,5 +23,6 @@ Why is a metric backend failing under high cardinality, and how would you fix it
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Prometheus: Metric and label naming](https://prometheus.io/docs/practices/naming/)
 - [Further reading: Prometheus instrumentation practices](https://prometheus.io/docs/practices/instrumentation/)

@@ -23,5 +23,6 @@ How would you reduce a service container's Linux privileges without breaking it?
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Runtime privilege and Linux capabilities](https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities)
 - [Further reading: Docker Docs on seccomp profiles](https://docs.docker.com/engine/security/seccomp/)

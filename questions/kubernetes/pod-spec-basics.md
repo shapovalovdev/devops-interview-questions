@@ -23,5 +23,6 @@ Which parts of a Pod manifest determine what runs and how it is identified?
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Pods](https://kubernetes.io/docs/concepts/workloads/pods/)
 - [Kubernetes: Pod API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/)

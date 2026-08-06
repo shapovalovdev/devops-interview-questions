@@ -23,5 +23,6 @@ How would you provide non-secret configuration to an application and roll out a 
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/)
 - [Kubernetes: Configure a Pod to use a ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/)

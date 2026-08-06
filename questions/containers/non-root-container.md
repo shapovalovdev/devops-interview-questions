@@ -23,5 +23,6 @@ What changes are needed to run an application image without root privileges?
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Dockerfile reference: USER](https://docs.docker.com/reference/dockerfile/#user)
 - [Further reading: Docker Docs on runtime privileges and capabilities](https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities)

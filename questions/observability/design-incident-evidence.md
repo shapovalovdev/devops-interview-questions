@@ -23,5 +23,6 @@ What observability standards let responders reconstruct a major incident without
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Google SRE Workbook: Incident response](https://sre.google/workbook/incident-response/)
 - [Further reading: OpenTelemetry security guidance](https://opentelemetry.io/docs/security/)

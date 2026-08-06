@@ -23,5 +23,6 @@ How would you establish a Linux hardening baseline that teams can adopt and safe
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [capabilities(7): partitioning privileged operations](https://man7.org/linux/man-pages/man7/capabilities.7.html)
 - Further reading: [systemd.exec security and execution controls](https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html)

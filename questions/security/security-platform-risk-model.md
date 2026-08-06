@@ -23,5 +23,6 @@ How should a staff engineer align security investments across many platform team
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [NIST Cybersecurity Framework 2.0](https://www.nist.gov/cyberframework)
 - [NIST SP 800-30: Guide for Conducting Risk Assessments](https://csrc.nist.gov/pubs/sp/800/30/r1/final)

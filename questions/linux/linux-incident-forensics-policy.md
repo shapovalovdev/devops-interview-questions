@@ -23,5 +23,6 @@ What platform capabilities should exist before a serious Linux host incident so 
 
 ## References
 
+- Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [journalctl: query systemd journal records](https://www.freedesktop.org/software/systemd/man/latest/journalctl.html)
 - Further reading: [systemd journal fields](https://www.freedesktop.org/software/systemd/man/latest/systemd.journal-fields.html)

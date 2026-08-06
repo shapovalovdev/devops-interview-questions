@@ -22,5 +22,6 @@ What should a team retain after a build, and which item should move between envi
 
 ## References
 
+- Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Storing and sharing data from a workflow](https://docs.github.com/en/actions/how-tos/store-and-share-data)
 - [Further reading: SLSA—build security levels](https://slsa.dev/spec/v1.0/levels)

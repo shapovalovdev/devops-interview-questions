@@ -23,5 +23,6 @@ How do CPU and memory limits affect a container, and how do you choose safe init
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Runtime resource constraints](https://docs.docker.com/engine/containers/resource_constraints/)
 - [Further reading: Docker Docs on OOM priority](https://docs.docker.com/engine/containers/resource_constraints/#understand-the-risks-of-running-out-of-memory)

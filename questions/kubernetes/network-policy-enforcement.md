@@ -23,5 +23,6 @@ How would you allow an API Pod to receive traffic only from its frontend and cal
 
 ## References
 
+- Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 - [Kubernetes: Services, load balancing, and networking](https://kubernetes.io/docs/concepts/services-networking/)

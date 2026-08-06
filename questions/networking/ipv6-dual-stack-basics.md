@@ -26,6 +26,7 @@ What must you validate before publishing an AAAA record for an existing IPv4 ser
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 8200: Internet Protocol, Version 6](https://www.rfc-editor.org/rfc/rfc8200.html)
 - [RFC 4861: IPv6 Neighbor Discovery](https://www.rfc-editor.org/rfc/rfc4861.html)
 - [Cloudflare learning: What is IPv6?](https://www.cloudflare.com/learning/ddos/glossary/internet-protocol-version-6-ipv6/)

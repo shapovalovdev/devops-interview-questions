@@ -23,5 +23,6 @@ How should a team manage AWS service quotas when planning a large launch or reco
 
 ## References
 
+- Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS Service Quotas User Guide](https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html)
 - [Further reading: AWS Service Quotas console](https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html#intro-how-it-works)

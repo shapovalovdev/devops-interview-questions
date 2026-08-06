@@ -26,6 +26,7 @@ What happens when an application resolves a hostname, and where can you investig
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 1034: Domain names — concepts and facilities](https://www.rfc-editor.org/rfc/rfc1034.html)
 - [RFC 2308: DNS negative caching](https://www.rfc-editor.org/rfc/rfc2308.html)
 - [Cloudflare learning: What is DNS?](https://www.cloudflare.com/learning/dns/what-is-dns/)

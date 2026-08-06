@@ -26,6 +26,7 @@ A new subdomain works against its nameserver but fails for public resolvers. Wha
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 1034: DNS delegations and glue](https://www.rfc-editor.org/rfc/rfc1034.html)
 - [RFC 1912: Common DNS operational errors](https://www.rfc-editor.org/rfc/rfc1912.html)
 - [ICANN: DNS basics](https://www.icann.org/resources/pages/dns-2018-10-25-en)

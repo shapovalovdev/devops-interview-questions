@@ -23,5 +23,6 @@ How do you release one image reference for both amd64 and arm64 workloads withou
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Multi-platform builds](https://docs.docker.com/build/building/multi-platform/)
 - [Further reading: OCI Image Format specification](https://github.com/opencontainers/image-spec/blob/main/image-index.md)

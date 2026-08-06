@@ -23,5 +23,6 @@ How would you build an application that needs compilers during build but not at 
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Multi-stage builds](https://docs.docker.com/build/building/multi-stage/)
 - [Further reading: Dockerfile reference: COPY --from](https://docs.docker.com/reference/dockerfile/#copy---from)

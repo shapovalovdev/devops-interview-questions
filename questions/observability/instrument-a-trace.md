@@ -23,5 +23,6 @@ How would you instrument an API request so a responder can find a slow downstrea
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [OpenTelemetry: Traces](https://opentelemetry.io/docs/concepts/signals/traces/)
 - [Further reading: OpenTelemetry context propagation](https://opentelemetry.io/docs/concepts/context-propagation/)

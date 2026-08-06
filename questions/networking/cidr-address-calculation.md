@@ -23,5 +23,6 @@ What does `192.0.2.64/26` mean, and why does getting the prefix wrong cause oper
 
 ## References
 
+- Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 4632: Classless Inter-domain Routing](https://www.rfc-editor.org/rfc/rfc4632.html)
 - [Cloudflare learning: What is CIDR?](https://www.cloudflare.com/learning/network-layer/what-is-cidr/)

@@ -22,5 +22,6 @@ How can a team shorten a test pipeline without creating order-dependent failures
 
 ## References
 
+- Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Using a matrix for jobs](https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs)
 - [Further reading: GitHub Docs—concurrency](https://docs.github.com/en/actions/concepts/workflows-and-actions/concurrency)

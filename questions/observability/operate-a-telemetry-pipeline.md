@@ -23,5 +23,6 @@ What reliability controls should a production telemetry collection pipeline have
 
 ## References
 
+- Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [OpenTelemetry Collector documentation](https://opentelemetry.io/docs/collector/)
 - [Further reading: OpenTelemetry Collector resiliency](https://opentelemetry.io/docs/collector/resiliency/)

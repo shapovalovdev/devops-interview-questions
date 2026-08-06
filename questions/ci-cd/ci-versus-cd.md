@@ -22,5 +22,6 @@ What are continuous integration, continuous delivery, and continuous deployment,
 
 ## References
 
+- Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Workflows and actions](https://docs.github.com/en/actions/concepts/workflows-and-actions)
 - [Further reading: Google Cloud—continuous delivery overview](https://cloud.google.com/architecture/devops/devops-tech-continuous-delivery)

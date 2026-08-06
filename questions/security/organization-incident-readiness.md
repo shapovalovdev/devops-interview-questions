@@ -23,5 +23,6 @@ How would you make security incident response dependable across product, platfor
 
 ## References
 
+- Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
 - [NIST SP 800-61 Rev. 2: Incident Handling Guide](https://csrc.nist.gov/pubs/sp/800/61/r2/final)
 - [CISA: Incident Response](https://www.cisa.gov/topics/cyber-threats-and-advisories/incident-response)

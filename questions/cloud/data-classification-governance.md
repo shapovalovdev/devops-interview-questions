@@ -23,5 +23,6 @@ How would you ensure cloud teams apply appropriate controls to sensitive data wi
 
 ## References
 
+- Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS Well-Architected Security Pillar: data classification](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/data-classification.html)
 - [Further reading: AWS Macie sensitive data discovery](https://docs.aws.amazon.com/macie/latest/user/what-is-macie.html)

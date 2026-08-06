@@ -23,5 +23,6 @@ How would you create a shared base-image program for many teams without turning 
 
 ## References
 
+- Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Build image best practices](https://docs.docker.com/build/building/best-practices/)
 - [Further reading: Docker Docs on image labels](https://docs.docker.com/reference/dockerfile/#label)
