@@ -24,4 +24,4 @@ How should a platform team consume Ansible collections without making production
 ## References
 
 - [Ansible documentation: installing collections](https://docs.ansible.com/projects/ansible/latest/collections_guide/collections_installing.html)
-- Further reading (blog): [Red Hat: managing Ansible collections](https://www.redhat.com/en/blog/ansible-collections)
+- Further reading (blog): [Spacelift: Ansible best practices](https://spacelift.io/blog/ansible-best-practices)

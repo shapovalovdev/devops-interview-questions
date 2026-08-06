@@ -24,4 +24,4 @@ How should a team detect and remediate configuration drift without overwriting a
 ## References
 
 - [Ansible documentation: check mode and diff mode](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_checkmode.html)
-- Further reading (blog): [Red Hat: configuration drift and automation](https://www.redhat.com/en/blog/configuration-drift-ansible)
+- Further reading (blog): [Spacelift: Ansible configuration drift management](https://spacelift.io/blog/ansible-configuration-drift-management)

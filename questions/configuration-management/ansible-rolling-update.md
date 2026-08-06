@@ -24,4 +24,4 @@ How would you apply a service configuration change to a fleet without taking all
 ## References
 
 - [Ansible documentation: controlling playbook execution](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_strategies.html)
-- Further reading (blog): [Red Hat: rolling updates with Ansible](https://www.redhat.com/en/blog/ansible-rolling-updates)
+- Further reading (blog): [Spacelift: Ansible best practices](https://spacelift.io/blog/ansible-best-practices)

@@ -24,4 +24,4 @@ A configuration task fails on part of a fleet. How should the playbook handle th
 ## References
 
 - [Ansible documentation: error handling in playbooks](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_error_handling.html)
-- Further reading (blog): [Red Hat: Ansible block and rescue patterns](https://www.redhat.com/en/blog/ansible-block-rescue-always)
+- Further reading (blog): [Spacelift: Ansible best practices](https://spacelift.io/blog/ansible-best-practices)

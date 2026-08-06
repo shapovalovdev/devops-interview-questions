@@ -24,4 +24,4 @@ What test layers should protect a production Ansible role or playbook?
 ## References
 
 - [Ansible documentation: running tests locally](https://docs.ansible.com/projects/ansible/latest/dev_guide/testing_running_locally.html)
-- Further reading (blog): [Red Hat: testing Ansible roles with Molecule](https://www.redhat.com/en/blog/testing-ansible-roles-molecule)
+- Further reading (blog): [Spacelift: Ansible best practices](https://spacelift.io/blog/ansible-best-practices)

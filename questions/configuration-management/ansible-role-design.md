@@ -24,4 +24,4 @@ What makes an Ansible role reusable without making it impossible to understand?
 ## References
 
 - [Ansible documentation: roles](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_reuse_roles.html)
-- Further reading (blog): [Red Hat: Ansible roles best practices](https://www.redhat.com/en/blog/ansible-roles)
+- Further reading (blog): [Spacelift: Ansible best practices](https://spacelift.io/blog/ansible-best-practices)

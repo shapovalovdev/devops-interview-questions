@@ -24,4 +24,4 @@ When should an Ansible task notify a handler instead of restarting a service dir
 ## References
 
 - [Ansible documentation: handlers](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_handlers.html)
-- Further reading (blog): [Red Hat: using Ansible handlers](https://www.redhat.com/en/blog/ansible-handlers)
+- Further reading (blog): [Spacelift: Ansible configuration management](https://spacelift.io/blog/ansible-configuration-management)

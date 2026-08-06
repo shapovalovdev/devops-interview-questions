@@ -24,4 +24,4 @@ What resilience properties should a configuration-management control plane have?
 ## References
 
 - [Ansible documentation: dynamic inventory](https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html)
-- Further reading (blog): [Red Hat: building resilient automation](https://www.redhat.com/en/blog/resilient-automation)
+- Further reading (blog): [Spacelift: Ansible configuration drift management](https://spacelift.io/blog/ansible-configuration-drift-management)

@@ -24,4 +24,4 @@ How should you use check mode and diff mode before a production configuration ch
 ## References
 
 - [Ansible documentation: check mode and diff mode](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_checkmode.html)
-- Further reading (blog): [Red Hat: testing Ansible content](https://www.redhat.com/en/blog/testing-ansible-roles-molecule)
+- Further reading (blog): [Spacelift: Ansible best practices](https://spacelift.io/blog/ansible-best-practices)

@@ -24,4 +24,4 @@ How should a team protect secrets consumed by Ansible playbooks?
 ## References
 
 - [Ansible documentation: protecting sensitive data with Vault](https://docs.ansible.com/projects/ansible/latest/vault_guide/vault.html)
-- Further reading (blog): [Red Hat: managing secrets with Ansible Vault](https://www.redhat.com/en/blog/ansible-vault)
+- Further reading (blog): [Spacelift: Ansible security automation](https://spacelift.io/blog/ansible-security)

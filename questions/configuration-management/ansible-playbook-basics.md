@@ -24,4 +24,4 @@ How do plays, tasks, and modules work together in an Ansible playbook?
 ## References
 
 - [Ansible documentation: creating a playbook](https://docs.ansible.com/projects/ansible/latest/getting_started/get_started_playbook.html)
-- Further reading (blog): [Red Hat: how Ansible playbooks work](https://www.redhat.com/en/blog/ansible-playbooks)
+- Further reading (blog): [Spacelift: Ansible configuration management](https://spacelift.io/blog/ansible-configuration-management)

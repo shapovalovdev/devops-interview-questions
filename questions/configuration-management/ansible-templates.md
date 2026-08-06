@@ -24,4 +24,4 @@ How would you deliver a service configuration file that differs by environment?
 ## References
 
 - [Ansible documentation: template module](https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/template_module.html)
-- Further reading (blog): [Red Hat: using Jinja templates in Ansible](https://www.redhat.com/en/blog/using-ansible-jinja2-templates)
+- Further reading (blog): [Spacelift: Ansible configuration management](https://spacelift.io/blog/ansible-configuration-management)

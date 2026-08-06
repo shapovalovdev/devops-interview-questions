@@ -24,4 +24,4 @@ What is an Ansible inventory, and how should host groups be used safely?
 ## References
 
 - [Ansible documentation: inventory](https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_inventory.html)
-- Further reading (blog): [Red Hat: getting started with Ansible inventory](https://www.redhat.com/en/blog/ansible-inventory-files)
+- Further reading (blog): [Spacelift: Ansible performance and inventory practices](https://spacelift.io/blog/how-to-improve-ansible-performance)

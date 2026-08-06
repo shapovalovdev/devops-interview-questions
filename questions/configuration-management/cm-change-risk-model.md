@@ -24,4 +24,4 @@ How would you scale configuration-change controls across both low-risk and high-
 ## References
 
 - [Ansible documentation: controlling playbook execution](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_strategies.html)
-- Further reading (blog): [Red Hat: DevOps change management](https://www.redhat.com/en/blog/devops-change-management)
+- Further reading (blog): [Spacelift: Ansible best practices](https://spacelift.io/blog/ansible-best-practices)

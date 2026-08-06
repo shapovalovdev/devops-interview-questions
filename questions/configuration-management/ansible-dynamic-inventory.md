@@ -24,4 +24,4 @@ How should dynamic inventory be designed for a cloud fleet that changes frequent
 ## References
 
 - [Ansible documentation: dynamic inventory](https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html)
-- Further reading (blog): [Red Hat: dynamic inventory with Ansible](https://www.redhat.com/en/blog/dynamic-inventory-ansible)
+- Further reading (blog): [Spacelift: dynamic inventory and Ansible](https://spacelift.io/blog/ansible-dynamic-inventories-and-spacelift)

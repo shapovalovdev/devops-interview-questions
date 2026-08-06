@@ -24,4 +24,4 @@ How would you standardize configuration management across teams while preserving
 ## References
 
 - [Ansible documentation: roles and reusable content](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_reuse_roles.html)
-- Further reading (blog): [Red Hat: building an automation center of excellence](https://www.redhat.com/en/blog/automation-center-excellence)
+- Further reading (blog): [Spacelift: Ansible configuration management](https://spacelift.io/blog/ansible-configuration-management)

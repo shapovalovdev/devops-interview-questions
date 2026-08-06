@@ -24,4 +24,4 @@ How would you give automation the elevated access it needs without granting unre
 ## References
 
 - [Ansible documentation: privilege escalation](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_privilege_escalation.html)
-- Further reading (blog): [Red Hat: privilege escalation with Ansible](https://www.redhat.com/en/blog/ansible-sudo)
+- Further reading (blog): [Spacelift: Ansible security automation](https://spacelift.io/blog/ansible-security)

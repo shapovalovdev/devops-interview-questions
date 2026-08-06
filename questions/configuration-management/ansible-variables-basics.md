@@ -24,4 +24,4 @@ How should a team use Ansible variables while avoiding unexpected overrides?
 ## References
 
 - [Ansible documentation: using variables](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_variables.html)
-- Further reading (blog): [Red Hat: Ansible variable precedence](https://www.redhat.com/en/blog/ansible-variables-precedence)
+- Further reading (blog): [Spacelift: Ansible best practices](https://spacelift.io/blog/ansible-best-practices)

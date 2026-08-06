@@ -24,4 +24,4 @@ What guardrails would you establish for a self-service configuration-management 
 ## References
 
 - [Ansible documentation: privilege escalation](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_privilege_escalation.html)
-- Further reading (blog): [Red Hat: automation governance](https://www.redhat.com/en/blog/automation-governance)
+- Further reading (blog): [Spacelift: Ansible security automation](https://spacelift.io/blog/ansible-security)

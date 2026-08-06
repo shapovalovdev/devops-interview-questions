@@ -24,4 +24,4 @@ What does it mean for an Ansible task to be idempotent, and why is that property
 ## References
 
 - [Ansible documentation: check mode and diff mode](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_checkmode.html)
-- Further reading (blog): [Red Hat: Ansible idempotency](https://www.redhat.com/en/blog/ansible-when-true)
+- Further reading (blog): [Spacelift: Ansible best practices](https://spacelift.io/blog/ansible-best-practices)
