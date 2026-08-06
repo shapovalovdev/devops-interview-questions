@@ -32,6 +32,7 @@ This map uses the DevOps roadmap as a coverage guide, not as copied content. Eac
 | Linux troubleshooting | `linux-troubleshooting` |
 | Linux performance | `linux-performance` |
 | Performance engineering | `performance-engineering` |
+| Systems performance (Brendan Gregg concepts) | `systems-performance` |
 | Site reliability engineering | `sre` |
 
 ## Coverage rule
