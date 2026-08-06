@@ -28,7 +28,7 @@
     {"name": "linux-performance", "state": "complete"},
     {"name": "linux-troubleshooting", "state": "complete"},
     {"name": "logging", "state": "in-progress"},
-    {"name": "network-storage", "state": "planned"},
+    {"name": "network-storage", "state": "complete"},
     {"name": "networking", "state": "complete"},
     {"name": "observability", "state": "in-progress"},
     {"name": "performance-engineering", "state": "complete"},

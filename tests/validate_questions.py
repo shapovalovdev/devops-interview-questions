@@ -91,7 +91,7 @@ def validate_question(path: Path, tags: set[str]) -> tuple[dict[str, str], set[s
     sources = primary_source_urls(content, path)
     assert "## References" in content, f"{path}: missing References section"
     assert re.search(r"^- \[.*\]\(https://", content, re.MULTILINE), f"{path}: requires a primary reference"
-    assert re.search(r"^- Further reading \(blog\): .*\(https://", content, re.MULTILINE), f"{path}: requires a labeled complementary blog post"
+    assert re.search(r"^- Further reading \((?:blog|personal blog)\): .*https://", content, re.MULTILINE), f"{path}: requires a labeled complementary blog post"
     references = content.split("## References", 1)[1].split("## What to learn next", 1)[0]
     reference_urls = set(re.findall(r"\]\((https://[^)\s]+)\)", references))
     missing_primary_references = sources - reference_urls
