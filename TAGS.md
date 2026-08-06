@@ -4,7 +4,7 @@ Use lowercase kebab-case tags. Give every question one or more technology or con
 
 ## Technologies and concepts
 
-`ansible`, `aws`, `bash`, `cgroups`, `ci-cd`, `cloud`, `containers`, `dns`, `docker`, `git`, `github-actions`, `http`, `iam`, `images`, `infrastructure-as-code`, `kubernetes`, `linux`, `networking`, `observability`, `prometheus`, `security`, `tcp`, `terraform`, `tls`
+`ansible`, `aws`, `bash`, `cgroups`, `ci-cd`, `cloud`, `configuration-management`, `containers`, `databases`, `dns`, `docker`, `filesystem`, `git`, `github-actions`, `hardware`, `http`, `iam`, `images`, `infrastructure-as-code`, `kubernetes`, `linux`, `logging`, `networking`, `nginx`, `observability`, `postgresql`, `prometheus`, `scripting`, `security`, `shell`, `storage`, `tcp`, `terraform`, `tls`, `version-control`, `web-server`
 
 ## Practices
 

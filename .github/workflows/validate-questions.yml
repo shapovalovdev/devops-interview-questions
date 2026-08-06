@@ -1,0 +1,36 @@
+name: Validate question database
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-content:
+    name: Validate every active Question
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Validate Markdown sources and catalog coverage
+        run: python tests/validate_questions.py
+
+  validate-site:
+    name: Validate website behavior
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install browser test dependencies
+        run: |
+          python -m pip install --upgrade pip playwright
+          python -m playwright install --with-deps chromium
+      - name: Verify search, filters, and rendered Question links
+        run: python tests/site_check.py

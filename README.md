@@ -16,18 +16,27 @@ devops_questions/
 │   ├── advanced-containers/       # runtime isolation, image construction, container hardening
 │   ├── ci-cd/                     # pipeline design and delivery safety
 │   ├── cloud/                     # cloud reliability and identity
+│   ├── configuration-management/  # desired-state host configuration
 │   ├── container-networking/      # Docker and Kubernetes traffic paths
 │   ├── containers/                # container fundamentals
+│   ├── databases/                 # data reliability and performance
+│   ├── hardware/                  # physical hosts and remote management
 │   ├── infrastructure-as-code/    # declarative infrastructure and state
 │   ├── kubernetes/                # workload orchestration
 │   ├── linux/                     # operating-system fundamentals
+│   ├── logging/                   # structured event records and correlation
 │   ├── networking/                # DNS, TCP, and HTTP
 │   ├── observability/             # metrics, logs, traces, and alerts
-│   └── security/                  # secrets and supply-chain security
+│   ├── shell-scripting/           # safe command-line automation
+│   ├── security/                  # secrets and supply-chain security
+│   ├── storage/                   # filesystems and persistent data
+│   ├── version-control/           # safe source-history workflows
+│   └── web-servers/               # reverse proxies and request handling
 ├── CONTRIBUTING.md
 ├── CONTEXT.md
 ├── LICENSE.md
 ├── README.md
+├── ROADMAP_COVERAGE.md
 └── TAGS.md
 ```
 
@@ -40,3 +49,5 @@ Content is made available under [CC BY 4.0](./LICENSE.md).
 ## Question format
 
 Every question file has YAML front matter with a title, canonical theme, difficulty, type, and normalized tags. The body contains the prompt, an answer guide, and optional follow-ups.
+
+[`ROADMAP_COVERAGE.md`](./ROADMAP_COVERAGE.md) maps every supported DevOps-roadmap competency to its canonical Theme.
