@@ -1,5 +1,18 @@
 # Repository guidance
 
+## Autonomous task loop
+
+For every implementation task:
+
+1. Create or identify a dedicated GitHub issue with acceptance criteria, including automated-test coverage.
+2. Spawn one dedicated subagent for that issue; do not mix unrelated Themes in one agent task.
+3. Require the subagent to run local validation, push its commit, and report the CI run.
+4. A coordinator agent checks finished subagents, validates the shared worktree and CI, closes only verified issues, and assigns the next queued issue immediately.
+
+Keep a maximum of three implementation subagents active at once. Resolve shared catalog or validator conflicts centrally before assigning replacement work.
+
+Every Question task must update or extend automated validation for its new behavior. A task is not complete until the repository test suite and GitHub Actions pass.
+
 ## Agent skills
 
 ### Issue tracker
