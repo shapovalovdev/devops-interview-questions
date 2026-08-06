@@ -10,6 +10,14 @@ sources:
     verified_on: 2026-08-06
 ---
 
+## What to learn next
+
+- Official documentation: [Istio overview](https://istio.io/latest/docs/overview/what-is-istio/)
+- Manual or specification: [Gateway API specification](https://gateway-api.sigs.k8s.io/)
+- Maintainer or personal blog: [Buoyant engineering blog](https://buoyant.io/blog/)
+- Technical blog: [Tetrate service-mesh articles](https://www.tetrate.io/blog/)
+- Hands-on guide: [Istio Bookinfo example](https://istio.io/latest/docs/examples/bookinfo/)
+
 # Apply traffic policies with a DestinationRule
 
 What belongs in an Istio DestinationRule, and how should it relate to routing?
@@ -24,4 +32,4 @@ What belongs in an Istio DestinationRule, and how should it relate to routing?
 
 - [Istio: Traffic management concepts](https://istio.io/latest/docs/concepts/traffic-management/)
 - [Istio: DestinationRule reference](https://istio.io/latest/docs/reference/config/networking/destination-rule/)
-- Further reading (blog): [Istio: Destination rule inheritance](https://istio.io/latest/blog/2021/proxy-config/)
+- Further reading (blog): [Buoyant engineering blog](https://buoyant.io/blog/)

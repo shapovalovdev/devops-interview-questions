@@ -10,6 +10,14 @@ sources:
     verified_on: 2026-08-06
 ---
 
+## What to learn next
+
+- Official documentation: [Istio overview](https://istio.io/latest/docs/overview/what-is-istio/)
+- Manual or specification: [Gateway API specification](https://gateway-api.sigs.k8s.io/)
+- Maintainer or personal blog: [Buoyant engineering blog](https://buoyant.io/blog/)
+- Technical blog: [Tetrate service-mesh articles](https://www.tetrate.io/blog/)
+- Hands-on guide: [Istio Bookinfo example](https://istio.io/latest/docs/examples/bookinfo/)
+
 # Use Istio fault injection safely
 
 How would you validate a caller's timeout and error handling by injecting an Istio delay or abort?
@@ -24,4 +32,4 @@ How would you validate a caller's timeout and error handling by injecting an Ist
 
 - [Istio: Fault injection](https://istio.io/latest/docs/tasks/traffic-management/fault-injection/)
 - [Istio: VirtualService reference](https://istio.io/latest/docs/reference/config/networking/virtual-service/)
-- Further reading (blog): [Istio: Traffic management](https://istio.io/latest/blog/2017/0.1-using-istio/)
+- Further reading (blog): [Buoyant engineering blog](https://buoyant.io/blog/)

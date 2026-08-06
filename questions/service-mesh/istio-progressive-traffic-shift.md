@@ -10,6 +10,14 @@ sources:
     verified_on: 2026-08-06
 ---
 
+## What to learn next
+
+- Official documentation: [Istio overview](https://istio.io/latest/docs/overview/what-is-istio/)
+- Manual or specification: [Gateway API specification](https://gateway-api.sigs.k8s.io/)
+- Maintainer or personal blog: [Buoyant engineering blog](https://buoyant.io/blog/)
+- Technical blog: [Tetrate service-mesh articles](https://www.tetrate.io/blog/)
+- Hands-on guide: [Istio Bookinfo example](https://istio.io/latest/docs/examples/bookinfo/)
+
 # Shift traffic progressively with Istio
 
 How would you run a canary release using weighted Istio traffic shifting?
@@ -24,4 +32,4 @@ How would you run a canary release using weighted Istio traffic shifting?
 
 - [Istio: Traffic shifting](https://istio.io/latest/docs/tasks/traffic-management/traffic-shifting/)
 - [Istio: Request routing](https://istio.io/latest/docs/tasks/traffic-management/request-routing/)
-- Further reading (blog): [Istio: Canary deployments](https://istio.io/latest/blog/2017/0.1-using-istio/)
+- Further reading (blog): [Buoyant engineering blog](https://buoyant.io/blog/)

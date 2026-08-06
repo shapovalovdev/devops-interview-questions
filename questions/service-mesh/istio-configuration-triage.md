@@ -10,6 +10,14 @@ sources:
     verified_on: 2026-08-06
 ---
 
+## What to learn next
+
+- Official documentation: [Istio overview](https://istio.io/latest/docs/overview/what-is-istio/)
+- Manual or specification: [Gateway API specification](https://gateway-api.sigs.k8s.io/)
+- Maintainer or personal blog: [Buoyant engineering blog](https://buoyant.io/blog/)
+- Technical blog: [Tetrate service-mesh articles](https://www.tetrate.io/blog/)
+- Hands-on guide: [Istio Bookinfo example](https://istio.io/latest/docs/examples/bookinfo/)
+
 # Triage an Istio configuration that is not taking effect
 
 A routing or policy resource applies successfully but request behavior has not changed. What do you check?
@@ -24,4 +32,4 @@ A routing or policy resource applies successfully but request behavior has not c
 
 - [Istio: Proxy command diagnostics](https://istio.io/latest/docs/ops/diagnostic-tools/proxy-cmd/)
 - [Istio: Configuration analysis messages](https://istio.io/latest/docs/reference/config/analysis/)
-- Further reading (blog): [Istio: Debugging Envoy and Istiod](https://istio.io/latest/blog/2021/proxy-config/)
+- Further reading (blog): [Buoyant engineering blog](https://buoyant.io/blog/)

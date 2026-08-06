@@ -10,6 +10,14 @@ sources:
     verified_on: 2026-08-06
 ---
 
+## What to learn next
+
+- Official documentation: [Istio overview](https://istio.io/latest/docs/overview/what-is-istio/)
+- Manual or specification: [Gateway API specification](https://gateway-api.sigs.k8s.io/)
+- Maintainer or personal blog: [Buoyant engineering blog](https://buoyant.io/blog/)
+- Technical blog: [Tetrate service-mesh articles](https://www.tetrate.io/blog/)
+- Hands-on guide: [Istio Bookinfo example](https://istio.io/latest/docs/examples/bookinfo/)
+
 # Enforce Istio mutual TLS incrementally
 
 How would you move a mixed workload namespace toward strict mutual TLS without breaking unmeshed clients?
@@ -24,4 +32,4 @@ How would you move a mixed workload namespace toward strict mutual TLS without b
 
 - [Istio: mTLS migration](https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/)
 - [Istio: PeerAuthentication reference](https://istio.io/latest/docs/reference/config/security/peer_authentication/)
-- Further reading (blog): [Istio: Mutual TLS explained](https://istio.io/latest/blog/2020/tls-configuration/)
+- Further reading (blog): [Buoyant engineering blog](https://buoyant.io/blog/)

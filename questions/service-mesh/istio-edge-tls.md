@@ -10,6 +10,14 @@ sources:
     verified_on: 2026-08-06
 ---
 
+## What to learn next
+
+- Official documentation: [Istio overview](https://istio.io/latest/docs/overview/what-is-istio/)
+- Manual or specification: [Gateway API specification](https://gateway-api.sigs.k8s.io/)
+- Maintainer or personal blog: [Buoyant engineering blog](https://buoyant.io/blog/)
+- Technical blog: [Tetrate service-mesh articles](https://www.tetrate.io/blog/)
+- Hands-on guide: [Istio Bookinfo example](https://istio.io/latest/docs/examples/bookinfo/)
+
 # Secure edge traffic at an Istio gateway
 
 How would you terminate TLS for `api.example.com` at an Istio ingress gateway without exposing a default insecure route?
@@ -24,4 +32,4 @@ How would you terminate TLS for `api.example.com` at an Istio ingress gateway wi
 
 - [Istio: Secure ingress traffic](https://istio.io/latest/docs/tasks/traffic-management/ingress/secure-ingress/)
 - [Istio: Gateway reference](https://istio.io/latest/docs/reference/config/networking/gateway/)
-- Further reading (blog): [Istio: Secure ingress](https://istio.io/latest/blog/2019/secure-ingress-1.1/)
+- Further reading (blog): [Buoyant engineering blog](https://buoyant.io/blog/)

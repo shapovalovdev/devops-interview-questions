@@ -10,6 +10,14 @@ sources:
     verified_on: 2026-08-06
 ---
 
+## What to learn next
+
+- Official documentation: [Istio overview](https://istio.io/latest/docs/overview/what-is-istio/)
+- Manual or specification: [Gateway API specification](https://gateway-api.sigs.k8s.io/)
+- Maintainer or personal blog: [Buoyant engineering blog](https://buoyant.io/blog/)
+- Technical blog: [Tetrate service-mesh articles](https://www.tetrate.io/blog/)
+- Hands-on guide: [Istio Bookinfo example](https://istio.io/latest/docs/examples/bookinfo/)
+
 # Customize an Istio installation safely
 
 What should be controlled when customizing an Istio installation with `istioctl` or Helm?
@@ -24,4 +32,4 @@ What should be controlled when customizing an Istio installation with `istioctl`
 
 - [Istio: Install with istioctl](https://istio.io/latest/docs/setup/install/istioctl/)
 - [Istio: Install with Helm](https://istio.io/latest/docs/setup/install/helm/)
-- Further reading (blog): [Istio: Introducing the Istio Helm charts](https://istio.io/latest/blog/2018/helm-charts/)
+- Further reading (blog): [Buoyant engineering blog](https://buoyant.io/blog/)

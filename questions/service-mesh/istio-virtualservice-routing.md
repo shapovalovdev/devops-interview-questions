@@ -10,6 +10,14 @@ sources:
     verified_on: 2026-08-06
 ---
 
+## What to learn next
+
+- Official documentation: [Istio overview](https://istio.io/latest/docs/overview/what-is-istio/)
+- Manual or specification: [Gateway API specification](https://gateway-api.sigs.k8s.io/)
+- Maintainer or personal blog: [Buoyant engineering blog](https://buoyant.io/blog/)
+- Technical blog: [Tetrate service-mesh articles](https://www.tetrate.io/blog/)
+- Hands-on guide: [Istio Bookinfo example](https://istio.io/latest/docs/examples/bookinfo/)
+
 # Route mesh traffic with a VirtualService
 
 How would you send `/v2` requests to a new application version while retaining a safe default route?
@@ -24,4 +32,4 @@ How would you send `/v2` requests to a new application version while retaining a
 
 - [Istio: Traffic management concepts](https://istio.io/latest/docs/concepts/traffic-management/)
 - [Istio: Request routing](https://istio.io/latest/docs/tasks/traffic-management/request-routing/)
-- Further reading (blog): [Istio: Intelligent routing](https://istio.io/latest/blog/2017/0.1-using-istio/)
+- Further reading (blog): [Buoyant engineering blog](https://buoyant.io/blog/)
