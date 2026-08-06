@@ -27,7 +27,7 @@
     {"name": "linux-networking", "state": "complete"},
     {"name": "linux-performance", "state": "complete"},
     {"name": "linux-troubleshooting", "state": "complete"},
-    {"name": "logging", "state": "in-progress"},
+    {"name": "logging", "state": "complete"},
     {"name": "network-storage", "state": "complete"},
     {"name": "networking", "state": "complete"},
     {"name": "observability", "state": "in-progress"},
@@ -42,7 +42,7 @@
     {"name": "systems-performance", "state": "complete"},
     {"name": "troubleshooting", "state": "complete"},
     {"name": "version-control", "state": "in-progress"},
-    {"name": "web-servers", "state": "in-progress"}
+    {"name": "web-servers", "state": "complete"}
   ],
   "certifications": [
     {"tag": "capa", "map": "docs/certifications/capa.md", "minimum_questions": 12},
