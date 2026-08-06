@@ -35,3 +35,19 @@ _Avoid_: Copying, transcription
 **License**:
 The reuse terms for this repository's content: Creative Commons Attribution 4.0 International.
 _Avoid_: Proprietary terms
+
+**Coverage target**:
+Twenty-five active Questions in each canonical Theme: five junior, ten middle, five senior, and five staff-level Questions, for 475 Questions across the repository.
+_Avoid_: Broad-topic quota, approximate coverage
+
+**Primary source**:
+An official standard, upstream project document, or vendor document used to verify a Question's factual claims.
+_Avoid_: Blog, interview collection
+
+**Further reading**:
+An optional explanatory article linked for learning context but not used as factual authority.
+_Avoid_: Verification source
+
+**Staff-level Question**:
+A Question about cross-system design, reliability, cost-risk trade-offs, or technical leadership rather than isolated tool knowledge.
+_Avoid_: Obscure senior trivia

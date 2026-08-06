@@ -4,7 +4,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 QUESTIONS = ROOT / "questions"
-ALLOWED_DIFFICULTIES = {"junior", "middle", "senior"}
+ALLOWED_DIFFICULTIES = {"junior", "middle", "senior", "staff"}
 ALLOWED_TYPES = {"theory", "scenario", "troubleshooting"}
 
 
