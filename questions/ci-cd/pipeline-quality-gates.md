@@ -4,6 +4,10 @@ theme: ci-cd
 difficulty: middle
 type: scenario
 tags: [ci-cd, delivery, deployment, automation, security]
+sources:
+  - url: https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-nodejs
+    source_type: official-docs
+    verified_on: 2026-08-06
 ---
 
 # Design CI/CD quality gates for a service
@@ -12,7 +16,12 @@ Which checks would you place between a pull request and production deployment, a
 
 ## Answer guide
 
-- Validate formatting, tests, and build reproducibility early.
-- Scan dependencies and produced artifacts for known security risks.
-- Publish immutable, traceable artifacts only after required checks pass.
-- Use staged deployment verification and explicit production-promotion criteria.
+- Run deterministic formatting, linting, unit tests, and a reproducible build before merge; they provide fast feedback on source-level regressions.
+- Run integration/contract tests where a disposable dependency is available, and scan dependencies, source, and produced artifacts. A passing scan is risk evidence, not a guarantee of no vulnerability.
+- Require review and protected-branch checks before publishing one immutable, traceable artifact. Treat deployment approval separately from build success.
+- Promote through a staged environment with explicit health and rollback thresholds. Gates that are slow, flaky, or have no owner become bypasses, so measure their duration and false-failure rate.
+
+## References
+
+- [GitHub Docs: Building and testing Node.js](https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-nodejs)
+- [Further reading: GitHub Docs—secure use reference](https://docs.github.com/en/actions/reference/security/secure-use)
