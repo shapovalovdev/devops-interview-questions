@@ -3,7 +3,7 @@ title: Route ingress traffic with Cilium Gateway API
 theme: service-mesh
 difficulty: middle
 type: scenario
-tags: [service-mesh, kubernetes, networking, traffic-management, security, cca]
+tags: [service-mesh, kubernetes, networking, traffic-management, security, cca, ckne]
 sources:
   - url: https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/
     source_type: official-docs

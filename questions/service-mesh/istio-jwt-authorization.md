@@ -3,7 +3,7 @@ title: Combine JWT authentication and authorization in Istio
 theme: service-mesh
 difficulty: senior
 type: scenario
-tags: [service-mesh, istio, kubernetes, ica, jwt, security, least-privilege]
+tags: [service-mesh, istio, kubernetes, ica, jwt, security, least-privilege, ckne]
 sources:
   - url: https://istio.io/latest/docs/tasks/security/authentication/authn-policy/
     source_type: official-docs

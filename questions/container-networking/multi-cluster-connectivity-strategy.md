@@ -3,7 +3,7 @@ title: Define a multi-cluster connectivity strategy
 theme: container-networking
 difficulty: staff
 type: scenario
-tags: [containers, kubernetes, networking, reliability, governance, platform-engineering, cca]
+tags: [containers, kubernetes, networking, reliability, governance, platform-engineering, cca, ckne]
 sources:
   - url: https://kubernetes.io/docs/concepts/services-networking/
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Use mesh telemetry without mistaking it for complete observability
 theme: service-mesh
 difficulty: junior
 type: scenario
-tags: [service-mesh, istio, observability, monitoring, logging, reliability]
+tags: [service-mesh, istio, observability, monitoring, logging, reliability, ckne]
 sources:
   - url: https://istio.io/latest/docs/concepts/observability/
     source_type: official-docs

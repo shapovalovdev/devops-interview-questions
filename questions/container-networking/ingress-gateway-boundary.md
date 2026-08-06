@@ -3,7 +3,7 @@ title: Define ingress and gateway boundaries
 theme: container-networking
 difficulty: senior
 type: scenario
-tags: [containers, kubernetes, networking, http, security, reliability, cca]
+tags: [containers, kubernetes, networking, http, security, reliability, cca, ckne]
 sources:
   - url: https://kubernetes.io/docs/concepts/services-networking/gateway/
     source_type: official-docs

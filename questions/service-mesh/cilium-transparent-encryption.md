@@ -3,7 +3,7 @@ title: Plan Cilium transparent workload encryption
 theme: service-mesh
 difficulty: senior
 type: scenario
-tags: [service-mesh, kubernetes, networking, security, mtls, cca]
+tags: [service-mesh, kubernetes, networking, security, mtls, cca, ckne]
 sources:
   - url: https://docs.cilium.io/en/stable/security/network/encryption-ipsec/
     source_type: official-docs

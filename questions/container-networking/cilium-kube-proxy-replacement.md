@@ -3,7 +3,7 @@ title: Evaluate Cilium kube-proxy replacement
 theme: container-networking
 difficulty: senior
 type: scenario
-tags: [containers, kubernetes, networking, performance, reliability, cca]
+tags: [containers, kubernetes, networking, performance, reliability, cca, ckne]
 sources:
   - url: https://docs.cilium.io/en/stable/network/kubernetes/kubeproxy-free/
     source_type: official-docs

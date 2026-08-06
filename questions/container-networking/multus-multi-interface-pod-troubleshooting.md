@@ -5,10 +5,10 @@ difficulty: senior
 type: troubleshooting
 tags: [containers, kubernetes, networking, cni, multus, ipam, routing, troubleshooting, ckne]
 sources:
-  - url: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/docs/how-to-use.md
+  - url: https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/how-to-use.md
     source_type: official-docs
     verified_on: 2026-08-06
-  - url: https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/docs/configuration.md
+  - url: https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/configuration.md
     source_type: official-docs
     verified_on: 2026-08-06
 ---

@@ -3,7 +3,7 @@ title: Design controlled egress with Cilium Egress Gateway
 theme: container-networking
 difficulty: senior
 type: scenario
-tags: [containers, kubernetes, networking, security, reliability, cca]
+tags: [containers, kubernetes, networking, security, reliability, cca, ckne]
 sources:
   - url: https://docs.cilium.io/en/stable/network/egress-gateway/egress-gateway/
     source_type: official-docs

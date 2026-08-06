@@ -3,7 +3,7 @@ title: Establish container network observability standards
 theme: container-networking
 difficulty: staff
 type: scenario
-tags: [containers, kubernetes, docker, networking, observability, monitoring, governance, cca]
+tags: [containers, kubernetes, docker, networking, observability, monitoring, governance, cca, ckne]
 sources:
   - url: https://kubernetes.io/docs/concepts/cluster-administration/system-metrics/
     source_type: official-docs

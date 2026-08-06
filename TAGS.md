@@ -4,7 +4,7 @@ Use lowercase kebab-case tags. Give every question one or more technology or con
 
 ## Technologies and concepts
 
-`ansible`, `argo`, `argo-cd`, `argo-events`, `argo-rollouts`, `argo-workflows`, `aws`, `bash`, `build-cache`, `build-secrets`, `capacity-planning`, `capabilities`, `cgroups`, `ci-cd`, `cka`, `cloud`, `configuration-management`, `container-runtime`, `containers`, `cost-optimization`, `cpu`, `databases`, `distributed-systems`, `dns`, `docker`, `dockerfile`, `event-driven`, `filesystem`, `firmware`, `git`, `github-actions`, `governance`, `hardware`, `healthchecks`, `http`, `iam`, `image-digests`, `image-tags`, `images`, `infrastructure-as-code`, `ipmi`, `istio`, `jwt`, `kafka`, `kubernetes`, `least-privilege`, `linux`, `logging`, `memory`, `message-queues`, `monitoring`, `mount-namespace`, `mtls`, `multi-platform`, `multi-stage-builds`, `namespaces`, `networking`, `nginx`, `observability`, `performance`, `pid-1`, `platform-engineering`, `power`, `process-isolation`, `postgresql`, `prometheus`, `rabbitmq`, `raid`, `redfish`, `registries`, `resource-limits`, `rootless`, `scripting`, `seccomp`, `security`, `sensors`, `server-hardware`, `service-mesh`, `shell`, `signals`, `sre`, `storage`, `supply-chain`, `tcp`, `terraform`, `tls`, `traffic-management`, `user-namespace`, `version-control`, `virtualization`, `volumes`, `web-server`
+`ansible`, `argo`, `argo-cd`, `argo-events`, `argo-rollouts`, `argo-workflows`, `aws`, `bash`, `build-cache`, `build-secrets`, `capacity-planning`, `capabilities`, `cgroups`, `ci-cd`, `cka`, `cloud`, `cni`, `configuration-management`, `container-runtime`, `containers`, `cost-optimization`, `cpu`, `databases`, `distributed-systems`, `dns`, `docker`, `dockerfile`, `event-driven`, `filesystem`, `firmware`, `gateway-api`, `git`, `github-actions`, `governance`, `hardware`, `healthchecks`, `http`, `iam`, `image-digests`, `image-tags`, `images`, `inference`, `infrastructure-as-code`, `ipam`, `ipmi`, `istio`, `jwt`, `kafka`, `kubernetes`, `least-privilege`, `linux`, `llm`, `logging`, `memory`, `message-queues`, `monitoring`, `mount-namespace`, `mtls`, `multi-platform`, `multi-stage-builds`, `multus`, `namespaces`, `networking`, `nginx`, `observability`, `performance`, `pid-1`, `platform-engineering`, `power`, `process-isolation`, `postgresql`, `prometheus`, `rabbitmq`, `raid`, `redfish`, `registries`, `resource-limits`, `rootless`, `routing`, `scripting`, `seccomp`, `security`, `sensors`, `server-hardware`, `service-mesh`, `shell`, `signals`, `sre`, `storage`, `supply-chain`, `tcp`, `terraform`, `tls`, `traffic-management`, `user-namespace`, `version-control`, `virtualization`, `volumes`, `web-server`
 
 ## Practices
 
@@ -16,6 +16,6 @@ Use lowercase kebab-case tags. Give every question one or more technology or con
 
 ## Certifications
 
-`capa`, `cca`, `cka`, `ckad`, `cks`, `ica`, `kcna`, `kcsa`, `pca`
+`capa`, `cca`, `cka`, `ckad`, `ckne`, `cks`, `ica`, `kcna`, `kcsa`, `pca`
 
 Propose a new tag only when an existing tag cannot express the concept clearly.

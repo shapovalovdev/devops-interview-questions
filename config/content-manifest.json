@@ -35,13 +35,13 @@
     {"name": "processes", "state": "complete"},
     {"name": "queue-messaging", "state": "complete"},
     {"name": "security", "state": "complete"},
-    {"name": "service-mesh", "state": "complete"},
+    {"name": "service-mesh", "state": "in-progress"},
     {"name": "shell-scripting", "state": "complete"},
     {"name": "sre", "state": "complete"},
     {"name": "storage", "state": "complete"},
     {"name": "systems-performance", "state": "complete"},
     {"name": "troubleshooting", "state": "complete"},
-    {"name": "version-control", "state": "in-progress"},
+    {"name": "version-control", "state": "complete"},
     {"name": "web-servers", "state": "complete"}
   ],
   "certifications": [
@@ -49,6 +49,7 @@
     {"tag": "cca", "map": "docs/certifications/cca.md", "minimum_questions": 20},
     {"tag": "cka", "map": "docs/certifications/cka.md", "minimum_questions": 25},
     {"tag": "ckad", "map": "docs/certifications/ckad.md", "minimum_questions": 20},
+    {"tag": "ckne", "map": "docs/certifications/ckne.md", "minimum_questions": 22},
     {"tag": "cks", "map": "docs/certifications/cks.md", "minimum_questions": 19},
     {"tag": "ica", "map": "docs/certifications/ica.md", "minimum_questions": 15},
     {"tag": "kcna", "map": "docs/certifications/kcna.md", "minimum_questions": 15},
