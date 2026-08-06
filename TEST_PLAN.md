@@ -49,6 +49,12 @@ rollout and the path to global enforcement are recorded in
 
 Certification-map invariants additionally require the published CCA curriculum map and at least 20 active Questions carrying the documented `cca` tag.
 
+`tests/test_ckne_curriculum_map.py` guards the public CKNE development-program
+map: official source and review date, all five published weighted domains,
+original-content boundary, and explicit gap policy. CKNE is not activated in the
+content manifest until its two remaining unique objectives and their catalog
+entries are integrated together with the certification tag.
+
 The manifest currently includes the PCA and CAPA study paths, along with the
 other published certification maps. Adding a certification requires one
 manifest entry, a documented tag, a curriculum map, and mapped Questions;
