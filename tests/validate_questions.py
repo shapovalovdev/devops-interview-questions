@@ -14,6 +14,7 @@ HARDWARE_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
 STORAGE_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
 QUEUE_MESSAGING_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
 ADVANCED_CONTAINERS_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
+CONTAINER_NETWORKING_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
 
 
 def front_matter(path: Path) -> dict[str, str]:
@@ -55,6 +56,7 @@ def main() -> None:
     storage_difficulties: dict[str, int] = {difficulty: 0 for difficulty in STORAGE_DISTRIBUTION}
     queue_messaging_difficulties: dict[str, int] = {difficulty: 0 for difficulty in QUEUE_MESSAGING_DISTRIBUTION}
     advanced_containers_difficulties: dict[str, int] = {difficulty: 0 for difficulty in ADVANCED_CONTAINERS_DISTRIBUTION}
+    container_networking_difficulties: dict[str, int] = {difficulty: 0 for difficulty in CONTAINER_NETWORKING_DISTRIBUTION}
     for path in question_files:
         fields = front_matter(path)
         required = {"title", "theme", "difficulty", "type", "tags"}
@@ -93,6 +95,8 @@ def main() -> None:
             queue_messaging_difficulties[fields["difficulty"]] += 1
         if fields["theme"] == "advanced-containers":
             advanced_containers_difficulties[fields["difficulty"]] += 1
+        if fields["theme"] == "container-networking":
+            container_networking_difficulties[fields["difficulty"]] += 1
         expected_catalog.add(path.relative_to(ROOT).with_suffix(".html").as_posix())
 
     assert set(catalog) == expected_catalog, "Website catalog must contain every active Question exactly once"
@@ -104,6 +108,7 @@ def main() -> None:
     assert storage_difficulties == STORAGE_DISTRIBUTION, f"storage must contain {STORAGE_DISTRIBUTION}, got {storage_difficulties}"
     assert queue_messaging_difficulties == QUEUE_MESSAGING_DISTRIBUTION, f"queue-messaging must contain {QUEUE_MESSAGING_DISTRIBUTION}, got {queue_messaging_difficulties}"
     assert advanced_containers_difficulties == ADVANCED_CONTAINERS_DISTRIBUTION, f"advanced-containers must contain {ADVANCED_CONTAINERS_DISTRIBUTION}, got {advanced_containers_difficulties}"
+    assert container_networking_difficulties == CONTAINER_NETWORKING_DISTRIBUTION, f"container-networking must contain {CONTAINER_NETWORKING_DISTRIBUTION}, got {container_networking_difficulties}"
     print(f"Validated {len(question_files)} active Questions and {len(catalog)} website records.")
 
 
