@@ -3,7 +3,7 @@ title: Lead Kubernetes disaster recovery and restore exercises
 theme: kubernetes
 difficulty: staff
 type: scenario
-tags: [kubernetes, incident-response, reliability, storage, governance]
+tags: [kubernetes, incident-response, reliability, storage, governance, cka]
 sources:
   - url: https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/
     source_type: official-docs

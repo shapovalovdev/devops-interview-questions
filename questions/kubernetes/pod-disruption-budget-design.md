@@ -3,7 +3,7 @@ title: Use PodDisruptionBudgets for voluntary disruptions
 theme: kubernetes
 difficulty: senior
 type: scenario
-tags: [kubernetes, availability, reliability, deployment]
+tags: [kubernetes, availability, reliability, deployment, cka]
 sources:
   - url: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
     source_type: official-docs

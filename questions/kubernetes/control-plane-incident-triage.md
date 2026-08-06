@@ -3,7 +3,7 @@ title: Triage a Kubernetes control-plane availability incident
 theme: kubernetes
 difficulty: senior
 type: troubleshooting
-tags: [kubernetes, incident-response, observability, reliability, kcsa, cka]
+tags: [kubernetes, incident-response, observability, reliability, kcsa, cka, kcna]
 sources:
   - url: https://kubernetes.io/docs/tasks/debug/debug-cluster/
     source_type: official-docs

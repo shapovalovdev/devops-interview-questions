@@ -3,7 +3,7 @@ title: Define multi-tenant Kubernetes platform boundaries
 theme: kubernetes
 difficulty: staff
 type: scenario
-tags: [kubernetes, security, governance, platform-engineering, reliability]
+tags: [kubernetes, security, governance, platform-engineering, reliability, cka]
 sources:
   - url: https://kubernetes.io/docs/concepts/security/multi-tenancy/
     source_type: official-docs

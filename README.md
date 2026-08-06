@@ -7,6 +7,7 @@ A public, Markdown-first database of DevOps interview questions and concise answ
 - Browse a topic in [`questions/`](./questions/).
 - Use [`TAGS.md`](./TAGS.md) to understand the controlled tag vocabulary.
 - Read [`CONTRIBUTING.md`](./CONTRIBUTING.md) before adding a question.
+- Follow the certification study maps in [`docs/certifications/`](./docs/certifications/), beginning with [CKA coverage](./docs/certifications/cka.md).
 
 ## Repository tree
 

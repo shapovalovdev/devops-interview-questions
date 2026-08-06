@@ -3,7 +3,7 @@ title: Define an SLI and SLO for an API
 theme: observability
 difficulty: junior
 type: theory
-tags: [observability, monitoring, reliability]
+tags: [observability, monitoring, reliability, kcna]
 sources:
   - url: https://sre.google/workbook/implementing-slos/
     source_type: official-docs

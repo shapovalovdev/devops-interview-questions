@@ -3,7 +3,7 @@ title: Explain Kubernetes Service discovery
 theme: kubernetes
 difficulty: junior
 type: theory
-tags: [kubernetes, networking, dns, reliability]
+tags: [kubernetes, networking, dns, reliability, cka, kcna]
 sources:
   - url: https://kubernetes.io/docs/concepts/services-networking/service/
     source_type: official-docs

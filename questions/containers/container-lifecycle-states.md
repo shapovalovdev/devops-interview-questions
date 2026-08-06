@@ -3,7 +3,7 @@ title: Explain container lifecycle states and restart policy
 theme: containers
 difficulty: junior
 type: theory
-tags: [containers, docker, reliability]
+tags: [containers, docker, reliability, kcna]
 sources:
   - url: https://docs.docker.com/engine/containers/start-containers-automatically/
     source_type: official-docs

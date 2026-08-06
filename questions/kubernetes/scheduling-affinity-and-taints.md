@@ -3,7 +3,7 @@ title: Place Kubernetes workloads with affinity and taints
 theme: kubernetes
 difficulty: senior
 type: scenario
-tags: [kubernetes, capacity-planning, reliability, security]
+tags: [kubernetes, capacity-planning, reliability, security, cka, kcna]
 sources:
   - url: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
     source_type: official-docs

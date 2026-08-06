@@ -3,7 +3,7 @@ title: Use Kubernetes namespaces and resource scope correctly
 theme: kubernetes
 difficulty: junior
 type: theory
-tags: [kubernetes, security, governance]
+tags: [kubernetes, security, governance, cka, kcna]
 sources:
   - url: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
     source_type: official-docs

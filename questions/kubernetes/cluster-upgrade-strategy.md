@@ -3,7 +3,7 @@ title: Plan a production Kubernetes cluster upgrade
 theme: kubernetes
 difficulty: senior
 type: scenario
-tags: [kubernetes, deployment, reliability, governance]
+tags: [kubernetes, deployment, reliability, governance, cka]
 sources:
   - url: https://kubernetes.io/releases/version-skew-policy/
     source_type: official-docs
