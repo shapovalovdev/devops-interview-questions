@@ -12,7 +12,7 @@ Use lowercase kebab-case tags. Give every question one or more technology or con
 
 ## Operational and performance concepts
 
-`boot`, `capacity`, `change-management`, `conntrack`, `dependencies`, `disk`, `file-descriptors`, `incident-management`, `io`, `journald`, `kernel`, `latency`, `leadership`, `limits`, `load`, `logs`, `metrics`, `mount`, `nfs`, `ntp`, `oom`, `operations`, `packages`, `packet-loss`, `panic`, `permissions`, `pid1`, `processes`, `recovery`, `resolver`, `runbooks`, `selinux`, `systemd`, `time`
+`boot`, `capacity`, `certificates`, `change-management`, `conntrack`, `dependencies`, `disk`, `file-descriptors`, `incident-management`, `io`, `journald`, `kernel`, `latency`, `leadership`, `limits`, `load`, `logs`, `metrics`, `mount`, `nfs`, `ntp`, `oom`, `operations`, `packages`, `packet-loss`, `panic`, `permissions`, `pid1`, `processes`, `recovery`, `resolver`, `runbooks`, `selinux`, `systemd`, `time`
 
 ## Certifications
 

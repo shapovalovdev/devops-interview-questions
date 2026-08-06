@@ -32,7 +32,7 @@
     {"name": "networking", "state": "complete"},
     {"name": "observability", "state": "in-progress"},
     {"name": "performance-engineering", "state": "complete"},
-    {"name": "processes", "state": "planned"},
+    {"name": "processes", "state": "complete"},
     {"name": "queue-messaging", "state": "complete"},
     {"name": "security", "state": "complete"},
     {"name": "service-mesh", "state": "in-progress"},
@@ -40,7 +40,7 @@
     {"name": "sre", "state": "complete"},
     {"name": "storage", "state": "complete"},
     {"name": "systems-performance", "state": "complete"},
-    {"name": "troubleshooting", "state": "planned"},
+    {"name": "troubleshooting", "state": "complete"},
     {"name": "version-control", "state": "in-progress"},
     {"name": "web-servers", "state": "in-progress"}
   ],
