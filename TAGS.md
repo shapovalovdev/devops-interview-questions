@@ -4,7 +4,7 @@ Use lowercase kebab-case tags. Give every question one or more technology or con
 
 ## Technologies and concepts
 
-`ansible`, `aws`, `bash`, `build-cache`, `build-secrets`, `capacity-planning`, `cgroups`, `ci-cd`, `cka`, `cloud`, `configuration-management`, `container-runtime`, `containers`, `cost-optimization`, `cpu`, `databases`, `dns`, `docker`, `dockerfile`, `event-driven`, `filesystem`, `firmware`, `git`, `github-actions`, `governance`, `hardware`, `healthchecks`, `http`, `iam`, `image-digests`, `image-tags`, `images`, `infrastructure-as-code`, `ipmi`, `kafka`, `kubernetes`, `least-privilege`, `linux`, `logging`, `memory`, `message-queues`, `monitoring`, `multi-platform`, `multi-stage-builds`, `networking`, `nginx`, `observability`, `performance`, `platform-engineering`, `power`, `postgresql`, `prometheus`, `rabbitmq`, `raid`, `redfish`, `registries`, `resource-limits`, `rootless`, `scripting`, `security`, `sensors`, `server-hardware`, `shell`, `signals`, `storage`, `supply-chain`, `tcp`, `terraform`, `tls`, `version-control`, `virtualization`, `volumes`, `web-server`
+`ansible`, `aws`, `bash`, `build-cache`, `build-secrets`, `capacity-planning`, `cgroups`, `ci-cd`, `cka`, `cloud`, `configuration-management`, `container-runtime`, `containers`, `cost-optimization`, `cpu`, `databases`, `dns`, `docker`, `dockerfile`, `event-driven`, `filesystem`, `firmware`, `git`, `github-actions`, `governance`, `hardware`, `healthchecks`, `http`, `iam`, `image-digests`, `image-tags`, `images`, `infrastructure-as-code`, `ipmi`, `istio`, `jwt`, `kafka`, `kubernetes`, `least-privilege`, `linux`, `logging`, `memory`, `message-queues`, `monitoring`, `mtls`, `multi-platform`, `multi-stage-builds`, `networking`, `nginx`, `observability`, `performance`, `platform-engineering`, `power`, `postgresql`, `prometheus`, `rabbitmq`, `raid`, `redfish`, `registries`, `resource-limits`, `rootless`, `scripting`, `security`, `sensors`, `server-hardware`, `service-mesh`, `shell`, `signals`, `storage`, `supply-chain`, `tcp`, `terraform`, `tls`, `traffic-management`, `version-control`, `virtualization`, `volumes`, `web-server`
 
 ## Practices
 
@@ -12,6 +12,6 @@ Use lowercase kebab-case tags. Give every question one or more technology or con
 
 ## Certifications
 
-`cka`, `kcna`, `kcsa`
+`cka`, `ckad`, `cks`, `ica`, `kcna`, `kcsa`
 
 Propose a new tag only when an existing tag cannot express the concept clearly.

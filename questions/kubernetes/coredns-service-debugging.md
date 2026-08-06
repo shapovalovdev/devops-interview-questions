@@ -3,7 +3,7 @@ title: Debug CoreDNS and Kubernetes Service resolution
 theme: kubernetes
 difficulty: senior
 type: troubleshooting
-tags: [kubernetes, cka, networking, dns, troubleshooting]
+tags: [kubernetes, cka, ckad, networking, dns, troubleshooting]
 sources:
   - url: https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/
     source_type: official-docs

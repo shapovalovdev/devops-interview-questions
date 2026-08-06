@@ -3,7 +3,7 @@ title: Distinguish labels, selectors, and annotations
 theme: kubernetes
 difficulty: junior
 type: theory
-tags: [kubernetes, deployment, automation, cka, kcna]
+tags: [kubernetes, deployment, automation, cka, ckad, kcna]
 sources:
   - url: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
     source_type: official-docs

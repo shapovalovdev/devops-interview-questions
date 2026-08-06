@@ -3,7 +3,7 @@ title: Explain Pod lifecycle and container restarts
 theme: kubernetes
 difficulty: junior
 type: theory
-tags: [kubernetes, troubleshooting, reliability, cka, kcna]
+tags: [kubernetes, troubleshooting, reliability, cka, ckad, kcna]
 sources:
   - url: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/
     source_type: official-docs

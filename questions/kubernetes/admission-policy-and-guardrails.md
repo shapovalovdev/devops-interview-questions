@@ -3,7 +3,7 @@ title: Establish Kubernetes admission policy guardrails
 theme: kubernetes
 difficulty: senior
 type: scenario
-tags: [kubernetes, security, governance, automation, kcsa, cka]
+tags: [kubernetes, security, governance, automation, cks, kcsa, cka, ckad]
 sources:
   - url: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
     source_type: official-docs

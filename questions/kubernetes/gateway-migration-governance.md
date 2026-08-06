@@ -3,7 +3,7 @@ title: Govern a migration from Ingress to Gateway API
 theme: kubernetes
 difficulty: staff
 type: scenario
-tags: [kubernetes, networking, deployment, governance, reliability, kcsa, cka]
+tags: [kubernetes, networking, deployment, governance, reliability, kcsa, cka, ckad]
 sources:
   - url: https://kubernetes.io/docs/concepts/services-networking/gateway/
     source_type: official-docs

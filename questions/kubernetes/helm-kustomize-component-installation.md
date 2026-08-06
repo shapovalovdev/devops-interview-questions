@@ -3,7 +3,7 @@ title: Install a cluster component with Helm or Kustomize safely
 theme: kubernetes
 difficulty: middle
 type: scenario
-tags: [kubernetes, cka, deployment, configuration-management, security]
+tags: [kubernetes, cka, ckad, deployment, configuration-management, security]
 sources:
   - url: https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/
     source_type: official-docs

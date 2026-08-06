@@ -3,7 +3,7 @@ title: Set Pod resource requests and limits
 theme: kubernetes
 difficulty: middle
 type: scenario
-tags: [kubernetes, resource-limits, capacity-planning, reliability, kcsa, cka, kcna]
+tags: [kubernetes, resource-limits, capacity-planning, reliability, kcsa, cka, ckad, kcna]
 sources:
   - url: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
     source_type: official-docs

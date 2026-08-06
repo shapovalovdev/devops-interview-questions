@@ -3,7 +3,7 @@ title: Operate a custom resource and its controller safely
 theme: kubernetes
 difficulty: senior
 type: scenario
-tags: [kubernetes, cka, automation, reliability, security]
+tags: [kubernetes, cka, ckad, automation, reliability, security]
 sources:
   - url: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Choose StatefulSet or Deployment
 theme: kubernetes
 difficulty: middle
 type: scenario
-tags: [kubernetes, deployment, storage, reliability, cka]
+tags: [kubernetes, deployment, storage, reliability, cka, ckad]
 sources:
   - url: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/
     source_type: official-docs

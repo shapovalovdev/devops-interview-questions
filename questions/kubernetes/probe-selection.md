@@ -3,7 +3,7 @@ title: Select Kubernetes readiness, liveness, and startup probes
 theme: kubernetes
 difficulty: middle
 type: scenario
-tags: [kubernetes, reliability, troubleshooting, cka, kcna]
+tags: [kubernetes, reliability, troubleshooting, cka, ckad, kcna]
 sources:
   - url: https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/
     source_type: official-docs

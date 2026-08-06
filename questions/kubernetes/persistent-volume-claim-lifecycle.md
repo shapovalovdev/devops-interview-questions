@@ -3,7 +3,7 @@ title: Design PersistentVolumeClaim lifecycle for a stateful workload
 theme: kubernetes
 difficulty: middle
 type: scenario
-tags: [kubernetes, storage, reliability, deployment, kcsa, cka, kcna]
+tags: [kubernetes, storage, reliability, deployment, kcsa, cka, ckad, kcna]
 sources:
   - url: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
     source_type: official-docs

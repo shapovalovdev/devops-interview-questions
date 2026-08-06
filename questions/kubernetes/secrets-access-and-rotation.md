@@ -3,7 +3,7 @@ title: Secure Kubernetes Secret access and rotation
 theme: kubernetes
 difficulty: middle
 type: scenario
-tags: [kubernetes, security, least-privilege, automation, kcsa, cka, kcna]
+tags: [kubernetes, security, least-privilege, automation, cks, kcsa, cka, ckad, kcna]
 sources:
   - url: https://kubernetes.io/docs/concepts/configuration/secret/
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Configure HorizontalPodAutoscaler behavior
 theme: kubernetes
 difficulty: middle
 type: scenario
-tags: [kubernetes, monitoring, capacity-planning, reliability, cka]
+tags: [kubernetes, monitoring, capacity-planning, reliability, cka, ckad]
 sources:
   - url: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
     source_type: official-docs

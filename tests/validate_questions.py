@@ -17,6 +17,9 @@ ADVANCED_CONTAINERS_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "sta
 CONFIGURATION_MANAGEMENT_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
 DATABASES_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
 CONTAINER_NETWORKING_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
+ICA_MINIMUM_QUESTIONS = 15
+CKAD_MINIMUM_QUESTIONS = 20
+CKS_MINIMUM_QUESTIONS = 19
 
 
 def front_matter(path: Path) -> dict[str, str]:
@@ -61,6 +64,9 @@ def main() -> None:
     configuration_management_difficulties: dict[str, int] = {difficulty: 0 for difficulty in CONFIGURATION_MANAGEMENT_DISTRIBUTION}
     databases_difficulties: dict[str, int] = {difficulty: 0 for difficulty in DATABASES_DISTRIBUTION}
     container_networking_difficulties: dict[str, int] = {difficulty: 0 for difficulty in CONTAINER_NETWORKING_DISTRIBUTION}
+    ica_questions = 0
+    ckad_questions = 0
+    cks_questions = 0
     for path in question_files:
         fields = front_matter(path)
         required = {"title", "theme", "difficulty", "type", "tags"}
@@ -105,6 +111,12 @@ def main() -> None:
             databases_difficulties[fields["difficulty"]] += 1
         if fields["theme"] == "container-networking":
             container_networking_difficulties[fields["difficulty"]] += 1
+        if "ckad" in question_tags:
+            ckad_questions += 1
+        if "cks" in question_tags:
+            cks_questions += 1
+        if "ica" in question_tags:
+            ica_questions += 1
         expected_catalog.add(path.relative_to(ROOT).with_suffix(".html").as_posix())
 
     assert set(catalog) == expected_catalog, "Website catalog must contain every active Question exactly once"
@@ -119,6 +131,15 @@ def main() -> None:
     assert configuration_management_difficulties == CONFIGURATION_MANAGEMENT_DISTRIBUTION, f"configuration-management must contain {CONFIGURATION_MANAGEMENT_DISTRIBUTION}, got {configuration_management_difficulties}"
     assert databases_difficulties == DATABASES_DISTRIBUTION, f"databases must contain {DATABASES_DISTRIBUTION}, got {databases_difficulties}"
     assert container_networking_difficulties == CONTAINER_NETWORKING_DISTRIBUTION, f"container-networking must contain {CONTAINER_NETWORKING_DISTRIBUTION}, got {container_networking_difficulties}"
+    assert "ckad" in tags, "CKAD certification tag must be documented in TAGS.md"
+    assert (ROOT / "docs/certifications/ckad.md").is_file(), "CKAD certification map is required"
+    assert ckad_questions >= CKAD_MINIMUM_QUESTIONS, f"CKAD requires at least {CKAD_MINIMUM_QUESTIONS} mapped Questions, got {ckad_questions}"
+    assert "cks" in tags, "CKS certification tag must be documented in TAGS.md"
+    assert (ROOT / "docs/certifications/cks.md").is_file(), "CKS certification map is required"
+    assert cks_questions >= CKS_MINIMUM_QUESTIONS, f"CKS requires at least {CKS_MINIMUM_QUESTIONS} mapped Questions, got {cks_questions}"
+    assert "ica" in tags, "ICA certification tag must be documented in TAGS.md"
+    assert (ROOT / "docs/certifications/ica.md").is_file(), "ICA certification map is required"
+    assert ica_questions >= ICA_MINIMUM_QUESTIONS, f"ICA requires at least {ICA_MINIMUM_QUESTIONS} mapped Questions, got {ica_questions}"
     print(f"Validated {len(question_files)} active Questions and {len(catalog)} website records.")
 
 
