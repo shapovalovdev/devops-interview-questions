@@ -19,6 +19,7 @@ This map uses the DevOps roadmap as a coverage guide, not as copied content. Eac
 | Databases | `databases` |
 | Observability and alerting | `observability` |
 | Logging | `logging` |
+| Queues and event streaming | `queue-messaging` |
 | Web servers and proxies | `web-servers` |
 | Security and supply chain | `security` |
 

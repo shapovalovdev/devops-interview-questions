@@ -51,3 +51,7 @@ _Avoid_: Verification source
 **Staff-level Question**:
 A Question about cross-system design, reliability, cost-risk trade-offs, or technical leadership rather than isolated tool knowledge.
 _Avoid_: Obscure senior trivia
+
+**Queue messaging**:
+The canonical Theme for message brokers and event-streaming systems, including RabbitMQ and Kafka.
+_Avoid_: Generic networking, application queue
