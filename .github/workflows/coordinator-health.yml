@@ -1,0 +1,31 @@
+name: Coordinator health check
+
+on:
+  schedule:
+    - cron: '*/20 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  validate-and-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Validate question database
+        run: python tests/validate_questions.py
+      - name: Report next queued issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          next=$(gh issue list --state open --label ready-for-agent --json number,title,url --jq 'sort_by(.number) | .[0] // empty')
+          if [ -n "$next" ]; then
+            echo "Next queued task: $next" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No ready-for-agent issues are queued." >> "$GITHUB_STEP_SUMMARY"
+          fi
