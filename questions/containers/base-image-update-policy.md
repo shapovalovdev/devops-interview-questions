@@ -3,7 +3,7 @@ title: Maintain a base-image update policy
 theme: containers
 difficulty: senior
 type: scenario
-tags: [containers, docker, images, image-digests, security, supply-chain]
+tags: [containers, docker, images, image-digests, security, supply-chain, cks]
 sources:
   - url: https://docs.docker.com/build/building/best-practices/#pin-base-image-versions
     source_type: official-docs

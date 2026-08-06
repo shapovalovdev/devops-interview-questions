@@ -3,7 +3,7 @@ title: Reduce Linux capabilities for a containerized service
 theme: containers
 difficulty: senior
 type: scenario
-tags: [containers, docker, security, least-privilege, kcsa]
+tags: [containers, docker, security, least-privilege, cks, kcsa, ckad]
 sources:
   - url: https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities
     source_type: official-docs

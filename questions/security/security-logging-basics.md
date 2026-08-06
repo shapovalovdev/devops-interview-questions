@@ -3,7 +3,7 @@ title: Design useful security event logging
 theme: security
 difficulty: junior
 type: theory
-tags: [security, logging, observability]
+tags: [security, logging, observability, cks]
 sources:
   - url: https://csrc.nist.gov/pubs/sp/800/92/final
     source_type: standard

@@ -3,7 +3,7 @@ title: Verify container image provenance before deployment
 theme: security
 difficulty: senior
 type: scenario
-tags: [containers, images, security, supply-chain, kcsa]
+tags: [containers, images, security, supply-chain, cks, kcsa]
 sources:
   - url: https://slsa.dev/spec/v1.1/provenance
     source_type: standard

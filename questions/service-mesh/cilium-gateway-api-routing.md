@@ -1,0 +1,27 @@
+---
+title: Route ingress traffic with Cilium Gateway API
+theme: service-mesh
+difficulty: middle
+type: scenario
+tags: [service-mesh, kubernetes, networking, traffic-management, security, cca]
+sources:
+  - url: https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/
+    source_type: official-docs
+    verified_on: 2026-08-06
+---
+
+# Route ingress traffic with Cilium Gateway API
+
+How would you expose two HTTP services through Cilium Gateway API while keeping backend access policy explicit?
+
+## Answer guide
+
+- Create a Gateway and HTTPRoutes with explicit hostnames and path matches, then bind only the intended Services and namespaces according to the Gateway API attachment rules.
+- Cilium processes Gateway traffic through its Envoy integration and assigns the ingress identity at policy enforcement points, so allow both external-to-ingress and ingress-to-backend paths where required.
+- Verify listener status, route acceptance, TLS configuration, and end-to-end requests before switching DNS or external load-balancer traffic.
+- Treat Gateway migration as a security change. Incorrect attachment, missing policy for the ingress identity, or assumptions copied from another controller can create a 403/timeout outage or unexpectedly expose a backend.
+
+## References
+
+- [Cilium Gateway API support](https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/)
+- Further reading (blog): [Cilium 1.15 overview](https://isovalent.com/blog/post/cilium-1-15/)

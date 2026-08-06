@@ -3,7 +3,7 @@ title: Run a containerized service as a non-root user
 theme: containers
 difficulty: middle
 type: scenario
-tags: [containers, docker, security, least-privilege, kcsa]
+tags: [containers, docker, security, least-privilege, cks, kcsa]
 sources:
   - url: https://docs.docker.com/reference/dockerfile/#user
     source_type: official-docs

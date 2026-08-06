@@ -3,7 +3,7 @@ title: Trace Kubernetes Service traffic
 theme: container-networking
 difficulty: senior
 type: troubleshooting
-tags: [containers, kubernetes, networking, dns, troubleshooting]
+tags: [containers, kubernetes, networking, dns, troubleshooting, cca]
 sources:
   - url: https://kubernetes.io/docs/concepts/services-networking/service/
     source_type: official-docs

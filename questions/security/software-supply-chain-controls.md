@@ -3,7 +3,7 @@ title: Design software supply-chain controls
 theme: security
 difficulty: senior
 type: scenario
-tags: [security, supply-chain, ci-cd, governance, kcsa]
+tags: [security, supply-chain, ci-cd, governance, cks, kcsa]
 sources:
   - url: https://slsa.dev/spec/v1.1/
     source_type: standard

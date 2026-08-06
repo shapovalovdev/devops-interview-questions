@@ -3,7 +3,7 @@ title: Triage a suspected security incident
 theme: security
 difficulty: middle
 type: troubleshooting
-tags: [security, incident-response, logging, reliability, kcsa]
+tags: [security, incident-response, logging, reliability, cks, kcsa]
 sources:
   - url: https://csrc.nist.gov/pubs/sp/800/61/r2/final
     source_type: standard

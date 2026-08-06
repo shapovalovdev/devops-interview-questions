@@ -3,7 +3,7 @@ title: Distinguish a container image from a running container
 theme: containers
 difficulty: junior
 type: theory
-tags: [containers, docker, images, kcna]
+tags: [containers, docker, images, ckad, kcna]
 sources:
   - url: https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/
     source_type: official-docs

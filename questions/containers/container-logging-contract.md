@@ -3,7 +3,7 @@ title: Define a container logging contract
 theme: containers
 difficulty: middle
 type: scenario
-tags: [containers, docker, logging, observability, reliability]
+tags: [containers, docker, logging, observability, reliability, ckad]
 sources:
   - url: https://docs.docker.com/engine/logging/
     source_type: official-docs
