@@ -3,7 +3,7 @@ title: Design a multi-team pipeline architecture
 theme: ci-cd
 difficulty: staff
 type: scenario
-tags: [ci-cd, platform-engineering, automation, governance, security, cnpe]
+tags: [ci-cd, platform-engineering, automation, governance, security, cnpe, cnpa]
 sources:
   - url: https://docs.github.com/en/actions/reference/workflows-and-actions/reusing-workflow-configurations
     source_type: official-docs

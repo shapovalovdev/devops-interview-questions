@@ -3,7 +3,7 @@ title: Triage a production incident
 theme: sre
 difficulty: middle
 type: troubleshooting
-tags: [reliability, monitoring, incident-response, troubleshooting, cnpe]
+tags: [reliability, monitoring, incident-response, troubleshooting, cnpe, cnpa]
 sources:
   - url: https://sre.google/sre-book/managing-incidents/
     source_type: official-docs

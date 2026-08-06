@@ -3,7 +3,7 @@ title: Establish configuration-management platform guardrails
 theme: configuration-management
 difficulty: staff
 type: scenario
-tags: [ansible, automation, configuration-management, platform-engineering, governance, security]
+tags: [ansible, automation, configuration-management, platform-engineering, governance, security, cnpa]
 sources:
   - url: https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_privilege_escalation.html
     source_type: official-docs

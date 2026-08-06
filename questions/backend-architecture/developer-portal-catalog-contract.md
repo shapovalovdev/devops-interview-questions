@@ -3,7 +3,7 @@ title: Design a developer-portal catalog contract teams can trust
 theme: backend-architecture
 difficulty: staff
 type: scenario
-tags: [platform-engineering, governance, reliability, automation]
+tags: [platform-engineering, governance, reliability, automation, cnpa]
 sources:
   - url: https://backstage.io/docs/features/software-catalog/
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Measure platform impact with DORA metrics without gaming teams
 theme: sre
 difficulty: staff
 type: scenario
-tags: [platform-engineering, reliability, monitoring, ci-cd, governance]
+tags: [platform-engineering, reliability, monitoring, ci-cd, governance, cnpa]
 sources:
   - url: https://dora.dev/guides/dora-metrics/
     source_type: official-docs

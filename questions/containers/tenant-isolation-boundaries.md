@@ -3,7 +3,7 @@ title: Define tenant isolation boundaries for a container platform
 theme: containers
 difficulty: staff
 type: scenario
-tags: [containers, docker, security, least-privilege, platform-engineering, governance]
+tags: [containers, docker, security, least-privilege, platform-engineering, governance, cnpa]
 sources:
   - url: https://docs.docker.com/engine/security/
     source_type: official-docs

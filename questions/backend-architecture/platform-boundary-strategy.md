@@ -3,7 +3,7 @@ title: Set platform and product-service boundaries
 theme: backend-architecture
 difficulty: staff
 type: scenario
-tags: [platform-engineering, governance, dependencies]
+tags: [platform-engineering, governance, dependencies, cnpa]
 sources:
   - url: https://sre.google/workbook/platform-engineering.html
     source_type: official-docs

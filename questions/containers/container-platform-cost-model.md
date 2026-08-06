@@ -3,7 +3,7 @@ title: Set a container-platform cost and capacity model
 theme: containers
 difficulty: staff
 type: scenario
-tags: [containers, docker, cgroups, resource-limits, cost-optimization, reliability, platform-engineering, cnpe]
+tags: [containers, docker, cgroups, resource-limits, cost-optimization, reliability, platform-engineering, cnpe, cnpa]
 sources:
   - url: https://docs.docker.com/engine/containers/resource_constraints/
     source_type: official-docs
