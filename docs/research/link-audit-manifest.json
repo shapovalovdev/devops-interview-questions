@@ -205,6 +205,106 @@
     {
       "question": "questions/performance-engineering/trace-critical-path.md",
       "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/analyze-load-average.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/architect-linux-observability.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/coordinate-linux-major-incident.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/debug-failed-mount.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/debug-kernel-panic.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/debug-permission-denied.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/design-linux-troubleshooting-runbooks.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/diagnose-full-filesystem.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/diagnose-nfs-stall.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/diagnose-oom-kill.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/diagnose-systemd-dependency.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/govern-fleet-kernel-updates.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/inspect-service-logs.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/investigate-file-descriptors.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/investigate-hung-task.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/investigate-memory-pressure.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/investigate-zombie-processes.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/lead-linux-capacity-risk.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/perform-storage-io-triage.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/recover-package-manager.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/repair-boot-failure.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/resolve-clock-skew.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/trace-conntrack-exhaustion.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/trace-dns-failure.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
+    },
+    {
+      "question": "questions/linux-troubleshooting/triage-network-packet-loss.md",
+      "related_materials": "docs/related-materials/linux-troubleshooting.md"
     }
   ]
 }
