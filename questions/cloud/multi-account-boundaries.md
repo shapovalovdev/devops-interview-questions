@@ -26,3 +26,11 @@ Why use multiple AWS accounts, and how should teams obtain access across them?
 - Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS Organizations introduction](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html)
 - [Further reading: AWS IAM cross-account roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html)
+
+## What to learn next
+
+- Official documentation: [AWS Organizations introduction](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html)
+- Manual or specification: [IAM cross-account roles tutorial](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html)
+- Maintainer or personal blog: [Corey Quinn — Last Week in AWS](https://www.lastweekinaws.com/blog/)
+- Technical blog: [AWS Security Blog](https://aws.amazon.com/blogs/security/)
+- Hands-on guide: [AWS Organizations workshops](https://catalog.workshops.aws/organizations/en-US)

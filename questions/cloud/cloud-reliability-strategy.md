@@ -26,3 +26,11 @@ How would you set reliability expectations for a portfolio of cloud services wit
 - Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS Well-Architected Reliability Pillar](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html)
 - [Further reading: AWS Well-Architected Tool](https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html)
+
+## What to learn next
+
+- Official documentation: [AWS Reliability Pillar](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html)
+- Manual or specification: [AWS Well-Architected Tool guide](https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html)
+- Maintainer or personal blog: [Corey Quinn — Last Week in AWS](https://www.lastweekinaws.com/blog/)
+- Technical blog: [AWS Architecture Blog](https://aws.amazon.com/blogs/architecture/)
+- Hands-on guide: [AWS Well-Architected Labs](https://www.wellarchitectedlabs.com/)

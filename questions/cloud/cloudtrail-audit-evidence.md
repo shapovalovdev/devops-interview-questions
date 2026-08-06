@@ -26,3 +26,11 @@ An AWS resource changed unexpectedly. How do you use CloudTrail to establish wha
 - Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html)
 - [Further reading: CloudTrail event history](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html)
+
+## What to learn next
+
+- Official documentation: [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html)
+- Manual or specification: [CloudTrail event history](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html)
+- Maintainer or personal blog: [Corey Quinn — Last Week in AWS](https://www.lastweekinaws.com/blog/)
+- Technical blog: [AWS Security Blog](https://aws.amazon.com/blogs/security/)
+- Hands-on guide: [AWS CloudTrail workshops](https://catalog.workshops.aws/security/en-US)

@@ -26,3 +26,11 @@ How do you provide engineers access to many cloud accounts without long-lived us
 - Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS IAM Identity Center User Guide](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)
 - [Further reading: AWS IAM root user best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-best-practices.html)
+
+## What to learn next
+
+- Official documentation: [AWS IAM Identity Center guide](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)
+- Manual or specification: [IAM root-user best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-best-practices.html)
+- Maintainer or personal blog: [Corey Quinn — Last Week in AWS](https://www.lastweekinaws.com/blog/)
+- Technical blog: [AWS Security Blog](https://aws.amazon.com/blogs/security/)
+- Hands-on guide: [AWS IAM workshops](https://catalog.workshops.aws/iam/en-US)

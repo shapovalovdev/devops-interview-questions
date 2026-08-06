@@ -26,3 +26,11 @@ What should an Application Load Balancer health check prove before it receives p
 - Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [ALB target group health checks](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html)
 - [Further reading: ALB target health status](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/check-target-health.html)
+
+## What to learn next
+
+- Official documentation: [ALB target-group health checks](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html)
+- Manual or specification: [ALB target health status](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/check-target-health.html)
+- Maintainer or personal blog: [Corey Quinn — Last Week in AWS](https://www.lastweekinaws.com/blog/)
+- Technical blog: [AWS Networking & Content Delivery Blog](https://aws.amazon.com/blogs/networking-and-content-delivery/)
+- Hands-on guide: [AWS load-balancing workshops](https://catalog.workshops.aws/elastic-load-balancing/en-US)

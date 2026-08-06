@@ -26,3 +26,11 @@ How would you make cloud resources attributable to an owner, product, and cost c
 - Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS tagging best practices](https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/introduction.html)
 - [Further reading: AWS cost allocation tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+
+## What to learn next
+
+- Official documentation: [AWS tagging best practices](https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/introduction.html)
+- Manual or specification: [AWS cost allocation tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+- Maintainer or personal blog: [Corey Quinn — Last Week in AWS](https://www.lastweekinaws.com/blog/)
+- Technical blog: [AWS Cloud Operations Blog](https://aws.amazon.com/blogs/mt/)
+- Hands-on guide: [AWS Well-Architected Labs](https://www.wellarchitectedlabs.com/)

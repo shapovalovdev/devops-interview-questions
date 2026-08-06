@@ -26,3 +26,11 @@ How would you make cloud cost an engineering feedback loop rather than an end-of
 - Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS Well-Architected Cost Optimization Pillar](https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html)
 - [Further reading: AWS Cost Explorer](https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html)
+
+## What to learn next
+
+- Official documentation: [AWS Cost Optimization Pillar](https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html)
+- Manual or specification: [AWS Cost Explorer guide](https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html)
+- Maintainer or personal blog: [Corey Quinn — Last Week in AWS](https://www.lastweekinaws.com/blog/)
+- Technical blog: [AWS Architecture Blog](https://aws.amazon.com/blogs/architecture/)
+- Hands-on guide: [AWS Well-Architected Labs](https://www.wellarchitectedlabs.com/)

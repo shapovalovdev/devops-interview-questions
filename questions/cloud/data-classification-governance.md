@@ -26,3 +26,11 @@ How would you ensure cloud teams apply appropriate controls to sensitive data wi
 - Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS Well-Architected Security Pillar: data classification](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/data-classification.html)
 - [Further reading: AWS Macie sensitive data discovery](https://docs.aws.amazon.com/macie/latest/user/what-is-macie.html)
+
+## What to learn next
+
+- Official documentation: [AWS data classification guidance](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/data-classification.html)
+- Manual or specification: [Amazon Macie overview](https://docs.aws.amazon.com/macie/latest/user/what-is-macie.html)
+- Maintainer or personal blog: [Corey Quinn — Last Week in AWS](https://www.lastweekinaws.com/blog/)
+- Technical blog: [AWS Security Blog](https://aws.amazon.com/blogs/security/)
+- Hands-on guide: [AWS data protection workshops](https://catalog.workshops.aws/security/en-US)

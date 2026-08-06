@@ -580,6 +580,106 @@
     {
       "question": "questions/linux-performance/vmstat-first-pass.md",
       "related_materials": "docs/related-materials/linux-performance.md"
+    },
+    {
+      "question": "questions/cloud/autoscaling-target-tracking.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/cloud-finops-governance.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/cloud-identity-governance.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/cloud-incident-response.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/cloud-migration-wave-plan.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/cloud-quota-capacity-planning.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/cloud-reliability-strategy.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/cloud-service-models.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/cloudtrail-audit-evidence.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/cloudwatch-alarm-design.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/data-classification-governance.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/disaster-recovery-rto-rpo.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/iam-policy-evaluation.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/landing-zone-governance.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/least-privilege-workload-identity.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/load-balancer-health-checks.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/managed-database-backup-restore.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/multi-account-boundaries.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/object-storage-durability.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/private-subnet-egress.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/regions-and-availability-zones.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/resource-tagging-strategy.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/secrets-manager-rotation.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/security-groups-and-network-acls.md",
+      "related_materials": "docs/related-materials/cloud.md"
+    },
+    {
+      "question": "questions/cloud/vpc-network-foundations.md",
+      "related_materials": "docs/related-materials/cloud.md"
     }
   ]
 }

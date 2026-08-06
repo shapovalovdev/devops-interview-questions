@@ -5,7 +5,7 @@ difficulty: junior
 type: theory
 tags: [aws, cloud, availability, reliability]
 sources:
-  - url: https://docs.aws.amazon.com/whitepapers/latest/aws-infrastructure-security/availability-zones.html
+  - url: https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html
     source_type: official-docs
     verified_on: 2026-08-06
 ---
@@ -24,5 +24,13 @@ What is the distinction between an AWS Region and an Availability Zone, and how 
 ## References
 
 - Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
-- [AWS Infrastructure Security: Availability Zones](https://docs.aws.amazon.com/whitepapers/latest/aws-infrastructure-security/availability-zones.html)
+- [AWS Fault Isolation Boundaries: Availability Zones](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html)
 - [Further reading: AWS Regions and Availability Zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
+
+## What to learn next
+
+- Official documentation: [AWS Availability Zone guidance](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html)
+- Manual or specification: [AWS Regions and Availability Zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
+- Maintainer or personal blog: [Corey Quinn — Last Week in AWS](https://www.lastweekinaws.com/blog/)
+- Technical blog: [AWS Architecture Blog](https://aws.amazon.com/blogs/architecture/)
+- Hands-on guide: [AWS Cloud Quest](https://aws.amazon.com/training/digital/aws-cloud-quest/)

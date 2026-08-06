@@ -5,7 +5,7 @@ difficulty: senior
 type: scenario
 tags: [aws, cloud, deployment, reliability, governance]
 sources:
-  - url: https://docs.aws.amazon.com/prescriptive-guidance/latest/migration-strategy/welcome.html
+  - url: https://docs.aws.amazon.com/prescriptive-guidance/latest/strategy-application-portfolio-assessment-migration/introduction.html
     source_type: official-docs
     verified_on: 2026-08-06
 ---
@@ -24,5 +24,13 @@ How do you migrate a group of applications to cloud infrastructure without treat
 ## References
 
 - Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
-- [AWS Prescriptive Guidance: migration strategy](https://docs.aws.amazon.com/prescriptive-guidance/latest/migration-strategy/welcome.html)
-- [Further reading: AWS migration readiness guide](https://docs.aws.amazon.com/prescriptive-guidance/latest/migration-readiness/welcome.html)
+- [AWS Prescriptive Guidance: application portfolio assessment strategy](https://docs.aws.amazon.com/prescriptive-guidance/latest/strategy-application-portfolio-assessment-migration/introduction.html)
+- [Further reading: AWS migration readiness guide](https://docs.aws.amazon.com/prescriptive-guidance/latest/evaluating-migration-readiness/introduction.html)
+
+## What to learn next
+
+- Official documentation: [AWS application portfolio assessment strategy](https://docs.aws.amazon.com/prescriptive-guidance/latest/strategy-application-portfolio-assessment-migration/introduction.html)
+- Manual or specification: [AWS migration readiness guidance](https://docs.aws.amazon.com/prescriptive-guidance/latest/evaluating-migration-readiness/introduction.html)
+- Maintainer or personal blog: [Corey Quinn — Last Week in AWS](https://www.lastweekinaws.com/blog/)
+- Technical blog: [AWS Architecture Blog](https://aws.amazon.com/blogs/architecture/)
+- Hands-on guide: [AWS migration workshops](https://catalog.workshops.aws/migration/en-US)

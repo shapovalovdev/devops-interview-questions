@@ -26,3 +26,11 @@ What should a staff engineer establish before many teams independently deploy in
 - Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS Security Reference Architecture: landing zone](https://docs.aws.amazon.com/prescriptive-guidance/latest/security-reference-architecture/landing-zone.html)
 - [Further reading: AWS Control Tower concepts](https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html)
+
+## What to learn next
+
+- Official documentation: [AWS landing-zone guidance](https://docs.aws.amazon.com/prescriptive-guidance/latest/security-reference-architecture/landing-zone.html)
+- Manual or specification: [AWS Control Tower concepts](https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html)
+- Maintainer or personal blog: [Corey Quinn — Last Week in AWS](https://www.lastweekinaws.com/blog/)
+- Technical blog: [AWS Architecture Blog](https://aws.amazon.com/blogs/architecture/)
+- Hands-on guide: [AWS Control Tower workshops](https://catalog.workshops.aws/control-tower/en-US)
