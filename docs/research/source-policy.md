@@ -25,6 +25,11 @@ An active Question is source-verified only when:
 Use the current stable documentation unless the Question intentionally teaches
 an older version; in that case, name the version in the prompt or answer.
 
+Each Question also needs one clearly labeled complementary technical blog post
+in `## References`. It is learning context only, never evidence for factual
+claims; prefer posts from maintainers, reputable engineering organizations, or
+the relevant vendor.
+
 ## Source hierarchy
 
 Prefer sources in this order:

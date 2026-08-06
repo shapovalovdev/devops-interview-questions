@@ -11,7 +11,7 @@ Read `docs/research/source-policy.md`, then verify one Question at a time.
 2. Research with MCP/web tools. Prefer standards, upstream documentation, or official vendor documentation; never use blogs or interview collections as factual authority.
 3. Rewrite the answer so it directly answers the prompt, explains the mechanism, gives material constraints or version caveats, and notes operational failure modes.
 4. Add front-matter sources with `url`, `source_type` (`standard`, `official-docs`, or `official-api`), and ISO `verified_on` date.
-5. Add a `## References` section with descriptive links that support the material claims.
+5. Add a `## References` section with descriptive links that support the material claims, plus one clearly labeled complementary blog post for learning context.
 6. Run the repository validator and report any gap needing human expert review.
 
 ## Full-answer standard
@@ -29,4 +29,5 @@ sources:
 ## References
 
 - [Descriptive official source](https://example.org/official-documentation)
+- Further reading: [Complementary technical blog post](https://example.org/article)
 ```
