@@ -9,7 +9,7 @@ with sync_playwright() as playwright:
     page.goto(site)
     page.wait_for_load_state('networkidle')
     cards = page.locator('.question-card')
-    assert cards.count() == 19
+    assert cards.count() == 27
     assert all(href.endswith('.html') for href in cards.locator('a').evaluate_all('(links) => links.map((link) => link.getAttribute("href"))'))
     page.locator('#search').fill('DNS')
     assert cards.count() == 1
