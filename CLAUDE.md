@@ -6,6 +6,8 @@ For every implementation task, create a dedicated GitHub issue with testable acc
 
 The coordinator validates finished agents, integrates shared changes, closes verified issues, and immediately assigns the next queued issue. Keep no more than three implementation agents active. Resolve shared catalog and validator changes centrally before replacing an agent.
 
+Follow the [Codex coordinator loop](docs/agents/codex-coordinator-loop.md): while an active Codex session exists, check the queue at least every 10 minutes. GitHub Actions may validate and publish; it must not spawn agents.
+
 No task is complete until repository validation and GitHub Actions pass.
 
 ## Published site and completion report

@@ -11,6 +11,8 @@ For every implementation task:
 
 Keep a maximum of three implementation subagents active at once. Resolve shared catalog or validator conflicts centrally before assigning replacement work.
 
+The active-session cadence and GitHub Actions boundary are defined in [Codex coordinator loop](docs/agents/codex-coordinator-loop.md). The coordinator checks status at least every 10 minutes while the Codex session is active; Actions validates and publishes but never spawns agents.
+
 Every Question task must update or extend automated validation for its new behavior. A task is not complete until the repository test suite and GitHub Actions pass.
 
 ## Published site and completion report
