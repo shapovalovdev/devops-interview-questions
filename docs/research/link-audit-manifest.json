@@ -105,6 +105,106 @@
     {
       "question": "questions/sre/write-blameless-postmortem.md",
       "related_materials": "docs/related-materials/sre.md"
+    },
+    {
+      "question": "questions/performance-engineering/avoid-metric-cardinality.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/benchmark-control-variables.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/benchmark-production-safety.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/cache-performance-evaluation.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/capacity-baseline-design.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/capacity-economics-governance.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/choose-histogram-buckets.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/connection-pool-sizing.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/cross-team-performance-contracts.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/database-query-regression.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/define-performance-objectives.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/identify-bottleneck-signals.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/load-shedding-design.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/measure-latency-percentiles.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/multi-tenant-noisy-neighbor.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/performance-budget-api.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/performance-investment-portfolio.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/performance-observability-strategy.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/performance-regression-ci.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/profile-cpu-hotspots.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/resilience-performance-tradeoffs.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/select-load-test-model.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/tail-latency-triage.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/throughput-and-concurrency.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
+    },
+    {
+      "question": "questions/performance-engineering/trace-critical-path.md",
+      "related_materials": "docs/related-materials/performance-engineering.md"
     }
   ]
 }
