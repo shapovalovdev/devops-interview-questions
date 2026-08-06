@@ -30,6 +30,9 @@ This map uses the DevOps roadmap as a coverage guide, not as copied content. Eac
 | Security and supply chain | `security` |
 | Cross-domain troubleshooting | `troubleshooting` |
 | Linux troubleshooting | `linux-troubleshooting` |
+| Linux performance | `linux-performance` |
+| Performance engineering | `performance-engineering` |
+| Site reliability engineering | `sre` |
 
 ## Coverage rule
 
