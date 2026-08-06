@@ -3,7 +3,7 @@ title: Expose an application with the right Service type
 theme: kubernetes
 difficulty: middle
 type: scenario
-tags: [kubernetes, cka, ckad, networking, availability, troubleshooting]
+tags: [kubernetes, cka, ckad, networking, availability, troubleshooting, ckne]
 sources:
   - url: https://kubernetes.io/docs/concepts/services-networking/service/
     source_type: official-docs

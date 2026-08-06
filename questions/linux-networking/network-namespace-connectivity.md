@@ -3,7 +3,7 @@ title: Debug connectivity across a Linux network namespace
 theme: linux-networking
 difficulty: middle
 type: troubleshooting
-tags: [linux, networking, containers, troubleshooting]
+tags: [linux, networking, containers, troubleshooting, ckne]
 sources:
   - url: https://man7.org/linux/man-pages/man7/network_namespaces.7.html
     source_type: official-docs

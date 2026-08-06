@@ -3,7 +3,7 @@ title: Validate a new Cilium installation before production traffic
 theme: kubernetes
 difficulty: middle
 type: scenario
-tags: [kubernetes, networking, deployment, troubleshooting, reliability, cca]
+tags: [kubernetes, networking, deployment, troubleshooting, reliability, cca, ckne]
 sources:
   - url: https://docs.cilium.io/en/stable/installation/k8s-install-helm/
     source_type: official-docs

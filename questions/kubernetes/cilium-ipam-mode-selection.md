@@ -3,7 +3,7 @@ title: Choose a Cilium IPAM mode for a Kubernetes cluster
 theme: kubernetes
 difficulty: middle
 type: scenario
-tags: [kubernetes, networking, cloud, reliability, cca]
+tags: [kubernetes, networking, cloud, reliability, cca, ckne]
 sources:
   - url: https://docs.cilium.io/en/stable/network/concepts/ipam/crd/
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Capture Linux packets without losing diagnostic value
 theme: linux-networking
 difficulty: middle
 type: scenario
-tags: [linux, networking, troubleshooting, security]
+tags: [linux, networking, troubleshooting, security, ckne]
 sources:
   - url: https://www.tcpdump.org/manpages/tcpdump.1.html
     source_type: official-docs

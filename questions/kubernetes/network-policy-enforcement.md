@@ -3,7 +3,7 @@ title: Restrict Pod traffic with NetworkPolicy
 theme: kubernetes
 difficulty: middle
 type: scenario
-tags: [kubernetes, networking, security, least-privilege, cks, kcsa, cka, ckad, kcna, cca]
+tags: [kubernetes, networking, security, least-privilege, cks, kcsa, cka, ckad, kcna, cca, ckne]
 sources:
   - url: https://kubernetes.io/docs/concepts/services-networking/network-policies/
     source_type: official-docs

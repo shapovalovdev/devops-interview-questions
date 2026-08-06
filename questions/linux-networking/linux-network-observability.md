@@ -3,7 +3,7 @@ title: Design Linux host network observability
 theme: linux-networking
 difficulty: senior
 type: scenario
-tags: [linux, networking, monitoring, reliability]
+tags: [linux, networking, monitoring, reliability, ckne]
 sources:
   - url: https://docs.kernel.org/networking/statistics.html
     source_type: official-docs
