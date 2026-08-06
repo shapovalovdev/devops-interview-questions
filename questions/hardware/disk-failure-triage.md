@@ -24,3 +24,11 @@ A host reports I/O errors and worsening disk health. What do you do before repla
 
 - [smartmontools FAQ](https://www.smartmontools.org/wiki/FAQ)
 - Further reading (blog): [Backblaze: Using machine learning to predict hard-drive failures](https://www.backblaze.com/blog/using-machine-learning-to-predict-hard-drive-failures/)
+
+## What to learn next
+
+- Official documentation: [Intel Software Developer's Manual](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)
+- Manual or specification: [NVM Express specifications](https://nvmexpress.org/specifications/)
+- Maintainer or personal blog: [Brendan Gregg — systems performance](https://www.brendangregg.com/)
+- Technical blog: [ServeTheHome](https://www.servethehome.com/)
+- Hands-on guide: [Operating Systems: Three Easy Pieces — free online book](https://pages.cs.wisc.edu/~remzi/OSTEP/)

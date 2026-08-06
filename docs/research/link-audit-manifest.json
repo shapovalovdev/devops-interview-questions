@@ -3,6 +3,81 @@
   "policy": "Each listed Question has been manually curated and live-checked. Do not add a Question until all five links have been reviewed for relevance and ownership.",
   "audited_questions": [
     {
+      "question": "questions/hardware/asset-inventory-basics.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/disk-failure-triage.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/ecc-memory-errors.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/firmware-upgrade-runbook.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/fleet-firmware-governance.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/hardware-capacity-baseline.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/hardware-lifecycle-strategy.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/hardware-performance-benchmark.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/hardware-refresh-migration.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/hardware-sensor-monitoring.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/network-interface-fault-isolation.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/numa-aware-workload-placement.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/out-of-band-server-recovery.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/platform-standardization.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/rack-power-cooling-governance.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/raid-rebuild-safety.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/raid-redundancy-basics.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/redundant-power-validation.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/secure-boot-attestation.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/server-component-basics.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/smart-health-basics.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/spares-and-failure-domain-strategy.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/storage-controller-failure-response.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/thermal-throttling-diagnosis.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
+      "question": "questions/hardware/ups-graceful-shutdown.md", "related_materials": "docs/related-materials/hardware.md"
+    },
+    {
       "question": "questions/containers/base-image-update-policy.md",
       "related_materials": "docs/related-materials/containers.md"
     },

@@ -24,3 +24,11 @@ How should you respond when a server reports corrected or uncorrected ECC memory
 
 - [Linux kernel EDAC documentation](https://www.kernel.org/doc/html/latest/driver-api/edac.html)
 - Further reading (blog): [Backblaze Drive Stats](https://www.backblaze.com/blog/category/cloud-storage/hard-drive-stats/)
+
+## What to learn next
+
+- Official documentation: [Intel Software Developer's Manual](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)
+- Manual or specification: [NVM Express specifications](https://nvmexpress.org/specifications/)
+- Maintainer or personal blog: [Brendan Gregg — systems performance](https://www.brendangregg.com/)
+- Technical blog: [ServeTheHome](https://www.servethehome.com/)
+- Hands-on guide: [Operating Systems: Three Easy Pieces — free online book](https://pages.cs.wisc.edu/~remzi/OSTEP/)

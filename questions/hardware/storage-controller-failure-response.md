@@ -24,3 +24,11 @@ Multiple disks disappear from a server at once. How do you respond without makin
 
 - [Linux kernel: Multiple Devices (MD)](https://docs.kernel.org/admin-guide/md.html)
 - Further reading (blog): [Backblaze: managing for hard-drive failure and data corruption](https://www.backblaze.com/blog/?p=91405)
+
+## What to learn next
+
+- Official documentation: [Intel Software Developer's Manual](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)
+- Manual or specification: [NVM Express specifications](https://nvmexpress.org/specifications/)
+- Maintainer or personal blog: [Brendan Gregg — systems performance](https://www.brendangregg.com/)
+- Technical blog: [ServeTheHome](https://www.servethehome.com/)
+- Hands-on guide: [Operating Systems: Three Easy Pieces — free online book](https://pages.cs.wisc.edu/~remzi/OSTEP/)
