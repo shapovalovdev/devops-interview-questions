@@ -25,3 +25,11 @@ An NGINX reverse proxy returns 502 while the page itself is reachable. How do yo
 
 - [NGINX documentation: proxy module](https://nginx.org/en/docs/http/ngx_http_proxy_module.html)
 - Further reading (blog): [NGINX: troubleshooting common errors](https://www.nginx.com/blog/avoiding-top-10-nginx-configuration-mistakes/)
+
+## What to learn next
+
+- Official documentation: [NGINX reverse proxy guide](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
+- Manual or specification: [RFC 9110: HTTP semantics](https://www.rfc-editor.org/rfc/rfc9110)
+- Maintainer or personal blog: [Ilya Grigorik's blog](https://www.igvita.com/)
+- Technical blog: [NGINX engineering blog](https://www.nginx.com/blog/)
+- Hands-on guide: [NGINX beginner's guide](https://nginx.org/en/docs/beginners_guide.html)
