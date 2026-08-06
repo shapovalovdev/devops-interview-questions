@@ -30,3 +30,11 @@ without turning DORA metrics into individual or team performance targets?
 - [DORA: software delivery performance metrics](https://dora.dev/guides/dora-metrics/)
 - [DORA: platform engineering capability](https://dora.dev/capabilities/platform-engineering/)
 - Further reading (blog): [Google Cloud Blog: improve developer experience with platform engineering](https://cloud.google.com/blog/products/application-development/how-platform-engineers-can-improve-their-developers-experience)
+
+## What to learn next
+
+- Official documentation: [DORA capability catalog](https://dora.dev/capabilities/)
+- Manual or specification: [Google SRE Workbook — implementing SLOs](https://sre.google/workbook/implementing-slos/)
+- Maintainer or personal blog: [Abi Noda — measuring developer productivity via humans](https://martinfowler.com/articles/measuring-developer-productivity-humans.html)
+- Technical blog: [Google Cloud — using the Four Keys to measure DevOps performance](https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance)
+- Hands-on guide: [Four Keys reference implementation](https://github.com/dora-team/fourkeys)

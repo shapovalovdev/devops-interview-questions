@@ -37,8 +37,8 @@ The reuse terms for this repository's content: Creative Commons Attribution 4.0 
 _Avoid_: Proprietary terms
 
 **Coverage target**:
-Twenty-five active Questions in each canonical Theme: five junior, ten middle, five senior, and five staff-level Questions, for 475 Questions across the repository.
-_Avoid_: Broad-topic quota, approximate coverage
+The baseline every canonical Theme must reach before it is declared complete: at least twenty-five active Questions, with at least five junior, ten middle, five senior, and five staff-level Questions. It is a floor, not a cap. A Theme that grows past the baseline through certification or roadmap coverage keeps that verified material; Questions are never deleted to satisfy an exact count. `config/content-manifest.json` is the authority, and CI enforces it.
+_Avoid_: Broad-topic quota, approximate coverage, exact-count cap
 
 **Primary source**:
 An official standard, upstream project document, or vendor document used to verify a Question's factual claims.

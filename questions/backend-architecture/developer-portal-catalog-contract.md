@@ -32,3 +32,11 @@ and tooling change?
 - [Backstage: Software Catalog](https://backstage.io/docs/features/software-catalog/)
 - [Backstage: Creating the Catalog Graph](https://backstage.io/docs/features/software-catalog/creating-the-catalog-graph/)
 - Further reading (blog): [Martin Fowler: platforms](https://martinfowler.com/articles/talk-about-platforms.html)
+
+## What to learn next
+
+- Official documentation: [Backstage catalog descriptor format](https://backstage.io/docs/features/software-catalog/descriptor-format/)
+- Manual or specification: [Backstage software catalog system model](https://backstage.io/docs/features/software-catalog/system-model/)
+- Maintainer or personal blog: [Vincenzo Scamporlino — Backstage Wrapped 2025](https://backstage.io/blog/2025/12/30/backstage-wrapped-2025)
+- Technical blog: [Spotify Engineering — what the heck is Backstage anyway?](https://engineering.atspotify.com/2020/03/what-the-heck-is-backstage-anyway)
+- Hands-on guide: [Backstage getting started](https://backstage.io/docs/getting-started/)

@@ -2,7 +2,10 @@ name: Coordinator health check
 
 on:
   schedule:
-    - cron: '*/20 * * * *'
+    # Hourly. The 20-minute cadence competed with content validation for hosted
+    # runners and left validation runs queued for hours. The 10-minute queue
+    # cadence is the active coordinator session's job, not this workflow's.
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 permissions:

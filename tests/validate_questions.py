@@ -105,8 +105,8 @@ def validate_question(path: Path, tags: set[str]) -> tuple[dict[str, str], set[s
 def main() -> None:
     manifest = load_manifest()
     policy = manifest["theme_policy"]
-    target = policy["target_question_count"]
-    expected_distribution = policy["difficulty_distribution"]
+    minimum_total = policy["minimum_question_count"]
+    minimum_distribution = policy["minimum_difficulty_distribution"]
     theme_by_name = {theme["name"]: theme for theme in manifest["themes"]}
     certifications = {certification["tag"]: certification for certification in manifest["certifications"]}
     question_files = sorted(QUESTIONS.glob("*/*.md"))
@@ -137,14 +137,22 @@ def main() -> None:
         counts = difficulties[name]
         total = sum(counts.values())
         if theme["state"] == "complete":
-            assert total == target, f"{name} must contain exactly {target} Questions, got {total}"
-            assert dict(counts) == expected_distribution, f"{name} must contain {expected_distribution}, got {dict(counts)}"
+            # The coverage target is a floor. A Theme that grew past the baseline
+            # through certification or roadmap work keeps that verified material
+            # instead of discarding Questions to satisfy an exact count.
+            assert total >= minimum_total, f"{name} must contain at least {minimum_total} Questions, got {total}"
+            shortfall = {
+                difficulty: (counts[difficulty], required)
+                for difficulty, required in minimum_distribution.items()
+                if counts[difficulty] < required
+            }
+            assert not shortfall, f"{name} is below the baseline difficulty mix: {shortfall}"
+            assert not set(counts) - set(minimum_distribution), f"{name} uses an undeclared difficulty band"
         elif theme["state"] == "in-progress":
             assert total > 0, f"{name} is in-progress but has no active Questions"
-            # In-progress Themes may contain additive certification coverage. The
-            # canonical 25-question core is still tracked by the Theme issue;
-            # extensions remain visible instead of being discarded to satisfy a
-            # superficial count cap.
+            assert total < minimum_total, (
+                f"{name} already meets the {minimum_total}-Question floor and must be declared complete"
+            )
         else:
             assert total == 0, f"{name} is planned but already contains active Questions"
 

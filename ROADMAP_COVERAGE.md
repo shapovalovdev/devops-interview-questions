@@ -37,4 +37,6 @@ This map uses the DevOps roadmap as a coverage guide, not as copied content. Eac
 
 ## Coverage rule
 
-When adding a roadmap competency, create a canonical Theme, add at least one Question, register it in `assets/questions.js`, and update this map. CI validates the first three requirements for every active Question.
+When adding a roadmap competency, create a canonical Theme, declare it in `config/content-manifest.json`, add its Questions, register every Question in `assets/questions.js`, and update this map.
+
+A Theme reaches the coverage floor at twenty-five active Questions with at least five junior, ten middle, five senior, and five staff-level Questions. A Theme that holds active Questions must be declared `complete` and must meet that floor: `tests/test_theme_coverage_policy.py` fails the build otherwise, so a new Theme lands as one complete drop rather than trickling onto the published site. A Theme still being scoped stays `planned` and holds no active Questions. The floor is a minimum — additional verified Questions are kept, not trimmed.

@@ -16,10 +16,13 @@ def load_manifest() -> dict:
 
 def main() -> None:
     manifest = load_manifest()
+    assert manifest["schema_version"] == 2, "content manifest must use schema version 2"
     policy = manifest["theme_policy"]
-    distribution = policy["difficulty_distribution"]
+    distribution = policy["minimum_difficulty_distribution"]
     assert set(distribution) == {"junior", "middle", "senior", "staff"}, "theme distribution must define every difficulty"
-    assert sum(distribution.values()) == policy["target_question_count"], "difficulty distribution must total the target"
+    assert sum(distribution.values()) == policy["minimum_question_count"], "difficulty distribution must total the minimum"
+    assert policy["count_semantics"] == "floor", "theme counts are a floor, never an exact cap"
+    assert policy["rationale"].strip(), "the count policy must record why it is a floor"
 
     themes = manifest["themes"]
     names = [theme["name"] for theme in themes]
