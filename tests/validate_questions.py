@@ -14,6 +14,8 @@ def front_matter(path: Path) -> dict[str, str]:
     end = lines.index("---", 1)
     fields = {}
     for line in lines[1:end]:
+        if not line or line.startswith("  - ") or line.startswith("    "):
+            continue
         key, value = line.split(": ", 1)
         fields[key] = value
     return fields
