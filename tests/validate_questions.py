@@ -9,6 +9,9 @@ ALLOWED_TYPES = {"theory", "scenario", "troubleshooting"}
 CONTAINER_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
 OBSERVABILITY_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
 SECURITY_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
+SHELL_SCRIPTING_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
+HARDWARE_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
+STORAGE_DISTRIBUTION = {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
 
 
 def front_matter(path: Path) -> dict[str, str]:
@@ -45,6 +48,9 @@ def main() -> None:
     container_difficulties: dict[str, int] = {difficulty: 0 for difficulty in CONTAINER_DISTRIBUTION}
     observability_difficulties: dict[str, int] = {difficulty: 0 for difficulty in OBSERVABILITY_DISTRIBUTION}
     security_difficulties: dict[str, int] = {difficulty: 0 for difficulty in SECURITY_DISTRIBUTION}
+    shell_scripting_difficulties: dict[str, int] = {difficulty: 0 for difficulty in SHELL_SCRIPTING_DISTRIBUTION}
+    hardware_difficulties: dict[str, int] = {difficulty: 0 for difficulty in HARDWARE_DISTRIBUTION}
+    storage_difficulties: dict[str, int] = {difficulty: 0 for difficulty in STORAGE_DISTRIBUTION}
     for path in question_files:
         fields = front_matter(path)
         required = {"title", "theme", "difficulty", "type", "tags"}
@@ -57,23 +63,34 @@ def main() -> None:
         assert set(question_tags) <= tags, f"{path}: uses a Tag missing from TAGS.md"
         content = path.read_text(encoding="utf-8")
         assert "## Answer guide" in content, f"{path}: missing answer guide"
-        if fields["theme"] in {"containers", "observability", "security"}:
+        if fields["theme"] in {"containers", "observability", "security", "shell-scripting", "hardware", "storage"}:
             assert re.search(r"^sources:\n  - url: https://", content, re.MULTILINE), f"{path}: missing HTTPS primary source metadata"
             assert re.search(r"^    source_type: (standard|official-docs|official-api)$", content, re.MULTILINE), f"{path}: invalid source type"
             assert re.search(r"^    verified_on: \d{4}-\d{2}-\d{2}$", content, re.MULTILINE), f"{path}: missing source verification date"
-            assert len(re.findall(r"^- \[[^]]+\]\(https://", content, re.MULTILINE)) >= 2, f"{path}: requires primary and further-reading references"
+            assert len(re.findall(r"^- .*\[.*\]\(https://", content, re.MULTILINE)) >= 2, f"{path}: requires primary and further-reading references"
+            if fields["theme"] in {"shell-scripting", "storage"}:
+                assert re.search(r"^- Further reading \(blog\): .*\(https://", content, re.MULTILINE), f"{path}: requires a labeled complementary blog post"
         if fields["theme"] == "containers":
             container_difficulties[fields["difficulty"]] += 1
         if fields["theme"] == "observability":
             observability_difficulties[fields["difficulty"]] += 1
         if fields["theme"] == "security":
             security_difficulties[fields["difficulty"]] += 1
+        if fields["theme"] == "shell-scripting":
+            shell_scripting_difficulties[fields["difficulty"]] += 1
+        if fields["theme"] == "hardware":
+            hardware_difficulties[fields["difficulty"]] += 1
+        if fields["theme"] == "storage":
+            storage_difficulties[fields["difficulty"]] += 1
         expected_catalog.add(path.relative_to(ROOT).with_suffix(".html").as_posix())
 
     assert set(catalog) == expected_catalog, "Website catalog must contain every active Question exactly once"
     assert container_difficulties == CONTAINER_DISTRIBUTION, f"containers must contain {CONTAINER_DISTRIBUTION}, got {container_difficulties}"
     assert observability_difficulties == OBSERVABILITY_DISTRIBUTION, f"observability must contain {OBSERVABILITY_DISTRIBUTION}, got {observability_difficulties}"
     assert security_difficulties == SECURITY_DISTRIBUTION, f"security must contain {SECURITY_DISTRIBUTION}, got {security_difficulties}"
+    assert shell_scripting_difficulties == SHELL_SCRIPTING_DISTRIBUTION, f"shell-scripting must contain {SHELL_SCRIPTING_DISTRIBUTION}, got {shell_scripting_difficulties}"
+    assert hardware_difficulties == HARDWARE_DISTRIBUTION, f"hardware must contain {HARDWARE_DISTRIBUTION}, got {hardware_difficulties}"
+    assert storage_difficulties == STORAGE_DISTRIBUTION, f"storage must contain {STORAGE_DISTRIBUTION}, got {storage_difficulties}"
     print(f"Validated {len(question_files)} active Questions and {len(catalog)} website records.")
 
 
