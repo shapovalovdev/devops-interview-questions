@@ -26,3 +26,11 @@ How would you isolate a latency-sensitive service while retaining scheduler flex
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
 - [Kubernetes: Topology spread constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/)
+
+## What to learn next
+
+- Official documentation: [Assigning Pods to nodes: node selectors and affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
+- Manual or specification: [kube-scheduler configuration v1 API reference](https://kubernetes.io/docs/reference/config-api/kube-scheduler-config.v1/)
+- Maintainer or personal blog: [Daniele Polencic — how the Kubernetes scheduler filters and scores nodes](https://learnkube.com/kubernetes-scheduler-explained)
+- Technical blog: [Kubernetes blog — introducing Pod topology spread constraints](https://kubernetes.io/blog/2020/05/introducing-podtopologyspread/)
+- Hands-on guide: [Assign Pods to nodes using node affinity](https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes-using-node-affinity/)
