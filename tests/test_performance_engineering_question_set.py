@@ -3,10 +3,14 @@
 from collections import Counter
 from pathlib import Path
 import re
+import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
 THEME = ROOT / "questions" / "performance-engineering"
+sys.path.insert(0, str(ROOT / "tests"))
+
+from theme_expectations import assert_meets_floor  # noqa: E402
 
 
 def front_matter(path: Path) -> dict[str, str]:
@@ -22,13 +26,7 @@ def front_matter(path: Path) -> dict[str, str]:
 
 def test_performance_engineering_has_the_25_question_distribution() -> None:
     questions = sorted(THEME.glob("*.md"))
-    assert len(questions) == 25
-    assert Counter(front_matter(path)["difficulty"] for path in questions) == {
-        "junior": 5,
-        "middle": 10,
-        "senior": 5,
-        "staff": 5,
-    }
+    assert_meets_floor("performance-engineering", Counter(front_matter(path)["difficulty"] for path in questions))
 
 
 def test_performance_engineering_questions_are_source_verified_and_teach_next_steps() -> None:

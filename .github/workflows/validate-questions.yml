@@ -27,16 +27,9 @@ jobs:
           python tests/test_validate_learning_resources.py
 
       - name: Run every Theme and certification regression test
-        run: |
-          set -e
-          for test in tests/test_*.py; do
-            case "$test" in
-              tests/test_validate_learning_resources.py|tests/test_theme_coverage_policy.py) continue ;;
-            esac
-            echo "::group::$test"
-            python "$test"
-            echo "::endgroup::"
-          done
+        # Runs each module's TestCase classes, bare test_* functions, and main().
+        # Invoking the files directly skipped sixteen checks that had no runner.
+        run: python tests/run_all_tests.py
 
   validate-site:
     name: Validate website behavior
