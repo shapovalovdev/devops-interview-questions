@@ -33,4 +33,4 @@ When should you create a Prometheus recording rule, and how do you operate it sa
 - Manual or specification: [PromQL querying reference](https://prometheus.io/docs/prometheus/latest/querying/basics/)
 - Maintainer or personal blog: [Julius Volz — the anatomy of a PromQL query](https://promlabs.com/blog/2020/06/18/the-anatomy-of-a-promql-query/)
 - Technical blog: [Grafana Labs engineering blog](https://grafana.com/blog/)
-- Hands-on guide: [Prometheus recording and alerting rule practices](https://prometheus.io/docs/practices/rules/)
+- Hands-on guide: [kubernetes-mixin recording rules, alerts and dashboards](https://github.com/kubernetes-monitoring/kubernetes-mixin)

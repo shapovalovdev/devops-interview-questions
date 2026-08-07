@@ -33,4 +33,4 @@ How would you reduce trace cost while retaining useful incident evidence?
 - Manual or specification: [OpenTelemetry tracing SDK specification — sampling](https://opentelemetry.io/docs/specs/otel/trace/sdk/)
 - Maintainer or personal blog: [Liz Fong-Jones — reliability and observability writing](https://www.lizthegrey.com/)
 - Technical blog: [Honeycomb engineering blog](https://www.honeycomb.io/blog/)
-- Hands-on guide: [OpenTelemetry Collector tail sampling processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/tailsamplingprocessor)
+- Hands-on guide: [OpenTelemetry Collector probabilistic sampler processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/probabilisticsamplerprocessor)

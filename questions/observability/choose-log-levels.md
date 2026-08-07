@@ -30,7 +30,7 @@ How should a service choose log levels without turning production logs into nois
 ## What to learn next
 
 - Official documentation: [OpenTelemetry logs signal](https://opentelemetry.io/docs/concepts/signals/logs/)
-- Manual or specification: [OpenTelemetry log data model, including severity](https://opentelemetry.io/docs/specs/otel/logs/data-model/)
+- Manual or specification: [RFC 5424 — syslog severity levels and facilities](https://www.rfc-editor.org/rfc/rfc5424)
 - Maintainer or personal blog: [Charity Majors — observability and structured events](https://charity.wtf/)
 - Technical blog: [Honeycomb engineering blog](https://www.honeycomb.io/blog/)
 - Hands-on guide: [Fluent Bit manual](https://docs.fluentbit.io/manual/)
