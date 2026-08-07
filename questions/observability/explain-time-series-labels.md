@@ -26,3 +26,11 @@ What is a metrics time series, and how should labels be chosen?
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Prometheus: Data model](https://prometheus.io/docs/concepts/data_model/)
 - [Further reading: Prometheus metric and label naming](https://prometheus.io/docs/practices/naming/)
+
+## What to learn next
+
+- Official documentation: [Prometheus data model](https://prometheus.io/docs/concepts/data_model/)
+- Manual or specification: [Prometheus exposition formats](https://prometheus.io/docs/instrumenting/exposition_formats/)
+- Maintainer or personal blog: [Brian Brazil — on the naming of things](https://www.robustperception.io/on-the-naming-of-things/)
+- Technical blog: [Grafana Labs engineering blog](https://grafana.com/blog/)
+- Hands-on guide: [PromQL query examples](https://prometheus.io/docs/prometheus/latest/querying/examples/)

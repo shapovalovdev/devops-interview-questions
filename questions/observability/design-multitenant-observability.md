@@ -26,3 +26,11 @@ How would you give many teams observability access while preventing cross-tenant
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [OpenTelemetry security](https://opentelemetry.io/docs/security/)
 - [Further reading: OpenTelemetry context propagation security](https://opentelemetry.io/docs/concepts/context-propagation/)
+
+## What to learn next
+
+- Official documentation: [Grafana Mimir architecture](https://grafana.com/docs/mimir/latest/references/architecture/)
+- Manual or specification: [OpenTelemetry resource semantic conventions](https://opentelemetry.io/docs/specs/semconv/resource/)
+- Maintainer or personal blog: [Frederic Branczyk — Kubernetes monitoring and metric access control](https://brancz.com/)
+- Technical blog: [Grafana Labs engineering blog](https://grafana.com/blog/)
+- Hands-on guide: [Thanos multi-tenancy operating guide](https://thanos.io/tip/operating/multi-tenancy.md/)

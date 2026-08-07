@@ -26,3 +26,11 @@ How should a platform team reduce rapidly increasing telemetry cost without maki
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Prometheus: Metric and label naming](https://prometheus.io/docs/practices/naming/)
 - [Further reading: Google SRE Workbook—Monitoring](https://sre.google/workbook/monitoring/)
+
+## What to learn next
+
+- Official documentation: [Prometheus storage and retention](https://prometheus.io/docs/prometheus/latest/storage/)
+- Manual or specification: [Google SRE Workbook — Monitoring](https://sre.google/workbook/monitoring/)
+- Maintainer or personal blog: [Brian Brazil — cardinality is key](https://www.robustperception.io/cardinality-is-key/)
+- Technical blog: [Grafana Labs engineering blog](https://grafana.com/blog/)
+- Hands-on guide: [Grafana Mimir production capacity tips](https://grafana.com/docs/mimir/latest/manage/run-production-environment/production-tips/)
