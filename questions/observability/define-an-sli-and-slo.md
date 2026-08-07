@@ -26,3 +26,11 @@ How would you define a service-level indicator (SLI) and service-level objective
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Google SRE Workbook: Implementing SLOs](https://sre.google/workbook/implementing-slos/)
 - [Further reading: Google SRE—Service level objectives](https://sre.google/sre-book/service-level-objectives/)
+
+## What to learn next
+
+- Official documentation: [Google SRE Workbook](https://sre.google/workbook/table-of-contents/)
+- Manual or specification: [Google SRE Book — Service Level Objectives](https://sre.google/sre-book/service-level-objectives/)
+- Maintainer or personal blog: [Liz Fong-Jones — reliability and observability writing](https://www.lizthegrey.com/)
+- Technical blog: [Google Cloud — SRE fundamentals: SLIs, SLAs and SLOs](https://cloud.google.com/blog/products/devops-sre/sre-fundamentals-slis-slas-and-slos)
+- Hands-on guide: [The Art of SLOs workshop materials](https://sre.google/resources/practices-and-processes/art-of-slos/)

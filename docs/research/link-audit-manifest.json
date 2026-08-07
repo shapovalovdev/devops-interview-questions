@@ -756,6 +756,14 @@
     {"question": "questions/databases/slow-query-triage.md", "related_materials": "docs/related-materials/databases.md"},
     {"question": "questions/databases/sql-query-plan-basics.md", "related_materials": "docs/related-materials/databases.md"},
     {"question": "questions/databases/transaction-basics.md", "related_materials": "docs/related-materials/databases.md"},
-    {"question": "questions/databases/zero-downtime-major-upgrade.md", "related_materials": "docs/related-materials/databases.md"}
+    {"question": "questions/databases/zero-downtime-major-upgrade.md", "related_materials": "docs/related-materials/databases.md"},
+    {"question": "questions/observability/build-an-actionable-alert.md", "related_materials": "docs/related-materials/observability.md"},
+    {"question": "questions/observability/choose-log-levels.md", "related_materials": "docs/related-materials/observability.md"},
+    {"question": "questions/observability/cilium-hubble-flow-observation.md", "related_materials": "docs/related-materials/observability.md"},
+    {"question": "questions/observability/compare-blackbox-whitebox.md", "related_materials": "docs/related-materials/observability.md"},
+    {"question": "questions/observability/control-metric-cardinality.md", "related_materials": "docs/related-materials/observability.md"},
+    {"question": "questions/observability/debug-telemetry-gaps.md", "related_materials": "docs/related-materials/observability.md"},
+    {"question": "questions/observability/define-an-sli-and-slo.md", "related_materials": "docs/related-materials/observability.md"},
+    {"question": "questions/observability/describe-metric-types.md", "related_materials": "docs/related-materials/observability.md"}
   ]
 }
