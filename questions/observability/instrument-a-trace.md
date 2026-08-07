@@ -26,3 +26,11 @@ How would you instrument an API request so a responder can find a slow downstrea
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [OpenTelemetry: Traces](https://opentelemetry.io/docs/concepts/signals/traces/)
 - [Further reading: OpenTelemetry context propagation](https://opentelemetry.io/docs/concepts/context-propagation/)
+
+## What to learn next
+
+- Official documentation: [OpenTelemetry traces signal](https://opentelemetry.io/docs/concepts/signals/traces/)
+- Manual or specification: [OpenTelemetry tracing API specification](https://opentelemetry.io/docs/specs/otel/trace/api/)
+- Maintainer or personal blog: [Charity Majors — observability and instrumentation](https://charity.wtf/)
+- Technical blog: [AWS Builders' Library — instrumenting distributed systems for operational visibility](https://aws.amazon.com/builders-library/instrumenting-distributed-systems-for-operational-visibility/)
+- Hands-on guide: [OpenTelemetry language instrumentation guides](https://opentelemetry.io/docs/languages/)

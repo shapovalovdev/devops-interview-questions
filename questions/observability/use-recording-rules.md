@@ -26,3 +26,11 @@ When should you create a Prometheus recording rule, and how do you operate it sa
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Prometheus: Defining recording rules](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/)
 - [Further reading: Prometheus recording-rule naming](https://prometheus.io/docs/practices/rules/)
+
+## What to learn next
+
+- Official documentation: [Prometheus recording rules configuration](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/)
+- Manual or specification: [PromQL querying reference](https://prometheus.io/docs/prometheus/latest/querying/basics/)
+- Maintainer or personal blog: [Julius Volz — the anatomy of a PromQL query](https://promlabs.com/blog/2020/06/18/the-anatomy-of-a-promql-query/)
+- Technical blog: [Grafana Labs engineering blog](https://grafana.com/blog/)
+- Hands-on guide: [Prometheus recording and alerting rule practices](https://prometheus.io/docs/practices/rules/)

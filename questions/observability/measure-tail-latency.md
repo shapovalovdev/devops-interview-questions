@@ -26,3 +26,11 @@ Average latency is stable, but users report occasional slowness. How do you inve
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Prometheus histogram and summary practices](https://prometheus.io/docs/practices/histograms/)
 - [Further reading: Google SRE—Addressing cascading failures](https://sre.google/sre-book/addressing-cascading-failures/)
+
+## What to learn next
+
+- Official documentation: [Prometheus histograms and summaries](https://prometheus.io/docs/practices/histograms/)
+- Manual or specification: [Dean and Barroso — The Tail at Scale](https://research.google/pubs/the-tail-at-scale/)
+- Maintainer or personal blog: [Brian Brazil — how does a Prometheus histogram work?](https://www.robustperception.io/how-does-a-prometheus-histogram-work/)
+- Technical blog: [AWS Builders' Library](https://aws.amazon.com/builders-library/)
+- Hands-on guide: [HdrHistogram — recording high-percentile latency](https://hdrhistogram.github.io/HdrHistogram/)

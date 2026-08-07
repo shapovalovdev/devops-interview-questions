@@ -26,3 +26,11 @@ What reliability controls should a production telemetry collection pipeline have
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [OpenTelemetry Collector documentation](https://opentelemetry.io/docs/collector/)
 - [Further reading: OpenTelemetry Collector resiliency](https://opentelemetry.io/docs/collector/resiliency/)
+
+## What to learn next
+
+- Official documentation: [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)
+- Manual or specification: [OTLP protocol specification](https://opentelemetry.io/docs/specs/otlp/)
+- Maintainer or personal blog: [Frederic Branczyk — cloud-native monitoring infrastructure](https://brancz.com/)
+- Technical blog: [CNCF Blog](https://www.cncf.io/blog/)
+- Hands-on guide: [Scaling the OpenTelemetry Collector](https://opentelemetry.io/docs/collector/scaling/)
