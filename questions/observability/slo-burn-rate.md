@@ -26,3 +26,11 @@ What does a burn-rate alert measure, and why can it be better than alerting on a
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Google SRE Workbook: Alerting on SLOs](https://sre.google/workbook/alerting-on-slos/)
 - [Further reading: Google SRE Workbook—Monitoring](https://sre.google/workbook/monitoring/)
+
+## What to learn next
+
+- Official documentation: [Google SRE Workbook](https://sre.google/workbook/table-of-contents/)
+- Manual or specification: [Google SRE Workbook — Alerting on SLOs](https://sre.google/workbook/alerting-on-slos/)
+- Maintainer or personal blog: [Björn Rabenstein — alerting on SLOs at SoundCloud](https://developers.soundcloud.com/blog/alerting-on-slos)
+- Technical blog: [Google Cloud — SRE fundamentals: SLIs, SLAs and SLOs](https://cloud.google.com/blog/products/devops-sre/sre-fundamentals-slis-slas-and-slos)
+- Hands-on guide: [Google Cloud — SLO monitoring](https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring)
