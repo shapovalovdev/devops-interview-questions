@@ -26,3 +26,11 @@ Pods cannot resolve an internal Service name. How do you isolate the fault witho
 - [Kubernetes: Debugging DNS resolution](https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/)
 - [Kubernetes: DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
 - Further reading (blog): [Kubernetes: Scaling DNS service](https://kubernetes.io/blog/2018/12/14/kubernetes-1-13-release-announcement/)
+
+## What to learn next
+
+- Official documentation: [Using CoreDNS for service discovery](https://kubernetes.io/docs/tasks/administer-cluster/coredns/)
+- Manual or specification: [CoreDNS manual and plugin reference](https://coredns.io/manual/toc/)
+- Maintainer or personal blog: [John Belamaric — CoreDNS GA for Kubernetes cluster DNS](https://kubernetes.io/blog/2018/07/10/coredns-ga-for-kubernetes-cluster-dns/)
+- Technical blog: [InfraCloud — CoreDNS metrics, ndots and cache tuning](https://www.infracloud.io/blogs/using-coredns-effectively-kubernetes/)
+- Hands-on guide: [Debugging DNS resolution](https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/)

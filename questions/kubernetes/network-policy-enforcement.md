@@ -26,3 +26,11 @@ How would you allow an API Pod to receive traffic only from its frontend and cal
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 - [Kubernetes: Services, load balancing, and networking](https://kubernetes.io/docs/concepts/services-networking/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes concepts: network policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+- Manual or specification: [NetworkPolicy v1 API reference](https://kubernetes.io/docs/reference/kubernetes-api/policy-resources/network-policy-v1/)
+- Maintainer or personal blog: [Brett Johnson — network policy deep dive: default ingress and egress policies](https://sdbrett.com/post/2020-11-16-network-policy-podselection-deep-dive/)
+- Technical blog: [Red Hat — guide to Kubernetes egress network policies](https://www.redhat.com/en/blog/guide-to-kubernetes-egress-network-policies)
+- Hands-on guide: [Declare a network policy](https://kubernetes.io/docs/tasks/administer-cluster/declare-network-policy/)
