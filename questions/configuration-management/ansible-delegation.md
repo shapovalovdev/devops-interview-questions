@@ -25,3 +25,11 @@ When should an Ansible task use `delegate_to`, and what can go wrong?
 
 - [Ansible documentation: delegation and local actions](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_delegation.html)
 - Further reading (blog): [Spacelift: Ansible performance and delegation](https://spacelift.io/blog/how-to-improve-ansible-performance)
+
+## What to learn next
+
+- Official documentation: [Ansible documentation](https://docs.ansible.com/ansible/latest/)
+- Manual or specification: [Ansible playbook guide](https://docs.ansible.com/ansible/latest/playbook_guide/index.html)
+- Maintainer or personal blog: [Jeff Geerling](https://www.jeffgeerling.com/blog)
+- Technical blog: [Red Hat Ansible blog](https://www.redhat.com/en/blog/channel/ansible)
+- Hands-on guide: [Ansible examples](https://github.com/ansible/ansible-examples)
