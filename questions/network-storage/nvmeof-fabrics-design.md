@@ -23,6 +23,7 @@ What must be designed before presenting NVMe namespaces across a fabric?
 ## References
 
 - [Linux kernel: NVMe documentation](https://docs.kernel.org/nvme/index.html)
+- [NVM Express over Fabrics specification](https://nvmexpress.org/specification/nvm-express-over-fabrics-specification/)
 - Further reading (blog): [Red Hat Blog: storage](https://www.redhat.com/en/blog)
 
 ## What to learn next
