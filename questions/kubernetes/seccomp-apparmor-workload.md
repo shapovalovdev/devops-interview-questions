@@ -26,3 +26,11 @@ How would you reduce a Pod's kernel attack surface with seccomp and AppArmor wit
 - [Kubernetes: Restrict a container's syscalls with seccomp](https://kubernetes.io/docs/tutorials/security/seccomp/)
 - [Kubernetes: Restrict a container's access to resources with AppArmor](https://kubernetes.io/docs/tutorials/security/apparmor/)
 - Further reading (blog): [Kubernetes: Seccomp default feature](https://kubernetes.io/blog/2021/08/25/seccomp-default/)
+
+## What to learn next
+
+- Official documentation: [Linux kernel security constraints for Pods and containers](https://kubernetes.io/docs/concepts/security/linux-kernel-security-constraints/)
+- Manual or specification: [seccomp(2) manual page](https://man7.org/linux/man-pages/man2/seccomp.2.html)
+- Maintainer or personal blog: [Dave Altena — from Linux primitives to Kubernetes security contexts](https://learnkube.com/security-contexts)
+- Technical blog: [Kubernetes blog — distributing seccomp, SELinux and AppArmor profiles as OCI artifacts](https://kubernetes.io/blog/2023/05/24/oci-security-profiles/)
+- Hands-on guide: [Restrict a container's syscalls with seccomp](https://kubernetes.io/docs/tutorials/security/seccomp/)

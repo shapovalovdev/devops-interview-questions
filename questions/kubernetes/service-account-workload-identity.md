@@ -25,3 +25,11 @@ How should an application use a Kubernetes ServiceAccount without granting every
 - [Kubernetes: Service Accounts](https://kubernetes.io/docs/concepts/security/service-accounts/)
 - [Kubernetes: RBAC authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 - Further reading (blog): [Kubernetes ServiceAccount token improvements](https://kubernetes.io/blog/2020/12/24/introducing-bound-service-account-tokens/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes concepts: service accounts](https://kubernetes.io/docs/concepts/security/service-accounts/)
+- Manual or specification: [TokenRequest v1 API reference](https://kubernetes.io/docs/reference/kubernetes-api/authentication-resources/token-request-v1/)
+- Maintainer or personal blog: [Rory McCune — anonymous access to the Kubernetes API](https://raesene.github.io/blog/2023/03/18/lets-talk-about-anonymous-access-to-Kubernetes/)
+- Technical blog: [Kubernetes blog — service account token integration for image pulls](https://kubernetes.io/blog/2025/09/03/kubernetes-v1-34-sa-tokens-image-pulls-beta/)
+- Hands-on guide: [Configure service accounts for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
