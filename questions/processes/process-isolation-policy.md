@@ -27,12 +27,12 @@ How would you define a practical process-isolation policy for shared Linux infra
 - [namespaces(7): Linux isolation namespaces](https://man7.org/linux/man-pages/man7/namespaces.7.html)
 - [systemd.exec: execution sandbox settings](https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html)
 - Free book: [Linux Security HOWTO](https://tldp.org/HOWTO/Security-HOWTO/)
-- Further reading (blog): [Liz Rice: Containers from scratch](https://www.lizrice.com/containers-from-scratch/)
+- Further reading (blog): [Liz Rice: Containers from scratch](https://www.lizrice.com/)
 
 ## What to learn next
 
 - Official documentation: [man7 capabilities(7)](https://man7.org/linux/man-pages/man7/capabilities.7.html)
 - Manual or specification: [man7 namespaces(7)](https://man7.org/linux/man-pages/man7/namespaces.7.html)
-- Maintainer or personal blog: [Liz Rice — Containers from Scratch](https://www.lizrice.com/containers-from-scratch/)
+- Maintainer or personal blog: [Liz Rice — Containers from Scratch](https://www.lizrice.com/)
 - Technical blog: [Red Hat — Linux security](https://www.redhat.com/en/topics/security)
 - Hands-on guide: [Linux Security HOWTO](https://tldp.org/HOWTO/Security-HOWTO/)

@@ -23,12 +23,12 @@ What trade-off does an NFS hard or soft mount make during a server outage?
 ## References
 
 - [nfs(5): soft, hard, and timeout options](https://man7.org/linux/man-pages/man5/nfs.5.html)
-- Further reading (blog): [Linux NFS project resources](https://www.linux-nfs.org/)
+- Further reading (blog): [Linux NFS project resources](https://www.spinics.net/lists/linux-nfs/)
 
 ## What to learn next
 
 - Official documentation: [Linux NFS client guide](https://docs.kernel.org/admin-guide/nfs/index.html)
 - Manual or specification: [nfs(5) manual](https://man7.org/linux/man-pages/man5/nfs.5.html)
-- Maintainer or personal blog: [Linux NFS project resources](https://www.linux-nfs.org/)
+- Maintainer or personal blog: [Linux NFS project resources](https://www.spinics.net/lists/linux-nfs/)
 - Technical blog: [Red Hat Blog: NFS](https://www.redhat.com/en/blog/channel/red-hat-enterprise-linux)
 - Hands-on guide: [Ubuntu Server: NFS](https://ubuntu.com/server/docs/how-to/networking/install-nfs/)
