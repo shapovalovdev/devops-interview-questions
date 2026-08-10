@@ -34,5 +34,5 @@ Why can an inherited file descriptor cause an availability or security incident,
 - Official documentation: [man7 open(2)](https://man7.org/linux/man-pages/man2/open.2.html)
 - Manual or specification: [man7 fcntl(2)](https://man7.org/linux/man-pages/man2/fcntl.2.html)
 - Maintainer or personal blog: [Julia Evans — file descriptors](https://jvns.ca/)
-- Technical blog: [Red Hat — Linux processes](https://www.redhat.com/en/topics/linux/what-is-a-linux-process)
+- Technical blog: [Linux kernel proc filesystem documentation](https://docs.kernel.org/filesystems/proc.html)
 - Hands-on guide: [The Linux Programming Interface resources](https://man7.org/tlpi/)

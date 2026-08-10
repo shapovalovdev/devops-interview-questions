@@ -108,3 +108,9 @@ def test_resource_limits_uses_live_kernel_process_documentation() -> None:
     text = (ROOT / "questions" / "processes" / "resource-limits.md").read_text(encoding="utf-8")
     assert "https://www.redhat.com/en/topics/linux/what-is-a-linux-process" not in text
     assert "https://docs.kernel.org/filesystems/proc.html" in text
+
+
+def test_file_descriptor_inheritance_uses_live_kernel_process_documentation() -> None:
+    text = (ROOT / "questions" / "processes" / "file-descriptor-inheritance.md").read_text(encoding="utf-8")
+    assert "https://www.redhat.com/en/topics/linux/what-is-a-linux-process" not in text
+    assert "https://docs.kernel.org/filesystems/proc.html" in text
