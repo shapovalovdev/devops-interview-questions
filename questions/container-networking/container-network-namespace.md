@@ -25,3 +25,11 @@ What does a container network namespace isolate, and what remains shared with th
 
 - [Docker Docs: Container networking](https://docs.docker.com/engine/network/)
 - Further reading (blog): [Docker: Networking basics](https://www.docker.com/blog/understanding-docker-networking-drivers-use-cases/)
+
+## What to learn next
+
+- Official documentation: [Docker networking](https://docs.docker.com/engine/network/)
+- Manual or specification: [network_namespaces(7)](https://man7.org/linux/man-pages/man7/network_namespaces.7.html)
+- Maintainer or personal blog: [Julia Evans: Linux networking writing](https://jvns.ca/)
+- Technical blog: [Docker networking drivers](https://www.docker.com/blog/understanding-docker-networking-drivers-use-cases/)
+- Hands-on guide: [Docker networking tutorial](https://docs.docker.com/engine/network/tutorials/standalone/)
