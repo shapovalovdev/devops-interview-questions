@@ -126,3 +126,9 @@ def test_process_identity_and_pid_reuse_uses_live_kernel_process_documentation()
     text = (ROOT / "questions" / "processes" / "process-identity-and-pid-reuse.md").read_text(encoding="utf-8")
     assert "https://www.redhat.com/en/topics/linux/what-is-a-linux-process" not in text
     assert "https://docs.kernel.org/filesystems/proc.html" in text
+
+
+def test_debug_error_budget_uses_live_error_budget_guidance() -> None:
+    text = (ROOT / "questions" / "troubleshooting" / "debug-error-budget.md").read_text(encoding="utf-8")
+    assert "https://www.nobl9.com/blog" not in text
+    assert "https://sre.google/workbook/error-budget-policy/" in text

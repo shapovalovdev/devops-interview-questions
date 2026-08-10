@@ -30,4 +30,4 @@ sources:
 - Official documentation: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
 - Hands-on guide: [Prometheus alerting](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)
 - Maintainer or personal blog: [Alex Hidalgo](https://www.alexhidalgo.com/)
-- Technical blog: [Nobl9 blog](https://www.nobl9.com/blog)
+- Technical blog: [Google SRE error-budget policy](https://sre.google/workbook/error-budget-policy/)
