@@ -24,12 +24,12 @@ How would you add trace-to-log correlation without making logs depend on a traci
 
 - [W3C Trace Context](https://www.w3.org/TR/trace-context/)
 - [OpenTelemetry logging correlation](https://opentelemetry.io/docs/specs/otel/logs/)
-- Further reading (blog): [Honeycomb: trace context](https://www.honeycomb.io/blog/how-trace-context-works)
+- Further reading (blog): [Honeycomb OpenTelemetry guidance](https://docs.honeycomb.io/send-data/opentelemetry/)
 
 ## What to learn next
 
 - Official documentation: [OpenTelemetry context propagation](https://opentelemetry.io/docs/concepts/context-propagation/)
 - Manual or specification: [W3C Trace Context](https://www.w3.org/TR/trace-context/)
 - Maintainer or personal blog: [Charity Majors' writing](https://charity.wtf/)
-- Technical blog: [Honeycomb trace context](https://www.honeycomb.io/blog/how-trace-context-works)
+- Technical blog: [Honeycomb OpenTelemetry guidance](https://docs.honeycomb.io/send-data/opentelemetry/)
 - Hands-on guide: [OpenTelemetry instrumentation](https://opentelemetry.io/docs/languages/)

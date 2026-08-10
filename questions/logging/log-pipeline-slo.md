@@ -31,4 +31,4 @@ What would you measure to know whether an observability logging pipeline is reli
 - Manual or specification: [Google SRE SLO chapter](https://sre.google/sre-book/service-level-objectives/)
 - Maintainer or personal blog: [Liz Fong-Jones' writing](https://www.lizthegrey.com/)
 - Technical blog: [Honeycomb observability pipelines](https://www.honeycomb.io/blog/)
-- Hands-on guide: [OpenTelemetry Collector monitoring](https://opentelemetry.io/docs/collector/monitoring/)
+- Hands-on guide: [OpenTelemetry Collector troubleshooting](https://opentelemetry.io/docs/collector/troubleshooting/)

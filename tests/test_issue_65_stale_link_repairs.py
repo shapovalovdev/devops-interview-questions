@@ -48,6 +48,9 @@ STALE_URL_FRAGMENTS = (
     "grafana.com/blog/author/ed-welch",
     "grafana.com/blog/tags/loki",
     "grafana.com/docs/loki/latest/operations/storage/migrate-to-tsdb",
+    "opentelemetry.io/docs/collector/monitoring/",
+    "elastic.co/docs/reference/ecs/migrate",
+    "honeycomb.io/blog/how-trace-context-works",
 )
 
 

@@ -31,4 +31,4 @@ What should the platform team own, and what should application teams own, in a c
 - Manual or specification: [OpenTelemetry logs specification](https://opentelemetry.io/docs/specs/otel/logs/)
 - Maintainer or personal blog: [Liz Fong-Jones' writing](https://www.lizthegrey.com/)
 - Technical blog: [Google SRE toil guidance](https://sre.google/workbook/eliminating-toil/)
-- Hands-on guide: [OpenTelemetry Collector monitoring](https://opentelemetry.io/docs/collector/monitoring/)
+- Hands-on guide: [OpenTelemetry Collector troubleshooting](https://opentelemetry.io/docs/collector/troubleshooting/)
