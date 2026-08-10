@@ -1518,5 +1518,9 @@
     {"question": "questions/backend-architecture/multi-tenancy-isolation.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/backend-architecture/platform-boundary-strategy.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/backend-architecture/rate-limiting-policy.md", "related_materials": "docs/related-materials/backend-architecture.md"}
+,
+    {"question": "questions/backend-architecture/resilience-investment-model.md", "related_materials": "docs/related-materials/backend-architecture.md"},
+    {"question": "questions/backend-architecture/rest-resource-semantics.md", "related_materials": "docs/related-materials/backend-architecture.md"},
+    {"question": "questions/backend-architecture/retry-backoff-and-jitter.md", "related_materials": "docs/related-materials/backend-architecture.md"}
   ]
 }
