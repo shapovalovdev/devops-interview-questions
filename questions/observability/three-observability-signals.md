@@ -3,7 +3,7 @@ title: Compare metrics, logs, and traces during an incident
 theme: observability
 difficulty: middle
 type: theory
-tags: [observability, monitoring, debugging, incident-response, kcna, prometheus, pca, otca]
+tags: [observability, monitoring, debugging, incident-response, kcna, prometheus, pca, otca, must-know]
 sources:
   - url: https://opentelemetry.io/docs/concepts/observability-primer/
     source_type: official-docs

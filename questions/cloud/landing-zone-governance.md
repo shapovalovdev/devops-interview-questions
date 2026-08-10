@@ -3,7 +3,7 @@ title: Establish a governed cloud landing zone
 theme: cloud
 difficulty: staff
 type: scenario
-tags: [aws, cloud, governance, security, platform-engineering, cnpa]
+tags: [aws, cloud, governance, security, platform-engineering, cnpa, must-know]
 sources:
   - url: https://docs.aws.amazon.com/prescriptive-guidance/latest/security-reference-architecture/landing-zone.html
     source_type: official-docs

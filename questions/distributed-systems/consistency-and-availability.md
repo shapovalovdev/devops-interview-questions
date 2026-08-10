@@ -3,7 +3,7 @@ title: Explain consistency and availability during a network partition
 theme: distributed-systems
 difficulty: junior
 type: theory
-tags: [availability, reliability, networking]
+tags: [availability, reliability, networking, must-know]
 sources:
   - url: https://etcd.io/docs/v3.6/learning/why/
     source_type: official-docs

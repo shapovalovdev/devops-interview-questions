@@ -3,7 +3,7 @@ title: Explain the Linux boot sequence
 theme: linux
 difficulty: middle
 type: theory
-tags: [linux, troubleshooting]
+tags: [linux, troubleshooting, must-know]
 sources:
   - url: https://www.freedesktop.org/software/systemd/man/latest/bootup.html
     source_type: official-docs

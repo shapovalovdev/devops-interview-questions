@@ -8,7 +8,9 @@ Use lowercase kebab-case tags. Give every question one or more technology or con
 
 ## Practices
 
-`automation`, `availability`, `capacity-planning`, `debugging`, `delivery`, `deployment`, `incident-response`, `least-privilege`, `monitoring`, `reliability`, `rolling-update`, `supply-chain`, `troubleshooting`
+`automation`, `availability`, `capacity-planning`, `debugging`, `delivery`, `deployment`, `incident-response`, `least-privilege`, `monitoring`, `must-know`, `reliability`, `rolling-update`, `supply-chain`, `troubleshooting`
+
+`must-know` is a controlled curation tag, not a synonym for difficult or popular. It is assigned only to the cross-theme study collection documented in [`docs/must-know.md`](./docs/must-know.md).
 
 ## Operational and performance concepts
 

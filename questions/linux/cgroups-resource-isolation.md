@@ -3,7 +3,7 @@ title: Diagnose a cgroup resource limit problem
 theme: linux
 difficulty: senior
 type: troubleshooting
-tags: [linux, cgroups, reliability, troubleshooting]
+tags: [linux, cgroups, reliability, troubleshooting, must-know]
 sources:
   - url: https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html
     source_type: official-docs

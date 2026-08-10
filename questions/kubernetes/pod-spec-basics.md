@@ -3,7 +3,7 @@ title: Read the essential parts of a Pod specification
 theme: kubernetes
 difficulty: junior
 type: theory
-tags: [kubernetes, containers, deployment, cka, ckad, kcna]
+tags: [kubernetes, containers, deployment, cka, ckad, kcna, must-know]
 sources:
   - url: https://kubernetes.io/docs/concepts/workloads/pods/
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Choose a messaging platform for an organization
 theme: queue-messaging
 difficulty: staff
 type: scenario
-tags: [kafka, rabbitmq, message-queues, platform-engineering, governance]
+tags: [kafka, rabbitmq, message-queues, platform-engineering, governance, must-know]
 sources:
   - url: https://kafka.apache.org/documentation/#intro_concepts_and_terms
     source_type: official-docs

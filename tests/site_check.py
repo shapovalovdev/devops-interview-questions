@@ -20,6 +20,9 @@ with sync_playwright() as playwright:
     page.locator('#search').fill('')
     page.get_by_role('button', name='security').click()
     assert cards.count() > 0
+    page.get_by_role('button', name='must-know study set').click()
+    must_know_count = page.evaluate("window.questions.filter((question) => question.tags.includes('must-know')).length")
+    assert cards.count() == must_know_count and page.url.endswith('#collection=must-know')
 
     # Certification tracks are manifest-derived, keyboard-accessible filters that
     # use URL hash state without creating duplicate Question themes.
@@ -41,6 +44,9 @@ with sync_playwright() as playwright:
     lfcs_count = mobile.evaluate("window.questions.filter((question) => question.tags.includes('lfcs')).length")
     assert mobile.locator('.question-card').count() == lfcs_count
     assert mobile.locator('#certification-filters button[data-certificate="lfcs"]').get_attribute('aria-pressed') == 'true'
+    mobile.goto(f'{site}#collection=must-know')
+    mobile.wait_for_load_state('networkidle')
+    assert mobile.locator('.question-card').count() == mobile.evaluate("window.questions.filter((question) => question.tags.includes('must-know')).length")
 
     # A narrow touch viewport can create, navigate, reveal, and share a session
     # without embedding a duplicate answer in browser data.

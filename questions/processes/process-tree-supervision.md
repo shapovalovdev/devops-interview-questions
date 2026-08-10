@@ -3,7 +3,7 @@ title: Design supervision for a multi-process application
 theme: processes
 difficulty: senior
 type: scenario
-tags: [linux, processes, systemd, pid1, reliability]
+tags: [linux, processes, systemd, pid1, reliability, must-know]
 sources:
   - url: https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html
     source_type: official-docs

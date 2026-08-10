@@ -3,7 +3,7 @@ title: Coordinate a multi-service saga
 theme: distributed-systems
 difficulty: middle
 type: scenario
-tags: [event-driven, reliability, recovery]
+tags: [event-driven, reliability, recovery, must-know]
 sources:
   - url: https://microservices.io/patterns/data/saga.html
     source_type: official-docs

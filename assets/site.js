@@ -7,8 +7,10 @@
   const resultLine = document.querySelector('#result-line');
   const themes = [...new Set(data.map((question) => question.theme))];
   const certifications = window.certifications || [];
+  const mustKnowFilter = document.querySelector('#must-know-filter');
   let activeTheme = 'all';
   let activeCertification = 'all';
+  let activeCollection = 'all';
 
   document.querySelector('#question-count').textContent = data.length;
   document.querySelector('#theme-count').textContent = themes.length;
@@ -38,6 +40,7 @@
     const params = new URLSearchParams();
     if (key === 'theme' && value !== 'all') params.set('theme', value);
     if (key === 'certificate' && value !== 'all') params.set('certificate', value);
+    if (key === 'collection' && value !== 'all') params.set('collection', value);
     const hash = params.toString();
     history.pushState(null, '', hash ? `#${hash}` : `${location.pathname}${location.search}`);
   }
@@ -46,8 +49,12 @@
     const params = new URLSearchParams(location.hash.slice(1));
     const theme = params.get('theme');
     const certification = params.get('certificate');
+    const collection = params.get('collection');
     activeTheme = themes.includes(theme) ? theme : 'all';
     activeCertification = certifications.some((item) => item.tag === certification) ? certification : 'all';
+    activeCollection = collection === 'must-know' ? collection : 'all';
+    mustKnowFilter.setAttribute('aria-pressed', String(activeCollection === 'must-know'));
+    mustKnowFilter.classList.toggle('active', activeCollection === 'must-know');
   }
 
   function renderQuestions() {
@@ -56,6 +63,7 @@
       const text = [question.title, question.theme, question.type, ...question.tags].join(' ').toLowerCase();
       return (activeTheme === 'all' || question.theme === activeTheme)
         && (activeCertification === 'all' || question.tags.includes(activeCertification))
+        && (activeCollection === 'all' || question.tags.includes(activeCollection))
         && text.includes(query);
     });
     resultLine.textContent = `${shown.length.toString().padStart(2, '0')} RECORD${shown.length === 1 ? '' : 'S'} FOUND`;
@@ -73,6 +81,7 @@
     if (!button) return;
     activeTheme = button.dataset.theme;
     activeCertification = 'all';
+    activeCollection = 'all';
     setHash('theme', activeTheme);
     renderFilters();
     renderCertificationFilters();
@@ -83,10 +92,17 @@
     if (!button) return;
     activeCertification = button.dataset.certificate;
     activeTheme = 'all';
+    activeCollection = 'all';
     setHash('certificate', activeCertification);
     renderFilters();
     renderCertificationFilters();
     renderQuestions();
+  });
+  mustKnowFilter.addEventListener('click', () => {
+    activeCollection = activeCollection === 'must-know' ? 'all' : 'must-know';
+    activeTheme = 'all'; activeCertification = 'all';
+    setHash('collection', activeCollection);
+    renderFilters(); renderCertificationFilters(); renderQuestions();
   });
   window.addEventListener('hashchange', () => {
     readHash();
