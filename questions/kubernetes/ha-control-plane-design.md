@@ -26,3 +26,11 @@ How would you design an HA control plane for a kubeadm cluster, and what failure
 - [Kubernetes: Creating highly available clusters with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/)
 - [Kubernetes: Operating etcd clusters for Kubernetes](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/)
 - Further reading (blog): [Kubernetes: Production considerations for etcd](https://kubernetes.io/blog/2023/10/12/bootstrap-an-etcd-cluster-with-kubeadm/)
+
+## What to learn next
+
+- Official documentation: [Highly available kubeadm topology options](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/ha-topology/)
+- Manual or specification: [etcd API and Raft consistency model](https://etcd.io/docs/v3.5/learning/api/)
+- Maintainer or personal blog: [Daniele Polencic — why etcd breaks at scale in Kubernetes](https://learnkube.com/etcd-breaks-at-scale)
+- Technical blog: [CNCF — making etcd incidents easier to debug in production Kubernetes](https://www.cncf.io/blog/2026/03/12/making-etcd-incidents-easier-to-debug-in-production-kubernetes/)
+- Hands-on guide: [Create a highly available cluster with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/)
