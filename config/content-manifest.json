@@ -147,6 +147,10 @@
     {
       "name": "testing-strategy",
       "state": "in-progress"
+    },
+    {
+      "name": "serverless",
+      "state": "in-progress"
     }
   ],
   "certifications": [
