@@ -24,3 +24,10 @@ What does a `FAILED` neighbour entry indicate, and how do you investigate it?
 
 - [ip-neighbour(8): Linux neighbour-table states](https://www.man7.org/linux/man-pages/man8/ip-neighbour.8.html)
 - Further reading (blog): [Red Hat: network troubleshooting with packet captures](https://www.redhat.com/en/blog/network-packet-captures)
+## What to learn next
+
+- Official documentation: [Linux kernel networking documentation](https://www.kernel.org/doc/html/latest/networking/)
+- Manual or specification: [netlink(7) Linux manual](https://man7.org/linux/man-pages/man7/netlink.7.html)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)

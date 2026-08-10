@@ -24,3 +24,10 @@ Does a failed `ping` prove that a service or host is down?
 
 - [ping(8): ICMP echo diagnostic utility](https://man7.org/linux/man-pages/man8/ping.8.html)
 - Further reading (blog): [Red Hat: Linux network troubleshooting commands](https://www.redhat.com/en/blog/linux-network-troubleshooting-commands)
+## What to learn next
+
+- Official documentation: [Linux kernel networking documentation](https://www.kernel.org/doc/html/latest/networking/)
+- Manual or specification: [netlink(7) Linux manual](https://man7.org/linux/man-pages/man7/netlink.7.html)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)

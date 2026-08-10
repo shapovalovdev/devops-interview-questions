@@ -24,3 +24,10 @@ How do network namespaces change Linux network troubleshooting?
 
 - [network_namespaces(7): Linux network namespace isolation](https://man7.org/linux/man-pages/man7/network_namespaces.7.html)
 - Further reading (blog): [Red Hat: network troubleshooting with packet captures](https://www.redhat.com/en/blog/network-packet-captures)
+## What to learn next
+
+- Official documentation: [Linux kernel networking documentation](https://www.kernel.org/doc/html/latest/networking/)
+- Manual or specification: [netlink(7) Linux manual](https://man7.org/linux/man-pages/man7/netlink.7.html)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)

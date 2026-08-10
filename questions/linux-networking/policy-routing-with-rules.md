@@ -24,3 +24,10 @@ Why can a route exist in the main table while a Linux connection still takes ano
 
 - [ip-rule(8): routing-policy database management](https://man7.org/linux/man-pages/man8/ip-rule.8.html)
 - Further reading (blog): [Red Hat: configuring IP networking with ip commands](https://www.redhat.com/en/blog/configuring-ip-networking-with-ip-commands)
+## What to learn next
+
+- Official documentation: [Linux kernel networking documentation](https://www.kernel.org/doc/html/latest/networking/)
+- Manual or specification: [netlink(7) Linux manual](https://man7.org/linux/man-pages/man7/netlink.7.html)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)

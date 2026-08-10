@@ -24,3 +24,10 @@ A host has latency spikes under egress load. When should you investigate Linux t
 
 - [tc(8): Linux traffic-control utility](https://man7.org/linux/man-pages/man8/tc.8.html)
 - Further reading (blog): [Cloudflare: how to drop 10 million packets](https://blog.cloudflare.com/how-to-drop-10-million-packets/)
+## What to learn next
+
+- Official documentation: [Linux kernel networking documentation](https://www.kernel.org/doc/html/latest/networking/)
+- Manual or specification: [netlink(7) Linux manual](https://man7.org/linux/man-pages/man7/netlink.7.html)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)
