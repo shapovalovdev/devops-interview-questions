@@ -192,3 +192,9 @@ def test_container_network_security_architecture_uses_live_docker_tutorial() -> 
     text = (ROOT / "questions" / "container-networking" / "container-network-security-architecture.md").read_text(encoding="utf-8")
     assert "https://docs.docker.com/network/tutorials/" not in text
     assert "https://docs.docker.com/engine/network/tutorials/standalone/" in text
+
+
+def test_network_policy_enforcement_limits_uses_live_docker_tutorial() -> None:
+    text = (ROOT / "questions" / "container-networking" / "network-policy-enforcement-limits.md").read_text(encoding="utf-8")
+    assert "https://docs.docker.com/network/tutorials/" not in text
+    assert "https://docs.docker.com/engine/network/tutorials/standalone/" in text
