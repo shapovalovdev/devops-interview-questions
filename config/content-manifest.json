@@ -21,6 +21,10 @@
       "state": "complete"
     },
     {
+      "name": "caching",
+      "state": "in-progress"
+    },
+    {
       "name": "certification-last-minute-review",
       "state": "complete"
     },
