@@ -25,3 +25,11 @@ How do you prevent a workflow from receiving more repository permission than it 
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Workflow syntax—permissions](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#permissions)
 - [Further reading: GitHub Docs—security hardening for Actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions permissions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication)
+- Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
+- Maintainer or personal blog: [Troy Hunt](https://www.troyhunt.com/)
+- Technical blog: [GitHub Blog — CI/CD](https://github.blog/enterprise-software/ci-cd/)
+- Hands-on guide: [Practical guide](https://docs.github.com/en/actions/tutorials/security-hardening-your-deployments)
