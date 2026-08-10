@@ -1413,5 +1413,9 @@
     {"question": "questions/systems-performance/baseline-before-tuning.md", "related_materials": "docs/related-materials/systems-performance.md"},
     {"question": "questions/systems-performance/benchmark-validity-review.md", "related_materials": "docs/related-materials/systems-performance.md"},
     {"question": "questions/systems-performance/capacity-model-governance.md", "related_materials": "docs/related-materials/systems-performance.md"}
+,
+    {"question": "questions/systems-performance/context-switch-investigation.md", "related_materials": "docs/related-materials/systems-performance.md"},
+    {"question": "questions/systems-performance/cpu-profiling-first-pass.md", "related_materials": "docs/related-materials/systems-performance.md"},
+    {"question": "questions/systems-performance/cpu-steal-time-cloud.md", "related_materials": "docs/related-materials/systems-performance.md"}
   ]
 }
