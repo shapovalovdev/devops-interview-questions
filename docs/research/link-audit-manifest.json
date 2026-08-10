@@ -1343,5 +1343,9 @@
     {"question": "questions/configuration-management/ansible-inventory-basics.md", "related_materials": "docs/related-materials/configuration-management.md"},
     {"question": "questions/configuration-management/ansible-playbook-basics.md", "related_materials": "docs/related-materials/configuration-management.md"},
     {"question": "questions/configuration-management/ansible-privilege-escalation.md", "related_materials": "docs/related-materials/configuration-management.md"}
+,
+    {"question": "questions/configuration-management/ansible-role-design.md", "related_materials": "docs/related-materials/configuration-management.md"},
+    {"question": "questions/configuration-management/ansible-rolling-update.md", "related_materials": "docs/related-materials/configuration-management.md"},
+    {"question": "questions/configuration-management/ansible-tags.md", "related_materials": "docs/related-materials/configuration-management.md"}
   ]
 }

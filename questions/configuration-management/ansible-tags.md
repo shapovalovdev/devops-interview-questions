@@ -25,3 +25,11 @@ How can tags make an urgent Ansible run safer without creating an unsupported pa
 
 - [Ansible documentation: tags](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_tags.html)
 - Further reading (blog): [Spacelift: Ansible tags](https://www.spacelift.io/blog/ansible-tags)
+
+## What to learn next
+
+- Official documentation: [Ansible documentation](https://docs.ansible.com/ansible/latest/)
+- Manual or specification: [Ansible playbook guide](https://docs.ansible.com/ansible/latest/playbook_guide/index.html)
+- Maintainer or personal blog: [Jeff Geerling](https://www.jeffgeerling.com/blog)
+- Technical blog: [Red Hat Ansible blog](https://www.redhat.com/en/blog/channel/ansible)
+- Hands-on guide: [Ansible examples](https://github.com/ansible/ansible-examples)
