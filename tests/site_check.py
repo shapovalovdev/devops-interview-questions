@@ -3,6 +3,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 site = Path('index.html').resolve().as_uri()
+session_site = Path('session.html').resolve().as_uri()
 manifest = json.loads(Path('config/content-manifest.json').read_text(encoding='utf-8'))
 certifications = manifest['certifications']
 
@@ -40,5 +41,29 @@ with sync_playwright() as playwright:
     lfcs_count = mobile.evaluate("window.questions.filter((question) => question.tags.includes('lfcs')).length")
     assert mobile.locator('.question-card').count() == lfcs_count
     assert mobile.locator('#certification-filters button[data-certificate="lfcs"]').get_attribute('aria-pressed') == 'true'
+
+    # A narrow touch viewport can create, navigate, reveal, and share a session
+    # without embedding a duplicate answer in browser data.
+    mobile.goto(session_site)
+    mobile.wait_for_load_state('networkidle')
+    mobile.locator('#session-themes input[value="linux"]').check()
+    mobile.locator('#session-themes input[value="kubernetes"]').check()
+    mobile.locator('#session-total').fill('6')
+    mobile.locator('#session-total').press('Tab')
+    mobile.get_by_label('linux allocation').fill('3')
+    mobile.get_by_label('kubernetes allocation').fill('3')
+    mobile.get_by_role('button', name='Build my session →').click()
+    assert mobile.locator('#interview-deck').is_visible()
+    assert mobile.locator('#session-progress').inner_text() == '1 / 6'
+    mobile.get_by_role('button', name='Reveal answer link').click()
+    answer_link = mobile.locator('#session-answer a')
+    assert answer_link.is_visible()
+    assert answer_link.get_attribute('href').endswith('.html')
+    mobile.get_by_role('button', name='Next →').click()
+    assert mobile.locator('#session-progress').inner_text() == '2 / 6'
+    session_params = mobile.evaluate('Object.fromEntries(new URLSearchParams(location.search))')
+    assert set(session_params['themes'].split(',')) == {'linux', 'kubernetes'}
+    assert session_params['total'] == '6' and session_params['index'] == '1'
+    assert set(session_params['allocations'].split(',')) == {'linux:3', 'kubernetes:3'}
     mobile.close()
     browser.close()

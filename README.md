@@ -8,6 +8,7 @@ A public, Markdown-first database of DevOps interview questions and concise answ
 - Use [`TAGS.md`](./TAGS.md) to understand the controlled tag vocabulary.
 - Read [`CONTRIBUTING.md`](./CONTRIBUTING.md) before adding a question.
 - Follow the certification study maps in [`docs/certifications/`](./docs/certifications/), beginning with [CKA coverage](./docs/certifications/cka.md).
+- Practise with the public [interview drill deck](https://shapovalovdev.github.io/devops-interview-questions/session.html): select Themes and allocations, then share the generated URL to restore the same one-question-at-a-time session. The deck links to canonical Question pages for answer guides; it never duplicates answers in browser data.
 
 ## Repository tree
 
