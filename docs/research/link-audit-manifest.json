@@ -1363,5 +1363,12 @@
     {"question": "questions/configuration-management/cm-resilience-strategy.md", "related_materials": "docs/related-materials/configuration-management.md"},
     {"question": "questions/configuration-management/cm-standardization-strategy.md", "related_materials": "docs/related-materials/configuration-management.md"},
     {"question": "questions/configuration-management/configuration-drift-remediation.md", "related_materials": "docs/related-materials/configuration-management.md"}
+,
+    {"question": "questions/shell-scripting/avoid-command-injection.md", "related_materials": "docs/related-materials/shell-scripting.md"},
+    {"question": "questions/shell-scripting/choose-strict-mode.md", "related_materials": "docs/related-materials/shell-scripting.md"},
+    {"question": "questions/shell-scripting/control-concurrent-jobs.md", "related_materials": "docs/related-materials/shell-scripting.md"},
+    {"question": "questions/infrastructure-as-code/output-contracts-and-sensitive-data.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"},
+    {"question": "questions/infrastructure-as-code/policy-as-code-gates.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"},
+    {"question": "questions/infrastructure-as-code/provider-version-pinning.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"}
   ]
 }

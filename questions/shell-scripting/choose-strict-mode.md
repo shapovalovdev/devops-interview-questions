@@ -25,3 +25,11 @@ What do `set -euo pipefail` options help with, and where can they mislead you?
 
 - [GNU Bash manual: The `set` builtin](https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html)
 - Further reading (blog): [Red Hat: Bash error handling](https://www.redhat.com/en/blog/bash-error-handling)
+
+## What to learn next
+
+- Official documentation: [GNU Bash manual](https://www.gnu.org/software/bash/manual/)
+- Manual or specification: [POSIX Shell Command Language](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/V3_chap02.html)
+- Maintainer or personal blog: [Julia Evans](https://jvns.ca/)
+- Technical blog: [Red Hat Enable Sysadmin](https://www.redhat.com/en/blog/channel/enable-sysadmin)
+- Hands-on guide: [ShellCheck wiki](https://www.shellcheck.net/wiki/)
