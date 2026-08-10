@@ -1492,5 +1492,9 @@
     {"question": "questions/backend-architecture/api-gateway-basics.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/backend-architecture/api-versioning-policy.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/backend-architecture/architecture-decision-portfolio.md", "related_materials": "docs/related-materials/backend-architecture.md"}
+,
+    {"question": "questions/backend-architecture/authentication-authorization-boundary.md", "related_materials": "docs/related-materials/backend-architecture.md"},
+    {"question": "questions/backend-architecture/background-job-contract.md", "related_materials": "docs/related-materials/backend-architecture.md"},
+    {"question": "questions/backend-architecture/cache-invalidation-strategy.md", "related_materials": "docs/related-materials/backend-architecture.md"}
   ]
 }
