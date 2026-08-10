@@ -1483,5 +1483,10 @@
     {"question": "questions/certification-last-minute-review/security-context-review.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
     {"question": "questions/certification-last-minute-review/service-endpoints-debug.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
     {"question": "questions/certification-last-minute-review/staff-certification-boundaries.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"}
+,
+    {"question": "questions/certification-last-minute-review/staff-certification-prioritization.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
+    {"question": "questions/certification-last-minute-review/staff-disaster-recovery-exercise.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
+    {"question": "questions/certification-last-minute-review/staff-incident-command.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
+    {"question": "questions/certification-last-minute-review/staff-platform-guardrails.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"}
   ]
 }
