@@ -102,3 +102,9 @@ def test_fork_exec_wait_lifecycle_uses_live_kernel_process_documentation() -> No
     text = (ROOT / "questions" / "processes" / "fork-exec-wait-lifecycle.md").read_text(encoding="utf-8")
     assert "https://www.redhat.com/en/topics/linux/what-is-a-linux-process" not in text
     assert "https://docs.kernel.org/filesystems/proc.html" in text
+
+
+def test_resource_limits_uses_live_kernel_process_documentation() -> None:
+    text = (ROOT / "questions" / "processes" / "resource-limits.md").read_text(encoding="utf-8")
+    assert "https://www.redhat.com/en/topics/linux/what-is-a-linux-process" not in text
+    assert "https://docs.kernel.org/filesystems/proc.html" in text

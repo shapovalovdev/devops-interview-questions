@@ -34,5 +34,5 @@ An application reports “too many open files.” How do you determine the effec
 - Official documentation: [man7 getrlimit(2)](https://man7.org/linux/man-pages/man2/getrlimit.2.html)
 - Manual or specification: [man7 proc_pid_limits(5)](https://man7.org/linux/man-pages/man5/proc_pid_limits.5.html)
 - Maintainer or personal blog: [Julia Evans — file descriptors](https://jvns.ca/)
-- Technical blog: [Red Hat — Linux processes](https://www.redhat.com/en/topics/linux/what-is-a-linux-process)
+- Technical blog: [Linux kernel proc filesystem documentation](https://docs.kernel.org/filesystems/proc.html)
 - Hands-on guide: [The Linux Documentation Project](https://tldp.org/)
