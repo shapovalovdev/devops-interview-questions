@@ -32,4 +32,4 @@ How should a pipeline use an environment approval without turning every release 
 - Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
 - Maintainer or personal blog: [Charity Majors](https://charity.wtf/)
 - Technical blog: [GitHub Blog — CI/CD](https://github.blog/enterprise-software/ci-cd/)
-- Hands-on guide: [GitHub Actions deployment environments](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments)
+- Hands-on guide: [GitHub Actions deployment tutorial](https://docs.github.com/en/actions/tutorials/deploying-with-github-actions)
