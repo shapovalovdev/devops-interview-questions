@@ -27,12 +27,12 @@ Why can an inherited file descriptor cause an availability or security incident,
 - [fcntl(2): FD_CLOEXEC](https://man7.org/linux/man-pages/man2/fcntl.2.html)
 - [proc_pid_fd(5): open file descriptors](https://man7.org/linux/man-pages/man5/proc_pid_fd.5.html)
 - Free book: [The Linux Programming Interface resources](https://man7.org/tlpi/)
-- Further reading (blog): [Julia Evans: A few ways to learn about Linux file descriptors](https://jvns.ca/blog/2020/10/20/what-even-is-a-file-descriptor/)
+- Further reading (blog): [Julia Evans: A few ways to learn about Linux file descriptors](https://jvns.ca/)
 
 ## What to learn next
 
 - Official documentation: [man7 open(2)](https://man7.org/linux/man-pages/man2/open.2.html)
 - Manual or specification: [man7 fcntl(2)](https://man7.org/linux/man-pages/man2/fcntl.2.html)
-- Maintainer or personal blog: [Julia Evans — file descriptors](https://jvns.ca/blog/2020/10/20/what-even-is-a-file-descriptor/)
+- Maintainer or personal blog: [Julia Evans — file descriptors](https://jvns.ca/)
 - Technical blog: [Red Hat — Linux processes](https://www.redhat.com/en/topics/linux/what-is-a-linux-process)
 - Hands-on guide: [The Linux Programming Interface resources](https://man7.org/tlpi/)

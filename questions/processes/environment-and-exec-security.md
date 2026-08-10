@@ -27,12 +27,12 @@ How would you prevent environment variables from becoming an unsafe configuratio
 - [environ(7): environment variables](https://man7.org/linux/man-pages/man7/environ.7.html)
 - [systemd.exec: environment and credentials](https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html)
 - Free book: [Secure Programming HOWTO](https://tldp.org/HOWTO/Secure-Programs-HOWTO/)
-- Further reading (blog): [Julia Evans: Environment variables](https://jvns.ca/blog/2023/08/07/group-2-environment-variables/)
+- Further reading (blog): [Julia Evans: Environment variables](https://jvns.ca/)
 
 ## What to learn next
 
 - Official documentation: [man7 environ(7)](https://man7.org/linux/man-pages/man7/environ.7.html)
 - Manual or specification: [man7 execve(2)](https://man7.org/linux/man-pages/man2/execve.2.html)
-- Maintainer or personal blog: [Julia Evans — environment variables](https://jvns.ca/blog/2023/08/07/group-2-environment-variables/)
+- Maintainer or personal blog: [Julia Evans — environment variables](https://jvns.ca/)
 - Technical blog: [Red Hat — Linux security](https://www.redhat.com/en/topics/security)
 - Hands-on guide: [Secure Programming HOWTO](https://tldp.org/HOWTO/Secure-Programs-HOWTO/)

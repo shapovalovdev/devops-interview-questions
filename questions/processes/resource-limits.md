@@ -27,12 +27,12 @@ An application reports “too many open files.” How do you determine the effec
 - [proc_pid_limits(5): process limits](https://man7.org/linux/man-pages/man5/proc_pid_limits.5.html)
 - [systemd.resource-control: service resource controls](https://www.freedesktop.org/software/systemd/man/latest/systemd.resource-control.html)
 - Free book: [The Linux Documentation Project](https://tldp.org/)
-- Further reading (blog): [Julia Evans: File descriptors](https://jvns.ca/blog/2020/10/20/what-even-is-a-file-descriptor/)
+- Further reading (blog): [Julia Evans: File descriptors](https://jvns.ca/)
 
 ## What to learn next
 
 - Official documentation: [man7 getrlimit(2)](https://man7.org/linux/man-pages/man2/getrlimit.2.html)
 - Manual or specification: [man7 proc_pid_limits(5)](https://man7.org/linux/man-pages/man5/proc_pid_limits.5.html)
-- Maintainer or personal blog: [Julia Evans — file descriptors](https://jvns.ca/blog/2020/10/20/what-even-is-a-file-descriptor/)
+- Maintainer or personal blog: [Julia Evans — file descriptors](https://jvns.ca/)
 - Technical blog: [Red Hat — Linux processes](https://www.redhat.com/en/topics/linux/what-is-a-linux-process)
 - Hands-on guide: [The Linux Documentation Project](https://tldp.org/)
