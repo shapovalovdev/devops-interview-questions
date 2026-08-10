@@ -1471,5 +1471,9 @@
     {"question": "questions/certification-last-minute-review/namespace-scope.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
     {"question": "questions/certification-last-minute-review/networkpolicy-semantics.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
     {"question": "questions/certification-last-minute-review/pod-disruption-budget.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"}
+,
+    {"question": "questions/certification-last-minute-review/pod-lifecycle-signals.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
+    {"question": "questions/certification-last-minute-review/probe-selection.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
+    {"question": "questions/certification-last-minute-review/pvc-binding.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"}
   ]
 }
