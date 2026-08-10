@@ -880,3 +880,20 @@ window.questions = [
   {"title": "Define WAF and application-security boundaries", "theme": "web-servers", "difficulty": "senior", "type": "scenario", "tags": ["security", "web-server", "http", "governance"], "path": "questions/web-servers/waf-and-application-boundaries.html"},
   {"title": "Proxy WebSocket connections correctly", "theme": "web-servers", "difficulty": "middle", "type": "scenario", "tags": ["http", "nginx", "tcp", "web-server"], "path": "questions/web-servers/websocket-proxying.html"},
 ];
+
+window.certifications = [
+  {"tag": "capa", "map": "docs/certifications/capa.md", "minimumQuestions": 12},
+  {"tag": "cca", "map": "docs/certifications/cca.md", "minimumQuestions": 20},
+  {"tag": "cka", "map": "docs/certifications/cka.md", "minimumQuestions": 25},
+  {"tag": "ckad", "map": "docs/certifications/ckad.md", "minimumQuestions": 20},
+  {"tag": "ckne", "map": "docs/certifications/ckne.md", "minimumQuestions": 22},
+  {"tag": "cks", "map": "docs/certifications/cks.md", "minimumQuestions": 19},
+  {"tag": "cnpa", "map": "docs/certifications/cnpa.md", "minimumQuestions": 21},
+  {"tag": "cnpe", "map": "docs/certifications/cnpe.md", "minimumQuestions": 15},
+  {"tag": "ica", "map": "docs/certifications/ica.md", "minimumQuestions": 15},
+  {"tag": "kca", "map": "docs/certifications/kca.md", "minimumQuestions": 6},
+  {"tag": "kcna", "map": "docs/certifications/kcna.md", "minimumQuestions": 15},
+  {"tag": "kcsa", "map": "docs/certifications/kcsa.md", "minimumQuestions": 20},
+  {"tag": "lfcs", "map": "docs/certifications/lfcs.md", "minimumQuestions": 25},
+  {"tag": "pca", "map": "docs/certifications/pca.md", "minimumQuestions": 25},
+];

@@ -31,7 +31,10 @@
           <label class="search-label" for="search">Find a concept, tool, or failure mode</label>
           <input id="search" type="search" placeholder="e.g. DNS, rollout, secret…" autocomplete="off" />
         </div>
-        <div class="filters" id="filters" aria-label="Filter questions by theme"></div>
+        <div class="filter-banks">
+          <nav class="filters" id="filters" aria-label="Filter questions by theme"></nav>
+          <nav class="certification-filters" id="certification-filters" aria-label="Filter questions by certification track"></nav>
+        </div>
       </section>
 
       <section class="question-zone" aria-live="polite">

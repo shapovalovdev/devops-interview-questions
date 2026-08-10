@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 QUESTIONS = ROOT / "questions"
 CATALOG = ROOT / "assets" / "questions.js"
+MANIFEST = ROOT / "config" / "content-manifest.json"
 
 
 def front_matter(path: Path) -> dict[str, str]:
@@ -24,6 +25,7 @@ def front_matter(path: Path) -> dict[str, str]:
 
 
 def main() -> None:
+    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     records = []
     for path in sorted(QUESTIONS.glob("*/*.md")):
         fields = front_matter(path)
@@ -42,6 +44,21 @@ def main() -> None:
     lines = ["window.questions = ["]
     for record in records:
         lines.append(f"  {json.dumps(record, ensure_ascii=False)},")
+    lines.append("];\n")
+    lines.append("window.certifications = [")
+    for certification in manifest["certifications"]:
+        lines.append(
+            "  "
+            + json.dumps(
+                {
+                    "tag": certification["tag"],
+                    "map": certification["map"],
+                    "minimumQuestions": certification["minimum_questions"],
+                },
+                ensure_ascii=False,
+            )
+            + ","
+        )
     lines.append("];\n")
     CATALOG.write_text("\n".join(lines), encoding="utf-8")
     print(f"Generated {len(records)} catalog records.")

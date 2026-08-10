@@ -32,7 +32,11 @@ h1 em { color: var(--ember); font-style: italic; font-weight: 600; }
 .search-label { display: block; font: 600 1.1rem/1.2 "Fraunces", serif; margin-bottom: .75rem; }
 input { appearance: none; width: 100%; border: 1px solid var(--ink); border-radius: 0; background: rgba(255,255,255,.38); padding: .8rem .9rem; color: var(--ink); font: .78rem "DM Mono", monospace; outline-offset: 3px; }
 input:focus { outline: 2px solid var(--ember); }
-.filters { display: flex; align-content: flex-start; align-items: flex-start; flex-wrap: wrap; gap: .42rem; padding-top: 1.7rem; }
+.filter-banks { padding-top: 1.7rem; }
+.filters, .filter-buttons { display: flex; align-content: flex-start; align-items: flex-start; flex-wrap: wrap; gap: .42rem; }
+.certification-filters { margin-top: 1.15rem; border-top: 1px solid var(--line); padding-top: .72rem; }
+.filter-heading { color: var(--ember); font-size: .68rem; letter-spacing: .09em; margin: 0 0 .55rem; text-transform: uppercase; }
+.filter-heading span { color: var(--muted); }
 .filter { cursor: pointer; border: 1px solid var(--ink); background: transparent; color: var(--ink); padding: .48rem .63rem; font: .68rem "DM Mono", monospace; text-transform: uppercase; transition: background .15s, color .15s, transform .15s; }
 .filter:hover, .filter.active { background: var(--ink); color: var(--acid); }
 .filter:hover { transform: translate(-2px, -2px); box-shadow: 2px 2px 0 var(--ember); }
@@ -50,5 +54,5 @@ input:focus { outline: 2px solid var(--ember); }
 footer { display: flex; justify-content: space-between; gap: 1rem; padding-top: 1rem; padding-bottom: 1.5rem; border-top: 1px solid var(--ink); color: var(--muted); }
 footer a { color: var(--ink); }
 @keyframes enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-@media (max-width: 780px) { .heading-row, .control-room { grid-template-columns: 1fr; gap: 1.5rem; } .filters { padding-top: 0; } .question-grid { grid-template-columns: 1fr; } .question-card { min-height: 13rem; } footer { flex-direction: column; } }
+@media (max-width: 780px) { .heading-row, .control-room { grid-template-columns: 1fr; gap: 1.5rem; } .filter-banks { padding-top: 0; } .question-grid { grid-template-columns: 1fr; } .question-card { min-height: 13rem; } footer { flex-direction: column; } }
 @media (min-width: 781px) and (max-width: 1050px) { .question-grid { grid-template-columns: repeat(2, 1fr); } }
