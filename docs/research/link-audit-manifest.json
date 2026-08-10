@@ -1548,6 +1548,10 @@
     {"question": "questions/caching/cold-cache-troubleshooting.md", "related_materials": "docs/related-materials/caching.md"},
     {"question": "questions/caching/memcached-slab-tuning.md", "related_materials": "docs/related-materials/caching.md"},
     {"question": "questions/caching/negative-caching.md", "related_materials": "docs/related-materials/caching.md"},
-    {"question": "questions/caching/redis-maxmemory-tuning.md", "related_materials": "docs/related-materials/caching.md"}
+    {"question": "questions/caching/redis-maxmemory-tuning.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/cdn-cache-key-scoping.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/hot-key-mitigation.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/stale-while-revalidate-budget.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/write-through-versus-write-behind.md", "related_materials": "docs/related-materials/caching.md"}
   ]
 }
