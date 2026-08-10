@@ -25,3 +25,10 @@ How would you define useful network observability standards across container pla
 
 - [Kubernetes Docs: System metrics](https://kubernetes.io/docs/concepts/cluster-administration/system-metrics/)
 - Further reading (blog): [Kubernetes: Logging architecture](https://kubernetes.io/blog/2020/09/02/beyond-container-logs/)
+## What to learn next
+
+- Official documentation: [Docker networking documentation](https://docs.docker.com/network/)
+- Manual or specification: [CNI specification](https://www.cni.dev/docs/spec/)
+- Maintainer or personal blog: [Thomas Graf — networking articles](https://tgraf.io/)
+- Technical blog: [Cilium engineering blog](https://cilium.io/blog/)
+- Hands-on guide: [Docker networking tutorial](https://docs.docker.com/network/tutorials/)
