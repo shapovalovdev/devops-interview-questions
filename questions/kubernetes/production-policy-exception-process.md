@@ -26,3 +26,11 @@ How do you permit necessary exceptions to platform security policy without norma
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Security checklist](https://kubernetes.io/docs/concepts/security/security-checklist/)
 - [Kubernetes: Admission controllers](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)
+
+## What to learn next
+
+- Official documentation: [Kyverno policy exceptions](https://kyverno.io/docs/guides/exceptions/)
+- Manual or specification: [Kubernetes admission controllers reference](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)
+- Maintainer or personal blog: [Chip Zoller — signing and automating policy exceptions](https://neonmirrors.net/post/2023-03/signing-and-automating-policy-exceptions/)
+- Technical blog: [CNCF — temporary policy exceptions in Kubernetes with Kyverno](https://www.cncf.io/blog/2023/03/01/temporary-policy-exceptions-in-kubernetes-with-kyverno/)
+- Hands-on guide: [Enforce Pod Security Standards with namespace labels and exemptions](https://kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-namespace-labels/)

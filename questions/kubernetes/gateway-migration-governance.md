@@ -26,3 +26,11 @@ How would you lead a migration from controller-specific Ingress configuration to
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/)
 - [Kubernetes: Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes concepts: Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/)
+- Manual or specification: [Gateway API reference specification](https://gateway-api.sigs.k8s.io/reference/)
+- Maintainer or personal blog: [Nico Vibert — migrating from Ingress to Gateway API](https://nicovibert.com/2023/01/20/migrating-from-ingress-to-gateway-api/)
+- Technical blog: [CNCF — zero-downtime migration from ingress-nginx to Envoy Gateway](https://www.cncf.io/blog/2026/05/25/zero-downtime-migration-from-ingress-nginx-to-envoy-gateway/)
+- Hands-on guide: [Gateway API guides](https://gateway-api.sigs.k8s.io/guides/)

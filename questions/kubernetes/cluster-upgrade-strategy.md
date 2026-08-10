@@ -26,3 +26,11 @@ What is a safe upgrade strategy for a production Kubernetes cluster?
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Version Skew Policy](https://kubernetes.io/releases/version-skew-policy/)
 - [Kubernetes: Safely drain a node](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)
+
+## What to learn next
+
+- Official documentation: [Upgrading kubeadm clusters](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)
+- Manual or specification: [Kubernetes version skew policy](https://kubernetes.io/releases/version-skew-policy/)
+- Maintainer or personal blog: [Ahmet Alp Balkan — the many ways a Pod can be evicted during node drains](https://ahmet.im/blog/kubernetes-evictions/)
+- Technical blog: [Kubernetes blog — removals, deprecations and major changes in 1.29](https://kubernetes.io/blog/2023/11/16/kubernetes-1-29-upcoming-changes/)
+- Hands-on guide: [Safely drain a node](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)

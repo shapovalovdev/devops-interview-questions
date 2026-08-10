@@ -26,3 +26,11 @@ How would you expose `api.example.com` through an Ingress with TLS while prevent
 - [Kubernetes: Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 - [Kubernetes: TLS Secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets)
 - Further reading (blog): [cert-manager: Securing Ingress resources](https://cert-manager.io/docs/usage/ingress/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes concepts: Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+- Manual or specification: [Ingress v1 API reference](https://kubernetes.io/docs/reference/kubernetes-api/service-resources/ingress-v1/)
+- Maintainer or personal blog: [Daniele Polencic — exposing services with an API gateway or Ingress](https://learnkube.com/kubernetes-ingress-api-gateway)
+- Technical blog: [Kubernetes blog — ingress-nginx CVE-2025-1974: what you need to know](https://kubernetes.io/blog/2025/03/24/ingress-nginx-CVE-2025-1974/)
+- Hands-on guide: [Manage TLS certificates in a cluster](https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/)

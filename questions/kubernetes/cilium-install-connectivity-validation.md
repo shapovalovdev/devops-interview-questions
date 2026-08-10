@@ -25,3 +25,11 @@ What checks would you run after installing Cilium on a new Kubernetes cluster?
 
 - [Install Cilium with Helm](https://docs.cilium.io/en/stable/installation/k8s-install-helm/)
 - Further reading (blog): [Cilium 1.15 overview](https://isovalent.com/blog/post/cilium-1-15/)
+
+## What to learn next
+
+- Official documentation: [Install Cilium with Helm](https://docs.cilium.io/en/stable/installation/k8s-install-helm/)
+- Manual or specification: [Kubernetes container runtime interface (CRI) reference](https://kubernetes.io/docs/concepts/architecture/cri/)
+- Maintainer or personal blog: [Nico Vibert — bring your own CNI with Cilium on AKS](https://nicovibert.com/2022/07/20/aks-bring-your-own-cni-with-cilium/)
+- Technical blog: [Isovalent — the Cilium engineering blog](https://isovalent.com/blog/)
+- Hands-on guide: [Cilium troubleshooting and connectivity validation](https://docs.cilium.io/en/stable/operations/troubleshooting/)

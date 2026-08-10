@@ -26,3 +26,11 @@ How does an HPA make scaling decisions, and what must be true before relying on 
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Horizontal Pod Autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
 - [Kubernetes: Metrics APIs](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/)
+
+## What to learn next
+
+- Official documentation: [Horizontal Pod Autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
+- Manual or specification: [HorizontalPodAutoscaler v2 API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/horizontal-pod-autoscaler-v2/)
+- Maintainer or personal blog: [Daniel Weibel — autoscaling apps on Kubernetes with custom metrics](https://learnkube.com/autoscaling-apps-kubernetes)
+- Technical blog: [CNCF — autoscaling simplified: how to scale applications in Kubernetes](https://www.cncf.io/blog/2024/02/05/autoscaling-simplified-how-to-scale-your-applications-in-kubernetes/)
+- Hands-on guide: [HorizontalPodAutoscaler walkthrough](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/)

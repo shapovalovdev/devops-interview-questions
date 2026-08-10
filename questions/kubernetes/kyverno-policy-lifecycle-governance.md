@@ -32,8 +32,8 @@ What operating model would you create for shared Kyverno policies, version upgra
 
 ## What to learn next
 
-- Official documentation: [Kyverno security guidance](https://kyverno.io/docs/security/)
-- Official documentation: [Kyverno policy reports](https://kyverno.io/docs/guides/reports/)
-- Manual or specification: [NIST SP 800-53 policy and procedures controls](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
-- Maintainer or personal blog: [Kyverno community blog](https://kyverno.io/blog/)
-- Free learning material: [Kyverno source and community repository](https://github.com/kyverno/kyverno)
+- Official documentation: [Applying and managing Kyverno policies](https://kyverno.io/docs/guides/applying-policies/)
+- Manual or specification: [kyverno apply command reference](https://kyverno.io/docs/kyverno-cli/reference/kyverno_apply/)
+- Maintainer or personal blog: [Chip Zoller — temporary policy exceptions with Kyverno](https://neonmirrors.net/post/2023-02/policy-exception-expiration/)
+- Technical blog: [CNCF — GitOps and mutating policies: the tale of two loops](https://www.cncf.io/blog/2024/01/18/gitops-and-mutating-policies-the-tale-of-two-loops/)
+- Hands-on guide: [Kyverno policy library](https://kyverno.io/policies/)

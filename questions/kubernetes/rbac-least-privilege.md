@@ -26,3 +26,11 @@ How would you authorize a workload and an operator without granting broad cluste
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Using RBAC authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 - [Kubernetes: Service Accounts](https://kubernetes.io/docs/concepts/security/service-accounts/)
+
+## What to learn next
+
+- Official documentation: [Using RBAC authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+- Manual or specification: [Role v1 API reference](https://kubernetes.io/docs/reference/kubernetes-api/authorization-resources/role-v1/)
+- Maintainer or personal blog: [Rory McCune — auditing Kubernetes RBAC, redux](https://raesene.github.io/blog/2022/08/14/auditing-rbac-redux/)
+- Technical blog: [Kubernetes blog — 11 ways (not) to get hacked](https://kubernetes.io/blog/2018/07/18/11-ways-not-to-get-hacked/)
+- Hands-on guide: [RBAC good practices for least privilege](https://kubernetes.io/docs/concepts/security/rbac-good-practices/)

@@ -26,3 +26,11 @@ How would you decide whether teams can safely share a Kubernetes cluster?
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Multi-tenancy](https://kubernetes.io/docs/concepts/security/multi-tenancy/)
 - [Kubernetes: Security checklist](https://kubernetes.io/docs/concepts/security/security-checklist/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes multi-tenancy concepts](https://kubernetes.io/docs/concepts/security/multi-tenancy/)
+- Manual or specification: [ResourceQuota v1 API reference](https://kubernetes.io/docs/reference/kubernetes-api/policy-resources/resource-quota-v1/)
+- Maintainer or personal blog: [Daniel Weibel — how many clusters, and where namespace isolation stops](https://learnkube.com/how-many-clusters)
+- Technical blog: [CNCF — building a cloud native internal developer platform](https://www.cncf.io/blog/2026/05/29/building-a-cloud-native-internal-developer-platform-with-kubernetes-gitops-and-supply-chain-security/)
+- Hands-on guide: [Configure memory and CPU quotas for a namespace](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)

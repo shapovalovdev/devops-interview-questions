@@ -26,3 +26,11 @@ The API server is intermittently unavailable. How do you investigate without mak
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Debugging clusters](https://kubernetes.io/docs/tasks/debug/debug-cluster/)
 - [Kubernetes: Operating etcd clusters](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/)
+
+## What to learn next
+
+- Official documentation: [Troubleshooting clusters](https://kubernetes.io/docs/tasks/debug/debug-cluster/)
+- Manual or specification: [Kubernetes API server health endpoints reference](https://kubernetes.io/docs/reference/using-api/health-checks/)
+- Maintainer or personal blog: [Ahmet Alp Balkan — anatomy of a Kubernetes control plane outage](https://ahmet.im/blog/openai-kubernetes-incident/)
+- Technical blog: [Learnkube — how the Kubernetes control plane works](https://learnkube.com/kubernetes-control-plane)
+- Hands-on guide: [Resource metrics pipeline troubleshooting](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/)

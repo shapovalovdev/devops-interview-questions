@@ -26,3 +26,11 @@ How would you prove that a Kubernetes platform can recover from control-plane or
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Operating etcd clusters](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/)
 - [Kubernetes: Disaster recovery for clusters](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/)
+
+## What to learn next
+
+- Official documentation: [Operating etcd clusters for Kubernetes: backup and restore](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/)
+- Manual or specification: [etcd disaster recovery guide](https://etcd.io/docs/v3.5/op-guide/recovery/)
+- Maintainer or personal blog: [Ahmet Alp Balkan — lessons from a large Kubernetes control plane outage](https://ahmet.im/blog/openai-kubernetes-incident/)
+- Technical blog: [CNCF — precision recovery from etcd snapshots](https://www.cncf.io/blog/2025/05/08/the-kubernetes-surgeons-handbook-precision-recovery-from-etcd-snapshots/)
+- Hands-on guide: [Velero backup and restore documentation](https://velero.io/docs/main/)
