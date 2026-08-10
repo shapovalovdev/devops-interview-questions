@@ -144,3 +144,9 @@ def test_exit_statuses_uses_live_enable_sysadmin_source() -> None:
     text = (ROOT / "questions" / "shell-scripting" / "use-exit-statuses.md").read_text(encoding="utf-8")
     assert "https://www.redhat.com/en/blog/channel/enable-sysadmin" not in text
     assert "https://www.redhat.com/en/blog/welcome" in text
+
+
+def test_host_networking_tradeoffs_uses_live_docker_networking_tutorial() -> None:
+    text = (ROOT / "questions" / "container-networking" / "host-networking-tradeoffs.md").read_text(encoding="utf-8")
+    assert "https://docs.docker.com/network/tutorials/" not in text
+    assert "https://docs.docker.com/engine/network/tutorials/standalone/" in text
