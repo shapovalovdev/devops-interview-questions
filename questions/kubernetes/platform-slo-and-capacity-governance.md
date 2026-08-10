@@ -26,3 +26,11 @@ How would you define service objectives and capacity ownership for a shared Kube
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Cluster autoscaling](https://kubernetes.io/docs/concepts/cluster-administration/cluster-autoscaling/)
 - [Kubernetes: Resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes service level indicator (SLI) metrics](https://kubernetes.io/docs/reference/instrumentation/slis/)
+- Manual or specification: [Kubernetes metrics reference](https://kubernetes.io/docs/reference/instrumentation/metrics/)
+- Maintainer or personal blog: [Daniele Polencic — allocatable resources and node capacity planning](https://learnkube.com/allocatable-resources)
+- Technical blog: [CNCF — Kubernetes patterns: capacity planning](https://www.cncf.io/blog/2019/10/08/kubernetes-patterns-capacity-planning/)
+- Hands-on guide: [Google SRE Workbook — implementing SLOs](https://sre.google/workbook/implementing-slos/)
