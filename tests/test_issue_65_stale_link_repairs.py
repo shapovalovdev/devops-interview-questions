@@ -180,3 +180,9 @@ def test_configuration_management_materials_use_live_ansible_blog() -> None:
     text = (ROOT / "docs" / "related-materials" / "configuration-management.md").read_text(encoding="utf-8")
     assert "https://www.redhat.com/en/blog/channel/ansible" not in text
     assert "https://www.ansible.com/blog" in text
+
+
+def test_pod_disruption_budget_uses_live_scylladb_blog() -> None:
+    text = (ROOT / "questions" / "certification-last-minute-review" / "pod-disruption-budget.md").read_text(encoding="utf-8")
+    assert "https://www.scylladb.com/2022/08/18/kubernetes-pod-disruption-budgets/" not in text
+    assert "https://www.scylladb.com/blog/" in text

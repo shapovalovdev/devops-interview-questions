@@ -23,12 +23,12 @@ How does a PodDisruptionBudget protect availability, and what does it not protec
 ## References
 
 - [Kubernetes: configure a PodDisruptionBudget](https://kubernetes.io/docs/tasks/run-application/configure-pdb/)
-- Further reading (blog): [Avi Kivity — PodDisruptionBudgets](https://www.scylladb.com/2022/08/18/kubernetes-pod-disruption-budgets/)
+- Further reading (blog): [ScyllaDB engineering blog](https://www.scylladb.com/blog/)
 
 ## What to learn next
 
 - Official documentation: [PodDisruptionBudgets](https://kubernetes.io/docs/tasks/run-application/configure-pdb/)
 - Manual or specification: [PDB API reference](https://kubernetes.io/docs/reference/kubernetes-api/policy-resources/pod-disruption-budget-v1/)
-- Maintainer or personal blog: [Avi Kivity — PDBs](https://www.scylladb.com/2022/08/18/kubernetes-pod-disruption-budgets/)
+- Maintainer or personal blog: [ScyllaDB engineering blog](https://www.scylladb.com/blog/)
 - Technical blog: [Google Cloud — Pod affinity and anti-affinity](https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-best-practices-pod-affinity-and-anti-affinity)
 - Hands-on guide: [Kubernetes safely drain a node](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)
