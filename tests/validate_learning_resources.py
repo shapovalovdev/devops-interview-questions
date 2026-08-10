@@ -191,6 +191,26 @@ def is_retryable_transport_error(error: BaseException) -> bool:
     }
 
 
+def is_unroutable_network_error(error: BaseException) -> bool:
+    """True when the checking host could not route to the target at all.
+
+    A runner without IPv6 connectivity reports ENETUNREACH for a dual-stack host
+    that is perfectly healthy over IPv4 — gnu.org is the recurring example. That
+    is a fact about the checker's network, not evidence that the resource is
+    gone, so it must not be reported as a broken link. A host that has actually
+    disappeared fails DNS resolution (socket.gaierror) instead, and that stays a
+    hard failure.
+    """
+    cause = error.reason if isinstance(error, urllib.error.URLError) else error
+    if isinstance(cause, socket.gaierror):
+        return False
+    return isinstance(cause, OSError) and cause.errno in {
+        errno.ENETUNREACH,
+        errno.EHOSTUNREACH,
+        errno.ENETDOWN,
+    }
+
+
 def retry_delay(headers: object, retry_index: int, now=time.time) -> float:
     """Respect Retry-After where possible, then use bounded exponential backoff."""
     retry_after = headers.get("Retry-After") if hasattr(headers, "get") else None
@@ -225,11 +245,12 @@ def check_url(
             pacer.pace(url)
             result = fetch_result(url, timeout)
         except (OSError, urllib.error.URLError) as error:
-            if is_retryable_transport_error(error):
+            if is_retryable_transport_error(error) or is_unroutable_network_error(error):
                 if attempt < MAX_ATTEMPTS - 1:
                     sleeper(DEFAULT_RETRY_DELAY_SECONDS * (2**attempt))
                     continue
-                return LinkCheck(url, "temporarily unavailable", str(error), MAX_ATTEMPTS)
+                category = "network unreachable" if is_unroutable_network_error(error) else "temporarily unavailable"
+                return LinkCheck(url, category, str(error), MAX_ATTEMPTS)
             return LinkCheck(url, "network error", str(error), attempt + 1)
         if 200 <= result.status < 400:
             return LinkCheck(url, "ok", f"HTTP {result.status}", attempt + 1)
@@ -257,7 +278,11 @@ def validate_live(
             )
         )
 
-    transient = [check for check in checks if check.category in {"rate limited", "temporarily unavailable"}]
+    transient = [
+        check
+        for check in checks
+        if check.category in {"rate limited", "temporarily unavailable", "network unreachable"}
+    ]
     failures = [check for check in checks if check.category in {"broken", "network error"}]
     if transient:
         print("Liveness-indeterminate learning-resource URLs (retried, not declared broken):")

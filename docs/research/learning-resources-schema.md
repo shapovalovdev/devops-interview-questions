@@ -47,10 +47,18 @@ unavailable after those attempts is reported explicitly as *liveness
 indeterminate*, not as a broken resource: a host denying or timing out a GitHub
 runner does not prove that the curated material has disappeared.
 
+A URL the checking host cannot route to at all — `ENETUNREACH`, `EHOSTUNREACH`,
+or `ENETDOWN` — is also *liveness indeterminate*. A runner without IPv6
+connectivity reports this for a dual-stack host that is perfectly healthy over
+IPv4; `gnu.org` is the recurring example. That is a fact about the checker's
+network, not evidence that the resource is gone.
+
 Permanent failures remain hard errors. In particular, `404` and other permanent
 HTTP failures, DNS errors, and TLS errors fail the live-check gate and must be
-fixed or removed after review. The retry policy is status-based and applies to
-every host; it is not a domain allowlist.
+fixed or removed after review. A host that has actually disappeared fails DNS
+resolution, which is why DNS failure stays a hard error even though it arrives
+as an `OSError` like the unroutable cases above. The retry policy is
+status-based and applies to every host; it is not a domain allowlist.
 
 For local certificate-store setups that do not trust public roots by default,
 run the check with `SSL_CERT_FILE="$(python3 -m certifi)"` after installing

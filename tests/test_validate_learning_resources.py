@@ -1,3 +1,4 @@
+import errno
 import io
 import socket
 import ssl
@@ -146,6 +147,30 @@ class LearningResourcesParserTests(unittest.TestCase):
                 self.assertEqual("network error", result.category)
                 self.assertEqual(1, result.attempts)
                 self.assertEqual(1, open_url.call_count)
+
+    def test_unroutable_network_is_indeterminate_not_broken(self) -> None:
+        """A runner without IPv6 must not declare a healthy dual-stack host dead."""
+        unreachable = URLError(OSError(errno.ENETUNREACH, "Network is unreachable"))
+        with patch("urllib.request.urlopen", side_effect=unreachable) as open_url:
+            result = check_url("https://www.gnu.org/software/bash/manual/", 1, sleeper=lambda _: None, pacer=HostPacer(0))
+        self.assertEqual("network unreachable", result.category)
+        self.assertEqual(3, open_url.call_count)
+
+        output = io.StringIO()
+        with patch("urllib.request.urlopen", side_effect=unreachable), redirect_stdout(output):
+            validate_live(
+                {"https://www.gnu.org/software/bash/manual/"},
+                1,
+                sleeper=lambda _: None,
+                pacer=HostPacer(0),
+                workers=1,
+            )
+        self.assertIn("network unreachable", output.getvalue())
+
+    def test_dns_failure_is_still_broken_even_though_it_is_an_oserror(self) -> None:
+        with patch("urllib.request.urlopen", side_effect=URLError(socket.gaierror(-2, "Name or service not known"))):
+            result = check_url("https://gone.example/resource", 1, sleeper=lambda _: None, pacer=HostPacer(0))
+        self.assertEqual("network error", result.category)
 
 
 if __name__ == "__main__":
