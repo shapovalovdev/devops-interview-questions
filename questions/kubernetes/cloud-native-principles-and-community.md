@@ -26,3 +26,11 @@ What makes an application cloud native, and how should a team evaluate and parti
 - Further reading (blog): [CNCF: Principles for designing and deploying scalable applications on Kubernetes](https://www.cncf.io/blog/2022/02/17/principles-for-designing-and-deploying-scalable-applications-on-kubernetes/)
 - [CNCF: Cloud Native Definition](https://github.com/cncf/toc/blob/main/DEFINITION.md)
 - [Kubernetes Contributors: Community](https://www.kubernetes.dev/community/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes overview and concepts](https://kubernetes.io/docs/concepts/overview/)
+- Manual or specification: [CNCF cloud native definition](https://github.com/cncf/toc/blob/main/DEFINITION.md)
+- Maintainer or personal blog: [Ivan Velichko — Kubernetes versus age-old infrastructure patterns](https://iximiuz.com/en/posts/kubernetes-vs-age-old-infra-patterns/)
+- Technical blog: [CNCF — the Cloud Native Computing Foundation blog](https://www.cncf.io/blog/)
+- Hands-on guide: [CNCF cloud native maturity model](https://maturitymodel.cncf.io/)

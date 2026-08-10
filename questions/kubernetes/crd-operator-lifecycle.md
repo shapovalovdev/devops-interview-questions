@@ -26,3 +26,11 @@ What must an administrator verify before installing or upgrading an operator tha
 - [Kubernetes: Custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
 - [Kubernetes: Extend the Kubernetes API with CustomResourceDefinitions](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/)
 - Further reading (blog): [Kubernetes: Extending Kubernetes APIs with CRDs](https://kubernetes.io/blog/2017/06/introducing-extensible-admission-control/)
+
+## What to learn next
+
+- Official documentation: [Extend the Kubernetes API with CustomResourceDefinitions](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/)
+- Manual or specification: [CustomResourceDefinition v1 API reference](https://kubernetes.io/docs/reference/kubernetes-api/extend-resources/custom-resource-definition-v1/)
+- Maintainer or personal blog: [Ahmet Alp Balkan — pitfalls when writing Kubernetes controllers](https://ahmet.im/blog/controller-pitfalls/)
+- Technical blog: [CNCF — Kubernetes operators 101](https://www.cncf.io/blog/2020/10/02/kubernetes-operators-101/)
+- Hands-on guide: [The Kubebuilder book: build an operator step by step](https://book.kubebuilder.io/)

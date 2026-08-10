@@ -26,3 +26,11 @@ You need to deploy an ingress controller or metrics component. How do Helm and K
 - [Kubernetes: Managing Kubernetes objects with Kustomize](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/)
 - [Helm: Chart best practices](https://helm.sh/docs/chart_best_practices/)
 - Further reading (blog): [Kubernetes: Kustomize comes to kubectl](https://kubernetes.io/blog/2018/05/29/kustomize-coming-to-kubernetes/)
+
+## What to learn next
+
+- Official documentation: [Helm documentation](https://helm.sh/docs/)
+- Manual or specification: [Helm chart structure and specification](https://helm.sh/docs/topics/charts/)
+- Maintainer or personal blog: [Daniele Polencic — is Helm just a templating engine?](https://learnkube.com/helm-templating-kubernetes-yaml)
+- Technical blog: [CNCF — building platforms with composition instead of hand-written manifests](https://www.cncf.io/blog/2025/12/15/building-platforms-using-kro-for-composition/)
+- Hands-on guide: [Declarative management of objects using Kustomize](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/)
