@@ -24,3 +24,11 @@ How would you prevent one product team’s Argo CD Application from deploying ar
 
 - [Argo CD: Projects](https://argo-cd.readthedocs.io/en/stable/user-guide/projects/)
 - Further reading (blog): [GitHub Blog: least privilege for CI/CD](https://github.blog/security/application-security/secure-your-software-supply-chain-and-build-faster-with-github-actions/)
+
+## What to learn next
+
+- Official documentation: [Argo CD RBAC configuration](https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/)
+- Manual or specification: [Argo CD declarative setup reference](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/)
+- Maintainer or personal blog: [Arthur Koziel — setting up Argo CD with Helm](https://www.arthurkoziel.com/setting-up-argocd-with-helm/)
+- Technical blog: [Akuity — Argo maintainers' engineering blog](https://akuity.io/blog/)
+- Hands-on guide: [Argo CD Applications in any namespace](https://argo-cd.readthedocs.io/en/stable/operator-manual/app-any-namespace/)

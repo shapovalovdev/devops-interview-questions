@@ -24,3 +24,11 @@ An Application is OutOfSync immediately after an operator changed a live resourc
 
 - [Argo CD: automated sync policy](https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/)
 - Further reading (blog): [GitHub Blog: operating GitOps safely](https://github.blog/enterprise-software/ci-cd/what-is-gitops/)
+
+## What to learn next
+
+- Official documentation: [Argo CD diffing and drift detection](https://argo-cd.readthedocs.io/en/stable/user-guide/diffing/)
+- Manual or specification: [OpenGitOps Principles v1.0.0](https://github.com/open-gitops/documents/blob/main/PRINCIPLES.md)
+- Maintainer or personal blog: [Arthur Koziel — setting up Argo CD with Helm](https://www.arthurkoziel.com/setting-up-argocd-with-helm/)
+- Technical blog: [Codefresh — Argo CD engineering blog](https://codefresh.io/blog/)
+- Hands-on guide: [Argo CD resource tracking and ownership](https://argo-cd.readthedocs.io/en/stable/user-guide/resource_tracking/)

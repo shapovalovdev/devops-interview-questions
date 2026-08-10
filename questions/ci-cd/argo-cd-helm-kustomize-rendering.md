@@ -25,3 +25,11 @@ When an Argo CD Application needs environment-specific manifests, how do Helm an
 - [Argo CD: Helm](https://argo-cd.readthedocs.io/en/stable/user-guide/helm/)
 - [Argo CD: Kustomize](https://argo-cd.readthedocs.io/en/stable/user-guide/kustomize/)
 - Further reading (blog): [GitHub Blog: managing Kubernetes manifests](https://github.blog/enterprise-software/ci-cd/gitops-with-github-actions/)
+
+## What to learn next
+
+- Official documentation: [Argo CD config management plugins](https://argo-cd.readthedocs.io/en/stable/operator-manual/config-management-plugins/)
+- Manual or specification: [Kustomize kustomization.yaml field reference](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/)
+- Maintainer or personal blog: [Arthur Koziel — setting up Argo CD with Helm](https://www.arthurkoziel.com/setting-up-argocd-with-helm/)
+- Technical blog: [Codefresh — Argo CD engineering blog](https://codefresh.io/blog/)
+- Hands-on guide: [Helm charts guide](https://helm.sh/docs/topics/charts/)

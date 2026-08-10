@@ -782,6 +782,10 @@
     {"question": "questions/observability/slo-burn-rate.md", "related_materials": "docs/related-materials/observability.md"},
     {"question": "questions/observability/three-observability-signals.md", "related_materials": "docs/related-materials/observability.md"},
     {"question": "questions/observability/use-recording-rules.md", "related_materials": "docs/related-materials/observability.md"},
-    {"question": "questions/observability/validate-telemetry-data-quality.md", "related_materials": "docs/related-materials/observability.md"}
+    {"question": "questions/observability/validate-telemetry-data-quality.md", "related_materials": "docs/related-materials/observability.md"},
+    {"question": "questions/ci-cd/argo-cd-application-project-boundaries.md", "related_materials": "docs/related-materials/ci-cd.md"},
+    {"question": "questions/ci-cd/argo-cd-application-sync.md", "related_materials": "docs/related-materials/ci-cd.md"},
+    {"question": "questions/ci-cd/argo-cd-helm-kustomize-rendering.md", "related_materials": "docs/related-materials/ci-cd.md"},
+    {"question": "questions/ci-cd/argo-cd-reconciliation-drift.md", "related_materials": "docs/related-materials/ci-cd.md"}
   ]
 }
