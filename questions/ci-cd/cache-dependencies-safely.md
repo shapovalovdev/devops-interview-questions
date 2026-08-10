@@ -25,3 +25,11 @@ How should a CI job cache dependencies while preserving correctness and isolatio
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Caching dependencies](https://docs.github.com/en/actions/how-tos/writing-workflows/choosing-what-your-workflow-does/caching-dependencies-to-speed-up-workflows)
 - [Further reading: GitHub Docs—dependency caching reference](https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions dependency caching concepts](https://docs.github.com/en/actions/concepts/workflows-and-actions/dependency-caching)
+- Manual or specification: [Docker build cache reference](https://docs.docker.com/build/cache/)
+- Maintainer or personal blog: [Michael Heap — GitHub Actions engineering notes](https://michaelheap.com/)
+- Technical blog: [GitHub Engineering blog](https://github.blog/engineering/)
+- Hands-on guide: [Docker — cache management with GitHub Actions](https://docs.docker.com/build/ci/github-actions/cache/)

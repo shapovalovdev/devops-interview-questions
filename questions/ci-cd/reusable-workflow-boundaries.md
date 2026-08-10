@@ -25,3 +25,11 @@ When should a team extract a reusable workflow, and what inputs should it expose
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Reusing workflow configurations](https://docs.github.com/en/actions/reference/workflows-and-actions/reusing-workflow-configurations)
 - [Further reading: GitHub Docs—workflow syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions reusable workflow concepts](https://docs.github.com/en/actions/concepts/workflows-and-actions/reusable-workflows)
+- Manual or specification: [GitHub Actions contexts reference](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts)
+- Maintainer or personal blog: [Ken Muse — GitHub Actions engineering blog](https://www.kenmuse.com/blog/)
+- Technical blog: [GitHub Engineering blog](https://github.blog/engineering/)
+- Hands-on guide: [GitHub Actions — trigger a workflow](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow)

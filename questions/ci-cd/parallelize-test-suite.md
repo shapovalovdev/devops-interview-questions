@@ -25,3 +25,11 @@ How can a team shorten a test pipeline without creating order-dependent failures
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Using a matrix for jobs](https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs)
 - [Further reading: GitHub Docs—concurrency](https://docs.github.com/en/actions/concepts/workflows-and-actions/concurrency)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions — run job variations with a matrix](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations)
+- Manual or specification: [Software Engineering at Google — testing overview](https://abseil.io/resources/swe-book/html/ch11.html)
+- Maintainer or personal blog: [Ham Vocke — the practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
+- Technical blog: [Google Testing Blog](https://testing.googleblog.com/)
+- Hands-on guide: [GitHub Actions — build and test Node.js tutorial](https://docs.github.com/en/actions/tutorials/build-and-test-code/nodejs)
