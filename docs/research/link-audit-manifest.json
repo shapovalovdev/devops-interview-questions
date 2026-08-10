@@ -1526,5 +1526,8 @@
     {"question": "questions/backend-architecture/saga-compensation.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/backend-architecture/stateless-service-design.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/backend-architecture/synchronous-versus-asynchronous-api.md", "related_materials": "docs/related-materials/backend-architecture.md"}
+,
+    {"question": "questions/backend-architecture/transaction-boundaries.md", "related_materials": "docs/related-materials/backend-architecture.md"},
+    {"question": "questions/backend-architecture/transactional-outbox.md", "related_materials": "docs/related-materials/backend-architecture.md"}
   ]
 }
