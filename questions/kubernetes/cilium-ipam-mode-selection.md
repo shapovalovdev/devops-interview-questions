@@ -25,3 +25,11 @@ How would you choose and validate Cilium IP address management for an on-premise
 
 - [Cilium CRD-backed IPAM](https://docs.cilium.io/en/stable/network/concepts/ipam/crd/)
 - Further reading (blog): [Cilium 1.15 overview](https://isovalent.com/blog/post/cilium-1-15/)
+
+## What to learn next
+
+- Official documentation: [Cilium IP address management concepts](https://docs.cilium.io/en/stable/network/concepts/ipam/)
+- Manual or specification: [Container Network Interface (CNI) specification](https://github.com/containernetworking/cni/blob/main/SPEC.md)
+- Maintainer or personal blog: [Nico Vibert — advertising Pod networks with BGP on Cilium](https://nicovibert.com/2022/07/21/bgp-with-cilium/)
+- Technical blog: [CNCF — connecting distributed Kubernetes clusters with Cilium](https://www.cncf.io/blog/2025/10/25/connecting-distributed-kubernetes-with-cilium-and-sd-wan-building-an-intelligent-network-fabric/)
+- Hands-on guide: [Configure Cilium IPAM modes on Kubernetes](https://docs.cilium.io/en/stable/network/kubernetes/ipam/)

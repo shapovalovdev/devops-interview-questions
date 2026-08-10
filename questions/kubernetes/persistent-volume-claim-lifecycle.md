@@ -26,3 +26,11 @@ How do PersistentVolumes, PersistentVolumeClaims, StorageClasses, and reclaim po
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 - [Kubernetes: Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes concepts: persistent volumes and claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
+- Manual or specification: [Container Storage Interface specification](https://github.com/container-storage-interface/spec/blob/master/spec.md)
+- Maintainer or personal blog: [Michelle Au — local persistent volumes and the PVC binding model](https://kubernetes.io/blog/2019/04/04/kubernetes-1.14-local-persistent-volumes-ga/)
+- Technical blog: [CNCF — cloud native disaster recovery for stateful workloads](https://www.cncf.io/blog/2024/02/15/cloud-native-disaster-recovery-for-stateful-workloads/)
+- Hands-on guide: [Configure a Pod to use a PersistentVolume for storage](https://kubernetes.io/docs/tutorials/configuration/configure-persistent-volume-storage/)

@@ -25,3 +25,11 @@ What responsibilities belong to the Cilium agent, Cilium operator, and Envoy whe
 
 - [Cilium and Hubble introduction](https://docs.cilium.io/en/stable/overview/intro/)
 - Further reading (blog): [Cilium 1.15 overview](https://isovalent.com/blog/post/cilium-1-15/)
+
+## What to learn next
+
+- Official documentation: [Cilium component overview](https://docs.cilium.io/en/stable/overview/component-overview/)
+- Manual or specification: [Container Network Interface (CNI) specification](https://github.com/containernetworking/cni/blob/main/SPEC.md)
+- Maintainer or personal blog: [Nico Vibert — exploring eBPF part 2: deploying Cilium as the CNI](https://nicovibert.com/2022/02/02/exploring-ebpf-part-2-cilium/)
+- Technical blog: [CNCF — unlocking cloud native security with Cilium and eBPF](https://www.cncf.io/blog/2025/01/02/unlocking-cloud-native-security-with-cilium-and-ebpf/)
+- Hands-on guide: [Cilium getting-started demo application](https://docs.cilium.io/en/stable/gettingstarted/demo/)

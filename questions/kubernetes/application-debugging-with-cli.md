@@ -25,3 +25,11 @@ An application is unavailable after a rollout. How do you use Kubernetes CLI too
 - [Kubernetes: Debugging Services](https://kubernetes.io/docs/tasks/debug/debug-application/)
 - [kubectl logs reference](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_logs/)
 - Further reading (blog): [Kubernetes debugging techniques](https://kubernetes.io/blog/2024/05/01/cri-streaming-explainer/)
+
+## What to learn next
+
+- Official documentation: [Troubleshooting applications](https://kubernetes.io/docs/tasks/debug/debug-application/)
+- Manual or specification: [kubectl command reference](https://kubernetes.io/docs/reference/kubectl/generated/)
+- Maintainer or personal blog: [Ivan Velichko — Kubernetes ephemeral containers for debugging](https://iximiuz.com/en/posts/kubernetes-ephemeral-containers/)
+- Technical blog: [CNCF — when Kubernetes restarts your Pod, and when it does not](https://www.cncf.io/blog/2026/03/17/when-kubernetes-restarts-your-pod-and-when-it-doesnt/)
+- Hands-on guide: [Debug Services](https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/)

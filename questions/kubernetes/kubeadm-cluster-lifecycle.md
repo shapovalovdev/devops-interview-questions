@@ -26,3 +26,11 @@ You must create a production-like cluster with kubeadm and later add workers saf
 - [Kubernetes: Creating a cluster with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
 - [Kubernetes: Upgrading kubeadm clusters](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)
 - Further reading (blog): [Kubernetes: kubeadm v1beta4 configuration](https://kubernetes.io/blog/2024/01/15/kubeadm-v1beta4/)
+
+## What to learn next
+
+- Official documentation: [Creating a cluster with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
+- Manual or specification: [kubeadm configuration v1beta4 API reference](https://kubernetes.io/docs/reference/config-api/kubeadm-config.v1beta4/)
+- Maintainer or personal blog: [Lucas Käldström — production-ready cluster creation with kubeadm](https://kubernetes.io/blog/2018/12/04/production-ready-kubernetes-cluster-creation-with-kubeadm/)
+- Technical blog: [Learnkube — how the Kubernetes control plane works](https://learnkube.com/kubernetes-control-plane)
+- Hands-on guide: [Kelsey Hightower — Kubernetes the hard way](https://github.com/kelseyhightower/kubernetes-the-hard-way)

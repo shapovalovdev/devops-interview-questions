@@ -26,3 +26,11 @@ How do ClusterIP, NodePort, and LoadBalancer Services differ, and how would you 
 - [Kubernetes: Service](https://kubernetes.io/docs/concepts/services-networking/service/)
 - [Kubernetes: EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/)
 - Further reading (blog): [Kubernetes: Topology-aware routing with EndpointSlices](https://kubernetes.io/blog/2021/04/22/topology-aware-hints/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes concepts: Service](https://kubernetes.io/docs/concepts/services-networking/service/)
+- Manual or specification: [Service v1 API reference](https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/)
+- Maintainer or personal blog: [Ahmet Alp Balkan — how label selectors drive endpoint and list behaviour](https://ahmet.im/blog/kubernetes-list-performance/)
+- Technical blog: [Kubernetes blog — scaling Kubernetes networking with EndpointSlices](https://kubernetes.io/blog/2020/09/02/scaling-kubernetes-networking-with-endpointslices/)
+- Hands-on guide: [Use source IP with Services](https://kubernetes.io/docs/tutorials/services/source-ip/)

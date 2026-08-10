@@ -26,3 +26,11 @@ Which parts of a Pod manifest determine what runs and how it is identified?
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Pods](https://kubernetes.io/docs/concepts/workloads/pods/)
 - [Kubernetes: Pod API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes concepts: Pods](https://kubernetes.io/docs/concepts/workloads/pods/)
+- Manual or specification: [Pod v1 API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/)
+- Maintainer or personal blog: [Daniele Polencic — a visual guide on troubleshooting Kubernetes deployments](https://learnkube.com/troubleshooting-deployments)
+- Technical blog: [Kubernetes blog — Kubernetes multicontainer Pods: an overview](https://kubernetes.io/blog/2025/04/22/multi-container-pods-overview/)
+- Hands-on guide: [Learn Kubernetes basics tutorial](https://kubernetes.io/docs/tutorials/kubernetes-basics/)

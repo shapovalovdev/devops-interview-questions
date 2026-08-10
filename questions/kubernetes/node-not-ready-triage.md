@@ -26,3 +26,11 @@ A production node changes to `NotReady`. What evidence do you collect and how do
 - [Kubernetes: Troubleshooting clusters](https://kubernetes.io/docs/tasks/debug/debug-cluster/)
 - [Kubernetes: Node status](https://kubernetes.io/docs/reference/node/node-status/)
 - Further reading (blog): [Kubernetes: Node heartbeats with Lease API](https://kubernetes.io/blog/2019/12/17/node-heartbeats/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes concepts: nodes and node conditions](https://kubernetes.io/docs/concepts/architecture/nodes/)
+- Manual or specification: [Node v1 API reference](https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/node-v1/)
+- Maintainer or personal blog: [Gulcan Topcu — kubelet, cAdvisor and CRI: where node metrics come from](https://learnkube.com/kubernetes-metrics-cadvisor-kubelet-cri)
+- Technical blog: [CNCF — when Kubernetes restarts your Pod, and when it does not](https://www.cncf.io/blog/2026/03/17/when-kubernetes-restarts-your-pod-and-when-it-doesnt/)
+- Hands-on guide: [Debug a node with kubectl debug](https://kubernetes.io/docs/tasks/debug/debug-cluster/kubectl-node-debug/)

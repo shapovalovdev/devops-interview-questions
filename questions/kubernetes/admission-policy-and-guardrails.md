@@ -26,3 +26,11 @@ How would you prevent unsafe workload manifests without making every delivery ch
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Admission controllers](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)
 - [Kubernetes: Validating Admission Policy](https://kubernetes.io/docs/reference/access-authn-authz/validating-admission-policy/)
+
+## What to learn next
+
+- Official documentation: [Validating admission policy](https://kubernetes.io/docs/reference/access-authn-authz/validating-admission-policy/)
+- Manual or specification: [ValidatingAdmissionPolicy v1 API reference](https://kubernetes.io/docs/reference/kubernetes-api/policy-resources/validating-admission-policy-v1/)
+- Maintainer or personal blog: [Jiahui Feng — validating admission policy is generally available](https://kubernetes.io/blog/2024/04/24/validating-admission-policy-ga/)
+- Technical blog: [Kubernetes blog — a practical validating admission policy library](https://kubernetes.io/blog/2023/03/30/kubescape-validating-admission-policy-library/)
+- Hands-on guide: [Explore validating and mutating admission policies](https://kubernetes.io/docs/tutorials/cluster-management/admission-policies/)

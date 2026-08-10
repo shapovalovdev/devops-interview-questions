@@ -29,8 +29,8 @@ How would you install or upgrade Kyverno in production while preserving both pol
 
 ## What to learn next
 
-- Official documentation: [Kyverno installation](https://kyverno.io/docs/installation/installation/)
-- Official documentation: [Kyverno monitoring](https://kyverno.io/docs/monitoring/)
-- Manual or specification: [Kubernetes webhook configuration](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/)
-- Maintainer or personal blog: [Kyverno release notes](https://github.com/kyverno/kyverno/releases)
-- Free learning material: [Kyverno Helm chart source](https://github.com/kyverno/kyverno/tree/main/charts/kyverno)
+- Official documentation: [Installing Kyverno](https://kyverno.io/docs/installation/installation/)
+- Manual or specification: [ValidatingWebhookConfiguration v1 API reference](https://kubernetes.io/docs/reference/kubernetes-api/extend-resources/validating-webhook-configuration-v1/)
+- Maintainer or personal blog: [Chip Zoller — Kyverno articles and operational write-ups](https://neonmirrors.net/tags/kyverno/)
+- Technical blog: [Nirmata — Kyverno engineering blog](https://nirmata.com/blog/)
+- Hands-on guide: [Kyverno troubleshooting guide](https://kyverno.io/docs/guides/troubleshooting/)

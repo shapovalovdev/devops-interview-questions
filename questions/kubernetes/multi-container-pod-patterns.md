@@ -25,3 +25,11 @@ When should an application use an init container, a sidecar, or neither?
 - [Kubernetes: Sidecar containers](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
 - [Kubernetes: Init containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
 - Further reading (blog): [Kubernetes sidecar containers](https://kubernetes.io/blog/2023/08/25/native-sidecar-containers/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes concepts: sidecar containers](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
+- Manual or specification: [KEP-753: sidecar containers enhancement proposal](https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/753-sidecar-containers/README.md)
+- Maintainer or personal blog: [Emanuel Evans — extending applications on Kubernetes with multi-container Pods](https://learnkube.com/sidecar-containers-patterns)
+- Technical blog: [Kubernetes blog — introducing native sidecar containers](https://kubernetes.io/blog/2023/08/25/native-sidecar-containers/)
+- Hands-on guide: [Adopting sidecar containers tutorial](https://kubernetes.io/docs/tutorials/configuration/pod-sidecar-containers/)

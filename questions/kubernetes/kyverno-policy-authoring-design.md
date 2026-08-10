@@ -36,8 +36,8 @@ How would you author and review a Kyverno policy set that validates workload sec
 
 ## What to learn next
 
-- Official documentation: [Kyverno policy library](https://kyverno.io/policies/)
-- Official documentation: [Kyverno variables](https://kyverno.io/docs/policy-types/cluster-policy/variables/)
-- Manual or specification: [Kubernetes Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
-- Maintainer or personal blog: [Kyverno maintainers' blog](https://kyverno.io/blog/)
-- Free learning material: [Kyverno policy samples](https://github.com/kyverno/policies)
+- Official documentation: [Kyverno ValidatingPolicy documentation](https://kyverno.io/docs/policy-types/validating-policy/)
+- Manual or specification: [Common Expression Language in Kubernetes](https://kubernetes.io/docs/reference/using-api/cel/)
+- Maintainer or personal blog: [Chip Zoller — scheduled mutations with Kyverno](https://neonmirrors.net/post/2023-07/scheduled-kyverno-mutations/)
+- Technical blog: [CNCF — policy-driven resource optimization with Kyverno](https://www.cncf.io/blog/2024/09/03/kubernetes-policy-driven-resource-optimization-with-kyverno/)
+- Hands-on guide: [Kyverno policy library](https://kyverno.io/policies/)

@@ -26,3 +26,11 @@ How should labels, selectors, and annotations be used safely in Kubernetes?
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Labels and selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
 - [Kubernetes: Annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes concepts: labels and selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
+- Manual or specification: [Well-known labels, annotations and taints reference](https://kubernetes.io/docs/reference/labels-annotations-taints/)
+- Maintainer or personal blog: [Ahmet Alp Balkan — why label selectors make Kubernetes list calls expensive](https://ahmet.im/blog/kubernetes-list-performance/)
+- Technical blog: [Komodor — best-practices guide for Kubernetes labels and annotations](https://komodor.com/blog/best-practices-guide-for-kubernetes-labels-and-annotations/)
+- Hands-on guide: [kubectl quick reference for selecting and filtering objects](https://kubernetes.io/docs/reference/kubectl/quick-reference/)

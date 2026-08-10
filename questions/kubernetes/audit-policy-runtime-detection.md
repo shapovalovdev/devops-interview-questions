@@ -26,3 +26,11 @@ How would you configure Kubernetes API audit logging to investigate privileged c
 - [Kubernetes: Auditing](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
 - [Kubernetes: Audit policy configuration](https://kubernetes.io/docs/reference/config-api/apiserver-audit.v1/)
 - Further reading (blog): [Kubernetes: Audit logging](https://kubernetes.io/blog/2017/05/kubernetes-audit/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes auditing](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
+- Manual or specification: [Audit policy configuration API reference](https://kubernetes.io/docs/reference/config-api/apiserver-audit.v1/)
+- Maintainer or personal blog: [Rory McCune — attacker persistence strategies in Kubernetes](https://raesene.github.io/blog/2025/09/12/beyond-the-surface/)
+- Technical blog: [Falco — runtime security project blog](https://falco.org/blog/)
+- Hands-on guide: [Get started with Falco runtime detection](https://falco.org/docs/getting-started/)

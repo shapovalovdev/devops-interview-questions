@@ -25,3 +25,11 @@ How do you move an application and its manifests off a Kubernetes API version th
 - [Kubernetes API deprecation policy](https://kubernetes.io/docs/reference/using-api/deprecation-policy/)
 - [Kubernetes: Deprecated API Migration Guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide/)
 - Further reading (blog): [Kubernetes API removals in v1.25](https://kubernetes.io/blog/2022/08/04/upcoming-changes-in-kubernetes-1-25/)
+
+## What to learn next
+
+- Official documentation: [Deprecated API migration guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide/)
+- Manual or specification: [Kubernetes deprecation policy](https://kubernetes.io/docs/reference/using-api/deprecation-policy/)
+- Maintainer or personal blog: [Daniele Polencic — how the API server converts between API versions](https://learnkube.com/kubernetes-api-explained)
+- Technical blog: [Kubernetes blog — API and feature removals in 1.22](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/)
+- Hands-on guide: [Pluto: detect deprecated Kubernetes API versions in manifests and charts](https://github.com/FairwindsOps/pluto)
