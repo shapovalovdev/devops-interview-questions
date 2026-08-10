@@ -1556,6 +1556,10 @@
     {"question": "questions/caching/cache-outage-blast-radius.md", "related_materials": "docs/related-materials/caching.md"},
     {"question": "questions/caching/cache-poisoning-defense.md", "related_materials": "docs/related-materials/caching.md"},
     {"question": "questions/caching/caching-strategy-decision.md", "related_materials": "docs/related-materials/caching.md"},
-    {"question": "questions/caching/redis-failover-operations.md", "related_materials": "docs/related-materials/caching.md"}
+    {"question": "questions/caching/redis-failover-operations.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/cache-capacity-cost-model.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/cache-slo-degradation-policy.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/multi-region-cache-coherence.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/shared-cache-platform-governance.md", "related_materials": "docs/related-materials/caching.md"}
   ]
 }
