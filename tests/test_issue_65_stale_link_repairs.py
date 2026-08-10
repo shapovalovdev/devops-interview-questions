@@ -204,3 +204,9 @@ def test_kubernetes_service_traffic_path_uses_live_docker_tutorial() -> None:
     text = (ROOT / "questions" / "container-networking" / "kubernetes-service-traffic-path.md").read_text(encoding="utf-8")
     assert "https://docs.docker.com/network/tutorials/" not in text
     assert "https://docs.docker.com/engine/network/tutorials/standalone/" in text
+
+
+def test_cilium_l7_network_policy_uses_live_docker_tutorial() -> None:
+    text = (ROOT / "questions" / "container-networking" / "cilium-l7-network-policy.md").read_text(encoding="utf-8")
+    assert "https://docs.docker.com/network/tutorials/" not in text
+    assert "https://docs.docker.com/engine/network/tutorials/standalone/" in text
