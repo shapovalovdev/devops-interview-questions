@@ -17,6 +17,7 @@ QUESTIONS = [
         "cilium-egress-gateway-design.md",
         "cilium-kube-proxy-replacement.md",
         "bridge-traffic-path.md",
+        "compose-network-contract.md",
     )
 ]
 RELATED = ROOT / "docs/related-materials/container-networking.md"

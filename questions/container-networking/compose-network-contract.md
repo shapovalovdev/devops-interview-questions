@@ -25,3 +25,11 @@ What should a production-minded Compose file state explicitly about networking?
 
 - [Docker Compose reference: networks](https://docs.docker.com/reference/compose-file/networks/)
 - Further reading (blog): [Docker: Understanding Docker networking](https://www.docker.com/blog/understanding-docker-networking-drivers-use-cases/)
+
+## What to learn next
+
+- Official documentation: [Compose networks reference](https://docs.docker.com/reference/compose-file/networks/)
+- Manual or specification: [Compose specification](https://compose-spec.io/)
+- Maintainer or personal blog: [Julia Evans: networking writing](https://jvns.ca/)
+- Technical blog: [Docker networking drivers](https://www.docker.com/blog/understanding-docker-networking-drivers-use-cases/)
+- Hands-on guide: [Docker Compose networking how-to](https://docs.docker.com/compose/how-tos/networking/)
