@@ -186,3 +186,9 @@ def test_pod_disruption_budget_uses_live_scylladb_blog() -> None:
     text = (ROOT / "questions" / "certification-last-minute-review" / "pod-disruption-budget.md").read_text(encoding="utf-8")
     assert "https://www.scylladb.com/2022/08/18/kubernetes-pod-disruption-budgets/" not in text
     assert "https://www.scylladb.com/blog/" in text
+
+
+def test_container_network_security_architecture_uses_live_docker_tutorial() -> None:
+    text = (ROOT / "questions" / "container-networking" / "container-network-security-architecture.md").read_text(encoding="utf-8")
+    assert "https://docs.docker.com/network/tutorials/" not in text
+    assert "https://docs.docker.com/engine/network/tutorials/standalone/" in text
