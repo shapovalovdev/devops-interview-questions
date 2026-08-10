@@ -1499,5 +1499,9 @@
     {"question": "questions/backend-architecture/authentication-authorization-boundary.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/backend-architecture/background-job-contract.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/backend-architecture/cache-invalidation-strategy.md", "related_materials": "docs/related-materials/backend-architecture.md"}
+,
+    {"question": "questions/backend-architecture/circuit-breaker-operations.md", "related_materials": "docs/related-materials/backend-architecture.md"},
+    {"question": "questions/backend-architecture/cursor-pagination.md", "related_materials": "docs/related-materials/backend-architecture.md"},
+    {"question": "questions/backend-architecture/data-governance-architecture.md", "related_materials": "docs/related-materials/backend-architecture.md"}
   ]
 }
