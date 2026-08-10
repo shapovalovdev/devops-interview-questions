@@ -138,3 +138,9 @@ def test_processes_materials_use_live_kernel_process_documentation() -> None:
     text = (ROOT / "docs" / "related-materials" / "processes.md").read_text(encoding="utf-8")
     assert "https://www.redhat.com/en/topics/linux/what-is-a-linux-process" not in text
     assert "https://docs.kernel.org/filesystems/proc.html" in text
+
+
+def test_exit_statuses_uses_live_enable_sysadmin_source() -> None:
+    text = (ROOT / "questions" / "shell-scripting" / "use-exit-statuses.md").read_text(encoding="utf-8")
+    assert "https://www.redhat.com/en/blog/channel/enable-sysadmin" not in text
+    assert "https://www.redhat.com/en/blog/welcome" in text
