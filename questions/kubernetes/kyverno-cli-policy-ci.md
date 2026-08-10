@@ -29,8 +29,8 @@ How would you use the Kyverno CLI to keep a policy change from surprising applic
 
 ## What to learn next
 
-- Official documentation: [Kyverno CLI `apply`](https://kyverno.io/docs/kyverno-cli/reference/kyverno_apply/)
-- Official documentation: [Kyverno policy reports](https://kyverno.io/docs/guides/reports/)
-- Manual or specification: [Kubernetes dry-run](https://kubernetes.io/docs/reference/using-api/api-concepts/#dry-run)
-- Maintainer or personal blog: [Kyverno community blog](https://kyverno.io/blog/)
-- Free learning material: [Kyverno policy examples](https://github.com/kyverno/policies)
+- Official documentation: [Kyverno CLI documentation](https://kyverno.io/docs/kyverno-cli/)
+- Manual or specification: [kyverno test command reference](https://kyverno.io/docs/kyverno-cli/reference/kyverno_test/)
+- Maintainer or personal blog: [Chip Zoller — preserving authorship in a GitOps world with Kyverno](https://neonmirrors.net/post/2023-03/preserving-authorship-in-a-gitops-world-with-kyverno/)
+- Technical blog: [CNCF — GitOps policy-as-code with Argo CD and Kyverno](https://www.cncf.io/blog/2026/04/02/gitops-policy-as-code-securing-kubernetes-with-argo-cd-and-kyverno/)
+- Hands-on guide: [Testing Kyverno policies with the CLI](https://kyverno.io/docs/guides/testing-policies/)

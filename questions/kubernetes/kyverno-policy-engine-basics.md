@@ -30,7 +30,7 @@ What is Kyverno, where does it evaluate Kubernetes configuration, and when would
 ## What to learn next
 
 - Official documentation: [How Kyverno works](https://kyverno.io/docs/introduction/how-kyverno-works/)
-- Official documentation: [Kyverno CLI apply](https://kyverno.io/docs/kyverno-cli/reference/kyverno_apply/)
-- Manual or specification: [Kubernetes dynamic admission control](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/)
-- Maintainer or personal blog: [Nirmata engineering blog — Kyverno](https://nirmata.com/blog/)
-- Free learning material: [Kyverno policy library](https://kyverno.io/policies/)
+- Manual or specification: [Kubernetes dynamic admission control reference](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/)
+- Maintainer or personal blog: [Chip Zoller — automatic cleanup of bad resources with Kyverno](https://neonmirrors.net/post/2023-12-18/cleanup-bad-resources/)
+- Technical blog: [CNCF — how Kyverno complements the built-in Kubernetes policy types](https://www.cncf.io/blog/2025/10/16/kyverno-vs-kubernetes-policies-how-kyverno-complements-and-completes-kubernetes-policy-types/)
+- Hands-on guide: [Kyverno quick start](https://kyverno.io/docs/introduction/quick-start/)
