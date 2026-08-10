@@ -1,5 +1,5 @@
 ---
-title: Treat coverage as a testing signal
+title: Name test cases for diagnosis
 theme: testing-strategy
 difficulty: junior
 type: scenario
@@ -10,16 +10,16 @@ sources:
     verified_on: 2026-08-10
 ---
 
-# Treat coverage as a testing signal
+# Name test cases for diagnosis
 
 How should a team make this testing strategy decision?
 
 ## Answer guide
 
-- Define the behavior and risk being controlled, then select evidence that is representative enough to influence a release decision.
-- Keep dependencies, test data, and timing controlled so a passing result is reproducible and a failure is diagnosable.
-- Make the cost, feedback time, and ownership explicit; use the result with code review and operational signals rather than as an isolated score.
-- Review false positives and escaped defects after releases. A broad but untrusted test signal can slow delivery while masking meaningful gaps.
+- Define the behavior and risk being controlled, then choose the smallest test boundary that provides reliable evidence.
+- Keep data, dependencies, and environment assumptions explicit so results are reproducible and failures can be diagnosed.
+- Balance execution cost against feedback speed and release confidence; use the check alongside review and operational signals.
+- Reassess the strategy after incidents and architecture changes because an unowned test can become a source of false confidence.
 
 ## References
 

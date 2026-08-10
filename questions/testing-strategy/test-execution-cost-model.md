@@ -1,7 +1,7 @@
 ---
-title: Treat coverage as a testing signal
+title: Model test execution cost
 theme: testing-strategy
-difficulty: junior
+difficulty: middle
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
@@ -10,16 +10,16 @@ sources:
     verified_on: 2026-08-10
 ---
 
-# Treat coverage as a testing signal
+# Model test execution cost
 
-How should a team make this testing strategy decision?
+How should a team decide which tests run at each delivery stage?
 
 ## Answer guide
 
-- Define the behavior and risk being controlled, then select evidence that is representative enough to influence a release decision.
-- Keep dependencies, test data, and timing controlled so a passing result is reproducible and a failure is diagnosable.
-- Make the cost, feedback time, and ownership explicit; use the result with code review and operational signals rather than as an isolated score.
-- Review false positives and escaped defects after releases. A broad but untrusted test signal can slow delivery while masking meaningful gaps.
+- Classify checks by risk, duration, and diagnostic value, then keep fast deterministic tests in the ordinary change path.
+- Run slower integration, performance, or environmental checks at an appropriate gate with clear ownership and service objectives.
+- Track queue time, flake rate, and escaped defects so cost reductions do not quietly weaken confidence.
+- Revisit the policy after architecture changes; a universal gate can waste capacity and still miss the system boundary that matters.
 
 ## References
 
