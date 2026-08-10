@@ -25,3 +25,10 @@ What is the difference between Dockerfile `EXPOSE` and publishing a container po
 
 - [Docker Docs: EXPOSE instruction](https://docs.docker.com/reference/dockerfile/#expose)
 - Further reading (blog): [Docker: Port publishing and network hardening](https://www.docker.com/blog/docker-engine-28-hardening-container-networking-by-default/)
+## What to learn next
+
+- Official documentation: [Docker networking documentation](https://docs.docker.com/network/)
+- Manual or specification: [CNI specification](https://www.cni.dev/docs/spec/)
+- Maintainer or personal blog: [Thomas Graf — networking articles](https://tgraf.io/)
+- Technical blog: [Cilium engineering blog](https://cilium.io/blog/)
+- Hands-on guide: [Docker networking tutorial](https://docs.docker.com/network/tutorials/)

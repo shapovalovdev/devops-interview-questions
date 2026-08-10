@@ -21,6 +21,9 @@ QUESTIONS = [
         "container-dns-resolution.md",
         "container-egress-debugging.md",
         "container-network-namespace.md",
+        "cilium-l7-network-policy.md",
+        "container-network-security-architecture.md",
+        "expose-versus-publish.md",
     )
 ]
 RELATED = ROOT / "docs/related-materials/container-networking.md"
