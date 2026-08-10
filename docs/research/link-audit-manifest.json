@@ -1347,5 +1347,9 @@
     {"question": "questions/configuration-management/ansible-role-design.md", "related_materials": "docs/related-materials/configuration-management.md"},
     {"question": "questions/configuration-management/ansible-rolling-update.md", "related_materials": "docs/related-materials/configuration-management.md"},
     {"question": "questions/configuration-management/ansible-tags.md", "related_materials": "docs/related-materials/configuration-management.md"}
+,
+    {"question": "questions/configuration-management/ansible-templates.md", "related_materials": "docs/related-materials/configuration-management.md"},
+    {"question": "questions/configuration-management/ansible-test-strategy.md", "related_materials": "docs/related-materials/configuration-management.md"},
+    {"question": "questions/configuration-management/ansible-variables-basics.md", "related_materials": "docs/related-materials/configuration-management.md"}
   ]
 }
