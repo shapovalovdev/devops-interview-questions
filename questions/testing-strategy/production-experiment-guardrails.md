@@ -5,7 +5,10 @@ difficulty: staff
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://openfeature.dev/docs/reference/intro/
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://sre.google/workbook/canarying-releases/
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [OpenFeature documentation](https://openfeature.dev/docs/reference/intro/)
+- [Google SRE Workbook — canarying releases](https://sre.google/workbook/canarying-releases/)
+- Further reading (blog): [Netflix TechBlog — automated canary analysis with Kayenta](https://netflixtechblog.com/automated-canary-analysis-at-netflix-with-kayenta-3260bc7acc69)
 
 ## What to learn next
 

@@ -5,7 +5,10 @@ difficulty: junior
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://www.w3.org/TR/WCAG22/
+    source_type: standard
+    verified_on: 2026-08-10
+  - url: https://www.w3.org/WAI/standards-guidelines/wcag/
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [W3C — Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/WCAG22/)
+- [W3C WAI — WCAG standards and guidelines overview](https://www.w3.org/WAI/standards-guidelines/wcag/)
+- Further reading (blog): [web.dev — Learn Accessibility course](https://web.dev/learn/accessibility)
 
 ## What to learn next
 

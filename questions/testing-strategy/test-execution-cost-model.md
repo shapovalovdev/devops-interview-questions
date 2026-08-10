@@ -5,7 +5,10 @@ difficulty: middle
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://docs.github.com/en/actions
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://abseil.io/resources/swe-book/html/ch14.html
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should a team decide which tests run at each delivery stage?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [GitHub Actions documentation](https://docs.github.com/en/actions)
+- [Software Engineering at Google — larger testing](https://abseil.io/resources/swe-book/html/ch14.html)
+- Further reading (blog): [Google Testing Blog — test sizes](https://testing.googleblog.com/2010/12/test-sizes.html)
 
 ## What to learn next
 

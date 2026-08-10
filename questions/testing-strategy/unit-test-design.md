@@ -5,7 +5,10 @@ difficulty: junior
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://abseil.io/resources/swe-book/html/ch12.html
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://docs.pytest.org/en/stable/how-to/fixtures.html
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [Software Engineering at Google — unit testing](https://abseil.io/resources/swe-book/html/ch12.html)
+- [pytest — how to use fixtures](https://docs.pytest.org/en/stable/how-to/fixtures.html)
+- Further reading (blog): [Google Testing Blog — tests too DRY? make them DAMP!](https://testing.googleblog.com/2019/12/testing-on-toilet-tests-too-dry-make.html)
 
 ## What to learn next
 

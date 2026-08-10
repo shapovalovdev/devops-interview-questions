@@ -5,7 +5,10 @@ difficulty: senior
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://owasp.org/www-project-application-security-verification-standard/
+    source_type: standard
+    verified_on: 2026-08-10
+  - url: https://www.zaproxy.org/docs/
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- [OWASP ZAP documentation](https://www.zaproxy.org/docs/)
+- Further reading (blog): [Snyk — how static application security testing works](https://snyk.io/articles/application-security/static-application-security-testing/)
 
 ## What to learn next
 

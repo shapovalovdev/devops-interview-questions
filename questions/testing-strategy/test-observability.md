@@ -5,7 +5,10 @@ difficulty: senior
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://opentelemetry.io/docs/specs/otel/
+    source_type: standard
+    verified_on: 2026-08-10
+  - url: https://opentelemetry.io/docs/
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/)
+- [OpenTelemetry documentation](https://opentelemetry.io/docs/)
+- Further reading (blog): [Honeycomb — what observability-driven development is not](https://www.honeycomb.io/blog/observability-driven-development)
 
 ## What to learn next
 

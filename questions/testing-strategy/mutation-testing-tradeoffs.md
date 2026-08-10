@@ -5,7 +5,10 @@ difficulty: senior
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://pitest.org/
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://abseil.io/resources/swe-book/html/ch12.html
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -24,8 +27,9 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [PIT mutation testing documentation](https://pitest.org/)
+- [Software Engineering at Google — unit testing](https://abseil.io/resources/swe-book/html/ch12.html)
+- Further reading (blog): [Google Testing Blog — mutation testing](https://testing.googleblog.com/2021/04/mutation-testing.html)
 
 ## What to learn next
 

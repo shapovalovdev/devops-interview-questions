@@ -5,8 +5,11 @@ difficulty: middle
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://docs.pact.io/
     source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://github.com/pact-foundation/pact-specification
+    source_type: standard
     verified_on: 2026-08-10
 ---
 
@@ -24,8 +27,9 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [Pact documentation](https://docs.pact.io/)
+- [Pact specification](https://github.com/pact-foundation/pact-specification)
+- Further reading (blog): [Spotify Engineering — testing of microservices](https://engineering.atspotify.com/2018/01/testing-of-microservices/)
 
 ## What to learn next
 

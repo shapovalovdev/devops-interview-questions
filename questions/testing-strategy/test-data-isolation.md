@@ -5,7 +5,10 @@ difficulty: senior
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://docs.pytest.org/en/stable/how-to/fixtures.html
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://abseil.io/resources/swe-book/html/ch13.html
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should an engineering team make this testing decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [pytest — how to use fixtures](https://docs.pytest.org/en/stable/how-to/fixtures.html)
+- [Software Engineering at Google — test doubles](https://abseil.io/resources/swe-book/html/ch13.html)
+- Further reading (blog): [Google Testing Blog — keep tests focused](https://testing.googleblog.com/2018/06/testing-on-toilet-keep-tests-focused.html)
 
 ## What to learn next
 

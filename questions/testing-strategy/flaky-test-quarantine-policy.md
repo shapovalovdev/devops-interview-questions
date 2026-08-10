@@ -5,7 +5,10 @@ difficulty: senior
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://docs.pytest.org/en/stable/how-to/skipping.html
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://abseil.io/resources/swe-book/html/ch11.html
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should a team approach this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [pytest — how to skip tests and mark expected failures](https://docs.pytest.org/en/stable/how-to/skipping.html)
+- [Software Engineering at Google — testing overview](https://abseil.io/resources/swe-book/html/ch11.html)
+- Further reading (blog): [Google Testing Blog — test flakiness, one of the main challenges of automated testing](https://testing.googleblog.com/2020/12/test-flakiness-one-of-main-challenges.html)
 
 ## What to learn next
 

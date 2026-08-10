@@ -5,7 +5,10 @@ difficulty: staff
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://sre.google/sre-book/release-engineering/
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should a team approach this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [Argo Rollouts — analysis and progressive delivery](https://argo-rollouts.readthedocs.io/en/stable/features/analysis/)
+- [Google SRE Book — release engineering](https://sre.google/sre-book/release-engineering/)
+- Further reading (blog): [AWS Builders' Library — automating safe, hands-off deployments](https://aws.amazon.com/builders-library/automating-safe-hands-off-deployments/)
 
 ## What to learn next
 

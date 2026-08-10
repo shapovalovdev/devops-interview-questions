@@ -5,7 +5,10 @@ difficulty: staff
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://istio.io/latest/docs/tasks/traffic-management/mirroring/
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://sre.google/sre-book/testing-reliability/
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [Istio — mirroring traffic to a second service](https://istio.io/latest/docs/tasks/traffic-management/mirroring/)
+- [Google SRE Book — testing for reliability](https://sre.google/sre-book/testing-reliability/)
+- Further reading (blog): [Martin Fowler — dark launching](https://martinfowler.com/bliki/DarkLaunching.html)
 
 ## What to learn next
 

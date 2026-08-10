@@ -5,7 +5,10 @@ difficulty: middle
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://json-schema.org/specification
+    source_type: standard
+    verified_on: 2026-08-10
+  - url: https://docs.confluent.io/platform/current/schema-registry/index.html
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [JSON Schema specification](https://json-schema.org/specification)
+- [Confluent — Schema Registry documentation](https://docs.confluent.io/platform/current/schema-registry/index.html)
+- Further reading (blog): [AWS Builders' Library — ensuring rollback safety during deployments](https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/)
 
 ## What to learn next
 

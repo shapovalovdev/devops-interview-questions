@@ -5,7 +5,10 @@ difficulty: middle
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://testcontainers.com/guides/
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://abseil.io/resources/swe-book/html/ch14.html
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should a team approach this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [Testcontainers — guides](https://testcontainers.com/guides/)
+- [Software Engineering at Google — larger testing](https://abseil.io/resources/swe-book/html/ch14.html)
+- Further reading (blog): [Google Testing Blog — hermetic servers](https://testing.googleblog.com/2012/10/hermetic-servers.html)
 
 ## What to learn next
 

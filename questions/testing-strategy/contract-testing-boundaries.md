@@ -5,7 +5,10 @@ difficulty: middle
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://spec.openapis.org/oas/latest.html
+    source_type: standard
+    verified_on: 2026-08-10
+  - url: https://docs.pact.io/getting_started/how_pact_works
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should an engineering team make this testing decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Pact — how Pact works](https://docs.pact.io/getting_started/how_pact_works)
+- Further reading (blog): [Martin Fowler — contract test](https://martinfowler.com/bliki/ContractTest.html)
 
 ## What to learn next
 

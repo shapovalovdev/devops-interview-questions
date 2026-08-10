@@ -5,7 +5,10 @@ difficulty: staff
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://dora.dev/guides/dora-metrics/
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://abseil.io/resources/swe-book/html/ch11.html
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [DORA — software delivery performance metrics](https://dora.dev/guides/dora-metrics/)
+- [Software Engineering at Google — testing overview](https://abseil.io/resources/swe-book/html/ch11.html)
+- Further reading (blog): [Martin Fowler — is high quality software worth the cost?](https://martinfowler.com/articles/is-quality-worth-cost.html)
 
 ## What to learn next
 

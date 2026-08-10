@@ -5,7 +5,10 @@ difficulty: middle
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://csrc.nist.gov/pubs/sp/800/122/final
+    source_type: standard
+    verified_on: 2026-08-10
+  - url: https://postgresql-anonymizer.readthedocs.io/en/stable/
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,8 +26,9 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [NIST SP 800-122 — protecting the confidentiality of personally identifiable information](https://csrc.nist.gov/pubs/sp/800/122/final)
+- [PostgreSQL Anonymizer documentation](https://postgresql-anonymizer.readthedocs.io/en/stable/)
+- Further reading (blog): [Thoughtworks Technology Radar — production data in test environments](https://www.thoughtworks.com/radar/techniques/production-data-in-test-environments)
 
 ## What to learn next
 
