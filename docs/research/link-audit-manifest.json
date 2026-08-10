@@ -1533,6 +1533,7 @@
     {"question": "questions/backend-architecture/transaction-boundaries.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/backend-architecture/transactional-outbox.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/sre/measure-platform-impact-with-dora.md", "related_materials": "docs/related-materials/sre.md"},
+    {"question": "questions/serverless/attach-function-to-private-network.md", "related_materials": "docs/related-materials/serverless.md"},
     {"question": "questions/serverless/choose-serverless-trigger.md", "related_materials": "docs/related-materials/serverless.md"},
     {"question": "questions/serverless/control-serverless-cost.md", "related_materials": "docs/related-materials/serverless.md"},
     {"question": "questions/serverless/deploy-serverless-safely.md", "related_materials": "docs/related-materials/serverless.md"},
@@ -1548,9 +1549,12 @@
     {"question": "questions/serverless/handle-serverless-failures.md", "related_materials": "docs/related-materials/serverless.md"},
     {"question": "questions/serverless/manage-function-concurrency.md", "related_materials": "docs/related-materials/serverless.md"},
     {"question": "questions/serverless/manage-serverless-configuration.md", "related_materials": "docs/related-materials/serverless.md"},
+    {"question": "questions/serverless/manage-serverless-database-connections.md", "related_materials": "docs/related-materials/serverless.md"},
     {"question": "questions/serverless/observe-serverless-production.md", "related_materials": "docs/related-materials/serverless.md"},
     {"question": "questions/serverless/orchestrate-serverless-workflows.md", "related_materials": "docs/related-materials/serverless.md"},
+    {"question": "questions/serverless/reduce-function-package-size.md", "related_materials": "docs/related-materials/serverless.md"},
     {"question": "questions/serverless/secure-function-identity.md", "related_materials": "docs/related-materials/serverless.md"},
-    {"question": "questions/serverless/test-serverless-integrations.md", "related_materials": "docs/related-materials/serverless.md"}
+    {"question": "questions/serverless/test-serverless-integrations.md", "related_materials": "docs/related-materials/serverless.md"},
+    {"question": "questions/serverless/trace-ephemeral-function-requests.md", "related_materials": "docs/related-materials/serverless.md"}
   ]
 }
