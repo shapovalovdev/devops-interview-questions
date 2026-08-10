@@ -1381,6 +1381,13 @@
 ,
     {"question": "questions/shell-scripting/govern-shell-script-supply-chain.md", "related_materials": "docs/related-materials/shell-scripting.md"},
     {"question": "questions/shell-scripting/handle-script-arguments.md", "related_materials": "docs/related-materials/shell-scripting.md"},
-    {"question": "questions/shell-scripting/handle-signals-and-cleanup.md", "related_materials": "docs/related-materials/shell-scripting.md"}
+    {"question": "questions/shell-scripting/handle-signals-and-cleanup.md", "related_materials": "docs/related-materials/shell-scripting.md"},
+    {"question": "questions/infrastructure-as-code/remote-backend-migration.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"},
+    {"question": "questions/infrastructure-as-code/resource-lifecycle-controls.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"},
+    {"question": "questions/infrastructure-as-code/safe-resource-refactoring.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"}
+,
+    {"question": "questions/shell-scripting/implement-idempotent-remediation.md", "related_materials": "docs/related-materials/shell-scripting.md"},
+    {"question": "questions/shell-scripting/lock-singleton-job.md", "related_materials": "docs/related-materials/shell-scripting.md"},
+    {"question": "questions/shell-scripting/log-without-secrets.md", "related_materials": "docs/related-materials/shell-scripting.md"}
   ]
 }
