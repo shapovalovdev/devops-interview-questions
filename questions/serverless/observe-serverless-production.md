@@ -23,7 +23,7 @@ What telemetry do you need to diagnose serverless failures across asynchronous a
 ## References
 
 - [AWS Lambda monitoring](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html)
-- Further reading (blog): [AWS Compute Blog — Lambda observability](https://aws.amazon.com/blogs/compute/using-aws-lambda-powertools-for-observability/)
+- Further reading (blog): [AWS Compute Blog — Lambda observability articles](https://aws.amazon.com/blogs/compute/)
 
 ## What to learn next
 
