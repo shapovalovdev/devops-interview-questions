@@ -25,3 +25,11 @@ How would you design shared CI/CD capabilities for many teams without coupling a
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Reusing workflow configurations](https://docs.github.com/en/actions/reference/workflows-and-actions/reusing-workflow-configurations)
 - [Further reading: GitHub Docs—workflow syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions reusable workflows](https://docs.github.com/en/actions/how-tos/sharing-automations/reusing-workflows)
+- Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
+- Maintainer or personal blog: [John Allspaw](https://www.kitchensoap.com/)
+- Technical blog: [Google Cloud DevOps and SRE](https://cloud.google.com/blog/products/devops-sre)
+- Hands-on guide: [Practical deployment guide](https://docs.github.com/en/actions/reference/workflows-and-actions/reusable-workflows)

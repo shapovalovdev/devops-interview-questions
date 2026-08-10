@@ -25,3 +25,11 @@ What must be true before switching production traffic from blue to green?
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [Google Cloud: Deployment and testing strategies](https://cloud.google.com/architecture/application-deployment-and-testing-strategies)
 - [Further reading: Kubernetes—Deployment rolling updates](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes Deployment strategies](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+- Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
+- Maintainer or personal blog: [John Allspaw](https://www.kitchensoap.com/)
+- Technical blog: [Google Cloud DevOps and SRE](https://cloud.google.com/blog/products/devops-sre)
+- Hands-on guide: [Practical deployment guide](https://kubernetes.io/docs/tasks/run-application/rollout/)

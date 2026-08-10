@@ -25,3 +25,11 @@ When should an incident commander pause deployments, and when may a change conti
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [Google SRE Book: Managing incidents](https://sre.google/sre-book/managing-incidents/)
 - [Further reading: Google SRE Workbook—canarying releases](https://sre.google/workbook/canarying-releases/)
+
+## What to learn next
+
+- Official documentation: [Google SRE incident management](https://sre.google/sre-book/managing-incidents/)
+- Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
+- Maintainer or personal blog: [John Allspaw](https://www.kitchensoap.com/)
+- Technical blog: [Google Cloud DevOps and SRE](https://cloud.google.com/blog/products/devops-sre)
+- Hands-on guide: [Practical deployment guide](https://sre.google/workbook/managing-incidents/)
