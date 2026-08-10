@@ -1443,5 +1443,9 @@
     {"question": "questions/systems-performance/perf-sampling-and-overhead.md", "related_materials": "docs/related-materials/systems-performance.md"},
     {"question": "questions/systems-performance/performance-budget-architecture.md", "related_materials": "docs/related-materials/systems-performance.md"},
     {"question": "questions/systems-performance/performance-incident-command.md", "related_materials": "docs/related-materials/systems-performance.md"}
+,
+    {"question": "questions/systems-performance/performance-observability-program.md", "related_materials": "docs/related-materials/systems-performance.md"},
+    {"question": "questions/systems-performance/pressure-stall-information.md", "related_materials": "docs/related-materials/systems-performance.md"},
+    {"question": "questions/systems-performance/tail-latency-incident.md", "related_materials": "docs/related-materials/systems-performance.md"}
   ]
 }
