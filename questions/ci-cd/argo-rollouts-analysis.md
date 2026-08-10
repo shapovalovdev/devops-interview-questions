@@ -24,3 +24,11 @@ What makes an AnalysisTemplate suitable for automatically promoting or aborting 
 
 - [Argo Rollouts: analysis](https://argo-rollouts.readthedocs.io/en/stable/features/analysis/)
 - Further reading (blog): [Google Cloud Blog: practical SLOs for releases](https://cloud.google.com/blog/products/devops-sre/introducing-slos-service-level-objectives)
+
+## What to learn next
+
+- Official documentation: [Argo Rollouts analysis](https://argo-rollouts.readthedocs.io/en/stable/features/analysis/)
+- Manual or specification: [Argo project documentation](https://argo-cd.readthedocs.io/en/stable/)
+- Maintainer or personal blog: [Akuity — application dependencies with Argo CD](https://akuity.io/blog/application-dependencies-with-argo-cd)
+- Technical blog: [Codefresh — trigger a pipeline from Argo CD](https://codefresh.io/blog/trigger-codefresh-pipeline-argocd/)
+- Hands-on guide: [Argo Rollouts getting started](https://argo-rollouts.readthedocs.io/en/stable/getting-started/)

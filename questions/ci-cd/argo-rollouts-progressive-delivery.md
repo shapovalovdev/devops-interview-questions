@@ -24,3 +24,11 @@ How would you use Argo Rollouts to reduce risk when releasing an API with uncert
 
 - [Argo Rollouts: canary deployment strategy](https://argo-rollouts.readthedocs.io/en/stable/features/canary/)
 - Further reading (blog): [Google Cloud Blog: canary deployment strategies](https://cloud.google.com/blog/products/devops-sre/canary-deployments-using-kubernetes)
+
+## What to learn next
+
+- Official documentation: [Argo Rollouts canary delivery](https://argo-rollouts.readthedocs.io/en/stable/features/canary/)
+- Manual or specification: [Argo project documentation](https://argo-cd.readthedocs.io/en/stable/)
+- Maintainer or personal blog: [Akuity — application dependencies with Argo CD](https://akuity.io/blog/application-dependencies-with-argo-cd)
+- Technical blog: [Codefresh — trigger a pipeline from Argo CD](https://codefresh.io/blog/trigger-codefresh-pipeline-argocd/)
+- Hands-on guide: [Argo Rollouts getting started](https://argo-rollouts.readthedocs.io/en/stable/getting-started/)

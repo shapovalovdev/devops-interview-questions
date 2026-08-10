@@ -24,3 +24,11 @@ How would you design a DAG that tests independent components in parallel but nev
 
 - [Argo Workflows: DAG](https://argo-workflows.readthedocs.io/en/latest/walk-through/dag/)
 - Further reading (blog): [Google Cloud Blog: designing resilient pipelines](https://cloud.google.com/blog/products/data-analytics/building-reliable-data-pipelines)
+
+## What to learn next
+
+- Official documentation: [Argo Workflows DAGs](https://argo-workflows.readthedocs.io/en/latest/walk-through/dag/)
+- Manual or specification: [Argo project documentation](https://argo-cd.readthedocs.io/en/stable/)
+- Maintainer or personal blog: [Akuity — application dependencies with Argo CD](https://akuity.io/blog/application-dependencies-with-argo-cd)
+- Technical blog: [Codefresh — trigger a pipeline from Argo CD](https://codefresh.io/blog/trigger-codefresh-pipeline-argocd/)
+- Hands-on guide: [Argo Rollouts getting started](https://argo-rollouts.readthedocs.io/en/stable/getting-started/)

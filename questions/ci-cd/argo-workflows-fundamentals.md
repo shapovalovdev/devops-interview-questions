@@ -24,3 +24,11 @@ When is Argo Workflows a better fit than a Kubernetes Deployment or a convention
 
 - [Argo Workflows documentation](https://argo-workflows.readthedocs.io/en/latest/)
 - Further reading (blog): [GitHub Blog: What is GitOps?](https://github.blog/enterprise-software/ci-cd/what-is-gitops/)
+
+## What to learn next
+
+- Official documentation: [Argo Workflows overview](https://argo-workflows.readthedocs.io/en/latest/)
+- Manual or specification: [Argo project documentation](https://argo-cd.readthedocs.io/en/stable/)
+- Maintainer or personal blog: [Akuity — application dependencies with Argo CD](https://akuity.io/blog/application-dependencies-with-argo-cd)
+- Technical blog: [Codefresh — trigger a pipeline from Argo CD](https://codefresh.io/blog/trigger-codefresh-pipeline-argocd/)
+- Hands-on guide: [Argo Rollouts getting started](https://argo-rollouts.readthedocs.io/en/stable/getting-started/)
