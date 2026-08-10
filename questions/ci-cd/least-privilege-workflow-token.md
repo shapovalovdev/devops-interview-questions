@@ -25,3 +25,11 @@ How do you prevent a workflow from receiving more repository permission than it 
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Workflow syntax—permissions](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#permissions)
 - [Further reading: GitHub Docs—security hardening for Actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions — secure use reference](https://docs.github.com/en/actions/reference/security/secure-use)
+- Manual or specification: [GitHub Actions OpenID Connect reference](https://docs.github.com/en/actions/reference/security/oidc)
+- Maintainer or personal blog: [Kelly Shortridge — security engineering blog](https://kellyshortridge.com/blog/posts/)
+- Technical blog: [GitHub Engineering blog](https://github.blog/engineering/)
+- Hands-on guide: [GitHub Actions — configure OIDC with cloud providers](https://docs.github.com/en/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-cloud-providers)

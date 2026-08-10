@@ -25,3 +25,11 @@ How should a pipeline use an environment approval without turning every release 
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Control deployments](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/control-deployments)
 - [Further reading: GitHub Docs—deployment environments](https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions — manage deployment environments](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments)
+- Manual or specification: [GitHub Actions workflow syntax reference](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax)
+- Maintainer or personal blog: [Ken Muse — GitHub Actions engineering blog](https://www.kenmuse.com/blog/)
+- Technical blog: [GitHub Engineering blog](https://github.blog/engineering/)
+- Hands-on guide: [GitHub Actions — review deployments](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/review-deployments)

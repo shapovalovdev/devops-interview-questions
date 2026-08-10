@@ -25,3 +25,11 @@ How should a production deployment obtain credentials without exposing them to o
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Using secrets in GitHub Actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions)
 - [Further reading: GitHub Docs—OpenID Connect](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions secrets concepts](https://docs.github.com/en/actions/concepts/security/secrets)
+- Manual or specification: [OpenID Connect Core 1.0 specification](https://openid.net/specs/openid-connect-core-1_0.html)
+- Maintainer or personal blog: [Kelly Shortridge — security engineering blog](https://kellyshortridge.com/blog/posts/)
+- Technical blog: [GitHub Engineering blog](https://github.blog/engineering/)
+- Hands-on guide: [OWASP — secrets management cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)

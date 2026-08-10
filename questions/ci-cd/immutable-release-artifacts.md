@@ -25,3 +25,11 @@ Why is rebuilding “the same version” at deployment time risky, and what trac
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [SLSA: Build security levels and provenance](https://slsa.dev/spec/v1.0/levels)
 - [Further reading: GitHub Docs—artifact attestations](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations)
+
+## What to learn next
+
+- Official documentation: [GitHub Packages — working with the container registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
+- Manual or specification: [OCI image specification](https://github.com/opencontainers/image-spec/blob/main/spec.md)
+- Maintainer or personal blog: [Jess Frazelle — containers and infrastructure blog](https://blog.jessfraz.com/)
+- Technical blog: [GitHub Engineering blog](https://github.blog/engineering/)
+- Hands-on guide: [GitHub Actions — publish Docker images tutorial](https://docs.github.com/en/actions/tutorials/publish-packages/publish-docker-images)
