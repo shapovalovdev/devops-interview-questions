@@ -26,3 +26,11 @@ What do namespaces isolate, and what do they not isolate?
 - Further reading (blog): [Complementary kubernetes practice article](https://kubernetes.io/blog/2024/12/09/kubernetes-v1-32-release/)
 - [Kubernetes: Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 - [Kubernetes: Resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes concepts: namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
+- Manual or specification: [Namespace v1 API reference](https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/namespace-v1/)
+- Maintainer or personal blog: [Daniel Weibel — how many clusters, and where namespaces stop being enough](https://learnkube.com/how-many-clusters)
+- Technical blog: [CNCF — Kubernetes resource management: QoS, quota and LimitRange](https://www.cncf.io/blog/2020/06/10/kubernetes-resources-management-qos-quota-and-limitrangeb/)
+- Hands-on guide: [Namespaces walkthrough](https://kubernetes.io/docs/tasks/administer-cluster/namespaces-walkthrough/)

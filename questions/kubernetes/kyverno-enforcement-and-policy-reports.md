@@ -29,8 +29,8 @@ How do you move a Kyverno policy from observation to enforcement without turning
 
 ## What to learn next
 
-- Official documentation: [Kyverno monitoring](https://kyverno.io/docs/guides/monitoring/)
-- Official documentation: [Kyverno troubleshooting](https://kyverno.io/docs/troubleshooting/)
-- Manual or specification: [Kubernetes API auditing](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
-- Maintainer or personal blog: [Kyverno blog](https://kyverno.io/blog/)
-- Free learning material: [Kyverno policy library](https://kyverno.io/policies/)
+- Official documentation: [Kyverno policy reports guide](https://kyverno.io/docs/guides/reports/)
+- Manual or specification: [PolicyReport custom resource specification (Kubernetes policy working group)](https://github.com/kubernetes-sigs/wg-policy-prototypes/blob/master/policy-report/README.md)
+- Maintainer or personal blog: [Chip Zoller — automating cleanup and reporting of non-conformant resources](https://neonmirrors.net/post/2023-12-18/cleanup-bad-resources/)
+- Technical blog: [Nirmata — Kyverno engineering blog](https://nirmata.com/blog/)
+- Hands-on guide: [Applying Kyverno policies in audit and enforce mode](https://kyverno.io/docs/guides/applying-policies/)
