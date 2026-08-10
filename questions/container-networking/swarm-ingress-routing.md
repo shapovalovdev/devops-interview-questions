@@ -25,3 +25,10 @@ How do Swarm routing-mesh publishing and host-mode publishing differ operational
 
 - [Docker Docs: Swarm ingress routing mesh](https://docs.docker.com/engine/swarm/ingress/)
 - Further reading (blog): [Docker: Understanding Docker networking](https://www.docker.com/blog/understanding-docker-networking-drivers-use-cases/)
+## What to learn next
+
+- Official documentation: [Docker networking documentation](https://docs.docker.com/network/)
+- Manual or specification: [CNI specification](https://www.cni.dev/docs/spec/)
+- Maintainer or personal blog: [Thomas Graf — networking articles](https://tgraf.io/)
+- Technical blog: [Cilium engineering blog](https://cilium.io/blog/)
+- Hands-on guide: [Docker networking tutorial](https://docs.docker.com/network/tutorials/)

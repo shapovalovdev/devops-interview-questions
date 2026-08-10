@@ -25,3 +25,10 @@ Why is a user-defined bridge normally preferable to Docker's default bridge for 
 
 - [Docker Docs: Bridge network driver](https://docs.docker.com/engine/network/drivers/bridge/)
 - Further reading (blog): [Docker: Understanding Docker networking](https://www.docker.com/blog/understanding-docker-networking-drivers-use-cases/)
+## What to learn next
+
+- Official documentation: [Docker networking documentation](https://docs.docker.com/network/)
+- Manual or specification: [CNI specification](https://www.cni.dev/docs/spec/)
+- Maintainer or personal blog: [Thomas Graf — networking articles](https://tgraf.io/)
+- Technical blog: [Cilium engineering blog](https://cilium.io/blog/)
+- Hands-on guide: [Docker networking tutorial](https://docs.docker.com/network/tutorials/)
