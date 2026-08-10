@@ -25,3 +25,11 @@ When should a team extract a reusable workflow, and what inputs should it expose
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Reusing workflow configurations](https://docs.github.com/en/actions/reference/workflows-and-actions/reusing-workflow-configurations)
 - [Further reading: GitHub Docs—workflow syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax)
+
+## What to learn next
+
+- Official documentation: [GitHub reusable workflows](https://docs.github.com/en/actions/how-tos/sharing-automations/reusing-workflows)
+- Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
+- Maintainer or personal blog: [Julia Evans](https://jvns.ca/)
+- Technical blog: [GitHub Blog — CI/CD](https://github.blog/enterprise-software/ci-cd/)
+- Hands-on guide: [Practical guide](https://docs.github.com/en/actions/tutorials/create-actions)
