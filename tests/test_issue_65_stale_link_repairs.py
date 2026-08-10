@@ -4,7 +4,10 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCOPES = [ROOT / "questions" / theme for theme in ("network-storage", "version-control", "distributed-systems")]
+SCOPES = [
+    ROOT / "questions" / theme
+    for theme in ("network-storage", "version-control", "distributed-systems", "logging", "troubleshooting")
+]
 STALE_URL_FRAGMENTS = (
     "implementing-the-saga-pattern-with-aws-lambda-and-amazon-step-functions",
     "consensus-and-coordination",
@@ -25,6 +28,10 @@ STALE_URL_FRAGMENTS = (
     "wiki.linux-nfs.org/wiki/index.php/Main_Page",
     "www.confluent.io/blog/stream-data-processing-using-apache-flink",
     "www.redhat.com/en/blog/channel/storage",
+    "aws.amazon.com/blogs/mt/control-log-retention-in-aws-accounts",
+    "aws.amazon.com/blogs/storage/how-to-protect-data-using-amazon-s3-object-lock",
+    "blog.cloudflare.com/tag/postmortem",
+    "blog.mozilla.org/en/internet-culture/privacy-security",
 )
 
 

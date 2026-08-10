@@ -22,7 +22,7 @@ sources:
 
 - [Google SRE Book — Monitoring Distributed Systems](https://sre.google/sre-book/monitoring-distributed-systems/)
 - [Google SRE Book — Service Level Objectives](https://sre.google/sre-book/service-level-objectives/)
-- Further reading (blog): [Cloudflare — Incident reports](https://blog.cloudflare.com/tag/postmortem/)
+- Further reading (blog): [Cloudflare — July 2020 outage postmortem](https://blog.cloudflare.com/cloudflare-outage-on-july-17-2020/)
 
 ## What to learn next
 
@@ -30,4 +30,4 @@ sources:
 - Official documentation: [Prometheus query basics](https://prometheus.io/docs/prometheus/latest/querying/basics/)
 - Hands-on guide: [OpenTelemetry metrics](https://opentelemetry.io/docs/concepts/signals/metrics/)
 - Maintainer or personal blog: [Charity Majors](https://charity.wtf/)
-- Technical blog: [Cloudflare incident reports](https://blog.cloudflare.com/tag/postmortem/)
+- Technical blog: [Cloudflare — July 2020 outage postmortem](https://blog.cloudflare.com/cloudflare-outage-on-july-17-2020/)

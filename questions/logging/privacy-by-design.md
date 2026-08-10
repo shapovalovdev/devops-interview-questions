@@ -23,12 +23,12 @@ How would you let engineers debug production while minimizing personal-data expo
 ## References
 
 - [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
-- Further reading (blog): [Mozilla: data privacy](https://blog.mozilla.org/en/internet-culture/privacy-security/)
+- Further reading (blog): [Mozilla: Privacy & Security](https://blog.mozilla.org/en/category/privacy-security/)
 
 ## What to learn next
 
 - Official documentation: [OWASP logging guidance](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - Manual or specification: [NIST Privacy Framework](https://www.nist.gov/privacy-framework)
 - Maintainer or personal blog: [Troy Hunt's blog](https://www.troyhunt.com/)
-- Technical blog: [Mozilla privacy writing](https://blog.mozilla.org/en/internet-culture/privacy-security/)
+- Technical blog: [Mozilla Privacy & Security writing](https://blog.mozilla.org/en/category/privacy-security/)
 - Hands-on guide: [OpenTelemetry attributes processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/attributesprocessor)

@@ -23,12 +23,12 @@ What controls make logs more trustworthy during a security investigation?
 ## References
 
 - [NIST SP 800-92: log management](https://csrc.nist.gov/pubs/sp/800/92/final)
-- Further reading (blog): [AWS: immutable logging](https://aws.amazon.com/blogs/storage/how-to-protect-data-using-amazon-s3-object-lock/)
+- Further reading (blog): [AWS: protecting data with S3 Object Lock](https://aws.amazon.com/blogs/storage/protecting-data-with-amazon-s3-object-lock/)
 
 ## What to learn next
 
 - Official documentation: [AWS S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)
 - Manual or specification: [NIST SP 800-92](https://csrc.nist.gov/pubs/sp/800/92/final)
 - Maintainer or personal blog: [Troy Hunt's blog](https://www.troyhunt.com/)
-- Technical blog: [AWS immutable logging](https://aws.amazon.com/blogs/storage/how-to-protect-data-using-amazon-s3-object-lock/)
+- Technical blog: [AWS: protecting data with S3 Object Lock](https://aws.amazon.com/blogs/storage/protecting-data-with-amazon-s3-object-lock/)
 - Hands-on guide: [OpenSearch security](https://docs.opensearch.org/latest/security/)

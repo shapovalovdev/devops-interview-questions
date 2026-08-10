@@ -30,5 +30,5 @@ How should a platform choose log retention periods?
 - Official documentation: [Google Cloud log retention](https://cloud.google.com/logging/docs/storage)
 - Manual or specification: [NIST SP 800-92](https://csrc.nist.gov/pubs/sp/800/92/final)
 - Maintainer or personal blog: [Troy Hunt's blog](https://www.troyhunt.com/)
-- Technical blog: [AWS log retention best practices](https://aws.amazon.com/blogs/mt/control-log-retention-in-aws-accounts/)
+- Technical blog: [AWS CloudWatch Logs data-protection practices](https://aws.amazon.com/blogs/mt/how-amazon-cloudwatch-logs-data-protection-can-help-detect-and-protect-sensitive-log-data/)
 - Hands-on guide: [OpenSearch index state management](https://docs.opensearch.org/latest/im-plugin/ism/index/)
