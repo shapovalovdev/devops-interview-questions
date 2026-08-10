@@ -25,3 +25,11 @@ When an Argo CD Application needs environment-specific manifests, how do Helm an
 - [Argo CD: Helm](https://argo-cd.readthedocs.io/en/stable/user-guide/helm/)
 - [Argo CD: Kustomize](https://argo-cd.readthedocs.io/en/stable/user-guide/kustomize/)
 - Further reading (blog): [GitHub Blog: managing Kubernetes manifests](https://github.blog/enterprise-software/ci-cd/gitops-with-github-actions/)
+
+## What to learn next
+
+- Official documentation: [Argo CD Helm support](https://argo-cd.readthedocs.io/en/stable/user-guide/helm/)
+- Manual or specification: [Argo CD Kustomize support](https://argo-cd.readthedocs.io/en/stable/user-guide/kustomize/)
+- Maintainer or personal blog: [Akuity — Argo CD architecture redesigned](https://akuity.io/blog/argo-cd-architecture-redesigned)
+- Technical blog: [Codefresh — Argo CD pipeline integration](https://codefresh.io/blog/trigger-codefresh-pipeline-argocd/)
+- Hands-on guide: [Argo CD application specification](https://argo-cd.readthedocs.io/en/stable/user-guide/application-specification/)

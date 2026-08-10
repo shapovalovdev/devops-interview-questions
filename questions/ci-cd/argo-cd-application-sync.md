@@ -24,3 +24,11 @@ What does synchronizing an Argo CD Application do, and what should an operator i
 
 - [Argo CD: sync options](https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/)
 - Further reading (blog): [GitHub Blog: GitOps with Actions and Argo CD](https://github.blog/enterprise-software/ci-cd/build-ci-cd-pipeline-github-actions-four-steps/)
+
+## What to learn next
+
+- Official documentation: [Argo CD sync options](https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/)
+- Manual or specification: [Argo CD architecture](https://argo-cd.readthedocs.io/en/stable/operator-manual/architecture/)
+- Maintainer or personal blog: [Akuity — application dependencies with Argo CD](https://akuity.io/blog/application-dependencies-with-argo-cd)
+- Technical blog: [GitHub Blog — GitOps with Actions and Argo CD](https://github.blog/enterprise-software/ci-cd/build-ci-cd-pipeline-github-actions-four-steps/)
+- Hands-on guide: [Argo CD getting started](https://argo-cd.readthedocs.io/en/stable/getting_started/)
