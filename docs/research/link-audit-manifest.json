@@ -1346,7 +1346,10 @@
 ,
     {"question": "questions/configuration-management/ansible-role-design.md", "related_materials": "docs/related-materials/configuration-management.md"},
     {"question": "questions/configuration-management/ansible-rolling-update.md", "related_materials": "docs/related-materials/configuration-management.md"},
-    {"question": "questions/configuration-management/ansible-tags.md", "related_materials": "docs/related-materials/configuration-management.md"}
+    {"question": "questions/configuration-management/ansible-tags.md", "related_materials": "docs/related-materials/configuration-management.md"},
+    {"question": "questions/infrastructure-as-code/local-values-and-data-sources.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"},
+    {"question": "questions/infrastructure-as-code/module-interface-design.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"},
+    {"question": "questions/infrastructure-as-code/multi-environment-isolation.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"}
 ,
     {"question": "questions/configuration-management/ansible-templates.md", "related_materials": "docs/related-materials/configuration-management.md"},
     {"question": "questions/configuration-management/ansible-test-strategy.md", "related_materials": "docs/related-materials/configuration-management.md"},
