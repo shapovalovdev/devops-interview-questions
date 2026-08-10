@@ -26,6 +26,7 @@ This map uses the DevOps roadmap as a coverage guide, not as copied content. Eac
 | Service mesh | `service-mesh` |
 | Serverless and event-driven compute | `serverless` |
 | Backend architecture | `backend-architecture` |
+| Caching and content delivery | `caching` |
 | Distributed systems | `distributed-systems` |
 | Web servers and proxies | `web-servers` |
 | Security and supply chain | `security` |
