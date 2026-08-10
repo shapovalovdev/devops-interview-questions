@@ -19,6 +19,7 @@ QUESTIONS = [
         "bridge-traffic-path.md",
         "compose-network-contract.md",
         "container-dns-resolution.md",
+        "container-egress-debugging.md",
     )
 ]
 RELATED = ROOT / "docs/related-materials/container-networking.md"

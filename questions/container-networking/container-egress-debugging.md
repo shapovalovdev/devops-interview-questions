@@ -25,3 +25,11 @@ A container can reach peer containers but not an external API. What is your debu
 
 - [Docker Docs: Container networking](https://docs.docker.com/engine/network/)
 - Further reading (blog): [Docker: Networking drivers and use cases](https://www.docker.com/blog/understanding-docker-networking-drivers-use-cases/)
+
+## What to learn next
+
+- Official documentation: [Docker networking](https://docs.docker.com/engine/network/)
+- Manual or specification: [RFC 3022: Traditional NAT](https://www.rfc-editor.org/rfc/rfc3022)
+- Maintainer or personal blog: [Julia Evans: networking writing](https://jvns.ca/)
+- Technical blog: [Docker networking drivers](https://www.docker.com/blog/understanding-docker-networking-drivers-use-cases/)
+- Hands-on guide: [Docker networking tutorial](https://docs.docker.com/engine/network/tutorials/standalone/)
