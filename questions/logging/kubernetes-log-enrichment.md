@@ -23,12 +23,12 @@ Which Kubernetes metadata belongs on collected logs, and what are the risks?
 ## References
 
 - [OpenTelemetry Kubernetes resource semantic conventions](https://opentelemetry.io/docs/specs/semconv/resource/k8s/)
-- Further reading (blog): [Grafana: Kubernetes labels in Loki](https://grafana.com/blog/2020/04/21/how-labels-in-loki-can-make-log-queries-faster-and-more-efficient/)
+- Further reading (blog): [Grafana: Loki labels and query performance](https://grafana.com/blog/how-labels-in-loki-can-make-log-queries-faster-and-easier/)
 
 ## What to learn next
 
 - Official documentation: [Kubernetes logging architecture](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
 - Manual or specification: [OpenTelemetry Kubernetes resource conventions](https://opentelemetry.io/docs/specs/semconv/resource/k8s/)
 - Maintainer or personal blog: [OpenTelemetry blog](https://opentelemetry.io/blog/)
-- Technical blog: [Grafana Loki labels](https://grafana.com/blog/2020/04/21/how-labels-in-loki-can-make-log-queries-faster-and-more-efficient/)
+- Technical blog: [Grafana Loki labels and query performance](https://grafana.com/blog/how-labels-in-loki-can-make-log-queries-faster-and-easier/)
 - Hands-on guide: [OpenTelemetry Kubernetes attributes processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor)

@@ -23,12 +23,12 @@ How would you plan a migration from many logging agents and backends without los
 ## References
 
 - [OpenTelemetry Collector documentation](https://opentelemetry.io/docs/collector/)
-- Further reading (blog): [Grafana: migrate to Loki](https://grafana.com/docs/loki/latest/operations/storage/migrate-to-tsdb/)
+- Further reading (blog): [Grafana Loki migration guidance](https://grafana.com/docs/loki/latest/setup/migrate/)
 
 ## What to learn next
 
 - Official documentation: [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)
 - Manual or specification: [OpenTelemetry logs specification](https://opentelemetry.io/docs/specs/otel/logs/)
 - Maintainer or personal blog: [OpenTelemetry blog](https://opentelemetry.io/blog/)
-- Technical blog: [Grafana Loki migration](https://grafana.com/docs/loki/latest/operations/storage/migrate-to-tsdb/)
+- Technical blog: [Grafana Loki migration guidance](https://grafana.com/docs/loki/latest/setup/migrate/)
 - Hands-on guide: [OpenTelemetry Collector configuration](https://opentelemetry.io/docs/collector/configuration/)

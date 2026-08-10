@@ -23,12 +23,12 @@ How would you improve a slow log query without making the data unusable?
 ## References
 
 - [Loki label best practices](https://grafana.com/docs/loki/latest/get-started/labels/)
-- Further reading (blog): [Grafana: labels in Loki](https://grafana.com/blog/2020/04/21/how-labels-in-loki-can-make-log-queries-faster-and-more-efficient/)
+- Further reading (blog): [Grafana: concise guide to Loki labels](https://grafana.com/blog/the-concise-guide-to-grafana-loki-everything-you-need-to-know-about-labels/)
 
 ## What to learn next
 
 - Official documentation: [Loki labels](https://grafana.com/docs/loki/latest/get-started/labels/)
 - Manual or specification: [Loki LogQL](https://grafana.com/docs/loki/latest/query/)
-- Maintainer or personal blog: [Ed Welch's Grafana writing](https://grafana.com/blog/author/ed-welch/)
-- Technical blog: [Grafana on Loki labels](https://grafana.com/blog/2020/04/21/how-labels-in-loki-can-make-log-queries-faster-and-more-efficient/)
+- Maintainer or personal blog: [Ed Welch: concise guide to Loki labels](https://grafana.com/blog/the-concise-guide-to-grafana-loki-everything-you-need-to-know-about-labels/)
+- Technical blog: [Grafana on Loki labels](https://grafana.com/blog/how-labels-in-loki-can-make-log-queries-faster-and-easier/)
 - Hands-on guide: [Loki query examples](https://grafana.com/docs/loki/latest/query/query_examples/)

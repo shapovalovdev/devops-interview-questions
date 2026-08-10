@@ -42,6 +42,12 @@ STALE_URL_FRAGMENTS = (
     "docs.github.com/en/actions/tutorials/security-hardening-your-deployments",
     "docs.github.com/en/repositories/working-with-files/managing-files/working-with-submodules",
     "kubernetes.io/docs/tasks/run-application/rollout/",
+    "grafana.com/blog/2020/04/21/how-labels-in-loki-can-make-log-queries-faster-and-more-efficient",
+    "grafana.com/blog/2021/01/20/how-to-run-grafana-loki-as-a-multi-tenant-log-aggregation-system",
+    "grafana.com/blog/2023/10/10/how-to-control-logging-costs-with-grafana-loki",
+    "grafana.com/blog/author/ed-welch",
+    "grafana.com/blog/tags/loki",
+    "grafana.com/docs/loki/latest/operations/storage/migrate-to-tsdb",
 )
 
 

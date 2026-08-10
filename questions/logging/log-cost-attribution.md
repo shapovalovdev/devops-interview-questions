@@ -23,12 +23,12 @@ How would you reduce an unexpectedly large logging bill without losing incident 
 ## References
 
 - [Loki label best practices](https://grafana.com/docs/loki/latest/get-started/labels/)
-- Further reading (blog): [Grafana: control logging costs](https://grafana.com/blog/2023/10/10/how-to-control-logging-costs-with-grafana-loki/)
+- Further reading (blog): [Grafana: cost-efficient Loki log queries](https://grafana.com/blog/grafana-labs-acquires-logline/)
 
 ## What to learn next
 
 - Official documentation: [Loki labels](https://grafana.com/docs/loki/latest/get-started/labels/)
 - Manual or specification: [NIST SP 800-92](https://csrc.nist.gov/pubs/sp/800/92/final)
 - Maintainer or personal blog: [Charity Majors' writing](https://charity.wtf/)
-- Technical blog: [Grafana logging cost control](https://grafana.com/blog/2023/10/10/how-to-control-logging-costs-with-grafana-loki/)
+- Technical blog: [Grafana: cost-efficient Loki log queries](https://grafana.com/blog/grafana-labs-acquires-logline/)
 - Hands-on guide: [Loki retention configuration](https://grafana.com/docs/loki/latest/operations/storage/retention/)

@@ -23,12 +23,12 @@ How would you prevent one tenant from reading, exhausting, or corrupting another
 ## References
 
 - [Loki authentication and multi-tenancy](https://grafana.com/docs/loki/latest/operations/authentication/)
-- Further reading (blog): [Grafana: multi-tenant Loki](https://grafana.com/blog/2021/01/20/how-to-run-grafana-loki-as-a-multi-tenant-log-aggregation-system/)
+- Further reading (blog): [Grafana Loki 2.6: multi-tenant queries](https://grafana.com/blog/grafana-loki-2-6-release/)
 
 ## What to learn next
 
 - Official documentation: [Loki authentication](https://grafana.com/docs/loki/latest/operations/authentication/)
 - Manual or specification: [OpenTelemetry security guidance](https://opentelemetry.io/docs/security/)
-- Maintainer or personal blog: [Ed Welch's Grafana writing](https://grafana.com/blog/author/ed-welch/)
-- Technical blog: [Grafana multi-tenant Loki](https://grafana.com/blog/2021/01/20/how-to-run-grafana-loki-as-a-multi-tenant-log-aggregation-system/)
+- Maintainer or personal blog: [Ed Welch: concise guide to Loki labels](https://grafana.com/blog/the-concise-guide-to-grafana-loki-everything-you-need-to-know-about-labels/)
+- Technical blog: [Grafana Loki 2.6: multi-tenant queries](https://grafana.com/blog/grafana-loki-2-6-release/)
 - Hands-on guide: [Loki configuration](https://grafana.com/docs/loki/latest/configure/)
