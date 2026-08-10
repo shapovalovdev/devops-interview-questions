@@ -27,7 +27,7 @@ How would you trigger a deployment Workflow only after a signed release event an
 
 ## What to learn next
 
-- Official documentation: [Argo Events sensors](https://argoproj.github.io/argo-events/sensors/)
+- Official documentation: [Argo Events documentation](https://argoproj.github.io/argo-events/)
 - Manual or specification: [Argo project documentation](https://argo-cd.readthedocs.io/en/stable/)
 - Maintainer or personal blog: [Akuity — application dependencies with Argo CD](https://akuity.io/blog/application-dependencies-with-argo-cd)
 - Technical blog: [Codefresh — trigger a pipeline from Argo CD](https://codefresh.io/blog/trigger-codefresh-pipeline-argocd/)
