@@ -18,6 +18,7 @@ QUESTIONS = [
         "cilium-kube-proxy-replacement.md",
         "bridge-traffic-path.md",
         "compose-network-contract.md",
+        "container-dns-resolution.md",
     )
 ]
 RELATED = ROOT / "docs/related-materials/container-networking.md"
