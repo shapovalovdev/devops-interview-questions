@@ -113,6 +113,10 @@
       "state": "complete"
     },
     {
+      "name": "serverless",
+      "state": "in-progress"
+    },
+    {
       "name": "service-mesh",
       "state": "complete"
     },
@@ -133,6 +137,10 @@
       "state": "complete"
     },
     {
+      "name": "testing-strategy",
+      "state": "in-progress"
+    },
+    {
       "name": "troubleshooting",
       "state": "complete"
     },
@@ -143,14 +151,6 @@
     {
       "name": "web-servers",
       "state": "complete"
-    },
-    {
-      "name": "testing-strategy",
-      "state": "in-progress"
-    },
-    {
-      "name": "serverless",
-      "state": "in-progress"
     }
   ],
   "certifications": [
