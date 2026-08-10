@@ -1552,6 +1552,10 @@
     {"question": "questions/caching/cdn-cache-key-scoping.md", "related_materials": "docs/related-materials/caching.md"},
     {"question": "questions/caching/hot-key-mitigation.md", "related_materials": "docs/related-materials/caching.md"},
     {"question": "questions/caching/stale-while-revalidate-budget.md", "related_materials": "docs/related-materials/caching.md"},
-    {"question": "questions/caching/write-through-versus-write-behind.md", "related_materials": "docs/related-materials/caching.md"}
+    {"question": "questions/caching/write-through-versus-write-behind.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/cache-outage-blast-radius.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/cache-poisoning-defense.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/caching-strategy-decision.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/redis-failover-operations.md", "related_materials": "docs/related-materials/caching.md"}
   ]
 }
