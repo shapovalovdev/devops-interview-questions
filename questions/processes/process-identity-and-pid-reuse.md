@@ -34,5 +34,5 @@ Why is `kill $(cat pidfile)` unsafe by itself, and how would you make process-co
 - Official documentation: [man7 pidfd_open(2)](https://man7.org/linux/man-pages/man2/pidfd_open.2.html)
 - Manual or specification: [man7 pidfd_send_signal(2)](https://man7.org/linux/man-pages/man2/pidfd_send_signal.2.html)
 - Maintainer or personal blog: [Lennart Poettering — systemd](https://0pointer.net/blog/projects/systemd.html)
-- Technical blog: [Red Hat — Linux processes](https://www.redhat.com/en/topics/linux/what-is-a-linux-process)
+- Technical blog: [Linux kernel proc filesystem documentation](https://docs.kernel.org/filesystems/proc.html)
 - Hands-on guide: [Secure Programming HOWTO](https://tldp.org/HOWTO/Secure-Programs-HOWTO/)
