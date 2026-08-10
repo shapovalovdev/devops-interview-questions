@@ -7,7 +7,7 @@ Use the Question-level sources for factual verification. This page is a curated 
 - Official documentation: [Linux man-pages: proc(5)](https://man7.org/linux/man-pages/man5/proc.5.html)
 - Manual or specification: [Linux man-pages: signal(7)](https://man7.org/linux/man-pages/man7/signal.7.html)
 - Maintainer or personal blog: [Brendan Gregg’s Linux performance writing](https://www.brendangregg.com/linuxperf.html)
-- Technical blog: [Red Hat — What is a Linux process?](https://www.redhat.com/en/topics/linux/what-is-a-linux-process)
+- Technical blog: [Linux kernel proc filesystem documentation](https://docs.kernel.org/filesystems/proc.html)
 - Hands-on guide: [The Linux Documentation Project](https://tldp.org/)
 
 ## Suggested study order
