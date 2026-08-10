@@ -174,3 +174,9 @@ def test_configmap_secret_boundaries_uses_live_liz_rice_source() -> None:
     text = (ROOT / "questions" / "certification-last-minute-review" / "configmap-secret-boundaries.md").read_text(encoding="utf-8")
     assert "https://www.aquasec.com/blog/kubernetes-secrets-management/" not in text
     assert "https://www.lizrice.com/" in text
+
+
+def test_configuration_management_materials_use_live_ansible_blog() -> None:
+    text = (ROOT / "docs" / "related-materials" / "configuration-management.md").read_text(encoding="utf-8")
+    assert "https://www.redhat.com/en/blog/channel/ansible" not in text
+    assert "https://www.ansible.com/blog" in text
