@@ -1327,10 +1327,17 @@
 ,
     {"question": "questions/configuration-management/ansible-check-diff.md", "related_materials": "docs/related-materials/configuration-management.md"},
     {"question": "questions/configuration-management/ansible-collection-pinning.md", "related_materials": "docs/related-materials/configuration-management.md"},
-    {"question": "questions/configuration-management/ansible-concurrency-limits.md", "related_materials": "docs/related-materials/configuration-management.md"}
+    {"question": "questions/configuration-management/ansible-concurrency-limits.md", "related_materials": "docs/related-materials/configuration-management.md"},
+    {"question": "questions/infrastructure-as-code/import-existing-infrastructure.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"},
+    {"question": "questions/infrastructure-as-code/infrastructure-drift.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"},
+    {"question": "questions/infrastructure-as-code/input-variables-and-validation.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"}
 ,
     {"question": "questions/configuration-management/ansible-delegation.md", "related_materials": "docs/related-materials/configuration-management.md"},
     {"question": "questions/configuration-management/ansible-dynamic-inventory.md", "related_materials": "docs/related-materials/configuration-management.md"},
     {"question": "questions/configuration-management/ansible-error-handling.md", "related_materials": "docs/related-materials/configuration-management.md"}
+,
+    {"question": "questions/configuration-management/ansible-facts.md", "related_materials": "docs/related-materials/configuration-management.md"},
+    {"question": "questions/configuration-management/ansible-handlers.md", "related_materials": "docs/related-materials/configuration-management.md"},
+    {"question": "questions/configuration-management/ansible-idempotence.md", "related_materials": "docs/related-materials/configuration-management.md"}
   ]
 }

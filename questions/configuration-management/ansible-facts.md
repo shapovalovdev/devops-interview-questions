@@ -25,3 +25,11 @@ What are Ansible facts, and what are the operational trade-offs of using them?
 
 - [Ansible documentation: vars, facts, and magic variables](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_vars_facts.html)
 - Further reading (blog): [Spacelift: Ansible performance and fact gathering](https://spacelift.io/blog/how-to-improve-ansible-performance)
+
+## What to learn next
+
+- Official documentation: [Ansible documentation](https://docs.ansible.com/ansible/latest/)
+- Manual or specification: [Ansible playbook guide](https://docs.ansible.com/ansible/latest/playbook_guide/index.html)
+- Maintainer or personal blog: [Jeff Geerling](https://www.jeffgeerling.com/blog)
+- Technical blog: [Red Hat Ansible blog](https://www.redhat.com/en/blog/channel/ansible)
+- Hands-on guide: [Ansible examples](https://github.com/ansible/ansible-examples)
