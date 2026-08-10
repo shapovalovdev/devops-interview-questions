@@ -1393,5 +1393,9 @@
     {"question": "questions/shell-scripting/manage-temporary-files.md", "related_materials": "docs/related-materials/shell-scripting.md"},
     {"question": "questions/shell-scripting/measure-automation-reliability.md", "related_materials": "docs/related-materials/shell-scripting.md"},
     {"question": "questions/shell-scripting/parse-options-with-getopts.md", "related_materials": "docs/related-materials/shell-scripting.md"}
+,
+    {"question": "questions/shell-scripting/preserve-pipeline-failures.md", "related_materials": "docs/related-materials/shell-scripting.md"},
+    {"question": "questions/shell-scripting/read-lines-safely.md", "related_materials": "docs/related-materials/shell-scripting.md"},
+    {"question": "questions/shell-scripting/shell-quoting-and-expansion.md", "related_materials": "docs/related-materials/shell-scripting.md"}
   ]
 }
