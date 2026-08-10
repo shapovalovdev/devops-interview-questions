@@ -23,12 +23,12 @@ How would you change a widely used log field from a string to a structured value
 ## References
 
 - [OpenTelemetry log data model](https://opentelemetry.io/docs/specs/otel/logs/data-model/)
-- Further reading (blog): [Elastic: ECS versioning](https://www.elastic.co/blog/introducing-elastic-common-schema)
+- Further reading (blog): [Elastic: ECS versioning](https://www.elastic.co/docs/reference/ecs/)
 
 ## What to learn next
 
 - Official documentation: [Elastic Common Schema](https://www.elastic.co/docs/reference/ecs)
 - Manual or specification: [OpenTelemetry log data model](https://opentelemetry.io/docs/specs/otel/logs/data-model/)
 - Maintainer or personal blog: [Charity Majors' writing](https://charity.wtf/)
-- Technical blog: [Elastic Common Schema introduction](https://www.elastic.co/blog/introducing-elastic-common-schema)
+- Technical blog: [Elastic Common Schema introduction](https://www.elastic.co/docs/reference/ecs/)
 - Hands-on guide: [ECS migration guidance](https://www.elastic.co/docs/reference/ecs/migrate)

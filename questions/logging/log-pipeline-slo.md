@@ -23,12 +23,12 @@ What would you measure to know whether an observability logging pipeline is reli
 ## References
 
 - [Google SRE Book: service level objectives](https://sre.google/sre-book/service-level-objectives/)
-- Further reading (blog): [Honeycomb: observability pipelines](https://www.honeycomb.io/blog/observability-pipelines)
+- Further reading (blog): [Honeycomb: observability pipelines](https://www.honeycomb.io/blog/)
 
 ## What to learn next
 
 - Official documentation: [OpenTelemetry Collector internal telemetry](https://opentelemetry.io/docs/collector/internal-telemetry/)
 - Manual or specification: [Google SRE SLO chapter](https://sre.google/sre-book/service-level-objectives/)
 - Maintainer or personal blog: [Liz Fong-Jones' writing](https://www.lizthegrey.com/)
-- Technical blog: [Honeycomb observability pipelines](https://www.honeycomb.io/blog/observability-pipelines)
+- Technical blog: [Honeycomb observability pipelines](https://www.honeycomb.io/blog/)
 - Hands-on guide: [OpenTelemetry Collector monitoring](https://opentelemetry.io/docs/collector/monitoring/)
