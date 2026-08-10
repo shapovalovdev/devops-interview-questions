@@ -24,12 +24,12 @@ What is the operational difference between ConfigMaps and Secrets?
 
 - [Kubernetes: Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
 - [Kubernetes: ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/)
-- Further reading (blog): [Liz Rice — Kubernetes Secrets](https://www.aquasec.com/blog/kubernetes-secrets-management/)
+- Further reading (blog): [Liz Rice's writing](https://www.lizrice.com/)
 
 ## What to learn next
 
 - Official documentation: [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
 - Manual or specification: [Secret API reference](https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/secret-v1/)
-- Maintainer or personal blog: [Liz Rice — Secrets management](https://www.aquasec.com/blog/kubernetes-secrets-management/)
+- Maintainer or personal blog: [Liz Rice's writing](https://www.lizrice.com/)
 - Technical blog: [Google Cloud — Secret Manager and GKE](https://cloud.google.com/blog/products/identity-security/how-to-use-secret-manager-with-gke)
 - Hands-on guide: [Kubernetes configure a Pod to use a ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/)

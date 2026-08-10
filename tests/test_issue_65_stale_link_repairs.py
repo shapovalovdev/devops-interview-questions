@@ -168,3 +168,9 @@ def test_ingress_gateway_routing_uses_live_maintainer_source() -> None:
     text = (ROOT / "questions" / "certification-last-minute-review" / "ingress-gateway-routing.md").read_text(encoding="utf-8")
     assert "https://technosophos.com/2023/05/25/gateway-api.html" not in text
     assert "https://technosophos.com/" in text
+
+
+def test_configmap_secret_boundaries_uses_live_liz_rice_source() -> None:
+    text = (ROOT / "questions" / "certification-last-minute-review" / "configmap-secret-boundaries.md").read_text(encoding="utf-8")
+    assert "https://www.aquasec.com/blog/kubernetes-secrets-management/" not in text
+    assert "https://www.lizrice.com/" in text
