@@ -24,6 +24,9 @@ QUESTIONS = [
         "cilium-l7-network-policy.md",
         "container-network-security-architecture.md",
         "expose-versus-publish.md",
+        "host-networking-tradeoffs.md",
+        "ingress-gateway-boundary.md",
+        "ipv6-container-networking.md",
     )
 ]
 RELATED = ROOT / "docs/related-materials/container-networking.md"

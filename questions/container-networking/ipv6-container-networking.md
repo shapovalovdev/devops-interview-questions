@@ -25,3 +25,10 @@ What should an operator validate before enabling IPv6 for Docker networks?
 
 - [Docker Docs: IPv6 networking](https://docs.docker.com/engine/daemon/ipv6/)
 - Further reading (blog): [Docker: Network drivers and use cases](https://www.docker.com/blog/understanding-docker-networking-drivers-use-cases/)
+## What to learn next
+
+- Official documentation: [Docker networking documentation](https://docs.docker.com/network/)
+- Manual or specification: [CNI specification](https://www.cni.dev/docs/spec/)
+- Maintainer or personal blog: [Thomas Graf — networking articles](https://tgraf.io/)
+- Technical blog: [Cilium engineering blog](https://cilium.io/blog/)
+- Hands-on guide: [Docker networking tutorial](https://docs.docker.com/network/tutorials/)

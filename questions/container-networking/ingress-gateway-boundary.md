@@ -25,3 +25,10 @@ What should a platform team decide before standardizing application ingress with
 
 - [Kubernetes Docs: Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/)
 - Further reading (blog): [Kubernetes: Gateway API v1](https://kubernetes.io/blog/2023/10/31/gateway-api-ga/)
+## What to learn next
+
+- Official documentation: [Docker networking documentation](https://docs.docker.com/network/)
+- Manual or specification: [CNI specification](https://www.cni.dev/docs/spec/)
+- Maintainer or personal blog: [Thomas Graf — networking articles](https://tgraf.io/)
+- Technical blog: [Cilium engineering blog](https://cilium.io/blog/)
+- Hands-on guide: [Docker networking tutorial](https://docs.docker.com/network/tutorials/)
