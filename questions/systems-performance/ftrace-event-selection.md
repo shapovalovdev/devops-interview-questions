@@ -30,4 +30,4 @@ sources:
 - Manual or specification: [trace-cmd documentation](https://trace-cmd.org/)
 - Maintainer or personal blog: [Brendan Gregg — tracing](https://www.brendangregg.com/blog/2015-07-08/choosing-a-linux-tracer.html)
 - Technical blog: [Datadog Engineering](https://www.datadoghq.com/blog/engineering/)
-- Hands-on guide: [trace-cmd](https://trace-cmd.org/)
+- Hands-on guide: [Kernel tracing event guide](https://www.kernel.org/doc/html/latest/trace/events.html)

@@ -1435,5 +1435,9 @@
     {"question": "questions/container-networking/host-networking-tradeoffs.md", "related_materials": "docs/related-materials/container-networking.md"},
     {"question": "questions/container-networking/ingress-gateway-boundary.md", "related_materials": "docs/related-materials/container-networking.md"},
     {"question": "questions/container-networking/ipv6-container-networking.md", "related_materials": "docs/related-materials/container-networking.md"}
+,
+    {"question": "questions/systems-performance/network-retransmission-triage.md", "related_materials": "docs/related-materials/systems-performance.md"},
+    {"question": "questions/systems-performance/numa-locality-performance.md", "related_materials": "docs/related-materials/systems-performance.md"},
+    {"question": "questions/systems-performance/oom-killer-incident.md", "related_materials": "docs/related-materials/systems-performance.md"}
   ]
 }
