@@ -34,5 +34,5 @@ How would you use systemd journal data to investigate a repeatedly restarting pr
 - Official documentation: [journalctl manual](https://www.freedesktop.org/software/systemd/man/latest/journalctl.html)
 - Manual or specification: [journal fields manual](https://www.freedesktop.org/software/systemd/man/latest/systemd.journal-fields.html)
 - Maintainer or personal blog: [Lennart Poettering — the journal](https://0pointer.net/blog/)
-- Technical blog: [Red Hat — systemd](https://www.redhat.com/en/topics/automation/what-is-systemd)
+- Technical blog: [systemd manual](https://www.freedesktop.org/software/systemd/man/latest/systemd.html)
 - Hands-on guide: [systemd project documentation](https://www.freedesktop.org/wiki/Software/systemd/)

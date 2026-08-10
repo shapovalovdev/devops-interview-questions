@@ -65,3 +65,10 @@ def test_hosted_run_31374633603_permanent_links_are_not_reintroduced() -> None:
     text += (ROOT / "docs/related-materials/network-storage.md").read_text(encoding="utf-8")
     for fragment in STALE_URL_FRAGMENTS:
         assert fragment not in text, f"stale link reintroduced: {fragment}"
+
+
+def test_journald_question_uses_the_live_systemd_manual() -> None:
+    """Keep this single-file #65 repair independent while other process slices land."""
+    text = (ROOT / "questions" / "processes" / "journald-process-diagnostics.md").read_text(encoding="utf-8")
+    assert "https://www.redhat.com/en/topics/automation/what-is-systemd" not in text
+    assert "https://www.freedesktop.org/software/systemd/man/latest/systemd.html" in text
