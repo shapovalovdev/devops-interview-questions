@@ -39,12 +39,13 @@ requests to the same host. It sends `HEAD` first, then retries with `GET` when a
 host rejects `HEAD` with a common method or bot-policy response (`403`, `405`,
 `406`, or `501`).
 
-Rate-limit and temporary-server responses (`403`, `418`, `429`, and `5xx`) are
-retried three times with bounded exponential backoff. When a response includes
-`Retry-After`, the validator honours it (up to 30 seconds). A URL that is still
-rate limited after those attempts is reported explicitly as *rate limited*, not
-as a broken resource: a host denying a GitHub runner does not prove that the
-curated material has disappeared.
+Rate-limit and temporary-server responses (`403`, `418`, `429`, and `5xx`),
+plus timeouts and connection resets, are retried three times with bounded
+exponential backoff. When a response includes `Retry-After`, the validator
+honours it (up to 30 seconds). A URL that is still rate limited or temporarily
+unavailable after those attempts is reported explicitly as *liveness
+indeterminate*, not as a broken resource: a host denying or timing out a GitHub
+runner does not prove that the curated material has disappeared.
 
 Permanent failures remain hard errors. In particular, `404` and other permanent
 HTTP failures, DNS errors, and TLS errors fail the live-check gate and must be

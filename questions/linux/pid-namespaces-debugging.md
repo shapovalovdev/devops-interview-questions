@@ -25,3 +25,11 @@ Why might a process have different PIDs inside and outside a container, and how 
 - Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [pid_namespaces(7): PID namespace semantics](https://man7.org/linux/man-pages/man7/pid_namespaces.7.html)
 - Further reading: [namespaces(7): Linux namespace overview](https://man7.org/linux/man-pages/man7/namespaces.7.html)
+
+## What to learn next
+
+- Official documentation: [Linux kernel namespaces documentation](https://docs.kernel.org/admin-guide/namespaces/)
+- Manual or specification: [proc(5) Linux manual](https://man7.org/linux/man-pages/man5/proc.5.html)
+- Maintainer or personal blog: [Brendan Gregg — Linux performance analysis](https://www.brendangregg.com/blog/index.html)
+- Technical blog: [Red Hat engineering blog](https://www.redhat.com/en/blog)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)

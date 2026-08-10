@@ -28,3 +28,11 @@ How do persistent and running libvirt domain configuration differ, and how would
 - [libvirt: domain XML format](https://libvirt.org/formatdomain.html)
 - [libvirt: virsh manual](https://www.libvirt.org/manpages/virsh.html)
 - Further reading (blog): [Seth Kenlon — use Vagrant with libvirt](https://opensource.com/article/21/10/vagrant-libvirt)
+
+## What to learn next
+
+- Official documentation: [libvirt documentation](https://libvirt.org/docs.html)
+- Manual or specification: [virsh command reference](https://www.libvirt.org/manpages/virsh.html)
+- Maintainer or personal blog: [Lennart Poettering — systemd and Linux articles](https://0pointer.net/blog/)
+- Technical blog: [Red Hat engineering blog](https://www.redhat.com/en/blog)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)

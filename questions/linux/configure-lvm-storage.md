@@ -24,3 +24,11 @@ A service needs more capacity without changing its mount path. How would you ext
 
 - [Red Hat Enterprise Linux: basic logical volume management](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/configuring_and_managing_logical_volumes/basic-logical-volume-management)
 - Further reading (blog): [Seth Kenlon — manage storage with LVM](https://opensource.com/article/18/11/manage-storage-lvm)
+
+## What to learn next
+
+- Official documentation: [Linux kernel filesystem documentation](https://www.kernel.org/doc/html/latest/filesystems/)
+- Manual or specification: [mount(8) Linux manual](https://man7.org/linux/man-pages/man8/mount.8.html)
+- Maintainer or personal blog: [Vidar Holen — Linux Ate My RAM](https://www.linuxatemyram.com/)
+- Technical blog: [Red Hat engineering blog](https://www.redhat.com/en/blog)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)

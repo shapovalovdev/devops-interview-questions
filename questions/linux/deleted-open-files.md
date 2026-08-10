@@ -25,3 +25,11 @@ Why can a filesystem remain full after a large log file is deleted, and how do y
 - Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [proc_pid_fd(5): file descriptors for a process](https://man7.org/linux/man-pages/man5/proc_pid_fd.5.html)
 - Further reading: [unlink(2): removing a directory entry](https://man7.org/linux/man-pages/man2/unlink.2.html)
+
+## What to learn next
+
+- Official documentation: [Linux kernel filesystem documentation](https://www.kernel.org/doc/html/latest/filesystems/)
+- Manual or specification: [mount(8) Linux manual](https://man7.org/linux/man-pages/man8/mount.8.html)
+- Maintainer or personal blog: [Vidar Holen — Linux Ate My RAM](https://www.linuxatemyram.com/)
+- Technical blog: [Red Hat engineering blog](https://www.redhat.com/en/blog)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)

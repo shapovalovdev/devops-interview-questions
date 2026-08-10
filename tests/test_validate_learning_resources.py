@@ -1,8 +1,10 @@
 import io
+import socket
+import ssl
 import unittest
 from contextlib import redirect_stdout
 from unittest.mock import patch
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 
 from validate_learning_resources import (
     HostPacer,
@@ -113,6 +115,37 @@ class LearningResourcesParserTests(unittest.TestCase):
                         workers=1,
                     )
         self.assertIn("https://rate.example: rate limited after 3 attempts", output.getvalue())
+
+    def test_retries_timeout_then_accepts_a_reachable_url(self) -> None:
+        delays = []
+        with patch("urllib.request.urlopen", side_effect=[TimeoutError("read timed out"), Response()]) as open_url:
+            result = check_url(
+                "https://temporary.example/resource",
+                1,
+                sleeper=delays.append,
+                pacer=HostPacer(0, sleeper=delays.append),
+            )
+        self.assertEqual("ok", result.category)
+        self.assertEqual(2, result.attempts)
+        self.assertEqual([0.5], delays)
+        self.assertEqual(2, open_url.call_count)
+
+    def test_dns_and_tls_errors_are_hard_failures_without_retry(self) -> None:
+        for error in (
+            URLError(socket.gaierror("name resolution failed")),
+            URLError(ssl.SSLError("certificate verify failed")),
+        ):
+            with self.subTest(error=error):
+                with patch("urllib.request.urlopen", side_effect=error) as open_url:
+                    result = check_url(
+                        "https://permanent.example/resource",
+                        1,
+                        sleeper=lambda _: None,
+                        pacer=HostPacer(0),
+                    )
+                self.assertEqual("network error", result.category)
+                self.assertEqual(1, result.attempts)
+                self.assertEqual(1, open_url.call_count)
 
 
 if __name__ == "__main__":

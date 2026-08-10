@@ -1,13 +1,21 @@
 # Linux related materials
 
 These resources complement the Linux Theme's Question-level references. They
-are a curated starting point for service scheduling, inspection, and host
-operations; review their applicability to the distribution in use.
+are a curated starting point for process inspection, filesystems, systemd, and
+host operations; review their applicability to the distribution and kernel in
+use.
 
 ## What to learn next
 
-- Official documentation: [systemd timer units](https://www.freedesktop.org/software/systemd/man/latest/systemd.timer.html)
-- Manual or specification: [crontab(5) manual](https://man7.org/linux/man-pages/man5/crontab.5.html)
-- Maintainer or personal blog: [Julien Enselme — systemd timers](https://www.jujens.eu/posts/en/2025/Feb/01/systemd-timers/)
-- Technical blog: [LinuxBlog.io — systemd timers as a cron alternative](https://linuxblog.io/systemd-timers-alternative-cron-linux/)
-- Hands-on guide: [FOSS Linux — scheduling tasks with systemd timers](https://www.fosslinux.com/48317/scheduling-tasks-systemd-timers-linux.htm)
+- Official documentation: [Linux kernel documentation](https://www.kernel.org/doc/html/latest/)
+- Manual or specification: [Linux man-pages](https://man7.org/linux/man-pages/)
+- Maintainer or personal blog: [Brendan Gregg — Linux performance analysis](https://www.brendangregg.com/blog/index.html)
+- Technical blog: [Red Hat engineering blog](https://www.redhat.com/en/blog)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)
+
+## Legal free books
+
+No general Linux book is linked here. This avoids pointing learners to
+unauthorized copies of commercial titles; the upstream manuals and
+project-maintainer resources above are free to read and are the appropriate
+primary study material.

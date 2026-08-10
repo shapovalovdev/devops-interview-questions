@@ -25,3 +25,11 @@ How do you roll out a kernel update safely across a production fleet?
 - Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [Linux kernel administration guide](https://www.kernel.org/doc/html/latest/admin-guide/README.html)
 - Further reading: [systemd boot loader specification](https://uapi-group.org/specifications/specs/boot_loader_specification/)
+
+## What to learn next
+
+- Official documentation: [Linux kernel administration guide](https://docs.kernel.org/admin-guide/)
+- Manual or specification: [systemd service units](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)
+- Maintainer or personal blog: [Lennart Poettering — systemd and Linux articles](https://0pointer.net/blog/)
+- Technical blog: [Red Hat engineering blog](https://www.redhat.com/en/blog)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)

@@ -26,3 +26,11 @@ Starting when firmware hands off control, explain the major stages that bring a 
 - Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [systemd bootup sequence](https://www.freedesktop.org/software/systemd/man/latest/bootup.html)
 - Further reading: [systemd special targets](https://www.freedesktop.org/software/systemd/man/latest/systemd.special.html)
+
+## What to learn next
+
+- Official documentation: [systemd manual pages](https://www.freedesktop.org/software/systemd/man/latest/)
+- Manual or specification: [systemd.service(5)](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)
+- Maintainer or personal blog: [Lennart Poettering — systemd and Linux articles](https://0pointer.net/blog/)
+- Technical blog: [Red Hat engineering blog](https://www.redhat.com/en/blog)
+- Hands-on guide: [Fedora guide to systemd](https://docs.fedoraproject.org/en-US/quick-docs/systemd-understanding-and-administering/)

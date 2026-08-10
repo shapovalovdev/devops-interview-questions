@@ -25,3 +25,11 @@ An executable succeeds interactively but fails under systemd. What differences d
 - Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [systemd.exec: execution environment and sandboxing](https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html)
 - Further reading: [systemd.service: service unit configuration](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)
+
+## What to learn next
+
+- Official documentation: [systemd.exec(5)](https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html)
+- Manual or specification: [systemd.service(5)](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)
+- Maintainer or personal blog: [Lennart Poettering — systemd and Linux articles](https://0pointer.net/blog/)
+- Technical blog: [Red Hat engineering blog](https://www.redhat.com/en/blog)
+- Hands-on guide: [Fedora guide to systemd](https://docs.fedoraproject.org/en-US/quick-docs/systemd-understanding-and-administering/)

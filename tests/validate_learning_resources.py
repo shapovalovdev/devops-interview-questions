@@ -12,8 +12,11 @@ from __future__ import annotations
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
+import errno
 import json
 import re
+import socket
+import ssl
 import sys
 import threading
 import time
@@ -174,6 +177,20 @@ def is_transient_status(status: int) -> bool:
     return status in TRANSIENT_STATUSES or 500 <= status < 600
 
 
+def is_retryable_transport_error(error: BaseException) -> bool:
+    """Retry only temporary transport errors, never DNS or certificate failures."""
+    cause = error.reason if isinstance(error, urllib.error.URLError) else error
+    if isinstance(cause, ssl.SSLError | socket.gaierror):
+        return False
+    if isinstance(cause, (TimeoutError, ConnectionResetError, ConnectionAbortedError)):
+        return True
+    return isinstance(cause, OSError) and cause.errno in {
+        errno.ETIMEDOUT,
+        errno.ECONNRESET,
+        errno.ECONNABORTED,
+    }
+
+
 def retry_delay(headers: object, retry_index: int, now=time.time) -> float:
     """Respect Retry-After where possible, then use bounded exponential backoff."""
     retry_after = headers.get("Retry-After") if hasattr(headers, "get") else None
@@ -208,6 +225,11 @@ def check_url(
             pacer.pace(url)
             result = fetch_result(url, timeout)
         except (OSError, urllib.error.URLError) as error:
+            if is_retryable_transport_error(error):
+                if attempt < MAX_ATTEMPTS - 1:
+                    sleeper(DEFAULT_RETRY_DELAY_SECONDS * (2**attempt))
+                    continue
+                return LinkCheck(url, "temporarily unavailable", str(error), MAX_ATTEMPTS)
             return LinkCheck(url, "network error", str(error), attempt + 1)
         if 200 <= result.status < 400:
             return LinkCheck(url, "ok", f"HTTP {result.status}", attempt + 1)
@@ -235,12 +257,12 @@ def validate_live(
             )
         )
 
-    rate_limited = [check for check in checks if check.category == "rate limited"]
+    transient = [check for check in checks if check.category in {"rate limited", "temporarily unavailable"}]
     failures = [check for check in checks if check.category in {"broken", "network error"}]
-    if rate_limited:
-        print("Temporarily rate-limited learning-resource URLs (retried, not declared broken):")
-        for check in rate_limited:
-            print(f"{check.url}: rate limited after {check.attempts} attempts ({check.detail})")
+    if transient:
+        print("Liveness-indeterminate learning-resource URLs (retried, not declared broken):")
+        for check in transient:
+            print(f"{check.url}: {check.category} after {check.attempts} attempts ({check.detail})")
     assert not failures, "Broken learning-resource links:\n" + "\n".join(
         f"{check.url}: {check.category} ({check.detail})" for check in failures
     )

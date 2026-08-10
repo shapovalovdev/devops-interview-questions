@@ -28,3 +28,11 @@ How would you configure a Linux host to use directory-backed users with SSSD, wh
 - [SSSD: introduction and supported identity/authentication integration](https://sssd.io/docs/introduction.html)
 - [Red Hat Enterprise Linux: configure SSSD to use LDAP and require TLS](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/configuring_authentication_and_authorization_in_rhel/configuring-sssd-to-use-ldap-and-require-tls-authentication)
 - Further reading (blog): [Emidio Stani — open-source LDAP implementations](https://opensource.com/business/14/5/four-open-source-alternatives-LDAP)
+
+## What to learn next
+
+- Official documentation: [Linux kernel administration guide](https://docs.kernel.org/admin-guide/)
+- Manual or specification: [systemd sysusers manual](https://www.freedesktop.org/software/systemd/man/latest/systemd-sysusers.html)
+- Maintainer or personal blog: [Lennart Poettering — systemd and Linux articles](https://0pointer.net/blog/)
+- Technical blog: [Red Hat engineering blog](https://www.redhat.com/en/blog)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)

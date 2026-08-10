@@ -25,3 +25,11 @@ A host is healthy now but failed to start a dependency during its prior boot. Ho
 - Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [journalctl: select records by boot](https://www.freedesktop.org/software/systemd/man/latest/journalctl.html)
 - Further reading: [systemd: manager and unit concepts](https://www.freedesktop.org/software/systemd/man/latest/systemd.html)
+
+## What to learn next
+
+- Official documentation: [systemd journal manual](https://www.freedesktop.org/software/systemd/man/latest/journalctl.html)
+- Manual or specification: [systemd.service(5)](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)
+- Maintainer or personal blog: [Lennart Poettering — systemd and Linux articles](https://0pointer.net/blog/)
+- Technical blog: [Red Hat engineering blog](https://www.redhat.com/en/blog)
+- Hands-on guide: [Fedora guide to systemd](https://docs.fedoraproject.org/en-US/quick-docs/systemd-understanding-and-administering/)

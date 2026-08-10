@@ -26,3 +26,11 @@ Why can a high load average be normal on one host and an incident on another?
 - Further reading (blog): [Complementary linux practice article](https://www.redhat.com/en/blog/what-is-linux)
 - [Linux kernel: cgroup v2 CPU and I/O controllers](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html)
 - Further reading: [Linux proc filesystem documentation](https://www.kernel.org/doc/html/latest/filesystems/proc.html)
+
+## What to learn next
+
+- Official documentation: [Linux kernel administration guide](https://docs.kernel.org/admin-guide/)
+- Manual or specification: [proc(5) Linux manual](https://man7.org/linux/man-pages/man5/proc.5.html)
+- Maintainer or personal blog: [Brendan Gregg — Linux performance analysis](https://www.brendangregg.com/blog/index.html)
+- Technical blog: [Red Hat engineering blog](https://www.redhat.com/en/blog)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)

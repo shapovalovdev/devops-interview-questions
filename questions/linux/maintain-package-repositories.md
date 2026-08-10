@@ -24,3 +24,11 @@ An update fails because a package repository is unavailable or its metadata cann
 
 - [Fedora Docs: DNF package manager](https://docs.fedoraproject.org/en-US/quick-docs/dnf/)
 - Further reading (blog): [Patrick Uiterwijk — how Fedora secures package delivery](https://fedoramagazine.org/fedora-secures-package-delivery/)
+
+## What to learn next
+
+- Official documentation: [Linux kernel administration guide](https://docs.kernel.org/admin-guide/)
+- Manual or specification: [systemd service units](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)
+- Maintainer or personal blog: [Lennart Poettering — systemd and Linux articles](https://0pointer.net/blog/)
+- Technical blog: [Red Hat engineering blog](https://www.redhat.com/en/blog)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)

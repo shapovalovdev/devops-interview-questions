@@ -24,3 +24,11 @@ When should a Linux administrator use an automounter for a remote filesystem, an
 
 - [autofs(5): automounter configuration format](https://man7.org/linux/man-pages/man5/autofs.5.html)
 - Further reading (blog): [Alan Formy-Duval — use autofs to mount NFS shares](https://opensource.com/article/18/6/using-autofs-mount-nfs-shares)
+
+## What to learn next
+
+- Official documentation: [Linux kernel filesystem documentation](https://www.kernel.org/doc/html/latest/filesystems/)
+- Manual or specification: [mount(8) Linux manual](https://man7.org/linux/man-pages/man8/mount.8.html)
+- Maintainer or personal blog: [Vidar Holen — Linux Ate My RAM](https://www.linuxatemyram.com/)
+- Technical blog: [Red Hat engineering blog](https://www.redhat.com/en/blog)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)
