@@ -25,3 +25,11 @@ How would you use static analysis in CI without treating lint output as a substi
 
 - [ShellCheck wiki: checks and directives](https://www.shellcheck.net/wiki/)
 - Further reading (blog): [Red Hat: Use ShellCheck to find Bash bugs](https://www.redhat.com/en/blog/spot-bugs-your-shell-scripts)
+
+## What to learn next
+
+- Official documentation: [GNU Bash manual](https://www.gnu.org/software/bash/manual/)
+- Manual or specification: [POSIX Shell Command Language](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/V3_chap02.html)
+- Maintainer or personal blog: [Julia Evans](https://jvns.ca/)
+- Technical blog: [Red Hat Enable Sysadmin](https://www.redhat.com/en/blog/channel/enable-sysadmin)
+- Hands-on guide: [ShellCheck wiki](https://www.shellcheck.net/wiki/)
