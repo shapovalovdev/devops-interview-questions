@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCOPES = [
     ROOT / "questions" / theme
-    for theme in ("network-storage", "version-control", "distributed-systems", "logging", "troubleshooting", "web-servers")
+    for theme in ("network-storage", "version-control", "distributed-systems", "logging", "troubleshooting", "web-servers", "ci-cd")
 ]
 STALE_URL_FRAGMENTS = (
     "implementing-the-saga-pattern-with-aws-lambda-and-amazon-step-functions",
@@ -36,6 +36,12 @@ STALE_URL_FRAGMENTS = (
     "pagerduty.com/resources/learn/incident-command-system",
     "sre.google/sre-book/capacity-planning",
     "sre.google/workbook/disaster-recovery",
+    "docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/caching-dependencies-to-speed-up-workflows",
+    "docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/run-variations-of-jobs-in-a-workflow",
+    "docs.github.com/en/actions/security-for-github-actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds",
+    "docs.github.com/en/actions/tutorials/security-hardening-your-deployments",
+    "docs.github.com/en/repositories/working-with-files/managing-files/working-with-submodules",
+    "kubernetes.io/docs/tasks/run-application/rollout/",
 )
 
 

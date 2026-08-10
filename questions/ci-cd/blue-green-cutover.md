@@ -32,4 +32,4 @@ What must be true before switching production traffic from blue to green?
 - Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
 - Maintainer or personal blog: [John Allspaw](https://www.kitchensoap.com/)
 - Technical blog: [Google Cloud DevOps and SRE](https://cloud.google.com/blog/products/devops-sre)
-- Hands-on guide: [Practical deployment guide](https://kubernetes.io/docs/tasks/run-application/rollout/)
+- Hands-on guide: [kubectl rollout reference](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_rollout/)

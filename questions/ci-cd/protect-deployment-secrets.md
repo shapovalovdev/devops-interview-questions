@@ -32,4 +32,4 @@ How should a production deployment obtain credentials without exposing them to o
 - Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
 - Maintainer or personal blog: [Troy Hunt](https://www.troyhunt.com/)
 - Technical blog: [GitHub Blog — CI/CD](https://github.blog/enterprise-software/ci-cd/)
-- Hands-on guide: [Practical guide](https://docs.github.com/en/actions/tutorials/security-hardening-your-deployments)
+- Hands-on guide: [Security hardening your deployments](https://docs.github.com/en/actions/how-tos/secure-your-work/security-harden-deployments)

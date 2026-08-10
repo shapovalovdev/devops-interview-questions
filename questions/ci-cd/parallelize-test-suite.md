@@ -28,7 +28,7 @@ How can a team shorten a test pipeline without creating order-dependent failures
 
 ## What to learn next
 
-- Official documentation: [GitHub Actions matrix strategy](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/run-variations-of-jobs-in-a-workflow)
+- Official documentation: [GitHub Actions matrix strategy](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations)
 - Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
 - Maintainer or personal blog: [Julia Evans](https://jvns.ca/)
 - Technical blog: [GitHub Blog — CI/CD](https://github.blog/enterprise-software/ci-cd/)

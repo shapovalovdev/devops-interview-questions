@@ -28,7 +28,7 @@ How should a CI job cache dependencies while preserving correctness and isolatio
 
 ## What to learn next
 
-- Official documentation: [GitHub Actions dependency caching](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/caching-dependencies-to-speed-up-workflows)
+- Official documentation: [GitHub Actions dependency caching](https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching)
 - Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
 - Maintainer or personal blog: [Julia Evans](https://jvns.ca/)
 - Technical blog: [GitHub Blog — CI/CD](https://github.blog/enterprise-software/ci-cd/)
