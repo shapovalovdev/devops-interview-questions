@@ -25,3 +25,11 @@ When is Cilium kube-proxy replacement appropriate, and how would you roll it out
 
 - [Cilium kube-proxy replacement](https://docs.cilium.io/en/stable/network/kubernetes/kubeproxy-free/)
 - Further reading (blog): [Cilium 1.15 overview](https://isovalent.com/blog/post/cilium-1-15/)
+
+## What to learn next
+
+- Official documentation: [Cilium kube-proxy replacement](https://docs.cilium.io/en/stable/network/kubernetes/kubeproxy-free/)
+- Manual or specification: [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/)
+- Maintainer or personal blog: [Thomas Graf: networking writing](https://thomasgraf.net/)
+- Technical blog: [Cilium engineering blog](https://cilium.io/blog/)
+- Hands-on guide: [Cilium troubleshooting guide](https://docs.cilium.io/en/stable/operations/troubleshooting/)

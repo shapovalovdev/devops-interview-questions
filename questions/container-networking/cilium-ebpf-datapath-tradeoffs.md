@@ -25,3 +25,11 @@ Why does Cilium use eBPF, and what must an operator validate before depending on
 
 - [Cilium and Hubble introduction](https://docs.cilium.io/en/stable/overview/intro/)
 - Further reading (blog): [Cilium 1.15 overview](https://isovalent.com/blog/post/cilium-1-15/)
+
+## What to learn next
+
+- Official documentation: [Cilium eBPF datapath](https://docs.cilium.io/en/stable/overview/intro/)
+- Manual or specification: [Linux BPF documentation](https://docs.kernel.org/bpf/)
+- Maintainer or personal blog: [Thomas Graf: networking writing](https://thomasgraf.net/)
+- Technical blog: [Cilium engineering blog](https://cilium.io/blog/)
+- Hands-on guide: [Cilium troubleshooting guide](https://docs.cilium.io/en/stable/operations/troubleshooting/)
