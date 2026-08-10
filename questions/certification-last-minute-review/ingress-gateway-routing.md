@@ -24,12 +24,12 @@ How do you investigate an HTTP route that returns the wrong response in Kubernet
 
 - [Kubernetes: Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 - [Kubernetes: Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/)
-- Further reading (blog): [Matt Butcher — Gateway API](https://technosophos.com/2023/05/25/gateway-api.html)
+- Further reading (blog): [Matt Butcher's writing](https://technosophos.com/)
 
 ## What to learn next
 
 - Official documentation: [Kubernetes Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 - Manual or specification: [Gateway API documentation](https://gateway-api.sigs.k8s.io/)
-- Maintainer or personal blog: [Matt Butcher — Gateway API](https://technosophos.com/2023/05/25/gateway-api.html)
+- Maintainer or personal blog: [Matt Butcher's writing](https://technosophos.com/)
 - Technical blog: [Google Cloud — Gateway API](https://cloud.google.com/blog/products/containers-kubernetes/introducing-gateway-api)
 - Hands-on guide: [Kubernetes Ingress tutorial](https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource)

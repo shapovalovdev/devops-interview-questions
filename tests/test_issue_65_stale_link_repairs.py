@@ -162,3 +162,9 @@ def test_incident_change_freeze_uses_live_sre_incident_response_workbook() -> No
     text = (ROOT / "questions" / "ci-cd" / "incident-change-freeze.md").read_text(encoding="utf-8")
     assert "https://sre.google/workbook/managing-incidents/" not in text
     assert "https://sre.google/workbook/incident-response/" in text
+
+
+def test_ingress_gateway_routing_uses_live_maintainer_source() -> None:
+    text = (ROOT / "questions" / "certification-last-minute-review" / "ingress-gateway-routing.md").read_text(encoding="utf-8")
+    assert "https://technosophos.com/2023/05/25/gateway-api.html" not in text
+    assert "https://technosophos.com/" in text
