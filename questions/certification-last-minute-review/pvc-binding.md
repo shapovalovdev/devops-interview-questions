@@ -31,4 +31,4 @@ Which facts decide whether a PersistentVolumeClaim can bind?
 - Manual or specification: [StorageClasses](https://kubernetes.io/docs/concepts/storage/storage-classes/)
 - Maintainer or personal blog: [Kelsey Hightower — Kubernetes the hard way](https://github.com/kelseyhightower/kubernetes-the-hard-way)
 - Technical blog: [Google Cloud — persistent disks in GKE](https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes)
-- Hands-on guide: [Kubernetes configure a Pod to use a PVC](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/)
+- Hands-on guide: [Kubernetes configure storage for a Pod](https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/)

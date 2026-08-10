@@ -214,6 +214,12 @@ def test_api_gateway_basics_uses_live_gateway_api_guides() -> None:
     assert "https://gateway-api.sigs.k8s.io/guides/" in text
 
 
+def test_pvc_binding_uses_live_kubernetes_volume_storage_task() -> None:
+    text = (ROOT / "questions" / "certification-last-minute-review" / "pvc-binding.md").read_text(encoding="utf-8")
+    assert "https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/" not in text
+    assert "https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/" in text
+
+
 def test_network_policy_enforcement_limits_uses_live_docker_tutorial() -> None:
     text = (ROOT / "questions" / "container-networking" / "network-policy-enforcement-limits.md").read_text(encoding="utf-8")
     assert "https://docs.docker.com/network/tutorials/" not in text
