@@ -24,3 +24,11 @@ How should a platform team offer a shared Argo Workflow step for building and sc
 
 - [Argo Workflows: WorkflowTemplates](https://argo-workflows.readthedocs.io/en/latest/workflow-templates/)
 - Further reading (blog): [GitHub Blog: Reusable workflows](https://github.blog/changelog/2021-10-18-github-actions-reusable-workflows/)
+
+## What to learn next
+
+- Official documentation: [Argo Workflows ClusterWorkflowTemplates](https://argo-workflows.readthedocs.io/en/latest/cluster-workflow-templates/)
+- Manual or specification: [Argo Workflows field and CRD reference](https://argo-workflows.readthedocs.io/en/latest/fields/)
+- Maintainer or personal blog: [Martin Fowler — deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html)
+- Technical blog: [CNCF — cloud native project blog](https://www.cncf.io/blog/)
+- Hands-on guide: [Argo Workflows workflow-of-workflows pattern](https://argo-workflows.readthedocs.io/en/latest/workflow-of-workflows/)

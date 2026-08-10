@@ -24,3 +24,11 @@ What makes an AnalysisTemplate suitable for automatically promoting or aborting 
 
 - [Argo Rollouts: analysis](https://argo-rollouts.readthedocs.io/en/stable/features/analysis/)
 - Further reading (blog): [Google Cloud Blog: practical SLOs for releases](https://cloud.google.com/blog/products/devops-sre/introducing-slos-service-level-objectives)
+
+## What to learn next
+
+- Official documentation: [Argo Rollouts canary strategy](https://argo-rollouts.readthedocs.io/en/stable/features/canary/)
+- Manual or specification: [Argo Rollouts specification reference](https://argo-rollouts.readthedocs.io/en/stable/features/specification/)
+- Maintainer or personal blog: [Martin Fowler — canary release](https://martinfowler.com/bliki/CanaryRelease.html)
+- Technical blog: [Codefresh — Argo engineering blog](https://codefresh.io/blog/)
+- Hands-on guide: [Google SRE Workbook — canarying releases](https://sre.google/workbook/canarying-releases/)
