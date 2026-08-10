@@ -34,5 +34,5 @@ What are PID and PPID, and what happens when a parent process exits before its c
 - Official documentation: [man7 getpid(2)](https://man7.org/linux/man-pages/man2/getpid.2.html)
 - Manual or specification: [Linux pid_namespaces(7)](https://man7.org/linux/man-pages/man7/pid_namespaces.7.html)
 - Maintainer or personal blog: [Lennart Poettering — systemd](https://0pointer.net/blog/projects/systemd.html)
-- Technical blog: [Red Hat — Linux processes](https://www.redhat.com/en/topics/linux/what-is-a-linux-process)
+- Technical blog: [Linux kernel proc filesystem documentation](https://docs.kernel.org/filesystems/proc.html)
 - Hands-on guide: [Linux Journey — process details](https://linuxjourney.com/lesson/process-details)
