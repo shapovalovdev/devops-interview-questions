@@ -26,3 +26,11 @@ sources:
 - [Kubernetes: Security overview](https://kubernetes.io/docs/concepts/security/)
 - [Aqua Security kube-bench documentation](https://github.com/aquasecurity/kube-bench)
 - Further reading (blog): [Kubernetes SIG Security: Kubernetes hardening guidance](https://kubernetes.io/blog/2021/04/06/pod-security-policy-deprecation-past-present-and-future/)
+
+## What to learn next
+
+- Official documentation: [Kubernetes security checklist](https://kubernetes.io/docs/concepts/security/security-checklist/)
+- Manual or specification: [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes)
+- Maintainer or personal blog: [Rory McCune — PCI compliance for Kubernetes: authorization controls](https://raesene.github.io/blog/2022/10/08/PCI-Kubernetes-Section2-Authorization/)
+- Technical blog: [CNCF — seven zero-trust rules for Kubernetes](https://www.cncf.io/blog/2022/11/04/seven-zero-trust-rules-for-kubernetes/)
+- Hands-on guide: [kube-bench: run CIS Kubernetes Benchmark checks](https://github.com/aquasecurity/kube-bench)
