@@ -31,4 +31,4 @@ How would you use Docker networks to limit reachability in a web, API, and datab
 - Manual or specification: [CNI specification](https://www.cni.dev/docs/spec/)
 - Maintainer or personal blog: [Thomas Graf — networking articles](https://tgraf.io/)
 - Technical blog: [Cilium engineering blog](https://cilium.io/blog/)
-- Hands-on guide: [Docker networking tutorial](https://docs.docker.com/network/tutorials/)
+- Hands-on guide: [Docker standalone networking tutorial](https://docs.docker.com/engine/network/tutorials/standalone/)

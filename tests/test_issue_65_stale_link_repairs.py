@@ -200,6 +200,14 @@ def test_api_gateway_basics_uses_live_google_cloud_quickstarts() -> None:
     assert "https://docs.cloud.google.com/api-gateway/docs/quickstarts" in text
 
 
+def test_container_networking_does_not_reintroduce_retired_docker_tutorials() -> None:
+    text = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in (ROOT / "questions" / "container-networking").glob("*.md")
+    )
+    assert "https://docs.docker.com/network/tutorials" not in text
+
+
 def test_network_policy_enforcement_limits_uses_live_docker_tutorial() -> None:
     text = (ROOT / "questions" / "container-networking" / "network-policy-enforcement-limits.md").read_text(encoding="utf-8")
     assert "https://docs.docker.com/network/tutorials/" not in text
