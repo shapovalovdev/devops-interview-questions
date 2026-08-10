@@ -25,3 +25,11 @@ Which evidence should a deployment policy verify before accepting a release arti
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [SLSA: Build security levels](https://slsa.dev/spec/v1.0/levels)
 - [Further reading: GitHub Docs—artifact attestations](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations)
+
+## What to learn next
+
+- Official documentation: [Sigstore Cosign signing overview](https://docs.sigstore.dev/cosign/signing/overview/)
+- Manual or specification: [SLSA v1.0 provenance specification](https://slsa.dev/spec/v1.0/provenance)
+- Maintainer or personal blog: [Kelly Shortridge — security engineering blog](https://kellyshortridge.com/blog/posts/)
+- Technical blog: [OpenSSF blog](https://openssf.org/blog/)
+- Hands-on guide: [SLSA GitHub generator — build provenance in Actions](https://github.com/slsa-framework/slsa-github-generator)

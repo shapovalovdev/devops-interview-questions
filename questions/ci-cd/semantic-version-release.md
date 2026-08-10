@@ -25,3 +25,11 @@ How should a pipeline create a release version that users can trace back to code
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [Semantic Versioning specification](https://semver.org/)
 - [Further reading: Git—tag documentation](https://git-scm.com/docs/git-tag)
+
+## What to learn next
+
+- Official documentation: [GitHub — managing releases in a repository](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
+- Manual or specification: [Conventional Commits v1.0.0 specification](https://www.conventionalcommits.org/en/v1.0.0/)
+- Maintainer or personal blog: [Martin Fowler — patterns for managing source code branches](https://martinfowler.com/articles/branching-patterns.html)
+- Technical blog: [GitHub Engineering blog](https://github.blog/engineering/)
+- Hands-on guide: [semantic-release — automated version management](https://github.com/semantic-release/semantic-release)

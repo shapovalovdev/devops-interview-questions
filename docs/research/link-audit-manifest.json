@@ -796,6 +796,7 @@
     {"question": "questions/ci-cd/argo-workflow-template-reuse.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/argo-workflows-dag-failure.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/argo-workflows-fundamentals.md", "related_materials": "docs/related-materials/ci-cd.md"},
+    {"question": "questions/ci-cd/artifact-retention-and-promotion.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/blue-green-cutover.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/cache-dependencies-safely.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/canary-deployment-decision.md", "related_materials": "docs/related-materials/ci-cd.md"},
@@ -803,6 +804,7 @@
     {"question": "questions/ci-cd/deployment-concurrency-control.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/immutable-release-artifacts.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/least-privilege-workflow-token.md", "related_materials": "docs/related-materials/ci-cd.md"},
+    {"question": "questions/ci-cd/multi-team-pipeline-architecture.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/parallelize-test-suite.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/pipeline-quality-gates.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/protect-deployment-secrets.md", "related_materials": "docs/related-materials/ci-cd.md"},
@@ -810,6 +812,8 @@
     {"question": "questions/ci-cd/retry-flaky-tests.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/reusable-workflow-boundaries.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/roll-back-a-deployment.md", "related_materials": "docs/related-materials/ci-cd.md"},
+    {"question": "questions/ci-cd/semantic-version-release.md", "related_materials": "docs/related-materials/ci-cd.md"},
+    {"question": "questions/ci-cd/supply-chain-provenance.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/trigger-a-pipeline.md", "related_materials": "docs/related-materials/ci-cd.md"}
   ]
 }
