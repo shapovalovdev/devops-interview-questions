@@ -1463,5 +1463,9 @@
     {"question": "questions/certification-last-minute-review/deployment-rollout-check.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
     {"question": "questions/certification-last-minute-review/dns-debugging.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
     {"question": "questions/certification-last-minute-review/etcd-backup-restore.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"}
+,
+    {"question": "questions/certification-last-minute-review/ingress-gateway-routing.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
+    {"question": "questions/certification-last-minute-review/job-cronjob-cleanup.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
+    {"question": "questions/certification-last-minute-review/kubectl-context-safety.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"}
   ]
 }
