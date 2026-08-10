@@ -1475,5 +1475,9 @@
     {"question": "questions/certification-last-minute-review/pod-lifecycle-signals.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
     {"question": "questions/certification-last-minute-review/probe-selection.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
     {"question": "questions/certification-last-minute-review/pvc-binding.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"}
+,
+    {"question": "questions/certification-last-minute-review/rbac-least-privilege.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
+    {"question": "questions/certification-last-minute-review/resource-requests-limits.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
+    {"question": "questions/certification-last-minute-review/scheduling-constraints.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"}
   ]
 }
