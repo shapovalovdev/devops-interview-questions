@@ -34,5 +34,5 @@ How would you configure a systemd service so startup, shutdown, and restart beha
 - Official documentation: [systemd.service manual](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)
 - Manual or specification: [systemd.kill manual](https://www.freedesktop.org/software/systemd/man/latest/systemd.kill.html)
 - Maintainer or personal blog: [Lennart Poettering — systemd](https://0pointer.net/blog/projects/systemd.html)
-- Technical blog: [Red Hat — systemd](https://www.redhat.com/en/topics/automation/what-is-systemd)
+- Technical blog: [systemd manual](https://www.freedesktop.org/software/systemd/man/latest/systemd.html)
 - Hands-on guide: [systemd project documentation](https://www.freedesktop.org/wiki/Software/systemd/)
