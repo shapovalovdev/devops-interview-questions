@@ -19,8 +19,8 @@ sources:
 - [Google SRE Book — Emergency Response](https://sre.google/sre-book/emergency-response/)
 - Further reading (blog): [John Allspaw — resilience](https://www.kitchensoap.com/)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [NIST incident handling](https://csrc.nist.gov/pubs/sp/800/61/r2/final)
-- Official guide: [Google SRE incident management](https://sre.google/sre-book/managing-incidents/)
-- Personal technical blog: [John Allspaw](https://www.kitchensoap.com/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [NIST incident handling](https://csrc.nist.gov/pubs/sp/800/61/r2/final)
+- Hands-on guide: [Google SRE incident management](https://sre.google/sre-book/managing-incidents/)
+- Maintainer or personal blog: [John Allspaw](https://www.kitchensoap.com/)
 - Technical blog: [AWS Builders’ Library](https://aws.amazon.com/builders-library/)

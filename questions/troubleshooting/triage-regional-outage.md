@@ -19,8 +19,8 @@ sources:
 - [Google SRE Book — Load Balancing at the Frontend](https://sre.google/sre-book/load-balancing-frontend/)
 - Further reading (blog): [AWS Builders’ Library](https://aws.amazon.com/builders-library/)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [AWS Well-Architected Reliability Pillar](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html)
-- Official guide: [Google Cloud reliability](https://cloud.google.com/architecture/framework/reliability)
-- Personal technical blog: [Marc Brooker](https://brooker.co.za/blog/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [AWS Well-Architected Reliability Pillar](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html)
+- Hands-on guide: [Google Cloud reliability](https://cloud.google.com/architecture/framework/reliability)
+- Maintainer or personal blog: [Marc Brooker](https://brooker.co.za/blog/)
 - Technical blog: [AWS Builders’ Library](https://aws.amazon.com/builders-library/)

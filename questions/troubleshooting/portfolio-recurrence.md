@@ -19,8 +19,8 @@ sources:
 - [Google SRE Book — Eliminating Toil](https://sre.google/sre-book/eliminating-toil/)
 - Further reading (blog): [Charity Majors — operational learning](https://charity.wtf/)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
-- Official guide: [OpenTelemetry documentation](https://opentelemetry.io/docs/)
-- Personal technical blog: [Charity Majors](https://charity.wtf/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
+- Hands-on guide: [OpenTelemetry documentation](https://opentelemetry.io/docs/)
+- Maintainer or personal blog: [Charity Majors](https://charity.wtf/)
 - Technical blog: [Google Cloud reliability](https://cloud.google.com/blog/products/devops-sre)

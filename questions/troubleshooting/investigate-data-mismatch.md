@@ -26,8 +26,8 @@ sources:
 
 ## What to learn next
 
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [PostgreSQL backup documentation](https://www.postgresql.org/docs/current/backup.html)
-- Official guide: [Kafka delivery semantics](https://kafka.apache.org/documentation/#semantics)
-- Personal technical blog: [Jepsen](https://aphyr.com/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [PostgreSQL backup documentation](https://www.postgresql.org/docs/current/backup.html)
+- Hands-on guide: [Kafka delivery semantics](https://kafka.apache.org/documentation/#semantics)
+- Maintainer or personal blog: [Jepsen](https://aphyr.com/)
 - Technical blog: [Cockroach Labs blog](https://www.cockroachlabs.com/blog/)

@@ -19,8 +19,8 @@ sources:
 - [OpenID Connect Core](https://openid.net/specs/openid-connect-core-1_0.html)
 - Further reading (blog): [Troy Hunt — authentication and security](https://www.troyhunt.com/)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
-- Standard: [OpenID Connect Core](https://openid.net/specs/openid-connect-core-1_0.html)
-- Personal technical blog: [Troy Hunt](https://www.troyhunt.com/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Hands-on guide: [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
+- Official documentation: [OpenID Connect Core](https://openid.net/specs/openid-connect-core-1_0.html)
+- Maintainer or personal blog: [Troy Hunt](https://www.troyhunt.com/)
 - Technical blog: [Cloudflare blog](https://blog.cloudflare.com/)

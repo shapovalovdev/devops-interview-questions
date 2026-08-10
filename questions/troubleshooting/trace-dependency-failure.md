@@ -26,8 +26,8 @@ sources:
 
 ## What to learn next
 
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [OpenTelemetry context propagation](https://opentelemetry.io/docs/concepts/context-propagation/)
-- Official guide: [HTTP semantics](https://www.rfc-editor.org/rfc/rfc9110)
-- Personal technical blog: [Cindy Sridharan](https://copyconstruct.medium.com/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [OpenTelemetry context propagation](https://opentelemetry.io/docs/concepts/context-propagation/)
+- Hands-on guide: [HTTP semantics](https://www.rfc-editor.org/rfc/rfc9110)
+- Maintainer or personal blog: [Cindy Sridharan](https://copyconstruct.medium.com/)
 - Technical blog: [Grafana Labs blog](https://grafana.com/blog/)

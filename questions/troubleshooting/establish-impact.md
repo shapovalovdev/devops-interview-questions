@@ -26,8 +26,8 @@ sources:
 
 ## What to learn next
 
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [Google SRE — Monitoring](https://sre.google/sre-book/monitoring-distributed-systems/)
-- Official guide: [Google SRE — Postmortems](https://sre.google/sre-book/postmortem-culture/)
-- Personal technical blog: [Brendan Gregg’s blog](https://www.brendangregg.com/blog/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [Google SRE — Monitoring](https://sre.google/sre-book/monitoring-distributed-systems/)
+- Hands-on guide: [Google SRE — Postmortems](https://sre.google/sre-book/postmortem-culture/)
+- Maintainer or personal blog: [Brendan Gregg’s blog](https://www.brendangregg.com/blog/)
 - Technical blog: [Red Hat Enable Sysadmin](https://www.redhat.com/en/blog/channel/enable-sysadmin)

@@ -19,8 +19,8 @@ sources:
 - [Google SRE Book — Handling Overload](https://sre.google/sre-book/handling-overload/)
 - Further reading (blog): [Marc Brooker — distributed systems](https://brooker.co.za/blog/)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [Envoy circuit breaking](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/upstream/circuit_breaking)
-- Official guide: [Kubernetes HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
-- Personal technical blog: [Marc Brooker](https://brooker.co.za/blog/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [Envoy circuit breaking](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/upstream/circuit_breaking)
+- Hands-on guide: [Kubernetes HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
+- Maintainer or personal blog: [Marc Brooker](https://brooker.co.za/blog/)
 - Technical blog: [AWS Builders’ Library](https://aws.amazon.com/builders-library/)

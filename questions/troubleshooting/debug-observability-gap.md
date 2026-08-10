@@ -19,8 +19,8 @@ sources:
 - [OpenTelemetry documentation](https://opentelemetry.io/docs/)
 - Further reading (blog): [Charity Majors — observability](https://charity.wtf/)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/)
-- Official guide: [Prometheus instrumentation](https://prometheus.io/docs/practices/instrumentation/)
-- Personal technical blog: [Charity Majors](https://charity.wtf/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/)
+- Hands-on guide: [Prometheus instrumentation](https://prometheus.io/docs/practices/instrumentation/)
+- Maintainer or personal blog: [Charity Majors](https://charity.wtf/)
 - Technical blog: [Honeycomb blog](https://www.honeycomb.io/blog)

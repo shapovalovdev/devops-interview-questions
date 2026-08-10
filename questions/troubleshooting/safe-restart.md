@@ -26,8 +26,8 @@ sources:
 
 ## What to learn next
 
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [Kubernetes termination](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination-flow)
-- Official guide: [systemd service manager](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)
-- Personal technical blog: [Brendan Gregg’s blog](https://www.brendangregg.com/blog/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [Kubernetes termination](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination-flow)
+- Hands-on guide: [systemd service manager](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)
+- Maintainer or personal blog: [Brendan Gregg’s blog](https://www.brendangregg.com/blog/)
 - Technical blog: [Google Cloud blog](https://cloud.google.com/blog/)

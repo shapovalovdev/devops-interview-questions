@@ -26,8 +26,8 @@ sources:
 
 ## What to learn next
 
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [OpenTelemetry traces](https://opentelemetry.io/docs/concepts/signals/traces/)
-- Official guide: [RFC 3339 timestamps](https://www.rfc-editor.org/rfc/rfc3339)
-- Personal technical blog: [Charity Majors](https://charity.wtf/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [OpenTelemetry traces](https://opentelemetry.io/docs/concepts/signals/traces/)
+- Hands-on guide: [RFC 3339 timestamps](https://www.rfc-editor.org/rfc/rfc3339)
+- Maintainer or personal blog: [Charity Majors](https://charity.wtf/)
 - Technical blog: [Honeycomb blog](https://www.honeycomb.io/blog)

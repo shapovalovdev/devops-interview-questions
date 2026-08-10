@@ -26,8 +26,8 @@ sources:
 
 ## What to learn next
 
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [Git documentation](https://git-scm.com/doc)
-- Official guide: [OpenTelemetry traces](https://opentelemetry.io/docs/concepts/signals/traces/)
-- Personal technical blog: [Martin Fowler](https://martinfowler.com/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [Git documentation](https://git-scm.com/doc)
+- Hands-on guide: [OpenTelemetry traces](https://opentelemetry.io/docs/concepts/signals/traces/)
+- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
 - Technical blog: [LaunchDarkly blog](https://launchdarkly.com/blog/)

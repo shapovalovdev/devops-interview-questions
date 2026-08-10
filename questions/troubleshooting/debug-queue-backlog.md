@@ -19,8 +19,8 @@ sources:
 - [Apache Kafka documentation](https://kafka.apache.org/documentation/)
 - Further reading (blog): [Chris Richardson — messaging](https://microservices.io/)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [RabbitMQ documentation](https://www.rabbitmq.com/docs)
-- Official guide: [Kafka documentation](https://kafka.apache.org/documentation/)
-- Personal technical blog: [Chris Richardson](https://microservices.io/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [RabbitMQ documentation](https://www.rabbitmq.com/docs)
+- Hands-on guide: [Kafka documentation](https://kafka.apache.org/documentation/)
+- Maintainer or personal blog: [Chris Richardson](https://microservices.io/)
 - Technical blog: [Confluent blog](https://www.confluent.io/blog/)

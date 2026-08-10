@@ -19,8 +19,8 @@ sources:
 - [Mozilla Server Side TLS](https://wiki.mozilla.org/Security/Server_Side_TLS)
 - Further reading (blog): [Scott Helme — TLS](https://scotthelme.co.uk/)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Standard: [RFC 8446](https://www.rfc-editor.org/rfc/rfc8446)
-- Official guide: [Let’s Encrypt documentation](https://letsencrypt.org/docs/)
-- Personal technical blog: [Scott Helme](https://scotthelme.co.uk/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [RFC 8446](https://www.rfc-editor.org/rfc/rfc8446)
+- Hands-on guide: [Let’s Encrypt documentation](https://letsencrypt.org/docs/)
+- Maintainer or personal blog: [Scott Helme](https://scotthelme.co.uk/)
 - Technical blog: [Cloudflare TLS](https://blog.cloudflare.com/tag/tls/)

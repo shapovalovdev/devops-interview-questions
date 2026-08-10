@@ -19,8 +19,8 @@ sources:
 - [Google SRE Book — Postmortem Culture](https://sre.google/sre-book/postmortem-culture/)
 - Further reading (blog): [John Allspaw — incident response](https://www.kitchensoap.com/)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [FEMA incident command](https://www.fema.gov/emergency-managers/nims/components)
-- Official guide: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
-- Personal technical blog: [John Allspaw](https://www.kitchensoap.com/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [FEMA incident command](https://www.fema.gov/emergency-managers/nims/components)
+- Hands-on guide: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
+- Maintainer or personal blog: [John Allspaw](https://www.kitchensoap.com/)
 - Technical blog: [PagerDuty incident response](https://www.pagerduty.com/resources/learn/)

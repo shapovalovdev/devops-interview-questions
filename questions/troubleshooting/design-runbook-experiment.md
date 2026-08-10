@@ -19,8 +19,8 @@ sources:
 - [Google SRE Book — Testing for Reliability](https://sre.google/sre-book/testing-reliability/)
 - Further reading (blog): [John Allspaw — experiments and learning](https://www.kitchensoap.com/)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
-- Official guide: [Kubernetes progressive delivery](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
-- Personal technical blog: [John Allspaw](https://www.kitchensoap.com/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
+- Hands-on guide: [Kubernetes progressive delivery](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+- Maintainer or personal blog: [John Allspaw](https://www.kitchensoap.com/)
 - Technical blog: [AWS Builders’ Library](https://aws.amazon.com/builders-library/)

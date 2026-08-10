@@ -19,8 +19,8 @@ sources:
 - [Google SRE Book — Managing Incidents](https://sre.google/sre-book/managing-incidents/)
 - Further reading (blog): [John Allspaw — incident response](https://www.kitchensoap.com/)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
-- Official guide: [NIST incident handling](https://csrc.nist.gov/pubs/sp/800/61/r2/final)
-- Personal technical blog: [John Allspaw](https://www.kitchensoap.com/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
+- Hands-on guide: [NIST incident handling](https://csrc.nist.gov/pubs/sp/800/61/r2/final)
+- Maintainer or personal blog: [John Allspaw](https://www.kitchensoap.com/)
 - Technical blog: [PagerDuty resources](https://www.pagerduty.com/resources/learn/)

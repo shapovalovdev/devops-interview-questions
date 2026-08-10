@@ -19,8 +19,8 @@ sources:
 - [Google SRE Book — Eliminating Toil](https://sre.google/sre-book/eliminating-toil/)
 - Further reading (blog): [Jesse Robbins — resilient operations](https://www.jesserobbins.com/)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
-- Official guide: [NIST incident handling](https://csrc.nist.gov/pubs/sp/800/61/r2/final)
-- Personal technical blog: [Jesse Robbins](https://www.jesserobbins.com/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
+- Hands-on guide: [NIST incident handling](https://csrc.nist.gov/pubs/sp/800/61/r2/final)
+- Maintainer or personal blog: [Jesse Robbins](https://www.jesserobbins.com/)
 - Technical blog: [Gremlin blog](https://www.gremlin.com/blog/)

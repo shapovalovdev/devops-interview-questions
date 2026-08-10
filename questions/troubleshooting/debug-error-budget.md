@@ -26,8 +26,8 @@ sources:
 
 ## What to learn next
 
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
-- Official guide: [Prometheus alerting](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)
-- Personal technical blog: [Alex Hidalgo](https://www.alexhidalgo.com/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
+- Hands-on guide: [Prometheus alerting](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)
+- Maintainer or personal blog: [Alex Hidalgo](https://www.alexhidalgo.com/)
 - Technical blog: [Nobl9 blog](https://www.nobl9.com/blog)

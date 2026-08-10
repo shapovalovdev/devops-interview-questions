@@ -19,8 +19,8 @@ sources:
 - [RFC 1035: Domain Names—Implementation and Specification](https://www.rfc-editor.org/rfc/rfc1035)
 - Further reading (blog): [Cloudflare — DNS](https://blog.cloudflare.com/tag/dns/)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Standard: [IANA DNS parameters](https://www.iana.org/domains/root/db)
-- Official guide: [BIND documentation](https://bind9.readthedocs.io/)
-- Personal technical blog: [Bert Hubert](https://berthub.eu/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [IANA DNS parameters](https://www.iana.org/domains/root/db)
+- Hands-on guide: [BIND documentation](https://bind9.readthedocs.io/)
+- Maintainer or personal blog: [Bert Hubert](https://berthub.eu/)
 - Technical blog: [Cloudflare DNS](https://blog.cloudflare.com/tag/dns/)

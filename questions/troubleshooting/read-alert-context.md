@@ -26,8 +26,8 @@ sources:
 
 ## What to learn next
 
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [Prometheus alerting rules](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)
-- Official guide: [OpenTelemetry documentation](https://opentelemetry.io/docs/)
-- Personal technical blog: [Brendan Gregg’s blog](https://www.brendangregg.com/blog/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [Prometheus alerting rules](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)
+- Hands-on guide: [OpenTelemetry documentation](https://opentelemetry.io/docs/)
+- Maintainer or personal blog: [Brendan Gregg’s blog](https://www.brendangregg.com/blog/)
 - Technical blog: [Cloudflare blog](https://blog.cloudflare.com/)

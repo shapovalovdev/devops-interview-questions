@@ -26,8 +26,8 @@ sources:
 
 ## What to learn next
 
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [OpenTelemetry metrics](https://opentelemetry.io/docs/concepts/signals/metrics/)
-- Official guide: [Prometheus histograms](https://prometheus.io/docs/practices/histograms/)
-- Personal technical blog: [Brendan Gregg](https://www.brendangregg.com/blog/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [OpenTelemetry metrics](https://opentelemetry.io/docs/concepts/signals/metrics/)
+- Hands-on guide: [Prometheus histograms](https://prometheus.io/docs/practices/histograms/)
+- Maintainer or personal blog: [Brendan Gregg](https://www.brendangregg.com/blog/)
 - Technical blog: [Grafana Labs blog](https://grafana.com/blog/)

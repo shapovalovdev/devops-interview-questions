@@ -19,8 +19,8 @@ sources:
 - [Google SRE Book — Communication and Collaboration](https://sre.google/sre-book/communication-and-collaboration/)
 - Further reading (blog): [John Allspaw — coordination](https://www.kitchensoap.com/)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [FEMA NIMS](https://www.fema.gov/emergency-managers/nims)
-- Official guide: [Google SRE incident management](https://sre.google/sre-book/managing-incidents/)
-- Personal technical blog: [John Allspaw](https://www.kitchensoap.com/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [FEMA NIMS](https://www.fema.gov/emergency-managers/nims)
+- Hands-on guide: [Google SRE incident management](https://sre.google/sre-book/managing-incidents/)
+- Maintainer or personal blog: [John Allspaw](https://www.kitchensoap.com/)
 - Technical blog: [PagerDuty resources](https://www.pagerduty.com/resources/learn/)

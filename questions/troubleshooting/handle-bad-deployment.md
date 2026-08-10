@@ -19,8 +19,8 @@ sources:
 - [Google SRE Book — Managing Incidents](https://sre.google/sre-book/managing-incidents/)
 - Further reading (blog): [Martin Fowler — Continuous Delivery](https://martinfowler.com/bliki/ContinuousDelivery.html)
 ## What to learn next
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [Argo Rollouts](https://argo-rollouts.readthedocs.io/)
-- Official guide: [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
-- Personal technical blog: [Martin Fowler](https://martinfowler.com/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [Argo Rollouts](https://argo-rollouts.readthedocs.io/)
+- Hands-on guide: [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
 - Technical blog: [Google Cloud blog](https://cloud.google.com/blog/)

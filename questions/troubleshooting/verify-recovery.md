@@ -26,8 +26,8 @@ sources:
 
 ## What to learn next
 
-- Free book: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
-- Official guide: [Prometheus query basics](https://prometheus.io/docs/prometheus/latest/querying/basics/)
-- Official guide: [OpenTelemetry metrics](https://opentelemetry.io/docs/concepts/signals/metrics/)
-- Personal technical blog: [Charity Majors](https://charity.wtf/)
+- Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- Official documentation: [Prometheus query basics](https://prometheus.io/docs/prometheus/latest/querying/basics/)
+- Hands-on guide: [OpenTelemetry metrics](https://opentelemetry.io/docs/concepts/signals/metrics/)
+- Maintainer or personal blog: [Charity Majors](https://charity.wtf/)
 - Technical blog: [Cloudflare incident reports](https://blog.cloudflare.com/tag/postmortem/)
