@@ -25,3 +25,11 @@ An Ansible controller overloads targets and a shared API during a fleet run. How
 
 - [Ansible documentation: playbook strategies and execution controls](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_strategies.html)
 - Further reading (blog): [Spacelift: improve Ansible performance](https://spacelift.io/blog/how-to-improve-ansible-performance)
+
+## What to learn next
+
+- Official documentation: [Ansible documentation](https://docs.ansible.com/ansible/latest/)
+- Manual or specification: [Ansible community package documentation](https://docs.ansible.com/ansible/latest/community/)
+- Maintainer or personal blog: [Jeff Geerling](https://www.jeffgeerling.com/blog)
+- Technical blog: [Red Hat Ansible blog](https://www.redhat.com/en/blog/channel/ansible)
+- Hands-on guide: [Ansible playbook guide](https://docs.ansible.com/ansible/latest/playbook_guide/index.html)
