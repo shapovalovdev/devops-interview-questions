@@ -25,3 +25,11 @@ Two containers on the same bridge cannot communicate. Describe a boundary-by-bou
 
 - [Docker Docs: Bridge network driver](https://docs.docker.com/engine/network/drivers/bridge/)
 - Further reading (blog): [Docker: Understanding Docker networking](https://www.docker.com/blog/understanding-docker-networking-drivers-use-cases/)
+
+## What to learn next
+
+- Official documentation: [Docker bridge network driver](https://docs.docker.com/engine/network/drivers/bridge/)
+- Manual or specification: [Linux network namespaces](https://man7.org/linux/man-pages/man7/network_namespaces.7.html)
+- Maintainer or personal blog: [Julia Evans: networking writing](https://jvns.ca/)
+- Technical blog: [Docker networking drivers](https://www.docker.com/blog/understanding-docker-networking-drivers-use-cases/)
+- Hands-on guide: [Docker network tutorial](https://docs.docker.com/engine/network/tutorials/standalone/)

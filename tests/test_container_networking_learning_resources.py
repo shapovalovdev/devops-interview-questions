@@ -16,6 +16,7 @@ QUESTIONS = [
         "cilium-ebpf-datapath-tradeoffs.md",
         "cilium-egress-gateway-design.md",
         "cilium-kube-proxy-replacement.md",
+        "bridge-traffic-path.md",
     )
 ]
 RELATED = ROOT / "docs/related-materials/container-networking.md"
