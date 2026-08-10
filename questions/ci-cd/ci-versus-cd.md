@@ -25,3 +25,11 @@ What are continuous integration, continuous delivery, and continuous deployment,
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Workflows and actions](https://docs.github.com/en/actions/concepts/workflows-and-actions)
 - [Further reading: Google Cloud—continuous delivery overview](https://cloud.google.com/architecture/devops/devops-tech-continuous-delivery)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions concepts](https://docs.github.com/en/actions/concepts/overview)
+- Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
+- Maintainer or personal blog: [Charity Majors](https://charity.wtf/)
+- Technical blog: [Google Cloud DevOps and SRE](https://cloud.google.com/blog/products/devops-sre)
+- Hands-on guide: [Practical guide](https://docs.github.com/en/actions/tutorials/build-and-test-code)

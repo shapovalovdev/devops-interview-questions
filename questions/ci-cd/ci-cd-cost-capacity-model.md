@@ -25,3 +25,11 @@ How would you manage CI/CD spend and queue time as engineering usage grows?
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: GitHub Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions)
 - [Further reading: GitHub Docs—concurrency](https://docs.github.com/en/actions/concepts/workflows-and-actions/concurrency)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions billing](https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-actions/about-billing-for-github-actions)
+- Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
+- Maintainer or personal blog: [Charity Majors](https://charity.wtf/)
+- Technical blog: [Google Cloud DevOps and SRE](https://cloud.google.com/blog/products/devops-sre)
+- Hands-on guide: [Practical guide](https://docs.github.com/en/actions/tutorials/build-and-test-code)
