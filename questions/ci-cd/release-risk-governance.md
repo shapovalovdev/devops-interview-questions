@@ -25,3 +25,11 @@ How would you make release controls proportionate to risk across many services?
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [Google SRE Workbook: Canarying releases](https://sre.google/workbook/canarying-releases/)
 - [Further reading: Google SRE Book—service level objectives](https://sre.google/sre-book/service-level-objectives/)
+
+## What to learn next
+
+- Official documentation: [GitHub deployment protection rules](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments)
+- Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
+- Maintainer or personal blog: [Troy Hunt](https://www.troyhunt.com/)
+- Technical blog: [GitHub Blog — CI/CD](https://github.blog/enterprise-software/ci-cd/)
+- Hands-on guide: [Practical guide](https://docs.github.com/en/actions/tutorials/deploying-with-github-actions)

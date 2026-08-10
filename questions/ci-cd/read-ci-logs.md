@@ -25,3 +25,11 @@ How do you turn a failed CI job into a safe, actionable diagnosis?
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Using workflow run logs](https://docs.github.com/en/actions/how-tos/monitor-workflows/use-workflow-run-logs)
 - [Further reading: GitHub Docs—storing workflow data as artifacts](https://docs.github.com/en/actions/how-tos/store-and-share-data)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions workflow logs](https://docs.github.com/en/actions/how-tos/monitor-workflows/use-workflow-run-logs)
+- Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
+- Maintainer or personal blog: [Troy Hunt](https://www.troyhunt.com/)
+- Technical blog: [GitHub Blog — CI/CD](https://github.blog/enterprise-software/ci-cd/)
+- Hands-on guide: [Practical guide](https://docs.github.com/en/actions/tutorials/build-and-test-code)
