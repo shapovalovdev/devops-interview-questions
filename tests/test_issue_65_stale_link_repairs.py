@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCOPES = [
     ROOT / "questions" / theme
-    for theme in ("network-storage", "version-control", "distributed-systems", "logging", "troubleshooting", "web-servers", "ci-cd", "processes", "shell-scripting")
+    for theme in ("network-storage", "version-control", "distributed-systems", "logging", "troubleshooting", "web-servers", "ci-cd", "processes", "shell-scripting", "container-networking")
 ]
 STALE_URL_FRAGMENTS = (
     "implementing-the-saga-pattern-with-aws-lambda-and-amazon-step-functions",
@@ -54,6 +54,9 @@ STALE_URL_FRAGMENTS = (
     "phusionpassenger.com/library/indepth/docker/",
     "redhat.com/en/blog/channel/enable-sysadmin",
     "redhat.com/en/blog/linux-signals",
+    "docs.cilium.io/en/stable/network/bgp-control-plane/)",
+    "charity.wtf/2019/02/05/logs-vs-structured-events/",
+    "techcommunity.microsoft.com/category/windowsserver/blog/windowsserver",
 )
 
 

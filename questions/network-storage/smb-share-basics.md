@@ -30,5 +30,5 @@ What does SMB provide, and what should an operator verify before exposing a shar
 - Official documentation: [Microsoft SMB protocol overview](https://learn.microsoft.com/en-us/windows-server/storage/file-server/file-server-smb-overview)
 - Manual or specification: [MS-SMB2 specification](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/5606ad47-5ee0-437a-817e-70c366052962)
 - Maintainer or personal blog: [Samba team news](https://www.samba.org/samba/news/)
-- Technical blog: [Microsoft Tech Community: storage](https://techcommunity.microsoft.com/category/windowsserver/blog/windowsserver)
+- Technical blog: [Microsoft Learn: SMB feature descriptions](https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-feature-descriptions)
 - Hands-on guide: [Samba documentation](https://www.samba.org/samba/docs/)

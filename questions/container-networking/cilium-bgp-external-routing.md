@@ -28,7 +28,7 @@ How would you design and validate Cilium BGP Control Plane so external networks 
 
 ## What to learn next
 
-- Official documentation: [Cilium BGP control plane](https://docs.cilium.io/en/stable/network/bgp-control-plane/)
+- Official documentation: [Cilium BGP control plane](https://docs.cilium.io/en/latest/network/bgp-control-plane/bgp-control-plane/)
 - Manual or specification: [CNI specification](https://www.cni.dev/docs/spec/)
 - Maintainer or personal blog: [Thomas Graf: networking writing](https://thomasgraf.net/)
 - Technical blog: [Cilium engineering blog](https://cilium.io/blog/)

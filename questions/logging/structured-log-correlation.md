@@ -30,6 +30,6 @@ Which fields should a service emit so an operator can follow one failed request 
 
 - Official documentation: [OpenTelemetry logging](https://opentelemetry.io/docs/specs/otel/logs/)
 - Manual or specification: [OpenTelemetry log data model](https://opentelemetry.io/docs/specs/otel/logs/data-model/)
-- Maintainer or personal blog: [Charity Majors on structured events](https://charity.wtf/2019/02/05/logs-vs-structured-events/)
+- Maintainer or personal blog: [Charity Majors' writing](https://charity.wtf/)
 - Technical blog: [Honeycomb engineering blog](https://www.honeycomb.io/blog/)
 - Hands-on guide: [OpenTelemetry Collector log collection](https://opentelemetry.io/docs/collector/)

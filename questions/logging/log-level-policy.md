@@ -23,7 +23,7 @@ How should a team use log severity levels in a production service?
 ## References
 
 - [OpenTelemetry log data model: severity fields](https://opentelemetry.io/docs/specs/otel/logs/data-model/)
-- Further reading (personal blog): [Charity Majors on logs and events](https://charity.wtf/2019/02/05/logs-vs-structured-events/)
+- Further reading (personal blog): [Charity Majors' writing](https://charity.wtf/)
 
 ## What to learn next
 
