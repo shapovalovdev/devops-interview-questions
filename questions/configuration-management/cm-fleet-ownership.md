@@ -25,3 +25,11 @@ How should a platform organization define ownership when many teams configure th
 
 - [Ansible documentation: inventory](https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_inventory.html)
 - Further reading (blog): [Spacelift: Ansible configuration management](https://spacelift.io/blog/ansible-configuration-management)
+
+## What to learn next
+
+- Official documentation: [Ansible documentation](https://docs.ansible.com/ansible/latest/)
+- Manual or specification: [Ansible playbook guide](https://docs.ansible.com/ansible/latest/playbook_guide/index.html)
+- Maintainer or personal blog: [Jeff Geerling](https://www.jeffgeerling.com/blog)
+- Technical blog: [Red Hat Ansible blog](https://www.redhat.com/en/blog/channel/ansible)
+- Hands-on guide: [Ansible examples](https://github.com/ansible/ansible-examples)

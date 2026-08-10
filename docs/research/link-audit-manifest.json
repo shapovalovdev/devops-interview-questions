@@ -1354,5 +1354,9 @@
     {"question": "questions/configuration-management/ansible-templates.md", "related_materials": "docs/related-materials/configuration-management.md"},
     {"question": "questions/configuration-management/ansible-test-strategy.md", "related_materials": "docs/related-materials/configuration-management.md"},
     {"question": "questions/configuration-management/ansible-variables-basics.md", "related_materials": "docs/related-materials/configuration-management.md"}
+,
+    {"question": "questions/configuration-management/ansible-vault-secrets.md", "related_materials": "docs/related-materials/configuration-management.md"},
+    {"question": "questions/configuration-management/cm-change-risk-model.md", "related_materials": "docs/related-materials/configuration-management.md"},
+    {"question": "questions/configuration-management/cm-fleet-ownership.md", "related_materials": "docs/related-materials/configuration-management.md"}
   ]
 }
