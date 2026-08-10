@@ -150,3 +150,9 @@ def test_host_networking_tradeoffs_uses_live_docker_networking_tutorial() -> Non
     text = (ROOT / "questions" / "container-networking" / "host-networking-tradeoffs.md").read_text(encoding="utf-8")
     assert "https://docs.docker.com/network/tutorials/" not in text
     assert "https://docs.docker.com/engine/network/tutorials/standalone/" in text
+
+
+def test_deployment_rollout_check_uses_live_kubernetes_blog() -> None:
+    text = (ROOT / "questions" / "certification-last-minute-review" / "deployment-rollout-check.md").read_text(encoding="utf-8")
+    assert "https://learnk8s.io/kubernetes-deployments" not in text
+    assert "https://kubernetes.io/blog/" in text

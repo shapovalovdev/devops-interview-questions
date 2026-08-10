@@ -23,12 +23,12 @@ What do you check when a Deployment update does not become available?
 ## References
 
 - [Kubernetes: Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
-- Further reading (blog): [Learnk8s — Kubernetes Deployment strategies](https://learnk8s.io/kubernetes-deployments)
+- Further reading (blog): [Kubernetes blog](https://kubernetes.io/blog/)
 
 ## What to learn next
 
 - Official documentation: [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 - Manual or specification: [Deployment API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/)
 - Maintainer or personal blog: [Kelsey Hightower — Kubernetes the hard way](https://github.com/kelseyhightower/kubernetes-the-hard-way)
-- Technical blog: [Learnk8s — Deployment strategies](https://learnk8s.io/kubernetes-deployments)
+- Technical blog: [Kubernetes blog](https://kubernetes.io/blog/)
 - Hands-on guide: [Kubernetes update a Deployment](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/)
