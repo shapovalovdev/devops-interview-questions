@@ -10,10 +10,16 @@ Theme related-material pages.
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass
 import json
 import re
 import sys
+import threading
+import time
 from collections import Counter
+from email.utils import parsedate_to_datetime
+from urllib.parse import urlparse
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -30,6 +36,49 @@ REQUIRED_CATEGORIES = {
 }
 LINK_PATTERN = re.compile(r"^- ([^:]+): \[[^]]+\]\((https://[^)\s]+)\)\s*$", re.MULTILINE)
 USER_AGENT = "DevOpsQuestionDatabaseLinkAudit/1.0 (+https://github.com/shapovalovdev/devops-interview-questions)"
+MAX_ATTEMPTS = 3
+DEFAULT_RETRY_DELAY_SECONDS = 0.5
+MAX_RETRY_AFTER_SECONDS = 30.0
+HOST_REQUEST_INTERVAL_SECONDS = 0.2
+LIVE_CHECK_WORKERS = 8
+TRANSIENT_STATUSES = {403, 418, 429}
+
+
+@dataclass(frozen=True)
+class FetchResult:
+    status: int
+    headers: object
+
+
+@dataclass(frozen=True)
+class LinkCheck:
+    url: str
+    category: str
+    detail: str
+    attempts: int
+
+
+class HostPacer:
+    """Serialize requests per host without blocking checks for other hosts."""
+
+    def __init__(self, interval: float, clock=time.monotonic, sleeper=time.sleep) -> None:
+        self.interval = interval
+        self.clock = clock
+        self.sleeper = sleeper
+        self.last_request: dict[str, float] = {}
+        self.host_locks: dict[str, threading.Lock] = {}
+        self.lock = threading.Lock()
+
+    def pace(self, url: str) -> None:
+        host = urlparse(url).netloc
+        with self.lock:
+            host_lock = self.host_locks.setdefault(host, threading.Lock())
+        with host_lock:
+            now = self.clock()
+            delay = max(0.0, self.interval - (now - self.last_request.get(host, float("-inf"))))
+            if delay:
+                self.sleeper(delay)
+            self.last_request[host] = self.clock()
 
 
 def section(text: str, heading: str) -> str:
@@ -101,32 +150,100 @@ def coverage_report(manifest: dict) -> str:
     )
 
 
-def fetch_status(url: str, timeout: float) -> int:
+def fetch_result(url: str, timeout: float) -> FetchResult:
     """Use HEAD first, then GET for hosts which do not implement HEAD correctly."""
     headers = {"User-Agent": USER_AGENT}
     for method in ("HEAD", "GET"):
         request = urllib.request.Request(url, headers=headers, method=method)
         try:
             with urllib.request.urlopen(request, timeout=timeout) as response:
-                return response.status
+                return FetchResult(response.status, response.headers)
         except urllib.error.HTTPError as error:
             if method == "HEAD" and error.code in {403, 405, 406, 501}:
                 continue
-            return error.code
-    return 599
+            return FetchResult(error.code, error.headers or {})
+    return FetchResult(599, {})
 
 
-def validate_live(urls: set[str], timeout: float) -> None:
-    failures: list[str] = []
-    for url in sorted(urls):
+def fetch_status(url: str, timeout: float) -> int:
+    """Compatibility wrapper for callers that only need the HTTP status."""
+    return fetch_result(url, timeout).status
+
+
+def is_transient_status(status: int) -> bool:
+    return status in TRANSIENT_STATUSES or 500 <= status < 600
+
+
+def retry_delay(headers: object, retry_index: int, now=time.time) -> float:
+    """Respect Retry-After where possible, then use bounded exponential backoff."""
+    retry_after = headers.get("Retry-After") if hasattr(headers, "get") else None
+    if retry_after:
         try:
-            status = fetch_status(url, timeout)
+            return min(float(retry_after), MAX_RETRY_AFTER_SECONDS)
+        except ValueError:
+            try:
+                retry_at = parsedate_to_datetime(retry_after).timestamp()
+                return min(max(0.0, retry_at - now()), MAX_RETRY_AFTER_SECONDS)
+            except (TypeError, ValueError, OverflowError):
+                pass
+    return DEFAULT_RETRY_DELAY_SECONDS * (2**retry_index)
+
+
+def check_url(
+    url: str,
+    timeout: float,
+    *,
+    sleeper=time.sleep,
+    pacer: HostPacer | None = None,
+) -> LinkCheck:
+    """Classify a link after bounded, host-paced checks.
+
+    Exhausted rate-limit responses are reported separately because they do not
+    establish that the resource is dead. Permanent HTTP and transport failures
+    remain hard failures for the live audit.
+    """
+    pacer = pacer or HostPacer(HOST_REQUEST_INTERVAL_SECONDS, sleeper=sleeper)
+    for attempt in range(MAX_ATTEMPTS):
+        try:
+            pacer.pace(url)
+            result = fetch_result(url, timeout)
         except (OSError, urllib.error.URLError) as error:
-            failures.append(f"{url}: network error: {error}")
-            continue
-        if not 200 <= status < 400:
-            failures.append(f"{url}: HTTP {status}")
-    assert not failures, "Broken learning-resource links:\n" + "\n".join(failures)
+            return LinkCheck(url, "network error", str(error), attempt + 1)
+        if 200 <= result.status < 400:
+            return LinkCheck(url, "ok", f"HTTP {result.status}", attempt + 1)
+        if not is_transient_status(result.status):
+            return LinkCheck(url, "broken", f"HTTP {result.status}", attempt + 1)
+        if attempt < MAX_ATTEMPTS - 1:
+            sleeper(retry_delay(result.headers, attempt))
+    return LinkCheck(url, "rate limited", f"HTTP {result.status}", MAX_ATTEMPTS)
+
+
+def validate_live(
+    urls: set[str],
+    timeout: float,
+    *,
+    sleeper=time.sleep,
+    pacer: HostPacer | None = None,
+    workers: int = LIVE_CHECK_WORKERS,
+) -> None:
+    shared_pacer = pacer or HostPacer(HOST_REQUEST_INTERVAL_SECONDS, sleeper=sleeper)
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        checks = list(
+            executor.map(
+                lambda url: check_url(url, timeout, sleeper=sleeper, pacer=shared_pacer),
+                sorted(urls),
+            )
+        )
+
+    rate_limited = [check for check in checks if check.category == "rate limited"]
+    failures = [check for check in checks if check.category in {"broken", "network error"}]
+    if rate_limited:
+        print("Temporarily rate-limited learning-resource URLs (retried, not declared broken):")
+        for check in rate_limited:
+            print(f"{check.url}: rate limited after {check.attempts} attempts ({check.detail})")
+    assert not failures, "Broken learning-resource links:\n" + "\n".join(
+        f"{check.url}: {check.category} ({check.detail})" for check in failures
+    )
 
 
 def main() -> None:

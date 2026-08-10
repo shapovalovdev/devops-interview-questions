@@ -34,10 +34,23 @@ It then follows every unique URL when run with `--check-live`.
 
 ## Live-check behavior
 
-The CI validator first sends `HEAD`, then retries with `GET` when a host rejects
-`HEAD` with a common method or bot-policy response (`403`, `405`, `406`, or
-`501`). A successful GET is accepted. A `403`, `429`, or other non-2xx/3xx
-result after that retry remains a failed link: it is not silently treated as
-valid merely because an anti-bot system may be involved. Replace it with an
-equally relevant, publicly readable resource or record why human review is
-required before adding it to the audited manifest.
+The CI validator checks unique URLs concurrently across hosts, but spaces
+requests to the same host. It sends `HEAD` first, then retries with `GET` when a
+host rejects `HEAD` with a common method or bot-policy response (`403`, `405`,
+`406`, or `501`).
+
+Rate-limit and temporary-server responses (`403`, `418`, `429`, and `5xx`) are
+retried three times with bounded exponential backoff. When a response includes
+`Retry-After`, the validator honours it (up to 30 seconds). A URL that is still
+rate limited after those attempts is reported explicitly as *rate limited*, not
+as a broken resource: a host denying a GitHub runner does not prove that the
+curated material has disappeared.
+
+Permanent failures remain hard errors. In particular, `404` and other permanent
+HTTP failures, DNS errors, and TLS errors fail the live-check gate and must be
+fixed or removed after review. The retry policy is status-based and applies to
+every host; it is not a domain allowlist.
+
+For local certificate-store setups that do not trust public roots by default,
+run the check with `SSL_CERT_FILE="$(python3 -m certifi)"` after installing
+`certifi`.
