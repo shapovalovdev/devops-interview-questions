@@ -31,3 +31,11 @@ sources:
 - Maintainer or personal blog: [Brendan Gregg — active benchmarking](https://www.brendangregg.com/activebenchmarking.html)
 - Technical blog: [AWS Builders' Library](https://aws.amazon.com/builders-library/)
 - Hands-on guide: [k6 documentation](https://grafana.com/docs/k6/latest/)
+
+## What to learn next
+
+- Official documentation: [Linux kernel documentation](https://docs.kernel.org/)
+- Manual or specification: [Linux perf events documentation](https://docs.kernel.org/admin-guide/perf-security.html)
+- Maintainer or personal blog: [Brendan Gregg](https://www.brendangregg.com/blog/)
+- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
+- Hands-on guide: [Linux perf tutorial](https://perf.wiki.kernel.org/index.php/Tutorial)
