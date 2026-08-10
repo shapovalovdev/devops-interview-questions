@@ -7,5 +7,5 @@ Use these public resources to practise a hypothesis-driven incident response. Th
 - Official documentation: [Google SRE Book — Effective Troubleshooting](https://sre.google/sre-book/effective-troubleshooting/)
 - Manual or specification: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
 - Maintainer or personal blog: [Brendan Gregg — Linux performance material](https://www.brendangregg.com/linuxperf.html)
-- Technical blog: [Red Hat Enable Sysadmin](https://www.redhat.com/en/blog/channel/enable-sysadmin)
+- Technical blog: [Red Hat: Welcome to Enable Sysadmin](https://www.redhat.com/en/blog/welcome)
 - Hands-on guide: [Google SRE Workbook](https://sre.google/workbook/table-of-contents/)

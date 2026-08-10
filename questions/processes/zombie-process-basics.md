@@ -27,12 +27,12 @@ What is a zombie process, and how do you fix a growing number of them?
 - [exit(3): zombie state and reaping](https://man7.org/linux/man-pages/man3/exit.3.html)
 - [pid_namespaces(7): namespace init responsibilities](https://man7.org/linux/man-pages/man7/pid_namespaces.7.html)
 - Free book: [The Linux Documentation Project](https://tldp.org/)
-- Further reading (blog): [Phusion: Docker and the PID 1 zombie reaping problem](https://www.phusionpassenger.com/library/indepth/docker/)
+- Further reading (blog): [Phusion: Docker and the PID 1 zombie reaping problem](https://blog.phusion.nl/docker-and-the-pid-1-zombie-reaping-problem/)
 
 ## What to learn next
 
 - Official documentation: [man7 wait(2)](https://man7.org/linux/man-pages/man2/wait.2.html)
 - Manual or specification: [Linux pid_namespaces(7)](https://man7.org/linux/man-pages/man7/pid_namespaces.7.html)
 - Maintainer or personal blog: [Lennart Poettering — systemd](https://0pointer.net/blog/projects/systemd.html)
-- Technical blog: [Phusion — PID 1 and child reaping](https://www.phusionpassenger.com/library/indepth/docker/)
+- Technical blog: [Phusion — PID 1 and child reaping](https://blog.phusion.nl/docker-and-the-pid-1-zombie-reaping-problem/)
 - Hands-on guide: [Linux Journey — processes](https://linuxjourney.com/lesson/processes)

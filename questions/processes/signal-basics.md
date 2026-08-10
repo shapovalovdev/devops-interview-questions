@@ -34,5 +34,5 @@ When would you use SIGTERM, SIGKILL, and SIGHUP, and what risks do they carry?
 - Official documentation: [man7 signal(7)](https://man7.org/linux/man-pages/man7/signal.7.html)
 - Manual or specification: [man7 kill(2)](https://man7.org/linux/man-pages/man2/kill.2.html)
 - Maintainer or personal blog: [Lennart Poettering — systemd](https://0pointer.net/blog/projects/systemd.html)
-- Technical blog: [Red Hat — Linux signals](https://www.redhat.com/en/blog/linux-signals)
+- Technical blog: [GNU C Library: signaling another process](https://www.gnu.org/software/libc/manual/html_node/Signaling-Another-Process.html)
 - Hands-on guide: [Advanced Bash-Scripting Guide — signals](https://www.gnu.org/software/bash/manual/html_node/Signals.html)

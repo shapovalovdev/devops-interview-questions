@@ -30,4 +30,4 @@ sources:
 - Official documentation: [Google SRE — Monitoring](https://sre.google/sre-book/monitoring-distributed-systems/)
 - Hands-on guide: [Google SRE — Postmortems](https://sre.google/sre-book/postmortem-culture/)
 - Maintainer or personal blog: [Brendan Gregg’s blog](https://www.brendangregg.com/blog/)
-- Technical blog: [Red Hat Enable Sysadmin](https://www.redhat.com/en/blog/channel/enable-sysadmin)
+- Technical blog: [Red Hat: Welcome to Enable Sysadmin](https://www.redhat.com/en/blog/welcome)

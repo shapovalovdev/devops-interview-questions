@@ -34,5 +34,5 @@ Why can a signal handler appear unreliable in a multithreaded Linux process?
 - Official documentation: [man7 signal(7)](https://man7.org/linux/man-pages/man7/signal.7.html)
 - Manual or specification: [man7 signal-safety(7)](https://man7.org/linux/man-pages/man7/signal-safety.7.html)
 - Maintainer or personal blog: [Thomas Trapp — signal handlers](https://thomastrapp.com/blog/signal-handlers-for-multithreaded-cpp/)
-- Technical blog: [Red Hat — Linux signals](https://www.redhat.com/en/blog/linux-signals)
+- Technical blog: [GNU C Library: signaling another process](https://www.gnu.org/software/libc/manual/html_node/Signaling-Another-Process.html)
 - Hands-on guide: [Advanced Bash-Scripting Guide — signals](https://www.gnu.org/software/bash/manual/html_node/Signals.html)
