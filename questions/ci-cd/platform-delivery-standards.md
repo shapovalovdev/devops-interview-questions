@@ -25,3 +25,11 @@ How would you set delivery standards that improve safety without centralizing ev
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [SLSA: Build security levels](https://slsa.dev/spec/v1.0/levels)
 - [Further reading: GitHub Docs—reusable workflows](https://docs.github.com/en/actions/reference/workflows-and-actions/reusing-workflow-configurations)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions reusable workflows](https://docs.github.com/en/actions/how-tos/sharing-automations/reusing-workflows)
+- Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
+- Maintainer or personal blog: [Julia Evans](https://jvns.ca/)
+- Technical blog: [GitHub Blog — CI/CD](https://github.blog/enterprise-software/ci-cd/)
+- Hands-on guide: [Practical guide](https://docs.github.com/en/actions/tutorials/create-actions)
