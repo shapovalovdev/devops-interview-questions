@@ -3,7 +3,7 @@ title: Design collector buffering and backpressure
 theme: logging
 difficulty: middle
 type: scenario
-tags: [logging, observability, reliability, capacity-planning]
+tags: [logging, observability, reliability, capacity-planning, otca]
 sources:
   - url: https://docs.fluentbit.io/manual/administration/buffering-and-storage
     source_type: official-docs

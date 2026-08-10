@@ -3,7 +3,7 @@ title: Evolve a log schema without breaking consumers
 theme: logging
 difficulty: senior
 type: scenario
-tags: [logging, observability, change-management, reliability]
+tags: [logging, observability, change-management, reliability, otca]
 sources:
   - url: https://opentelemetry.io/docs/specs/otel/logs/data-model/
     source_type: official-docs

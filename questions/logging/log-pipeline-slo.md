@@ -3,7 +3,7 @@ title: Define an SLO for a log delivery pipeline
 theme: logging
 difficulty: senior
 type: scenario
-tags: [logging, reliability, monitoring, observability]
+tags: [logging, reliability, monitoring, observability, otca]
 sources:
   - url: https://sre.google/sre-book/service-level-objectives/
     source_type: official-docs

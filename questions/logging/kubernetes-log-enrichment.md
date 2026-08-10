@@ -3,7 +3,7 @@ title: Enrich Kubernetes logs without destroying provenance
 theme: logging
 difficulty: middle
 type: scenario
-tags: [logging, kubernetes, observability, debugging]
+tags: [logging, kubernetes, observability, debugging, otca]
 sources:
   - url: https://opentelemetry.io/docs/specs/semconv/resource/k8s/
     source_type: official-docs

@@ -60,6 +60,7 @@
     {"tag": "kcna", "map": "docs/certifications/kcna.md", "minimum_questions": 15},
     {"tag": "kcsa", "map": "docs/certifications/kcsa.md", "minimum_questions": 20},
     {"tag": "lfcs", "map": "docs/certifications/lfcs.md", "minimum_questions": 25},
+    {"tag": "otca", "map": "docs/certifications/otca.md", "minimum_questions": 16},
     {"tag": "pca", "map": "docs/certifications/pca.md", "minimum_questions": 25}
   ]
 }

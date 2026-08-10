@@ -3,7 +3,7 @@ title: Design structured logs for request correlation
 theme: logging
 difficulty: middle
 type: scenario
-tags: [logging, observability, debugging, incident-response]
+tags: [logging, observability, debugging, incident-response, otca]
 sources:
   - url: https://opentelemetry.io/docs/specs/semconv/general/recording-errors/
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Operate a reliable telemetry collection pipeline
 theme: observability
 difficulty: middle
 type: scenario
-tags: [observability, monitoring, logging, reliability, prometheus, pca]
+tags: [observability, monitoring, logging, reliability, prometheus, pca, otca]
 sources:
   - url: https://opentelemetry.io/docs/collector/
     source_type: official-docs

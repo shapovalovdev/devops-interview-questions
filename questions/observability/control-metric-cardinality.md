@@ -3,7 +3,7 @@ title: Control metric-label cardinality
 theme: observability
 difficulty: middle
 type: troubleshooting
-tags: [observability, monitoring, prometheus, troubleshooting, pca]
+tags: [observability, monitoring, prometheus, troubleshooting, pca, otca]
 sources:
   - url: https://prometheus.io/docs/practices/naming/
     source_type: official-docs

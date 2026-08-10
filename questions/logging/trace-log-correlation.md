@@ -3,7 +3,7 @@ title: Correlate trace context with logs
 theme: logging
 difficulty: middle
 type: scenario
-tags: [logging, observability, debugging, distributed-systems]
+tags: [logging, observability, debugging, distributed-systems, otca]
 sources:
   - url: https://www.w3.org/TR/trace-context/
     source_type: standard

@@ -3,7 +3,7 @@ title: Diagnose missing trace context across services
 theme: observability
 difficulty: middle
 type: troubleshooting
-tags: [observability, debugging, troubleshooting, security, pca]
+tags: [observability, debugging, troubleshooting, security, pca, otca]
 sources:
   - url: https://www.w3.org/TR/trace-context/
     source_type: standard

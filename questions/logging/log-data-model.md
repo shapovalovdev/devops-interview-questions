@@ -3,7 +3,7 @@ title: Choose fields for a log data model
 theme: logging
 difficulty: junior
 type: theory
-tags: [logging, observability, debugging]
+tags: [logging, observability, debugging, otca]
 sources:
   - url: https://opentelemetry.io/docs/specs/otel/logs/data-model/
     source_type: official-docs
