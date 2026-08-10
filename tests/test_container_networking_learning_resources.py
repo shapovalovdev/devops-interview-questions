@@ -30,6 +30,9 @@ QUESTIONS = [
         "kubernetes-service-traffic-path.md",
         "mtu-mismatch-troubleshooting.md",
         "multi-cluster-connectivity-strategy.md",
+        "multi-network-segmentation.md",
+        "network-alias-lifecycle.md",
+        "network-change-governance.md",
     )
 ]
 RELATED = ROOT / "docs/related-materials/container-networking.md"

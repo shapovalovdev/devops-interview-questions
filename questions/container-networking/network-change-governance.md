@@ -25,3 +25,10 @@ How do you make network-policy, DNS, CNI, and ingress changes safe without makin
 
 - [Kubernetes Docs: Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 - Further reading (blog): [Kubernetes: Production readiness](https://kubernetes.io/blog/2021/04/20/defending-your-cluster-cloud-native-threat-detection-response/)
+## What to learn next
+
+- Official documentation: [Docker networking documentation](https://docs.docker.com/network/)
+- Manual or specification: [CNI specification](https://www.cni.dev/docs/spec/)
+- Maintainer or personal blog: [Thomas Graf — networking articles](https://tgraf.io/)
+- Technical blog: [Cilium engineering blog](https://cilium.io/blog/)
+- Hands-on guide: [Docker networking tutorial](https://docs.docker.com/network/tutorials/)
