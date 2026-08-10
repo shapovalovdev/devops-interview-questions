@@ -25,3 +25,10 @@ How would you make a stateful service recoverable after a regional outage?
 
 - [Copy Amazon EBS snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copy-snapshot.html)
 - Further reading (blog): [Google Cloud Blog: cross-region backup](https://cloud.google.com/blog/products/storage-data-transfer/backup-and-dr-service-adds-cross-region-backups)
+## What to learn next
+
+- Official documentation: [Linux kernel filesystem documentation](https://www.kernel.org/doc/html/latest/filesystems/)
+- Manual or specification: [mount(8) Linux manual](https://man7.org/linux/man-pages/man8/mount.8.html)
+- Maintainer or personal blog: [Brendan Gregg — systems performance](https://www.brendangregg.com/blog/index.html)
+- Technical blog: [Red Hat engineering blog](https://www.redhat.com/en/blog)
+- Hands-on guide: [Fedora Quick Docs](https://docs.fedoraproject.org/en-US/quick-docs/)
