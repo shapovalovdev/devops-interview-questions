@@ -12,55 +12,218 @@
     "rationale": "The coverage target is a floor, not a cap. A complete Theme carries at least 25 active Questions and at least the baseline count in every difficulty band. Themes that legitimately grew past the baseline through certification or roadmap coverage keep that material instead of discarding verified Questions to satisfy an exact count."
   },
   "themes": [
-    {"name": "advanced-containers", "state": "complete"},
-    {"name": "backend-architecture", "state": "complete"},
-    {"name": "certification-last-minute-review", "state": "complete"},
-    {"name": "ci-cd", "state": "complete"},
-    {"name": "cloud", "state": "complete"},
-    {"name": "configuration-management", "state": "complete"},
-    {"name": "container-networking", "state": "complete"},
-    {"name": "containers", "state": "complete"},
-    {"name": "databases", "state": "complete"},
-    {"name": "distributed-systems", "state": "complete"},
-    {"name": "hardware", "state": "complete"},
-    {"name": "infrastructure-as-code", "state": "complete"},
-    {"name": "kubernetes", "state": "complete"},
-    {"name": "linux", "state": "complete"},
-    {"name": "linux-networking", "state": "complete"},
-    {"name": "linux-performance", "state": "complete"},
-    {"name": "linux-troubleshooting", "state": "complete"},
-    {"name": "logging", "state": "complete"},
-    {"name": "network-storage", "state": "complete"},
-    {"name": "networking", "state": "complete"},
-    {"name": "observability", "state": "complete"},
-    {"name": "performance-engineering", "state": "complete"},
-    {"name": "processes", "state": "complete"},
-    {"name": "queue-messaging", "state": "complete"},
-    {"name": "security", "state": "complete"},
-    {"name": "service-mesh", "state": "complete"},
-    {"name": "shell-scripting", "state": "complete"},
-    {"name": "sre", "state": "complete"},
-    {"name": "storage", "state": "complete"},
-    {"name": "systems-performance", "state": "complete"},
-    {"name": "troubleshooting", "state": "complete"},
-    {"name": "version-control", "state": "complete"},
-    {"name": "web-servers", "state": "complete"}
+    {
+      "name": "advanced-containers",
+      "state": "complete"
+    },
+    {
+      "name": "backend-architecture",
+      "state": "complete"
+    },
+    {
+      "name": "certification-last-minute-review",
+      "state": "complete"
+    },
+    {
+      "name": "ci-cd",
+      "state": "complete"
+    },
+    {
+      "name": "cloud",
+      "state": "complete"
+    },
+    {
+      "name": "configuration-management",
+      "state": "complete"
+    },
+    {
+      "name": "container-networking",
+      "state": "complete"
+    },
+    {
+      "name": "containers",
+      "state": "complete"
+    },
+    {
+      "name": "databases",
+      "state": "complete"
+    },
+    {
+      "name": "distributed-systems",
+      "state": "complete"
+    },
+    {
+      "name": "hardware",
+      "state": "complete"
+    },
+    {
+      "name": "infrastructure-as-code",
+      "state": "complete"
+    },
+    {
+      "name": "kubernetes",
+      "state": "complete"
+    },
+    {
+      "name": "linux",
+      "state": "complete"
+    },
+    {
+      "name": "linux-networking",
+      "state": "complete"
+    },
+    {
+      "name": "linux-performance",
+      "state": "complete"
+    },
+    {
+      "name": "linux-troubleshooting",
+      "state": "complete"
+    },
+    {
+      "name": "logging",
+      "state": "complete"
+    },
+    {
+      "name": "network-storage",
+      "state": "complete"
+    },
+    {
+      "name": "networking",
+      "state": "complete"
+    },
+    {
+      "name": "observability",
+      "state": "complete"
+    },
+    {
+      "name": "performance-engineering",
+      "state": "complete"
+    },
+    {
+      "name": "processes",
+      "state": "complete"
+    },
+    {
+      "name": "queue-messaging",
+      "state": "complete"
+    },
+    {
+      "name": "security",
+      "state": "complete"
+    },
+    {
+      "name": "service-mesh",
+      "state": "complete"
+    },
+    {
+      "name": "shell-scripting",
+      "state": "complete"
+    },
+    {
+      "name": "sre",
+      "state": "complete"
+    },
+    {
+      "name": "storage",
+      "state": "complete"
+    },
+    {
+      "name": "systems-performance",
+      "state": "complete"
+    },
+    {
+      "name": "troubleshooting",
+      "state": "complete"
+    },
+    {
+      "name": "version-control",
+      "state": "complete"
+    },
+    {
+      "name": "web-servers",
+      "state": "complete"
+    },
+    {
+      "name": "testing-strategy",
+      "state": "in-progress"
+    }
   ],
   "certifications": [
-    {"tag": "capa", "map": "docs/certifications/capa.md", "minimum_questions": 12},
-    {"tag": "cca", "map": "docs/certifications/cca.md", "minimum_questions": 20},
-    {"tag": "cka", "map": "docs/certifications/cka.md", "minimum_questions": 25},
-    {"tag": "ckad", "map": "docs/certifications/ckad.md", "minimum_questions": 20},
-    {"tag": "ckne", "map": "docs/certifications/ckne.md", "minimum_questions": 22},
-    {"tag": "cks", "map": "docs/certifications/cks.md", "minimum_questions": 19},
-    {"tag": "cnpa", "map": "docs/certifications/cnpa.md", "minimum_questions": 21},
-    {"tag": "cnpe", "map": "docs/certifications/cnpe.md", "minimum_questions": 15},
-    {"tag": "ica", "map": "docs/certifications/ica.md", "minimum_questions": 15},
-    {"tag": "kca", "map": "docs/certifications/kca.md", "minimum_questions": 6},
-    {"tag": "kcna", "map": "docs/certifications/kcna.md", "minimum_questions": 15},
-    {"tag": "kcsa", "map": "docs/certifications/kcsa.md", "minimum_questions": 20},
-    {"tag": "lfcs", "map": "docs/certifications/lfcs.md", "minimum_questions": 25},
-    {"tag": "otca", "map": "docs/certifications/otca.md", "minimum_questions": 16},
-    {"tag": "pca", "map": "docs/certifications/pca.md", "minimum_questions": 25}
+    {
+      "tag": "capa",
+      "map": "docs/certifications/capa.md",
+      "minimum_questions": 12
+    },
+    {
+      "tag": "cca",
+      "map": "docs/certifications/cca.md",
+      "minimum_questions": 20
+    },
+    {
+      "tag": "cka",
+      "map": "docs/certifications/cka.md",
+      "minimum_questions": 25
+    },
+    {
+      "tag": "ckad",
+      "map": "docs/certifications/ckad.md",
+      "minimum_questions": 20
+    },
+    {
+      "tag": "ckne",
+      "map": "docs/certifications/ckne.md",
+      "minimum_questions": 22
+    },
+    {
+      "tag": "cks",
+      "map": "docs/certifications/cks.md",
+      "minimum_questions": 19
+    },
+    {
+      "tag": "cnpa",
+      "map": "docs/certifications/cnpa.md",
+      "minimum_questions": 21
+    },
+    {
+      "tag": "cnpe",
+      "map": "docs/certifications/cnpe.md",
+      "minimum_questions": 15
+    },
+    {
+      "tag": "ica",
+      "map": "docs/certifications/ica.md",
+      "minimum_questions": 15
+    },
+    {
+      "tag": "kca",
+      "map": "docs/certifications/kca.md",
+      "minimum_questions": 6
+    },
+    {
+      "tag": "kcna",
+      "map": "docs/certifications/kcna.md",
+      "minimum_questions": 15
+    },
+    {
+      "tag": "kcsa",
+      "map": "docs/certifications/kcsa.md",
+      "minimum_questions": 20
+    },
+    {
+      "tag": "lfcs",
+      "map": "docs/certifications/lfcs.md",
+      "minimum_questions": 25
+    },
+    {
+      "tag": "otca",
+      "map": "docs/certifications/otca.md",
+      "minimum_questions": 16
+    },
+    {
+      "tag": "pca",
+      "map": "docs/certifications/pca.md",
+      "minimum_questions": 25
+    }
   ]
 }
