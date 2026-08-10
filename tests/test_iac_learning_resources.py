@@ -4,3 +4,9 @@ from pathlib import Path
 def test_iac_slice_has_learning_resources() -> None:
     for name in ("explicit-dependencies.md", "for-each-versus-count.md", "iac-change-risk-management.md", "iac-drift-governance.md", "iac-module-product-strategy.md", "iac-platform-guardrails.md", "iac-state-ownership-model.md", "import-existing-infrastructure.md", "infrastructure-drift.md", "input-variables-and-validation.md", "local-values-and-data-sources.md", "module-interface-design.md", "multi-environment-isolation.md", "output-contracts-and-sensitive-data.md", "policy-as-code-gates.md", "provider-version-pinning.md", "remote-backend-migration.md", "resource-lifecycle-controls.md", "safe-resource-refactoring.md", "state-lock-contention.md", "terraform-configuration-basics.md", "terraform-plan-review.md"):
         assert "## What to learn next" in (Path("questions/infrastructure-as-code") / name).read_text()
+
+
+def test_all_iac_questions_are_curated() -> None:
+    questions = list(Path("questions/infrastructure-as-code").glob("*.md"))
+    assert len(questions) == 25
+    assert all("## What to learn next" in question.read_text() for question in questions)
