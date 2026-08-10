@@ -23,7 +23,7 @@ How do you give a function access to dependencies without embedding long-lived c
 ## References
 
 - [AWS Lambda execution role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html)
-- Further reading (blog): [AWS Compute Blog — Lambda security](https://aws.amazon.com/blogs/compute/operating-lambda-building-a-solid-security-foundation/)
+- Further reading (blog): [AWS Compute Blog — Lambda security articles](https://aws.amazon.com/blogs/compute/)
 
 ## What to learn next
 
