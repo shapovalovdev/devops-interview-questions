@@ -78,3 +78,9 @@ def test_systemd_service_lifecycle_uses_the_live_systemd_manual() -> None:
     text = (ROOT / "questions" / "processes" / "systemd-service-lifecycle.md").read_text(encoding="utf-8")
     assert "https://www.redhat.com/en/topics/automation/what-is-systemd" not in text
     assert "https://www.freedesktop.org/software/systemd/man/latest/systemd.html" in text
+
+
+def test_process_tree_supervision_uses_the_live_systemd_manual() -> None:
+    text = (ROOT / "questions" / "processes" / "process-tree-supervision.md").read_text(encoding="utf-8")
+    assert "https://www.redhat.com/en/topics/automation/what-is-systemd" not in text
+    assert "https://www.freedesktop.org/software/systemd/man/latest/systemd.html" in text
