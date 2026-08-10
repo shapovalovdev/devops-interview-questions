@@ -23,4 +23,4 @@ sources:
 - Official documentation: [FEMA incident command](https://www.fema.gov/emergency-managers/nims/components)
 - Hands-on guide: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
 - Maintainer or personal blog: [John Allspaw](https://www.kitchensoap.com/)
-- Technical blog: [PagerDuty incident response](https://www.pagerduty.com/resources/learn/)
+- Technical blog: [PagerDuty incident-response process](https://www.pagerduty.com/resources/incident-management-response/learn/what-is-an-incident-response-process/)

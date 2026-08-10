@@ -31,4 +31,4 @@ How do you design a global failover process for public web traffic that balances
 - Manual or specification: [RFC 2308](https://www.rfc-editor.org/rfc/rfc2308)
 - Maintainer or personal blog: [Marc Brooker's blog](https://brooker.co.za/blog/)
 - Technical blog: [Cloudflare traffic management](https://blog.cloudflare.com/)
-- Hands-on guide: [Google SRE disaster recovery](https://sre.google/workbook/disaster-recovery/)
+- Hands-on guide: [Google Cloud disaster-recovery planning](https://cloud.google.com/architecture/dr-scenarios-planning-guide)

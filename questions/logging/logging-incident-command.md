@@ -23,12 +23,12 @@ How should an incident commander use a shared logging system during a major outa
 ## References
 
 - [Google SRE Book: managing incidents](https://sre.google/sre-book/managing-incidents/)
-- Further reading (blog): [PagerDuty: incident command](https://www.pagerduty.com/resources/learn/incident-command-system/)
+- Further reading (blog): [PagerDuty: incident commander training](https://response.pagerduty.com/training/incident_commander/)
 
 ## What to learn next
 
 - Official documentation: [Google SRE incident management](https://sre.google/sre-book/managing-incidents/)
 - Manual or specification: [NIST SP 800-61 incident response](https://csrc.nist.gov/pubs/sp/800/61/r2/final)
 - Maintainer or personal blog: [John Allspaw's writing](https://www.kitchensoap.com/)
-- Technical blog: [PagerDuty incident command](https://www.pagerduty.com/resources/learn/incident-command-system/)
+- Technical blog: [PagerDuty incident commander training](https://response.pagerduty.com/training/incident_commander/)
 - Hands-on guide: [Google SRE incident response workbook](https://sre.google/workbook/incident-response/)

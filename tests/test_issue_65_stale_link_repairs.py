@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCOPES = [
     ROOT / "questions" / theme
-    for theme in ("network-storage", "version-control", "distributed-systems", "logging", "troubleshooting")
+    for theme in ("network-storage", "version-control", "distributed-systems", "logging", "troubleshooting", "web-servers")
 ]
 STALE_URL_FRAGMENTS = (
     "implementing-the-saga-pattern-with-aws-lambda-and-amazon-step-functions",
@@ -32,6 +32,10 @@ STALE_URL_FRAGMENTS = (
     "aws.amazon.com/blogs/storage/how-to-protect-data-using-amazon-s3-object-lock",
     "blog.cloudflare.com/tag/postmortem",
     "blog.mozilla.org/en/internet-culture/privacy-security",
+    "pagerduty.com/resources/learn/",
+    "pagerduty.com/resources/learn/incident-command-system",
+    "sre.google/sre-book/capacity-planning",
+    "sre.google/workbook/disaster-recovery",
 )
 
 

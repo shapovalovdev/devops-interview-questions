@@ -5,7 +5,7 @@ difficulty: staff
 type: scenario
 tags: [capacity-planning, cost-optimization, governance, web-server]
 sources:
-  - url: https://sre.google/sre-book/capacity-planning/
+  - url: https://sre.google/sre-book/handling-overload/
     source_type: official-docs
     verified_on: 2026-08-06
 ---
@@ -22,12 +22,12 @@ How would you make web-edge capacity and cost decisions transparent across many 
 
 ## References
 
-- [Google SRE: capacity planning](https://sre.google/sre-book/capacity-planning/)
+- [Google SRE: handling overload](https://sre.google/sre-book/handling-overload/)
 - Further reading (personal blog): [Brendan Gregg on capacity and performance](https://www.brendangregg.com/blog/)
 
 ## What to learn next
 
-- Official documentation: [Google SRE capacity planning](https://sre.google/sre-book/capacity-planning/)
+- Official documentation: [Google SRE: handling overload](https://sre.google/sre-book/handling-overload/)
 - Manual or specification: [Google SRE book](https://sre.google/sre-book/table-of-contents/)
 - Maintainer or personal blog: [Brendan Gregg's blog](https://www.brendangregg.com/blog/)
 - Technical blog: [AWS Builders' Library](https://aws.amazon.com/builders-library/)

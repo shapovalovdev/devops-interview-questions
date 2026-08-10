@@ -23,4 +23,4 @@ sources:
 - Official documentation: [Google SRE workbook](https://sre.google/workbook/table-of-contents/)
 - Hands-on guide: [NIST incident handling](https://csrc.nist.gov/pubs/sp/800/61/r2/final)
 - Maintainer or personal blog: [John Allspaw](https://www.kitchensoap.com/)
-- Technical blog: [PagerDuty resources](https://www.pagerduty.com/resources/learn/)
+- Technical blog: [PagerDuty incident-response process](https://www.pagerduty.com/resources/incident-management-response/learn/what-is-an-incident-response-process/)
