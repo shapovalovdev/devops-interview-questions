@@ -2,14 +2,10 @@
 """Enforce complete Theme and certification coverage for the published database.
 
 `validate_questions.py` checks each Question and each declared Theme against the
-manifest.  This test states the stronger repository-level guarantee: nothing is
-published half-finished.  Every Theme that holds active Questions must be
-declared `complete` and must meet the baseline coverage floor, and every declared
-certification must have a map document and enough tagged Questions.
-
-A Theme may be declared `planned` while it is being scoped, but it must then hold
-no active Questions: new Themes land as one complete drop rather than trickling
-into the public site.
+manifest. A `complete` Theme meets the baseline coverage floor and difficulty
+distribution. An `in-progress` Theme may publish a reviewed incremental slice
+below that floor. Every declared certification must have a map document and
+enough tagged Questions. A `planned` Theme holds no active Questions.
 """
 
 from __future__ import annotations
@@ -57,9 +53,6 @@ def main() -> None:
 
     assert set(counts) <= set(states), f"undeclared Theme folders: {sorted(set(counts) - set(states))}"
 
-    incomplete = sorted(name for name, theme_counts in counts.items() if states[name] != "complete" and sum(theme_counts.values()))
-    assert not incomplete, f"Themes hold active Questions but are not declared complete: {incomplete}"
-
     for name, state in states.items():
         theme_counts = counts.get(name, Counter())
         total = sum(theme_counts.values())
@@ -69,6 +62,10 @@ def main() -> None:
                 assert theme_counts[difficulty] >= required, (
                     f"{name}: {difficulty} has {theme_counts[difficulty]} Questions, baseline is {required}"
                 )
+        elif state == "in-progress":
+            assert 0 < total < floor, (
+                f"{name} is in-progress but has {total} Questions; use planned for zero or complete at the {floor}-Question floor"
+            )
         else:
             assert total == 0, f"{name} is {state} but publishes {total} Questions"
 
