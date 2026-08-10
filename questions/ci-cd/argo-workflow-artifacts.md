@@ -24,3 +24,11 @@ How would you make a build output available to a later Argo Workflow step withou
 
 - [Argo Workflows: artifacts](https://argo-workflows.readthedocs.io/en/latest/walk-through/artifacts/)
 - Further reading (blog): [GitHub Blog: Secure your supply chain with artifact attestations](https://github.blog/security/supply-chain-security/secure-your-software-supply-chain-and-build-faster-with-github-actions/)
+
+## What to learn next
+
+- Official documentation: [Argo Workflows artifacts](https://argo-workflows.readthedocs.io/en/latest/walk-through/artifacts/)
+- Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
+- Maintainer or personal blog: [Julia Evans](https://jvns.ca/)
+- Technical blog: [GitHub Blog — CI/CD](https://github.blog/enterprise-software/ci-cd/)
+- Hands-on guide: [Upstream practical guide](https://argo-workflows.readthedocs.io/en/latest/walk-through/)

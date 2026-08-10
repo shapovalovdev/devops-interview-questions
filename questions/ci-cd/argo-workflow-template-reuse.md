@@ -24,3 +24,11 @@ How should a platform team offer a shared Argo Workflow step for building and sc
 
 - [Argo Workflows: WorkflowTemplates](https://argo-workflows.readthedocs.io/en/latest/workflow-templates/)
 - Further reading (blog): [GitHub Blog: Reusable workflows](https://github.blog/changelog/2021-10-18-github-actions-reusable-workflows/)
+
+## What to learn next
+
+- Official documentation: [Argo Workflow templates](https://argo-workflows.readthedocs.io/en/latest/workflow-templates/)
+- Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
+- Maintainer or personal blog: [Julia Evans](https://jvns.ca/)
+- Technical blog: [GitHub Blog — CI/CD](https://github.blog/enterprise-software/ci-cd/)
+- Hands-on guide: [Upstream practical guide](https://argo-workflows.readthedocs.io/en/latest/walk-through/)
