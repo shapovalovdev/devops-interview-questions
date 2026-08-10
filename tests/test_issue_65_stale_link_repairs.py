@@ -84,3 +84,9 @@ def test_process_tree_supervision_uses_the_live_systemd_manual() -> None:
     text = (ROOT / "questions" / "processes" / "process-tree-supervision.md").read_text(encoding="utf-8")
     assert "https://www.redhat.com/en/topics/automation/what-is-systemd" not in text
     assert "https://www.freedesktop.org/software/systemd/man/latest/systemd.html" in text
+
+
+def test_program_vs_process_uses_live_kernel_process_documentation() -> None:
+    text = (ROOT / "questions" / "processes" / "program-vs-process.md").read_text(encoding="utf-8")
+    assert "https://www.redhat.com/en/topics/linux/what-is-a-linux-process" not in text
+    assert "https://docs.kernel.org/filesystems/proc.html" in text

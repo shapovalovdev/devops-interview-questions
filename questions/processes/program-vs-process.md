@@ -34,5 +34,5 @@ What is the difference between a program and a process on Linux, and why does th
 - Official documentation: [man7 proc(5)](https://man7.org/linux/man-pages/man5/proc.5.html)
 - Manual or specification: [Linux pid_namespaces(7)](https://man7.org/linux/man-pages/man7/pid_namespaces.7.html)
 - Maintainer or personal blog: [Brendan Gregg — Linux performance](https://www.brendangregg.com/linuxperf.html)
-- Technical blog: [Red Hat — What is a Linux process?](https://www.redhat.com/en/topics/linux/what-is-a-linux-process)
+- Technical blog: [Linux kernel proc filesystem documentation](https://docs.kernel.org/filesystems/proc.html)
 - Hands-on guide: [Linux Journey — processes](https://linuxjourney.com/lesson/processes)
