@@ -794,6 +794,10 @@
     {"question": "questions/ci-cd/argo-workflow-artifacts.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/argo-workflow-template-reuse.md", "related_materials": "docs/related-materials/ci-cd.md"},
     {"question": "questions/ci-cd/argo-workflows-dag-failure.md", "related_materials": "docs/related-materials/ci-cd.md"},
-    {"question": "questions/ci-cd/argo-workflows-fundamentals.md", "related_materials": "docs/related-materials/ci-cd.md"}
+    {"question": "questions/ci-cd/argo-workflows-fundamentals.md", "related_materials": "docs/related-materials/ci-cd.md"},
+    {"question": "questions/ci-cd/ci-versus-cd.md", "related_materials": "docs/related-materials/ci-cd.md"},
+    {"question": "questions/ci-cd/pipeline-quality-gates.md", "related_materials": "docs/related-materials/ci-cd.md"},
+    {"question": "questions/ci-cd/read-ci-logs.md", "related_materials": "docs/related-materials/ci-cd.md"},
+    {"question": "questions/ci-cd/trigger-a-pipeline.md", "related_materials": "docs/related-materials/ci-cd.md"}
   ]
 }

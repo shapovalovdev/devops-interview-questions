@@ -26,3 +26,11 @@ Which checks would you place between a pull request and production deployment, a
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Building and testing Node.js](https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-nodejs)
 - [Further reading: GitHub Docs—secure use reference](https://docs.github.com/en/actions/reference/security/secure-use)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions expressions reference](https://docs.github.com/en/actions/reference/workflows-and-actions/expressions)
+- Manual or specification: [Software Engineering at Google — testing overview](https://abseil.io/resources/swe-book/html/ch11.html)
+- Maintainer or personal blog: [Martin Fowler — deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html)
+- Technical blog: [Google Testing Blog](https://testing.googleblog.com/)
+- Hands-on guide: [GitHub Actions — build and test Node.js tutorial](https://docs.github.com/en/actions/tutorials/build-and-test-code/nodejs)

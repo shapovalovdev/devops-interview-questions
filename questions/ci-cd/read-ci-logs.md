@@ -25,3 +25,11 @@ How do you turn a failed CI job into a safe, actionable diagnosis?
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Using workflow run logs](https://docs.github.com/en/actions/how-tos/monitor-workflows/use-workflow-run-logs)
 - [Further reading: GitHub Docs—storing workflow data as artifacts](https://docs.github.com/en/actions/how-tos/store-and-share-data)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions — re-run workflows and jobs](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs)
+- Manual or specification: [GitHub Actions contexts reference](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts)
+- Maintainer or personal blog: [Ken Muse — GitHub Actions engineering blog](https://www.kenmuse.com/blog/)
+- Technical blog: [GitHub Engineering blog](https://github.blog/engineering/)
+- Hands-on guide: [GitHub Actions — store and share workflow data](https://docs.github.com/en/actions/tutorials/store-and-share-data)
