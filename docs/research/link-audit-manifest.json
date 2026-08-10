@@ -1439,5 +1439,9 @@
     {"question": "questions/systems-performance/network-retransmission-triage.md", "related_materials": "docs/related-materials/systems-performance.md"},
     {"question": "questions/systems-performance/numa-locality-performance.md", "related_materials": "docs/related-materials/systems-performance.md"},
     {"question": "questions/systems-performance/oom-killer-incident.md", "related_materials": "docs/related-materials/systems-performance.md"}
+,
+    {"question": "questions/systems-performance/perf-sampling-and-overhead.md", "related_materials": "docs/related-materials/systems-performance.md"},
+    {"question": "questions/systems-performance/performance-budget-architecture.md", "related_materials": "docs/related-materials/systems-performance.md"},
+    {"question": "questions/systems-performance/performance-incident-command.md", "related_materials": "docs/related-materials/systems-performance.md"}
   ]
 }
