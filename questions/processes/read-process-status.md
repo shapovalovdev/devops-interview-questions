@@ -34,5 +34,5 @@ How would you inspect a running process before deciding whether to restart or te
 - Official documentation: [man7 proc_pid_status(5)](https://man7.org/linux/man-pages/man5/proc_pid_status.5.html)
 - Manual or specification: [man7 ps(1)](https://man7.org/linux/man-pages/man1/ps.1.html)
 - Maintainer or personal blog: [Brendan Gregg — Linux performance](https://www.brendangregg.com/linuxperf.html)
-- Technical blog: [Red Hat — What is a Linux process?](https://www.redhat.com/en/topics/linux/what-is-a-linux-process)
+- Technical blog: [Linux kernel proc filesystem documentation](https://docs.kernel.org/filesystems/proc.html)
 - Hands-on guide: [Linux Journey — processes](https://linuxjourney.com/lesson/processes)
