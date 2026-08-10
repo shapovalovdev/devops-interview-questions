@@ -24,3 +24,10 @@ Why can writing a file from an image layer have unexpected performance or storag
 
 - [Docker Docs: OverlayFS storage driver](https://docs.docker.com/engine/storage/drivers/overlayfs-driver/)
 - Further reading (blog): [Docker: storage drivers](https://www.docker.com/blog/containers-101-attach-a-volume-to-a-container/)
+## What to learn next
+
+- Official documentation: [OCI runtime specification](https://github.com/opencontainers/runtime-spec)
+- Manual or specification: [Linux kernel cgroup v2 guide](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html)
+- Maintainer or personal blog: [Liz Rice — containers and Linux security](https://www.lizrice.com/)
+- Technical blog: [Docker engineering blog](https://www.docker.com/blog/)
+- Hands-on guide: [Docker Get Started guide](https://docs.docker.com/get-started/)

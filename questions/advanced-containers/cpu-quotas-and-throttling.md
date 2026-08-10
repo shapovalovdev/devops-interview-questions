@@ -24,3 +24,10 @@ A service has low average node CPU use but high latency. How do CPU quotas chang
 
 - [Docker Docs: resource constraints](https://docs.docker.com/engine/containers/resource_constraints/)
 - Further reading (blog): [Docker: resource constraints](https://www.docker.com/blog/how-to-keep-your-containers-under-control-with-resource-constraints/)
+## What to learn next
+
+- Official documentation: [OCI runtime specification](https://github.com/opencontainers/runtime-spec)
+- Manual or specification: [Linux kernel cgroup v2 guide](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html)
+- Maintainer or personal blog: [Liz Rice — containers and Linux security](https://www.lizrice.com/)
+- Technical blog: [Docker engineering blog](https://www.docker.com/blog/)
+- Hands-on guide: [Docker Get Started guide](https://docs.docker.com/get-started/)

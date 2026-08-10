@@ -24,3 +24,10 @@ How should a team tailor seccomp without breaking a production application?
 
 - [Docker Docs: seccomp security profiles](https://docs.docker.com/engine/security/seccomp/)
 - Further reading (blog): [Docker: seccomp profiles](https://www.docker.com/blog/securing-containers-with-seccomp/)
+## What to learn next
+
+- Official documentation: [OCI runtime specification](https://github.com/opencontainers/runtime-spec)
+- Manual or specification: [Linux kernel cgroup v2 guide](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html)
+- Maintainer or personal blog: [Liz Rice — containers and Linux security](https://www.lizrice.com/)
+- Technical blog: [Docker engineering blog](https://www.docker.com/blog/)
+- Hands-on guide: [Docker Get Started guide](https://docs.docker.com/get-started/)

@@ -24,3 +24,10 @@ How do you make a container root filesystem read-only without breaking normal op
 
 - [Docker Docs: running containers](https://docs.docker.com/engine/containers/run/)
 - Further reading (blog): [Docker: container security best practices](https://www.docker.com/blog/10-docker-security-best-practices/)
+## What to learn next
+
+- Official documentation: [OCI runtime specification](https://github.com/opencontainers/runtime-spec)
+- Manual or specification: [Linux kernel cgroup v2 guide](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html)
+- Maintainer or personal blog: [Liz Rice — containers and Linux security](https://www.lizrice.com/)
+- Technical blog: [Docker engineering blog](https://www.docker.com/blog/)
+- Hands-on guide: [Docker Get Started guide](https://docs.docker.com/get-started/)

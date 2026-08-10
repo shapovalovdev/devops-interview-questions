@@ -24,3 +24,10 @@ When is sharing PID, network, or IPC namespaces appropriate, and what changes op
 
 - [Linux man-pages: namespaces](https://man7.org/linux/man-pages/man7/namespaces.7.html)
 - Further reading (blog): [Docker: networking overview](https://www.docker.com/blog/docker-networking-tutorial/)
+## What to learn next
+
+- Official documentation: [OCI runtime specification](https://github.com/opencontainers/runtime-spec)
+- Manual or specification: [Linux kernel cgroup v2 guide](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html)
+- Maintainer or personal blog: [Liz Rice — containers and Linux security](https://www.lizrice.com/)
+- Technical blog: [Docker engineering blog](https://www.docker.com/blog/)
+- Hands-on guide: [Docker Get Started guide](https://docs.docker.com/get-started/)

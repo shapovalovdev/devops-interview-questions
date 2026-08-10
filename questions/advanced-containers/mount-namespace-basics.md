@@ -24,3 +24,10 @@ How does a container get a filesystem view that differs from the host?
 
 - [Linux man-pages: mount namespaces](https://man7.org/linux/man-pages/man7/mount_namespaces.7.html)
 - Further reading (blog): [Docker: bind mounts](https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint/)
+## What to learn next
+
+- Official documentation: [OCI runtime specification](https://github.com/opencontainers/runtime-spec)
+- Manual or specification: [Linux kernel cgroup v2 guide](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html)
+- Maintainer or personal blog: [Liz Rice — containers and Linux security](https://www.lizrice.com/)
+- Technical blog: [Docker engineering blog](https://www.docker.com/blog/)
+- Hands-on guide: [Docker Get Started guide](https://docs.docker.com/get-started/)

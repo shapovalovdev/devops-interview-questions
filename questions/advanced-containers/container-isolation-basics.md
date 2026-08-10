@@ -24,3 +24,10 @@ Which Linux primitives make a container distinct from another process?
 
 - [Linux man-pages: namespaces](https://man7.org/linux/man-pages/man7/namespaces.7.html)
 - Further reading (blog): [Docker: What is a container?](https://www.docker.com/resources/what-container/)
+## What to learn next
+
+- Official documentation: [OCI runtime specification](https://github.com/opencontainers/runtime-spec)
+- Manual or specification: [Linux kernel cgroup v2 guide](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html)
+- Maintainer or personal blog: [Liz Rice — containers and Linux security](https://www.lizrice.com/)
+- Technical blog: [Docker engineering blog](https://www.docker.com/blog/)
+- Hands-on guide: [Docker Get Started guide](https://docs.docker.com/get-started/)
