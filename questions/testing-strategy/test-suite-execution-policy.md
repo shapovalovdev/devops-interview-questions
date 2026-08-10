@@ -28,8 +28,8 @@ How should a team make this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [GitHub Actions documentation](https://docs.github.com/en/actions)
+- Manual or specification: [Software Engineering at Google — larger testing](https://abseil.io/resources/swe-book/html/ch14.html)
+- Maintainer or personal blog: [Martin Fowler — on the diverse and fantastical shapes of testing](https://martinfowler.com/articles/2021-test-shapes.html)
+- Technical blog: [Slack Engineering — handling flaky tests at scale](https://slack.engineering/handling-flaky-tests-at-scale-auto-detection-suppression/)
+- Hands-on guide: [pytest — how to mark test functions with attributes](https://docs.pytest.org/en/stable/how-to/mark.html)

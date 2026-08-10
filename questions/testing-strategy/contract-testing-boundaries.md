@@ -28,8 +28,8 @@ How should an engineering team make this testing decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [The Google Testing Blog book](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [OpenAPI Initiative — learn OpenAPI](https://learn.openapis.org/)
+- Manual or specification: [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- Maintainer or personal blog: [Martin Fowler — contract test](https://martinfowler.com/bliki/ContractTest.html)
+- Technical blog: [Spotify Engineering — testing of microservices](https://engineering.atspotify.com/2018/01/testing-of-microservices/)
+- Hands-on guide: [Pact — how Pact works](https://docs.pact.io/getting_started/how_pact_works)

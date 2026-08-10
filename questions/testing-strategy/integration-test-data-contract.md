@@ -28,8 +28,8 @@ How should a team make this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [Confluent — Schema Registry documentation](https://docs.confluent.io/platform/current/schema-registry/index.html)
+- Manual or specification: [JSON Schema specification](https://json-schema.org/specification)
+- Maintainer or personal blog: [Martin Fowler — tolerant reader](https://martinfowler.com/bliki/TolerantReader.html)
+- Technical blog: [AWS Builders' Library — ensuring rollback safety during deployments](https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/)
+- Hands-on guide: [JSON Schema — creating your first schema](https://json-schema.org/learn/getting-started-step-by-step)

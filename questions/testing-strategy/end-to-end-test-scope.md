@@ -28,8 +28,8 @@ How should a team make this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [Playwright — best practices](https://playwright.dev/docs/best-practices)
+- Manual or specification: [Software Engineering at Google — larger testing](https://abseil.io/resources/swe-book/html/ch14.html)
+- Maintainer or personal blog: [Toby Clemson — testing strategies in a microservice architecture](https://martinfowler.com/articles/microservice-testing/)
+- Technical blog: [Google Testing Blog — just say no to more end-to-end tests](https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html)
+- Hands-on guide: [Playwright — writing tests](https://playwright.dev/docs/writing-tests)

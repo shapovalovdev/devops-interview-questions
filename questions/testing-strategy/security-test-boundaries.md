@@ -28,8 +28,8 @@ How should a team make this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [OWASP ZAP documentation](https://www.zaproxy.org/docs/)
+- Manual or specification: [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- Maintainer or personal blog: [Jim Gumbley — a guide to threat modelling for software teams](https://martinfowler.com/articles/agile-threat-modelling.html)
+- Technical blog: [Snyk — how static application security testing works](https://snyk.io/articles/application-security/static-application-security-testing/)
+- Hands-on guide: [OWASP ZAP — getting started](https://www.zaproxy.org/getting-started/)

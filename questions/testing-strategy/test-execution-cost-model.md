@@ -28,8 +28,8 @@ How should a team decide which tests run at each delivery stage?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [GitHub Actions documentation](https://docs.github.com/en/actions)
+- Manual or specification: [Software Engineering at Google — larger testing](https://abseil.io/resources/swe-book/html/ch14.html)
+- Maintainer or personal blog: [Alex Kladov — how to test](https://matklad.github.io/2021/05/31/how-to-test.html)
+- Technical blog: [Google Testing Blog — test sizes](https://testing.googleblog.com/2010/12/test-sizes.html)
+- Hands-on guide: [pytest-xdist — distributed test execution](https://pytest-xdist.readthedocs.io/en/stable/)

@@ -29,8 +29,8 @@ How should a team make this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [PIT mutation testing documentation](https://pitest.org/)
+- Manual or specification: [Software Engineering at Google — unit testing](https://abseil.io/resources/swe-book/html/ch12.html)
+- Maintainer or personal blog: [Henry Coles — less is more](https://blog.pitest.org/less-is-more/)
+- Technical blog: [Google Testing Blog — mutation testing](https://testing.googleblog.com/2021/04/mutation-testing.html)
+- Hands-on guide: [PIT — quickstart for Maven users](https://pitest.org/quickstart/maven/)

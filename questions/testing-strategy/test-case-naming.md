@@ -28,8 +28,8 @@ How should a team make this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Manual or specification: [Software Engineering at Google — unit testing](https://abseil.io/resources/swe-book/html/ch12.html)
+- Maintainer or personal blog: [Vladimir Khorikov — you are naming your tests wrong](https://enterprisecraftsmanship.com/posts/you-naming-tests-wrong/)
+- Technical blog: [Google Testing Blog — writing descriptive test names](https://testing.googleblog.com/2014/10/testing-on-toilet-writing-descriptive.html)
+- Hands-on guide: [pytest — good integration practices](https://docs.pytest.org/en/stable/explanation/goodpractices.html)

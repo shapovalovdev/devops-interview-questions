@@ -28,8 +28,8 @@ How should a team approach this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Manual or specification: [Software Engineering at Google — testing overview](https://abseil.io/resources/swe-book/html/ch11.html)
+- Maintainer or personal blog: [Martin Fowler — eradicating non-determinism in tests](https://martinfowler.com/articles/nonDeterminism.html)
+- Technical blog: [Google Testing Blog — test flakiness, one of the main challenges of automated testing](https://testing.googleblog.com/2020/12/test-flakiness-one-of-main-challenges.html)
+- Hands-on guide: [pytest — how to skip tests and mark expected failures](https://docs.pytest.org/en/stable/how-to/skipping.html)

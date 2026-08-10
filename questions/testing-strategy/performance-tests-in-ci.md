@@ -28,8 +28,8 @@ How should a team make this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [Grafana k6 documentation](https://grafana.com/docs/k6/latest/)
+- Manual or specification: [Google SRE Book — testing for reliability](https://sre.google/sre-book/testing-reliability/)
+- Maintainer or personal blog: [Brendan Gregg — active benchmarking](https://www.brendangregg.com/activebenchmarking.html)
+- Technical blog: [Slack Engineering — continuous load testing](https://slack.engineering/continuous-load-testing/)
+- Hands-on guide: [Grafana k6 — automated performance testing](https://grafana.com/docs/k6/latest/testing-guides/automated-performance-testing/)

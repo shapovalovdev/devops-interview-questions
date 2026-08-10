@@ -28,8 +28,8 @@ How should a team make this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [DORA — software delivery performance metrics](https://dora.dev/guides/dora-metrics/)
+- Manual or specification: [Software Engineering at Google — testing overview](https://abseil.io/resources/swe-book/html/ch11.html)
+- Maintainer or personal blog: [Martin Fowler — is high quality software worth the cost?](https://martinfowler.com/articles/is-quality-worth-cost.html)
+- Technical blog: [AWS Builders' Library — going faster with continuous delivery](https://aws.amazon.com/builders-library/going-faster-with-continuous-delivery/)
+- Hands-on guide: [DORA — quick check](https://dora.dev/quickcheck/)

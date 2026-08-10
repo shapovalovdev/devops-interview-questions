@@ -28,8 +28,8 @@ How should a team make this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [PostgreSQL Anonymizer documentation](https://postgresql-anonymizer.readthedocs.io/en/stable/)
+- Manual or specification: [NIST SP 800-122 — protecting the confidentiality of personally identifiable information](https://csrc.nist.gov/pubs/sp/800/122/final)
+- Maintainer or personal blog: [Vladimir Khorikov — how to assert database state](https://enterprisecraftsmanship.com/posts/how-to-assert-database-state/)
+- Technical blog: [Thoughtworks Technology Radar — production data in test environments](https://www.thoughtworks.com/radar/techniques/production-data-in-test-environments)
+- Hands-on guide: [DORA — test data management capability](https://dora.dev/capabilities/test-data-management/)

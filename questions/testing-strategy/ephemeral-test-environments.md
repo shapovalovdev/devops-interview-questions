@@ -28,8 +28,8 @@ How should a team approach this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [Testcontainers — guides](https://testcontainers.com/guides/)
+- Manual or specification: [Software Engineering at Google — larger testing](https://abseil.io/resources/swe-book/html/ch14.html)
+- Maintainer or personal blog: [Martin Fowler — continuous integration](https://martinfowler.com/articles/continuousIntegration.html)
+- Technical blog: [Google Testing Blog — hermetic servers](https://testing.googleblog.com/2012/10/hermetic-servers.html)
+- Hands-on guide: [Testcontainers — getting started](https://testcontainers.com/getting-started/)

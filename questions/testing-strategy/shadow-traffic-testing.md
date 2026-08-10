@@ -28,8 +28,8 @@ How should a team make this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [Istio — traffic management concepts](https://istio.io/latest/docs/concepts/traffic-management/)
+- Manual or specification: [Google SRE Book — testing for reliability](https://sre.google/sre-book/testing-reliability/)
+- Maintainer or personal blog: [Martin Fowler — dark launching](https://martinfowler.com/bliki/DarkLaunching.html)
+- Technical blog: [Honeycomb — testing in production, should you do it?](https://www.honeycomb.io/blog/testing-in-production)
+- Hands-on guide: [Istio — mirroring traffic to a second service](https://istio.io/latest/docs/tasks/traffic-management/mirroring/)

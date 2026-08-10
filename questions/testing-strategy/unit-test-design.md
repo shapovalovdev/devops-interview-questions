@@ -28,8 +28,8 @@ How should a team make this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Manual or specification: [Software Engineering at Google — unit testing](https://abseil.io/resources/swe-book/html/ch12.html)
+- Maintainer or personal blog: [Martin Fowler — unit test](https://martinfowler.com/bliki/UnitTest.html)
+- Technical blog: [Google Testing Blog — tests too DRY? make them DAMP!](https://testing.googleblog.com/2019/12/testing-on-toilet-tests-too-dry-make.html)
+- Hands-on guide: [pytest — how to use fixtures](https://docs.pytest.org/en/stable/how-to/fixtures.html)

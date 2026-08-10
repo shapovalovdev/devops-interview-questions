@@ -29,8 +29,8 @@ How should a team make this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [Pact documentation](https://docs.pact.io/)
+- Manual or specification: [Pact specification](https://github.com/pact-foundation/pact-specification)
+- Maintainer or personal blog: [Ian Robinson — consumer-driven contracts, a service evolution pattern](https://martinfowler.com/articles/consumerDrivenContracts.html)
+- Technical blog: [Spotify Engineering — testing of microservices](https://engineering.atspotify.com/2018/01/testing-of-microservices/)
+- Hands-on guide: [Pact — five-minute getting started guide](https://docs.pact.io/5-minute-getting-started-guide)

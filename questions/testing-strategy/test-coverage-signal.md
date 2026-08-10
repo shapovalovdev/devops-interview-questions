@@ -28,8 +28,8 @@ How should a team make this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [Coverage.py documentation](https://coverage.readthedocs.io/en/latest/)
+- Manual or specification: [Software Engineering at Google — testing overview](https://abseil.io/resources/swe-book/html/ch11.html)
+- Maintainer or personal blog: [Martin Fowler — test coverage](https://martinfowler.com/bliki/TestCoverage.html)
+- Technical blog: [Google Testing Blog — code coverage best practices](https://testing.googleblog.com/2020/08/code-coverage-best-practices.html)
+- Hands-on guide: [Coverage.py — branch coverage measurement](https://coverage.readthedocs.io/en/latest/branch.html)

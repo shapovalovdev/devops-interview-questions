@@ -28,8 +28,8 @@ How should a team make this testing strategy decision?
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [Kubernetes — namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
+- Manual or specification: [Software Engineering at Google — larger testing](https://abseil.io/resources/swe-book/html/ch14.html)
+- Maintainer or personal blog: [J. B. Rainsberger — beware the integrated tests scam](https://blog.thecodewhisperer.com/permalink/integrated-tests-are-a-scam)
+- Technical blog: [Google Testing Blog — hermetic servers](https://testing.googleblog.com/2012/10/hermetic-servers.html)
+- Hands-on guide: [Kubernetes — namespaces walkthrough](https://kubernetes.io/docs/tutorials/cluster-management/namespaces-walkthrough/)
