@@ -27,7 +27,7 @@ When is an API gateway useful, and what should it not become?
 
 ## What to learn next
 
-- Official documentation: [Kubernetes Gateway API concepts](https://gateway-api.sigs.k8s.io/concepts/)
+- Official documentation: [Kubernetes Gateway API guides](https://gateway-api.sigs.k8s.io/guides/)
 - Manual or specification: [HTTP Semantics (RFC 9110)](https://www.rfc-editor.org/rfc/rfc9110)
 - Maintainer or personal blog: [Martin Fowler's blog](https://martinfowler.com/)
 - Technical blog: [Stripe engineering](https://stripe.com/blog/engineering)

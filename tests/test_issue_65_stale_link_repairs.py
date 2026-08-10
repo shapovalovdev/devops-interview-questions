@@ -208,6 +208,12 @@ def test_container_networking_does_not_reintroduce_retired_docker_tutorials() ->
     assert "https://docs.docker.com/network/tutorials" not in text
 
 
+def test_api_gateway_basics_uses_live_gateway_api_guides() -> None:
+    text = (ROOT / "questions" / "backend-architecture" / "api-gateway-basics.md").read_text(encoding="utf-8")
+    assert "https://gateway-api.sigs.k8s.io/concepts/" not in text
+    assert "https://gateway-api.sigs.k8s.io/guides/" in text
+
+
 def test_network_policy_enforcement_limits_uses_live_docker_tutorial() -> None:
     text = (ROOT / "questions" / "container-networking" / "network-policy-enforcement-limits.md").read_text(encoding="utf-8")
     assert "https://docs.docker.com/network/tutorials/" not in text
