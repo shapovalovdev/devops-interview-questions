@@ -1491,7 +1491,10 @@
 ,
     {"question": "questions/backend-architecture/api-gateway-basics.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/backend-architecture/api-versioning-policy.md", "related_materials": "docs/related-materials/backend-architecture.md"},
-    {"question": "questions/backend-architecture/architecture-decision-portfolio.md", "related_materials": "docs/related-materials/backend-architecture.md"}
+    {"question": "questions/backend-architecture/architecture-decision-portfolio.md", "related_materials": "docs/related-materials/backend-architecture.md"},
+    {"question": "questions/container-networking/network-driver-basics.md", "related_materials": "docs/related-materials/container-networking.md"},
+    {"question": "questions/container-networking/network-observability-standard.md", "related_materials": "docs/related-materials/container-networking.md"},
+    {"question": "questions/container-networking/network-policy-enforcement-limits.md", "related_materials": "docs/related-materials/container-networking.md"}
 ,
     {"question": "questions/backend-architecture/authentication-authorization-boundary.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/backend-architecture/background-job-contract.md", "related_materials": "docs/related-materials/backend-architecture.md"},
