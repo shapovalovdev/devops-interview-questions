@@ -23,12 +23,12 @@ How do you place a workload while keeping unsuitable Pods off dedicated nodes?
 ## References
 
 - [Kubernetes: assigning Pods to nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
-- Further reading (blog): [Avi Kivity — Kubernetes scheduling](https://www.scylladb.com/2021/02/17/kubernetes-scheduling/)
+- Further reading (blog): [Ian Lewis and David Oppenheimer — advanced scheduling in Kubernetes](https://kubernetes.io/blog/2017/03/advanced-scheduling-in-kubernetes/)
 
 ## What to learn next
 
 - Official documentation: [Assign Pods to nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
 - Manual or specification: [Taints and tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
-- Maintainer or personal blog: [Avi Kivity — scheduling](https://www.scylladb.com/2021/02/17/kubernetes-scheduling/)
+- Maintainer or personal blog: [Ian Lewis and David Oppenheimer — advanced scheduling in Kubernetes](https://kubernetes.io/blog/2017/03/advanced-scheduling-in-kubernetes/)
 - Technical blog: [Google Cloud — Pod affinity](https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-best-practices-pod-affinity-and-anti-affinity)
 - Hands-on guide: [Kubernetes assign Pods using node affinity](https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes-using-node-affinity/)

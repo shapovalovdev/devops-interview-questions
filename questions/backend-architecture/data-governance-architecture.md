@@ -28,7 +28,7 @@ What architecture decisions make data handling auditable and safe as a backend g
 ## What to learn next
 
 - Official documentation: [NIST Privacy Framework](https://www.nist.gov/privacy-framework)
-- Manual or specification: [NIST Privacy Framework resources](https://www.nist.gov/privacy-framework/resources)
+- Manual or specification: [NIST Privacy Framework 1.0 core (PDF)](https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.01162020.pdf)
 - Maintainer or personal blog: [Troy Hunt's blog](https://www.troyhunt.com/)
 - Technical blog: [GitHub Security Lab](https://github.blog/security/)
 - Hands-on guide: [OWASP data protection cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/User_Privacy_Protection_Cheat_Sheet.html)

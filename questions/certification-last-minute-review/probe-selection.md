@@ -23,12 +23,12 @@ How do the three probe types change traffic and restart behavior?
 ## References
 
 - [Kubernetes: liveness, readiness, and startup probes](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/)
-- Further reading (blog): [Pete Goodman — Kubernetes probes](https://www.petermgoodman.com/kubernetes-probes/)
+- Further reading (blog): [Henning Jacobs — liveness probes are dangerous](https://srcco.de/posts/kubernetes-liveness-probes-are-dangerous.html)
 
 ## What to learn next
 
 - Official documentation: [Kubernetes probes](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/)
 - Manual or specification: [Pod lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
-- Maintainer or personal blog: [Pete Goodman — probes](https://www.petermgoodman.com/kubernetes-probes/)
+- Maintainer or personal blog: [Henning Jacobs — liveness probes are dangerous](https://srcco.de/posts/kubernetes-liveness-probes-are-dangerous.html)
 - Technical blog: [Google Cloud — liveness probes](https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-best-practices-setting-up-health-checks-with-readiness-and-liveness-probes)
 - Hands-on guide: [Kubernetes configure liveness and readiness probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)

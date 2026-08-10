@@ -30,5 +30,5 @@ Which Kubernetes controls should become platform defaults rather than review com
 - Official documentation: [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
 - Manual or specification: [Kubernetes admission controllers](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)
 - Maintainer or personal blog: [PlatformEngineering.org](https://platformengineering.org/)
-- Technical blog: [CNCF — platform engineering](https://www.cncf.io/blog/2023/08/30/platform-engineering-what-is-it-and-why-is-it-important/)
+- Technical blog: [Google Cloud — platform engineering control mechanisms](https://cloud.google.com/blog/products/application-modernization/platform-engineering-control-mechanisms)
 - Hands-on guide: [Kubernetes ValidatingAdmissionPolicy](https://kubernetes.io/docs/reference/access-authn-authz/validating-admission-policy/)

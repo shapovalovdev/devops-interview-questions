@@ -31,4 +31,4 @@ How should a public API protect shared capacity without making failures opaque?
 - Manual or specification: [RFC 6585](https://www.rfc-editor.org/rfc/rfc6585)
 - Maintainer or personal blog: [Aphyr's blog](https://aphyr.com/)
 - Technical blog: [Stripe engineering](https://stripe.com/blog/engineering)
-- Hands-on guide: [Envoy rate limiting sandbox](https://www.envoyproxy.io/docs/envoy/latest/start/sandboxes/ratelimit)
+- Hands-on guide: [Envoy local rate limit sandbox](https://www.envoyproxy.io/docs/envoy/latest/start/sandboxes/local_ratelimit)
