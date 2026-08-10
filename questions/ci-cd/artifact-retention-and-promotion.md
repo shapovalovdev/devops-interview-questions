@@ -25,3 +25,11 @@ What should a team retain after a build, and which item should move between envi
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Storing and sharing data from a workflow](https://docs.github.com/en/actions/how-tos/store-and-share-data)
 - [Further reading: SLSA—build security levels](https://slsa.dev/spec/v1.0/levels)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions deployments](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments)
+- Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
+- Maintainer or personal blog: [Charity Majors](https://charity.wtf/)
+- Technical blog: [GitHub Blog — CI/CD](https://github.blog/enterprise-software/ci-cd/)
+- Hands-on guide: [GitHub Actions deployment environments](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments)
