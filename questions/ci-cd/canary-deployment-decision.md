@@ -25,3 +25,11 @@ Which signals should control promotion of a small canary release?
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [Google SRE Workbook: Canarying releases](https://sre.google/workbook/canarying-releases/)
 - [Further reading: Kubernetes—Deployment rolling updates](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+
+## What to learn next
+
+- Official documentation: [Argo Rollouts canary strategy](https://argo-rollouts.readthedocs.io/en/stable/features/canary/)
+- Manual or specification: [Google SRE Book — reliable product launches](https://sre.google/sre-book/reliable-product-launches/)
+- Maintainer or personal blog: [Martin Fowler — canary release](https://martinfowler.com/bliki/CanaryRelease.html)
+- Technical blog: [Google Cloud — DevOps and SRE blog](https://cloud.google.com/blog/products/devops-sre)
+- Hands-on guide: [Argo Rollouts getting started](https://argo-rollouts.readthedocs.io/en/stable/getting-started/)

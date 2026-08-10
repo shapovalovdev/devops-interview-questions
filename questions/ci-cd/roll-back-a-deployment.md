@@ -25,3 +25,11 @@ What makes a rollback fast and safe when a newly deployed service is harmful?
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [Kubernetes: Deployments and rollout history](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 - [Further reading: Google SRE Workbook—canarying releases](https://sre.google/workbook/canarying-releases/)
+
+## What to learn next
+
+- Official documentation: [Helm rollback command reference](https://helm.sh/docs/helm/helm_rollback/)
+- Manual or specification: [Google SRE Book — release engineering](https://sre.google/sre-book/release-engineering/)
+- Maintainer or personal blog: [Pete Hodgson — feature toggles](https://martinfowler.com/articles/feature-toggles.html)
+- Technical blog: [Google Cloud — DevOps and SRE blog](https://cloud.google.com/blog/products/devops-sre)
+- Hands-on guide: [Kubernetes — update and roll back an application](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/)

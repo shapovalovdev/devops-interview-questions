@@ -25,3 +25,11 @@ What must be true before switching production traffic from blue to green?
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [Google Cloud: Deployment and testing strategies](https://cloud.google.com/architecture/application-deployment-and-testing-strategies)
 - [Further reading: Kubernetes—Deployment rolling updates](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+
+## What to learn next
+
+- Official documentation: [Argo Rollouts blue-green strategy](https://argo-rollouts.readthedocs.io/en/stable/features/bluegreen/)
+- Manual or specification: [Google SRE Book — reliable product launches](https://sre.google/sre-book/reliable-product-launches/)
+- Maintainer or personal blog: [Martin Fowler — blue-green deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html)
+- Technical blog: [Google Cloud — DevOps and SRE blog](https://cloud.google.com/blog/products/devops-sre)
+- Hands-on guide: [GitHub Actions — manage deployment environments](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments)
