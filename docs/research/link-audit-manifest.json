@@ -1522,5 +1522,9 @@
     {"question": "questions/backend-architecture/resilience-investment-model.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/backend-architecture/rest-resource-semantics.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/backend-architecture/retry-backoff-and-jitter.md", "related_materials": "docs/related-materials/backend-architecture.md"}
+,
+    {"question": "questions/backend-architecture/saga-compensation.md", "related_materials": "docs/related-materials/backend-architecture.md"},
+    {"question": "questions/backend-architecture/stateless-service-design.md", "related_materials": "docs/related-materials/backend-architecture.md"},
+    {"question": "questions/backend-architecture/synchronous-versus-asynchronous-api.md", "related_materials": "docs/related-materials/backend-architecture.md"}
   ]
 }
