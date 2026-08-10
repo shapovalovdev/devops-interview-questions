@@ -1268,6 +1268,6 @@
     {"question": "questions/storage/operate-nfs-shared-storage.md", "related_materials": "docs/related-materials/storage.md"},
     {"question": "questions/storage/plan-raid-rebuild-risk.md", "related_materials": "docs/related-materials/storage.md"},
     {"question": "questions/storage/restore-backup-exercise.md", "related_materials": "docs/related-materials/storage.md"},
-    {"question": "questions/storage/set-storage-slos.md", "related_materials": "docs/related-materials/storage.md"},
+    {"question": "questions/storage/set-storage-slos.md", "related_materials": "docs/related-materials/storage.md"}
   ]
 }
