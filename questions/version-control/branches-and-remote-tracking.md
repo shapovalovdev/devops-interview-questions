@@ -34,6 +34,6 @@ What is the difference between a local branch and `origin/main`, and what change
 
 - Official documentation: [Git: git-branch](https://git-scm.com/docs/git-branch)
 - Manual or specification: [Pro Git: remote branches](https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches)
-- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/blog/2023/11/01/confusing-git-terminology/)
+- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/)
 - Technical blog: [GitHub Docs — working with remotes](https://docs.github.com/en/get-started/git-basics/about-remote-repositories)
 - Hands-on guide: [Git: git-remote](https://git-scm.com/docs/git-remote)

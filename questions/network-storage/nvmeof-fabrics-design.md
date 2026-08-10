@@ -5,7 +5,7 @@ difficulty: senior
 type: scenario
 tags: [storage, networking, performance, reliability, security]
 sources:
-  - url: https://docs.kernel.org/admin-guide/nvme-fabrics.html
+  - url: https://nvmexpress.org/specification/nvm-express-over-fabrics-specification/
     source_type: official-docs
     verified_on: 2026-08-06
 ---
@@ -22,13 +22,13 @@ What must be designed before presenting NVMe namespaces across a fabric?
 
 ## References
 
-- [Linux kernel: NVMe over Fabrics](https://docs.kernel.org/admin-guide/nvme-fabrics.html)
-- Further reading (blog): [Red Hat Blog: storage](https://www.redhat.com/en/blog/channel/storage)
+- [Linux kernel: NVMe documentation](https://docs.kernel.org/nvme/index.html)
+- Further reading (blog): [Red Hat Blog: storage](https://www.redhat.com/en/blog)
 
 ## What to learn next
 
 - Official documentation: [Linux NVMe documentation](https://docs.kernel.org/nvme/index.html)
-- Manual or specification: [Linux NVMe over Fabrics](https://docs.kernel.org/admin-guide/nvme-fabrics.html)
+- Manual or specification: [Linux NVMe over Fabrics](https://nvmexpress.org/specification/nvm-express-over-fabrics-specification/)
 - Maintainer or personal blog: [Linux NVMe maintainer mailing list](https://lists.infradead.org/mailman/listinfo/linux-nvme)
-- Technical blog: [Red Hat Blog: storage](https://www.redhat.com/en/blog/channel/storage)
+- Technical blog: [Red Hat Blog: storage](https://www.redhat.com/en/blog)
 - Hands-on guide: [nvme-cli project](https://github.com/linux-nvme/nvme-cli)

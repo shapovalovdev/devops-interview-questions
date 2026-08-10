@@ -30,6 +30,6 @@ How do you use `git bisect` to find the change that introduced a reproducible re
 
 - Official documentation: [Git: git-bisect](https://git-scm.com/docs/git-bisect)
 - Manual or specification: [Pro Git: debugging with Git](https://git-scm.com/book/en/v2/Git-Tools-Debugging-with-Git)
-- Maintainer or personal blog: [Julia Evans — Git tips](https://jvns.ca/blog/2024/06/21/git-tips/)
+- Maintainer or personal blog: [Julia Evans — Git tips](https://jvns.ca/)
 - Technical blog: [GitHub Blog — Git workflow](https://github.blog/open-source/git/)
 - Hands-on guide: [Git: git-bisect run](https://git-scm.com/docs/git-bisect#Documentation/git-bisect.txt-run)

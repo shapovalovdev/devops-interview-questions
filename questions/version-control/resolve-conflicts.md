@@ -30,6 +30,6 @@ Walk through resolving a merge conflict in a production-bound change. What must 
 
 - Official documentation: [Git: git-merge](https://git-scm.com/docs/git-merge)
 - Manual or specification: [Pro Git: basic merge conflicts](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
-- Maintainer or personal blog: [Julia Evans — Git tips](https://jvns.ca/blog/2024/06/21/git-tips/)
+- Maintainer or personal blog: [Julia Evans — Git tips](https://jvns.ca/)
 - Technical blog: [GitHub Docs — resolving conflicts](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts)
 - Hands-on guide: [Git: git-mergetool](https://git-scm.com/docs/git-mergetool)

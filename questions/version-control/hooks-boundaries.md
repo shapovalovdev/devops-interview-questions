@@ -30,6 +30,6 @@ What checks belong in local Git hooks, and which must run in CI or server-side c
 
 - Official documentation: [Git: githooks](https://git-scm.com/docs/githooks)
 - Manual or specification: [Pro Git: customizing Git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
-- Maintainer or personal blog: [Julia Evans — Git tips](https://jvns.ca/blog/2024/06/21/git-tips/)
+- Maintainer or personal blog: [Julia Evans — Git tips](https://jvns.ca/)
 - Technical blog: [GitHub Blog — secure development](https://github.blog/security/)
 - Hands-on guide: [Git: git-config core.hooksPath](https://git-scm.com/docs/git-config#Documentation/git-config.txt-corehooksPath)

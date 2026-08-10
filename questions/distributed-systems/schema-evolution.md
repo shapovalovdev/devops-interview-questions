@@ -30,5 +30,5 @@ How do you add fields or change meaning in an event consumed by independently de
 - Official documentation: [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html)
 - Manual or specification: [Apache Avro specification](https://avro.apache.org/docs/1.12.0/specification/)
 - Maintainer or personal blog: [Martin Kleppmann's blog](https://martin.kleppmann.com/)
-- Technical blog: [Confluent: schema evolution](https://www.confluent.io/blog/stream-data-processing-using-apache-flink/)
+- Technical blog: [Confluent: schema evolution](https://developer.confluent.io/)
 - Hands-on guide: [Kafka quickstart](https://kafka.apache.org/quickstart)

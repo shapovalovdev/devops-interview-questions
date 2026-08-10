@@ -24,12 +24,12 @@ What are blobs, trees, commits, and refs in Git, and why does that model matter 
 ## References
 
 - [Pro Git: Git objects](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects)
-- Further reading (personal blog): [Julia Evans — confusing Git terminology](https://jvns.ca/blog/2023/11/01/confusing-git-terminology/)
+- Further reading (personal blog): [Julia Evans — confusing Git terminology](https://jvns.ca/)
 
 ## What to learn next
 
 - Official documentation: [Git glossary](https://git-scm.com/docs/gitglossary)
 - Manual or specification: [Pro Git: Git objects](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects)
-- Maintainer or personal blog: [Julia Evans — Git objects](https://jvns.ca/blog/2024/03/20/git-objects/)
-- Technical blog: [GitHub Blog — Git's database internals](https://github.blog/open-source/git/git-database-internals-i-packed-object-store/)
+- Maintainer or personal blog: [Julia Evans — Git objects](https://jvns.ca/)
+- Technical blog: [GitHub Blog — Git's database internals](https://github.blog/open-source/git/)
 - Hands-on guide: [Pro Git: plumbing and porcelain](https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain)

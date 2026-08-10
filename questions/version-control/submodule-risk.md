@@ -24,12 +24,12 @@ What trade-offs should a team evaluate before adding a Git submodule for a produ
 ## References
 
 - [Git documentation: git-submodule](https://git-scm.com/docs/git-submodule)
-- Further reading (blog): [GitHub Docs — working with submodules](https://docs.github.com/en/repositories/working-with-files/managing-large-files/working-with-submodules)
+- Further reading (blog): [GitHub Docs — working with submodules](https://docs.github.com/en/repositories/working-with-files/managing-files/working-with-submodules)
 
 ## What to learn next
 
 - Official documentation: [Git: git-submodule](https://git-scm.com/docs/git-submodule)
 - Manual or specification: [Pro Git: submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
-- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/blog/2023/11/01/confusing-git-terminology/)
-- Technical blog: [GitHub Docs — submodules](https://docs.github.com/en/repositories/working-with-files/managing-large-files/working-with-submodules)
+- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/)
+- Technical blog: [GitHub Docs — submodules](https://docs.github.com/en/repositories/working-with-files/managing-files/working-with-submodules)
 - Hands-on guide: [Git: git-submodule update](https://git-scm.com/docs/git-submodule#Documentation/git-submodule.txt-update)

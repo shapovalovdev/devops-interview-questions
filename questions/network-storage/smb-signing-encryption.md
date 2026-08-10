@@ -23,12 +23,12 @@ When should an operator require SMB signing or encryption, and what must be test
 ## References
 
 - [Microsoft: SMB security enhancements](https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-security)
-- Further reading (blog): [Microsoft Storage at Microsoft blog](https://techcommunity.microsoft.com/category/windowsserver/blog/storageatmsft)
+- Further reading (blog): [Microsoft Storage at Microsoft blog](https://techcommunity.microsoft.com/category/windowsserver/blog/windowsserver)
 
 ## What to learn next
 
 - Official documentation: [Microsoft SMB security](https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-security)
-- Manual or specification: [MS-SMB2 specification](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/5606ad47-2290-4e8b-8016-6c53a05bcb30)
+- Manual or specification: [MS-SMB2 specification](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/5606ad47-5ee0-437a-817e-70c366052962)
 - Maintainer or personal blog: [Samba team news](https://www.samba.org/samba/news/)
-- Technical blog: [Microsoft Storage at Microsoft blog](https://techcommunity.microsoft.com/category/windowsserver/blog/storageatmsft)
+- Technical blog: [Microsoft Storage at Microsoft blog](https://techcommunity.microsoft.com/category/windowsserver/blog/windowsserver)
 - Hands-on guide: [Samba documentation](https://www.samba.org/samba/docs/)

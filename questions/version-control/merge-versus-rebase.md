@@ -34,6 +34,6 @@ When should a team merge rather than rebase, and what risk changes after a branc
 
 - Official documentation: [Git: git-rebase](https://git-scm.com/docs/git-rebase)
 - Manual or specification: [Pro Git: rebasing](https://git-scm.com/book/en/v2/Git-Branching-Rebasing)
-- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/blog/2023/11/01/confusing-git-terminology/)
+- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/)
 - Technical blog: [Atlassian Git tutorials — merge or rebase](https://www.atlassian.com/git/tutorials/merging-vs-rebasing)
 - Hands-on guide: [Pro Git: basic merging and conflicts](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)

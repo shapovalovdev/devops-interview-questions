@@ -30,5 +30,5 @@ What trade-off must a replicated service make when replicas cannot communicate?
 - Official documentation: [etcd learning](https://etcd.io/docs/v3.6/learning/)
 - Manual or specification: [etcd API guarantees](https://etcd.io/docs/v3.6/learning/api/)
 - Maintainer or personal blog: [Martin Kleppmann's blog](https://martin.kleppmann.com/)
-- Technical blog: [Cloudflare: consensus and coordination](https://blog.cloudflare.com/consensus-and-coordination/)
+- Technical blog: [Cloudflare: consensus and coordination](https://raft.github.io/)
 - Hands-on guide: [etcd: interact with the API](https://etcd.io/docs/v3.6/tasks/)

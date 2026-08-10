@@ -31,4 +31,4 @@ How do NAS, SAN, and object storage differ, and how would you select one for a w
 - Manual or specification: [RFC 8881: NFSv4.1](https://www.rfc-editor.org/rfc/rfc8881.html)
 - Maintainer or personal blog: [Ceph developer blog](https://ceph.io/en/news/blog/)
 - Technical blog: [Cloudflare Blog: R2 object storage](https://blog.cloudflare.com/introducing-r2-object-storage/)
-- Hands-on guide: [Ceph RGW quick start](https://docs.ceph.com/en/latest/start/quick-rgw/)
+- Hands-on guide: [Ceph RGW quick start](https://docs.ceph.com/en/latest/radosgw/)

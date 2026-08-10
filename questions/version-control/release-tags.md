@@ -30,6 +30,6 @@ How would you use Git tags to identify a release artifact unambiguously?
 
 - Official documentation: [Git: git-tag](https://git-scm.com/docs/git-tag)
 - Manual or specification: [Pro Git: tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
-- Maintainer or personal blog: [Julia Evans — Git tips](https://jvns.ca/blog/2024/06/21/git-tips/)
+- Maintainer or personal blog: [Julia Evans — Git tips](https://jvns.ca/)
 - Technical blog: [GitHub Docs — releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)
 - Hands-on guide: [Git: git-verify-tag](https://git-scm.com/docs/git-verify-tag)

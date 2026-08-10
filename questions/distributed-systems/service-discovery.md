@@ -23,12 +23,12 @@ What must a service-discovery design handle beyond resolving a name to an addres
 ## References
 
 - [RFC 1034: Domain Names—Concepts and Facilities](https://www.rfc-editor.org/rfc/rfc1034.html)
-- Further reading (personal blog): [Cloudflare: how DNS works](https://blog.cloudflare.com/dns-what-is-it-and-how-does-it-work/)
+- Further reading (personal blog): [Cloudflare: how DNS works](https://www.cloudflare.com/learning/dns/what-is-dns/)
 
 ## What to learn next
 
 - Official documentation: [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/)
 - Manual or specification: [RFC 1034](https://www.rfc-editor.org/rfc/rfc1034.html)
-- Maintainer or personal blog: [Julia Evans: DNS](https://jvns.ca/blog/2021/12/15/dns-doesn-t-propagate/)
-- Technical blog: [Cloudflare: DNS](https://blog.cloudflare.com/dns-what-is-it-and-how-does-it-work/)
+- Maintainer or personal blog: [Julia Evans: DNS](https://jvns.ca/)
+- Technical blog: [Cloudflare: DNS](https://www.cloudflare.com/learning/dns/what-is-dns/)
 - Hands-on guide: [CoreDNS manual](https://coredns.io/manual/toc/)

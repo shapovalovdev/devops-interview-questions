@@ -23,12 +23,12 @@ What are an iSCSI initiator and target, and what is the main safety concern afte
 ## References
 
 - [RFC 7143: iSCSI protocol](https://www.rfc-editor.org/rfc/rfc7143.html)
-- Further reading (blog): [Red Hat Blog: storage](https://www.redhat.com/en/blog/channel/storage)
+- Further reading (blog): [Red Hat Blog: storage](https://www.redhat.com/en/blog)
 
 ## What to learn next
 
 - Official documentation: [Linux open-iscsi project](https://github.com/open-iscsi/open-iscsi)
 - Manual or specification: [RFC 7143: iSCSI](https://www.rfc-editor.org/rfc/rfc7143.html)
 - Maintainer or personal blog: [Ceph developer blog](https://ceph.io/en/news/blog/)
-- Technical blog: [Red Hat Blog: storage](https://www.redhat.com/en/blog/channel/storage)
+- Technical blog: [Red Hat Blog: storage](https://www.redhat.com/en/blog)
 - Hands-on guide: [RHEL: managing storage devices](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_storage_devices/index)

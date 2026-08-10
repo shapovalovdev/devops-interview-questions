@@ -24,12 +24,12 @@ What makes a commit easy to review, test, revert, and later investigate?
 ## References
 
 - [Git documentation: git-commit](https://git-scm.com/docs/git-commit)
-- Further reading (personal blog): [Julia Evans — confusing Git terminology](https://jvns.ca/blog/2023/11/01/confusing-git-terminology/)
+- Further reading (personal blog): [Julia Evans — confusing Git terminology](https://jvns.ca/)
 
 ## What to learn next
 
 - Official documentation: [Git: git-commit](https://git-scm.com/docs/git-commit)
 - Manual or specification: [Pro Git: viewing history](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History)
-- Maintainer or personal blog: [Julia Evans — Git tips](https://jvns.ca/blog/2024/06/21/git-tips/)
+- Maintainer or personal blog: [Julia Evans — Git tips](https://jvns.ca/)
 - Technical blog: [GitHub Blog — good commit messages](https://github.blog/developer-skills/github/write-better-commits-build-better-projects/)
 - Hands-on guide: [Pro Git: rewriting history](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History)

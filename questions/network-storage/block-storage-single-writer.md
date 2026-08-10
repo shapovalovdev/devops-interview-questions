@@ -23,12 +23,12 @@ Why is attaching one block volume to two hosts dangerous, and when is it valid?
 ## References
 
 - [RHEL: configuring GFS2 file systems](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_gfs2_file_systems/index)
-- Further reading (blog): [Red Hat Blog: storage](https://www.redhat.com/en/blog/channel/storage)
+- Further reading (blog): [Red Hat Blog: storage](https://www.redhat.com/en/blog)
 
 ## What to learn next
 
 - Official documentation: [RHEL GFS2 configuration](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_gfs2_file_systems/index)
 - Manual or specification: [Linux filesystem documentation](https://docs.kernel.org/filesystems/index.html)
 - Maintainer or personal blog: [GFS project resources](https://sourceware.org/cluster/)
-- Technical blog: [Red Hat Blog: storage](https://www.redhat.com/en/blog/channel/storage)
+- Technical blog: [Red Hat Blog: storage](https://www.redhat.com/en/blog)
 - Hands-on guide: [RHEL storage devices guide](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_storage_devices/index)

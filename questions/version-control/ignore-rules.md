@@ -30,6 +30,6 @@ How do `.gitignore` rules work, and how would you debug a file that is unexpecte
 
 - Official documentation: [Git: gitignore](https://git-scm.com/docs/gitignore)
 - Manual or specification: [Pro Git: ignoring files](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring)
-- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/blog/2023/11/01/confusing-git-terminology/)
+- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/)
 - Technical blog: [GitHub Docs — ignoring files](https://docs.github.com/en/get-started/git-basics/ignoring-files)
 - Hands-on guide: [Git: git-check-ignore](https://git-scm.com/docs/git-check-ignore)

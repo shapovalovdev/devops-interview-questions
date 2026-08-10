@@ -32,4 +32,4 @@ How would you define branching and merge governance for many teams without makin
 - Manual or specification: [Pro Git: distributed Git](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows)
 - Maintainer or personal blog: [Charity Majors' blog](https://charity.wtf/)
 - Technical blog: [GitHub Blog — developer skills](https://github.blog/developer-skills/)
-- Hands-on guide: [GitHub Docs: rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-repository-settings/managing-rulesets/about-rulesets)
+- Hands-on guide: [GitHub Docs: rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets)

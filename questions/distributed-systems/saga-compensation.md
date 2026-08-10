@@ -27,8 +27,8 @@ When should a workflow use compensating actions instead of a distributed transac
 
 ## What to learn next
 
-- Official documentation: [Temporal: saga pattern](https://docs.temporal.io/develop/java/saga)
+- Official documentation: [Temporal: saga pattern](https://temporal.io/blog/compensating-actions-part-of-a-complete-breakfast-with-sagas)
 - Manual or specification: [BPMN 2.0 specification](https://www.omg.org/spec/BPMN/2.0/PDF)
 - Maintainer or personal blog: [Chris Richardson's microservices blog](https://microservices.io/)
-- Technical blog: [AWS: saga orchestration](https://aws.amazon.com/blogs/architecture/implementing-the-saga-pattern-with-aws-lambda-and-amazon-step-functions/)
+- Technical blog: [AWS: saga orchestration](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/saga.html)
 - Hands-on guide: [Temporal tutorials](https://learn.temporal.io/)

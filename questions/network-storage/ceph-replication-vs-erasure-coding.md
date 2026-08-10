@@ -30,5 +30,5 @@ How do replication and erasure coding trade capacity, latency, and failure recov
 - Official documentation: [Ceph architecture](https://docs.ceph.com/en/latest/architecture/)
 - Manual or specification: [Ceph erasure coding](https://docs.ceph.com/en/latest/rados/operations/erasure-code/)
 - Maintainer or personal blog: [Ceph developer blog](https://ceph.io/en/news/blog/)
-- Technical blog: [Red Hat Blog: storage](https://www.redhat.com/en/blog/channel/storage)
+- Technical blog: [Red Hat Blog: storage](https://www.redhat.com/en/blog)
 - Hands-on guide: [Ceph quick start](https://docs.ceph.com/en/latest/start/)

@@ -29,6 +29,6 @@ What must you establish before mounting an NFS export for an application?
 
 - Official documentation: [Linux NFS client guide](https://docs.kernel.org/admin-guide/nfs/index.html)
 - Manual or specification: [nfs(5) manual](https://man7.org/linux/man-pages/man5/nfs.5.html)
-- Maintainer or personal blog: [Linux NFS developer resources](https://wiki.linux-nfs.org/wiki/index.php/Main_Page)
+- Maintainer or personal blog: [Linux NFS developer resources](https://www.linux-nfs.org/)
 - Technical blog: [Red Hat Blog: NFS](https://www.redhat.com/en/blog/channel/red-hat-enterprise-linux)
 - Hands-on guide: [Ubuntu Server: NFS](https://ubuntu.com/server/docs/how-to/networking/install-nfs/)

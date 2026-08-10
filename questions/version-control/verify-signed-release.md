@@ -34,6 +34,6 @@ How would you use signed Git objects in a release process, and what do they prov
 
 - Official documentation: [Git: git-verify-commit](https://git-scm.com/docs/git-verify-commit)
 - Manual or specification: [Pro Git: signing your work](https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work)
-- Maintainer or personal blog: [Julia Evans — cryptography](https://jvns.ca/blog/2022/10/17/what-is-cryptography/)
+- Maintainer or personal blog: [Julia Evans — cryptography](https://jvns.ca/)
 - Technical blog: [GitHub Docs — verified signatures](https://docs.github.com/en/authentication/managing-commit-signature-verification)
 - Hands-on guide: [Git: git-tag signing](https://git-scm.com/docs/git-tag#Documentation/git-tag.txt--s)

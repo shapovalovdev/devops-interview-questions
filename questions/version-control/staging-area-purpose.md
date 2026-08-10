@@ -30,6 +30,6 @@ Why does Git have an index (staging area), and how should an engineer use it whe
 
 - Official documentation: [Git: git-add](https://git-scm.com/docs/git-add)
 - Manual or specification: [Pro Git: recording changes](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository)
-- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/blog/2023/11/01/confusing-git-terminology/)
+- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/)
 - Technical blog: [GitHub Blog — Git tips](https://github.blog/open-source/git/)
 - Hands-on guide: [Pro Git: interactive staging](https://git-scm.com/book/en/v2/Git-Tools-Interactive-Staging)

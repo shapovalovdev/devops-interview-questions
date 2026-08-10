@@ -30,6 +30,6 @@ When is cherry-picking appropriate for a release branch, and what checks prevent
 
 - Official documentation: [Git: git-cherry-pick](https://git-scm.com/docs/git-cherry-pick)
 - Manual or specification: [Pro Git: maintenance and data recovery](https://git-scm.com/book/en/v2/Git-Internals-Maintenance-and-Data-Recovery)
-- Maintainer or personal blog: [Julia Evans — Git tips](https://jvns.ca/blog/2024/06/21/git-tips/)
+- Maintainer or personal blog: [Julia Evans — Git tips](https://jvns.ca/)
 - Technical blog: [GitHub Blog — Git workflow guidance](https://github.blog/open-source/git/)
 - Hands-on guide: [Git: git-show](https://git-scm.com/docs/git-show)

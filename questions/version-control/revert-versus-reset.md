@@ -34,6 +34,6 @@ A defective commit is already on a shared branch. When should you create a rever
 
 - Official documentation: [Git: git-revert](https://git-scm.com/docs/git-revert)
 - Manual or specification: [Git: git-reset](https://git-scm.com/docs/git-reset)
-- Maintainer or personal blog: [Julia Evans — confusing Git terminology](https://jvns.ca/blog/2023/11/01/confusing-git-terminology/)
+- Maintainer or personal blog: [Julia Evans — confusing Git terminology](https://jvns.ca/)
 - Technical blog: [GitHub Blog — undo almost anything with Git](https://github.blog/open-source/git/how-to-undo-almost-anything-with-git/)
 - Hands-on guide: [Pro Git — Reset demystified](https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified)

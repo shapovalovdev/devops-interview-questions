@@ -5,7 +5,7 @@ difficulty: junior
 type: theory
 tags: [storage, networking, filesystem, security]
 sources:
-  - url: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/5606ad47-2290-4e8b-8016-6c53a05bcb30
+  - url: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/5606ad47-5ee0-437a-817e-70c366052962
     source_type: official-docs
     verified_on: 2026-08-06
 ---
@@ -22,13 +22,13 @@ What does SMB provide, and what should an operator verify before exposing a shar
 
 ## References
 
-- [Microsoft SMB2 protocol specification](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/5606ad47-2290-4e8b-8016-6c53a05bcb30)
+- [Microsoft SMB2 protocol specification](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/5606ad47-5ee0-437a-817e-70c366052962)
 - Further reading (blog): [Samba team news](https://www.samba.org/samba/news/)
 
 ## What to learn next
 
 - Official documentation: [Microsoft SMB protocol overview](https://learn.microsoft.com/en-us/windows-server/storage/file-server/file-server-smb-overview)
-- Manual or specification: [MS-SMB2 specification](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/5606ad47-2290-4e8b-8016-6c53a05bcb30)
+- Manual or specification: [MS-SMB2 specification](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/5606ad47-5ee0-437a-817e-70c366052962)
 - Maintainer or personal blog: [Samba team news](https://www.samba.org/samba/news/)
-- Technical blog: [Microsoft Tech Community: storage](https://techcommunity.microsoft.com/category/windowsserver/blog/storageatmsft)
+- Technical blog: [Microsoft Tech Community: storage](https://techcommunity.microsoft.com/category/windowsserver/blog/windowsserver)
 - Hands-on guide: [Samba documentation](https://www.samba.org/samba/docs/)

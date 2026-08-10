@@ -30,6 +30,6 @@ After an accidental reset, how would you recover a local commit without making t
 
 - Official documentation: [Git: git-reflog](https://git-scm.com/docs/git-reflog)
 - Manual or specification: [Pro Git: data recovery](https://git-scm.com/book/en/v2/Git-Internals-Maintenance-and-Data-Recovery)
-- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/blog/2023/11/01/confusing-git-terminology/)
+- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/)
 - Technical blog: [GitHub Blog — undo almost anything](https://github.blog/open-source/git/how-to-undo-almost-anything-with-git/)
 - Hands-on guide: [Git: git-fsck](https://git-scm.com/docs/git-fsck)

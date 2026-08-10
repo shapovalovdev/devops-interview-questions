@@ -30,5 +30,5 @@ What capacity and observability policy keeps a Ceph cluster recoverable after a 
 - Official documentation: [Ceph health checks](https://docs.ceph.com/en/latest/rados/operations/health-checks/)
 - Manual or specification: [Ceph architecture](https://docs.ceph.com/en/latest/architecture/)
 - Maintainer or personal blog: [Ceph developer blog](https://ceph.io/en/news/blog/)
-- Technical blog: [Red Hat Blog: storage](https://www.redhat.com/en/blog/channel/storage)
+- Technical blog: [Red Hat Blog: storage](https://www.redhat.com/en/blog)
 - Hands-on guide: [Ceph operations guide](https://docs.ceph.com/en/latest/rados/operations/)

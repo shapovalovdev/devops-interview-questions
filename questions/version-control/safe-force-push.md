@@ -30,6 +30,6 @@ When can a force push be justified, and what procedure reduces the risk of losin
 
 - Official documentation: [Git: git-push](https://git-scm.com/docs/git-push)
 - Manual or specification: [Pro Git: rewriting history](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History)
-- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/blog/2023/11/01/confusing-git-terminology/)
+- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/)
 - Technical blog: [GitHub Docs — non-fast-forward errors](https://docs.github.com/en/get-started/using-git/dealing-with-non-fast-forward-errors)
 - Hands-on guide: [Git: force-with-lease](https://git-scm.com/docs/git-push#Documentation/git-push.txt---force-with-leaseltrefnamegt)

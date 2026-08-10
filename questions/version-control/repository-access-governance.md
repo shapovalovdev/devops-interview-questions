@@ -32,4 +32,4 @@ How would you design repository access for employees, contractors, and deploymen
 - Manual or specification: [NIST SP 800-53 access control](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
 - Maintainer or personal blog: [Troy Hunt's blog](https://www.troyhunt.com/)
 - Technical blog: [GitHub Security Blog](https://github.blog/security/)
-- Hands-on guide: [GitHub Docs: audit log](https://docs.github.com/en/organizations/keeping-your-organization-secure/reviewing-audit-logs-for-your-organization)
+- Hands-on guide: [GitHub Docs: audit log](https://docs.github.com/en/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/reviewing-the-audit-log-for-your-organization)

@@ -27,7 +27,7 @@ How do you add capacity to a hash-partitioned system without causing a customer 
 
 ## What to learn next
 
-- Official documentation: [Cassandra operations](https://cassandra.apache.org/doc/latest/cassandra/operating/)
+- Official documentation: [Cassandra operations](https://cassandra.apache.org/doc/latest/cassandra/architecture/overview.html)
 - Manual or specification: [Cassandra architecture](https://cassandra.apache.org/doc/latest/cassandra/architecture/)
 - Maintainer or personal blog: [Aphyr's blog](https://aphyr.com/)
 - Technical blog: [Datastax: data modeling](https://www.datastax.com/blog)

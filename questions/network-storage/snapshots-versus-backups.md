@@ -30,5 +30,5 @@ Why is a storage snapshot useful but not automatically a backup?
 - Official documentation: [Ceph RBD snapshots](https://docs.ceph.com/en/latest/rbd/rbd-snapshot/)
 - Manual or specification: [NIST SP 800-34 contingency planning](https://csrc.nist.gov/pubs/sp/800/34/r1/final)
 - Maintainer or personal blog: [Ceph developer blog](https://ceph.io/en/news/blog/)
-- Technical blog: [Red Hat Blog: storage](https://www.redhat.com/en/blog/channel/storage)
-- Hands-on guide: [Ceph RBD operations](https://docs.ceph.com/en/latest/rbd/rbd/) 
+- Technical blog: [Red Hat Blog: storage](https://www.redhat.com/en/blog)
+- Hands-on guide: [Ceph RBD operations](https://docs.ceph.com/en/latest/rbd/)

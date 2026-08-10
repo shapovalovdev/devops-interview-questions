@@ -8,7 +8,7 @@ sources:
   - url: https://slsa.dev/spec/v1.0/levels
     source_type: standard
     verified_on: 2026-08-06
-  - url: https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds
+  - url: https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations
     source_type: official-docs
     verified_on: 2026-08-06
 ---
@@ -27,13 +27,13 @@ How would you connect a production artifact to the reviewed source change withou
 ## References
 
 - [SLSA: levels](https://slsa.dev/spec/v1.0/levels)
-- [GitHub Docs: artifact attestations](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds)
+- [GitHub Docs: artifact attestations](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations)
 - Further reading (blog): [GitHub Security Blog](https://github.blog/security/)
 
 ## What to learn next
 
-- Official documentation: [GitHub: artifact attestations](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds)
+- Official documentation: [GitHub: artifact attestations](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations)
 - Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
 - Maintainer or personal blog: [Dan Lorenc's blog](https://dlorenc.medium.com/)
 - Technical blog: [GitHub Security Blog](https://github.blog/security/)
-- Hands-on guide: [SLSA build track](https://slsa.dev/spec/v1.0/build-requirements)
+- Hands-on guide: [SLSA build track](https://slsa.dev/spec/v1.1/requirements)

@@ -28,12 +28,12 @@ How would you investigate a repository reporting missing or corrupt Git objects 
 
 - [Git documentation: git-fsck](https://git-scm.com/docs/git-fsck)
 - [Git documentation: git-clone](https://git-scm.com/docs/git-clone)
-- Further reading (blog): [GitHub Blog — Git database internals](https://github.blog/open-source/git/git-database-internals-i-packed-object-store/)
+- Further reading (blog): [GitHub Blog — Git database internals](https://github.blog/open-source/git/)
 
 ## What to learn next
 
 - Official documentation: [Git: git-fsck](https://git-scm.com/docs/git-fsck)
 - Manual or specification: [Pro Git: data recovery](https://git-scm.com/book/en/v2/Git-Internals-Maintenance-and-Data-Recovery)
 - Maintainer or personal blog: [Derrick Stolee's Git blog](https://stolee.dev/)
-- Technical blog: [GitHub Blog — Git database internals](https://github.blog/open-source/git/git-database-internals-i-packed-object-store/)
+- Technical blog: [GitHub Blog — Git database internals](https://github.blog/open-source/git/)
 - Hands-on guide: [Git: git-gc](https://git-scm.com/docs/git-gc)

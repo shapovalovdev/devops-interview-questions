@@ -23,12 +23,12 @@ How do you design and test redundant paths to an iSCSI LUN?
 ## References
 
 - [RHEL: configuring device-mapper multipath](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_device_mapper_multipath/index)
-- Further reading (blog): [Red Hat Blog: storage](https://www.redhat.com/en/blog/channel/storage)
+- Further reading (blog): [Red Hat Blog: storage](https://www.redhat.com/en/blog)
 
 ## What to learn next
 
 - Official documentation: [RHEL multipath configuration](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_device_mapper_multipath/index)
 - Manual or specification: [RFC 7143: iSCSI](https://www.rfc-editor.org/rfc/rfc7143.html)
 - Maintainer or personal blog: [Linux SCSI subsystem documentation](https://docs.kernel.org/scsi/index.html)
-- Technical blog: [Red Hat Blog: storage](https://www.redhat.com/en/blog/channel/storage)
+- Technical blog: [Red Hat Blog: storage](https://www.redhat.com/en/blog)
 - Hands-on guide: [RHEL: managing storage devices](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_storage_devices/index)

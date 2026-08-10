@@ -24,12 +24,12 @@ When would you use `git worktree` instead of repeatedly switching branches, and 
 ## References
 
 - [Git documentation: git-worktree](https://git-scm.com/docs/git-worktree)
-- Further reading (personal blog): [Julia Evans — Git worktrees](https://jvns.ca/blog/2024/02/15/git-worktrees/)
+- Further reading (personal blog): [Julia Evans — Git worktrees](https://jvns.ca/)
 
 ## What to learn next
 
 - Official documentation: [Git: git-worktree](https://git-scm.com/docs/git-worktree)
 - Manual or specification: [Pro Git: Git internals](https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables)
-- Maintainer or personal blog: [Julia Evans — Git worktrees](https://jvns.ca/blog/2024/02/15/git-worktrees/)
+- Maintainer or personal blog: [Julia Evans — Git worktrees](https://jvns.ca/)
 - Technical blog: [GitHub Blog — Git tips](https://github.blog/open-source/git/)
 - Hands-on guide: [Git: git-worktree add](https://git-scm.com/docs/git-worktree#Documentation/git-worktree.txt-add)

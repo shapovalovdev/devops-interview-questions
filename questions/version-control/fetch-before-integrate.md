@@ -34,6 +34,6 @@ Why might an engineer use fetch followed by inspection rather than immediately r
 
 - Official documentation: [Git: git-fetch](https://git-scm.com/docs/git-fetch)
 - Manual or specification: [Pro Git: working with remotes](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes)
-- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/blog/2023/11/01/confusing-git-terminology/)
+- Maintainer or personal blog: [Julia Evans — Git terminology](https://jvns.ca/)
 - Technical blog: [GitHub Docs — about remote repositories](https://docs.github.com/en/get-started/git-basics/about-remote-repositories)
 - Hands-on guide: [Git: git-log](https://git-scm.com/docs/git-log)
