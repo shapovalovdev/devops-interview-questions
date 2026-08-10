@@ -220,6 +220,12 @@ def test_pvc_binding_uses_live_kubernetes_volume_storage_task() -> None:
     assert "https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/" in text
 
 
+def test_staff_platform_guardrails_uses_live_platform_engineering_source() -> None:
+    text = (ROOT / "questions" / "certification-last-minute-review" / "staff-platform-guardrails.md").read_text(encoding="utf-8")
+    assert "https://niels-degraaf.com/2023/01/11/platform-engineering.html" not in text
+    assert "https://platformengineering.org/" in text
+
+
 def test_network_policy_enforcement_limits_uses_live_docker_tutorial() -> None:
     text = (ROOT / "questions" / "container-networking" / "network-policy-enforcement-limits.md").read_text(encoding="utf-8")
     assert "https://docs.docker.com/network/tutorials/" not in text
