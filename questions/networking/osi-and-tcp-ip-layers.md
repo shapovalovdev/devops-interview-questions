@@ -26,3 +26,10 @@ When an HTTPS request fails, how do link, IP, transport, and application layers 
 - Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 1122: Requirements for Internet Hosts](https://www.rfc-editor.org/rfc/rfc1122.html)
 - [Cloudflare learning: What is the OSI model?](https://www.cloudflare.com/learning/ddos/glossary/open-systems-interconnection-model-osi/)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

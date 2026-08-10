@@ -30,3 +30,10 @@ Why can many clients connect to the same HTTPS port, and what identifies one TCP
 - [RFC 9293: TCP ports and connection identifiers](https://www.rfc-editor.org/rfc/rfc9293.html)
 - [IANA Service Name and Transport Protocol Port Number Registry](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml)
 - [man7: socket(7)](https://man7.org/linux/man-pages/man7/socket.7.html)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

@@ -26,3 +26,10 @@ Which IPv4 ranges are private, and what must you plan before connecting two priv
 - Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 1918: Address Allocation for Private Internets](https://www.rfc-editor.org/rfc/rfc1918.html)
 - [Cloudflare learning: What is a private IP address?](https://www.cloudflare.com/learning/network-layer/what-is-a-private-ip-address/)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

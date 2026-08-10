@@ -30,3 +30,10 @@ A new subdomain works against its nameserver but fails for public resolvers. Wha
 - [RFC 1034: DNS delegations and glue](https://www.rfc-editor.org/rfc/rfc1034.html)
 - [RFC 1912: Common DNS operational errors](https://www.rfc-editor.org/rfc/rfc1912.html)
 - [ICANN: DNS basics](https://www.icann.org/resources/pages/dns-2018-10-25-en)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

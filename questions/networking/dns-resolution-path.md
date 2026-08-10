@@ -30,3 +30,10 @@ What happens when an application resolves a hostname, and where can you investig
 - [RFC 1034: Domain names — concepts and facilities](https://www.rfc-editor.org/rfc/rfc1034.html)
 - [RFC 2308: DNS negative caching](https://www.rfc-editor.org/rfc/rfc2308.html)
 - [Cloudflare learning: What is DNS?](https://www.cloudflare.com/learning/dns/what-is-dns/)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

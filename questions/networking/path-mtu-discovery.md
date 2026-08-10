@@ -30,3 +30,10 @@ Why can small requests work while larger responses hang across a VPN or tunnel?
 - [RFC 1191: Path MTU Discovery for IPv4](https://www.rfc-editor.org/rfc/rfc1191.html)
 - [RFC 8201: Path MTU Discovery for IPv6](https://www.rfc-editor.org/rfc/rfc8201.html)
 - [Cloudflare learning: What is MTU?](https://www.cloudflare.com/learning/network-layer/what-is-mtu/)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

@@ -30,3 +30,10 @@ What controls reduce the chance that your edge advertises or accepts unintended 
 - [RFC 4271: Border Gateway Protocol 4](https://www.rfc-editor.org/rfc/rfc4271.html)
 - [RFC 8212: Default External BGP Route Propagation Behavior](https://www.rfc-editor.org/rfc/rfc8212.html)
 - [MANRS routing security actions](https://www.manrs.org/)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

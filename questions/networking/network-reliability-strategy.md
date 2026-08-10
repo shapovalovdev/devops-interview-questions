@@ -30,3 +30,10 @@ How would you turn recurring network incidents into a reliability strategy share
 - [Google SRE Book: Service Level Objectives](https://sre.google/sre-book/service-level-objectives/)
 - [RFC 1812: Requirements for IPv4 routers](https://www.rfc-editor.org/rfc/rfc1812.html)
 - [Google SRE Workbook: Alerting on SLOs](https://sre.google/workbook/alerting-on-slos/)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

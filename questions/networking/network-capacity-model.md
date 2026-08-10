@@ -30,3 +30,10 @@ How do you plan network capacity so a utilization graph does not hide saturation
 - [RFC 5681: TCP Congestion Control](https://www.rfc-editor.org/rfc/rfc5681.html)
 - [Google SRE Book: Monitoring Distributed Systems](https://sre.google/sre-book/monitoring-distributed-systems/)
 - [Google SRE Workbook: Addressing overload](https://sre.google/workbook/addressing-overload/)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

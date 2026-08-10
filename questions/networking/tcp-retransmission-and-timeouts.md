@@ -30,3 +30,10 @@ What does a rising TCP retransmission rate mean, and what evidence do you need b
 - [RFC 6298: Computing TCP's Retransmission Timer](https://www.rfc-editor.org/rfc/rfc6298.html)
 - [RFC 5681: TCP Congestion Control](https://www.rfc-editor.org/rfc/rfc5681.html)
 - [Cloudflare learning: What is packet loss?](https://www.cloudflare.com/learning/performance/what-is-packet-loss/)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

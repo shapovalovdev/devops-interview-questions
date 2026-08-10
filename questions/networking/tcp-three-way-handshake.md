@@ -26,3 +26,10 @@ A client times out connecting to a TCP service. How do SYN, SYN-ACK, ACK, refusa
 - Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 9293: TCP connection establishment](https://www.rfc-editor.org/rfc/rfc9293.html)
 - [Cloudflare learning: What is a TCP handshake?](https://www.cloudflare.com/learning/ddos/tcp-three-way-handshake/)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

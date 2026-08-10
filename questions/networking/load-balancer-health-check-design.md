@@ -26,3 +26,10 @@ How should health checks avoid both sending traffic to broken instances and remo
 - Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 9110: HTTP semantics and status codes](https://www.rfc-editor.org/rfc/rfc9110.html)
 - [AWS Elastic Load Balancing health checks](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

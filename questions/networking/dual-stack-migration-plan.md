@@ -30,3 +30,10 @@ How would you introduce IPv6 to an IPv4 production service with measurable risk 
 - [RFC 8200: IPv6 specification](https://www.rfc-editor.org/rfc/rfc8200.html)
 - [RFC 6724: Default address selection for IPv6](https://www.rfc-editor.org/rfc/rfc6724.html)
 - [RIPE NCC IPv6 documentation](https://www.ripe.net/publications/docs/ripe-554/)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

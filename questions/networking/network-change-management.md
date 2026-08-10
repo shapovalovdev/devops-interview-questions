@@ -30,3 +30,10 @@ What delivery system would you use for high-impact routing, firewall, or DNS cha
 - [RFC 1812: Router requirements](https://www.rfc-editor.org/rfc/rfc1812.html)
 - [Google SRE Book: Release Engineering](https://sre.google/sre-book/release-engineering/)
 - [Google SRE Workbook: Canarying releases](https://sre.google/workbook/canarying-releases/)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

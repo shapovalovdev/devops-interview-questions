@@ -30,3 +30,10 @@ Why can a reachable destination still fail for a stateful service after a route 
 - [RFC 1812: Requirements for IPv4 routers](https://www.rfc-editor.org/rfc/rfc1812.html)
 - [RFC 4632: CIDR and longest-match routing](https://www.rfc-editor.org/rfc/rfc4632.html)
 - [Cloudflare learning: What is routing?](https://www.cloudflare.com/learning/network-layer/what-is-routing/)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)

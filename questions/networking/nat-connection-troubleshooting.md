@@ -26,3 +26,10 @@ An internal service can initiate connections but cannot receive an expected call
 - Further reading (blog): [Complementary networking practice article](https://blog.cloudflare.com/network-performance-update/)
 - [RFC 4787: NAT behavioral requirements for UDP](https://www.rfc-editor.org/rfc/rfc4787.html)
 - [Cloudflare learning: What is NAT?](https://www.cloudflare.com/learning/cloud/what-is-nat/)
+## What to learn next
+
+- Official documentation: [RFC Editor](https://www.rfc-editor.org/)
+- Manual or specification: [IANA protocol registries](https://www.iana.org/protocols)
+- Maintainer or personal blog: [Julia Evans — networking articles](https://jvns.ca/categories/networking/)
+- Technical blog: [Cloudflare networking engineering blog](https://blog.cloudflare.com/tag/networking/)
+- Hands-on guide: [ns-3 documentation](https://www.nsnam.org/docs/)
