@@ -1278,6 +1278,7 @@
     {"question": "questions/infrastructure-as-code/for-each-versus-count.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"},
     {"question": "questions/infrastructure-as-code/iac-change-risk-management.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"},
     {"question": "questions/container-networking/bridge-traffic-path.md", "related_materials": "docs/related-materials/container-networking.md"},
-    {"question": "questions/container-networking/compose-network-contract.md", "related_materials": "docs/related-materials/container-networking.md"}
+    {"question": "questions/container-networking/compose-network-contract.md", "related_materials": "docs/related-materials/container-networking.md"},
+    {"question": "questions/infrastructure-as-code/iac-drift-governance.md", "related_materials": "docs/related-materials/infrastructure-as-code.md"}
   ]
 }
