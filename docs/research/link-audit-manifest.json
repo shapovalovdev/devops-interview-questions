@@ -1452,5 +1452,9 @@
     {"question": "questions/systems-performance/tail-latency-incident.md", "related_materials": "docs/related-materials/systems-performance.md"}
 ,
     {"question": "questions/systems-performance/use-method-basics.md", "related_materials": "docs/related-materials/systems-performance.md"}
+,
+    {"question": "questions/certification-last-minute-review/cluster-upgrade-runbook.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
+    {"question": "questions/certification-last-minute-review/configmap-secret-boundaries.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"},
+    {"question": "questions/certification-last-minute-review/control-plane-triage.md", "related_materials": "docs/related-materials/certification-last-minute-review.md"}
   ]
 }
