@@ -24,3 +24,11 @@ How would you design a DAG that tests independent components in parallel but nev
 
 - [Argo Workflows: DAG](https://argo-workflows.readthedocs.io/en/latest/walk-through/dag/)
 - Further reading (blog): [Google Cloud Blog: designing resilient pipelines](https://cloud.google.com/blog/products/data-analytics/building-reliable-data-pipelines)
+
+## What to learn next
+
+- Official documentation: [Argo Workflows retries and error handling](https://argo-workflows.readthedocs.io/en/latest/retries/)
+- Manual or specification: [Argo Workflows field and CRD reference](https://argo-workflows.readthedocs.io/en/latest/fields/)
+- Maintainer or personal blog: [Martin Fowler — eradicating non-determinism in tests](https://martinfowler.com/articles/nonDeterminism.html)
+- Technical blog: [CNCF — cloud native project blog](https://www.cncf.io/blog/)
+- Hands-on guide: [Argo Workflows quick start](https://argo-workflows.readthedocs.io/en/latest/quick-start/)

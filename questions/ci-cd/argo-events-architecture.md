@@ -24,3 +24,11 @@ What are EventSources, EventBus, Sensors, and Triggers in Argo Events?
 
 - [Argo Events: architecture](https://argoproj.github.io/argo-events/concepts/architecture/)
 - Further reading (blog): [AWS Compute Blog: idempotency in event-driven systems](https://aws.amazon.com/blogs/compute/handling-lambda-functions-idempotency-with-aws-lambda-powertools/)
+
+## What to learn next
+
+- Official documentation: [Argo Events documentation](https://argoproj.github.io/argo-events/)
+- Manual or specification: [CloudEvents v1.0 specification](https://github.com/cloudevents/spec/blob/main/cloudevents/spec.md)
+- Maintainer or personal blog: [Martin Fowler — what do you mean by event-driven?](https://martinfowler.com/articles/201701-event-driven.html)
+- Technical blog: [CNCF — cloud native project blog](https://www.cncf.io/blog/)
+- Hands-on guide: [Argo Events quick start](https://argoproj.github.io/argo-events/quick_start/)

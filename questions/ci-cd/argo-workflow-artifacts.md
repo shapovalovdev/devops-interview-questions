@@ -24,3 +24,11 @@ How would you make a build output available to a later Argo Workflow step withou
 
 - [Argo Workflows: artifacts](https://argo-workflows.readthedocs.io/en/latest/walk-through/artifacts/)
 - Further reading (blog): [GitHub Blog: Secure your supply chain with artifact attestations](https://github.blog/security/supply-chain-security/secure-your-software-supply-chain-and-build-faster-with-github-actions/)
+
+## What to learn next
+
+- Official documentation: [Argo Workflows artifact repository configuration](https://argo-workflows.readthedocs.io/en/latest/configure-artifact-repository/)
+- Manual or specification: [OCI distribution specification](https://github.com/opencontainers/distribution-spec/blob/main/spec.md)
+- Maintainer or personal blog: [Martin Fowler — deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html)
+- Technical blog: [CNCF — cloud native project blog](https://www.cncf.io/blog/)
+- Hands-on guide: [Argo Workflows quick start](https://argo-workflows.readthedocs.io/en/latest/quick-start/)

@@ -24,3 +24,11 @@ How would you trigger a deployment Workflow only after a signed release event an
 
 - [Argo Events: Sensor triggers](https://argoproj.github.io/argo-events/sensors/trigger/)
 - Further reading (blog): [AWS Compute Blog: event-driven architecture patterns](https://aws.amazon.com/blogs/compute/introducing-the-serverless-lens-for-the-aws-well-architected-framework/)
+
+## What to learn next
+
+- Official documentation: [Argo Events Sensor concept](https://argoproj.github.io/argo-events/concepts/sensor/)
+- Manual or specification: [CloudEvents v1.0 specification](https://github.com/cloudevents/spec/blob/main/cloudevents/spec.md)
+- Maintainer or personal blog: [Martin Fowler — what do you mean by event-driven?](https://martinfowler.com/articles/201701-event-driven.html)
+- Technical blog: [CNCF — cloud native project blog](https://www.cncf.io/blog/)
+- Hands-on guide: [Argo Events webhook EventSource tutorial](https://argoproj.github.io/argo-events/eventsources/setup/webhook/)
