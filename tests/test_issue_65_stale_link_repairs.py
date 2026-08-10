@@ -242,3 +242,21 @@ def test_cilium_l7_network_policy_uses_live_docker_tutorial() -> None:
     text = (ROOT / "questions" / "container-networking" / "cilium-l7-network-policy.md").read_text(encoding="utf-8")
     assert "https://docs.docker.com/network/tutorials/" not in text
     assert "https://docs.docker.com/engine/network/tutorials/standalone/" in text
+
+
+def test_kubernetes_security_reviews_use_live_authoritative_sources() -> None:
+    replacements = {
+        "questions/certification-last-minute-review/security-context-review.md": (
+            "https://rorymccune.com/2020/03/11/kubernetes-security-contexts/",
+            "https://kubernetes.io/blog/2024/04/24/validating-admission-policy-ga/",
+        ),
+        "questions/certification-last-minute-review/rbac-least-privilege.md": (
+            "https://rorymccune.com/2021/01/04/kubernetes-rbac/",
+            "https://kubernetes.io/blog/2026/03/18/securing-production-debugging-in-kubernetes/",
+        ),
+    }
+
+    for relative_path, (retired_url, replacement_url) in replacements.items():
+        text = (ROOT / relative_path).read_text(encoding="utf-8")
+        assert retired_url not in text
+        assert replacement_url in text

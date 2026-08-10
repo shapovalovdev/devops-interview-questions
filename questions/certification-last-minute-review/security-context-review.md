@@ -24,12 +24,12 @@ Which security-context choices should be questioned before admitting a workload?
 
 - [Kubernetes: configure a security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
 - [Kubernetes: Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
-- Further reading (blog): [Rory McCune — Kubernetes security contexts](https://rorymccune.com/2020/03/11/kubernetes-security-contexts/)
+- Further reading (blog): [Kubernetes: Validating Admission Policy is GA](https://kubernetes.io/blog/2024/04/24/validating-admission-policy-ga/)
 
 ## What to learn next
 
 - Official documentation: [Security contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
 - Manual or specification: [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
-- Maintainer or personal blog: [Rory McCune — security contexts](https://rorymccune.com/2020/03/11/kubernetes-security-contexts/)
+- Maintainer or personal blog: [Kubernetes: Validating Admission Policy is GA](https://kubernetes.io/blog/2024/04/24/validating-admission-policy-ga/)
 - Technical blog: [Google Cloud — harden GKE workloads](https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster)
 - Hands-on guide: [Kubernetes restrict a container's syscalls](https://kubernetes.io/docs/tutorials/security/seccomp/)

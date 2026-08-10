@@ -23,12 +23,12 @@ What is a safe method for resolving `forbidden` from the Kubernetes API?
 ## References
 
 - [Kubernetes: RBAC authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
-- Further reading (blog): [Rory McCune — Kubernetes RBAC](https://rorymccune.com/2021/01/04/kubernetes-rbac/)
+- Further reading (blog): [Kubernetes: securing production debugging](https://kubernetes.io/blog/2026/03/18/securing-production-debugging-in-kubernetes/)
 
 ## What to learn next
 
 - Official documentation: [Kubernetes RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 - Manual or specification: [Authorization overview](https://kubernetes.io/docs/reference/access-authn-authz/authorization/)
-- Maintainer or personal blog: [Rory McCune — RBAC](https://rorymccune.com/2021/01/04/kubernetes-rbac/)
+- Maintainer or personal blog: [Kubernetes: securing production debugging](https://kubernetes.io/blog/2026/03/18/securing-production-debugging-in-kubernetes/)
 - Technical blog: [Google Cloud — RBAC best practices](https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#use_least_privilege_sa)
-- Hands-on guide: [Kubernetes RBAC good practices](https://kubernetes.io/docs/concepts/security/rbac-good-practices/)
+- Hands-on guide: [Kubernetes service accounts](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
