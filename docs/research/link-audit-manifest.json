@@ -1378,5 +1378,9 @@
     {"question": "questions/shell-scripting/define-shell-automation-standard.md", "related_materials": "docs/related-materials/shell-scripting.md"},
     {"question": "questions/shell-scripting/design-fleet-remediation-runbook.md", "related_materials": "docs/related-materials/shell-scripting.md"},
     {"question": "questions/shell-scripting/execute-a-script-portably.md", "related_materials": "docs/related-materials/shell-scripting.md"}
+,
+    {"question": "questions/shell-scripting/govern-shell-script-supply-chain.md", "related_materials": "docs/related-materials/shell-scripting.md"},
+    {"question": "questions/shell-scripting/handle-script-arguments.md", "related_materials": "docs/related-materials/shell-scripting.md"},
+    {"question": "questions/shell-scripting/handle-signals-and-cleanup.md", "related_materials": "docs/related-materials/shell-scripting.md"}
   ]
 }

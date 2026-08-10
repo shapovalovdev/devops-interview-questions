@@ -25,3 +25,11 @@ How should a long-running automation script respond to cancellation?
 
 - [GNU Bash manual: Bourne shell builtins (`trap`)](https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html)
 - Further reading (blog): [Red Hat: Handle signals in Bash scripts](https://www.redhat.com/en/blog/bash-trap-command)
+
+## What to learn next
+
+- Official documentation: [GNU Bash manual](https://www.gnu.org/software/bash/manual/)
+- Manual or specification: [POSIX Shell Command Language](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/V3_chap02.html)
+- Maintainer or personal blog: [Julia Evans](https://jvns.ca/)
+- Technical blog: [Red Hat Enable Sysadmin](https://www.redhat.com/en/blog/channel/enable-sysadmin)
+- Hands-on guide: [ShellCheck wiki](https://www.shellcheck.net/wiki/)
