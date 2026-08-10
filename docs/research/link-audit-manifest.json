@@ -1532,6 +1532,18 @@
 ,
     {"question": "questions/backend-architecture/transaction-boundaries.md", "related_materials": "docs/related-materials/backend-architecture.md"},
     {"question": "questions/backend-architecture/transactional-outbox.md", "related_materials": "docs/related-materials/backend-architecture.md"},
-    {"question": "questions/sre/measure-platform-impact-with-dora.md", "related_materials": "docs/related-materials/sre.md"}
+    {"question": "questions/sre/measure-platform-impact-with-dora.md", "related_materials": "docs/related-materials/sre.md"},
+    {"question": "questions/caching/cache-aside-basics.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/cache-consistency-tradeoffs.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/cache-eviction-policy.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/cache-hit-ratio-basics.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/cache-invalidation-policy.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/cache-key-design.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/cache-observability.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/cache-placement-layers.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/cache-stampede-control.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/cache-warming-strategy.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/read-through-cache-basics.md", "related_materials": "docs/related-materials/caching.md"},
+    {"question": "questions/caching/ttl-selection-basics.md", "related_materials": "docs/related-materials/caching.md"}
   ]
 }
