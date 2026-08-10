@@ -32,4 +32,4 @@ When should an incident commander pause deployments, and when may a change conti
 - Manual or specification: [SLSA specification](https://slsa.dev/spec/v1.0/)
 - Maintainer or personal blog: [John Allspaw](https://www.kitchensoap.com/)
 - Technical blog: [Google Cloud DevOps and SRE](https://cloud.google.com/blog/products/devops-sre)
-- Hands-on guide: [Practical deployment guide](https://sre.google/workbook/managing-incidents/)
+- Hands-on guide: [Google SRE incident-response workbook](https://sre.google/workbook/incident-response/)

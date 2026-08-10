@@ -156,3 +156,9 @@ def test_deployment_rollout_check_uses_live_kubernetes_blog() -> None:
     text = (ROOT / "questions" / "certification-last-minute-review" / "deployment-rollout-check.md").read_text(encoding="utf-8")
     assert "https://learnk8s.io/kubernetes-deployments" not in text
     assert "https://kubernetes.io/blog/" in text
+
+
+def test_incident_change_freeze_uses_live_sre_incident_response_workbook() -> None:
+    text = (ROOT / "questions" / "ci-cd" / "incident-change-freeze.md").read_text(encoding="utf-8")
+    assert "https://sre.google/workbook/managing-incidents/" not in text
+    assert "https://sre.google/workbook/incident-response/" in text
