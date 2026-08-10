@@ -26,3 +26,10 @@ How do you move a resource into a module or rename it without recreating product
 - Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: Refactoring](https://developer.hashicorp.com/terraform/language/modules/develop/refactoring)
 - [Terraform: moved block reference](https://developer.hashicorp.com/terraform/language/block/moved)
+## What to learn next
+
+- Official documentation: [Terraform language documentation](https://developer.hashicorp.com/terraform/language)
+- Manual or specification: [Terraform configuration language reference](https://developer.hashicorp.com/terraform/language/syntax/configuration)
+- Maintainer or personal blog: [Martin Atkins — Terraform and HCL articles](https://log.martinatkins.me/)
+- Technical blog: [HashiCorp engineering blog](https://www.hashicorp.com/blog)
+- Hands-on guide: [Terraform tutorials](https://developer.hashicorp.com/terraform/tutorials)
