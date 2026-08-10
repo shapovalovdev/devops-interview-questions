@@ -27,6 +27,9 @@ QUESTIONS = [
         "host-networking-tradeoffs.md",
         "ingress-gateway-boundary.md",
         "ipv6-container-networking.md",
+        "kubernetes-service-traffic-path.md",
+        "mtu-mismatch-troubleshooting.md",
+        "multi-cluster-connectivity-strategy.md",
     )
 ]
 RELATED = ROOT / "docs/related-materials/container-networking.md"

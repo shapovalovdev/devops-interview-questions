@@ -25,3 +25,10 @@ A Kubernetes Service resolves but requests fail. How do you trace the traffic pa
 
 - [Kubernetes Docs: Service](https://kubernetes.io/docs/concepts/services-networking/service/)
 - Further reading (blog): [Kubernetes: Services, load balancing, and networking](https://kubernetes.io/blog/2017/10/Using-CoreDNS-for-Service-Discovery/)
+## What to learn next
+
+- Official documentation: [Docker networking documentation](https://docs.docker.com/network/)
+- Manual or specification: [CNI specification](https://www.cni.dev/docs/spec/)
+- Maintainer or personal blog: [Thomas Graf — networking articles](https://tgraf.io/)
+- Technical blog: [Cilium engineering blog](https://cilium.io/blog/)
+- Hands-on guide: [Docker networking tutorial](https://docs.docker.com/network/tutorials/)
