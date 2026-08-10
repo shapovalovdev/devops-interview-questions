@@ -26,3 +26,11 @@ How would you control observability cost without removing the evidence needed fo
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Google SRE Workbook: Monitoring](https://sre.google/workbook/monitoring/)
 - [Further reading: Prometheus storage](https://prometheus.io/docs/prometheus/latest/storage/)
+
+## What to learn next
+
+- Official documentation: [Prometheus storage and retention](https://prometheus.io/docs/prometheus/latest/storage/)
+- Manual or specification: [Google SRE Book — free online edition](https://sre.google/sre-book/table-of-contents/)
+- Maintainer or personal blog: [Brian Brazil — Robust Perception monitoring blog](https://www.robustperception.io/blog/)
+- Technical blog: [Grafana Labs engineering blog](https://grafana.com/blog/)
+- Hands-on guide: [Thanos compactor — retention and downsampling](https://thanos.io/tip/components/compact.md/)

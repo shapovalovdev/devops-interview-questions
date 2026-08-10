@@ -25,3 +25,11 @@ A Pod can resolve a Service name but its HTTP request times out. How would you u
 
 - [Cilium Hubble setup](https://docs.cilium.io/en/stable/gettingstarted/hubble_setup/)
 - Further reading (blog): [Cilium 1.15 overview](https://isovalent.com/blog/post/cilium-1-15/)
+
+## What to learn next
+
+- Official documentation: [Cilium Hubble network observability](https://docs.cilium.io/en/stable/observability/hubble/)
+- Manual or specification: [eBPF reference — what is eBPF?](https://ebpf.io/what-is-ebpf/)
+- Maintainer or personal blog: [Brendan Gregg — eBPF tracing resources](https://www.brendangregg.com/ebpf.html)
+- Technical blog: [Cilium project blog](https://cilium.io/blog/)
+- Hands-on guide: [Layer 7 flow visibility with hubble observe](https://docs.cilium.io/en/stable/observability/visibility/)

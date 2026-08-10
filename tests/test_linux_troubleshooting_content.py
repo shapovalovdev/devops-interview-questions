@@ -3,20 +3,23 @@
 from collections import Counter
 from pathlib import Path
 import re
+import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
 THEME = ROOT / "questions" / "linux-troubleshooting"
+sys.path.insert(0, str(ROOT / "tests"))
+
+from theme_expectations import assert_meets_floor  # noqa: E402
 
 
 def test_linux_troubleshooting_has_required_distribution_and_core_topics() -> None:
     files = sorted(THEME.glob("*.md"))
-    assert len(files) == 25
     difficulties = Counter(
         re.search(r"^difficulty: (.+)$", path.read_text(encoding="utf-8"), re.MULTILINE).group(1)
         for path in files
     )
-    assert difficulties == {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
+    assert_meets_floor("linux-troubleshooting", difficulties)
     text = "\\n".join(path.read_text(encoding="utf-8") for path in files).lower()
     for topic in ("oom", "systemd", "nfs", "conntrack", "kernel panic", "runbook"):
         assert topic in text

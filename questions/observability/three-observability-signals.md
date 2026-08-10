@@ -26,3 +26,11 @@ How do metrics, logs, and traces complement each other when diagnosing a product
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [OpenTelemetry: Observability primer](https://opentelemetry.io/docs/concepts/observability-primer/)
 - [Further reading: OpenTelemetry log correlation](https://opentelemetry.io/docs/specs/otel/logs/)
+
+## What to learn next
+
+- Official documentation: [OpenTelemetry observability primer](https://opentelemetry.io/docs/concepts/observability-primer/)
+- Manual or specification: [Google SRE Book — Monitoring Distributed Systems](https://sre.google/sre-book/monitoring-distributed-systems/)
+- Maintainer or personal blog: [Charity Majors — observability and structured events](https://charity.wtf/)
+- Technical blog: [Honeycomb — what is observability?](https://www.honeycomb.io/blog/what-is-observability)
+- Hands-on guide: [OpenTelemetry Demo application](https://opentelemetry.io/docs/demo/)

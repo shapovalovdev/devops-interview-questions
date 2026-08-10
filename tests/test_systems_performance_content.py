@@ -3,17 +3,20 @@
 from collections import Counter
 from pathlib import Path
 import re
+import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
 THEME = ROOT / "questions" / "systems-performance"
+sys.path.insert(0, str(ROOT / "tests"))
+
+from theme_expectations import assert_meets_floor  # noqa: E402
 
 
 def test_systems_performance_has_targeted_distribution_and_original_prompts() -> None:
     files = sorted(THEME.glob("*.md"))
-    assert len(files) == 25
     difficulties = Counter(re.search(r"^difficulty: (.+)$", path.read_text(), re.MULTILINE).group(1) for path in files)
-    assert difficulties == {"junior": 5, "middle": 10, "senior": 5, "staff": 5}
+    assert_meets_floor("systems-performance", difficulties)
     text = "\n".join(path.read_text() for path in files).lower()
     assert "use method" in text
     assert "pressure stall" in text

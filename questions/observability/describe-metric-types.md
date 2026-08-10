@@ -26,3 +26,11 @@ When should you use a counter, gauge, histogram, or summary metric?
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Prometheus: Metric types](https://prometheus.io/docs/concepts/metric_types/)
 - [Further reading: Prometheus histogram best practices](https://prometheus.io/docs/practices/histograms/)
+
+## What to learn next
+
+- Official documentation: [Prometheus metric types](https://prometheus.io/docs/concepts/metric_types/)
+- Manual or specification: [OpenMetrics specification](https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md)
+- Maintainer or personal blog: [Brian Brazil — how does a Prometheus counter work?](https://www.robustperception.io/how-does-a-prometheus-counter-work/)
+- Technical blog: [Grafana Labs engineering blog](https://grafana.com/blog/)
+- Hands-on guide: [Prometheus instrumentation practices](https://prometheus.io/docs/practices/instrumentation/)

@@ -26,3 +26,11 @@ How would you make SLOs influence delivery decisions across many services?
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Google SRE Workbook: Implementing SLOs](https://sre.google/workbook/implementing-slos/)
 - [Further reading: Google SRE Workbook—Error budget policy example](https://sre.google/workbook/error-budget-policy/)
+
+## What to learn next
+
+- Official documentation: [Google SRE Workbook](https://sre.google/workbook/table-of-contents/)
+- Manual or specification: [OpenSLO specification](https://openslo.com/)
+- Maintainer or personal blog: [Liz Fong-Jones — reliability and observability writing](https://www.lizthegrey.com/)
+- Technical blog: [Google Cloud Blog — DevOps and SRE](https://cloud.google.com/blog/products/devops-sre)
+- Hands-on guide: [The Art of SLOs workshop materials](https://sre.google/resources/practices-and-processes/art-of-slos/)

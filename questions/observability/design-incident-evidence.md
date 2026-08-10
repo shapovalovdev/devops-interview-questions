@@ -26,3 +26,11 @@ What observability standards let responders reconstruct a major incident without
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Google SRE Workbook: Incident response](https://sre.google/workbook/incident-response/)
 - [Further reading: OpenTelemetry security guidance](https://opentelemetry.io/docs/security/)
+
+## What to learn next
+
+- Official documentation: [Google SRE Book — Managing Incidents](https://sre.google/sre-book/managing-incidents/)
+- Manual or specification: [Google SRE Book — Postmortem Culture](https://sre.google/sre-book/postmortem-culture/)
+- Maintainer or personal blog: [John Allspaw — Kitchen Soap, on incident analysis](https://www.kitchensoap.com/)
+- Technical blog: [Honeycomb engineering blog](https://www.honeycomb.io/blog/)
+- Hands-on guide: [Google SRE Workbook — incident response](https://sre.google/workbook/incident-response/)

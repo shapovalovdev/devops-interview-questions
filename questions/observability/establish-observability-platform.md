@@ -26,3 +26,11 @@ How would you build a shared observability platform without forcing every team i
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [OpenTelemetry: What is OpenTelemetry?](https://opentelemetry.io/docs/what-is-opentelemetry/)
 - [Further reading: OpenTelemetry semantic conventions](https://opentelemetry.io/docs/concepts/semantic-conventions/)
+
+## What to learn next
+
+- Official documentation: [What is OpenTelemetry?](https://opentelemetry.io/docs/what-is-opentelemetry/)
+- Manual or specification: [Google SRE Book — free online edition](https://sre.google/sre-book/table-of-contents/)
+- Maintainer or personal blog: [Pete Hodgson — domain-oriented observability](https://martinfowler.com/articles/domain-oriented-observability.html)
+- Technical blog: [CNCF Blog](https://www.cncf.io/blog/)
+- Hands-on guide: [OpenTelemetry Demo application](https://opentelemetry.io/docs/demo/)

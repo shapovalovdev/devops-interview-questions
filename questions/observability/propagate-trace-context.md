@@ -26,3 +26,11 @@ Traces split at a service boundary. How do you diagnose and fix context propagat
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [W3C Trace Context](https://www.w3.org/TR/trace-context/)
 - [Further reading: OpenTelemetry propagators](https://opentelemetry.io/docs/specs/otel/context/api-propagators/)
+
+## What to learn next
+
+- Official documentation: [OpenTelemetry context propagation](https://opentelemetry.io/docs/concepts/context-propagation/)
+- Manual or specification: [W3C Trace Context recommendation](https://www.w3.org/TR/trace-context/)
+- Maintainer or personal blog: [Liz Fong-Jones — distributed tracing writing](https://www.lizthegrey.com/)
+- Technical blog: [Honeycomb engineering blog](https://www.honeycomb.io/blog/)
+- Hands-on guide: [Jaeger getting started](https://www.jaegertracing.io/docs/latest/getting-started/)

@@ -26,3 +26,11 @@ Why is a metric backend failing under high cardinality, and how would you fix it
 - Further reading (blog): [Complementary observability practice article](https://www.honeycomb.io/blog/the-lost-art-of-structured-logging)
 - [Prometheus: Metric and label naming](https://prometheus.io/docs/practices/naming/)
 - [Further reading: Prometheus instrumentation practices](https://prometheus.io/docs/practices/instrumentation/)
+
+## What to learn next
+
+- Official documentation: [Prometheus configuration and metric relabeling](https://prometheus.io/docs/prometheus/latest/configuration/configuration/)
+- Manual or specification: [OpenMetrics specification](https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md)
+- Maintainer or personal blog: [Brian Brazil — cardinality is key](https://www.robustperception.io/cardinality-is-key/)
+- Technical blog: [Grafana Labs engineering blog](https://grafana.com/blog/)
+- Hands-on guide: [OpenTelemetry Collector filter processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/filterprocessor)
