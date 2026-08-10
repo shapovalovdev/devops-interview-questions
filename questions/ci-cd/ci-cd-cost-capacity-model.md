@@ -25,3 +25,11 @@ How would you manage CI/CD spend and queue time as engineering usage grows?
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: GitHub Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions)
 - [Further reading: GitHub Docs—concurrency](https://docs.github.com/en/actions/concepts/workflows-and-actions/concurrency)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions larger runners](https://docs.github.com/en/actions/concepts/runners/about-larger-runners)
+- Manual or specification: [GitHub Actions usage limits reference](https://docs.github.com/en/actions/reference/limits)
+- Maintainer or personal blog: [Alex Ellis — CI and self-hosted runner engineering](https://blog.alexellis.io/)
+- Technical blog: [GitHub Engineering blog](https://github.blog/engineering/)
+- Hands-on guide: [Docker — cache management with GitHub Actions](https://docs.docker.com/build/ci/github-actions/cache/)

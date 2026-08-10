@@ -25,3 +25,11 @@ When should an incident commander pause deployments, and when may a change conti
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [Google SRE Book: Managing incidents](https://sre.google/sre-book/managing-incidents/)
 - [Further reading: Google SRE Workbook—canarying releases](https://sre.google/workbook/canarying-releases/)
+
+## What to learn next
+
+- Official documentation: [DORA — streamlining change approval](https://dora.dev/capabilities/streamlining-change-approval/)
+- Manual or specification: [Google SRE Book — emergency response](https://sre.google/sre-book/emergency-response/)
+- Maintainer or personal blog: [Pete Hodgson — feature toggles](https://martinfowler.com/articles/feature-toggles.html)
+- Technical blog: [Google Cloud — DevOps and SRE blog](https://cloud.google.com/blog/products/devops-sre)
+- Hands-on guide: [Google SRE Workbook — incident response](https://sre.google/workbook/incident-response/)

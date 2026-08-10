@@ -25,3 +25,11 @@ What should a delivery-platform disaster recovery plan cover?
 - Further reading (blog): [Complementary ci cd practice article](https://github.blog/enterprise-software/ci-cd/continuous-deployment-with-github-actions/)
 - [GitHub Docs: Workflows and actions concepts](https://docs.github.com/en/actions/concepts/workflows-and-actions)
 - [Further reading: SLSA—build security levels](https://slsa.dev/spec/v1.0/levels)
+
+## What to learn next
+
+- Official documentation: [GitHub Actions documentation](https://docs.github.com/en/actions)
+- Manual or specification: [Google SRE Book — emergency response](https://sre.google/sre-book/emergency-response/)
+- Maintainer or personal blog: [Alex Ellis — CI and self-hosted runner engineering](https://blog.alexellis.io/)
+- Technical blog: [Google Cloud — DevOps and SRE blog](https://cloud.google.com/blog/products/devops-sre)
+- Hands-on guide: [Google Cloud — disaster recovery scenarios planning guide](https://cloud.google.com/architecture/dr-scenarios-planning-guide)
