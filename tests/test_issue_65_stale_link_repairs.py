@@ -194,6 +194,12 @@ def test_container_network_security_architecture_uses_live_docker_tutorial() -> 
     assert "https://docs.docker.com/engine/network/tutorials/standalone/" in text
 
 
+def test_api_gateway_basics_uses_live_google_cloud_quickstarts() -> None:
+    text = (ROOT / "questions" / "backend-architecture" / "api-gateway-basics.md").read_text(encoding="utf-8")
+    assert "https://cloud.google.com/api-gateway/docs/get-started" not in text
+    assert "https://docs.cloud.google.com/api-gateway/docs/quickstarts" in text
+
+
 def test_network_policy_enforcement_limits_uses_live_docker_tutorial() -> None:
     text = (ROOT / "questions" / "container-networking" / "network-policy-enforcement-limits.md").read_text(encoding="utf-8")
     assert "https://docs.docker.com/network/tutorials/" not in text

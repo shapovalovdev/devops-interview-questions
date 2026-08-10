@@ -31,4 +31,4 @@ When is an API gateway useful, and what should it not become?
 - Manual or specification: [HTTP Semantics (RFC 9110)](https://www.rfc-editor.org/rfc/rfc9110)
 - Maintainer or personal blog: [Martin Fowler's blog](https://martinfowler.com/)
 - Technical blog: [Stripe engineering](https://stripe.com/blog/engineering)
-- Hands-on guide: [Google Cloud API Gateway quickstart](https://cloud.google.com/api-gateway/docs/get-started)
+- Hands-on guide: [Google Cloud API Gateway quickstarts](https://docs.cloud.google.com/api-gateway/docs/quickstarts)
