@@ -34,5 +34,5 @@ Explain how a Unix service commonly creates a child process and later observes i
 - Official documentation: [man7 fork(2)](https://man7.org/linux/man-pages/man2/fork.2.html)
 - Manual or specification: [man7 execve(2)](https://man7.org/linux/man-pages/man2/execve.2.html)
 - Maintainer or personal blog: [Lennart Poettering — systemd](https://0pointer.net/blog/projects/systemd.html)
-- Technical blog: [Red Hat — Linux processes](https://www.redhat.com/en/topics/linux/what-is-a-linux-process)
+- Technical blog: [Linux kernel proc filesystem documentation](https://docs.kernel.org/filesystems/proc.html)
 - Hands-on guide: [Linux Journey — processes](https://linuxjourney.com/lesson/processes)
