@@ -1588,13 +1588,17 @@
     {"question": "questions/serverless/standardize-serverless-event-contracts.md", "related_materials": "docs/related-materials/serverless.md"},
     {"question": "questions/serverless/test-serverless-integrations.md", "related_materials": "docs/related-materials/serverless.md"},
     {"question": "questions/serverless/trace-ephemeral-function-requests.md", "related_materials": "docs/related-materials/serverless.md"},
+    {"question": "questions/finops/attribute-kubernetes-cluster-cost-to-teams.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/build-a-commitment-discount-portfolio.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/compare-on-demand-committed-and-spot-pricing.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/explain-cloud-unit-economics.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/explain-showback-and-chargeback.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/read-a-cloud-bill-and-find-its-drivers.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/rightsize-overprovisioned-compute.md", "related_materials": "docs/related-materials/finops.md"},
+    {"question": "questions/finops/run-production-work-on-spot-capacity.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/set-a-cloud-budget-and-alert.md", "related_materials": "docs/related-materials/finops.md"},
-    {"question": "questions/finops/tag-resources-for-cost-allocation.md", "related_materials": "docs/related-materials/finops.md"}
+    {"question": "questions/finops/tag-resources-for-cost-allocation.md", "related_materials": "docs/related-materials/finops.md"},
+    {"question": "questions/finops/tier-object-storage-with-lifecycle-rules.md", "related_materials": "docs/related-materials/finops.md"},
+    {"question": "questions/finops/trace-an-unexplained-data-transfer-bill.md", "related_materials": "docs/related-materials/finops.md"}
   ]
 }
