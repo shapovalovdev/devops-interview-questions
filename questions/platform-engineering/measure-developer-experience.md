@@ -5,7 +5,7 @@ difficulty: middle
 type: scenario
 tags: [platform-engineering, developer-experience, product-management, quality]
 sources:
-  - url: https://queue.acm.org/detail.cfm?id=3454124
+  - url: https://www.microsoft.com/en-us/research/publication/the-space-of-developer-productivity/
     source_type: standard
     verified_on: 2026-08-11
 ---
@@ -23,13 +23,13 @@ Your platform's dashboards are all green but engineers say working with it is pa
 
 ## References
 
-- [ACM Queue — the SPACE of developer productivity](https://queue.acm.org/detail.cfm?id=3454124)
+- [Microsoft Research — the SPACE of developer productivity](https://www.microsoft.com/en-us/research/publication/the-space-of-developer-productivity/)
 - Further reading (blog): [Abi Noda — measuring developer productivity via humans](https://martinfowler.com/articles/measuring-developer-productivity-humans.html)
 
 ## What to learn next
 
 - Official documentation: [DORA capability catalog](https://dora.dev/capabilities/)
-- Manual or specification: [ACM Queue — the SPACE of developer productivity](https://queue.acm.org/detail.cfm?id=3454124)
+- Manual or specification: [Microsoft Research — the SPACE of developer productivity](https://www.microsoft.com/en-us/research/publication/the-space-of-developer-productivity/)
 - Maintainer or personal blog: [Abi Noda — measuring developer productivity via humans](https://martinfowler.com/articles/measuring-developer-productivity-humans.html)
 - Technical blog: [Stack Overflow blog](https://stackoverflow.blog/)
 - Hands-on guide: [Microsoft — developer self-service in platform engineering](https://learn.microsoft.com/en-us/platform-engineering/developer-self-service)
