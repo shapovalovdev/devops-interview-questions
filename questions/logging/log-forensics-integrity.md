@@ -5,7 +5,7 @@ difficulty: senior
 type: scenario
 tags: [logging, security, incident-response, governance]
 sources:
-  - url: https://csrc.nist.gov/pubs/sp/800/92/final
+  - url: https://csrc.nist.gov/pubs/sp/800/92/r1/ipd
     source_type: official-docs
     verified_on: 2026-08-06
 ---
@@ -22,13 +22,13 @@ What controls make logs more trustworthy during a security investigation?
 
 ## References
 
-- [NIST SP 800-92: log management](https://csrc.nist.gov/pubs/sp/800/92/final)
+- [NIST SP 800-92 Rev. 1 (initial public draft) — guide to computer security log management](https://csrc.nist.gov/pubs/sp/800/92/r1/ipd)
 - Further reading (blog): [AWS: protecting data with S3 Object Lock](https://aws.amazon.com/blogs/storage/protecting-data-with-amazon-s3-object-lock/)
 
 ## What to learn next
 
 - Official documentation: [AWS S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)
-- Manual or specification: [NIST SP 800-92](https://csrc.nist.gov/pubs/sp/800/92/final)
+- Manual or specification: [NIST SP 800-92 Rev. 1 (initial public draft) — guide to computer security log management](https://csrc.nist.gov/pubs/sp/800/92/r1/ipd)
 - Maintainer or personal blog: [Troy Hunt's blog](https://www.troyhunt.com/)
 - Technical blog: [AWS: protecting data with S3 Object Lock](https://aws.amazon.com/blogs/storage/protecting-data-with-amazon-s3-object-lock/)
 - Hands-on guide: [OpenSearch security](https://docs.opensearch.org/latest/security/)

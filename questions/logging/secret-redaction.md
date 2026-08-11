@@ -28,7 +28,7 @@ How would you keep credentials and personal data out of application logs?
 ## What to learn next
 
 - Official documentation: [OWASP logging guidance](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
-- Manual or specification: [NIST SP 800-92 log management](https://csrc.nist.gov/pubs/sp/800/92/final)
+- Manual or specification: [NIST SP 800-92 Rev. 1 (initial public draft) — guide to computer security log management](https://csrc.nist.gov/pubs/sp/800/92/r1/ipd)
 - Maintainer or personal blog: [Troy Hunt's blog](https://www.troyhunt.com/)
 - Technical blog: [GitGuardian engineering blog](https://blog.gitguardian.com/)
 - Hands-on guide: [GitHub secret scanning](https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning)
