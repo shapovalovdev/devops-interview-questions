@@ -167,6 +167,28 @@ class LearningResourcesParserTests(unittest.TestCase):
             )
         self.assertIn("network unreachable", output.getvalue())
 
+    def test_bot_blocked_404_is_confirmed_with_a_browser_agent_before_failing(self) -> None:
+        """csrc.nist.gov answers an unknown agent with 404 and a browser with 200."""
+
+        def response_for(request, timeout):
+            if "Mozilla" in request.headers.get("User-agent", ""):
+                return Response()
+            raise HTTPError(request.full_url, 404, "not found", {}, None)
+
+        with patch("urllib.request.urlopen", side_effect=response_for):
+            result = check_url("https://csrc.nist.gov/pubs/sp/800/92/r1/ipd", 1, sleeper=lambda _: None, pacer=HostPacer(0))
+        self.assertEqual("ok", result.category)
+        self.assertIn("browser agent", result.detail)
+
+    def test_a_genuinely_removed_page_still_fails_after_confirmation(self) -> None:
+        def gone(request, timeout):
+            raise HTTPError(request.full_url, 404, "not found", {}, None)
+
+        with patch("urllib.request.urlopen", side_effect=gone):
+            result = check_url("https://example.test/removed", 1, sleeper=lambda _: None, pacer=HostPacer(0))
+        self.assertEqual("broken", result.category)
+        self.assertEqual("HTTP 404", result.detail)
+
     def test_dns_failure_is_still_broken_even_though_it_is_an_oserror(self) -> None:
         with patch("urllib.request.urlopen", side_effect=URLError(socket.gaierror(-2, "Name or service not known"))):
             result = check_url("https://gone.example/resource", 1, sleeper=lambda _: None, pacer=HostPacer(0))

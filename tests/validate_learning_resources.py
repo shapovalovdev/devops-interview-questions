@@ -39,6 +39,10 @@ REQUIRED_CATEGORIES = {
 }
 LINK_PATTERN = re.compile(r"^- ([^:]+): \[[^]]+\]\((https://[^)\s]+)\)\s*$", re.MULTILINE)
 USER_AGENT = "DevOpsQuestionDatabaseLinkAudit/1.0 (+https://github.com/shapovalovdev/devops-interview-questions)"
+BROWSER_USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+)
 MAX_ATTEMPTS = 3
 DEFAULT_RETRY_DELAY_SECONDS = 0.5
 MAX_RETRY_AFTER_SECONDS = 30.0
@@ -153,9 +157,9 @@ def coverage_report(manifest: dict) -> str:
     )
 
 
-def fetch_result(url: str, timeout: float) -> FetchResult:
+def fetch_result(url: str, timeout: float, user_agent: str = USER_AGENT) -> FetchResult:
     """Use HEAD first, then GET for hosts which do not implement HEAD correctly."""
-    headers = {"User-Agent": USER_AGENT}
+    headers = {"User-Agent": user_agent}
     for method in ("HEAD", "GET"):
         request = urllib.request.Request(url, headers=headers, method=method)
         try:
@@ -175,6 +179,26 @@ def fetch_status(url: str, timeout: float) -> int:
 
 def is_transient_status(status: int) -> bool:
     return status in TRANSIENT_STATUSES or 500 <= status < 600
+
+
+def confirm_permanent_failure(url: str, timeout: float, *, sleeper=time.sleep) -> FetchResult | None:
+    """Re-check an apparently permanent failure with a browser User-Agent.
+
+    Some hosts answer an unrecognised agent with `404` rather than `403`, and do
+    it only once they have seen a few requests — `csrc.nist.gov` failed a
+    different pair of URLs on each CI run while the other thirteen NIST
+    citations passed, and every one of them served `200` to a browser agent.
+    A status alone therefore cannot distinguish a withdrawn document from a
+    bot-blocked one.
+
+    So a permanent status is confirmed with a second, differently shaped request
+    before the link is declared dead. A genuinely removed page answers `404` to
+    any agent, so this does not weaken the gate: returns the failing result when
+    the failure is real, and `None` when the resource is actually reachable.
+    """
+    sleeper(DEFAULT_RETRY_DELAY_SECONDS)
+    result = fetch_result(url, timeout, user_agent=BROWSER_USER_AGENT)
+    return None if 200 <= result.status < 400 else result
 
 
 def is_retryable_transport_error(error: BaseException) -> bool:
@@ -255,6 +279,9 @@ def check_url(
         if 200 <= result.status < 400:
             return LinkCheck(url, "ok", f"HTTP {result.status}", attempt + 1)
         if not is_transient_status(result.status):
+            confirmed = confirm_permanent_failure(url, timeout, sleeper=sleeper)
+            if confirmed is None:
+                return LinkCheck(url, "ok", f"HTTP {result.status} for the audit agent, 2xx for a browser agent", attempt + 1)
             return LinkCheck(url, "broken", f"HTTP {result.status}", attempt + 1)
         if attempt < MAX_ATTEMPTS - 1:
             sleeper(retry_delay(result.headers, attempt))
