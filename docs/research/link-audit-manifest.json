@@ -1655,10 +1655,22 @@
       "question": "questions/platform-engineering/offer-self-service-with-safe-defaults.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
+      "question": "questions/platform-engineering/onboard-a-team-onto-the-platform.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/publish-platform-slos-and-a-support-model.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/retire-a-platform-capability.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
       "question": "questions/platform-engineering/scope-what-the-platform-owns.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
       "question": "questions/platform-engineering/treat-the-platform-as-a-product.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/version-a-platform-interface.md", "related_materials": "docs/related-materials/platform-engineering.md"
     }
   ]
 }
