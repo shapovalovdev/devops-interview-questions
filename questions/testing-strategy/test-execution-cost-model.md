@@ -5,7 +5,10 @@ difficulty: middle
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://docs.github.com/en/actions
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://abseil.io/resources/swe-book/html/ch14.html
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,13 +26,14 @@ How should a team decide which tests run at each delivery stage?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [GitHub Actions documentation](https://docs.github.com/en/actions)
+- [Software Engineering at Google — larger testing](https://abseil.io/resources/swe-book/html/ch14.html)
+- Further reading (blog): [Google Testing Blog — test sizes](https://testing.googleblog.com/2010/12/test-sizes.html)
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [GitHub Actions documentation](https://docs.github.com/en/actions)
+- Manual or specification: [Software Engineering at Google — larger testing](https://abseil.io/resources/swe-book/html/ch14.html)
+- Maintainer or personal blog: [Alex Kladov — how to test](https://matklad.github.io/2021/05/31/how-to-test.html)
+- Technical blog: [Google Testing Blog — test sizes](https://testing.googleblog.com/2010/12/test-sizes.html)
+- Hands-on guide: [pytest-xdist — distributed test execution](https://pytest-xdist.readthedocs.io/en/stable/)

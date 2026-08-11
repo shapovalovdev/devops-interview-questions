@@ -5,7 +5,10 @@ difficulty: middle
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://testcontainers.com/guides/
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://abseil.io/resources/swe-book/html/ch14.html
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,13 +26,14 @@ How should a team approach this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [Testcontainers — guides](https://testcontainers.com/guides/)
+- [Software Engineering at Google — larger testing](https://abseil.io/resources/swe-book/html/ch14.html)
+- Further reading (blog): [Google Testing Blog — hermetic servers](https://testing.googleblog.com/2012/10/hermetic-servers.html)
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [Testcontainers — guides](https://testcontainers.com/guides/)
+- Manual or specification: [Software Engineering at Google — larger testing](https://abseil.io/resources/swe-book/html/ch14.html)
+- Maintainer or personal blog: [Martin Fowler — continuous integration](https://martinfowler.com/articles/continuousIntegration.html)
+- Technical blog: [Google Testing Blog — hermetic servers](https://testing.googleblog.com/2012/10/hermetic-servers.html)
+- Hands-on guide: [Testcontainers — getting started](https://testcontainers.com/getting-started/)

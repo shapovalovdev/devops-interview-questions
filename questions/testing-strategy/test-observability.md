@@ -5,7 +5,10 @@ difficulty: senior
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://opentelemetry.io/docs/specs/otel/
+    source_type: standard
+    verified_on: 2026-08-10
+  - url: https://opentelemetry.io/docs/
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,13 +26,14 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/)
+- [OpenTelemetry documentation](https://opentelemetry.io/docs/)
+- Further reading (blog): [Honeycomb — what observability-driven development is not](https://www.honeycomb.io/blog/observability-driven-development)
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [OpenTelemetry documentation](https://opentelemetry.io/docs/)
+- Manual or specification: [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/)
+- Maintainer or personal blog: [Pete Hodgson — domain-oriented observability](https://martinfowler.com/articles/domain-oriented-observability.html)
+- Technical blog: [Honeycomb — what observability-driven development is not](https://www.honeycomb.io/blog/observability-driven-development)
+- Hands-on guide: [OpenTelemetry — Python getting started](https://opentelemetry.io/docs/languages/python/getting-started/)

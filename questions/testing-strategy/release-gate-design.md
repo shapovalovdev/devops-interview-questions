@@ -5,7 +5,10 @@ difficulty: staff
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://sre.google/sre-book/release-engineering/
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,13 +26,14 @@ How should a team approach this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [Argo Rollouts — analysis and progressive delivery](https://argo-rollouts.readthedocs.io/en/stable/features/analysis/)
+- [Google SRE Book — release engineering](https://sre.google/sre-book/release-engineering/)
+- Further reading (blog): [AWS Builders' Library — automating safe, hands-off deployments](https://aws.amazon.com/builders-library/automating-safe-hands-off-deployments/)
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [Argo Rollouts — analysis and progressive delivery](https://argo-rollouts.readthedocs.io/en/stable/features/analysis/)
+- Manual or specification: [Google SRE Book — release engineering](https://sre.google/sre-book/release-engineering/)
+- Maintainer or personal blog: [Jez Humble and Dave Farley — continuous testing](https://continuousdelivery.com/foundations/test-automation/)
+- Technical blog: [AWS Builders' Library — automating safe, hands-off deployments](https://aws.amazon.com/builders-library/automating-safe-hands-off-deployments/)
+- Hands-on guide: [Flagger — Istio canary deployment tutorial](https://docs.flagger.app/tutorials/istio-progressive-delivery)
