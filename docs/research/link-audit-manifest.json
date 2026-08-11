@@ -1640,13 +1640,22 @@
     {"question": "questions/testing-strategy/test-suite-ownership.md", "related_materials": "docs/related-materials/testing-strategy.md"},
     {"question": "questions/testing-strategy/unit-test-design.md", "related_materials": "docs/related-materials/testing-strategy.md"},
     {
+      "question": "questions/platform-engineering/choose-a-guardrail-over-a-gate.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
       "question": "questions/platform-engineering/define-an-internal-developer-platform.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
       "question": "questions/platform-engineering/explain-a-paved-road-and-a-golden-path.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
+      "question": "questions/platform-engineering/make-platform-documentation-discoverable.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
       "question": "questions/platform-engineering/offer-self-service-with-safe-defaults.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/scope-what-the-platform-owns.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
       "question": "questions/platform-engineering/treat-the-platform-as-a-product.md", "related_materials": "docs/related-materials/platform-engineering.md"
