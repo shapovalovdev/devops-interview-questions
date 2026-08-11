@@ -12,11 +12,14 @@ sources:
 
 # When and how should a service shed load?
 
+Your service is offered three times its capacity, every request now times out, and nobody is being served. What should it drop, on what signal, and at which layer?
+
 ## Answer guide
 
-- Start by defining the user-visible outcome and workload boundary before choosing a number. For admission control and graceful degradation, record the request class, time window, traffic mix, dependency versions, and the service-level objective or explicit decision that the measurement will inform.
-- Measure a repeatable baseline, then change one plausible cause at a time. Compare latency distribution, throughput, errors, resource saturation, and cost against the same workload; use traces or profiles to connect an observed symptom to the resource or dependency doing the work.
-- Treat the result as conditional rather than universal. Cache state, retries, background jobs, autoscaling, noisy neighbors, and sampling can change the outcome. Define an abort or rollback condition, retain raw evidence, and verify that an apparent improvement does not move delay, failures, or cost to another component.
+- Past capacity the question is not whether requests fail but which ones, and shedding early is what turns total failure into partial service. Reject at admission, before the request takes a thread, a connection, or a downstream call, and reject cheaply — a 503 or 429 with `Retry-After` costs almost nothing, while a request that times out after 30 seconds has held the resource for all 30. Choose victims deliberately: background and batch work before interactive traffic, low tier before high, using a priority carried in the request rather than inferred at the edge.
+- Trigger on a queueing signal rather than on utilization. Queue depth, queue wait time, or the ratio of in-flight concurrency to a measured limit all move before CPU does and do not need a hand-tuned threshold; adaptive concurrency controllers infer the limit from observed latency instead. Pair shedding with a bounded queue, because an unbounded queue converts overload into unbounded latency, and drop any request whose deadline expired while it waited — serving it consumes capacity to produce a response nobody is still listening for.
+- Shedding only helps if clients cooperate. They must back off with jitter, honour `Retry-After`, and hold a retry budget, or the shed load returns immediately and amplifies the overload it was meant to relieve; a circuit breaker on the caller is part of the same design. Make every rejection attributable with metrics by class and reason, or you cannot tell a healthy shed from an outage. And keep the reject path genuinely cheap — if it still authenticates, queries a database, or writes an audit record per request, the rejection path becomes the new bottleneck.
+- Shedding a uniform percentage of requests is usually the wrong shape: a page that issues ten backend calls will show an error to nearly every user at a ten percent uniform shed rate, so dropping whole low-priority classes or whole sessions serves more people. Shedding also conceals its own cause and can mask a capacity shortfall for months, so treat shed rate as an objective-affecting signal that pages, not as a success metric. Placing the control upstream of a queue that other consumers drain can starve them, so put it where the whole priority order is visible.
 
 ## References
 
