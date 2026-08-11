@@ -46,7 +46,11 @@ BROWSER_USER_AGENT = (
 MAX_ATTEMPTS = 3
 DEFAULT_RETRY_DELAY_SECONDS = 0.5
 MAX_RETRY_AFTER_SECONDS = 30.0
-HOST_REQUEST_INTERVAL_SECONDS = 0.2
+# One request per second per host. A link checker that fires five requests a
+# second at one host gets throttled, and csrc.nist.gov expresses throttling as
+# 404 rather than 429 — indistinguishable from a dead page by status alone.
+HOST_REQUEST_INTERVAL_SECONDS = 1.0
+CONFIRMATION_DELAYS_SECONDS = (2.0, 5.0)
 LIVE_CHECK_WORKERS = 8
 TRANSIENT_STATUSES = {403, 418, 429}
 
@@ -191,14 +195,19 @@ def confirm_permanent_failure(url: str, timeout: float, *, sleeper=time.sleep) -
     A status alone therefore cannot distinguish a withdrawn document from a
     bot-blocked one.
 
-    So a permanent status is confirmed with a second, differently shaped request
-    before the link is declared dead. A genuinely removed page answers `404` to
-    any agent, so this does not weaken the gate: returns the failing result when
+    So a permanent status is confirmed with further, differently shaped requests
+    before the link is declared dead, spaced out because the blocking is
+    rate-driven. A genuinely removed page answers `404` to any agent however long
+    you wait, so this does not weaken the gate: returns the failing result when
     the failure is real, and `None` when the resource is actually reachable.
     """
-    sleeper(DEFAULT_RETRY_DELAY_SECONDS)
-    result = fetch_result(url, timeout, user_agent=BROWSER_USER_AGENT)
-    return None if 200 <= result.status < 400 else result
+    result = None
+    for delay in CONFIRMATION_DELAYS_SECONDS:
+        sleeper(delay)
+        result = fetch_result(url, timeout, user_agent=BROWSER_USER_AGENT)
+        if 200 <= result.status < 400:
+            return None
+    return result
 
 
 def is_retryable_transport_error(error: BaseException) -> bool:

@@ -53,8 +53,10 @@ connectivity reports this for a dual-stack host that is perfectly healthy over
 IPv4; `gnu.org` is the recurring example. That is a fact about the checker's
 network, not evidence that the resource is gone.
 
-A permanent HTTP status is re-checked once with a browser `User-Agent` before
-the link is declared dead. Some hosts answer an unrecognised agent with `404`
+The checker sends at most one request per second to any single host, and
+concurrency across different hosts keeps the run workable. A permanent HTTP
+status is then re-checked twice with a browser `User-Agent`, spaced two and
+five seconds apart, before the link is declared dead. Some hosts answer an unrecognised agent with `404`
 rather than `403`, and only after they have seen a few requests: `csrc.nist.gov`
 failed a different pair of URLs on each CI run while its other thirteen
 citations passed, and every one of them served `200` to a browser agent. A
