@@ -1643,6 +1643,12 @@
       "question": "questions/platform-engineering/choose-a-guardrail-over-a-gate.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
+      "question": "questions/platform-engineering/choose-between-mandated-and-voluntary-adoption.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/consolidate-two-competing-internal-platforms.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
       "question": "questions/platform-engineering/contain-a-noisy-neighbour-on-a-shared-platform.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
