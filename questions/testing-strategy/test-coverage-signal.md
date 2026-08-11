@@ -5,7 +5,10 @@ difficulty: junior
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://coverage.readthedocs.io/en/latest/branch.html
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://abseil.io/resources/swe-book/html/ch11.html
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,13 +26,14 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [Coverage.py — branch coverage measurement](https://coverage.readthedocs.io/en/latest/branch.html)
+- [Software Engineering at Google — testing overview](https://abseil.io/resources/swe-book/html/ch11.html)
+- Further reading (blog): [Google Testing Blog — code coverage best practices](https://testing.googleblog.com/2020/08/code-coverage-best-practices.html)
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [Coverage.py documentation](https://coverage.readthedocs.io/en/latest/)
+- Manual or specification: [Software Engineering at Google — testing overview](https://abseil.io/resources/swe-book/html/ch11.html)
+- Maintainer or personal blog: [Martin Fowler — test coverage](https://martinfowler.com/bliki/TestCoverage.html)
+- Technical blog: [Google Testing Blog — code coverage best practices](https://testing.googleblog.com/2020/08/code-coverage-best-practices.html)
+- Hands-on guide: [Coverage.py — branch coverage measurement](https://coverage.readthedocs.io/en/latest/branch.html)

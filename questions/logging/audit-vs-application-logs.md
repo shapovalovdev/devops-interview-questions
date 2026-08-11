@@ -28,7 +28,7 @@ Why should audit events not be treated as ordinary application diagnostics?
 ## What to learn next
 
 - Official documentation: [Kubernetes audit logging](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
-- Manual or specification: [NIST SP 800-92](https://csrc.nist.gov/pubs/sp/800/92/final)
+- Manual or specification: [NIST SP 800-92 Rev. 1 (initial public draft) — guide to computer security log management](https://csrc.nist.gov/pubs/sp/800/92/r1/ipd)
 - Maintainer or personal blog: [Troy Hunt's blog](https://www.troyhunt.com/)
 - Technical blog: [Google Cloud audit logs](https://cloud.google.com/logging/docs/audit)
 - Hands-on guide: [AWS CloudTrail user guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html)

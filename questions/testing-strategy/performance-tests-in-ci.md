@@ -5,7 +5,10 @@ difficulty: senior
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://grafana.com/docs/k6/latest/testing-guides/automated-performance-testing/
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://sre.google/sre-book/testing-reliability/
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,13 +26,14 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [Grafana k6 — automated performance testing](https://grafana.com/docs/k6/latest/testing-guides/automated-performance-testing/)
+- [Google SRE Book — testing for reliability](https://sre.google/sre-book/testing-reliability/)
+- Further reading (blog): [Slack Engineering — continuous load testing](https://slack.engineering/continuous-load-testing/)
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [Grafana k6 documentation](https://grafana.com/docs/k6/latest/)
+- Manual or specification: [Google SRE Book — testing for reliability](https://sre.google/sre-book/testing-reliability/)
+- Maintainer or personal blog: [Brendan Gregg — active benchmarking](https://www.brendangregg.com/activebenchmarking.html)
+- Technical blog: [Slack Engineering — continuous load testing](https://slack.engineering/continuous-load-testing/)
+- Hands-on guide: [Grafana k6 — automated performance testing](https://grafana.com/docs/k6/latest/testing-guides/automated-performance-testing/)

@@ -5,7 +5,7 @@ difficulty: middle
 type: scenario
 tags: [logging, security, governance, cost-optimization]
 sources:
-  - url: https://csrc.nist.gov/pubs/sp/800/92/final
+  - url: https://csrc.nist.gov/pubs/sp/800/92/r1/ipd
     source_type: official-docs
     verified_on: 2026-08-06
 ---
@@ -22,13 +22,13 @@ How should a platform choose log retention periods?
 
 ## References
 
-- [NIST SP 800-92: guide to computer security log management](https://csrc.nist.gov/pubs/sp/800/92/final)
+- [NIST SP 800-92 Rev. 1 (initial public draft) — guide to computer security log management](https://csrc.nist.gov/pubs/sp/800/92/r1/ipd)
 - Further reading (blog): [Google Cloud: log retention](https://cloud.google.com/logging/docs/storage)
 
 ## What to learn next
 
 - Official documentation: [Google Cloud log retention](https://cloud.google.com/logging/docs/storage)
-- Manual or specification: [NIST SP 800-92](https://csrc.nist.gov/pubs/sp/800/92/final)
+- Manual or specification: [NIST SP 800-92 Rev. 1 (initial public draft) — guide to computer security log management](https://csrc.nist.gov/pubs/sp/800/92/r1/ipd)
 - Maintainer or personal blog: [Troy Hunt's blog](https://www.troyhunt.com/)
 - Technical blog: [AWS CloudWatch Logs data-protection practices](https://aws.amazon.com/blogs/mt/how-amazon-cloudwatch-logs-data-protection-can-help-detect-and-protect-sensitive-log-data/)
 - Hands-on guide: [OpenSearch index state management](https://docs.opensearch.org/latest/im-plugin/ism/index/)

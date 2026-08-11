@@ -36,6 +36,7 @@ This map uses the DevOps roadmap as a coverage guide, not as copied content. Eac
 | Performance engineering | `performance-engineering` |
 | Systems performance (Brendan Gregg concepts) | `systems-performance` |
 | Site reliability engineering | `sre` |
+| Testing strategy and quality | `testing-strategy` |
 | Cloud financial management | `finops` |
 
 ## Coverage rule
