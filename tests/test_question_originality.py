@@ -5,8 +5,11 @@ A Question can satisfy `validate_questions.py` completely — front-matter sourc
 a long-enough answer guide, References, a blog link, five curated learning links
 — and still say nothing. Three Themes were built by stamping the same prompt and
 the same answer-guide bullets across every file: 19 `testing-strategy` Questions
-literally ask "How should a team make this testing strategy decision?", and all
-25 `performance-engineering` Questions share two identical bullets.
+literally asked "How should a team make this testing strategy decision?", three
+`caching` Questions shared one generic prompt, and all 25
+`performance-engineering` Questions share two identical bullets. The
+`testing-strategy` and `caching` clusters were rewritten under issue #103; the
+`performance-engineering` cluster is still on the backlog below.
 
 Structure validators cannot see that, so this test checks distinctiveness
 directly:
@@ -35,9 +38,6 @@ MIN_BULLET_LENGTH = 40
 
 # Tracked by the Question-rewrite issue. Remove entries as they are rewritten.
 KNOWN_BOILERPLATE = {
-    "questions/caching/cache-aside-basics.md",
-    "questions/caching/cache-consistency-tradeoffs.md",
-    "questions/caching/cache-invalidation-policy.md",
     "questions/performance-engineering/avoid-metric-cardinality.md",
     "questions/performance-engineering/benchmark-control-variables.md",
     "questions/performance-engineering/benchmark-production-safety.md",
@@ -63,9 +63,6 @@ KNOWN_BOILERPLATE = {
     "questions/performance-engineering/tail-latency-triage.md",
     "questions/performance-engineering/throughput-and-concurrency.md",
     "questions/performance-engineering/trace-critical-path.md",
-    "questions/testing-strategy/test-suite-execution-policy.md",
-    "questions/testing-strategy/test-suite-ownership.md",
-    "questions/testing-strategy/unit-test-design.md",
 }
 
 
