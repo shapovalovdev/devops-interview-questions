@@ -15,14 +15,14 @@ sources:
 
 # Set production experiment guardrails
 
-How should a team make this testing strategy decision?
+Product wants to run a pricing experiment on 10% of live checkout traffic, and the platform team wants assurance it cannot become an incident. What guardrails have to exist before the flag is switched on, and who is allowed to turn it off?
 
 ## Answer guide
 
-- Define the user-facing risk and select evidence that represents it without making every change wait on slow, unrelated systems.
-- Keep dependencies, data ownership, and environment isolation explicit so results are reproducible and failures are diagnosable.
-- Balance test cost, feedback speed, and release confidence; combine automated checks with reviews and operational signals.
-- Reassess after incidents and architecture changes because an uncontrolled test boundary can become a source of false confidence.
+- Separate the release decision from the experiment decision, and give each its own mechanism. Ship the code dark behind a flag evaluated through a defined interface — OpenFeature-style, so the SDK and the provider can change without touching call sites — with a fail-closed default: if evaluation errors or the provider is unreachable, the control path runs. Targeting must be deterministic on a stable unit such as account or session ID, so a user does not flip between variants mid-checkout and corrupt both the experience and the measurement.
+- Guardrail metrics are not the experiment's success metrics. Before launch, name the small set of signals that abort the experiment regardless of how the pricing metric performs — error ratio, checkout completion rate, p99 latency, payment declines — with a threshold and an evaluation window each, wired to automated evaluation rather than a dashboard someone might be watching. Run a pre-experiment A/A test on the same split to measure how much those metrics vary with no change at all; that variance sets the thresholds honestly.
+- Kill authority has to be explicit and cheap to exercise. The flag must be switchable to control by whoever is on call, without a deploy, a code review, or the experiment owner's approval, and the switch must take effect within a bounded time you have actually measured, including SDK cache and CDN TTLs. Write down the blast-radius ramp — 1%, 5%, 10% with a soak at each — a hard end date after which the flag defaults off, and the cleanup ticket, because a flag whose owner has left the team is a permanent untested branch.
+- Failure modes: an experiment that changes something irreversible, so aborting does not undo it — money moved, an email sent, a record written in the variant's schema — which makes it a migration wearing an experiment's clothes; guardrails evaluated on aggregate traffic where a 10% arm's regression is invisible; caching or CDN layers keyed without the variant so the two arms contaminate each other; and flag evaluation inside a hot path with a synchronous network call, where the guardrail itself becomes the latency incident.
 
 ## References
 
