@@ -12,11 +12,14 @@ sources:
 
 # How would a staff engineer prioritize a portfolio of performance work?
 
+You have four engineers for a quarter and eleven proposed performance projects competing for them. How do you decide what gets funded, and how do you defend the decision afterwards?
+
 ## Answer guide
 
-- Start by defining the user-visible outcome and workload boundary before choosing a number. For user impact, cost, risk, and ownership, record the request class, time window, traffic mix, dependency versions, and the service-level objective or explicit decision that the measurement will inform.
-- Measure a repeatable baseline, then change one plausible cause at a time. Compare latency distribution, throughput, errors, resource saturation, and cost against the same workload; use traces or profiles to connect an observed symptom to the resource or dependency doing the work.
-- Treat the result as conditional rather than universal. Cache state, retries, background jobs, autoscaling, noisy neighbors, and sampling can change the outcome. Define an abort or rollback condition, retain raw evidence, and verify that an apparent improvement does not move delay, failures, or cost to another component.
+- Rank by expected user-visible or financial benefit per engineer-week, with the estimate written down before the work starts so it can be checked against the outcome. Convert every proposal into the same unit — error budget recovered, share of requests brought under the objective, or infrastructure cost removed — and discount each by confidence. A change that takes 100 ms off 40 percent of requests usually beats halving a path that 2 percent of traffic touches, and stating it arithmetically keeps the decision out of the hands of whoever argues hardest.
+- Profile the portfolio the way you would profile a service. Aggregate where end-to-end time and cost genuinely go across the fleet before accepting proposals, because most candidate lists are assembled from what individual engineers happened to notice. Amdahl's law bounds every entry: a component worth 15 percent of the critical path caps its own win at 15 percent however elegant the fix. Prefer work that removes work — a query, a fan-out hop, a serialization round trip — over work that makes the same work faster, since removed work cannot regress later.
+- Reserve part of the budget for capability rather than fixes: the missing per-tenant metric, a profiler that can run safely in production, a benchmark harness with a versioned dataset. A portfolio with no measurement investment reproduces the same unresolvable argument next quarter. Price carrying cost too, because a cache, a shard, or a precomputation pipeline adds permanent operational surface and its benefit has to clear both the build cost and that ongoing cost. Then sequence for risk, shipping reversible and independently deployable items first.
+- Funding by loudest recent incident produces a quarter of tail-chasing; funding a rewrite produces a quarter with nothing shipped and no measurement either way. Benefits claimed but never re-measured get counted again in the next planning round, so make a post-hoc measurement against the pre-registered estimate part of the definition of done. And an item that improves an internal metric without moving a user-facing objective or a cost line should lose to one that does, however satisfying the internal number is.
 
 ## References
 
