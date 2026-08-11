@@ -1643,6 +1643,9 @@
       "question": "questions/platform-engineering/choose-a-guardrail-over-a-gate.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
+      "question": "questions/platform-engineering/contain-a-noisy-neighbour-on-a-shared-platform.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
       "question": "questions/platform-engineering/define-an-internal-developer-platform.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
@@ -1650,6 +1653,12 @@
     },
     {
       "question": "questions/platform-engineering/make-platform-documentation-discoverable.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/measure-developer-experience.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/measure-platform-adoption.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
       "question": "questions/platform-engineering/offer-self-service-with-safe-defaults.md", "related_materials": "docs/related-materials/platform-engineering.md"
@@ -1662,6 +1671,9 @@
     },
     {
       "question": "questions/platform-engineering/retire-a-platform-capability.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/run-a-platform-wide-incident.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
       "question": "questions/platform-engineering/scope-what-the-platform-owns.md", "related_materials": "docs/related-materials/platform-engineering.md"
