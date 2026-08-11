@@ -53,12 +53,22 @@ connectivity reports this for a dual-stack host that is perfectly healthy over
 IPv4; `gnu.org` is the recurring example. That is a fact about the checker's
 network, not evidence that the resource is gone.
 
-Permanent failures remain hard errors. In particular, `404` and other permanent
-HTTP failures, DNS errors, and TLS errors fail the live-check gate and must be
-fixed or removed after review. A host that has actually disappeared fails DNS
-resolution, which is why DNS failure stays a hard error even though it arrives
-as an `OSError` like the unroutable cases above. The retry policy is
-status-based and applies to every host; it is not a domain allowlist.
+A permanent HTTP status is re-checked once with a browser `User-Agent` before
+the link is declared dead. Some hosts answer an unrecognised agent with `404`
+rather than `403`, and only after they have seen a few requests: `csrc.nist.gov`
+failed a different pair of URLs on each CI run while its other thirteen
+citations passed, and every one of them served `200` to a browser agent. A
+status alone cannot separate a withdrawn document from a bot-blocked one, so the
+validator confirms with a differently shaped request. A genuinely removed page
+answers `404` to any agent, so the gate is not weakened.
+
+Permanent failures remain hard errors. In particular, a `404` confirmed under
+both agents, other permanent HTTP failures, DNS errors, and TLS errors fail the
+live-check gate and must be fixed or removed after review. A host that has
+actually disappeared fails DNS resolution, which is why DNS failure stays a hard
+error even though it arrives as an `OSError` like the unroutable cases above.
+The retry policy is status-based and applies to every host; it is not a domain
+allowlist.
 
 For local certificate-store setups that do not trust public roots by default,
 run the check with `SSL_CERT_FILE="$(python3 -m certifi)"` after installing
