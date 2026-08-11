@@ -64,6 +64,16 @@ status alone cannot separate a withdrawn document from a bot-blocked one, so the
 validator confirms with a differently shaped request. A genuinely removed page
 answers `404` to any agent, so the gate is not weakened.
 
+A very small number of hosts cannot be liveness-checked from CI at all:
+`csrc.nist.gov` answers GitHub-hosted runners with `404` for documents that
+exist, and the failing set changes from run to run. Those hosts are listed in
+`docs/research/unverifiable-hosts.json` with evidence and a manual verification
+date, and a permanent status from one of them is reported as *unverifiable*
+rather than broken. This is the one place the gate stops protecting the
+database, so `tests/test_unverifiable_hosts.py` caps the list, requires stated
+evidence, and fails the build when an entry has not been re-verified inside the
+review window.
+
 Permanent failures remain hard errors. In particular, a `404` confirmed under
 both agents, other permanent HTTP failures, DNS errors, and certificate-verification errors fail the
 live-check gate and must be fixed or removed after review. A host that has
