@@ -29,6 +29,10 @@
       "state": "complete"
     },
     {
+      "name": "chaos-engineering",
+      "state": "complete"
+    },
+    {
       "name": "ci-cd",
       "state": "complete"
     },
