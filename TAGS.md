@@ -4,7 +4,7 @@ Use lowercase kebab-case tags. Give every question one or more technology or con
 
 ## Technologies and concepts
 
-`ansible`, `architecture`, `argo`, `argo-cd`, `argo-events`, `argo-rollouts`, `argo-workflows`, `aws`, `bash`, `caching`, `build-cache`, `build-secrets`, `capacity-planning`, `capabilities`, `cdn`, `cgroups`, `ci-cd`, `cka`, `cloud`, `cni`, `configuration-management`, `container-runtime`, `containers`, `cost-optimization`, `cpu`, `databases`, `distributed-systems`, `dns`, `docker`, `dockerfile`, `event-driven`, `filesystem`, `firmware`, `gateway-api`, `git`, `github-actions`, `governance`, `hardware`, `healthchecks`, `http`, `iam`, `image-digests`, `image-tags`, `images`, `inference`, `infrastructure-as-code`, `ipam`, `ipmi`, `istio`, `jwt`, `kafka`, `kubernetes`, `kyverno`, `least-privilege`, `linux`, `llm`, `logging`, `memcached`, `memory`, `message-queues`, `monitoring`, `mount-namespace`, `mtls`, `multi-platform`, `multi-stage-builds`, `multus`, `namespaces`, `networking`, `nginx`, `observability`, `performance`, `pid-1`, `platform-engineering`, `policy-as-code`, `power`, `process-isolation`, `postgresql`, `prometheus`, `quality`, `rabbitmq`, `raid`, `redfish`, `redis`, `registries`, `resource-limits`, `rootless`, `routing`, `scripting`, `seccomp`, `security`, `sensors`, `server-hardware`, `service-mesh`, `shell`, `signals`, `sre`, `storage`, `supply-chain`, `tcp`, `terraform`, `testing-strategy`, `tls`, `traffic-management`, `user-namespace`, `version-control`, `virtualization`, `volumes`, `web-server`
+`ansible`, `architecture`, `argo`, `argo-cd`, `argo-events`, `argo-rollouts`, `argo-workflows`, `aws`, `bash`, `caching`, `build-cache`, `build-secrets`, `capacity-planning`, `capabilities`, `cdn`, `cgroups`, `ci-cd`, `cka`, `cloud`, `cni`, `configuration-management`, `container-runtime`, `containers`, `cost-optimization`, `cpu`, `databases`, `distributed-systems`, `dns`, `docker`, `dockerfile`, `event-driven`, `filesystem`, `finops`, `firmware`, `gateway-api`, `git`, `github-actions`, `governance`, `hardware`, `healthchecks`, `http`, `iam`, `image-digests`, `image-tags`, `images`, `inference`, `infrastructure-as-code`, `ipam`, `ipmi`, `istio`, `jwt`, `kafka`, `kubernetes`, `kyverno`, `least-privilege`, `linux`, `llm`, `logging`, `memcached`, `memory`, `message-queues`, `monitoring`, `mount-namespace`, `mtls`, `multi-platform`, `multi-stage-builds`, `multus`, `namespaces`, `networking`, `nginx`, `observability`, `performance`, `pid-1`, `platform-engineering`, `policy-as-code`, `power`, `process-isolation`, `postgresql`, `prometheus`, `quality`, `rabbitmq`, `raid`, `redfish`, `redis`, `registries`, `resource-limits`, `rootless`, `routing`, `scripting`, `seccomp`, `security`, `sensors`, `server-hardware`, `service-mesh`, `shell`, `signals`, `sre`, `storage`, `supply-chain`, `tcp`, `terraform`, `testing-strategy`, `tls`, `traffic-management`, `user-namespace`, `version-control`, `virtualization`, `volumes`, `web-server`
 
 ## Practices
 
@@ -15,6 +15,10 @@ Use lowercase kebab-case tags. Give every question one or more technology or con
 ## Operational and performance concepts
 
 `boot`, `capacity`, `certificates`, `change-management`, `conntrack`, `dependencies`, `disk`, `file-descriptors`, `incident-management`, `io`, `journald`, `kernel`, `latency`, `leadership`, `limits`, `load`, `logs`, `metrics`, `mount`, `nfs`, `ntp`, `oom`, `operations`, `packages`, `packet-loss`, `panic`, `permissions`, `pid1`, `processes`, `recovery`, `resolver`, `runbooks`, `selinux`, `systemd`, `time`
+
+## Cloud financial management
+
+`anomaly-detection`, `budgeting`, `chargeback`, `commitment-discounts`, `cost-allocation`, `data-transfer`, `forecasting`, `rightsizing`, `spot-instances`, `tagging`, `unit-economics`
 
 ## Certifications
 

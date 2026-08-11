@@ -57,6 +57,10 @@
       "state": "complete"
     },
     {
+      "name": "finops",
+      "state": "in-progress"
+    },
+    {
       "name": "hardware",
       "state": "complete"
     },
