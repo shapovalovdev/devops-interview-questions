@@ -1587,6 +1587,10 @@
     {"question": "questions/serverless/secure-function-identity.md", "related_materials": "docs/related-materials/serverless.md"},
     {"question": "questions/serverless/standardize-serverless-event-contracts.md", "related_materials": "docs/related-materials/serverless.md"},
     {"question": "questions/serverless/test-serverless-integrations.md", "related_materials": "docs/related-materials/serverless.md"},
-    {"question": "questions/serverless/trace-ephemeral-function-requests.md", "related_materials": "docs/related-materials/serverless.md"}
+    {"question": "questions/serverless/trace-ephemeral-function-requests.md", "related_materials": "docs/related-materials/serverless.md"},
+    {"question": "questions/chaos-engineering/abort-a-running-experiment.md", "related_materials": "docs/related-materials/chaos-engineering.md"},
+    {"question": "questions/chaos-engineering/choose-a-first-chaos-experiment.md", "related_materials": "docs/related-materials/chaos-engineering.md"},
+    {"question": "questions/chaos-engineering/define-chaos-engineering.md", "related_materials": "docs/related-materials/chaos-engineering.md"},
+    {"question": "questions/chaos-engineering/state-a-steady-state-hypothesis.md", "related_materials": "docs/related-materials/chaos-engineering.md"}
   ]
 }
