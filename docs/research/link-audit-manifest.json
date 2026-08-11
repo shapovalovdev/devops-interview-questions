@@ -1597,6 +1597,7 @@
     {"question": "questions/finops/explain-showback-and-chargeback.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/forecast-next-quarter-cloud-spend.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/investigate-a-cost-anomaly-alert.md", "related_materials": "docs/related-materials/finops.md"},
+    {"question": "questions/finops/manage-commitment-risk-on-a-changing-fleet.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/model-cost-per-transaction-for-a-service.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/normalise-multi-cloud-billing-data-with-focus.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/read-a-cloud-bill-and-find-its-drivers.md", "related_materials": "docs/related-materials/finops.md"},
@@ -1604,9 +1605,12 @@
     {"question": "questions/finops/rightsize-overprovisioned-compute.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/run-production-work-on-spot-capacity.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/set-a-cloud-budget-and-alert.md", "related_materials": "docs/related-materials/finops.md"},
+    {"question": "questions/finops/set-incentives-for-cost-accountability.md", "related_materials": "docs/related-materials/finops.md"},
+    {"question": "questions/finops/stand-up-a-finops-practice.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/tag-resources-for-cost-allocation.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/tier-object-storage-with-lifecycle-rules.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/trace-an-unexplained-data-transfer-bill.md", "related_materials": "docs/related-materials/finops.md"},
-    {"question": "questions/finops/trade-cost-against-reliability.md", "related_materials": "docs/related-materials/finops.md"}
+    {"question": "questions/finops/trade-cost-against-reliability.md", "related_materials": "docs/related-materials/finops.md"},
+    {"question": "questions/finops/tune-autoscaling-for-cost-and-latency.md", "related_materials": "docs/related-materials/finops.md"}
   ]
 }
