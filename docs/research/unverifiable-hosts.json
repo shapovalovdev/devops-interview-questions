@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "policy": "Hosts whose liveness cannot be established from GitHub-hosted runners. A permanent HTTP status from one of these hosts is reported as unverifiable rather than broken. Every entry must record evidence that the resource is genuinely reachable from a normal client, and a manual verification date that tests/test_unverifiable_hosts.py requires to stay within review_interval_days. This is not a way to silence a dead link: if a URL on one of these hosts is actually gone, the next manual review must catch it and the entry must be removed once the host becomes checkable again.",
+  "review_interval_days": 90,
+  "max_hosts": 5,
+  "hosts": [
+    {
+      "host": "csrc.nist.gov",
+      "reason": "Answers GitHub-hosted runners with HTTP 404 under sustained load, including for documents that exist. The status is indistinguishable from a withdrawn publication, so the live gate cannot judge this host.",
+      "evidence": "Across four CI runs the failing set changed every time (800-92/final, then 800-92/r1/ipd and 800-122/final, then 800-122/final plus 800-34/r1/final) while the other NIST citations in the same run passed. Every failing URL returned HTTP 200 from a normal client, both with the audit User-Agent and a browser User-Agent. Host pacing at one request per second and three browser-agent confirmations spaced 2s, 5s and 15s did not clear it.",
+      "verified_manually_on": "2026-08-11",
+      "urls_in_use": 15
+    }
+  ]
+}
