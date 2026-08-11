@@ -5,7 +5,7 @@ difficulty: junior
 type: theory
 tags: [security, logging, observability, cks]
 sources:
-  - url: https://csrc.nist.gov/pubs/sp/800/92/final
+  - url: https://csrc.nist.gov/pubs/sp/800/92/r1/ipd
     source_type: standard
     verified_on: 2026-08-06
 ---
@@ -24,7 +24,7 @@ Which events should a service log for security investigations, and what must nev
 ## References
 
 - Further reading (blog): [Complementary security practice article](https://snyk.io/blog/container-security-best-practices/)
-- [NIST SP 800-92: Guide to Computer Security Log Management](https://csrc.nist.gov/pubs/sp/800/92/final)
+- [NIST SP 800-92 Rev. 1 (initial public draft) — guide to computer security log management](https://csrc.nist.gov/pubs/sp/800/92/r1/ipd)
 - [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 
 ## What to learn next
