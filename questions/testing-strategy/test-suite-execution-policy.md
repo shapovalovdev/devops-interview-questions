@@ -5,7 +5,10 @@ difficulty: middle
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://docs.github.com/en/actions
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://docs.pytest.org/en/stable/how-to/mark.html
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,13 +26,14 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [GitHub Actions documentation](https://docs.github.com/en/actions)
+- [pytest — how to mark test functions with attributes](https://docs.pytest.org/en/stable/how-to/mark.html)
+- Further reading (blog): [Slack Engineering — handling flaky tests at scale](https://slack.engineering/handling-flaky-tests-at-scale-auto-detection-suppression/)
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [GitHub Actions documentation](https://docs.github.com/en/actions)
+- Manual or specification: [Software Engineering at Google — larger testing](https://abseil.io/resources/swe-book/html/ch14.html)
+- Maintainer or personal blog: [Martin Fowler — on the diverse and fantastical shapes of testing](https://martinfowler.com/articles/2021-test-shapes.html)
+- Technical blog: [Slack Engineering — handling flaky tests at scale](https://slack.engineering/handling-flaky-tests-at-scale-auto-detection-suppression/)
+- Hands-on guide: [pytest — how to mark test functions with attributes](https://docs.pytest.org/en/stable/how-to/mark.html)

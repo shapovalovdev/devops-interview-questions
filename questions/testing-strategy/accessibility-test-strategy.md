@@ -5,7 +5,10 @@ difficulty: junior
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://www.w3.org/TR/WCAG22/
+    source_type: standard
+    verified_on: 2026-08-10
+  - url: https://www.w3.org/WAI/standards-guidelines/wcag/
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,13 +26,14 @@ How should a team make this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [W3C — Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/WCAG22/)
+- [W3C WAI — WCAG standards and guidelines overview](https://www.w3.org/WAI/standards-guidelines/wcag/)
+- Further reading (blog): [web.dev — Learn Accessibility course](https://web.dev/learn/accessibility)
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [W3C WAI — WCAG standards and guidelines overview](https://www.w3.org/WAI/standards-guidelines/wcag/)
+- Manual or specification: [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/WCAG22/)
+- Maintainer or personal blog: [Manuel Matuzovic — building the most inaccessible site possible with a perfect Lighthouse score](https://www.matuzo.at/blog/building-the-most-inaccessible-site-possible-with-a-perfect-lighthouse-score/)
+- Technical blog: [web.dev — Learn Accessibility course](https://web.dev/learn/accessibility)
+- Hands-on guide: [web.dev — how to do an accessibility review](https://web.dev/articles/how-to-review)

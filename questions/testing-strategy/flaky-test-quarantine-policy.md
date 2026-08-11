@@ -5,7 +5,10 @@ difficulty: senior
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://docs.pytest.org/en/stable/how-to/skipping.html
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://abseil.io/resources/swe-book/html/ch11.html
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,13 +26,14 @@ How should a team approach this testing strategy decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [pytest — how to skip tests and mark expected failures](https://docs.pytest.org/en/stable/how-to/skipping.html)
+- [Software Engineering at Google — testing overview](https://abseil.io/resources/swe-book/html/ch11.html)
+- Further reading (blog): [Google Testing Blog — test flakiness, one of the main challenges of automated testing](https://testing.googleblog.com/2020/12/test-flakiness-one-of-main-challenges.html)
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [Software Engineering at Google — testing](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Manual or specification: [Software Engineering at Google — testing overview](https://abseil.io/resources/swe-book/html/ch11.html)
+- Maintainer or personal blog: [Martin Fowler — eradicating non-determinism in tests](https://martinfowler.com/articles/nonDeterminism.html)
+- Technical blog: [Google Testing Blog — test flakiness, one of the main challenges of automated testing](https://testing.googleblog.com/2020/12/test-flakiness-one-of-main-challenges.html)
+- Hands-on guide: [pytest — how to skip tests and mark expected failures](https://docs.pytest.org/en/stable/how-to/skipping.html)

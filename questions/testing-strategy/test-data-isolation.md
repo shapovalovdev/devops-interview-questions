@@ -5,7 +5,10 @@ difficulty: senior
 type: scenario
 tags: [testing-strategy, quality, reliability, delivery]
 sources:
-  - url: https://martinfowler.com/articles/practical-test-pyramid.html
+  - url: https://docs.pytest.org/en/stable/how-to/fixtures.html
+    source_type: official-docs
+    verified_on: 2026-08-10
+  - url: https://abseil.io/resources/swe-book/html/ch13.html
     source_type: official-docs
     verified_on: 2026-08-10
 ---
@@ -23,13 +26,14 @@ How should an engineering team make this testing decision?
 
 ## References
 
-- [Martin Fowler — practical test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
-- Further reading (blog): [Google Testing Blog](https://testing.googleblog.com/)
+- [pytest — how to use fixtures](https://docs.pytest.org/en/stable/how-to/fixtures.html)
+- [Software Engineering at Google — test doubles](https://abseil.io/resources/swe-book/html/ch13.html)
+- Further reading (blog): [Google Testing Blog — keep tests focused](https://testing.googleblog.com/2018/06/testing-on-toilet-keep-tests-focused.html)
 
 ## What to learn next
 
-- Official documentation: [Google Testing Blog](https://testing.googleblog.com/)
-- Manual or specification: [The Google Testing Blog book](https://abseil.io/resources/swe-book/html/ch14.html)
-- Maintainer or personal blog: [Martin Fowler](https://martinfowler.com/)
-- Technical blog: [Netflix TechBlog](https://netflixtechblog.com/)
-- Hands-on guide: [pytest documentation](https://docs.pytest.org/en/stable/)
+- Official documentation: [Testcontainers — guides](https://testcontainers.com/guides/)
+- Manual or specification: [Software Engineering at Google — test doubles](https://abseil.io/resources/swe-book/html/ch13.html)
+- Maintainer or personal blog: [Martin Fowler — object mother](https://martinfowler.com/bliki/ObjectMother.html)
+- Technical blog: [Google Testing Blog — keep tests focused](https://testing.googleblog.com/2018/06/testing-on-toilet-keep-tests-focused.html)
+- Hands-on guide: [pytest — how to use fixtures](https://docs.pytest.org/en/stable/how-to/fixtures.html)
