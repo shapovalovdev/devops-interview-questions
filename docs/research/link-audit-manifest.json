@@ -1652,7 +1652,13 @@
       "question": "questions/platform-engineering/define-an-internal-developer-platform.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
+      "question": "questions/platform-engineering/design-an-escape-hatch-from-the-paved-road.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
       "question": "questions/platform-engineering/explain-a-paved-road-and-a-golden-path.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/justify-continued-platform-investment.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
       "question": "questions/platform-engineering/make-platform-documentation-discoverable.md", "related_materials": "docs/related-materials/platform-engineering.md"
@@ -1676,6 +1682,9 @@
       "question": "questions/platform-engineering/publish-platform-slos-and-a-support-model.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
+      "question": "questions/platform-engineering/recognise-when-a-platform-team-is-the-wrong-answer.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
       "question": "questions/platform-engineering/reduce-cognitive-load-with-team-topologies.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
@@ -1689,6 +1698,9 @@
     },
     {
       "question": "questions/platform-engineering/scope-what-the-platform-owns.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/size-and-staff-a-platform-team.md", "related_materials": "docs/related-materials/platform-engineering.md"
     },
     {
       "question": "questions/platform-engineering/treat-the-platform-as-a-product.md", "related_materials": "docs/related-materials/platform-engineering.md"
