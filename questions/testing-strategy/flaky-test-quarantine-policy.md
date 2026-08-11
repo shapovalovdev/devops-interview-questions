@@ -15,14 +15,14 @@ sources:
 
 # Define a flaky-test quarantine policy
 
-How should a team approach this testing strategy decision?
+Engineers have started adding `@pytest.mark.skip` to any test that fails intermittently, and the main suite is green again. Write the quarantine policy that replaces this, and say what stops quarantine from becoming a graveyard.
 
 ## Answer guide
 
-- Start with the failure mode and choose the smallest reliable test boundary that proves the important behavior.
-- Make environment, ownership, and test-data assumptions explicit; shared mutable state and uncontrolled timing make confidence misleading.
-- Use evidence from deterministic checks and targeted integration tests to decide whether a change may proceed.
-- Revisit the strategy after incidents; excessive slow checks can delay delivery without covering the highest-risk boundary.
+- Quarantine is a routing decision, not a delete. A test entering quarantine is removed from the merge-blocking job and moved to a separate scheduled job that still runs it, records pass and fail history, and reports the flake rate. `skip` erases the signal entirely; a quarantine marker such as a `flaky` mark selected out of the gating run with `-m "not flaky"` keeps it. Record the entry with an owner, the linked defect, the observed failure rate, and an expiry date in the same commit, because an unowned quarantine is indistinguishable from a deletion.
+- Entry needs a threshold rather than a judgement call: a test whose failure rate on unchanged code exceeds some small percentage over a rolling window — measured by rerunning the suite on the same commit, not by memory — qualifies. Exit needs one too: a fixed number of consecutive clean scheduled runs restores it to the gate. Expiry is the important half. When the deadline passes with no fix, the policy must force a decision, and deleting a test nobody will repair is a legitimate outcome as long as the risk it covered is written down.
+- Cap the blast radius. Enforce a maximum share of the suite that may sit in quarantine at once and fail the pipeline when it is exceeded, otherwise quarantine absorbs regressions faster than anyone fixes them. Exclude tests covering the journeys you would page for: if the only coverage of checkout is quarantined, the correct action is to fix or replace it, not to ship without it. Never let quarantine status be set outside version control, because a dashboard toggle leaves no review trail.
+- Failure modes: a flaky test that was reporting a genuine race, quarantined and then closed as a test defect; retries layered on top of quarantine so a test has to fail three times to be noticed at all; quarantine growth that tracks release pressure rather than test quality; and the scheduled quarantine job itself going unwatched, so nothing observes the tests that were supposed to still be running.
 
 ## References
 
