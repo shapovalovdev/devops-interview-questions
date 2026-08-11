@@ -30,6 +30,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "docs/research/link-audit-manifest.json"
+UNVERIFIABLE_HOSTS = ROOT / "docs/research/unverifiable-hosts.json"
 REQUIRED_CATEGORIES = {
     "official documentation",
     "manual or specification",
@@ -185,6 +186,23 @@ def is_transient_status(status: int) -> bool:
     return status in TRANSIENT_STATUSES or 500 <= status < 600
 
 
+def unverifiable_hosts() -> set[str]:
+    """Hosts that cannot be liveness-checked from CI, with recorded evidence.
+
+    `csrc.nist.gov` answers GitHub-hosted runners with `404` for documents that
+    exist, and the failing set changes run to run. Retrying harder does not fix
+    that, and replacing fifteen NIST Special Publication citations with weaker
+    sources would degrade the database to suit a checker limitation.
+
+    So a permanent status from a listed host is reported as unverifiable instead
+    of broken. The entry carries evidence and a manual verification date that
+    `tests/test_unverifiable_hosts.py` requires to stay current, and every
+    occurrence is printed on each run, so this cannot quietly hide link rot.
+    """
+    data = json.loads(UNVERIFIABLE_HOSTS.read_text(encoding="utf-8"))
+    return {entry["host"] for entry in data["hosts"]}
+
+
 def confirm_permanent_failure(url: str, timeout: float, *, sleeper=time.sleep) -> FetchResult | None:
     """Re-check an apparently permanent failure with a browser User-Agent.
 
@@ -296,6 +314,8 @@ def check_url(
             confirmed = confirm_permanent_failure(url, timeout, sleeper=sleeper)
             if confirmed is None:
                 return LinkCheck(url, "ok", f"HTTP {result.status} for the audit agent, 2xx for a browser agent", attempt + 1)
+            if urlparse(url).netloc in unverifiable_hosts():
+                return LinkCheck(url, "unverifiable host", f"HTTP {result.status}", attempt + 1)
             return LinkCheck(url, "broken", f"HTTP {result.status}", attempt + 1)
         if attempt < MAX_ATTEMPTS - 1:
             sleeper(retry_delay(result.headers, attempt))
@@ -322,7 +342,7 @@ def validate_live(
     transient = [
         check
         for check in checks
-        if check.category in {"rate limited", "temporarily unavailable", "network unreachable"}
+        if check.category in {"rate limited", "temporarily unavailable", "network unreachable", "unverifiable host"}
     ]
     failures = [check for check in checks if check.category in {"broken", "network error"}]
     if transient:
