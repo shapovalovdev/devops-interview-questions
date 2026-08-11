@@ -55,8 +55,8 @@ network, not evidence that the resource is gone.
 
 The checker sends at most one request per second to any single host, and
 concurrency across different hosts keeps the run workable. A permanent HTTP
-status is then re-checked twice with a browser `User-Agent`, spaced two and
-five seconds apart, before the link is declared dead. Some hosts answer an unrecognised agent with `404`
+status is then re-checked up to three times with a browser `User-Agent`,
+spaced two, five, and fifteen seconds apart, before the link is declared dead. Some hosts answer an unrecognised agent with `404`
 rather than `403`, and only after they have seen a few requests: `csrc.nist.gov`
 failed a different pair of URLs on each CI run while its other thirteen
 citations passed, and every one of them served `200` to a browser agent. A
@@ -65,7 +65,7 @@ validator confirms with a differently shaped request. A genuinely removed page
 answers `404` to any agent, so the gate is not weakened.
 
 Permanent failures remain hard errors. In particular, a `404` confirmed under
-both agents, other permanent HTTP failures, DNS errors, and TLS errors fail the
+both agents, other permanent HTTP failures, DNS errors, and certificate-verification errors fail the
 live-check gate and must be fixed or removed after review. A host that has
 actually disappeared fails DNS resolution, which is why DNS failure stays a hard
 error even though it arrives as an `OSError` like the unroutable cases above.

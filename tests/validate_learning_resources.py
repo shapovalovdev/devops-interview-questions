@@ -50,7 +50,7 @@ MAX_RETRY_AFTER_SECONDS = 30.0
 # second at one host gets throttled, and csrc.nist.gov expresses throttling as
 # 404 rather than 429 — indistinguishable from a dead page by status alone.
 HOST_REQUEST_INTERVAL_SECONDS = 1.0
-CONFIRMATION_DELAYS_SECONDS = (2.0, 5.0)
+CONFIRMATION_DELAYS_SECONDS = (2.0, 5.0, 15.0)
 LIVE_CHECK_WORKERS = 8
 TRANSIENT_STATUSES = {403, 418, 429}
 
@@ -213,8 +213,13 @@ def confirm_permanent_failure(url: str, timeout: float, *, sleeper=time.sleep) -
 def is_retryable_transport_error(error: BaseException) -> bool:
     """Retry only temporary transport errors, never DNS or certificate failures."""
     cause = error.reason if isinstance(error, urllib.error.URLError) else error
-    if isinstance(cause, ssl.SSLError | socket.gaierror):
+    if isinstance(cause, ssl.SSLCertVerificationError | socket.gaierror):
         return False
+    if isinstance(cause, ssl.SSLError):
+        # A truncated handshake (UNEXPECTED_EOF_WHILE_READING) is a dropped
+        # connection, which is how a throttling host sheds load. Only a
+        # certificate failure is a permanent verdict about the resource.
+        return True
     if isinstance(cause, (TimeoutError, ConnectionResetError, ConnectionAbortedError)):
         return True
     return isinstance(cause, OSError) and cause.errno in {

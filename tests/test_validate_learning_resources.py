@@ -134,7 +134,7 @@ class LearningResourcesParserTests(unittest.TestCase):
     def test_dns_and_tls_errors_are_hard_failures_without_retry(self) -> None:
         for error in (
             URLError(socket.gaierror("name resolution failed")),
-            URLError(ssl.SSLError("certificate verify failed")),
+            URLError(ssl.SSLCertVerificationError("certificate verify failed")),
         ):
             with self.subTest(error=error):
                 with patch("urllib.request.urlopen", side_effect=error) as open_url:
@@ -147,6 +147,14 @@ class LearningResourcesParserTests(unittest.TestCase):
                 self.assertEqual("network error", result.category)
                 self.assertEqual(1, result.attempts)
                 self.assertEqual(1, open_url.call_count)
+
+    def test_truncated_tls_handshake_is_retried_not_declared_dead(self) -> None:
+        """UNEXPECTED_EOF is a dropped connection — how a throttling host sheds load."""
+        truncated = URLError(ssl.SSLError("[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol"))
+        with patch("urllib.request.urlopen", side_effect=[truncated, Response()]) as open_url:
+            result = check_url("https://kubernetes.io/docs/", 1, sleeper=lambda _: None, pacer=HostPacer(0))
+        self.assertEqual("ok", result.category)
+        self.assertEqual(2, open_url.call_count)
 
     def test_unroutable_network_is_indeterminate_not_broken(self) -> None:
         """A runner without IPv6 must not declare a healthy dual-stack host dead."""
