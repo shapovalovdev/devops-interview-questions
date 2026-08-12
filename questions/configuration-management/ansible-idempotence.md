@@ -3,7 +3,7 @@ title: Explain idempotence in an Ansible playbook
 theme: configuration-management
 difficulty: middle
 type: theory
-tags: [ansible, automation, configuration-management, reliability]
+tags: [ansible, automation, configuration-management, reliability, cgoa]
 sources:
   - url: https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_checkmode.html
     source_type: official-docs

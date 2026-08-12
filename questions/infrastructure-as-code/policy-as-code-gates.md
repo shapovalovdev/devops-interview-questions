@@ -3,7 +3,7 @@ title: Design policy-as-code gates for Terraform delivery
 theme: infrastructure-as-code
 difficulty: senior
 type: scenario
-tags: [terraform, infrastructure-as-code, security, automation, governance]
+tags: [terraform, infrastructure-as-code, security, automation, governance, cgoa]
 sources:
   - url: https://developer.hashicorp.com/terraform/cloud-docs/policy-enforcement
     source_type: official-docs

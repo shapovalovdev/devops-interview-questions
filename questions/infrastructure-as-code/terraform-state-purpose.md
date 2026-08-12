@@ -3,7 +3,7 @@ title: Why does Terraform use state?
 theme: infrastructure-as-code
 difficulty: middle
 type: theory
-tags: [terraform, infrastructure-as-code, automation, reliability]
+tags: [terraform, infrastructure-as-code, automation, reliability, cgoa]
 sources:
   - url: https://developer.hashicorp.com/terraform/language/state
     source_type: official-docs

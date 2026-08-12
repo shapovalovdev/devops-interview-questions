@@ -3,7 +3,7 @@ title: Detect and handle infrastructure drift
 theme: infrastructure-as-code
 difficulty: middle
 type: scenario
-tags: [terraform, infrastructure-as-code, reliability, troubleshooting]
+tags: [terraform, infrastructure-as-code, reliability, troubleshooting, cgoa]
 sources:
   - url: https://developer.hashicorp.com/terraform/cli/commands/plan
     source_type: official-docs

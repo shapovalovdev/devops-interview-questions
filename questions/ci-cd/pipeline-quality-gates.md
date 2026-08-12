@@ -3,7 +3,7 @@ title: Design CI/CD quality gates for a service
 theme: ci-cd
 difficulty: middle
 type: scenario
-tags: [ci-cd, delivery, deployment, automation, security]
+tags: [ci-cd, delivery, deployment, automation, security, cgoa]
 sources:
   - url: https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-nodejs
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Govern infrastructure drift at organization scale
 theme: infrastructure-as-code
 difficulty: staff
 type: scenario
-tags: [terraform, infrastructure-as-code, governance, monitoring, reliability, security]
+tags: [terraform, infrastructure-as-code, governance, monitoring, reliability, security, cgoa]
 sources:
   - url: https://developer.hashicorp.com/terraform/cli/commands/plan
     source_type: official-docs

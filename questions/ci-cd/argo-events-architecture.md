@@ -3,7 +3,7 @@ title: Explain the Argo Events event path
 theme: ci-cd
 difficulty: junior
 type: theory
-tags: [ci-cd, kubernetes, argo, argo-events, capa, event-driven, automation]
+tags: [ci-cd, kubernetes, argo, argo-events, capa, event-driven, automation, cgoa]
 sources:
   - url: https://argoproj.github.io/argo-events/concepts/architecture/
     source_type: official-docs

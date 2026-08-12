@@ -3,7 +3,7 @@ title: Explain Argo CD Application synchronization
 theme: ci-cd
 difficulty: junior
 type: theory
-tags: [ci-cd, kubernetes, argo, argo-cd, capa, git, deployment, cnpa]
+tags: [ci-cd, kubernetes, argo, argo-cd, capa, git, deployment, cnpa, cgoa]
 sources:
   - url: https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/
     source_type: official-docs

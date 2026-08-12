@@ -3,7 +3,7 @@ title: Design an Argo Events Sensor for a production trigger
 theme: ci-cd
 difficulty: middle
 type: scenario
-tags: [ci-cd, kubernetes, argo, argo-events, capa, event-driven, security]
+tags: [ci-cd, kubernetes, argo, argo-events, capa, event-driven, security, cgoa]
 sources:
   - url: https://argoproj.github.io/argo-events/sensors/trigger/
     source_type: official-docs
