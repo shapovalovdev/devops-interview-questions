@@ -12,11 +12,14 @@ sources:
 
 # How do you investigate a database query performance regression?
 
+A query that returned in 40 ms yesterday now takes six seconds, and no application code was deployed. How do you find out what changed?
+
 ## Answer guide
 
-- Start by defining the user-visible outcome and workload boundary before choosing a number. For plans, representative parameters, and rollback, record the request class, time window, traffic mix, dependency versions, and the service-level objective or explicit decision that the measurement will inform.
-- Measure a repeatable baseline, then change one plausible cause at a time. Compare latency distribution, throughput, errors, resource saturation, and cost against the same workload; use traces or profiles to connect an observed symptom to the resource or dependency doing the work.
-- Treat the result as conditional rather than universal. Cache state, retries, background jobs, autoscaling, noisy neighbors, and sampling can change the outcome. Define an abort or rollback condition, retain raw evidence, and verify that an apparent improvement does not move delay, failures, or cost to another component.
+- Get the plan the database actually used rather than the one it predicts. `EXPLAIN (ANALYZE, BUFFERS)` on PostgreSQL reports estimated versus actual rows for every node, and a large discrepancy there explains most plan flips — the planner chose a nested loop expecting five rows and received five hundred thousand. Cross-check `pg_stat_statements` to confirm this statement is the regression, when its mean time moved, and whether call volume changed at the same moment.
+- Plans change without code changing. Common causes are table growth crossing a cost threshold, statistics that went stale after a bulk load before autovacuum caught up, an index created or dropped by another team, index or heap bloat making a scan look cheaper, and parameter sniffing — PostgreSQL may switch a prepared statement from a custom plan to a generic one after five executions. Reproduce with the parameter values the slow calls actually used, because a plan is usually only bad for part of the value distribution.
+- `EXPLAIN ANALYZE` executes the statement, so wrap anything that writes in a transaction you roll back, and remember that per-row timing instrumentation inflates reported time on plans with many rows — use `TIMING OFF` when that dominates, and enable `track_io_timing` if you need I/O attribution. A plan captured on a replica or a staging copy with different statistics, `work_mem`, or major version proves nothing about the primary. Prefer statistics fixes such as `ANALYZE`, a higher `default_statistics_target`, or extended statistics on correlated columns before reaching for a new index.
+- Adding an index to force the old plan back taxes every write on that table and can silently change plans for statements nobody checked. Confirm the query is executing rather than waiting first: a lock wait shows up in `pg_stat_activity.wait_event_type`, not in the plan, and no amount of index tuning fixes it. Keep the slow plan captured so the improvement is provable, and weigh the fix against total time rather than per-call time — a six-second query invoked twice an hour is a different priority from one on the request path.
 
 ## References
 

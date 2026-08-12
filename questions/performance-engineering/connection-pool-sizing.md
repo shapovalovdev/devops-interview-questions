@@ -12,11 +12,14 @@ sources:
 
 # How do you size a client connection pool safely?
 
+A service runs 200 request-handling threads against one PostgreSQL primary with a 200-connection pool, and p99 latency is climbing. How do you choose the pool size, and how do you tell pool exhaustion from a slow query?
+
 ## Answer guide
 
-- Start by defining the user-visible outcome and workload boundary before choosing a number. For queueing, downstream limits, and measurement, record the request class, time window, traffic mix, dependency versions, and the service-level objective or explicit decision that the measurement will inform.
-- Measure a repeatable baseline, then change one plausible cause at a time. Compare latency distribution, throughput, errors, resource saturation, and cost against the same workload; use traces or profiles to connect an observed symptom to the resource or dependency doing the work.
-- Treat the result as conditional rather than universal. Cache state, retries, background jobs, autoscaling, noisy neighbors, and sampling can change the outcome. Define an abort or rollback condition, retain raw evidence, and verify that an apparent improvement does not move delay, failures, or cost to another component.
+- Size the pool for the concurrency the database can usefully absorb, not for the concurrency the application offers. Little's law gives the floor: 500 queries per second holding a connection for 4 ms is 2 connections in flight on average, and headroom for variance and bursts puts a realistic pool in the low tens. HikariCP's sizing guidance lands in the same place from the other direction, deriving a small number from core count plus effective storage parallelism rather than from thread count.
+- Beyond the server's real parallelism, extra connections add context switching, buffer and lock contention, and per-connection memory instead of throughput — PostgreSQL forks a backend per connection and `work_mem` is charged per sort or hash per backend. A pool smaller than the thread pool is the point, not a limitation: it converts overload into a short, measurable wait at a place that has a timeout and a metric, rather than letting every in-flight query degrade together inside the database.
+- Pool size is per instance and multiplies by replica count against `max_connections`; 40 pods holding 50 connections each needs 2000 server slots, and autoscaling raises that ceiling silently. That arithmetic is the usual reason to put PgBouncer in transaction pooling mode in front, which in turn forbids session-scoped state — `SET` outside a transaction, session advisory locks, and server-side prepared statements need explicit handling. Also keep the acquisition timeout well below the request deadline, or a caller gives up while still holding its slot in the queue.
+- The signatures differ cleanly. Exhaustion adds latency before any SQL runs: pool wait time and pending-acquire count rise while database CPU and per-statement mean time in `pg_stat_statements` stay flat. A slow query is the mirror image — flat pool wait, rising statement time, a changed plan. A third case is a connection pinned by a transaction left `idle in transaction`, which starves the pool with no slow query anywhere. Enlarging the pool to relieve exhaustion usually just relocates the queue into the database, where nothing bounds it.
 
 ## References
 

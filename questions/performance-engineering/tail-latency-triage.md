@@ -12,11 +12,14 @@ sources:
 
 # How do you triage a p99 latency regression?
 
+At 14:05 the p99 of one endpoint jumped from 180 ms to 900 ms while p50 and the error rate stayed flat. How do you triage it?
+
 ## Answer guide
 
-- Start by defining the user-visible outcome and workload boundary before choosing a number. For correlating saturation, errors, and request classes, record the request class, time window, traffic mix, dependency versions, and the service-level objective or explicit decision that the measurement will inform.
-- Measure a repeatable baseline, then change one plausible cause at a time. Compare latency distribution, throughput, errors, resource saturation, and cost against the same workload; use traces or profiles to connect an observed symptom to the resource or dependency doing the work.
-- Treat the result as conditional rather than universal. Cache state, retries, background jobs, autoscaling, noisy neighbors, and sampling can change the outcome. Define an abort or rollback condition, retain raw evidence, and verify that an apparent improvement does not move delay, failures, or cost to another component.
+- A moved p99 with an unchanged p50 means a subset of requests got slow, not the service as a whole, so the first job is to find the dimension that separates that subset. Slice the histogram by endpoint, tenant, region and zone, instance, deployment version, request size class, and cache hit versus miss. A regression confined to one shard, one node pool, or one client version is a completely different investigation from one spread evenly across all of them.
+- Line the 14:05 boundary up against the change record before theorising: deploys, feature-flag flips, config pushes, schema migrations, dependency releases, node rotations, and scale events. Then line it up against saturation signals in the same window — run queue and cgroup throttling, garbage-collection pause time, connection-pool wait, disk `await`, and each downstream's own p99. You are trying to prove a specific chain: requests are queueing, and this is the resource they are queueing for.
+- Pull traces from the slow histogram buckets through exemplars, and always diff a slow trace against a fast one for the same operation rather than reading slow traces alone; the difference — an extra downstream call, a retry, a cold cache, a lock wait, a larger payload — is the finding. Cross-host clock skew of tens of milliseconds is normal, so do not build an argument on cross-service span arithmetic, and check that sampling actually captured slow requests before concluding they look ordinary.
+- Mitigations regularly fake a recovery. Raising the timeout makes errors vanish while raising in-flight concurrency and lengthening the queue; adding replicas helps only when the bottleneck is per-instance rather than a shared database, cache, or partition leader; and if retries are driving the tail, retrying harder amplifies it. After any mitigation, check that request volume held steady, because a p99 also improves when traffic drops and the sample count collapses.
 
 ## References
 
