@@ -68,6 +68,15 @@ boundary, direct IDP/DORA gap policy, and source-verified canonical links. CNPA
 is not activated as a filter until the coordinator atomically integrates its
 tag, manifest entry, and catalog records.
 
+`tests/test_cgoa_curriculum_map.py` guards the CGOA public curriculum map: the
+Linux Foundation program page and the CNCF `cgoa` outline with their review
+date, all five published weighted domains, the original-content boundary, and
+an explicit gap decision that names each of the six added Questions. It also
+requires every mapped canonical Question to exist, carry the `cgoa` tag, and
+retain source metadata, References, and a complementary technical blog, and it
+requires the manifest's `minimum_questions` to equal the number of mapped
+Questions so the published filter cannot overstate coverage.
+
 The manifest currently includes the PCA and CAPA study paths, along with the
 other published certification maps. Adding a certification requires one
 manifest entry, a documented tag, a curriculum map, and mapped Questions;
