@@ -172,6 +172,11 @@
       "minimum_questions": 12
     },
     {
+      "tag": "cba",
+      "map": "docs/certifications/cba.md",
+      "minimum_questions": 23
+    },
+    {
       "tag": "cca",
       "map": "docs/certifications/cca.md",
       "minimum_questions": 20

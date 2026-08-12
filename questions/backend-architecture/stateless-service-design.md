@@ -3,7 +3,7 @@ title: Design a stateless backend service
 theme: backend-architecture
 difficulty: junior
 type: theory
-tags: [availability, cloud, load]
+tags: [availability, cloud, load, cba]
 sources:
   - url: https://12factor.net/processes
     source_type: official-docs

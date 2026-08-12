@@ -3,7 +3,7 @@ title: Produce a reproducible Backstage backend image from its Yarn workspace
 theme: ci-cd
 difficulty: middle
 type: scenario
-tags: [ci-cd, containers, docker, build-cache, delivery, platform-engineering]
+tags: [ci-cd, containers, docker, build-cache, delivery, platform-engineering, cba]
 sources:
   - url: https://backstage.io/docs/deployment/docker
     source_type: official-docs

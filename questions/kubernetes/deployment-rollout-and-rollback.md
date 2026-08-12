@@ -3,7 +3,7 @@ title: Explain a Kubernetes Deployment rollout and rollback
 theme: kubernetes
 difficulty: middle
 type: scenario
-tags: [kubernetes, deployment, rolling-update, reliability, cka, ckad, kcna]
+tags: [kubernetes, deployment, rolling-update, reliability, cka, ckad, kcna, cba]
 sources:
   - url: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
     source_type: official-docs

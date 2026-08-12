@@ -3,7 +3,7 @@ title: Diagnose why a service never appears in the Backstage catalog
 theme: backend-architecture
 difficulty: senior
 type: troubleshooting
-tags: [architecture, platform-engineering, troubleshooting, automation, governance]
+tags: [architecture, platform-engineering, troubleshooting, automation, governance, cba]
 sources:
   - url: https://backstage.io/docs/features/software-catalog/life-of-an-entity/
     source_type: official-docs

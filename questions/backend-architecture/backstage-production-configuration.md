@@ -3,7 +3,7 @@ title: Move a Backstage instance from local defaults to production configuration
 theme: backend-architecture
 difficulty: senior
 type: scenario
-tags: [architecture, platform-engineering, configuration-management, security, iam]
+tags: [architecture, platform-engineering, configuration-management, security, iam, cba]
 sources:
   - url: https://backstage.io/docs/conf/
     source_type: official-docs

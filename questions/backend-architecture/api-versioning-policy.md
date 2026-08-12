@@ -3,7 +3,7 @@ title: Govern API versioning and deprecation
 theme: backend-architecture
 difficulty: senior
 type: scenario
-tags: [http, change-management, dependencies]
+tags: [http, change-management, dependencies, cba]
 sources:
   - url: https://www.rfc-editor.org/rfc/rfc9110
     source_type: standard

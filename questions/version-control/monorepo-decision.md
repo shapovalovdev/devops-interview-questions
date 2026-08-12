@@ -3,7 +3,7 @@ title: Make a monorepo versus multirepo decision
 theme: version-control
 difficulty: staff
 type: scenario
-tags: [git, version-control, platform-engineering, operations, governance]
+tags: [git, version-control, platform-engineering, operations, governance, cba]
 sources:
   - url: https://git-scm.com/docs/git-sparse-checkout
     source_type: official-docs

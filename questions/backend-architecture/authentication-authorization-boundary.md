@@ -3,7 +3,7 @@ title: Separate authentication from authorization
 theme: backend-architecture
 difficulty: middle
 type: theory
-tags: [security, iam, jwt]
+tags: [security, iam, jwt, cba]
 sources:
   - url: https://www.rfc-editor.org/rfc/rfc6750
     source_type: standard

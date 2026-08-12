@@ -3,7 +3,7 @@ title: Keep Backstage UI customizations upgradable
 theme: backend-architecture
 difficulty: staff
 type: scenario
-tags: [architecture, platform-engineering, change-management, quality, governance]
+tags: [architecture, platform-engineering, change-management, quality, governance, cba]
 sources:
   - url: https://backstage.io/docs/conf/user-interface
     source_type: official-docs

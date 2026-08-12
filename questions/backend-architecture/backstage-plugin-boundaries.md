@@ -3,7 +3,7 @@ title: Decide whether a Backstage capability belongs in a frontend or backend pl
 theme: backend-architecture
 difficulty: senior
 type: scenario
-tags: [architecture, platform-engineering, security, least-privilege, automation]
+tags: [architecture, platform-engineering, security, least-privilege, automation, cba]
 sources:
   - url: https://backstage.io/docs/backend-system/architecture/plugins/
     source_type: official-docs
