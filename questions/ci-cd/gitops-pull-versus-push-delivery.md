@@ -3,7 +3,7 @@ title: Choose a pull-based reconciler or a push-based deployment pipeline
 theme: ci-cd
 difficulty: middle
 type: scenario
-tags: [ci-cd, kubernetes, git, argo-cd, deployment, architecture, least-privilege]
+tags: [ci-cd, kubernetes, git, argo-cd, deployment, architecture, least-privilege, cgoa]
 sources:
   - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/architecture/
     source_type: official-docs

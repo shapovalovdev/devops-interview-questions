@@ -3,7 +3,7 @@ title: Set Argo CD Application project boundaries
 theme: ci-cd
 difficulty: middle
 type: scenario
-tags: [ci-cd, kubernetes, argo, argo-cd, capa, security, least-privilege]
+tags: [ci-cd, kubernetes, argo, argo-cd, capa, security, least-privilege, cgoa]
 sources:
   - url: https://argo-cd.readthedocs.io/en/stable/user-guide/projects/
     source_type: official-docs

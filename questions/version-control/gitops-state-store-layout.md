@@ -3,7 +3,7 @@ title: Structure a Git state store for GitOps environments
 theme: version-control
 difficulty: middle
 type: scenario
-tags: [version-control, git, ci-cd, kubernetes, deployment, governance, gitops]
+tags: [version-control, git, ci-cd, kubernetes, deployment, governance, gitops, cgoa]
 sources:
   - url: https://fluxcd.io/flux/guides/repository-structure/
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Explain the four GitOps principles
 theme: ci-cd
 difficulty: junior
 type: theory
-tags: [ci-cd, git, kubernetes, deployment, delivery, automation]
+tags: [ci-cd, git, kubernetes, deployment, delivery, automation, cgoa]
 sources:
   - url: https://opengitops.dev/
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Choose a progressive Argo Rollouts strategy
 theme: ci-cd
 difficulty: middle
 type: scenario
-tags: [ci-cd, kubernetes, argo, argo-rollouts, capa, deployment, reliability, cnpe]
+tags: [ci-cd, kubernetes, argo, argo-rollouts, capa, deployment, reliability, cnpe, cgoa]
 sources:
   - url: https://argo-rollouts.readthedocs.io/en/stable/features/canary/
     source_type: official-docs

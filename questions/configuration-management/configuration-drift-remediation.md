@@ -3,7 +3,7 @@ title: Design safe configuration drift remediation
 theme: configuration-management
 difficulty: senior
 type: scenario
-tags: [ansible, automation, configuration-management, reliability, security]
+tags: [ansible, automation, configuration-management, reliability, security, cgoa]
 sources:
   - url: https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_checkmode.html
     source_type: official-docs

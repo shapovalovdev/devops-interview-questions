@@ -3,7 +3,7 @@ title: Define an Argo Rollouts AnalysisTemplate safely
 theme: ci-cd
 difficulty: senior
 type: scenario
-tags: [ci-cd, kubernetes, argo, argo-rollouts, capa, observability, reliability]
+tags: [ci-cd, kubernetes, argo, argo-rollouts, capa, observability, reliability, cgoa]
 sources:
   - url: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/
     source_type: official-docs

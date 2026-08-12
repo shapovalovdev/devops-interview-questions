@@ -3,7 +3,7 @@ title: Design a deployment rollback
 theme: ci-cd
 difficulty: middle
 type: scenario
-tags: [ci-cd, deployment, reliability, incident-response]
+tags: [ci-cd, deployment, reliability, incident-response, cgoa]
 sources:
   - url: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Explain how Flux reconciles a cluster from a source
 theme: ci-cd
 difficulty: middle
 type: theory
-tags: [ci-cd, kubernetes, git, flux, gitops, deployment, automation]
+tags: [ci-cd, kubernetes, git, flux, gitops, deployment, automation, cgoa]
 sources:
   - url: https://fluxcd.io/flux/components/
     source_type: official-docs

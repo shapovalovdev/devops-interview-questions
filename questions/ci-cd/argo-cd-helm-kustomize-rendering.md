@@ -3,7 +3,7 @@ title: Choose Helm or Kustomize rendering in Argo CD
 theme: ci-cd
 difficulty: middle
 type: scenario
-tags: [ci-cd, kubernetes, argo, argo-cd, capa, configuration-management]
+tags: [ci-cd, kubernetes, argo, argo-cd, capa, configuration-management, cgoa]
 sources:
   - url: https://argo-cd.readthedocs.io/en/stable/user-guide/helm/
     source_type: official-docs

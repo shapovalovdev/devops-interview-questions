@@ -3,7 +3,7 @@ title: Why should CI publish immutable release artifacts?
 theme: ci-cd
 difficulty: middle
 type: theory
-tags: [ci-cd, delivery, supply-chain, security]
+tags: [ci-cd, delivery, supply-chain, security, cgoa]
 sources:
   - url: https://slsa.dev/spec/v1.0/levels
     source_type: standard

@@ -3,7 +3,7 @@ title: Plan a blue-green production cutover
 theme: ci-cd
 difficulty: senior
 type: scenario
-tags: [ci-cd, deployment, reliability, availability]
+tags: [ci-cd, deployment, reliability, availability, cgoa]
 sources:
   - url: https://cloud.google.com/architecture/application-deployment-and-testing-strategies
     source_type: official-docs

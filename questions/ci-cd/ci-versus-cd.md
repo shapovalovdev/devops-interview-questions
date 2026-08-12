@@ -3,7 +3,7 @@ title: Distinguish continuous integration, delivery, and deployment
 theme: ci-cd
 difficulty: junior
 type: theory
-tags: [ci-cd, automation, delivery, deployment, kcna]
+tags: [ci-cd, automation, delivery, deployment, kcna, cgoa]
 sources:
   - url: https://docs.github.com/en/actions/concepts/workflows-and-actions
     source_type: official-docs

@@ -177,6 +177,11 @@
       "minimum_questions": 20
     },
     {
+      "tag": "cgoa",
+      "map": "docs/certifications/cgoa.md",
+      "minimum_questions": 32
+    },
+    {
       "tag": "cka",
       "map": "docs/certifications/cka.md",
       "minimum_questions": 25

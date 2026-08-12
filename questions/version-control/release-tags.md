@@ -3,7 +3,7 @@ title: Create an auditable release tag
 theme: version-control
 difficulty: middle
 type: scenario
-tags: [git, version-control, delivery, supply-chain]
+tags: [git, version-control, delivery, supply-chain, cgoa]
 sources:
   - url: https://git-scm.com/docs/git-tag
     source_type: official-docs

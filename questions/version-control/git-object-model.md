@@ -3,7 +3,7 @@ title: Explain Git's object model
 theme: version-control
 difficulty: junior
 type: theory
-tags: [git, version-control]
+tags: [git, version-control, cgoa]
 sources:
   - url: https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Close the feedback loop for a GitOps deployment
 theme: ci-cd
 difficulty: middle
 type: scenario
-tags: [ci-cd, kubernetes, argo-cd, gitops, monitoring, deployment, observability]
+tags: [ci-cd, kubernetes, argo-cd, gitops, monitoring, deployment, observability, cgoa]
 sources:
   - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/health/
     source_type: official-docs

@@ -3,7 +3,7 @@ title: Verify supply-chain provenance before deployment
 theme: ci-cd
 difficulty: senior
 type: scenario
-tags: [ci-cd, supply-chain, security, deployment, cnpa]
+tags: [ci-cd, supply-chain, security, deployment, cnpa, cgoa]
 sources:
   - url: https://slsa.dev/spec/v1.0/levels
     source_type: standard

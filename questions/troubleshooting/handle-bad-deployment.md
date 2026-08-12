@@ -3,7 +3,7 @@ title: Contain a bad deployment while protecting evidence
 theme: troubleshooting
 difficulty: senior
 type: troubleshooting
-tags: [troubleshooting, deployment, recovery, incident-response, reliability]
+tags: [troubleshooting, deployment, recovery, incident-response, reliability, cgoa]
 sources:
   - url: https://sre.google/sre-book/release-engineering/
     source_type: official-docs

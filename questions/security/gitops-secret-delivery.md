@@ -3,7 +3,7 @@ title: Deliver secrets to a GitOps-reconciled cluster
 theme: security
 difficulty: senior
 type: scenario
-tags: [security, kubernetes, ci-cd, git, least-privilege, governance, gitops]
+tags: [security, kubernetes, ci-cd, git, least-privilege, governance, gitops, cgoa]
 sources:
   - url: https://fluxcd.io/flux/guides/mozilla-sops/
     source_type: official-docs

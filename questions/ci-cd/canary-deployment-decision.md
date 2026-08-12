@@ -3,7 +3,7 @@ title: Decide whether to advance or stop a canary deployment
 theme: ci-cd
 difficulty: senior
 type: scenario
-tags: [ci-cd, deployment, monitoring, reliability]
+tags: [ci-cd, deployment, monitoring, reliability, cgoa]
 sources:
   - url: https://sre.google/workbook/canarying-releases/
     source_type: official-docs
