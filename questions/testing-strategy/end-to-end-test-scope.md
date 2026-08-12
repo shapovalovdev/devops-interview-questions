@@ -15,14 +15,14 @@ sources:
 
 # Control end-to-end test scope
 
-How should a team make this testing strategy decision?
+The browser suite has grown to 400 Playwright specs, runs for fifty minutes, and fails for a non-product reason about once per run. Which journeys should stay end-to-end, and where does the rest of that coverage go?
 
 ## Answer guide
 
-- Start from the production risk and choose a test boundary that proves the behavior without making feedback unnecessarily slow.
-- Make dependencies, data ownership, and environment isolation explicit so results are reproducible and failures can be diagnosed.
-- Treat test execution time and flake rate as product metrics; improve the signal before tightening a release gate.
-- Review the strategy after escaped defects and architecture changes. More tests do not automatically improve confidence when the wrong boundary is exercised.
+- Keep end-to-end coverage for the handful of journeys where the integration itself is the risk and no cheaper test can observe the failure: authentication, checkout or payment, and the one or two flows whose breakage pages someone. Google's testing guidance and the test-pyramid literature agree that beyond a small fraction of total tests, spend buys more one layer down. Everything else moves to component tests with the network layer stubbed, or to API-level tests that hit a real backend without a browser.
+- Scope each surviving spec to one user-visible outcome and make it self-sufficient. Create its data through the API rather than by driving the UI, authenticate by injecting saved storage state instead of replaying the login form in every test, and never let one spec depend on another's ordering or leftovers. Assert through user-visible roles and text with auto-retrying web-first assertions rather than CSS selectors and fixed sleeps, which is where most timing flake originates.
+- Manage runtime and signal explicitly: shard across runners, set per-test and per-assertion timeouts so a hung spec fails fast, and capture trace, video, and console output on failure so a red run is diagnosable from artifacts rather than by rerunning locally. Track flake rate per spec as a first-class metric with an owner, because a suite that is red half the time stops being a gate no matter what the policy document says.
+- Failure modes: the ratchet where every incident adds one more end-to-end test, growing runtime without narrowing risk; specs that reach into internal state through the UI and break on every redesign; a suite pinned to a shared environment whose other tenants cause most failures; and the gate being made advisory under release pressure, after which nobody restores it.
 
 ## References
 

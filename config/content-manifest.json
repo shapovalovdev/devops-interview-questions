@@ -61,6 +61,10 @@
       "state": "complete"
     },
     {
+      "name": "finops",
+      "state": "complete"
+    },
+    {
       "name": "hardware",
       "state": "complete"
     },

@@ -12,11 +12,14 @@ sources:
 
 # What should a performance regression check in CI actually prove?
 
+A CI job runs a 60-second benchmark on every pull request and fails the build when p95 exceeds the previous run by ten percent. Why does that gate fail the team, and what should it assert instead?
+
 ## Answer guide
 
-- Start by defining the user-visible outcome and workload boundary before choosing a number. For stable environments, thresholds, and gates, record the request class, time window, traffic mix, dependency versions, and the service-level objective or explicit decision that the measurement will inform.
-- Measure a repeatable baseline, then change one plausible cause at a time. Compare latency distribution, throughput, errors, resource saturation, and cost against the same workload; use traces or profiles to connect an observed symptom to the resource or dependency doing the work.
-- Treat the result as conditional rather than universal. Cache state, retries, background jobs, autoscaling, noisy neighbors, and sampling can change the outcome. Define an abort or rollback condition, retain raw evidence, and verify that an apparent improvement does not move delay, failures, or cost to another component.
+- Comparing against the immediately preceding run on shared CI hardware measures the runner, not the change. Noise on shared runners routinely exceeds ten percent, so the gate emits false failures, the team learns to re-run until green, and it then catches nothing real. A gate worth keeping compares against a rolling baseline distribution with a threshold derived from that distribution's own variance, builds and runs candidate and baseline in the same job on the same machine, and requires the failure to reproduce before it blocks a merge.
+- Shift what CI asserts toward things that are deterministic in a noisy environment: allocation counts, SQL statements executed per request (which is how you catch an N+1 before production), number of downstream calls, bytes transferred, response or bundle size, and scaling behaviour across a growing input. These are counts, not times, so they are stable on a busy runner. Wall-clock throughput and tail latency need quiet pinned hardware and long runs, which belongs in a nightly or pre-release job, with a production canary as the final check.
+- A 60-second run barely clears warm-up on a JIT runtime or a cold page cache, so much of what it measures is startup. Fix what you can — pinned instance type, dedicated host, CPU pinning, no concurrent jobs — and report a distribution across repetitions instead of one number. Version the benchmark's dataset alongside the benchmark itself, or a fixture change will present as a code regression and consume a day of investigation.
+- A flaky gate is worse than no gate, because it teaches an entire team to dismiss performance signals. A microbenchmark gate can stay green while the service regresses, since it excludes I/O, serialization, and contention. The subtler failure is automatic baseline ratcheting after every merge: twenty consecutive two-percent regressions compound to roughly forty percent without a single build ever failing, so keep an absolute budget tied to the user-facing objective next to the relative comparison.
 
 ## References
 

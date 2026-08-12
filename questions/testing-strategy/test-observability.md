@@ -15,14 +15,14 @@ sources:
 
 # Make test failures observable
 
-How should a team make this testing strategy decision?
+A test fails in CI, passes locally, and the only artifact is `AssertionError: expected 200, got 500`. What should the pipeline have captured so the next failure is diagnosable without a rerun?
 
 ## Answer guide
 
-- Start from the production risk and choose a test boundary that proves the behavior without making feedback unnecessarily slow.
-- Make dependencies, data ownership, and environment isolation explicit so results are reproducible and failures can be diagnosed.
-- Treat test execution time and flake rate as product metrics; improve the signal before tightening a release gate.
-- Review the strategy after escaped defects and architecture changes. More tests do not automatically improve confidence when the wrong boundary is exercised.
+- Treat a test run as a traced operation rather than a log stream. Emit an OpenTelemetry span per test with the suite, test name, outcome, and duration as attributes, and let the spans the application produces during that test nest under it, so a red result links directly to the request that failed inside it. Propagate the trace context from the test into the system under test through the usual `traceparent` header and stamp the test's identity into baggage, which is what turns "a 500 happened somewhere" into the exact handler, query, and downstream call that produced it.
+- Then capture the state a rerun would give you, at failure time. Persist the server-side logs of every process the test touched, the response body and headers rather than just the status code, the database state or the specific query result the assertion depended on, the seed used for any randomisation, and the resolved dependency versions and image digests. For browser and API suites, attach the framework's own trace, video, or HAR. All of it belongs in the run's artifacts, keyed by test identity, because a failure whose evidence exists only in a container that has already exited is not diagnosable.
+- Make the aggregate visible too. Store one structured record per test execution — name, outcome, duration, commit, branch, runner, attempt number — in something queryable, and you can answer the questions that matter across runs: which tests fail only on one runner class, which have started getting slower, which pass on a retry, and whether this failure is new or the eleventh occurrence. A single test's failure is ambiguous; its history usually is not, and "passes locally" is a hypothesis you can test against the runner dimension directly.
+- Constraints and failure modes: instrumentation costs runtime and storage, so sample successful runs and keep full detail on failures; secrets and personal data flow into logs and traces, so redaction has to be part of the capture path rather than an afterthought; artifacts uploaded only on a green run, or on a step that is skipped when the previous one fails, are the most common reason evidence is missing; and per-test tracing that shares one exporter across parallel workers can interleave spans so badly that the trace is worse than no trace.
 
 ## References
 
