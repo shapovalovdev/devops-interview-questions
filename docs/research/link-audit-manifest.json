@@ -1639,6 +1639,81 @@
     {"question": "questions/testing-strategy/test-suite-execution-policy.md", "related_materials": "docs/related-materials/testing-strategy.md"},
     {"question": "questions/testing-strategy/test-suite-ownership.md", "related_materials": "docs/related-materials/testing-strategy.md"},
     {"question": "questions/testing-strategy/unit-test-design.md", "related_materials": "docs/related-materials/testing-strategy.md"},
+    {
+      "question": "questions/platform-engineering/choose-a-guardrail-over-a-gate.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/choose-between-mandated-and-voluntary-adoption.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/consolidate-two-competing-internal-platforms.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/contain-a-noisy-neighbour-on-a-shared-platform.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/decide-build-versus-buy-for-a-capability.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/define-an-internal-developer-platform.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/design-an-escape-hatch-from-the-paved-road.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/explain-a-paved-road-and-a-golden-path.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/justify-continued-platform-investment.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/make-platform-documentation-discoverable.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/measure-developer-experience.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/measure-platform-adoption.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/offer-self-service-with-safe-defaults.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/onboard-a-team-onto-the-platform.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/plan-a-migration-onto-the-paved-road.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/publish-platform-slos-and-a-support-model.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/recognise-when-a-platform-team-is-the-wrong-answer.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/reduce-cognitive-load-with-team-topologies.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/retire-a-platform-capability.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/roll-out-a-change-across-every-tenant.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/run-a-platform-wide-incident.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/scope-what-the-platform-owns.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/size-and-staff-a-platform-team.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/treat-the-platform-as-a-product.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
+    {
+      "question": "questions/platform-engineering/version-a-platform-interface.md", "related_materials": "docs/related-materials/platform-engineering.md"
+    },
     {"question": "questions/finops/allocate-shared-and-untaggable-cost.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/attribute-kubernetes-cluster-cost-to-teams.md", "related_materials": "docs/related-materials/finops.md"},
     {"question": "questions/finops/build-a-commitment-discount-portfolio.md", "related_materials": "docs/related-materials/finops.md"},
