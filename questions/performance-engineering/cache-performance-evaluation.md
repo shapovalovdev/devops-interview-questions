@@ -12,11 +12,14 @@ sources:
 
 # How do you evaluate whether a cache improves a service?
 
+A team added a cache and reports a 92 percent hit rate as proof it worked. What else do you need before accepting that the service is better off?
+
 ## Answer guide
 
-- Start by defining the user-visible outcome and workload boundary before choosing a number. For hit ratio, tail latency, and invalidation, record the request class, time window, traffic mix, dependency versions, and the service-level objective or explicit decision that the measurement will inform.
-- Measure a repeatable baseline, then change one plausible cause at a time. Compare latency distribution, throughput, errors, resource saturation, and cost against the same workload; use traces or profiles to connect an observed symptom to the resource or dependency doing the work.
-- Treat the result as conditional rather than universal. Cache state, retries, background jobs, autoscaling, noisy neighbors, and sampling can change the outcome. Define an abort or rollback condition, retain raw evidence, and verify that an apparent improvement does not move delay, failures, or cost to another component.
+- Hit rate is an input, not the outcome. Judge the cache on end-to-end p50 and p99 with it enabled versus disabled under the same workload, together with the origin's request rate and saturation. A 92 percent hit rate is compatible with a worse p99: the remaining 8 percent now pay a cache lookup plus origin latency plus possibly a lock wait, and if the cached items were the cheap ones the cache bought nothing. The value is roughly hit ratio times the cost avoided per hit, weighed against the added cost of every miss.
+- The number hides which requests miss. Measure hit-path and miss-path latency separately, and check whether misses concentrate on a subset — new items, one tenant, one key prefix — because a cache that serves the already-fast requests while missing the slow ones adds latency without removing meaningful load. Also account for the dependency it creates: absorbing 92 percent of reads means a cold start, a flush, or a failover presents the origin with more than ten times its steady-state read load.
+- Correctness is part of the evaluation, since the characteristic failure of a caching layer is wrong data rather than slow data. Decide the staleness the product tolerates, set the TTL from that, and be explicit about the invalidation model — write-through, write-around, or TTL-only. Track memory footprint and eviction rate too: a cache already evicting at its ceiling has a hit rate that will fall as soon as the working set grows. Redis client-side caching with RESP3 tracking removes a network hop but introduces an invalidation-message path that can itself drop or lag.
+- Two failure modes dominate in production. A thundering herd on a hot key expiring means many concurrent requests miss at once and all hit the origin together, which request coalescing, a probabilistic early refresh, or a short per-key lock prevents. Synchronised TTLs from a bulk load create a mass-expiry cliff, which TTL jitter fixes. Beyond that, a cache masking an unindexed query or an inefficient origin converts a bounded inefficiency into an outage the first time the cache is unavailable, so verify the origin survives a deliberate cache-off window before you rely on it.
 
 ## References
 

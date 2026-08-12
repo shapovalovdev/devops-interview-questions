@@ -12,11 +12,14 @@ sources:
 
 # How do you diagnose and mitigate noisy-neighbor performance?
 
+One tenant's bulk import is degrading every other tenant's p99 on a shared Kubernetes cluster. How do you prove that is the cause, and how do you contain it?
+
 ## Answer guide
 
-- Start by defining the user-visible outcome and workload boundary before choosing a number. For fairness, resource limits, and isolation, record the request class, time window, traffic mix, dependency versions, and the service-level objective or explicit decision that the measurement will inform.
-- Measure a repeatable baseline, then change one plausible cause at a time. Compare latency distribution, throughput, errors, resource saturation, and cost against the same workload; use traces or profiles to connect an observed symptom to the resource or dependency doing the work.
-- Treat the result as conditional rather than universal. Cache state, retries, background jobs, autoscaling, noisy neighbors, and sampling can change the outcome. Define an abort or rollback condition, retain raw evidence, and verify that an apparent improvement does not move delay, failures, or cost to another component.
+- Establish attribution before mitigation. Break requests, CPU seconds, database time, and bytes down by tenant and compare the affected window with a control period; where per-tenant telemetry does not exist, correlate the suspect's activity against the victims' latency and then confirm with a controlled throttle. Identify the contended layer as well, because node CPU, the shared database, a cache whose working set one tenant has evicted, and a rate-limited third-party dependency all present as "the neighbours are slow" and have different fixes.
+- In Kubernetes, requests and limits do different jobs. CPU requests set the cgroup weight and drive scheduling, so they decide what a pod receives when the node is contended; CPU limits set CFS quota per period and cause hard throttling visible in `container_cpu_cfs_throttled_seconds_total` even when the node is otherwise idle. Memory limits are enforced by OOM kill, not throttling. A latency-sensitive pod sharing a node with a batch pod that declares no requests loses by default, so give it Guaranteed QoS and separate the workloads physically with taints, node pools, or spread constraints.
+- Cgroups isolate CPU and memory reasonably well and isolate almost nothing else: shared last-level cache, memory bandwidth, disk queues, and NIC capacity are not partitioned, so a co-tenant saturating NVMe or the network is invisible in CPU metrics. Below the cluster, hypervisor steal time and burst-credit exhaustion produce identical symptoms with no local cause at all. The loudest shared resource is usually the database, which cannot see pods — isolation there means per-tenant-class connection pools, statement timeouts, and application-level quotas.
+- Applying CPU limits everywhere in the name of fairness is the most common self-inflicted version of this incident: it throttles latency-sensitive services that were comfortably within node capacity. Per-tenant limits counted in requests ignore cost, since one expensive query outweighs a thousand cheap ones, so quota should track work such as CPU time or rows scanned. And relocating the batch job to another node without attaching a quota to it simply hands the problem to that node's tenants.
 
 ## References
 
