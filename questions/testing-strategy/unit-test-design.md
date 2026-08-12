@@ -15,14 +15,14 @@ sources:
 
 # Design a focused unit test
 
-How should a team make this testing strategy decision?
+A test calls the function under test, then asserts on six unrelated fields, and its setup is a helper shared with twenty other tests that nobody dares change. Rewrite the design rules that would have prevented this, and say where they conflict with DRY.
 
 ## Answer guide
 
-- Define the behavior and risk being controlled, then choose the smallest test boundary that provides reliable evidence.
-- Keep data, dependencies, and environment assumptions explicit so results are reproducible and failures can be diagnosed.
-- Balance execution cost against feedback speed and release confidence; use the check alongside review and operational signals.
-- Reassess the strategy after incidents and architecture changes because an unowned test can become a source of false confidence.
+- One test should establish one behaviour, so its failure names the defect. Keep the arrange, act, assert structure visible, act exactly once, and assert on the one outcome the test exists to protect; the six unrelated assertions are six tests wearing one name, and when the second fails you never learn whether the fourth would have. Assert on observable behaviour — the return value, the raised exception, the message published — not on how the code reached it, or the test blocks the refactor it was supposed to make safe.
+- Test code optimises for a different property than production code: it should be obvious in isolation, which is why the guidance is DAMP rather than DRY. The shared setup helper that nobody dares change is the standard end state of applying DRY to fixtures — a reader must open it to know what the test assumes, and a change for one test silently alters twenty. Prefer inlining the values that matter to the assertion, keep the fixture for genuinely expensive or incidental setup, and use small builders with defaults so each test overrides only the field it cares about.
+- Use fixtures for what they are good at: pytest fixtures are dependency injection with a scope, so a session-scoped fixture can hold an expensive resource while a function-scoped one hands each test its own data. Compose them rather than growing one god fixture, and prefer `tmp_path` and monkeypatching over globals so nothing leaks between tests. Determinism is a design requirement, not a nice-to-have — inject the clock, seed the randomness, and avoid real sleeps, because a test that depends on timing will eventually fail for a reason unrelated to the code.
+- Failure modes: mocking every collaborator until the test asserts only that the mocks were called, so it passes against a broken implementation; asserting on log output or private attributes, which makes an internal rename a red build; a helper that both sets up and asserts, hiding the actual expectation from the test body; and conditionals or loops inside a test, which mean either the test can pass without testing anything or it is really several tests that should be parametrised.
 
 ## References
 

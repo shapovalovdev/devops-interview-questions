@@ -15,14 +15,14 @@ sources:
 
 # Prioritize quality investment portfolio
 
-How should a team make this testing strategy decision?
+You are given four engineers for a quarter to improve quality across twelve services, and every team's request is "more test coverage". How do you decide where that capacity goes, and how will you know afterwards whether it worked?
 
 ## Answer guide
 
-- Define the user-facing risk and choose a test boundary that produces useful evidence without delaying every change.
-- Make dependencies, data, and environment ownership explicit so results are reproducible and failures can be diagnosed.
-- Balance test cost against feedback speed and release confidence; use the result together with review and operational signals.
-- Reassess after incidents and architecture changes, because an uncontrolled or unowned check becomes a source of false confidence.
+- Start from failure data, not from coverage. Pull the last two or three quarters of incidents, customer-reported defects, and rollbacks, and attribute each to the stage that should have caught it and the service it came from. The distribution is almost never uniform: a small number of services and a small number of failure classes — a config change with no validation, a schema migration, a third-party timeout — usually account for most of the pain, and that ranking is the portfolio, whereas per-team coverage requests are a proxy for how each team feels.
+- Balance the portfolio across the four DORA outcomes rather than optimising one. Deployment frequency and lead time are throughput; change failure rate and failed-deployment recovery time are stability. Work that only adds gates buys stability by spending lead time, and work that only removes friction does the reverse; the research finding worth acting on is that the two move together when the investment is in the feedback loop itself — faster suites, better environments, safer rollback — rather than in more checks. Reserve part of the capacity for reducing test runtime, because it compounds across every future change.
+- Make each bet falsifiable before it starts. Write the expected effect as a change in a measurable quantity — this class of defect stops reaching production, this suite drops below ten minutes, this service's change failure rate halves — with a baseline recorded now and a review date at the end of the quarter. Convert cost into the same currency: hours of engineer time per week lost to flaky reruns, or incident minutes, so a request competes on evidence rather than volume.
+- Failure modes: funding a coverage percentage target, which reliably produces assertion-free tests and no defect reduction; spending the whole quarter on the loudest team rather than the riskiest service; treating quality investment as a one-off project so the improvement decays once the funded engineers leave; and measuring only the metric you moved, missing that lead time doubled because the new gates added forty minutes to every pipeline.
 
 ## References
 
