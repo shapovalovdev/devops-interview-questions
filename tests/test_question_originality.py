@@ -3,13 +3,11 @@
 
 A Question can satisfy `validate_questions.py` completely — front-matter sources,
 a long-enough answer guide, References, a blog link, five curated learning links
-— and still say nothing. Three Themes were built by stamping the same prompt and
-the same answer-guide bullets across every file: 19 `testing-strategy` Questions
-literally asked "How should a team make this testing strategy decision?", three
-`caching` Questions shared one generic prompt, and all 25
-`performance-engineering` Questions share two identical bullets. The
-`testing-strategy` and `caching` clusters were rewritten under issue #103; the
-`performance-engineering` cluster is still on the backlog below.
+— and still say nothing. Three Themes were once built by stamping the same prompt
+and the same answer-guide bullets across every file: 19 `testing-strategy`
+Questions literally asked "How should a team make this testing strategy
+decision?", three `caching` Questions shared one generic prompt, and all 25
+`performance-engineering` Questions shared two identical bullets.
 
 Structure validators cannot see that, so this test checks distinctiveness
 directly:
@@ -18,10 +16,8 @@ directly:
 * an answer-guide bullet must not appear in more than `MAX_SHARED_BULLET`
   Questions.
 
-`KNOWN_BOILERPLATE` is the recorded backlog of files that already fail, so this
-gate blocks *new* boilerplate today instead of waiting for the rewrite. It is
-allowed to shrink and never to grow: an entry that no longer fails must be
-deleted, and the test enforces that too, so the debt cannot be quietly retained.
+All 53 files were rewritten under issues #102 and #103, so the gate is now
+unconditional: there is no allowlist to add a new exception to.
 """
 
 from __future__ import annotations
@@ -35,35 +31,6 @@ ROOT = Path(__file__).resolve().parents[1]
 QUESTIONS = ROOT / "questions"
 MAX_SHARED_BULLET = 2
 MIN_BULLET_LENGTH = 40
-
-# Tracked by the Question-rewrite issue. Remove entries as they are rewritten.
-KNOWN_BOILERPLATE = {
-    "questions/performance-engineering/avoid-metric-cardinality.md",
-    "questions/performance-engineering/benchmark-control-variables.md",
-    "questions/performance-engineering/benchmark-production-safety.md",
-    "questions/performance-engineering/cache-performance-evaluation.md",
-    "questions/performance-engineering/capacity-baseline-design.md",
-    "questions/performance-engineering/capacity-economics-governance.md",
-    "questions/performance-engineering/choose-histogram-buckets.md",
-    "questions/performance-engineering/connection-pool-sizing.md",
-    "questions/performance-engineering/cross-team-performance-contracts.md",
-    "questions/performance-engineering/database-query-regression.md",
-    "questions/performance-engineering/define-performance-objectives.md",
-    "questions/performance-engineering/identify-bottleneck-signals.md",
-    "questions/performance-engineering/load-shedding-design.md",
-    "questions/performance-engineering/measure-latency-percentiles.md",
-    "questions/performance-engineering/multi-tenant-noisy-neighbor.md",
-    "questions/performance-engineering/performance-budget-api.md",
-    "questions/performance-engineering/performance-investment-portfolio.md",
-    "questions/performance-engineering/performance-observability-strategy.md",
-    "questions/performance-engineering/performance-regression-ci.md",
-    "questions/performance-engineering/profile-cpu-hotspots.md",
-    "questions/performance-engineering/resilience-performance-tradeoffs.md",
-    "questions/performance-engineering/select-load-test-model.md",
-    "questions/performance-engineering/tail-latency-triage.md",
-    "questions/performance-engineering/throughput-and-concurrency.md",
-    "questions/performance-engineering/trace-critical-path.md",
-}
 
 
 def prompt_of(text: str) -> str:
@@ -102,8 +69,8 @@ def offenders() -> set[str]:
     return failing
 
 
-def test_no_new_boilerplate_questions() -> None:
-    new = sorted(offenders() - KNOWN_BOILERPLATE)
+def test_no_boilerplate_questions() -> None:
+    new = sorted(offenders())
     assert not new, (
         "These Questions reuse another Question's prompt or share an answer-guide bullet with "
         f"more than {MAX_SHARED_BULLET} Questions. Write the specific question and a specific "
@@ -111,18 +78,11 @@ def test_no_new_boilerplate_questions() -> None:
     )
 
 
-def test_known_boilerplate_list_only_shrinks() -> None:
-    fixed = sorted(KNOWN_BOILERPLATE - offenders())
-    assert not fixed, (
-        "These Questions are no longer boilerplate. Delete them from KNOWN_BOILERPLATE so the "
-        "backlog cannot silently retain fixed entries:\n" + "\n".join(fixed)
-    )
 
 
 def main() -> None:
-    test_no_new_boilerplate_questions()
-    test_known_boilerplate_list_only_shrinks()
-    print(f"Validated Question distinctiveness; {len(KNOWN_BOILERPLATE)} Questions remain on the rewrite backlog.")
+    test_no_boilerplate_questions()
+    print(f"Validated that {len(list(QUESTIONS.glob('*/*.md')))} Questions each ask something distinct.")
 
 
 if __name__ == "__main__":

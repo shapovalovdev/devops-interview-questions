@@ -12,11 +12,14 @@ sources:
 
 # How do you investigate a CPU hotspot without optimizing the wrong code?
 
+A service is using 70 percent of its CPU budget and the flame graph shows `memcpy` as the widest leaf frame. How do you profile it so that the fix targets the real cost?
+
 ## Answer guide
 
-- Start by defining the user-visible outcome and workload boundary before choosing a number. For cpu profiling and confirmation, record the request class, time window, traffic mix, dependency versions, and the service-level objective or explicit decision that the measurement will inform.
-- Measure a repeatable baseline, then change one plausible cause at a time. Compare latency distribution, throughput, errors, resource saturation, and cost against the same workload; use traces or profiles to connect an observed symptom to the resource or dependency doing the work.
-- Treat the result as conditional rather than universal. Cache state, retries, background jobs, autoscaling, noisy neighbors, and sampling can change the outcome. Define an abort or rollback condition, retain raw evidence, and verify that an apparent improvement does not move delay, failures, or cost to another component.
+- A leaf like `memcpy`, `malloc`, or a serialization routine is a symptom; the actionable unit is the call path that reaches it, so read a flame graph by the width of the ancestor frames rather than the top row. Collect with `perf record -F 99 -g` or the runtime's sampling profiler over the workload you actually care about, then fold to a flame graph. Sampling at 99 Hz instead of 100 Hz avoids lock-stepping with periodic timer work and the aliasing that produces.
+- On-CPU profiling can only ever explain CPU time. If the service is slow but not CPU-saturated, the latency is off-CPU — blocked on a lock, on I/O, or waiting for the scheduler — and no amount of extra on-CPU profiling will reveal it; that needs off-CPU sampling such as `offcputime` or scheduler tracing. Decide which regime you are in from the utilization-versus-latency correlation before you profile, or you will optimise code that is not where the delay lives.
+- The profile is only as good as the stacks. Builds compiled with `-fomit-frame-pointer` truncate stacks to one frame, so either build with frame pointers, pay for `--call-graph dwarf`, or use LBR. Symbolisation needs debug info, JIT runtimes (JVM, Node, .NET) need a perf map agent, and profiling inside a container needs the symbols visible in the profiler's mount namespace. Permission is the other common wall: `perf` needs `perf_event_paranoid` relaxed or `CAP_PERFMON`, which is usually why profiling a pod silently returns nothing.
+- A profile captured while the service is idle, warming up, or driven by a synthetic harness attributes cost to startup or to the harness. Percentages are relative, so a frame worth 40 percent of CPU is worth nothing if the service is I/O-bound. Amdahl's law bounds the payoff: halving the cost of a path that is 20 percent of CPU returns 10 percent. Confirm the fix by re-measuring end-to-end latency, throughput, and cost, not by confirming that the frame in the flame graph got narrower.
 
 ## References
 
