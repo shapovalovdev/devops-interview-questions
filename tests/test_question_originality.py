@@ -3,10 +3,11 @@
 
 A Question can satisfy `validate_questions.py` completely — front-matter sources,
 a long-enough answer guide, References, a blog link, five curated learning links
-— and still say nothing. Three Themes were built by stamping the same prompt and
-the same answer-guide bullets across every file: 19 `testing-strategy` Questions
-literally ask "How should a team make this testing strategy decision?", and all
-25 `performance-engineering` Questions share two identical bullets.
+— and still say nothing. Three Themes were once built by stamping the same prompt
+and the same answer-guide bullets across every file: 19 `testing-strategy`
+Questions literally asked "How should a team make this testing strategy
+decision?", three `caching` Questions shared one generic prompt, and all 25
+`performance-engineering` Questions shared two identical bullets.
 
 Structure validators cannot see that, so this test checks distinctiveness
 directly:
@@ -15,10 +16,8 @@ directly:
 * an answer-guide bullet must not appear in more than `MAX_SHARED_BULLET`
   Questions.
 
-`KNOWN_BOILERPLATE` is the recorded backlog of files that already fail, so this
-gate blocks *new* boilerplate today instead of waiting for the rewrite. It is
-allowed to shrink and never to grow: an entry that no longer fails must be
-deleted, and the test enforces that too, so the debt cannot be quietly retained.
+All 53 files were rewritten under issues #102 and #103, so the gate is now
+unconditional: there is no allowlist to add a new exception to.
 """
 
 from __future__ import annotations
@@ -32,38 +31,6 @@ ROOT = Path(__file__).resolve().parents[1]
 QUESTIONS = ROOT / "questions"
 MAX_SHARED_BULLET = 2
 MIN_BULLET_LENGTH = 40
-
-# Tracked by the Question-rewrite issue. Remove entries as they are rewritten.
-KNOWN_BOILERPLATE = {
-    "questions/caching/cache-aside-basics.md",
-    "questions/caching/cache-consistency-tradeoffs.md",
-    "questions/caching/cache-invalidation-policy.md",
-    "questions/testing-strategy/accessibility-test-strategy.md",
-    "questions/testing-strategy/consumer-driven-contracts.md",
-    "questions/testing-strategy/contract-testing-boundaries.md",
-    "questions/testing-strategy/end-to-end-test-scope.md",
-    "questions/testing-strategy/ephemeral-test-environments.md",
-    "questions/testing-strategy/flaky-test-quarantine-policy.md",
-    "questions/testing-strategy/integration-test-boundaries.md",
-    "questions/testing-strategy/integration-test-data-contract.md",
-    "questions/testing-strategy/mutation-testing-tradeoffs.md",
-    "questions/testing-strategy/performance-tests-in-ci.md",
-    "questions/testing-strategy/production-experiment-guardrails.md",
-    "questions/testing-strategy/quality-investment-portfolio.md",
-    "questions/testing-strategy/release-gate-design.md",
-    "questions/testing-strategy/security-test-boundaries.md",
-    "questions/testing-strategy/shadow-traffic-testing.md",
-    "questions/testing-strategy/shared-test-environment-policy.md",
-    "questions/testing-strategy/test-case-naming.md",
-    "questions/testing-strategy/test-coverage-signal.md",
-    "questions/testing-strategy/test-data-isolation.md",
-    "questions/testing-strategy/test-data-management.md",
-    "questions/testing-strategy/test-observability.md",
-    "questions/testing-strategy/test-pyramid-boundaries.md",
-    "questions/testing-strategy/test-suite-execution-policy.md",
-    "questions/testing-strategy/test-suite-ownership.md",
-    "questions/testing-strategy/unit-test-design.md",
-}
 
 
 def prompt_of(text: str) -> str:
@@ -102,8 +69,8 @@ def offenders() -> set[str]:
     return failing
 
 
-def test_no_new_boilerplate_questions() -> None:
-    new = sorted(offenders() - KNOWN_BOILERPLATE)
+def test_no_boilerplate_questions() -> None:
+    new = sorted(offenders())
     assert not new, (
         "These Questions reuse another Question's prompt or share an answer-guide bullet with "
         f"more than {MAX_SHARED_BULLET} Questions. Write the specific question and a specific "
@@ -111,18 +78,11 @@ def test_no_new_boilerplate_questions() -> None:
     )
 
 
-def test_known_boilerplate_list_only_shrinks() -> None:
-    fixed = sorted(KNOWN_BOILERPLATE - offenders())
-    assert not fixed, (
-        "These Questions are no longer boilerplate. Delete them from KNOWN_BOILERPLATE so the "
-        "backlog cannot silently retain fixed entries:\n" + "\n".join(fixed)
-    )
 
 
 def main() -> None:
-    test_no_new_boilerplate_questions()
-    test_known_boilerplate_list_only_shrinks()
-    print(f"Validated Question distinctiveness; {len(KNOWN_BOILERPLATE)} Questions remain on the rewrite backlog.")
+    test_no_boilerplate_questions()
+    print(f"Validated that {len(list(QUESTIONS.glob('*/*.md')))} Questions each ask something distinct.")
 
 
 if __name__ == "__main__":

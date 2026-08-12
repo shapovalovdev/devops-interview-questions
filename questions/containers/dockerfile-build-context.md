@@ -3,7 +3,7 @@ title: Control Docker build context with .dockerignore
 theme: containers
 difficulty: junior
 type: theory
-tags: [containers, docker, dockerfile, security]
+tags: [containers, docker, dockerfile, security, cba]
 sources:
   - url: https://docs.docker.com/build/concepts/context/#dockerignore-files
     source_type: official-docs

@@ -39,6 +39,7 @@ This map uses the DevOps roadmap as a coverage guide, not as copied content. Eac
 | Testing strategy and quality | `testing-strategy` |
 | Chaos engineering and resilience testing | `chaos-engineering` |
 | Cloud financial management | `finops` |
+| Platform engineering and internal developer platforms | `platform-engineering` |
 
 ## Coverage rule
 

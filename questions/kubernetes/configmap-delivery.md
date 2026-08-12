@@ -3,7 +3,7 @@ title: Deliver application configuration with ConfigMaps
 theme: kubernetes
 difficulty: middle
 type: scenario
-tags: [kubernetes, configuration-management, deployment, reliability, cka, ckad, kcna]
+tags: [kubernetes, configuration-management, deployment, reliability, cka, ckad, kcna, cba]
 sources:
   - url: https://kubernetes.io/docs/concepts/configuration/configmap/
     source_type: official-docs

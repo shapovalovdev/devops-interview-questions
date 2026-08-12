@@ -3,7 +3,7 @@ title: Establish data governance architecture
 theme: backend-architecture
 difficulty: staff
 type: scenario
-tags: [security, governance, databases]
+tags: [security, governance, databases, cba]
 sources:
   - url: https://www.nist.gov/privacy-framework
     source_type: official-docs

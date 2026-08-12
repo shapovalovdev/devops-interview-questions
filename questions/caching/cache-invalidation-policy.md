@@ -12,14 +12,14 @@ sources:
 
 # Design cache invalidation policy
 
-How should an engineering team approach this caching decision?
+An order's total is cached under three different keys, and a discount change updated only one of them. Write the invalidation policy that prevents this class of bug, and say what its backstop is.
 
 ## Answer guide
 
-- Define freshness, availability, latency, and correctness requirements before selecting a cache pattern.
-- Make invalidation, ownership, and failure behavior explicit; a cache miss or outage must not silently corrupt the source-of-truth path.
-- Observe hit rate, stale reads, evictions, and dependency latency, then test recovery and cold-cache behavior before release.
-- Revisit trade-offs after incidents because a fast cache can amplify stale data or overload a backend during failure.
+- Start by making invalidation derivable rather than remembered. Every cached value needs a declared dependency set — which entities it was computed from — and a key scheme that lets a change to an entity name the keys to drop: a prefix or a tag per entity such as `order:{id}:*`, or a registered index from entity to key. Three hand-maintained keys with an invalidation written at one call site is the failure mode by construction, because the fourth reader will add a fourth key and not know about the writer.
+- Invalidate from the write path that owns the data, once, rather than from every caller. Put the delete in the repository or in a change-data-capture consumer on the database's log, so a write from a batch job, a migration, or an admin tool triggers the same invalidation as the API. Delete rather than update, so the next reader repopulates from the origin and concurrent writers cannot leave the cache holding the loser's value. Where the cost of a miss is unacceptable, refresh asynchronously after the delete rather than writing the value inline.
+- An alternative that removes the problem is to never mutate a cached value: include a version in the key, so a change writes `order:{id}:v7` and readers that resolve the current version simply stop referencing v6, which then ages out. This makes invalidation atomic and multi-region-safe, at the cost of more keys, a lower hit rate immediately after a change, and a version pointer that itself has to be current. Immutable content-addressed keys are the same idea taken further and are the right choice for derived artifacts.
+- TTL is the backstop and it is not optional. Invalidation is a message that can be lost, dropped during a partition, or skipped by a code path nobody updated, so every entry needs a maximum age that bounds the damage — and a policy of no TTL because invalidation is exhaustive is how a wrong value survives for months. Failure modes: an invalidation issued before the database transaction commits, so a concurrent reader repopulates the old value; wildcard deletes implemented with `KEYS` in production, which blocks the server; and CDN or client caches holding the same value with a TTL you cannot reach, so origin invalidation fixes nothing the user sees.
 
 ## References
 

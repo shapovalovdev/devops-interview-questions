@@ -68,6 +68,15 @@ boundary, direct IDP/DORA gap policy, and source-verified canonical links. CNPA
 is not activated as a filter until the coordinator atomically integrates its
 tag, manifest entry, and catalog records.
 
+`tests/test_cba_curriculum_map.py` guards the CBA public curriculum map: its
+three official sources — the Linux Foundation program page, the CNCF program
+page, and the open-sourced CNCF curriculum PDF — their review date, all four
+published weighted domains, the original-content boundary, and an explicit gap
+decision for every domain naming each of the five original Questions added. It
+also verifies that all 23 mapped canonical Questions exist, carry the `cba`
+tag, and retain source metadata, References, and a complementary blog. CBA is
+activated in the content manifest at a minimum of 23 mapped Questions.
+
 `tests/test_cgoa_curriculum_map.py` guards the CGOA public curriculum map: the
 Linux Foundation program page and the CNCF `cgoa` outline with their review
 date, all five published weighted domains, the original-content boundary, and

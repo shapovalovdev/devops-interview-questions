@@ -3,7 +3,7 @@ title: Govern evolutionary backend architecture
 theme: backend-architecture
 difficulty: staff
 type: theory
-tags: [governance, change-management, reliability]
+tags: [governance, change-management, reliability, cba]
 sources:
   - url: https://martinfowler.com/articles/riskAndScale.html
     source_type: official-docs

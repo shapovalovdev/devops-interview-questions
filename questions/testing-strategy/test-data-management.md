@@ -15,14 +15,14 @@ sources:
 
 # Manage test data safely
 
-How should a team make this testing strategy decision?
+Someone proposes restoring last night's production database into the staging environment so tests run against realistic data. What has to be true before that is acceptable, and what would you do instead?
 
 ## Answer guide
 
-- Define the user-facing risk and select evidence that represents it without making every change wait on slow, unrelated systems.
-- Keep dependencies, data ownership, and environment isolation explicit so results are reproducible and failures are diagnosable.
-- Balance test cost, feedback speed, and release confidence; combine automated checks with reviews and operational signals.
-- Reassess after incidents and architecture changes because an uncontrolled test boundary can become a source of false confidence.
+- A production restore moves personal data into an environment with different controls, and it is the access model that fails first: staging typically grants read access to every engineer, logs queries verbosely, has weaker retention rules, and is backed up to somewhere nobody has inventoried. Under NIST SP 800-122's framing you owe the same protection to the PII regardless of which system holds it, so the copy inherits every obligation of production — access control, breach reporting, deletion requests — while having none of production's controls. That is the fact that decides the proposal.
+- The workable version is a de-identified extract produced by an owned, repeatable job, not a hand-cleaned dump. PostgreSQL Anonymizer applies masking rules declared on the columns themselves — static masking that rewrites the table in place, dynamic masking that shows masked values to a restricted role, and generalisation for quasi-identifiers — so the rules live with the schema and a new column defaults to being unmasked loudly rather than leaking quietly. Run it inside the production trust boundary and export only the masked result, since anonymising after the copy has already landed in staging means the raw data was there.
+- Masking is weaker than it looks: a birth date plus a postcode plus a gender re-identifies a large share of a population, so masking direct identifiers while keeping the quasi-identifiers intact is not de-identification. Referential integrity has to survive the transformation or joins break and the data stops being realistic, which means a deterministic, keyed pseudonym per subject rather than an independent random value per table. And free-text columns — support tickets, addresses, notes — are the ones no column rule catches; usually they are dropped rather than masked.
+- Prefer synthetic data generated from the schema and a factory for most testing, since it is cheap, shareable, and safe, and reserve masked extracts for the cases that genuinely need production's shape — volume, cardinality, and skew for performance work, and long-tail records for migration testing. Failure modes: a masking job that skips a newly added column because the rule set was not updated; a subset copy that breaks foreign keys and hides bugs behind missing rows; and an extract with no expiry, so a copy from two years ago is still sitting in a bucket when the breach happens.
 
 ## References
 

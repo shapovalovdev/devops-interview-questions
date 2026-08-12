@@ -3,7 +3,7 @@ title: Cache CI dependencies without using stale outputs
 theme: ci-cd
 difficulty: junior
 type: scenario
-tags: [ci-cd, automation, reliability, security]
+tags: [ci-cd, automation, reliability, security, cba]
 sources:
   - url: https://docs.github.com/en/actions/how-tos/writing-workflows/choosing-what-your-workflow-does/caching-dependencies-to-speed-up-workflows
     source_type: official-docs

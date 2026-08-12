@@ -15,15 +15,14 @@ sources:
 
 # Assign test suite ownership
 
-How should a team make this testing strategy decision?
+A cross-cutting end-to-end suite has been failing for nine days. Every team says the failing test is not theirs, and the platform team that built the harness has no context on the assertion. How do you make ownership real?
 
 ## Answer guide
 
-- Define the risk and decision the check supports before selecting a tool or metric.
-- Keep test data, dependencies, and ownership explicit so the result remains reproducible.
-- Balance execution cost against feedback speed and failure diagnosis; use multiple signals for release decisions.
-- Reassess after incidents and product changes because a useful test boundary can become misleading as systems evolve.
-- Assign owners for shared fixtures, environments, and release gates as well as individual tests. Teams need an escalation path for quarantines and flaky infrastructure; otherwise the cost is silently transferred to every delivery team and the suite loses trust.
+- Ownership has to resolve to a team with an on-call route, and it has to be derivable from the failing artifact without a conversation. Put it in two places that cannot drift apart: CODEOWNERS entries covering the test directories so a change requires the owning team's review, and a service catalog such as Backstage where the suite is a component with an owner, a lifecycle, and declared dependencies on the services it exercises. A failure notification that names a team and a channel is the difference between nine days and one.
+- Split ownership by concern rather than by file. The platform team owns the harness — runners, fixtures, environment provisioning, reporting, flake detection — and is accountable for the suite being runnable and its results trustworthy. The team owning the behaviour under test owns each individual assertion and is accountable for it passing. Cross-cutting journeys that genuinely span teams need a single named owner for the journey, chosen deliberately, because a test owned by everyone is owned by no one and that is the exact state described.
+- Back it with a service level and a policy that fires automatically. State a maximum time a test may stay red before it is quarantined or deleted, route the alert to the owner rather than to a shared channel, and escalate on a schedule rather than waiting for someone to notice. Publish per-suite health — pass rate, flake rate, runtime, mean time to green — attributed to the owning team, since ownership without a visible metric decays back to the loudest engineer taking it on.
+- Failure modes: CODEOWNERS pointing at a team that was reorganised away, so review requests go nowhere and merges bypass the intent; a catalog entry with an owner field nobody maintains; ownership assigned to an individual who then leaves; the platform team absorbing assertion failures because it is faster than chasing the owner, which permanently removes the incentive to fix them; and blocking every team's merges on a suite none of them owns, which reliably ends with the gate being made advisory.
 
 ## References
 

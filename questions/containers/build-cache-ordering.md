@@ -3,7 +3,7 @@ title: Order a Dockerfile for safe cache reuse
 theme: containers
 difficulty: middle
 type: scenario
-tags: [containers, docker, dockerfile, build-cache, automation]
+tags: [containers, docker, dockerfile, build-cache, automation, cba]
 sources:
   - url: https://docs.docker.com/build/cache/optimize/
     source_type: official-docs
