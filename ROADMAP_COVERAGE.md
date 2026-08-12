@@ -38,6 +38,7 @@ This map uses the DevOps roadmap as a coverage guide, not as copied content. Eac
 | Site reliability engineering | `sre` |
 | Testing strategy and quality | `testing-strategy` |
 | Chaos engineering and resilience testing | `chaos-engineering` |
+| Cloud financial management | `finops` |
 
 ## Coverage rule
 
