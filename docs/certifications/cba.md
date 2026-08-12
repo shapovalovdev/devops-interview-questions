@@ -16,8 +16,9 @@ authority for exam domains and weights.
 CBA publishes four domains: Backstage Development Workflow (24%), Backstage
 Infrastructure (22%), Backstage Catalog (22%), and Customizing Backstage (32%).
 The CNCF curriculum PDF carries no version or revision number; the competency
-bullets quoted below are taken verbatim from that PDF and from the Linux
-Foundation page, which agree.
+bullets listed against each domain below are the ones that PDF and the Linux
+Foundation page publish, reproduced with only their leading capitalisation
+normalised so they read as a list.
 
 CBA is a beginner-level, online, proctored, multiple-choice certification aimed
 at developers and platform engineers. It is materially more product-specific
