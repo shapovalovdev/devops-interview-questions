@@ -3,7 +3,7 @@ title: Run a production-readiness review
 theme: sre
 difficulty: middle
 type: scenario
-tags: [reliability, monitoring, incident-response, troubleshooting]
+tags: [reliability, monitoring, incident-response, troubleshooting, cba]
 sources:
   - url: https://sre.google/sre-book/evolving-sre-engagement-model/
     source_type: official-docs

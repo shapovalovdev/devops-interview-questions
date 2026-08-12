@@ -3,7 +3,7 @@ title: Build a small runtime image with multi-stage builds
 theme: containers
 difficulty: middle
 type: scenario
-tags: [containers, docker, dockerfile, multi-stage-builds, images, security]
+tags: [containers, docker, dockerfile, multi-stage-builds, images, security, cba]
 sources:
   - url: https://docs.docker.com/build/building/multi-stage/
     source_type: official-docs

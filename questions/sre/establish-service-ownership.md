@@ -3,7 +3,7 @@ title: Establish service ownership and reliability accountability
 theme: sre
 difficulty: staff
 type: theory
-tags: [reliability, monitoring, incident-response, troubleshooting, cnpa]
+tags: [reliability, monitoring, incident-response, troubleshooting, cnpa, cba]
 sources:
   - url: https://sre.google/sre-book/service-best-practices/
     source_type: official-docs
