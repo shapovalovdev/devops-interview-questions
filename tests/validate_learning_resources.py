@@ -56,7 +56,12 @@ MAX_RETRY_AFTER_SECONDS = 30.0
 # 404 rather than 429 — indistinguishable from a dead page by status alone.
 HOST_REQUEST_INTERVAL_SECONDS = 1.0
 CONFIRMATION_DELAYS_SECONDS = (2.0, 5.0, 15.0)
-LIVE_CHECK_WORKERS = 8
+# Workers check distinct hosts, not distinct URLs: one worker owns one host's
+# queue at a time, so the only pace interval it ever waits out is its own. With
+# a URL-per-worker pool, eight workers drawing from a URL list sorted by host
+# all queued behind the same host lock while the other 300 hosts sat idle, and
+# the 1,600-URL manifest took 25-30 minutes against a three-minute floor.
+LIVE_CHECK_HOST_WORKERS = 32
 TRANSIENT_STATUSES = {403, 418, 429}
 
 
@@ -341,22 +346,53 @@ def check_url(
     return LinkCheck(url, "rate limited", f"HTTP {result.status}", MAX_ATTEMPTS)
 
 
+def host_queues(urls: set[str]) -> list[list[str]]:
+    """Group every URL by host, busiest host first.
+
+    Scheduling by host is what keeps the pool busy. A worker holds one host's
+    queue for as long as it takes, so the only interval it ever waits out is the
+    one its own next request owes — never another host's. The busiest queue is
+    started first because the run cannot finish before that queue does, which is
+    the classic longest-processing-time-first ordering.
+
+    Grouping only reorders the work: every URL appears in exactly one queue, so
+    the audited set is unchanged.
+    """
+    grouped: dict[str, list[str]] = {}
+    for url in sorted(urls):
+        grouped.setdefault(urlparse(url).netloc, []).append(url)
+    return sorted(grouped.values(), key=len, reverse=True)
+
+
+def check_host_queue(
+    urls: list[str],
+    timeout: float,
+    *,
+    sleeper=time.sleep,
+    pacer: HostPacer | None = None,
+) -> list[LinkCheck]:
+    """Check one host's URLs in sequence, which is the pace the host is owed."""
+    return [check_url(url, timeout, sleeper=sleeper, pacer=pacer) for url in urls]
+
+
 def validate_live(
     urls: set[str],
     timeout: float,
     *,
     sleeper=time.sleep,
     pacer: HostPacer | None = None,
-    workers: int = LIVE_CHECK_WORKERS,
+    workers: int = LIVE_CHECK_HOST_WORKERS,
 ) -> None:
     shared_pacer = pacer or HostPacer(HOST_REQUEST_INTERVAL_SECONDS, sleeper=sleeper)
-    with ThreadPoolExecutor(max_workers=workers) as executor:
-        checks = list(
-            executor.map(
-                lambda url: check_url(url, timeout, sleeper=sleeper, pacer=shared_pacer),
-                sorted(urls),
-            )
+    queues = host_queues(urls)
+    if not queues:
+        return
+    with ThreadPoolExecutor(max_workers=min(workers, len(queues))) as executor:
+        results = executor.map(
+            lambda queue: check_host_queue(queue, timeout, sleeper=sleeper, pacer=shared_pacer),
+            queues,
         )
+        checks = sorted((check for queue in results for check in queue), key=lambda check: check.url)
 
     transient = [
         check
