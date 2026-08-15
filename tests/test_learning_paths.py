@@ -105,10 +105,19 @@ class LearningPathManifest(unittest.TestCase):
                         f"{path['slug']} step {position}: a why must explain the position, not label the topic",
                     )
 
-    def test_the_sre_track_is_declared(self) -> None:
+    def test_the_sre_track_is_a_complete_cross_theme_progression(self) -> None:
         track = next((path for path in self.paths if path["slug"] == "sre-track"), None)
         self.assertIsNotNone(track, "sre-track is the seed path and must stay declared")
-        self.assertTrue(track["steps"], "the seed path must carry steps")
+        steps = track["steps"]
+        self.assertGreaterEqual(len(steps), 30, "the SRE track is a full progression, not a shortlist")
+        self.assertLessEqual(len(steps), 40, "keep the SRE track finishable")
+        themes = {step["question"].split("/")[1] for step in steps}
+        self.assertGreaterEqual(len(themes), 7, "an SRE track crosses Themes rather than sitting in one folder")
+        self.assertEqual(
+            steps[0]["question"],
+            "questions/sre/define-service-reliability.md",
+            "the track opens on what reliability means; every later technique defends that promise",
+        )
 
 
 class GeneratedLearningPathCatalog(unittest.TestCase):

@@ -1300,6 +1300,62 @@ window.learningPaths = [
         "difficulty": "senior",
         "href": "questions/sre/prevent-cascading-failures.html",
         "why": "The synthesis of this stage: timeouts, bulkheads, backpressure, and degradation set as one compatible system instead of four independent settings. It is unreadable before the three primitives above it, and it is the reason the next stage exists."
+      },
+      {
+        "title": "Define chaos engineering and what it is for",
+        "theme": "chaos-engineering",
+        "difficulty": "junior",
+        "href": "questions/chaos-engineering/define-chaos-engineering.html",
+        "why": "You now hold containment mechanisms you believe in but have never falsified. Chaos engineering enters here and not earlier because its own stated precondition — observability good enough to detect harm within seconds — is exactly what the telemetry stage built."
+      },
+      {
+        "title": "State a steady-state hypothesis",
+        "theme": "chaos-engineering",
+        "difficulty": "junior",
+        "href": "questions/chaos-engineering/state-a-steady-state-hypothesis.html",
+        "why": "An experiment needs a falsifiable statement before it needs a tool, and the hypothesis reuses the user-visible SLI thinking from the opening steps rather than a CPU graph. Without this there is nothing for the later steps to abort against."
+      },
+      {
+        "title": "Verify observability before injecting a fault",
+        "theme": "chaos-engineering",
+        "difficulty": "middle",
+        "href": "questions/chaos-engineering/verify-observability-before-injecting.html",
+        "why": "The audit between hypothesis and injection: histogram resolution, labels that match the scope, and telemetry that does not travel the path you are about to break. It turns the earlier metric-type and tail-latency choices into a go or no-go decision."
+      },
+      {
+        "title": "Control the blast radius of an experiment",
+        "theme": "chaos-engineering",
+        "difficulty": "middle",
+        "href": "questions/chaos-engineering/control-the-blast-radius.html",
+        "why": "Last in this stage because it is the safety contract that lets the rest of it run in production: bound the fault on every axis, widen only in planned steps, and give each step its own abort condition."
+      },
+      {
+        "title": "Run a production-readiness review",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/run-production-readiness-review.html",
+        "why": "The staff stage opens by making the whole track repeatable for a service you did not build. A readiness review is a walk through every earlier stage — ownership, SLOs, capacity, failure modes, rollback — which is precisely why it cannot come first."
+      },
+      {
+        "title": "Measure and reduce toil",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/measure-and-reduce-toil.html",
+        "why": "Moves the subject from one service to the engineer's time. It follows the incident and readiness work because you can only price toil after feeling which repeated manual tasks those stages generate."
+      },
+      {
+        "title": "Govern an error-budget policy",
+        "theme": "sre",
+        "difficulty": "staff",
+        "href": "questions/sre/govern-error-budget-policy.html",
+        "why": "The clearest pedagogy-over-difficulty placement in the track: this staff question is meaningless without the junior error-budget step near the start and the burn-rate maths in the middle. Only with both does \"what happens when the budget is exhausted\" become an organisational decision rather than a definition."
+      },
+      {
+        "title": "Build a reliability investment roadmap",
+        "theme": "sre",
+        "difficulty": "staff",
+        "href": "questions/sre/build-reliability-roadmap.html",
+        "why": "The final step because it is the only one that consumes the output of every other: SLO gaps, incident history, measured toil, and experiment results become a funded plan with owners. The track ends where it began, on the promise, now with a way to invest in it."
       }
     ]
   }
