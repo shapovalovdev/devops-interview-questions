@@ -22,9 +22,11 @@ jobs:
           python tests/validate_content_manifest.py
           python tests/validate_certification_question_workflow.py
           python tests/validate_questions.py
+          python tests/validate_labs.py
           python tests/test_theme_coverage_policy.py
           python tests/validate_learning_resources.py --check-live
           python tests/test_validate_learning_resources.py
+          python tests/test_validate_labs.py
 
       - name: Run every Theme and certification regression test
         # Runs each module's TestCase classes, bare test_* functions, and main().

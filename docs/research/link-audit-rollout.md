@@ -20,6 +20,14 @@ The current CI gate prevents an audited Question from publishing with malformed
 or unreachable curated links. It is intentionally staged so it does not accept
 unreviewed, machine-generated links merely to make the legacy catalog pass.
 
+## Labs are audited in full, not staged
+
+Every URL cited by a lab under `labs/` is in the live audit from the moment the
+lab is committed. Staging exists to record which Questions have received manual
+five-resource curation; labs carry no such curation, so there is nothing to
+stage and no list to forget to update. `tests/validate_labs.py` validates the
+surrounding lab schema.
+
 ## Current measured scope
 
 Run `python3 tests/validate_learning_resources.py --report` for the

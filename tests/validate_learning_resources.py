@@ -31,6 +31,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "docs/research/link-audit-manifest.json"
 UNVERIFIABLE_HOSTS = ROOT / "docs/research/unverifiable-hosts.json"
+LABS = ROOT / "labs"
 REQUIRED_CATEGORIES = {
     "official documentation",
     "manual or specification",
@@ -39,6 +40,9 @@ REQUIRED_CATEGORIES = {
     "hands-on guide",
 }
 LINK_PATTERN = re.compile(r"^- ([^:]+): \[[^]]+\]\((https://[^)\s]+)\)\s*$", re.MULTILINE)
+# Labs cite links in prose, fenced commands, and Markdown links rather than in a
+# curated five-category list, so their URLs are matched directly.
+LAB_LINK_PATTERN = re.compile(r"https://[^\s`\"'()<>\\]+")
 USER_AGENT = "DevOpsQuestionDatabaseLinkAudit/1.0 (+https://github.com/shapovalovdev/devops-interview-questions)"
 BROWSER_USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -133,8 +137,23 @@ def audit_scope(manifest: dict) -> list[tuple[Path, Path]]:
     return scope
 
 
-def validate_scope(manifest: dict) -> set[str]:
+def lab_urls() -> set[str]:
+    """Every URL cited by a hands-on lab, on the same liveness terms as a Question link.
+
+    Question membership in this audit is staged, because a Question enters it
+    only after a maintainer has curated five categorized resources.  Labs need
+    no such curation, so their scope is the whole of `labs/` read from disk:
+    there is no list to forget to update, and a new lab is audited the moment it
+    is committed.  `tests/validate_labs.py` validates the surrounding schema.
+    """
     urls: set[str] = set()
+    for lab in sorted(LABS.glob("*/*.md")):
+        urls.update(url.rstrip(".,;:") for url in LAB_LINK_PATTERN.findall(lab.read_text(encoding="utf-8")))
+    return urls
+
+
+def validate_scope(manifest: dict) -> set[str]:
+    urls: set[str] = set(lab_urls())
     for question, related in audit_scope(manifest):
         question_links = resource_links(question.read_text(encoding="utf-8"), str(question.relative_to(ROOT)))
         related_links = resource_links(related.read_text(encoding="utf-8"), str(related.relative_to(ROOT)))
@@ -364,7 +383,10 @@ def main() -> None:
     urls = validate_scope(load_manifest())
     if args.check_live:
         validate_live(urls, args.timeout)
-    print(f"Validated {len(urls)} unique curated learning-resource URLs.")
+    print(
+        f"Validated {len(urls)} unique curated learning-resource URLs, "
+        f"including {len(lab_urls())} cited by labs."
+    )
     if args.report or args.check_live:
         print(coverage_report(load_manifest()))
 
