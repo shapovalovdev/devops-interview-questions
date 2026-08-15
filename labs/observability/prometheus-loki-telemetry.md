@@ -4,7 +4,7 @@ theme: "observability"
 difficulty: "middle"
 question_ref: "observability/build-an-actionable-alert.md"
 tags: [observability, monitoring, logging, prometheus, alertmanager, loki, grafana, ansible]
-why: "Мониторинг упоминается в 8 из 8 анализируемых вакансий, логирование — в 6 из 8; Loki закрывает практическую часть логирования дешевле и проще ELK; связка метрики + логи в одном дашборде — именно то, что просят на интервью в Ostrovok, Т1 и efin. Кандидат с продовым Zabbix+Grafana и пет-уровнем Prometheus закрывает этим лабом главный пробел: переносит разрозренный Zabbix-опыт на Prometheus-стек и учится связывать алерт с причиной по логам."
+why: "Мониторинг упоминается в 8 из 8 анализируемых вакансий, логирование — в 6 из 8; Loki закрывает практическую часть логирования дешевле и проще ELK; связка метрики + логи в одном дашборде — именно то, что просят на интервью в Ostrovok, Т1 и efin. Кандидат с продовым Zabbix+Grafana и пет-уровнем Prometheus закрывает этим лабом главный пробел: переносит разрозренный Zabbix-опыт на Prometheus-стек и учится связывать алерт с причиной по логам. Hands-on: deploy Prometheus + node_exporter via Ansible, write alert rules, route them through Alertmanager, ship journald and Flask logs with Promtail into Loki, and query both metrics and logs in one Grafana dashboard."
 checklist:
   - "Prometheus и node_exporter подняты на всех 3 VM; все таргеты видны как UP в /targets."
   - "Scrape-конфиги объявлены декларативно (Ansible role или docker-compose) и воспроизводятся повторным запуском."

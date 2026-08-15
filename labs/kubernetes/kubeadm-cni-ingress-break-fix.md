@@ -3,8 +3,8 @@ title: "Kubernetes break-fix: kubeadm-кластер и диагностика C
 theme: "kubernetes"
 difficulty: "middle"
 question_ref: "kubernetes/node-not-ready-triage.md"
-tags: [kubernetes, kubeadm, cni, flannel, cilium, ingress, etcd, troubleshooting, break-fix]
-why: "K8s — требование 8/8 целевых вакансий; рекрутеры отличают 'использовал k3s' от 'умеет чинить кластер'. Break-fix учит диагностике через kubectl describe/logs/events и пониманию control-plane (etcd, apiserver, сертификаты), а не только деплою."
+tags: [kubernetes, kubeadm, cni, ingress, etcd, troubleshooting, fault-injection]
+why: "Kubernetes — требование 8/8 целевых вакансий; рекрутеры отличают 'использовал k3s' от 'умеет чинить кластер'. Кандидат поднимает кластер через kubeadm (control-plane, worker join), настраивает CNI (flannel или cilium) и ingress-controller, затем диагностирует injected-отказы: NotReady node, broken pod-cidr routing, ingress без endpoints, мёртвый etcd/apiserver, expired certificates. Каждый scenario учит методу: kubectl describe, events, logs → root cause → verify."
 checklist:
   - "Стенд поднят: 1 control-plane + минимум 1 worker, все узлы Ready, CNI-подузы Running."
   - "Тестовое приложение задеплоено и доступно через ingress с рабочим endpoint."
