@@ -40,7 +40,7 @@ Paths are declared in [`config/learning-paths.json`](../config/learning-paths.js
 2. Run `python3 scripts/generate_question_catalog.py` to republish `assets/questions.js`; the site reads paths from the generated `window.learningPaths`, where each step is resolved to its title, theme, difficulty, and `href`. Never hand-edit that file.
 3. Run `python3 tests/test_learning_paths.py`.
 
-The site renders every declared path automatically — an entry button on the landing view and an ordered view at `#path=<slug>`. No site change is needed to add a path.
+The site picks a new path up automatically: it gains a button in the landing view's **Learning paths** bank and an ordered view at `#path=<slug>`. No change to `index.html`, `assets/site.js`, or `assets/site.css` is needed. The masthead shortcut beside the drill deck is a deliberate exception — it points at one flagship path, currently `sre-track`, and only changes if the flagship does.
 
 ## Writing a `why`
 
