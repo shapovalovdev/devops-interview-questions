@@ -2,10 +2,13 @@ import errno
 import io
 import socket
 import ssl
+import threading
+import time
 import unittest
 from contextlib import redirect_stdout
 from unittest.mock import patch
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlparse
 
 from validate_learning_resources import (
     HostPacer,
@@ -13,6 +16,7 @@ from validate_learning_resources import (
     check_url,
     coverage_report,
     fetch_status,
+    host_queues,
     load_manifest,
     resource_links,
     validate_live,
@@ -201,6 +205,85 @@ class LearningResourcesParserTests(unittest.TestCase):
         with patch("urllib.request.urlopen", side_effect=URLError(socket.gaierror(-2, "Name or service not known"))):
             result = check_url("https://gone.example/resource", 1, sleeper=lambda _: None, pacer=HostPacer(0))
         self.assertEqual("network error", result.category)
+
+
+class LiveCheckSchedulingTests(unittest.TestCase):
+    """The audit is scheduled by host, so raising concurrency cannot raise the per-host rate.
+
+    These run real threads against a stubbed transport, never the network. The
+    pace interval is shortened so the assertions cost tenths of a second, and
+    gaps are compared with a small tolerance because the timestamp is taken just
+    after the pacer releases the request, which the scheduler can delay by a
+    millisecond or two. A pacer that had stopped working would produce gaps two
+    orders of magnitude below the interval, so the tolerance cannot hide one.
+    """
+
+    INTERVAL = 0.1
+    TOLERANCE = 0.01
+    HOSTS = 24
+    PER_HOST = 4
+
+    @staticmethod
+    def recording_transport():
+        """A stub urlopen that answers 200 and records (host, time) per request."""
+        requests: list[tuple[str, float]] = []
+        lock = threading.Lock()
+
+        def respond(request, timeout):
+            with lock:
+                requests.append((urlparse(request.full_url).netloc, time.monotonic()))
+            return Response()
+
+        return requests, respond
+
+    @classmethod
+    def urls_for(cls, hosts: int, per_host: int) -> set[str]:
+        return {f"https://host{host}.example/page{page}" for host in range(hosts) for page in range(per_host)}
+
+    def check_all(self, urls: set[str], workers: int) -> tuple[list[tuple[str, float]], float]:
+        requests, respond = self.recording_transport()
+        started = time.monotonic()
+        with patch("urllib.request.urlopen", side_effect=respond):
+            validate_live(urls, 1, pacer=HostPacer(self.INTERVAL), workers=workers)
+        return requests, time.monotonic() - started
+
+    def test_host_queues_group_every_url_busiest_first(self) -> None:
+        urls = {"https://a.example/1", "https://a.example/2", "https://b.example/1", "https://c.example/1"}
+        queues = host_queues(urls)
+        self.assertEqual([2, 1, 1], [len(queue) for queue in queues])
+        self.assertEqual(urls, {url for queue in queues for url in queue})
+
+    def test_per_host_rate_holds_when_many_hosts_run_at_once(self) -> None:
+        urls = self.urls_for(self.HOSTS, self.PER_HOST)
+        requests, _ = self.check_all(urls, workers=32)
+
+        self.assertEqual(len(urls), len(requests), "every URL is checked exactly once")
+        by_host: dict[str, list[float]] = {}
+        for host, at in requests:
+            by_host.setdefault(host, []).append(at)
+        self.assertEqual(self.HOSTS, len(by_host))
+        for host, times in sorted(by_host.items()):
+            ordered = sorted(times)
+            gaps = [later - earlier for earlier, later in zip(ordered, ordered[1:])]
+            self.assertEqual(self.PER_HOST - 1, len(gaps))
+            self.assertGreaterEqual(
+                min(gaps),
+                self.INTERVAL - self.TOLERANCE,
+                f"{host} was requested faster than one request per interval: {gaps}",
+            )
+
+    def test_a_paced_host_does_not_starve_the_others(self) -> None:
+        """The run is bounded by the busiest host's queue, not by the total URL count."""
+        urls = self.urls_for(self.HOSTS, self.PER_HOST)
+        _, elapsed = self.check_all(urls, workers=32)
+
+        one_host_queue = (self.PER_HOST - 1) * self.INTERVAL
+        self.assertGreaterEqual(elapsed, one_host_queue, "the pace interval was skipped")
+        self.assertLess(
+            elapsed,
+            self.HOSTS * one_host_queue / 4,
+            "hosts waited on each other's pace intervals instead of being checked at once",
+        )
 
 
 if __name__ == "__main__":

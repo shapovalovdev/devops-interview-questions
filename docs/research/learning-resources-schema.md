@@ -34,9 +34,14 @@ It then follows every unique URL when run with `--check-live`.
 
 ## Live-check behavior
 
-The CI validator checks unique URLs concurrently across hosts, but spaces
-requests to the same host. It sends `HEAD` first, then retries with `GET` when a
-host rejects `HEAD` with a common method or bot-policy response (`403`, `405`,
+The CI validator checks every unique URL in the manifest on every run — nothing
+is sampled, skipped, or allowlisted for speed. Work is scheduled by host: the
+URLs are grouped per host, the busiest queue is started first, and up to 32
+queues run at once, one worker per host. A worker therefore only ever waits out
+the interval owed to its own host, so a paced host cannot stall the hosts that
+are ready. The run is bounded by the busiest host's queue rather than by the
+total URL count. It sends `HEAD` first, then retries with `GET` when a host
+rejects `HEAD` with a common method or bot-policy response (`403`, `405`,
 `406`, or `501`).
 
 Rate-limit and temporary-server responses (`403`, `418`, `429`, and `5xx`),
@@ -53,8 +58,10 @@ connectivity reports this for a dual-stack host that is perfectly healthy over
 IPv4; `gnu.org` is the recurring example. That is a fact about the checker's
 network, not evidence that the resource is gone.
 
-The checker sends at most one request per second to any single host, and
-concurrency across different hosts keeps the run workable. A permanent HTTP
+The checker sends at most one request per second to any single host, whatever
+the concurrency across hosts, and
+`tests/test_validate_learning_resources.py` proves that under many workers with
+a stubbed transport rather than asserting it in a comment. A permanent HTTP
 status is then re-checked up to three times with a browser `User-Agent`,
 spaced two, five, and fifteen seconds apart, before the link is declared dead. Some hosts answer an unrecognised agent with `404`
 rather than `403`, and only after they have seen a few requests: `csrc.nist.gov`
