@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/engine/containers/resource_constraints/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Set a container-platform cost and capacity model
@@ -20,12 +23,14 @@ How would you reduce container-platform cost without encouraging teams to under-
 - Set policy guardrails for missing limits, extreme over-allocation, and noisy-neighbor risk, but let service objectives and burst behavior determine the recommended operating range.
 - Use staged rightsizing with production telemetry, load tests, and rollback thresholds. Savings based only on average utilization can understate peak demand, startup requirements, or recovery capacity.
 - Align incentives: report cost and reliability together, fund platform efficiency work, and avoid chargeback rules that cause teams to hide demand or disable observability.
+- The accounting is cgroup accounting wherever it runs: the same measured CPU and memory demand drives Kubernetes requests and limits on containerd nodes and podman's `--cpus`/`--memory` on hosts, so a cost model built on measured demand travels with the fleet.
 
 ## References
 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Runtime resource constraints](https://docs.docker.com/engine/containers/resource_constraints/)
 - [Further reading: Docker Docs on CPU limits](https://docs.docker.com/engine/containers/resource_constraints/#cpu)
+- [Kubernetes: resource management for pods and containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 
 ## What to learn next
 

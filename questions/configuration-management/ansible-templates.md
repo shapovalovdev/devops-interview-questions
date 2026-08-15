@@ -20,6 +20,7 @@ How would you deliver a service configuration file that differs by environment?
 - Validate the generated configuration before activating it when the service offers a syntax checker. Notify a restart or reload handler only after the file changes and validation succeeds.
 - Do not put secret values in a template rendered to an uncontrolled workspace, in logs, or in a diff. Disable sensitive diffs and use an appropriate secret-delivery mechanism.
 - Templating makes syntax easy to vary but can hide semantic differences. Test representative production values and make a bad configuration recoverable through a known previous version or rollback path.
+- Template-then-validate-then-reload is portable: Puppet's EPP templates notify the managed service the same way, and the failure mode — valid syntax rendering a semantically wrong file — is engine-independent, so test rendered output with production-like values.
 
 ## References
 

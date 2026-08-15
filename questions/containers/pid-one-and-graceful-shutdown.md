@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/reference/dockerfile/#entrypoint
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://github.com/opencontainers/runtime-spec/blob/main/runtime.md
+    source_type: standard
+    verified_on: 2026-08-16
 ---
 
 # Make a container stop gracefully
@@ -20,6 +23,7 @@ Why does PID 1 matter in a container, and how do you prevent a stop request from
 - Use an exec-form entrypoint so the application is PID 1, or use a small init/supervisor when the container genuinely manages child processes. A shell wrapper must `exec` the long-running process or correctly forward signals and reap children.
 - Make shutdown bounded: stop accepting new work, drain or checkpoint according to the service semantics, then exit before the deployment timeout.
 - Test termination under load. A too-short grace period risks lost work; an unbounded shutdown delays rollouts and can exhaust capacity.
+- Signal handling follows the OCI runtime contract: the spec's lifecycle defines signal-then-timeout-then-kill termination, and podman stop or containerd's stop apply the same SIGTERM-to-SIGKILL sequence — the image's shutdown contract is the part that must be portable.
 
 ## References
 
@@ -27,6 +31,7 @@ Why does PID 1 matter in a container, and how do you prevent a stop request from
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Dockerfile reference: shell-form ENTRYPOINT and signals](https://docs.docker.com/reference/dockerfile/#shell-form-entrypoint-example)
 - [Further reading: Docker Docs on stop signals](https://docs.docker.com/reference/dockerfile/#stopsignal)
+- [OCI Runtime Specification: lifecycle](https://github.com/opencontainers/runtime-spec/blob/main/runtime.md)
 
 ## What to learn next
 

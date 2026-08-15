@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/build/cache/optimize/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://docs.podman.io/en/latest/markdown/podman-build.1.html
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Order a Dockerfile for safe cache reuse
@@ -20,12 +23,14 @@ How should you order Dockerfile steps to speed builds without hiding dependency 
 - Each changed instruction or relevant input can invalidate later cache. Keep the build context small and use cache mounts when the tool supports them rather than copying a local package cache into the final image.
 - Cache is a performance optimization, not a freshness guarantee. Pin and deliberately update dependencies and base images; do not assume a cached package installation includes current security updates.
 - Confirm reproducibility in a clean build as well as speed in cached CI. Incorrect copy order can reuse stale generated output or rebuild every layer after a trivial source edit.
+- Layer ordering pays off under any layered OCI builder: BuildKit caches by instruction inputs, while `podman build` (Buildah) must be given `--layers` to cache intermediate steps at all — ordering stable inputs first is what gives every builder something to reuse.
 
 ## References
 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Optimize cache usage](https://docs.docker.com/build/cache/optimize/)
 - [Further reading: Docker Docs on cache invalidation](https://docs.docker.com/build/cache/invalidation/)
+- [Podman docs: podman build](https://docs.podman.io/en/latest/markdown/podman-build.1.html)
 
 ## What to learn next
 

@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/reference/cli/docker/container/logs/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://docs.podman.io/en/latest/markdown/podman-logs.1.html
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Investigate a container that exits immediately
@@ -20,12 +23,14 @@ A newly started container stops in seconds. What evidence do you collect before 
 - Inspect the effective command, entrypoint, environment, mounts, user, health configuration, and state rather than assuming the Dockerfile defaults are still in force.
 - Separate application failure from runtime setup failure: missing configuration, an unreadable mount, port conflict, unsupported architecture, or permission error can each terminate the process.
 - Do not keep a failed process alive with a shell loop merely to make the container appear healthy. Fix the contract or use an intentional debug override while preserving evidence.
+- The first commands have direct equivalents — `podman logs`, `podman inspect`, and the exit status from `podman ps -a` — so read-before-rebuild is a portable discipline rather than a Docker CLI habit.
 
 ## References
 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker CLI reference: docker container logs](https://docs.docker.com/reference/cli/docker/container/logs/)
 - [Further reading: Docker CLI reference: docker container inspect](https://docs.docker.com/reference/cli/docker/container/inspect/)
+- [Podman docs: podman-logs](https://docs.podman.io/en/latest/markdown/podman-logs.1.html)
 
 ## What to learn next
 

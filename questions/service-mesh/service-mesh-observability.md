@@ -27,6 +27,7 @@ What request information can a service mesh add, and what still needs applicatio
 - A mesh can emit traffic-oriented metrics, access logs, and trace context or spans around captured requests. This helps correlate source, destination, response code, latency, TLS, and policy behavior across services.
 - Application instrumentation remains necessary for business outcomes, database calls, queue work, internal errors, meaningful trace attributes, and operations that never traverse the mesh. Sampling and privacy requirements must be designed explicitly.
 - Build dashboards from user-facing indicators and verify label cardinality, sampling, retention, and sensitive-data handling before enabling verbose telemetry broadly. High-cardinality labels or full request logging can increase cost and leak data while still failing to explain an application bug.
+- Golden-signal telemetry is mesh-generic: Linkerd emits per-route success and latency metrics from its proxies with no per-service configuration, and Cilium's Hubble serves the same L3-L7 view — the blind spots (in-process work, queues, unenrolled traffic) are identical, so application instrumentation stays mandatory.
 
 ## References
 

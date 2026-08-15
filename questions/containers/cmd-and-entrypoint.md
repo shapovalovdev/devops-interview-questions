@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/reference/dockerfile/#entrypoint
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://github.com/opencontainers/image-spec/blob/main/config.md
+    source_type: standard
+    verified_on: 2026-08-16
 ---
 
 # Choose between CMD and ENTRYPOINT in a Docker image
@@ -20,6 +23,7 @@ How do `CMD` and `ENTRYPOINT` interact, and which form best supports a container
 - Prefer JSON/exec form for both when the image is an executable: it avoids an implicit shell, preserves argument boundaries, and lets the application receive signals directly.
 - Use `CMD` alone when users should freely replace the command. Use an entrypoint plus default arguments when the executable is stable but its configuration is normally overridden.
 - A shell-form entrypoint can leave a shell as PID 1 and may not forward stop signals or pass arguments as intended. Test `docker run image --help` and graceful stopping, not only the default invocation.
+- `CMD` and `ENTRYPOINT` are spec fields, not Docker inventions: the OCI image config defines `config.Cmd` and `config.Entrypoint`, and containerd or podman combine them with the same override precedence when resolving the container's arguments.
 
 ## References
 
@@ -27,6 +31,7 @@ How do `CMD` and `ENTRYPOINT` interact, and which form best supports a container
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Dockerfile reference: ENTRYPOINT and CMD interaction](https://docs.docker.com/reference/dockerfile/#understand-how-cmd-and-entrypoint-interact)
 - [Further reading: Docker Docs on running containers](https://docs.docker.com/engine/containers/run/)
+- [OCI Image Format: image config](https://github.com/opencontainers/image-spec/blob/main/config.md)
 
 ## What to learn next
 

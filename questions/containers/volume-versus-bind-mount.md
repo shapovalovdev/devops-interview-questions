@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/engine/storage/volumes/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://docs.podman.io/en/latest/markdown/podman-volume.1.html
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Choose a Docker volume or a bind mount
@@ -20,12 +23,14 @@ How do Docker-managed volumes differ from bind mounts, and which would you use f
 - A bind mount exposes a chosen host path directly into a container. It is useful for local development or when the host path is deliberately part of the integration contract.
 - Use a named volume or external managed storage for production service data, with backup, restore, ownership, and retention defined outside the image. Use a bind mount for source iteration only when host coupling is intended.
 - Bind mounts can obscure image files at the target path and grant host-file access; wrong paths or permissions cause environment-specific failures. Neither mount type substitutes for a database-consistency backup strategy.
+- The split survives the engine swap: podman named volumes live under its storage roots with `podman volume` lifecycle commands, and Kubernetes draws the same line as PersistentVolumeClaims versus hostPath — engine-managed data versus host coupling is the portable decision.
 
 ## References
 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Volumes](https://docs.docker.com/engine/storage/volumes/)
 - [Further reading: Docker Docs on bind mounts](https://docs.docker.com/engine/storage/bind-mounts/)
+- [Podman docs: podman-volume](https://docs.podman.io/en/latest/markdown/podman-volume.1.html)
 
 ## What to learn next
 

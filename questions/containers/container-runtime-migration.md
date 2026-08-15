@@ -8,6 +8,9 @@ sources:
   - url: https://github.com/opencontainers/runtime-spec/blob/main/README.md
     source_type: standard
     verified_on: 2026-08-06
+  - url: https://containerd.io/docs/
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Lead a container runtime migration
@@ -20,12 +23,14 @@ Your organization must migrate workloads to a different OCI-compatible container
 - Inventory workloads and classify exceptions before migration. Test representative services, privileged workloads, storage-heavy jobs, multi-architecture images, and failure handling in a production-like environment.
 - Roll out in cohorts with objective success measures, rollback paths, support ownership, and clear freeze criteria. Keep application teams informed of behavior changes and replacement operational procedures.
 - OCI compatibility constrains image/runtime formats, not every implementation-specific feature or operational command. Treat undocumented Docker-specific assumptions as migration risks until tested.
+- Scope the alternatives by name: containerd is the CRI runtime underneath most Kubernetes distributions, podman provides the daemonless rootless stack, and runc versus crun is the reference-implementation choice — each surface above maps onto their documented behavior.
 
 ## References
 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [OCI Runtime Specification](https://github.com/opencontainers/runtime-spec/blob/main/README.md)
 - [Further reading: OCI Image Format specification](https://github.com/opencontainers/image-spec/blob/main/README.md)
+- [containerd documentation](https://containerd.io/docs/)
 
 ## What to learn next
 

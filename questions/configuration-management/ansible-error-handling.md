@@ -20,6 +20,7 @@ A configuration task fails on part of a fleet. How should the playbook handle th
 - Define `failed_when` and `changed_when` only when the module’s normal result cannot express the real contract. Base those conditions on stable result fields, not fragile output text.
 - Do not set `ignore_errors: true` to keep a rollout green. That can hide drift and let later tasks run against an invalid prerequisite; record exceptions and decide whether to stop the batch.
 - A rescue block does not restore every side effect. Make risky changes incrementally, validate after each batch, and keep a tested manual recovery procedure for partial success.
+- Partial-failure visibility is a convergence invariant: a Puppet agent run leaves per-node failure reports and a failed Terraform apply marks affected resources tainted — whatever the engine, the wrapper must keep failed hosts visible instead of green.
 
 ## References
 

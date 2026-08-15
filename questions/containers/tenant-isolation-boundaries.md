@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/engine/security/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://gvisor.dev/docs/
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Define tenant isolation boundaries for a container platform
@@ -20,12 +23,14 @@ Multiple teams will run untrusted build and workload images. How do you decide w
 - Containers use multiple kernel isolation mechanisms but share a host kernel. For stronger tenant boundaries, combine workload policy with dedicated nodes, virtual machines, sandboxed runtimes, or separate accounts according to risk.
 - Prohibit or tightly govern privileged containers, Docker socket access, broad host mounts, device access, and uncontrolled capabilities; these can bypass the intended boundary.
 - Make the decision explicit and testable through admission policy, audit evidence, incident response ownership, and periodic reassessment. A single "containerized" label is not a security classification.
+- The shared-kernel ceiling is spec-level: every OCI runtime applies the same namespace-and-cgroup isolation over one host kernel, so graduating tenants to gVisor's userspace kernel or Kata's micro-VMs is a category move any engine's tenants may need.
 
 ## References
 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Docker security](https://docs.docker.com/engine/security/)
 - [Further reading: Docker Docs on runtime privileges](https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities)
+- [gVisor documentation](https://gvisor.dev/docs/)
 
 ## What to learn next
 

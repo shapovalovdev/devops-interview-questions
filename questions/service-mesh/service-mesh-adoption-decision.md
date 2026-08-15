@@ -27,6 +27,7 @@ How would you decide whether a platform should adopt, expand, or retire a servic
 - Tie the decision to recurring problems that a mesh can address: consistent service identity, encrypted east-west traffic, policy enforcement, traffic control, or cross-service telemetry. Compare those outcomes with simpler alternatives such as application libraries, an API gateway, or Kubernetes-native controls.
 - Run a representative pilot with application owners and quantify reliability, security coverage, operational effort, latency, resource cost, upgrade risk, and support burden. Include non-HTTP, batch, external, and legacy workloads so the result does not only describe the easiest path.
 - Define adoption and exit criteria, investment owners, supported scope, and a migration plan. Declaring success from installation alone hides per-workload proxy cost and configuration complexity; conversely, rejecting the mesh after an unplanned rollout confuses a poor implementation with the underlying capability decision.
+- The comparison axes are mesh-generic: Linkerd's deliberately smaller feature set and lower proxy overhead is the standard counterweight to Istio's breadth, and pure north-south routing may need only a Gateway API implementation with no mesh at all — adopt for measured gaps, and retire the same way.
 
 ## References
 

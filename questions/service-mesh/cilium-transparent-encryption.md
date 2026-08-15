@@ -28,6 +28,7 @@ How would you introduce Cilium transparent encryption for traffic between worklo
 - Start with a representative cluster or node pool, confirm protected paths with connectivity tests and metrics, and make the encryption boundary explicit to application and security owners.
 - Preserve application TLS and authentication where end-to-end identity, protocol-level authorization, or traffic beyond the Cilium-managed path requires them.
 - Encryption configuration can affect MTU, routing, performance, and interoperability during a mixed rollout. Incorrect keys or incompatible nodes can interrupt traffic, so stage the change, monitor drops, and retain a tested rollback path.
+- Transport encryption sits at a different layer per tool: mesh mTLS in Istio or Linkerd authenticates workloads per connection, while this Cilium feature encrypts node-to-node without workload identity — know the mapping's layer (L3/L4 versus L7) and who holds the keys.
 
 ## References
 

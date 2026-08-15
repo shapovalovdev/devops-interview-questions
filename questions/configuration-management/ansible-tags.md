@@ -20,6 +20,7 @@ How can tags make an urgent Ansible run safer without creating an unsupported pa
 - Tag tasks by a stable operational intent, not by a transient ticket. Document required prerequisites, handlers, and verification tasks, then test the selected set in CI or a disposable environment.
 - Avoid using a tag to bypass database migrations, secret setup, or dependent configuration merely to make a run faster. A successful selected task can still leave the service in an incoherent state.
 - Review `--list-tags` and `--list-tasks` with the exact command before production use. Dynamic includes have different visibility from static imports, so selection behavior needs explicit testing.
+- Partial targeting carries the same warning in other engines: `terraform apply -target=` documents exactly this unsupported-partial-state risk — treat a tag selection as a contract with prerequisites, whichever tool's selector expresses it.
 
 ## References
 

@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/engine/containers/start-containers-automatically/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://github.com/opencontainers/runtime-spec/blob/main/runtime.md
+    source_type: standard
+    verified_on: 2026-08-16
 ---
 
 # Explain container lifecycle states and restart policy
@@ -20,12 +23,14 @@ What happens when a container's main process exits, and how should you choose a 
 - Restart policies let Docker restart eligible containers after exits or daemon restarts. Choose `no`, `on-failure`, `always`, or `unless-stopped` based on the workload's intended recovery behavior.
 - A restart policy is local process recovery, not application orchestration: it does not correct a bad configuration, unavailable dependency, or corrupted data.
 - Avoid restart loops that hide repeated failures. Capture exit reason and logs, add health checks where appropriate, and let an orchestrator own availability when more than one host or replica is required.
+- Exit-to-recorded-status is the OCI runtime lifecycle, and the restart decision belongs to the supervisor: podman offers the same four policies but defers daemon-independent restarts to systemd units, and the kubelet owns `restartPolicy` for Pods — local recovery, not orchestration, in each stack.
 
 ## References
 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Start containers automatically](https://docs.docker.com/engine/containers/start-containers-automatically/)
 - [Further reading: Docker Docs on container lifecycle](https://docs.docker.com/engine/containers/run/)
+- [OCI Runtime Specification: lifecycle](https://github.com/opencontainers/runtime-spec/blob/main/runtime.md)
 
 ## What to learn next
 

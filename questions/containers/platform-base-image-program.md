@@ -20,6 +20,7 @@ How would you create a shared base-image program for many teams without turning 
 - Automate rebuild, test, scan, and notification flows so upstream fixes reach downstream teams as actionable pull requests or release events rather than ad-hoc announcements.
 - Provide an exception process with a named risk owner and expiry, while measuring adoption, stale consumers, update latency, and breakage. A mandatory image with no migration support invites unsafe forks.
 - Keep the platform boundary narrow: the program supplies maintained foundations and policy evidence; application teams own their runtime dependencies, service behavior, and rollout safety.
+- The program's objects are runtime-neutral artifacts: a base image is an OCI image consumed identically by containerd nodes, podman hosts, and mixed fleets, so ownership, digest pinning, and rebuild notification are the durable parts — only build tooling differs per platform.
 
 ## References
 

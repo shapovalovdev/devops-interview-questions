@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/reference/cli/docker/container/inspect/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://docs.podman.io/en/latest/markdown/podman-inspect.1.html
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Triage a container service restart storm
@@ -20,12 +23,14 @@ A service repeatedly restarts after a release. Describe a safe triage sequence t
 - Compare the effective runtime state of a failing and healthy instance: exit code, logs, entrypoint, environment, mounts, user, resource events, health status, and dependency reachability.
 - Correlate restart timing with deployment, secret/config changes, node conditions, and external dependency errors. A restart policy can make one root cause appear as many independent failures.
 - Do not edit a live container as the fix. Turn the identified cause into a tested image/configuration change, then add a regression signal or pre-deploy check that would have caught it.
+- The evidence commands port across engines: `podman inspect` and `podman logs` return the same effective config, exit codes, and streams, and `crictl` plays the inspect role on containerd Kubernetes nodes — the triage sequence does not depend on the Docker socket.
 
 ## References
 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker CLI reference: docker container inspect](https://docs.docker.com/reference/cli/docker/container/inspect/)
 - [Further reading: Docker Docs on container logs](https://docs.docker.com/reference/cli/docker/container/logs/)
+- [Podman docs: podman-inspect](https://docs.podman.io/en/latest/markdown/podman-inspect.1.html)
 
 ## What to learn next
 

@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/build/building/multi-stage/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://github.com/containers/buildah/blob/main/docs/buildah.1.md
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Build a small runtime image with multi-stage builds
@@ -20,12 +23,14 @@ How would you build an application that needs compilers during build but not at 
 - Name stages and copy explicit outputs with `COPY --from`; this makes the runtime contents reviewable and prevents build tools, source trees, and transient caches from being carried forward by accident.
 - A smaller final image can reduce attack surface and transfer time, but it must still include required certificates, shared libraries, users, and diagnostic approach appropriate to operations.
 - Test the final stage, not only the builder. A common failure is an artifact linked to a library or expecting a path that existed only in the build image.
+- Stage separation is builder-neutral: podman build and Buildah execute the same multi-stage Dockerfile and commit only the final stage's rootfs, so test-the-final-stage is advice about layered OCI artifacts, not about BuildKit.
 
 ## References
 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Multi-stage builds](https://docs.docker.com/build/building/multi-stage/)
 - [Further reading: Dockerfile reference: COPY --from](https://docs.docker.com/reference/dockerfile/#copy---from)
+- [Buildah docs: buildah](https://github.com/containers/buildah/blob/main/docs/buildah.1.md)
 
 ## What to learn next
 

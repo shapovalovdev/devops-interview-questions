@@ -20,6 +20,7 @@ An Ansible controller overloads targets and a shared API during a fleet run. How
 - Size concurrency using measured target capacity, API quotas, connection limits, and service redundancy. Start with a canary batch and widen only after technical and service-level health checks pass.
 - Inspect strategy choice carefully: the default linear strategy coordinates task stages, while the free strategy lets hosts progress independently and can make shared side effects harder to reason about.
 - More parallelism shortens elapsed time but increases blast radius and hides causality during failures. Rate-limit retries and record per-batch results so a controller retry does not compound load.
+- Bounding parallel change is fleet-generic: Terraform's `-parallelism` caps resource operations within one apply and Salt rolls matched hosts with `--batch-size` — sizing concurrency from measured capacity and blast radius rather than controller speed is the transferable discipline.
 
 ## References
 

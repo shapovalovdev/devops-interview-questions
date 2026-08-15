@@ -27,6 +27,7 @@ Mesh requests are failing after a platform change across several teams. How do y
 - Establish scope with a known-good workload and a failing workload, then separate API/control-plane health, proxy connection and synchronization status, gateway health, service endpoints, DNS, TLS, and application responses. An unhealthy request can occur with a healthy control plane, and a proxy sync warning does not by itself prove the user-visible fault.
 - Inspect Istiod logs and metrics, `istioctl proxy-status`, the target proxy's effective configuration, Envoy access logs, and the Kubernetes events and endpoints that underlie the route. Check recent installation revisions, certificate trust, network policy, resource pressure, and image changes before restarting components that may erase useful evidence.
 - Restore the smallest verified broken dependency with the affected owners and monitor both mesh and application indicators through recovery. Repeatedly restarting proxies or Istiod without identifying the bad configuration, network path, certificate, or endpoint condition can broaden the outage and delay a rollback of the actual triggering change.
+- The fault-domain split is mesh-generic: in Linkerd you would separate the destination and identity controllers from linkerd2-proxy health, and in Cilium the agent from the data path — scope with known-good versus failing workloads before restarting anything, in any mesh.
 
 ## References
 

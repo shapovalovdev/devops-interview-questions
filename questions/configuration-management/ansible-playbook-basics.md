@@ -20,6 +20,7 @@ How do plays, tasks, and modules work together in an Ansible playbook?
 - Prefer fully qualified, state-aware modules such as package, service, template, and user over arbitrary shell commands. Modules expose meaningful inputs and can report whether they changed the managed state.
 - Give each task a clear name and keep a play focused on one operational outcome. Split repeated, reusable configuration into roles rather than creating one unreviewable site playbook.
 - Task order is observable behavior. An imperative sequence can still leave partial state after a failure, so identify prerequisites, validate inputs, and include rollback or repair steps for consequential changes.
+- State-aware modules are this model's resource types: Terraform resources and Puppet declared resources play the same converge-and-report role, and each tool's shell escape — provisioners, `exec` — loses change reporting the same way `command` does here.
 
 ## References
 

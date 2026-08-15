@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://github.com/opencontainers/runtime-spec/blob/main/config.md
+    source_type: standard
+    verified_on: 2026-08-16
 ---
 
 # Reduce Linux capabilities for a containerized service
@@ -20,12 +23,14 @@ How would you reduce a service container's Linux privileges without breaking it?
 - Do not use `--privileged` as a troubleshooting shortcut: it grants broad device and capability access and collapses much of the container isolation model.
 - Validate filesystem mounts, seccomp/AppArmor or equivalent policy, user namespaces, and network access alongside capabilities. Capability reduction alone cannot secure a writable host mount or exposed control socket.
 - Test startup, steady state, upgrades, and failure paths under the restricted profile. A common failure is an init step or diagnostic command that silently assumes a capability the service should not retain.
+- Capability sets are kernel state the runtime writes down: the OCI runtime spec's `process.capabilities` (bounding, effective, and so on) is what runc, crun, and podman all apply, and `podman run --cap-drop=ALL` with named add-backs is the identical least-privilege loop.
 
 ## References
 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Runtime privilege and Linux capabilities](https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities)
 - [Further reading: Docker Docs on seccomp profiles](https://docs.docker.com/engine/security/seccomp/)
+- [OCI Runtime Specification: configuration](https://github.com/opencontainers/runtime-spec/blob/main/config.md)
 
 ## What to learn next
 

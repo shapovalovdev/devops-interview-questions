@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/engine/security/rootless/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://docs.podman.io/en/latest/markdown/podman.1.html
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Evaluate Docker rootless mode for a build worker
@@ -20,12 +23,14 @@ When is Docker rootless mode useful, and what compatibility constraints must you
 - Assess required kernel/user-namespace support, storage driver behavior, networking and port requirements, and operational tooling before migration. Some capabilities and host integrations have limitations in rootless environments.
 - Rootless mode complements rather than replaces image provenance, least privilege, patching, tenant separation, and workload-specific authorization.
 - Pilot representative builds and runtime workloads. Falling back to privileged daemon access for a single incompatible job can defeat the intended risk reduction if it becomes the normal exception.
+- Rootless is a lineage rather than a Docker mode: podman is rootless-first with its daemonless model and containerd also runs rootless — the user-namespace, storage-driver, and port-limitation assessment transfers, and 'falling back to privileged defeats it' is true in each.
 
 ## References
 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Rootless mode](https://docs.docker.com/engine/security/rootless/)
 - [Further reading: Docker Docs on rootless limitations](https://docs.docker.com/engine/security/rootless/#known-limitations)
+- [Podman docs: podman](https://docs.podman.io/en/latest/markdown/podman.1.html)
 
 ## What to learn next
 

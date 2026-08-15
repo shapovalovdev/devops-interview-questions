@@ -20,6 +20,7 @@ How would you give automation the elevated access it needs without granting unre
 - Separate controller credentials, transport authentication, and privilege-escalation credentials. Rotate them independently and ensure logs, process listings, and temporary files do not disclose passwords or tokens.
 - Test the exact privilege boundary on each supported platform. PAM, sudo configuration, connection plugins, and temporary-module-file handling can differ across distributions and affect both security and execution.
 - Broad passwordless root makes initial automation easy but enlarges blast radius. Pair minimum privilege with reviewed playbooks, audited execution, hardened controllers, and an emergency revocation path.
+- The elevation boundary is largely tool-independent: a sudoers allowlist for the automation account bounds any engine's escalation, and Salt's publisher ACLs limit which states a user may apply — scope by command and target rather than granting unrestricted root.
 
 ## References
 

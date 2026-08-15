@@ -27,6 +27,7 @@ As the platform owner, how would you upgrade an Istio mesh while limiting the bl
 - Read the target release notes and supported upgrade path, back up versioned installation configuration, and test the upgrade against representative workloads first. Install the new control-plane revision alongside the old one, rather than assuming an in-place replacement can be undone after all workloads have moved.
 - Move selected namespaces or workloads to the new revision in small batches, restart them so they obtain proxies from that revision, and compare request success, latency, policy decisions, certificate behavior, telemetry, and proxy synchronization. Include gateways and externally exposed traffic in the plan because their compatibility and rollback impact differ from an internal workload.
 - Define measurable promotion and rollback gates with service owners. Do not remove the prior revision until all enrolled workloads, gateways, and control-plane health checks are stable; incompatible proxy configuration, unsupported APIs, missing images, or a rushed restart can turn a control-plane upgrade into an application outage.
+- Upgrade blast radius is where meshes diverge hardest: Linkerd has no revision-canary equivalent — `linkerd upgrade` rolls the control plane with staged proxy restarts as the bound — so the staged-cohort discipline, not Istio's revision machinery, is the portable part.
 
 ## References
 

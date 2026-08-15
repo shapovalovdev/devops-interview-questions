@@ -20,6 +20,7 @@ What guardrails would you establish for a self-service configuration-management 
 - Enforce policy at delivery boundaries: reviewed source, approved collections, least-privilege credentials, environment separation, secret handling, and audit-grade execution records. Exceptions should be time-bound and visible.
 - Measure adoption, failed changes, time to remediate drift, credential use, and blast radius. Use those signals to improve defaults rather than turning every platform decision into a manual review.
 - Guardrails that only block work invite bypasses; guardrails that permit arbitrary privilege create systemic risk. Balance them with documented escalation, usable APIs, and incident-safe emergency access that is later reviewed.
+- Guardrails mean the same thing across engines: approved modules or providers, pinned content sources, and audited execution map onto a Terraform module registry and Puppet code management exactly as onto collections — paved paths, not per-team plumbing.
 
 ## References
 

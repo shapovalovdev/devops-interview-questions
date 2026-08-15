@@ -27,6 +27,7 @@ How would you move a mixed workload namespace toward strict mutual TLS without b
 - Inventory callers, servers, gateways, VMs, and unmeshed or legacy endpoints before changing policy. PeerAuthentication defines the receiving side's mTLS posture, while DestinationRule client TLS settings influence how workload proxies originate traffic; the two must be compatible with the actual traffic path.
 - Begin with a mode that permits the required transition traffic, verify that workload identities and certificates are issued and rotated correctly, then enforce strict mTLS in bounded namespaces or services after all legitimate callers are prepared. Test ingress, egress, health probes, batch jobs, and cross-namespace calls because they often reveal unaccounted clients.
 - Monitor TLS handshake and policy failures during each step and retain a controlled rollback path. Strict mTLS improves workload authentication but does not authorize requests or secure an endpoint that bypasses the mesh, and a premature global switch can create a broad availability outage.
+- The transition problem differs by mesh: Linkerd encrypts enrolled traffic by default with no per-namespace mode to stage, and Cilium's transparent IPsec or WireGuard encryption works at L3/L4 between nodes — inventory-and-stage remains the discipline wherever a mode switch exists.
 
 ## References
 

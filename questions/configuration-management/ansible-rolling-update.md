@@ -20,6 +20,7 @@ How would you apply a service configuration change to a fleet without taking all
 - Choose batch size from redundancy, recovery time, and error budget—not controller speed. Keep a capacity margin so one failed batch cannot make the remaining service unhealthy.
 - Stop on failures and investigate before widening the rollout. `max_fail_percentage` and forks change blast radius but do not make an application-level health check optional.
 - Make load-balancer changes explicit and concurrency-safe. Delegated tasks can race when multiple forks write shared control-plane state, so serialize or centralize that operation.
+- Batched convergence exists wherever fleets do: Salt applies the same drain-change-validate-restore loop over `--batch-size` batches of matched minions — batch size from redundancy and error budget, not from controller speed.
 
 ## References
 

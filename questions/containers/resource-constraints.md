@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/engine/containers/resource_constraints/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://github.com/opencontainers/runtime-spec/blob/main/config.md
+    source_type: standard
+    verified_on: 2026-08-16
 ---
 
 # Apply CPU and memory constraints to a container
@@ -20,12 +23,14 @@ How do CPU and memory limits affect a container, and how do you choose safe init
 - Start from measured workload behavior and a service-level latency or throughput objective, then leave headroom for normal bursts and language-runtime behavior. Observe throttling, memory usage, and OOM events after rollout.
 - Set both application-level concurrency/backpressure and platform limits. A limit alone cannot prevent a request queue, connection pool, or cache from creating failure pressure.
 - Do not treat defaults as isolation. Overly low limits cause restart storms; no limits let one workload impair neighbors. Kernel, cgroup version, and orchestrator policy can affect the observable behavior.
+- Limits are cgroup controls the runtime configures: the OCI runtime spec's `linux.resources` block (memory limit, CPU quota and weight) is exactly what runc, crun, containerd, and podman write into the cgroup — throttling and OOM kills are kernel behaviors, not Docker behaviors.
 
 ## References
 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Runtime resource constraints](https://docs.docker.com/engine/containers/resource_constraints/)
 - [Further reading: Docker Docs on OOM priority](https://docs.docker.com/engine/containers/resource_constraints/#understand-the-risks-of-running-out-of-memory)
+- [OCI Runtime Specification: configuration](https://github.com/opencontainers/runtime-spec/blob/main/config.md)
 
 ## What to learn next
 

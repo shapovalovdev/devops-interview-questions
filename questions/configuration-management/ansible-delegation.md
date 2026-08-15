@@ -20,6 +20,7 @@ When should an Ansible task use `delegate_to`, and what can go wrong?
 - Combine delegation with a bounded serial rollout when the shared control plane has side effects. Understand that delegated tasks use the delegated host’s connection context unless you explicitly reference the original host through `hostvars`.
 - Do not assume delegation serializes shared writes. Multiple forks can still update the same file or API concurrently; use `run_once`, throttling, or an external concurrency control where required.
 - Validate both directions of the change: an instance must be removed before a disruptive action and restored only after health checks pass. Failure to restore traffic is an availability incident, not merely an automation error.
+- Running a step somewhere other than its target is generic orchestration: Terraform draws the same line with `local-exec` on the operator machine versus `remote-exec` on the target, and the drain-change-restore choreography with its concurrency caveats translates directly.
 
 ## References
 
