@@ -1120,6 +1120,13 @@ window.learningPaths = [
         "why": "Linux load counts uninterruptible sleep as well as runnable work, so this question is misread by anyone who has not just learned process states. Placed here it teaches saturation-versus-utilisation rather than a folk rule about CPU count."
       },
       {
+        "title": "Triage a hung process without destroying evidence",
+        "theme": "processes",
+        "difficulty": "middle",
+        "href": "questions/processes/hung-process-triage.html",
+        "why": "Process state showed you what a stuck task looks like; this is the first step that makes you act on one. It introduces the capture-before-you-restart discipline — evidence in increasing order of intrusion — that the incident stage later turns into a team practice."
+      },
+      {
         "title": "Diagnose a systemd service that repeatedly fails",
         "theme": "linux",
         "difficulty": "middle",
@@ -1146,6 +1153,83 @@ window.learningPaths = [
         "difficulty": "middle",
         "href": "questions/linux/file-descriptor-exhaustion.html",
         "why": "A second exhaustion class with a different shape — a slow leak against a soft limit rather than a sudden kill — which is what teaches the general habit of alerting on a resource relative to its limit."
+      },
+      {
+        "title": "Trace a DNS lookup from an application to an answer",
+        "theme": "networking",
+        "difficulty": "middle",
+        "href": "questions/networking/dns-resolution-path.html",
+        "why": "The track now leaves the host. Most \"the service is down\" reports start at name resolution, and walking stub resolver to cache to authoritative teaches the layer discipline — say which component answered and from which cache — that the remaining network steps reuse."
+      },
+      {
+        "title": "Diagnose a failed TCP three-way handshake",
+        "theme": "networking",
+        "difficulty": "middle",
+        "href": "questions/networking/tcp-three-way-handshake.html",
+        "why": "Once names resolve, the next failure boundary is the connection. SYN followed by RST versus SYN with no reply is the cheapest way to separate \"nothing is listening\" from \"something is dropping\", and it is the evidence the health-check step below depends on."
+      },
+      {
+        "title": "Design load-balancer health checks",
+        "theme": "networking",
+        "difficulty": "senior",
+        "href": "questions/networking/load-balancer-health-check-design.html",
+        "why": "The first design question in the track, and it needs the two steps before it: a health check is only a real decision once you know what a completed handshake proves, what it says nothing about downstream, and how eviction thresholds interact with the drain contract from the shutdown step."
+      },
+      {
+        "title": "Compare metrics, logs, and traces during an incident",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/three-observability-signals.html",
+        "why": "The host and network stages read one machine at a time; here the track switches to reading a population. It establishes the alert-then-metrics-then-trace-then-logs order that every following telemetry step assumes."
+      },
+      {
+        "title": "Choose a counter, gauge, histogram, or summary",
+        "theme": "observability",
+        "difficulty": "junior",
+        "href": "questions/observability/describe-metric-types.html",
+        "why": "Placed before anything that reads a distribution, because counter versus gauge versus histogram is the choice that decides whether tail latency is measurable at all. Its bucket advice is a prerequisite for the quantile step two positions later."
+      },
+      {
+        "title": "Instrument a distributed trace for an API request",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/instrument-a-trace.html",
+        "why": "Metrics establish that a population is unhealthy; a trace establishes where in the dependency chain it happened. Coming after the signal comparison, context propagation reads as filling a named gap rather than as tooling for its own sake."
+      },
+      {
+        "title": "Measure and improve tail latency",
+        "theme": "observability",
+        "difficulty": "senior",
+        "href": "questions/observability/measure-tail-latency.html",
+        "why": "The first senior measurement question, and it only works once histograms and traces are both in place. It asks you to choose buckets around an SLO boundary, which ties this stage back to the objectives defined in the opening steps."
+      },
+      {
+        "title": "Classify an alert as a page, ticket, or log",
+        "theme": "sre",
+        "difficulty": "junior",
+        "href": "questions/sre/classify-alert-urgency.html",
+        "why": "Before writing an alert, decide whether it should wake anyone. Page, ticket, or log is the cheapest filter in the track, and taking it first stops the next steps from producing technically correct alerts that no responder can act on."
+      },
+      {
+        "title": "Build an actionable production alert",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/build-an-actionable-alert.html",
+        "why": "Applies that classification to one concrete alert — owner, runbook, symptom, and an expression tested against missing data. It closes by pointing at multi-window SLO logic, which is exactly what the next two steps construct."
+      },
+      {
+        "title": "Explain an SLO error-budget burn-rate alert",
+        "theme": "observability",
+        "difficulty": "senior",
+        "href": "questions/observability/slo-burn-rate.html",
+        "why": "The arithmetic step. Burn rate is the bad-event rate divided by the budget rate defined back in the error-budget step, so it belongs after both that definition and a working alerting habit — and strictly before any multi-window alert design."
+      },
+      {
+        "title": "Design a multi-window burn-rate alert",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/design-multiwindow-burn-alert.html",
+        "why": "Deliberately after the senior burn-rate theory even though it is labelled middle: the short-and-long-window construction is a design decision rather than a copied recipe only once you can compute the burn rate it thresholds."
       }
     ]
   }
