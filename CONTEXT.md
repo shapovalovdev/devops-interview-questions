@@ -4,7 +4,7 @@ This repository is a public, topic-organized collection of DevOps interview ques
 
 ## Goal and current epic
 
-The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The current epic is the wayfinder map [Complete the learning-path catalog](https://github.com/shapovalovdev/devops-interview-questions/issues/120): cross-Theme learning paths beside the SRE track, plus a within-Theme suggested study order on all 39 related-materials pages. Its release gate is the GitHub milestone [Learning paths v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/1). Work is only dispatched on issues attached to that milestone; when the milestone closes, a new epic and release must be charted before further implementation work starts.
+The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The epic [Complete the learning-path catalog](https://github.com/shapovalovdev/devops-interview-questions/issues/120) and its release [Learning paths v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/1) closed on 2026-08-15 with every issue verified. There is currently **no active epic**: dispatch is paused until the next epic (owner direction: a qemu/kvm Theme) is charted with wayfinder and recorded here and in `AGENTS.md`.
 
 ## Language
 
