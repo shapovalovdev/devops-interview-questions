@@ -5,6 +5,7 @@ This map uses the DevOps roadmap as a coverage guide, not as copied content. Eac
 | Roadmap competency | Theme |
 | --- | --- |
 | Hardware and remote management | `hardware` |
+| Virtualization with QEMU, KVM, and libvirt | `qemu-kvm` |
 | Linux and operating systems | `linux` |
 | Linux networking | `linux-networking` |
 | Linux processes | `processes` |
