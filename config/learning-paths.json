@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "paths": [
+    {
+      "slug": "sre-track",
+      "title": "Site reliability engineering",
+      "audience": "Engineers moving into an SRE or on-call role who can already run a service but have never been asked to defend its reliability with numbers",
+      "prerequisites": [],
+      "steps": [
+        {
+          "question": "questions/sre/define-service-reliability.md",
+          "why": "Everything later in the track is a technique for defending a promise, so start by naming the promise: reliability is a measured user outcome and SRE is shared ownership of it, not a ticket queue."
+        },
+        {
+          "question": "questions/observability/define-an-sli-and-slo.md",
+          "why": "The promise is only defensible once it is arithmetic. Learn the SLI/SLO vocabulary — eligible events, good events, window, owner — before any step that assumes a target exists."
+        },
+        {
+          "question": "questions/sre/define-user-journey-sli.md",
+          "why": "Knowing the SLI definition is not the same as choosing a good one. This step applies the previous definition to a real checkout journey and shows why a convenient host metric fails as an indicator."
+        },
+        {
+          "question": "questions/sre/explain-error-budget.md",
+          "why": "An error budget is nothing but the leftover of the SLO you just learned to define, so it can only be taught after the target and its window are concrete. Every budget, burn-rate, and policy step below depends on this one."
+        },
+        {
+          "question": "questions/linux/process-states.md",
+          "why": "The track now drops from the promise to the machine that keeps it. Process state is the smallest unit of host evidence, and the runnable-versus-uninterruptible distinction here is exactly what makes the next step readable."
+        },
+        {
+          "question": "questions/linux/load-average-interpretation.md",
+          "why": "Linux load counts uninterruptible sleep as well as runnable work, so this question is misread by anyone who has not just learned process states. Placed here it teaches saturation-versus-utilisation rather than a folk rule about CPU count."
+        },
+        {
+          "question": "questions/linux/systemd-service-failure.md",
+          "why": "The first host-level thing an on-call engineer actually touches is a unit that will not stay up. It also introduces the restart-amplification trap that the graceful-shutdown contract in the next step resolves."
+        },
+        {
+          "question": "questions/linux/signals-and-graceful-shutdown.md",
+          "why": "Comes directly after the restart-policy discussion because it supplies the missing half: SIGTERM as a bounded drain contract and SIGKILL as a deadline, plus removing the instance from the load balancer before exit."
+        },
+        {
+          "question": "questions/linux/oom-killer-investigation.md",
+          "why": "The first named saturation failure, and it needs the earlier steps: kernel OOM selection is only interpretable once you can read process and cgroup pressure rather than an application exit code."
+        },
+        {
+          "question": "questions/linux/file-descriptor-exhaustion.md",
+          "why": "A second exhaustion class with a different shape — a slow leak against a soft limit rather than a sudden kill — which is what teaches the general habit of alerting on a resource relative to its limit."
+        }
+      ]
+    }
+  ]
+}

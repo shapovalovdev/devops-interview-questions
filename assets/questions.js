@@ -1069,3 +1069,84 @@ window.certifications = [
   {"tag": "otca", "map": "docs/certifications/otca.md", "minimumQuestions": 16},
   {"tag": "pca", "map": "docs/certifications/pca.md", "minimumQuestions": 25},
 ];
+
+window.learningPaths = [
+  {
+    "slug": "sre-track",
+    "title": "Site reliability engineering",
+    "audience": "Engineers moving into an SRE or on-call role who can already run a service but have never been asked to defend its reliability with numbers",
+    "prerequisites": [],
+    "steps": [
+      {
+        "title": "Define service reliability and the role of an SRE",
+        "theme": "sre",
+        "difficulty": "junior",
+        "href": "questions/sre/define-service-reliability.html",
+        "why": "Everything later in the track is a technique for defending a promise, so start by naming the promise: reliability is a measured user outcome and SRE is shared ownership of it, not a ticket queue."
+      },
+      {
+        "title": "Define an SLI and SLO for an API",
+        "theme": "observability",
+        "difficulty": "junior",
+        "href": "questions/observability/define-an-sli-and-slo.html",
+        "why": "The promise is only defensible once it is arithmetic. Learn the SLI/SLO vocabulary — eligible events, good events, window, owner — before any step that assumes a target exists."
+      },
+      {
+        "title": "Choose a user-journey SLI",
+        "theme": "sre",
+        "difficulty": "junior",
+        "href": "questions/sre/define-user-journey-sli.html",
+        "why": "Knowing the SLI definition is not the same as choosing a good one. This step applies the previous definition to a real checkout journey and shows why a convenient host metric fails as an indicator."
+      },
+      {
+        "title": "Explain an error budget",
+        "theme": "sre",
+        "difficulty": "junior",
+        "href": "questions/sre/explain-error-budget.html",
+        "why": "An error budget is nothing but the leftover of the SLO you just learned to define, so it can only be taught after the target and its window are concrete. Every budget, burn-rate, and policy step below depends on this one."
+      },
+      {
+        "title": "Explain Linux process states during an incident",
+        "theme": "linux",
+        "difficulty": "junior",
+        "href": "questions/linux/process-states.html",
+        "why": "The track now drops from the promise to the machine that keeps it. Process state is the smallest unit of host evidence, and the runnable-versus-uninterruptible distinction here is exactly what makes the next step readable."
+      },
+      {
+        "title": "Interpret a high Linux load average",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/load-average-interpretation.html",
+        "why": "Linux load counts uninterruptible sleep as well as runnable work, so this question is misread by anyone who has not just learned process states. Placed here it teaches saturation-versus-utilisation rather than a folk rule about CPU count."
+      },
+      {
+        "title": "Diagnose a systemd service that repeatedly fails",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/systemd-service-failure.html",
+        "why": "The first host-level thing an on-call engineer actually touches is a unit that will not stay up. It also introduces the restart-amplification trap that the graceful-shutdown contract in the next step resolves."
+      },
+      {
+        "title": "Design a graceful Linux service shutdown",
+        "theme": "linux",
+        "difficulty": "junior",
+        "href": "questions/linux/signals-and-graceful-shutdown.html",
+        "why": "Comes directly after the restart-policy discussion because it supplies the missing half: SIGTERM as a bounded drain contract and SIGKILL as a deadline, plus removing the instance from the load balancer before exit."
+      },
+      {
+        "title": "Investigate a Linux out-of-memory kill",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/oom-killer-investigation.html",
+        "why": "The first named saturation failure, and it needs the earlier steps: kernel OOM selection is only interpretable once you can read process and cgroup pressure rather than an application exit code."
+      },
+      {
+        "title": "Diagnose too many open files in a Linux service",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/file-descriptor-exhaustion.html",
+        "why": "A second exhaustion class with a different shape — a slow leak against a soft limit rather than a sudden kill — which is what teaches the general habit of alerting on a resource relative to its limit."
+      }
+    ]
+  }
+];
