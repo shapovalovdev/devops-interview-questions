@@ -23,7 +23,10 @@
           <span><b id="theme-count">11</b> themes</span>
           <span>CC BY 4.0</span>
         </div>
-        <a class="practice-entry" href="session.html">Build a 30-question interview drill deck <b>→</b></a>
+        <div class="entry-points">
+          <a class="practice-entry" href="session.html">Build a 30-question interview drill deck <b>→</b></a>
+          <a class="practice-entry" id="path-entry" href="#path=sre-track">Follow the ordered SRE learning path <b>→</b></a>
+        </div>
       </header>
 
       <section class="control-room" aria-labelledby="browse-heading">
@@ -36,13 +39,16 @@
           <nav class="filters" aria-label="Curated study collections"><button class="filter" id="must-know-filter" type="button" aria-pressed="false">must-know study set</button></nav>
           <nav class="filters" id="filters" aria-label="Filter questions by theme"></nav>
           <nav class="certification-filters" id="certification-filters" aria-label="Filter questions by certification track"></nav>
+          <nav class="path-filters" id="path-filters" aria-label="Open an ordered learning path"></nav>
         </div>
       </section>
 
-      <section class="question-zone" aria-live="polite">
+      <section class="question-zone" id="question-zone" aria-live="polite">
         <p class="result-line" id="result-line"></p>
         <div class="question-grid" id="question-grid"></div>
       </section>
+
+      <section class="path-zone" id="path-view" aria-live="polite" hidden></section>
     </main>
 
     <footer>

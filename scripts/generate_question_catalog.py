@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 QUESTIONS = ROOT / "questions"
 CATALOG = ROOT / "assets" / "questions.js"
 MANIFEST = ROOT / "config" / "content-manifest.json"
+LEARNING_PATHS = ROOT / "config" / "learning-paths.json"
 
 
 def front_matter(path: Path) -> dict[str, str]:
@@ -22,6 +23,43 @@ def front_matter(path: Path) -> dict[str, str]:
             key, value = line.split(": ", 1)
             fields[key] = value
     return fields
+
+
+def learning_paths() -> list[dict]:
+    """Resolve `config/learning-paths.json` into ordered, renderable steps.
+
+    Ordering belongs to the path, not to the Question, so a step is resolved
+    here rather than read from Question front matter.  The rendered link is
+    published as `href` on purpose: `path` is the Question catalog's own key and
+    reusing it would make a step look like a duplicate Question record.
+    """
+    declaration = json.loads(LEARNING_PATHS.read_text(encoding="utf-8"))
+    resolved = []
+    for path in declaration["paths"]:
+        steps = []
+        for step in path["steps"]:
+            source = ROOT / step["question"]
+            assert source.is_file(), f"{path['slug']}: missing Question {step['question']}"
+            fields = front_matter(source)
+            steps.append(
+                {
+                    "title": fields["title"],
+                    "theme": fields["theme"],
+                    "difficulty": fields["difficulty"],
+                    "href": source.relative_to(ROOT).with_suffix(".html").as_posix(),
+                    "why": step["why"],
+                }
+            )
+        resolved.append(
+            {
+                "slug": path["slug"],
+                "title": path["title"],
+                "audience": path["audience"],
+                "prerequisites": path["prerequisites"],
+                "steps": steps,
+            }
+        )
+    return resolved
 
 
 def main() -> None:
@@ -60,8 +98,10 @@ def main() -> None:
             + ","
         )
     lines.append("];\n")
+    paths = learning_paths()
+    lines.append("window.learningPaths = " + json.dumps(paths, ensure_ascii=False, indent=2) + ";\n")
     CATALOG.write_text("\n".join(lines), encoding="utf-8")
-    print(f"Generated {len(records)} catalog records.")
+    print(f"Generated {len(records)} catalog records and {len(paths)} learning paths.")
 
 
 if __name__ == "__main__":

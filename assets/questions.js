@@ -1069,3 +1069,294 @@ window.certifications = [
   {"tag": "otca", "map": "docs/certifications/otca.md", "minimumQuestions": 16},
   {"tag": "pca", "map": "docs/certifications/pca.md", "minimumQuestions": 25},
 ];
+
+window.learningPaths = [
+  {
+    "slug": "sre-track",
+    "title": "Site reliability engineering",
+    "audience": "Engineers moving into an SRE or on-call role who can already run a service but have never been asked to defend its reliability with numbers",
+    "prerequisites": [],
+    "steps": [
+      {
+        "title": "Define service reliability and the role of an SRE",
+        "theme": "sre",
+        "difficulty": "junior",
+        "href": "questions/sre/define-service-reliability.html",
+        "why": "Everything later in the track is a technique for defending a promise, so start by naming the promise: reliability is a measured user outcome and SRE is shared ownership of it, not a ticket queue."
+      },
+      {
+        "title": "Define an SLI and SLO for an API",
+        "theme": "observability",
+        "difficulty": "junior",
+        "href": "questions/observability/define-an-sli-and-slo.html",
+        "why": "The promise is only defensible once it is arithmetic. Learn the SLI/SLO vocabulary — eligible events, good events, window, owner — before any step that assumes a target exists."
+      },
+      {
+        "title": "Choose a user-journey SLI",
+        "theme": "sre",
+        "difficulty": "junior",
+        "href": "questions/sre/define-user-journey-sli.html",
+        "why": "Knowing the SLI definition is not the same as choosing a good one. This step applies the previous definition to a real checkout journey and shows why a convenient host metric fails as an indicator."
+      },
+      {
+        "title": "Explain an error budget",
+        "theme": "sre",
+        "difficulty": "junior",
+        "href": "questions/sre/explain-error-budget.html",
+        "why": "An error budget is nothing but the leftover of the SLO you just learned to define, so it can only be taught after the target and its window are concrete. Every budget, burn-rate, and policy step below depends on this one."
+      },
+      {
+        "title": "Explain Linux process states during an incident",
+        "theme": "linux",
+        "difficulty": "junior",
+        "href": "questions/linux/process-states.html",
+        "why": "The track now drops from the promise to the machine that keeps it. Process state is the smallest unit of host evidence, and the runnable-versus-uninterruptible distinction here is exactly what makes the next step readable."
+      },
+      {
+        "title": "Interpret a high Linux load average",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/load-average-interpretation.html",
+        "why": "Linux load counts uninterruptible sleep as well as runnable work, so this question is misread by anyone who has not just learned process states. Placed here it teaches saturation-versus-utilisation rather than a folk rule about CPU count."
+      },
+      {
+        "title": "Triage a hung process without destroying evidence",
+        "theme": "processes",
+        "difficulty": "middle",
+        "href": "questions/processes/hung-process-triage.html",
+        "why": "Process state showed you what a stuck task looks like; this is the first step that makes you act on one. It introduces the capture-before-you-restart discipline — evidence in increasing order of intrusion — that the incident stage later turns into a team practice."
+      },
+      {
+        "title": "Diagnose a systemd service that repeatedly fails",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/systemd-service-failure.html",
+        "why": "The first host-level thing an on-call engineer actually touches is a unit that will not stay up. It also introduces the restart-amplification trap that the graceful-shutdown contract in the next step resolves."
+      },
+      {
+        "title": "Design a graceful Linux service shutdown",
+        "theme": "linux",
+        "difficulty": "junior",
+        "href": "questions/linux/signals-and-graceful-shutdown.html",
+        "why": "Comes directly after the restart-policy discussion because it supplies the missing half: SIGTERM as a bounded drain contract and SIGKILL as a deadline, plus removing the instance from the load balancer before exit."
+      },
+      {
+        "title": "Investigate a Linux out-of-memory kill",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/oom-killer-investigation.html",
+        "why": "The first named saturation failure, and it needs the earlier steps: kernel OOM selection is only interpretable once you can read process and cgroup pressure rather than an application exit code."
+      },
+      {
+        "title": "Diagnose too many open files in a Linux service",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/file-descriptor-exhaustion.html",
+        "why": "A second exhaustion class with a different shape — a slow leak against a soft limit rather than a sudden kill — which is what teaches the general habit of alerting on a resource relative to its limit."
+      },
+      {
+        "title": "Trace a DNS lookup from an application to an answer",
+        "theme": "networking",
+        "difficulty": "middle",
+        "href": "questions/networking/dns-resolution-path.html",
+        "why": "The track now leaves the host. Most \"the service is down\" reports start at name resolution, and walking stub resolver to cache to authoritative teaches the layer discipline — say which component answered and from which cache — that the remaining network steps reuse."
+      },
+      {
+        "title": "Diagnose a failed TCP three-way handshake",
+        "theme": "networking",
+        "difficulty": "middle",
+        "href": "questions/networking/tcp-three-way-handshake.html",
+        "why": "Once names resolve, the next failure boundary is the connection. SYN followed by RST versus SYN with no reply is the cheapest way to separate \"nothing is listening\" from \"something is dropping\", and it is the evidence the health-check step below depends on."
+      },
+      {
+        "title": "Design load-balancer health checks",
+        "theme": "networking",
+        "difficulty": "senior",
+        "href": "questions/networking/load-balancer-health-check-design.html",
+        "why": "The first design question in the track, and it needs the two steps before it: a health check is only a real decision once you know what a completed handshake proves, what it says nothing about downstream, and how eviction thresholds interact with the drain contract from the shutdown step."
+      },
+      {
+        "title": "Compare metrics, logs, and traces during an incident",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/three-observability-signals.html",
+        "why": "The host and network stages read one machine at a time; here the track switches to reading a population. It establishes the alert-then-metrics-then-trace-then-logs order that every following telemetry step assumes."
+      },
+      {
+        "title": "Choose a counter, gauge, histogram, or summary",
+        "theme": "observability",
+        "difficulty": "junior",
+        "href": "questions/observability/describe-metric-types.html",
+        "why": "Placed before anything that reads a distribution, because counter versus gauge versus histogram is the choice that decides whether tail latency is measurable at all. Its bucket advice is a prerequisite for the quantile step two positions later."
+      },
+      {
+        "title": "Instrument a distributed trace for an API request",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/instrument-a-trace.html",
+        "why": "Metrics establish that a population is unhealthy; a trace establishes where in the dependency chain it happened. Coming after the signal comparison, context propagation reads as filling a named gap rather than as tooling for its own sake."
+      },
+      {
+        "title": "Measure and improve tail latency",
+        "theme": "observability",
+        "difficulty": "senior",
+        "href": "questions/observability/measure-tail-latency.html",
+        "why": "The first senior measurement question, and it only works once histograms and traces are both in place. It asks you to choose buckets around an SLO boundary, which ties this stage back to the objectives defined in the opening steps."
+      },
+      {
+        "title": "Classify an alert as a page, ticket, or log",
+        "theme": "sre",
+        "difficulty": "junior",
+        "href": "questions/sre/classify-alert-urgency.html",
+        "why": "Before writing an alert, decide whether it should wake anyone. Page, ticket, or log is the cheapest filter in the track, and taking it first stops the next steps from producing technically correct alerts that no responder can act on."
+      },
+      {
+        "title": "Build an actionable production alert",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/build-an-actionable-alert.html",
+        "why": "Applies that classification to one concrete alert — owner, runbook, symptom, and an expression tested against missing data. It closes by pointing at multi-window SLO logic, which is exactly what the next two steps construct."
+      },
+      {
+        "title": "Explain an SLO error-budget burn-rate alert",
+        "theme": "observability",
+        "difficulty": "senior",
+        "href": "questions/observability/slo-burn-rate.html",
+        "why": "The arithmetic step. Burn rate is the bad-event rate divided by the budget rate defined back in the error-budget step, so it belongs after both that definition and a working alerting habit — and strictly before any multi-window alert design."
+      },
+      {
+        "title": "Design a multi-window burn-rate alert",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/design-multiwindow-burn-alert.html",
+        "why": "Deliberately after the senior burn-rate theory even though it is labelled middle: the short-and-long-window construction is a design decision rather than a copied recipe only once you can compute the burn rate it thresholds."
+      },
+      {
+        "title": "Read alert context before escalating",
+        "theme": "troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/troubleshooting/read-alert-context.html",
+        "why": "The incident stage starts where a page starts. Having just built alerts, the first responder skill is reading one back critically — what it measures, over what window, and whether it is a detector failure rather than an outage."
+      },
+      {
+        "title": "Establish impact before changing a failing service",
+        "theme": "troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/troubleshooting/establish-impact.html",
+        "why": "Comes before any mitigation step because it fixes the order of operations for the whole stage: record a baseline and form one falsifiable hypothesis before changing anything, since changing several variables at once destroys the evidence."
+      },
+      {
+        "title": "Triage an error-budget burn alert",
+        "theme": "troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/troubleshooting/debug-error-budget.html",
+        "why": "The direct sequel to the multi-window burn alert you designed — this is what to do when it fires. It tells you to validate the numerator, denominator, window, and exclusions first, which is only a meaningful instruction to someone who defined those fields earlier in this track."
+      },
+      {
+        "title": "Triage a production incident",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/triage-production-incident.html",
+        "why": "Scales the single-responder method up to a declared incident with a lead, a severity, and an update cadence. This is where the track stops teaching a debugging technique and starts teaching a role."
+      },
+      {
+        "title": "Verify recovery rather than trusting a green deployment",
+        "theme": "troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/troubleshooting/verify-recovery.html",
+        "why": "Near the end of the incident stage despite its junior label, because \"is it actually over?\" is only answerable once you hold an impact statement and an SLI to check it against. It is the antidote to the briefly green dashboard the previous steps can produce."
+      },
+      {
+        "title": "Write a blameless postmortem",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/write-blameless-postmortem.html",
+        "why": "Closes the loop the page opened, and it depends on the evidence habits built from the hung-process step onward: a postmortem can only be written from the timestamps, alert payloads, and change records that triage bothered to preserve."
+      },
+      {
+        "title": "Choose timeouts, retries, and backoff",
+        "theme": "distributed-systems",
+        "difficulty": "junior",
+        "href": "questions/distributed-systems/timeouts-retries-backoff.html",
+        "why": "The track turns from responding to failure to designing against it. Deadlines, bounded attempts, and jittered backoff come first because retry amplification is the mechanism underneath most of the cascades in the steps that follow."
+      },
+      {
+        "title": "Make a retried write idempotent",
+        "theme": "distributed-systems",
+        "difficulty": "junior",
+        "href": "questions/distributed-systems/idempotent-operations.html",
+        "why": "Immediately after retries, because the previous step is only safe advice when a repeated write is safe. A timeout means the caller lacks an answer, not that the server did nothing, and that distinction is the entire reason idempotency keys exist."
+      },
+      {
+        "title": "Use a circuit breaker without masking failure",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/circuit-breakers.html",
+        "why": "A retry budget protects the caller; a breaker protects the dependency. It belongs after both, because its failure modes — synchronised half-open probes, a silently open circuit hiding a long outage — are the retry problems you have just learned to recognise, one layer out."
+      },
+      {
+        "title": "Prevent cascading failures",
+        "theme": "sre",
+        "difficulty": "senior",
+        "href": "questions/sre/prevent-cascading-failures.html",
+        "why": "The synthesis of this stage: timeouts, bulkheads, backpressure, and degradation set as one compatible system instead of four independent settings. It is unreadable before the three primitives above it, and it is the reason the next stage exists."
+      },
+      {
+        "title": "Define chaos engineering and what it is for",
+        "theme": "chaos-engineering",
+        "difficulty": "junior",
+        "href": "questions/chaos-engineering/define-chaos-engineering.html",
+        "why": "You now hold containment mechanisms you believe in but have never falsified. Chaos engineering enters here and not earlier because its own stated precondition — observability good enough to detect harm within seconds — is exactly what the telemetry stage built."
+      },
+      {
+        "title": "State a steady-state hypothesis",
+        "theme": "chaos-engineering",
+        "difficulty": "junior",
+        "href": "questions/chaos-engineering/state-a-steady-state-hypothesis.html",
+        "why": "An experiment needs a falsifiable statement before it needs a tool, and the hypothesis reuses the user-visible SLI thinking from the opening steps rather than a CPU graph. Without this there is nothing for the later steps to abort against."
+      },
+      {
+        "title": "Verify observability before injecting a fault",
+        "theme": "chaos-engineering",
+        "difficulty": "middle",
+        "href": "questions/chaos-engineering/verify-observability-before-injecting.html",
+        "why": "The audit between hypothesis and injection: histogram resolution, labels that match the scope, and telemetry that does not travel the path you are about to break. It turns the earlier metric-type and tail-latency choices into a go or no-go decision."
+      },
+      {
+        "title": "Control the blast radius of an experiment",
+        "theme": "chaos-engineering",
+        "difficulty": "middle",
+        "href": "questions/chaos-engineering/control-the-blast-radius.html",
+        "why": "Last in this stage because it is the safety contract that lets the rest of it run in production: bound the fault on every axis, widen only in planned steps, and give each step its own abort condition."
+      },
+      {
+        "title": "Run a production-readiness review",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/run-production-readiness-review.html",
+        "why": "The staff stage opens by making the whole track repeatable for a service you did not build. A readiness review is a walk through every earlier stage — ownership, SLOs, capacity, failure modes, rollback — which is precisely why it cannot come first."
+      },
+      {
+        "title": "Measure and reduce toil",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/measure-and-reduce-toil.html",
+        "why": "Moves the subject from one service to the engineer's time. It follows the incident and readiness work because you can only price toil after feeling which repeated manual tasks those stages generate."
+      },
+      {
+        "title": "Govern an error-budget policy",
+        "theme": "sre",
+        "difficulty": "staff",
+        "href": "questions/sre/govern-error-budget-policy.html",
+        "why": "The clearest pedagogy-over-difficulty placement in the track: this staff question is meaningless without the junior error-budget step near the start and the burn-rate maths in the middle. Only with both does \"what happens when the budget is exhausted\" become an organisational decision rather than a definition."
+      },
+      {
+        "title": "Build a reliability investment roadmap",
+        "theme": "sre",
+        "difficulty": "staff",
+        "href": "questions/sre/build-reliability-roadmap.html",
+        "why": "The final step because it is the only one that consumes the output of every other: SLO gaps, incident history, measured toil, and experiment results become a funded plan with owners. The track ends where it began, on the promise, now with a way to invest in it."
+      }
+    ]
+  }
+];
