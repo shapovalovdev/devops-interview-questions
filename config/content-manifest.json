@@ -121,6 +121,10 @@
       "state": "complete"
     },
     {
+      "name": "qemu-kvm",
+      "state": "complete"
+    },
+    {
       "name": "queue-messaging",
       "state": "complete"
     },
