@@ -4,7 +4,7 @@ This repository is a public, topic-organized collection of DevOps interview ques
 
 ## Goal and current epic
 
-The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The current epic is the wayfinder map [Open the qemu-kvm Theme](https://github.com/shapovalovdev/devops-interview-questions/issues/128): a canonical `qemu-kvm` Theme at the 25-Question coverage floor, with a related-materials page and study order, a hands-on lab, and its Questions woven into the `devops-platform` learning path. Its release gate is the GitHub milestone [qemu-kvm v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/2). Work is only dispatched on issues attached to that milestone; when the milestone closes, a new epic and release must be charted before further implementation work starts.
+The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The epic [Open the qemu-kvm Theme](https://github.com/shapovalovdev/devops-interview-questions/issues/128) and its release [qemu-kvm v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/2) closed on 2026-08-15 with every issue verified (40 Themes, 1074 Questions). There is currently **no active epic**: dispatch is paused until the next epic is charted with wayfinder and recorded here and in `AGENTS.md`.
 
 ## Language
 
