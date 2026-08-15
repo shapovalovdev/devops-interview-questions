@@ -2,7 +2,7 @@
 
 ## Epic and release gate
 
-Implementation work is only dispatched against a live epic and its release. The epic [Complete the learning-path catalog](https://github.com/shapovalovdev/devops-interview-questions/issues/120) and milestone [Learning paths v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/1) closed 2026-08-15 — **there is no active epic; do not dispatch implementation work** until the next epic and milestone are charted with wayfinder and recorded in `CONTEXT.md` and here. Rules:
+Implementation work is only dispatched against a live epic and its release. The current epic is the wayfinder map [Open the qemu-kvm Theme](https://github.com/shapovalovdev/devops-interview-questions/issues/128); the release gate is the GitHub milestone [qemu-kvm v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/2). Rules:
 
 - Do not assign implementation work on an issue outside the current milestone; chart a new epic and milestone first (wayfinder, with the repository owner).
 - When the milestone closes, stop dispatching until a new epic and release are charted and recorded in `CONTEXT.md` and here.
