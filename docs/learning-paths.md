@@ -54,3 +54,4 @@ Order by pedagogy rather than by the difficulty label. A staff Question on error
 ## Declared paths
 
 - [`sre-track`](../index.html#path=sre-track) — foundations to staff for engineers moving into an SRE or on-call role.
+- [`backend`](../index.html#path=backend) — the systems-design spine for backend engineers: transaction boundaries, idempotency, the outbox, saga compensation, and consistency trade-offs.

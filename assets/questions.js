@@ -1358,5 +1358,293 @@ window.learningPaths = [
         "why": "The final step because it is the only one that consumes the output of every other: SLO gaps, incident history, measured toil, and experiment results become a funded plan with owners. The track ends where it began, on the promise, now with a way to invest in it."
       }
     ]
+  },
+  {
+    "slug": "backend",
+    "title": "Backend engineering",
+    "audience": "Backend engineers preparing for systems-design and operational interview rounds",
+    "prerequisites": [],
+    "steps": [
+      {
+        "title": "Design a stateless backend service",
+        "theme": "backend-architecture",
+        "difficulty": "junior",
+        "href": "questions/backend-architecture/stateless-service-design.html",
+        "why": "The whole path is about what happens to state once it leaves the request process, so it opens by naming that premise: durable state lives in a database, an object store, or a managed cache, and any healthy instance can serve any request. Every later pattern — transaction, cache, queue, saga — is coordination between those external stores."
+      },
+      {
+        "title": "Choose synchronous versus asynchronous API processing",
+        "theme": "backend-architecture",
+        "difficulty": "junior",
+        "href": "questions/backend-architecture/synchronous-versus-asynchronous-api.html",
+        "why": "With the premise set, the first real design decision is the fork every backend faces: answer synchronously inside the caller's latency expectation, or accept the work and expose a status resource. The queueing, outbox, and saga stages all live on the asynchronous branch, so the reader must choose the branch before the machinery for it can make sense."
+      },
+      {
+        "title": "Explain database transaction boundaries",
+        "theme": "databases",
+        "difficulty": "junior",
+        "href": "questions/databases/transaction-basics.html",
+        "why": "The asynchronous branch still ends in a database, so fix the unit of atomicity before anything complicates it: related changes commit or roll back together and the boundary matches one business operation. Its closing note — side effects outside the database need their own design — is a deliberate forward pointer to both the idempotency stage and the outbox."
+      },
+      {
+        "title": "Choose a transaction boundary",
+        "theme": "backend-architecture",
+        "difficulty": "middle",
+        "href": "questions/backend-architecture/transaction-boundaries.html",
+        "why": "Restates that definition at the level of one backend request: validate first, keep the atomic core short, commit, and only then trigger slow external effects. Its central claim — a transaction cannot atomically include an email, an HTTP call, or a broker publish — is the exact gap the outbox stage later fills, which is why the gap must be met here and not at the end of the path."
+      },
+      {
+        "title": "Select a PostgreSQL transaction isolation level",
+        "theme": "databases",
+        "difficulty": "middle",
+        "href": "questions/databases/isolation-level-selection.html",
+        "why": "A boundary is only meaningful once concurrent writers are in the picture. This step forces the reader to derive isolation from an invariant — do not oversell inventory — rather than from a preferred label, and it plants a habit the whole spine reuses: a rejected transaction is retried as a whole unit, and the unit must stay short enough that retrying it is affordable."
+      },
+      {
+        "title": "Choose timeouts, retries, and backoff",
+        "theme": "distributed-systems",
+        "difficulty": "junior",
+        "href": "questions/distributed-systems/timeouts-retries-backoff.html",
+        "why": "The path now leaves the single database and calls a remote dependency, and the first thing failure costs is time. Deadlines come from a measured end-to-end budget and retries target only demonstrably transient failures — and the caveat that a retry must be safe to repeat is left deliberately hanging, because the next two steps exist to satisfy it."
+      },
+      {
+        "title": "Make a retried write idempotent",
+        "theme": "distributed-systems",
+        "difficulty": "junior",
+        "href": "questions/distributed-systems/idempotent-operations.html",
+        "why": "Answers the hanging caveat: a timeout means the caller lacks an answer, not that the server did nothing, so a repeated write needs a stable client-generated key persisted atomically with the effect and returned as the prior outcome on retry. This is the first spine concept in full, and the queueing stage will reintroduce it later as duplicate delivery."
+      },
+      {
+        "title": "Implement idempotency keys for mutations",
+        "theme": "backend-architecture",
+        "difficulty": "middle",
+        "href": "questions/backend-architecture/idempotency-keys.html",
+        "why": "Turns the concept into a production contract for a payment-like mutation: key scope bound to the authenticated caller, retention and expiry, a deterministic conflict response when the same key arrives with changed parameters, and the record coupled transactionally to the business write. It sits directly after the concept it operationalises and directly before the proxy layer whose retries depend on such keys existing."
+      },
+      {
+        "title": "Set reverse-proxy timeouts from a request budget",
+        "theme": "web-servers",
+        "difficulty": "middle",
+        "href": "questions/web-servers/proxy-timeout-budget.html",
+        "why": "Individual retries are now safe; this step makes the edge's arithmetic add up. Connect, send, and read timeouts are allocations from the caller's end-to-end objective rather than independent knobs, and a deadline that is never propagated is one the upstream cannot honour — the discipline that keeps a slow upstream from becoming an amplified outage."
+      },
+      {
+        "title": "Make upstream retries safe at a proxy",
+        "theme": "web-servers",
+        "difficulty": "senior",
+        "href": "questions/web-servers/upstream-retry-safety.html",
+        "why": "The proxy itself now wants to retry, and the question is when it may. The answer — only operations known to be safe to repeat or protected by an idempotency-key replay contract — is undecidable without the two steps above it, and placed there it reads as applying that vocabulary to the one layer that retries without the application ever knowing."
+      },
+      {
+        "title": "Use a circuit breaker without masking failure",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/circuit-breakers.html",
+        "why": "Retries and proxy budgets discipline one request; the breaker disciplines the population. It comes after both because its failure modes are their failure modes scaled up — synchronised half-open probes, an open circuit quietly hiding a long outage — and because a declared degraded response only means something once the caller's own retry behaviour is already bounded."
+      },
+      {
+        "title": "Shed load to preserve a critical service",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/load-shedding.html",
+        "why": "Closes the failure stage by turning the lens around: the breaker protects an unhealthy dependency, but shedding protects this service when demand exceeds safe capacity. Ranking requests by business importance and rejecting low-value work early needs the admission signals — queue depth, concurrency, dependency latency — that every previous step in the stage instrumented."
+      },
+      {
+        "title": "Explain cache-aside basics",
+        "theme": "caching",
+        "difficulty": "junior",
+        "href": "questions/caching/cache-aside-basics.html",
+        "why": "The path now adds its first deliberately replicated state. Cache-aside is the pattern most backends actually run, and its answer guide carries the two facts the rest of the stage leans on: delete on write rather than update, and a concurrent read and write can repopulate a stale value that nothing in the pattern itself prevents — which is why the TTL step must come next."
+      },
+      {
+        "title": "Choose a TTL for a cached value",
+        "theme": "caching",
+        "difficulty": "junior",
+        "href": "questions/caching/ttl-selection-basics.html",
+        "why": "The repopulation race cannot be fixed inside the pattern, so the mitigation is a bound: the TTL is the explicit contract for how wrong a value may be and for how long. Placed before keys, invalidation, and stampedes, it teaches that every later cache mechanism tightens or backs up this contract rather than replacing it."
+      },
+      {
+        "title": "Design cache keys safely",
+        "theme": "caching",
+        "difficulty": "middle",
+        "href": "questions/caching/cache-key-design.html",
+        "why": "Before any invalidation cleverness, the cache must not become a data leak. Keys carry the tenant boundary, the representation version, and every input that materially changes the response, because a shared key that crosses a privacy boundary is the one cache bug no consistency model repairs. It sits between mechanics and policy because policy built on unsafe keys is wasted work."
+      },
+      {
+        "title": "Design cache invalidation policy",
+        "theme": "caching",
+        "difficulty": "middle",
+        "href": "questions/caching/cache-invalidation-policy.html",
+        "why": "The hard problem of the stage, and it needs what came before: invalidation that is remembered rather than derived fails the moment a fourth reader adds a fourth key, so the policy is declared dependency sets, deletion from the write path that owns the data, and versioned keys as the alternative that makes invalidation atomic. The TTL bound from earlier remains the backstop when an invalidation is lost."
+      },
+      {
+        "title": "Prevent a cache stampede",
+        "theme": "caching",
+        "difficulty": "middle",
+        "href": "questions/caching/cache-stampede-control.html",
+        "why": "Only now does the stampede question make sense, because a stampede is what the invalidation and TTL model produces when a popular entry expires for every requester at once. Request coalescing, stale-while-revalidate, and expiry jitter treat it as the capacity event it is — a reader who met synchronized expiry through the previous steps diagnoses the burst instead of complaining that the database got slow."
+      },
+      {
+        "title": "Evaluate cache consistency trade-offs",
+        "theme": "caching",
+        "difficulty": "senior",
+        "href": "questions/caching/cache-consistency-tradeoffs.html",
+        "why": "Closes the cache stage by naming what the whole stage really was: a second copy of state with its own update path. Bounded staleness and read-your-writes are separable promises with different costs, and the stale profile name in this question is a read-your-writes violation, not a staleness one — the exact distinction the replication-lag and read-your-writes steps later need, which is why the consistency stage starts from this bridge."
+      },
+      {
+        "title": "Choose a work queue or an event log",
+        "theme": "queue-messaging",
+        "difficulty": "junior",
+        "href": "questions/queue-messaging/choose-a-queue-or-log.html",
+        "why": "The asynchronous branch chosen near the start now gets its transport decision: competing-consumer work queue or append-only event log. The distinction decides everything downstream — whether messages are deleted on consumption or replayable, which ordering is possible, and why an outbox relay can safely retry publication — so it must precede the mechanics built on top of it."
+      },
+      {
+        "title": "Explain at-most-once, at-least-once, and exactly-once claims",
+        "theme": "queue-messaging",
+        "difficulty": "junior",
+        "href": "questions/queue-messaging/explain-delivery-semantics.html",
+        "why": "Delivery semantics are end-to-end properties of producer, broker, and consumer, and an exactly-once claim is incomplete for any external side effect. It follows the platform choice and precedes the Kafka mechanics because it re-derives the idempotency argument from earlier at system scale: the broker's guarantee stops at the consumer, and the effect is the reader's problem again."
+      },
+      {
+        "title": "Explain Kafka topics and partitions",
+        "theme": "queue-messaging",
+        "difficulty": "junior",
+        "href": "questions/queue-messaging/explain-kafka-topics-and-partitions.html",
+        "why": "The concrete unit of the log platform: a partition is both the unit of parallelism and the entire scope of ordering, and ordering does not exist across partitions. Stated on its own it becomes a premise the next two steps immediately exercise; buried inside them it would be trivia."
+      },
+      {
+        "title": "Preserve required ordering in asynchronous processing",
+        "theme": "queue-messaging",
+        "difficulty": "middle",
+        "href": "questions/queue-messaging/preserve-order-in-async-processing.html",
+        "why": "Applies the partition premise to a real requirement: events for one order process in sequence while different orders proceed in parallel. Keying by aggregate, serialising per partition, and versioning events is the first place ordering and idempotency explicitly meet — the idempotent transitions that make replay safe are doing quiet load-bearing work from the earlier idempotency steps."
+      },
+      {
+        "title": "Commit Kafka offsets after processing effects",
+        "theme": "queue-messaging",
+        "difficulty": "middle",
+        "href": "questions/queue-messaging/commit-kafka-offsets-after-effects.html",
+        "why": "The smallest possible dual-write: one consumer, one external database, two commits that cannot be atomic. Committing the offset before the effect loses work permanently; committing after permits replay that repeats it — and the escape hatch this question names, an idempotency key or an outbox, is the next stage in full. Meeting the miniature first makes the general pattern feel inevitable rather than clever."
+      },
+      {
+        "title": "Consume an at-least-once event stream safely",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/at-least-once-delivery.html",
+        "why": "Generalises the offset problem to any at-least-once transport: assume duplicates after a crash or rebalance, deduplicate on a durable key, commit the position only after the effect is recorded, and choose that atomic boundary deliberately. It is the last step before the outbox because its own resolution is the outbox — the pattern has been earned before it is named."
+      },
+      {
+        "title": "Apply the transactional outbox pattern",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/outbox-pattern.html",
+        "why": "The spine's centrepiece, and it resolves the tension the path built on purpose: the business change and its event must become atomic, so both are written in one database transaction and a separate relay publishes later. It lands after transaction boundaries, idempotency, and the offset miniature because each is a premise of the design and of its honest limit — consumers still see duplicates."
+      },
+      {
+        "title": "Use a transactional outbox for event publication",
+        "theme": "backend-architecture",
+        "difficulty": "middle",
+        "href": "questions/backend-architecture/transactional-outbox.html",
+        "why": "The operational sequel, because an outbox that is only designed is an unbounded table and an unmonitored relay. Relay ownership, age and backlog metrics, replay and poison-event handling, and the refusal to claim exactly-once delivery are what turn the previous step's diagram into a service someone can run — the operational-round half of the same question."
+      },
+      {
+        "title": "Coordinate a multi-service saga",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/saga-compensation.html",
+        "why": "One service's dual-write is now solved; the multi-service workflow is not, and this is where a global transaction is deliberately given up. Local transactions plus compensating actions — a business reversal, never a database rollback — with orchestration versus choreography chosen for visibility. It follows the outbox because the saga's steps communicate through exactly the events the outbox guarantees."
+      },
+      {
+        "title": "Coordinate a saga with compensations",
+        "theme": "backend-architecture",
+        "difficulty": "senior",
+        "href": "questions/backend-architecture/saga-compensation.html",
+        "why": "Deepens the saga into an operable contract: correlation identity and durable state so a failover resumes rather than infers progress, compensations written as idempotent commands, and an explicit operator path for the indeterminate outcome — because a shipped item cannot be un-shipped. The honest close of this summit is admitting which effects cannot be undone, out loud, in the design."
+      },
+      {
+        "title": "Explain consistency and availability during a network partition",
+        "theme": "distributed-systems",
+        "difficulty": "junior",
+        "href": "questions/distributed-systems/consistency-and-availability.html",
+        "why": "With eventual consistency now running through the reader's own hands, the trade-off question finally has a referent. A partition forces an explicit safety decision, availability is a per-operation and per-replica statement rather than a global adjective, and an unsafe fail-open leader is the concrete split-brain disaster. Before the outbox this was theory; after it, it is a description of the reader's system."
+      },
+      {
+        "title": "Design a quorum for replicated writes",
+        "theme": "distributed-systems",
+        "difficulty": "junior",
+        "href": "questions/distributed-systems/quorum-basics.html",
+        "why": "The mechanism underneath the partition decision: every successful read quorum must intersect every successful write quorum, and the intersection is what carries the committed position. It follows the trade-off step because rejecting writes without quorum is only a defensible policy once the reader can compute why the intersection keeps two successful operations from disagreeing."
+      },
+      {
+        "title": "Use fencing tokens to prevent stale writers",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/fencing-tokens.html",
+        "why": "Quorums govern membership, but a stale writer that resumes after a failover still believes it owns the work. A monotonically increasing token, checked at the point of side effect, is the write-side complement to the idempotency that opened the spine: duplicates are made harmless, and late writers are made visible and rejectable."
+      },
+      {
+        "title": "Diagnose replication lag",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/replication-lag.html",
+        "why": "Consistency trade-offs have a practical face, and it is lag: measured as backlog and replay position rather than wall-clock age, staged through transport, durable write, and replay, and diagnosed against what the primary was doing. This is the operational diagnosis that makes the next step's user-facing promise implementable rather than aspirational."
+      },
+      {
+        "title": "Provide read-your-writes consistency",
+        "theme": "distributed-systems",
+        "difficulty": "senior",
+        "href": "questions/distributed-systems/read-your-writes.html",
+        "why": "The promise extracted from lag: return a replication position with the write and refuse that session a read from a replica behind it. It is the same separable promise the cache-consistency step established on the cache side — bounded staleness for everyone, read-your-writes for the writer — now implemented across replicas, which is why that bridge step stood where it did."
+      },
+      {
+        "title": "Choose a linearizable read",
+        "theme": "distributed-systems",
+        "difficulty": "senior",
+        "href": "questions/distributed-systems/linearizable-read.html",
+        "why": "The top of the read-guarantee ladder: a lock check, a quota, or a leadership decision before a destructive action must reflect the latest committed state, and that costs quorum or leader contact and its latency. It closes the consistency stage because choosing this expensive read is only rational after the reader can say exactly which reads do not need it."
+      },
+      {
+        "title": "Explain the serverless function execution model",
+        "theme": "serverless",
+        "difficulty": "junior",
+        "href": "questions/serverless/explain-serverless-execution-model.html",
+        "why": "The path now replays its spine on the compute model that removes the safety net: instances appear and vanish between requests and nothing survives in the process. That is the stateless premise from the opening step with no in-flight guarantees and no implicit deduplication left, which is why the execution model is restated here rather than explained at the start."
+      },
+      {
+        "title": "Explain synchronous and asynchronous serverless invocation",
+        "theme": "serverless",
+        "difficulty": "junior",
+        "href": "questions/serverless/explain-invocation-delivery-semantics.html",
+        "why": "On this platform the retry decision partly belongs to the infrastructure: asynchronous invocations are retried by the platform, so duplicates arrive by design rather than by accident. It re-derives the delivery-semantics argument from the queueing stage in a setting where the retry budget is invisible — the reason the next step is mandatory rather than optional."
+      },
+      {
+        "title": "Design idempotent serverless event processing",
+        "theme": "serverless",
+        "difficulty": "senior",
+        "href": "questions/serverless/design-idempotent-serverless-events.html",
+        "why": "The spine's first concept returns as the senior version of itself: the event identifier and the business operation are separate keys, an idempotency record is created with an atomic conditional write before any irreversible effect, and a duplicate returns the prior result. Everything between the early idempotency steps and here is what makes this design routine instead of heroic."
+      },
+      {
+        "title": "Adopt consumer-driven contracts",
+        "theme": "testing-strategy",
+        "difficulty": "middle",
+        "href": "questions/testing-strategy/consumer-driven-contracts.html",
+        "why": "The path has built boundaries — APIs, events, the outbox, the saga — and this is how they are verified without a shared staging environment. Consumer-driven contracts record what each client actually reads and replay every pact against the provider, replacing the integration free-for-all that event-driven systems otherwise produce. It can only arrive after the boundaries exist, because before then it has nothing to test."
+      },
+      {
+        "title": "Diagnose missing trace context across services",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/propagate-trace-context.html",
+        "why": "The last skill is diagnosing the machinery itself, and the first casualty of an event-driven design is trace context: a span dies at the broker unless identifiers travel through the payloads, and the outbox relay, the saga steps, and the serverless consumer each start a fresh trace otherwise. The design-time contracts came first; this is their runtime complement."
+      },
+      {
+        "title": "Establish data-integrity controls across services",
+        "theme": "distributed-systems",
+        "difficulty": "staff",
+        "href": "questions/distributed-systems/data-integrity.html",
+        "why": "The capstone, because it is the one question that consumes the whole spine at once: end-to-end integrity across services is idempotency keys, transaction boundaries, the outbox, saga compensation, fencing, and reconciliation — chosen per data class, owned, and auditable. The path ends where a staff interview begins: not one pattern, but a justified portfolio of them."
+      }
+    ]
   }
 ];
