@@ -20,6 +20,7 @@ How would you standardize configuration management across teams while preserving
 - Standardize outcomes that reduce shared risk—identity, secret handling, auditability, rollback evidence, and service health checks—while allowing teams to own application-specific desired state.
 - Track adoption, unsupported customizations, time-to-change, and incidents from configuration drift. Use these metrics and user feedback to decide which abstractions deserve investment.
 - A forced rewrite often freezes delivery and creates shadow automation. Phase standards in with interoperability, deprecation dates, and justified exception paths; remove old paths only after replacement capabilities are proven.
+- Standardization-as-product repeats across engines: a shared Terraform module registry or a blessed Puppet module path is the same small supported platform with compatibility commitments — and shadow automation is the failure mode in each.
 
 ## References
 

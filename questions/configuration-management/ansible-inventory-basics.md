@@ -20,6 +20,7 @@ What is an Ansible inventory, and how should host groups be used safely?
 - Keep membership authoritative and reviewable: generate dynamic inventory from a trusted platform or maintain static inventory in version control. Put shared settings in group variables and genuinely host-specific settings in host variables.
 - Do not use broad groups such as `all` for routine production changes. Limit runs with explicit environment and service patterns, then inspect `--list-hosts` before an important execution.
 - Inventory is an access boundary as well as an address book. Stale membership can apply a valid change to the wrong host, while duplicate or conflicting group variables make the intended state difficult to predict.
+- The address book is a configuration-management-generic object: Puppet resolves name-to-node through node classification (an external node classifier or node definitions) and Salt targets minions by grains — membership as an access boundary holds whichever shape the catalog takes.
 
 ## References
 

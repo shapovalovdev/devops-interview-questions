@@ -20,6 +20,7 @@ How should dynamic inventory be designed for a cloud fleet that changes frequent
 - Inspect generated output with `ansible-inventory --graph` or `--list`, and test empty, duplicate, and unexpectedly broad results. Cache only when staleness is acceptable for the operation.
 - Make the source account read-only for discovery and scope it to the intended accounts or projects. A compromised inventory credential should not also be able to mutate infrastructure.
 - Treat changing membership as rollout risk. A newly created or terminated instance can appear mid-run, so pin a reviewed target set for consequential actions and reconcile afterward.
+- Live catalogs appear across engines: PuppetDB queries and Terraform cloud data sources both turn current platform state into the target set, with the same read-only-credential and mid-run-membership cautions.
 
 ## References
 

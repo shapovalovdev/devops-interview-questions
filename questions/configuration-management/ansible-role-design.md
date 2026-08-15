@@ -20,6 +20,7 @@ What makes an Ansible role reusable without making it impossible to understand?
 - Provide safe defaults and explicit required variables; validate inputs and document supported platforms and side effects. Keep role variables narrow so callers can reason about what customization changes.
 - Separate high-precedence implementation constants from user-overridable defaults deliberately. Unbounded variable indirection and hidden dependencies make a role difficult to test and unsafe to upgrade.
 - Test the role against each supported platform and version. Version it like an internal product, because changing a default, handler, or variable name can alter many fleets at once.
+- A versioned, interface-driven role is the configuration-management-generic unit of reuse: Puppet modules and Terraform modules make the same safe-defaults-versus-explicit-inputs trade, and breaking a default breaks every consumer in all three.
 
 ## References
 

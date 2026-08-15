@@ -20,6 +20,7 @@ What does it mean for an Ansible task to be idempotent, and why is that property
 - That property makes retries, scheduled drift correction, and change review safer because a transient controller failure does not turn a second run into a second mutation.
 - Prefer state-aware modules and declare `state`; commands and shell tasks need an explicit guard such as `creates`, `removes`, or a reliable `changed_when`. Check mode is useful evidence, but not proof—modules and external commands can have limits.
 - Do not hide non-idempotence by forcing `changed_when: false`: it loses audit signal and can conceal a repeated side effect. Test a play twice against a disposable target and investigate an unexpected second change.
+- Idempotence is the property of the declarative-convergence model, not of Ansible: a clean `terraform plan` after a successful apply shows no diff and a second Puppet catalog run reports every resource unchanged — same declared input, no second mutation, whichever engine enforces it.
 
 ## References
 

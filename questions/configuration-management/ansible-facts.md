@@ -20,6 +20,7 @@ What are Ansible facts, and what are the operational trade-offs of using them?
 - Gather only facts required by the play or use subsets/caching where fleet scale makes collection expensive. Treat cached facts as potentially stale when a change depends on current state.
 - Use explicit validation before branching on a fact. An absent package, restricted connection, or platform difference can produce missing or differently shaped data.
 - Facts are not a trust boundary: remote systems provide much of the data. Do not use an unverified fact alone to grant access or make a destructive decision, and avoid logging facts that may reveal sensitive topology.
+- Automatic node data has named equivalents: Chef gathers it with Ohai and Salt exposes grains — carrying the same caution that remote-provided data is input to validate, never a trust boundary.
 
 ## References
 

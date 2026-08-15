@@ -8,6 +8,9 @@ sources:
   - url: https://istio.io/latest/docs/overview/what-is-istio/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://linkerd.io/2.18/overview/
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 ## What to learn next
@@ -27,6 +30,7 @@ What problem does a service mesh solve, and which application and platform contr
 - A service mesh provides a consistent traffic layer between services. Its proxies or node-level components can apply service identity, mutual TLS, routing policy, telemetry, and selected resilience behavior without every service implementing the same plumbing.
 - It complements rather than replaces application authentication and authorization, input validation, secure code, Kubernetes admission controls, NetworkPolicy, DNS, load-balancer configuration, and an incident process. The exact capabilities depend on the mesh and data-plane mode.
 - Start with a clear problem such as workload identity or request telemetry, then enroll a small service boundary and measure behavior. A mesh adds components, configuration, and failure modes; adopting it for every cluster without ownership and observability can make simple traffic failures harder to diagnose.
+- The capability set is mesh-generic: Linkerd's Rust sidecars and Cilium's eBPF data plane deliver the same identity, mTLS, and telemetry layer with different machinery — evaluate the layer and its costs, not one project's logo.
 
 ## References
 

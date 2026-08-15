@@ -2,6 +2,18 @@
 
 Use upstream Ansible documentation for behavior and practise changes in disposable inventories before applying them to production.
 
+## Vendor bias
+
+Ansible is the single engine this Theme teaches through: every mechanics
+Question (plays, handlers, roles, inventory) uses Ansible vocabulary with
+`docs.ansible.com` as its authority, and even the strategy Questions cite
+Ansible documentation. The portable core is the declarative-convergence
+model — declare desired state, converge idempotently, predict changes before
+applying, detect drift — which Terraform, Puppet, and Salt implement with
+their own constructs. Each Question's answer guide names the equivalent
+construct or the model-level invariant in at least one other implementation,
+rather than presenting Ansible as the category.
+
 ## What to learn next
 
 - Official documentation: [Ansible documentation](https://docs.ansible.com/ansible/latest/)

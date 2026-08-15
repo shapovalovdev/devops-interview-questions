@@ -20,6 +20,7 @@ How should a platform organization define ownership when many teams configure th
 - Separate shared baseline roles from product-owned roles and use environment-scoped inventories and credentials. Require an explicit integration point when two owners can write the same file, service, or access policy.
 - Maintain an inventory-to-owner mapping, code repository ownership, and execution audit trail. These make incidents and drift investigations actionable instead of becoming a search through controllers.
 - Central ownership of every setting becomes a bottleneck; no ownership permits conflicting convergence loops. Review boundaries after outages and organizational changes, especially for new shared services.
+- The precedence problem is multi-engine by nature: a Terraform provider writing cloud security groups and an Ansible role hardening the same hosts need the same published ownership interfaces — the boundary review belongs to the fleet, not to one tool.
 
 ## References
 

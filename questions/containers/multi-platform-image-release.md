@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/build/building/multi-platform/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://github.com/opencontainers/image-spec/blob/main/image-index.md
+    source_type: standard
+    verified_on: 2026-08-16
 ---
 
 # Release a multi-platform container image
@@ -20,6 +23,7 @@ How do you release one image reference for both amd64 and arm64 workloads withou
 - Ensure every architecture receives equivalent source revision, dependency policy, scanning, and functional tests. A successful amd64 build is not evidence that the arm64 image starts or behaves correctly.
 - Record the top-level and platform-specific digests in release evidence. Deployment resolution can select different platform manifests under one tag or index.
 - Prefer native builders for performance and fidelity where practical; emulation can be slower and may not expose every architecture-specific behavior. Define how a platform-specific rollback is handled.
+- The artifact is standardized: the release object is an OCI image index pointing at platform-specific manifests, and `podman build --manifest --platform linux/amd64 --platform linux/arm64` produces the same shape — traceability comes from recording index and per-platform digests, not from the builder.
 
 ## References
 

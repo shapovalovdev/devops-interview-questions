@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/engine/logging/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://kubernetes.io/docs/concepts/cluster-administration/logging/
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Define a container logging contract
@@ -20,12 +23,14 @@ How should an application emit logs in a containerized service, and what belongs
 - Docker routes container output through a configured logging driver; choose retention, transport, and back-pressure behavior at the platform level rather than embedding host-specific log agents in every image by default.
 - Treat logs as a bounded operational resource. High-cardinality, unbounded, or synchronous remote logging can increase cost, delay requests, or fill storage during an incident.
 - Define how operators retrieve logs after restarts and what information is safe to record. Container logs alone do not replace metrics, traces, or application audit records.
+- stdout/stderr is the portable contract precisely because the runtime owns the destination: containerd under the CRI writes each container's streams to the node log directory and podman can route them to journald — the application's format discipline is what makes every backend useful.
 
 ## References
 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: Configure logging drivers](https://docs.docker.com/engine/logging/)
 - [Further reading: Docker Docs on the local logging driver](https://docs.docker.com/engine/logging/drivers/local/)
+- [Kubernetes: logging architecture](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
 
 ## What to learn next
 

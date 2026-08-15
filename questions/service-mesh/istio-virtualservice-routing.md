@@ -8,6 +8,9 @@ sources:
   - url: https://istio.io/latest/docs/concepts/traffic-management/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://gateway-api.sigs.k8s.io/guides/http-routing/
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 ## What to learn next
@@ -27,9 +30,11 @@ How would you send `/v2` requests to a new application version while retaining a
 - Define a VirtualService that binds to the intended host or gateway and contains ordered HTTP match rules. Put the specific `/v2` match before a default route, select an explicit destination subset or service port where required, and avoid using a transient Pod address as the routing target.
 - Verify the resource is attached to the correct gateway or mesh context and that its host names match the request authority. Routing rules describe desired proxy behavior; they do not create ready endpoints, repair DNS, or override an unrelated route with a more specific attachment or match.
 - Test representative paths, headers, retries, and an unavailable version before rollout, then inspect proxy configuration and request telemetry. A broad match, wrong host, missing subset, or route applied to the wrong gateway can send traffic unexpectedly or leave the new version unused without an obvious API error.
+- The same split is standardized without Istio CRDs: one Gateway API `HTTPRoute` with a `/v2` path match and weighted `backendRefs` expresses this pattern, implemented alike by Envoy Gateway and Cilium — match order and an explicit default route translate directly.
 
 ## References
 
 - [Istio: Traffic management concepts](https://istio.io/latest/docs/concepts/traffic-management/)
 - [Istio: Request routing](https://istio.io/latest/docs/tasks/traffic-management/request-routing/)
 - Further reading (blog): [Buoyant engineering blog](https://buoyant.io/blog/)
+- [Gateway API: HTTP routing](https://gateway-api.sigs.k8s.io/guides/http-routing/)

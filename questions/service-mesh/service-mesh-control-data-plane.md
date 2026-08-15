@@ -27,6 +27,7 @@ What is the difference between a service-mesh control plane and data plane, and 
 - The data plane is the set of components that carry or enforce traffic, such as sidecar proxies, gateways, or ambient node proxies. The control plane receives desired configuration and service-discovery state, then programs those components.
 - A control-plane outage can prevent configuration or certificate updates while already-programmed proxies may continue serving traffic. A data-plane failure can break a request even if the control plane and Kubernetes API are healthy.
 - During an incident, check request scope, endpoints, DNS, proxy readiness and configuration synchronization separately from control-plane health. Restarting the control plane as a first response can hide evidence and will not repair a wrong route, expired certificate, or failing application.
+- The split is architectural rather than Istio's: Linkerd's destination and identity controllers program its linkerd2-proxy sidecars, and Cilium pushes policy to per-node eBPF — 'control-plane outage freezes configuration, data-plane outage breaks requests' reads the same in each.
 
 ## References
 

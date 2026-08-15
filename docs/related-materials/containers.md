@@ -5,6 +5,19 @@ for product and format semantics; the personal material and the freely
 available book are deliberately supplemental learning context, not evidence for
 the answers in individual Questions.
 
+## Vendor bias
+
+This Theme teaches container concepts through Docker: nearly every primary
+source is `docs.docker.com`, and the Questions phrase their examples in
+Dockerfile and `docker` CLI syntax. That is a teaching choice, not a claim that
+Docker is the canonical stack. The portable substrate underneath is the OCI
+image, runtime, and distribution specifications, implemented equally by
+containerd (the runtime beneath most Kubernetes distributions), podman (the
+daemonless, rootless-first alternative), and other engines. Every
+vendor-neutral Question's answer guide names the equivalent construct in at
+least one other implementation, while genuinely Docker-specific behavior —
+BuildKit cache semantics, rootless-mode details — keeps its Docker framing.
+
 ## What to learn next
 
 - Official documentation: [Docker Docs — what is a container?](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/)

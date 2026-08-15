@@ -4,6 +4,19 @@ Use upstream project documentation as factual authority. A service mesh changes
 how traffic, identity, policy, and telemetry are implemented; it does not make
 application authorization, network design, or incident ownership disappear.
 
+## Vendor bias
+
+Istio is this Theme's working example: most Questions describe Istio's CRDs
+and tooling from `istio.io`, and only a few use Cilium or Gateway API
+directly. The concepts themselves — control plane versus data plane, workload
+identity, mutual TLS, traffic policy, progressive delivery — are mesh-generic.
+Linkerd expresses them with a smaller Rust-proxy data plane and mTLS by
+default, and the Kubernetes Gateway API standardizes the north-south routing
+half across implementations. Each vendor-neutral Question's answer guide maps
+its concept onto at least one of those, while Questions about Istio's own
+mechanics (revision-canary upgrades, ambient versus sidecar modes) keep Istio
+framing.
+
 ## What to learn next
 
 - Official documentation: [Istio documentation](https://istio.io/latest/docs/)

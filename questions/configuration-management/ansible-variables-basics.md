@@ -20,6 +20,7 @@ How should a team use Ansible variables while avoiding unexpected overrides?
 - Treat high-precedence inputs, especially extra variables, as powerful overrides. Document their contract and avoid relying on a long precedence chain to express normal environment configuration.
 - Validate required inputs and types early, and give defaults only where a default is genuinely safe. Quote YAML values when ambiguity could change their type or interpretation.
 - Never place secrets in ordinary variable files or command lines. A hidden override can silently alter a security-sensitive setting, so review rendered intent and restrict who may supply deployment variables.
+- Layered data lookup exists everywhere: Puppet's Hiera resolves environment-then-host layering with explicit precedence and Chef defines named attribute precedence levels — owning values at the narrowest honest scope transfers unchanged.
 
 ## References
 

@@ -8,6 +8,9 @@ sources:
   - url: https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_checkmode.html
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://developer.hashicorp.com/terraform/cli/commands/plan
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Validate an Ansible change with check and diff mode
@@ -20,11 +23,13 @@ How should you use check mode and diff mode before a production configuration ch
 - Check mode is a simulation, not a guarantee. Modules without support may skip work, and tasks dependent on values registered by earlier mutations may not model normal execution.
 - Protect secrets: diff output can disclose sensitive configuration, so disable diff for secret-bearing tasks and keep CI logs appropriately restricted and retained.
 - Follow simulation with automated syntax, integration, and idempotence testing on disposable infrastructure. A clean diff does not prove service health, ordering correctness, or compatibility with production data.
+- Predict-then-approve is the portable half of declarative convergence: `terraform plan` renders a predicted diff against real state for review, and Puppet's `--noop` run reports what a run would change — all three are simulations with the same gaps, such as values knowable only after execution.
 
 ## References
 
 - [Ansible documentation: check mode and diff mode](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_checkmode.html)
 - Further reading (blog): [Spacelift: Ansible best practices](https://spacelift.io/blog/ansible-best-practices)
+- [Terraform CLI: plan](https://developer.hashicorp.com/terraform/cli/commands/plan)
 
 ## What to learn next
 

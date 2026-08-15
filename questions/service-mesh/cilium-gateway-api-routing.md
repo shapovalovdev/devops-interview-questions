@@ -8,6 +8,9 @@ sources:
   - url: https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://gateway-api.sigs.k8s.io/
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 ## What to learn next
@@ -28,8 +31,10 @@ How would you expose two HTTP services through Cilium Gateway API while keeping 
 - Cilium processes Gateway traffic through its Envoy integration and assigns the ingress identity at policy enforcement points, so allow both external-to-ingress and ingress-to-backend paths where required.
 - Verify listener status, route acceptance, TLS configuration, and end-to-end requests before switching DNS or external load-balancer traffic.
 - Treat Gateway migration as a security change. Incorrect attachment, missing policy for the ingress identity, or assumptions copied from another controller can create a 403/timeout outage or unexpectedly expose a backend.
+- Attachment rules belong to the standard, enforcement to the controller: the same Gateway and HTTPRoute objects attach to Istio's or Envoy Gateway's implementations with identical hostname and namespace rules — only the policy identity semantics, like Cilium's ingress identity here, are implementation-specific.
 
 ## References
 
 - [Cilium Gateway API support](https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/)
 - Further reading (blog): [Cilium 1.15 overview](https://isovalent.com/blog/post/cilium-1-15/)
+- [Gateway API](https://gateway-api.sigs.k8s.io/)

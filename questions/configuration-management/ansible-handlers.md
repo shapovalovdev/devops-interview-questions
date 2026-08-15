@@ -20,6 +20,7 @@ When should an Ansible task notify a handler instead of restarting a service dir
 - Notify a clearly named handler from every task that can affect the same service. This avoids repeated restarts when several files change in one run and keeps mutation tied to its cause.
 - Use `meta: flush_handlers` only where subsequent tasks truly require the new state. Early flushing changes ordering and can create an outage if later validation fails.
 - A handler is not a transaction. If a later task fails, a deferred restart may be skipped or inappropriate; validate configuration first and explicitly design remediation for partial rollout failures.
+- Refresh-on-change exists across engines: Puppet resources trigger service reloads through `notify`/`subscribe` refresh events, so defer-the-restart-to-the-thing-that-changed is the portable pattern, with the same starvation risk when a later resource fails.
 
 ## References
 

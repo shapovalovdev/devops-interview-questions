@@ -27,6 +27,7 @@ How would you decide whether and how two Kubernetes clusters should participate 
 - Start with ownership, regulatory boundary, network reachability, latency, failure-domain, and identity requirements. A shared mesh can simplify consistent policy and discovery, but it also couples trust, upgrade, and control-plane decisions across clusters.
 - Choose and document a supported topology such as multi-primary or primary-remote, then validate cross-network gateways, trust-domain strategy, service discovery, DNS, certificates, and failure behavior. Keep a cluster-local path for critical traffic where a remote dependency is not justified.
 - Establish staged onboarding and rollback, plus clear SLOs for east-west gateways and remote discovery. Treating two clusters as one flat network can expand an outage or identity compromise; treating them as isolated without tested connectivity can produce asymmetric routing and silent failover failures.
+- Multicluster coupling is a mesh-generic trade: Linkerd mirrors remote services behind per-cluster gateways without sharing a control plane, trading Istio's shared-identity reach for weaker blast coupling — ownership and trust-domain boundaries must be drawn explicitly in either model.
 
 ## References
 

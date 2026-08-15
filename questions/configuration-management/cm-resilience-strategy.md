@@ -20,6 +20,7 @@ What resilience properties should a configuration-management control plane have?
 - Use highly available or recoverable services for required schedulers, databases, and credential systems, with documented recovery objectives. Preserve a safe, audited break-glass procedure for urgent host repair when the platform is unavailable.
 - Constrain duplicate execution after failover through job identifiers, locks, idempotent content, and operator visibility. Retrying a partially completed fleet change without target-state evidence can be more harmful than waiting.
 - Test outage scenarios including lost inventory, expired credentials, unreachable targets, and corrupted job history. Resilience claims are weak until recovery exercises show who can safely decide whether to resume, rollback, or stop.
+- Control-plane recovery questions are generic: a Puppet server or a Terraform automation pipeline carries the same restore-drill, break-glass, and duplicate-execution concerns — idempotent content is what makes a retried run safe in any of them.
 
 ## References
 

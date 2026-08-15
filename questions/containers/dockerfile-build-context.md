@@ -8,6 +8,9 @@ sources:
   - url: https://docs.docker.com/build/concepts/context/#dockerignore-files
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://github.com/containers/buildah/blob/main/docs/buildah.1.md
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Control Docker build context with .dockerignore
@@ -20,12 +23,14 @@ Why should an application repository define a `.dockerignore` file, and what mus
 - Exclude dependency directories, test outputs, local configuration, VCS data where it is not needed, credentials, and other files that do not belong in the image.
 - Do not rely on `.dockerignore` as a secret-management control: a secret that is needed during a build needs a dedicated secret mechanism, and a secret already copied into a layer can remain recoverable from image history.
 - Validate patterns against the actual build context. Over-broad exclusions can make builds fail only in CI; missing exclusions can leak sensitive material or invalidate cache unnecessarily.
+- Context control is builder-generic: Buildah and podman assemble the context honoring `.dockerignore` and its `.containerignore` synonym, so the exclusion list travels with the repository rather than with one builder.
 
 ## References
 
 - Further reading (blog): [Complementary containers practice article](https://www.docker.com/blog/container-security-and-why-it-matters/)
 - [Docker Docs: .dockerignore files](https://docs.docker.com/build/concepts/context/#dockerignore-files)
 - [Further reading: Docker Docs on build context](https://docs.docker.com/build/concepts/context/)
+- [Buildah docs: buildah](https://github.com/containers/buildah/blob/main/docs/buildah.1.md)
 
 ## What to learn next
 

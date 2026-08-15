@@ -8,6 +8,9 @@ sources:
   - url: https://istio.io/latest/docs/tasks/traffic-management/traffic-shifting/
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://gateway-api.sigs.k8s.io/guides/traffic-splitting/
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 ## What to learn next
@@ -27,9 +30,11 @@ How would you run a canary release using weighted Istio traffic shifting?
 - Deploy and prove the candidate version independently, then route a small percentage of traffic to a DestinationRule subset using a VirtualService. Keep the stable route explicit, ensure both versions meet readiness requirements, and distinguish an HTTP request split from a guarantee that every user or long-lived connection sees the same version.
 - Establish pre-defined promotion and rollback signals: user-facing errors, latency, saturation, business correctness, and mesh policy failures. Increase weights only after an observation window that covers enough representative traffic; use header or cookie matching only when its stickiness and privacy implications are understood.
 - Revert the routing weight first when a canary fails, preserve evidence, and investigate the application and dependency behavior. A successful traffic shift is not a database migration strategy: incompatible schemas, shared caches, sessions, and asynchronous consumers require their own compatibility and rollback design.
+- Weighted canaries exist outside Istio CRDs: Gateway API HTTPRoute `backendRef` weights perform the same split, and Argo Rollouts or Flagger can drive them — the user-stickiness caveats and 'traffic shift is not a schema migration' translate unchanged.
 
 ## References
 
 - [Istio: Traffic shifting](https://istio.io/latest/docs/tasks/traffic-management/traffic-shifting/)
 - [Istio: Request routing](https://istio.io/latest/docs/tasks/traffic-management/request-routing/)
 - Further reading (blog): [Buoyant engineering blog](https://buoyant.io/blog/)
+- [Gateway API: traffic splitting](https://gateway-api.sigs.k8s.io/guides/traffic-splitting/)

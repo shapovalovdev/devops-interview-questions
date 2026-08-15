@@ -20,6 +20,7 @@ How should a platform team consume Ansible collections without making production
 - Review release notes, dependency changes, supported Ansible-core versions, and any plugin behavior that affects credentials, inventory, or remote execution. Test upgrades against representative infrastructure before rollout.
 - Use an approved internal mirror or verified automation-hub policy when supply-chain controls require it. The controller must not install arbitrary content during a production run.
 - Pinning alone is not a security strategy: a pinned vulnerable version remains vulnerable. Maintain an update cadence, integrity/provenance checks, and a fast rollback path for a faulty collection release.
+- Content pinning is the same supply-chain move elsewhere: a Puppetfile pins module versions and Terraform constrains providers in `required_providers` — review-then-promote beats floating `latest` in every one of them.
 
 ## References
 
