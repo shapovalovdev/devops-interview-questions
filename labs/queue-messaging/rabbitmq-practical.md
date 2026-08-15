@@ -3,8 +3,8 @@ title: "RabbitMQ на практике: асинхронная обработк�
 theme: "queue-messaging"
 difficulty: "middle"
 question_ref: "queue-messaging/design-rabbitmq-dead-lettering.md"
-tags: [rabbitmq, message-queues, async-processing, observability, reliability]
-why: "Брокеры сообщений упоминаются в 4 из 8 актуальных вакансий, а в банке лежит ~30 вопросов по queue-messaging без практической опоры. RabbitMQ — самый дешёвый вход в тему: один вечер с compose-стендом даёт базовый язык (exchange, binding, ack, DLQ) и снимает страх перед вопросами. Интерлизинг в вакансиях требует RabbitMQ-кластеры, efin — Kafka-концепты: обе собеседовательные ветки начинаются с понимания, чем брокер отличается от лога."
+tags: [rabbitmq, message-queues, event-driven, observability, reliability]
+why: "Message brokers appear in four of the eight current vacancies, while the queue-messaging bank holds about thirty questions with no practical footing. RabbitMQ is the cheapest entry into the topic: one evening with a compose stand teaches the basic vocabulary (exchange, binding, ack, DLQ) and removes the fear of those interview questions. Interlizing vacancies require RabbitMQ clusters and efin asks Kafka concepts, and both interview branches start with understanding how a broker differs from a log."
 checklist:
   - "RabbitMQ поднят через docker-compose, management UI доступен на порту 15672."
   - "Создан vhost, пользователь и permissions через rabbitmqctl или UI."
@@ -75,7 +75,7 @@ checklist:
 ## Exercise 6: Наблюдаемость — queue depth в Grafana
 
 1. Собери метрику глубины очереди любым из двух путей:
-    * management API: `curl -u app:<pass> http://localhost:15672/api/queues/reports` → поле `messages`;
+    * management API: `curl -u app:<pass> http://<vm3-ip>:15672/api/queues/reports` → поле `messages`;
     * или готовый `rabbitmq_exporter` (docker, рядом с брокером).
 2. Добавь источник в существующий Prometheus/Grafana-стек, сделай дашборд-панель: глубина `reports.tasks`, `reports.dlq`, rate publish/deliver.
 3. Нагрузи эндпоинт циклом из 100 запросов и останови воркер — покажи на графике рост глубины очереди, затем запуск воркера и дренаж. Сформулируй: какая глубина очереди для тебя «пора звонить» и почему.
