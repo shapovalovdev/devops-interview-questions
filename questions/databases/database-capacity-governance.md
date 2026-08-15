@@ -19,6 +19,7 @@ How would you prevent database capacity incidents across many product teams?
 - Forecast storage, WAL, connection, CPU, memory, I/O, replica, and backup growth per workload, with service-level headroom and explicit owners. Combine PostgreSQL statistics with infrastructure telemetry and workload release plans; publish thresholds and lead times for scaling or partitioning decisions.
 - Create safe self-service limits, cost allocation, capacity reviews, and exception processes. Load-test major changes, reserve incident capacity, and use query and schema reviews to catch amplification before production.
 - Total disk free space is not enough: WAL retention, replication slots, backup windows, vacuum debt, and per-tenant bursts can exhaust a critical resource first. Shared limits without fairness can let one workload consume availability for others.
+- Capacity governance transfers by renaming the indicators: forecasting storage, connection, CPU, and I/O headroom against per-workload fairness is the same discipline whether the signals are WAL and replication slots here or InnoDB growth and tempdb sizing on another engine.
 
 ## References
 

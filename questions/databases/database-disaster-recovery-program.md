@@ -19,6 +19,7 @@ How would you make database disaster recovery a reliable organizational capabili
 - Define business-owned RTO and RPO objectives, data classifications, recovery tiers, backup and WAL retention, alternate infrastructure, accountable roles, and communication plans. Map dependencies such as identity, DNS, keys, object storage, application versions, and third-party integrations.
 - Run scheduled restore and failover exercises that include timed evidence, application validation, decision escalation, and corrective actions. Track coverage and failure modes by service rather than accepting a platform-wide backup dashboard as proof.
 - A runbook that has never restored production-like data is an assumption. DR can fail because credentials, network routes, keys, capacity, or application migrations are absent; a technically restored database may still violate business consistency requirements.
+- The program's objectives and exercises are engine-neutral: RTO and RPO drills, dependency mapping, and timed restore evidence apply identically to a MySQL binlog-based recovery or a SQL Server log-chain restore, even though the recovery mechanics differ per engine.
 
 ## References
 

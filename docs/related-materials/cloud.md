@@ -1,7 +1,16 @@
 # Cloud: related materials
 
-Use each Question's primary AWS documentation as the factual authority. This
-page is a learning path for the AWS-specific Cloud Theme, not a claim that
+Vendor scope, stated plainly: this Theme teaches cloud concepts through AWS.
+Every Question's primary source is AWS documentation, and about six Questions
+(CloudTrail, CloudWatch, AWS IAM evaluation, the AWS VPC, AWS multi-account
+boundaries, and AWS incident response) are legitimately about one provider's
+behaviour. The rest teach portable concepts — regions and fault domains,
+RTO/RPO-driven recovery, tagging, quotas, autoscaling, health checks, landing
+zones — and each of those answer guides names the Azure or Google Cloud
+equivalent construct, with the other provider's documentation cited as an
+additional primary source where it is the authority for that equivalent. Use
+each Question's primary AWS documentation as the factual authority for AWS
+behaviour, and treat the mapped equivalents as orientation, not a promise that
 features or responsibility boundaries transfer unchanged to another provider.
 
 ## What to learn next

@@ -8,6 +8,9 @@ sources:
   - url: https://developer.hashicorp.com/terraform/language/state/locking
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://opentofu.org/docs/language/state/locking/
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Handle Terraform state lock contention
@@ -20,12 +23,15 @@ What do you do when Terraform cannot acquire a state lock in a shared environmen
 - Wait for or safely terminate the confirmed stale run according to the incident/change process. Inspect CI logs and backend audit records before intervening.
 - Use `force-unlock` only when you know the lock belongs to your failed operation and use the lock ID Terraform reports. Unlocking another active writer can permit state corruption.
 - Do not routinely disable locking with `-lock=false`; it converts a controlled wait into a race and does not solve backlog or workflow design problems.
+- Locking semantics carry over: OpenTofu implements the same state-locking behavior with the same per-backend caveats and force-unlock risk, and Pulumi's backends serialize stack updates comparably — identify-then-intervene beats breaking the lock on any tool.
 
 ## References
 
 - Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: State locking](https://developer.hashicorp.com/terraform/language/state/locking)
 - [Terraform: Backend configuration](https://developer.hashicorp.com/terraform/language/backend)
+- [OpenTofu — state locking](https://opentofu.org/docs/language/state/locking/)
+
 ## What to learn next
 
 - Official documentation: [Terraform language documentation](https://developer.hashicorp.com/terraform/language)

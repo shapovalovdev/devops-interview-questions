@@ -20,12 +20,14 @@ How should a platform organization decide state boundaries and ownership across 
 - Split state where ownership, environment, change cadence, or failure blast radius differ; document stable contracts for cross-state dependencies instead of sharing write access.
 - Standardize remote storage, locking capability, backups, auditability, recovery drills, and the procedure for orphaned state.
 - Do not equate more state files with better safety. Excessive fragmentation creates fragile remote-state coupling and makes end-to-end changes harder to coordinate.
+- The ownership model transfers to sibling tools: one remote object bound to one address is as true for an OpenTofu configuration as for a Pulumi stack, and lifecycle-and-blast-radius boundaries argue for the same state splits whichever engine records them.
 
 ## References
 
 - Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: State](https://developer.hashicorp.com/terraform/language/state)
 - [Terraform: State locking](https://developer.hashicorp.com/terraform/language/state/locking)
+
 ## What to learn next
 
 - Official documentation: [Terraform language documentation](https://developer.hashicorp.com/terraform/language)

@@ -8,6 +8,12 @@ sources:
   - url: https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://learn.microsoft.com/azure/well-architected/resiliency/
+    source_type: official-docs
+    verified_on: 2026-08-16
+  - url: https://cloud.google.com/architecture/framework/reliability
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Set a cloud reliability strategy across product teams
@@ -20,12 +26,15 @@ How would you set reliability expectations for a portfolio of cloud services wit
 - Provide reusable patterns for multi-AZ deployment, backups, capacity, observability, safe change delivery, and incident response. Test important failure modes through exercises rather than reviewing diagrams alone.
 - Track error-budget consumption, recovery-exercise results, repeated dependency failures, and resilience debt; fund improvements based on demonstrated risk and customer impact.
 - Do not promise an aggregate platform SLA while critical dependencies have unknown limits or single points of failure. Reliability is an end-to-end property, including people and recovery procedures.
+- Portfolio reliability language transfers directly: the Azure Well-Architected reliability guidance and Google's Architecture Framework reliability pillar codify the same classify-services, set-objectives, spend-error-budgets discipline, so anchor the strategy in service objectives rather than in AWS constructs.
 
 ## References
 
 - Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS Well-Architected Reliability Pillar](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html)
 - [Further reading: AWS Well-Architected Tool](https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html)
+- [Azure Well-Architected — reliability and resiliency](https://learn.microsoft.com/azure/well-architected/resiliency/)
+- [Google Cloud Architecture Framework — reliability](https://cloud.google.com/architecture/framework/reliability)
 
 ## What to learn next
 

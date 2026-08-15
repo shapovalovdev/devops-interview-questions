@@ -8,6 +8,9 @@ sources:
   - url: https://developer.hashicorp.com/terraform/language/values/locals
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://opentofu.org/docs/language/values/locals/
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Distinguish Terraform local values from data sources
@@ -20,12 +23,15 @@ When should you use a local value versus a data source in Terraform?
 - A data source reads information exposed by a provider, such as an existing network or image. Its result can change outside the configuration and can affect a plan.
 - Keep data-source selection explicit and constrained—for example, specify an immutable image identifier rather than selecting an ambiguous "latest" result.
 - Excessive locals can obscure values and dependency flow, while unbounded data-source lookups can make plans slow or non-deterministic.
+- The computed-in-configuration versus read-from-provider distinction maps cleanly: OpenTofu keeps identical locals and data sources, and Bicep separates local variables from `existing` resource lookups along the same line — knowing which side a value lives on is the transferable skill.
 
 ## References
 
 - Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: Local values](https://developer.hashicorp.com/terraform/language/values/locals)
 - [Terraform: Data sources](https://developer.hashicorp.com/terraform/language/data-sources)
+- [OpenTofu — local values](https://opentofu.org/docs/language/values/locals/)
+
 ## What to learn next
 
 - Official documentation: [Terraform language documentation](https://developer.hashicorp.com/terraform/language)

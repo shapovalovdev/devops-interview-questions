@@ -20,6 +20,7 @@ What operating model detects and reduces IaC drift without blocking incident res
 - Permit time-bounded emergency changes with an auditable record, then require configuration reconciliation or explicit retirement of the managed object.
 - Track drift age, recurrence, coverage, and changes by identity to distinguish provider noise from access-control or process failures.
 - Do not auto-apply every detected difference. Some differences represent an approved emergency fix, an unsafe provider interpretation, or a configuration bug; reconciliation needs an accountable decision.
+- Organization-scale drift governance is tool-composable rather than Terraform-specific: scheduled read-only detection exists as OpenTofu plans, CloudFormation drift status, or Pulumi refresh, and the governance layer — ownership, expected reconciliation time, audited emergency changes — is identical over any of them.
 
 ## References
 

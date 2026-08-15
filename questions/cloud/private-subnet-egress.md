@@ -8,6 +8,12 @@ sources:
   - url: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://learn.microsoft.com/azure/nat-gateway/nat-overview
+    source_type: official-docs
+    verified_on: 2026-08-16
+  - url: https://cloud.google.com/nat/docs/overview
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Provide controlled Internet egress from a private subnet
@@ -20,12 +26,15 @@ How would instances without public IP addresses download approved updates from t
 - Restrict destination and port access using security controls, private endpoints where a managed service supports them, and egress logging. Prefer endpoints for AWS services when they eliminate unnecessary Internet paths.
 - Make the design AZ-aware: a NAT gateway is scoped to one AZ, and cross-AZ dependency can add cost and reduce resilience. Choose the number of gateways based on availability and cost requirements.
 - A route alone is insufficient: missing gateway routes, restrictive NACLs, DNS failures, or lack of public NAT addressing can still block egress.
+- Outbound-only translation is a generic construct: Azure NAT Gateway and Google Cloud NAT give private subnets the same one-way egress that a NAT gateway provides here, and the managed-service equivalent of a VPC endpoint is an Azure Private Endpoint or GCP Private Service Connect.
 
 ## References
 
 - Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS VPC: NAT gateway scenarios](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html)
 - [Further reading: VPC endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html)
+- [Azure — NAT Gateway overview](https://learn.microsoft.com/azure/nat-gateway/nat-overview)
+- [Google Cloud — Cloud NAT overview](https://cloud.google.com/nat/docs/overview)
 
 ## What to learn next
 
