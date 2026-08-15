@@ -20,12 +20,14 @@ How should a staff engineer govern a portfolio of shared Terraform modules?
 - Make the secure, observable path the easiest one by providing documented inputs and safe defaults, while allowing justified extension points rather than forcing teams to fork.
 - Test supported provider and Terraform-version combinations, publish immutable releases, and track adoption and upgrade lag to plan removals.
 - A module registry alone is not a product strategy. Unowned modules, breaking changes without migration paths, and excessive universal abstractions create more risk than copy-paste.
+- Treating shared units as products is tool-independent: Bicep registry modules, Pulumi packages, and CloudFormation modules in the AWS Registry are all semver-published, owned, deprecable artifacts — ownership, release notes, and adoption tracking matter identically whichever registry you use.
 
 ## References
 
 - Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: Developing modules](https://developer.hashicorp.com/terraform/language/modules/develop)
 - [Terraform: Module sources](https://developer.hashicorp.com/terraform/language/modules/sources)
+
 ## What to learn next
 
 - Official documentation: [Terraform language documentation](https://developer.hashicorp.com/terraform/language)

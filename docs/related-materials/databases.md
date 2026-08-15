@@ -1,8 +1,20 @@
 # Databases: related materials
 
-The Databases Theme uses PostgreSQL as its concrete operational model. Treat
-the upstream manual as authority for PostgreSQL behaviour; database products
-vary in locking, recovery, replication, and privilege semantics.
+Vendor scope, stated plainly: this Theme teaches database operations through
+PostgreSQL. Every Question's primary source is the PostgreSQL manual, so
+PostgreSQL is the concrete engine in every scenario — that is a deliberate
+default, not a claim that the behaviour shown is universal. The concepts,
+however, are engine-portable, and each answer guide names how its construct
+maps onto another engine — InnoDB history-list growth and purge threads where
+PostgreSQL shows dead tuples and autovacuum, binary-log replay or a SQL Server
+log-chain restore for point-in-time recovery, online DDL options where
+PostgreSQL offers concurrent index builds. Where that other implementation's
+documentation is the authority for the equivalent construct, it is cited as an
+additional primary source (SQL Server and MariaDB documentation, and NIST
+standards where one applies). Treat the upstream PostgreSQL manual as the
+authority for PostgreSQL behaviour; database products vary in locking,
+recovery, replication, and privilege semantics, and the mapped equivalents are
+orientation rather than a promise of identical semantics.
 
 ## What to learn next
 

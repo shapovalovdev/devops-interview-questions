@@ -8,6 +8,9 @@ sources:
   - url: https://developer.hashicorp.com/terraform/language/modules/develop
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://learn.microsoft.com/azure/azure-resource-manager/bicep/modules
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Design a stable Terraform module interface
@@ -20,12 +23,15 @@ What makes a Terraform module safe to reuse across teams and environments?
 - Pin module versions from a registry, VCS, or package source and upgrade them through review. Treat an input, output, or resource-address change as an API compatibility decision.
 - Put provider configuration in the root module in most cases so the caller controls credentials, region, and provider aliases; pass aliases explicitly for multi-provider modules.
 - Avoid a universal module with dozens of loosely related flags. It increases the test matrix and creates accidental coupling between teams.
+- Module craft generalizes: an Azure Bicep module with explicitly typed parameters and outputs, a CloudFormation nested stack, and an OpenTofu module with the same shape each reward one responsibility, a narrow typed interface, and versioned upgrades through review.
 
 ## References
 
 - Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: Developing modules](https://developer.hashicorp.com/terraform/language/modules/develop)
 - [Terraform: Module composition](https://developer.hashicorp.com/terraform/language/modules/develop/composition)
+- [Azure Bicep — modules](https://learn.microsoft.com/azure/azure-resource-manager/bicep/modules)
+
 ## What to learn next
 
 - Official documentation: [Terraform language documentation](https://developer.hashicorp.com/terraform/language)

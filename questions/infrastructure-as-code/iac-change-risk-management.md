@@ -20,12 +20,14 @@ How would you scale IaC approvals without applying the same process to every cha
 - Require the evidence proportionate to the risk: reviewed plan, owner approval, maintenance/cutover plan, rollback evidence, and policy result. Low-risk repeatable changes should flow automatically through protected CI.
 - Preserve the reviewed configuration, plan metadata, policy decision, actor identity, and apply result for audit and incident investigation.
 - A plan becomes stale when inputs or remote infrastructure change. Risk classification reduces review noise; it does not make a speculative plan safe to apply later without revalidation.
+- Impact classification generalizes across tools because every plan contract exposes the same signals: CloudFormation change sets classify actions as add, modify, remove, or import, and OpenTofu plan JSON carries the same destructive-action flags a risk classifier consumes.
 
 ## References
 
 - Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: plan command](https://developer.hashicorp.com/terraform/cli/commands/plan)
 - [Terraform: apply command](https://developer.hashicorp.com/terraform/cli/commands/apply)
+
 ## What to learn next
 
 - Official documentation: [Terraform language documentation](https://developer.hashicorp.com/terraform/language)

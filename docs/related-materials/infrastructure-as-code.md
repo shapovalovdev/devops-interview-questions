@@ -1,5 +1,20 @@
 # Infrastructure as Code: related materials
 
+Vendor scope, stated plainly: this Theme teaches infrastructure as code
+through Terraform. Every Question's primary source is HashiCorp's Terraform
+documentation, and the Questions are written in Terraform terms. The concepts —
+state, plan review, module craft, drift, guardrails — are tool-portable, and
+each answer guide names the equivalent construct elsewhere: OpenTofu, the
+Linux Foundation fork that keeps the same language, state, and plan mechanics,
+plus CloudFormation change sets, resource import, and retention policies,
+Pulumi previews, aliases, and stacks, and Azure Bicep modules where they carry
+the same lesson. OpenTofu, CloudFormation, Pulumi, Bicep, and Open Policy
+Agent documentation are cited as additional primary sources where they are the
+authority for the mapped construct. Since the OpenTofu fork, single-vendor
+Terraform framing deserves this scrutiny: treat Terraform behaviour as
+Terraform's, and check the fork's or another tool's documentation before
+assuming an identical mechanism.
+
 ## What to learn next
 
 - Official documentation: [Terraform language documentation](https://developer.hashicorp.com/terraform/language)

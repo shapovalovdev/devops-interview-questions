@@ -8,6 +8,9 @@ sources:
   - url: https://developer.hashicorp.com/terraform/cloud-docs/policy-enforcement
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://www.openpolicyagent.org/docs/policy-language/
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Design policy-as-code gates for Terraform delivery
@@ -20,12 +23,15 @@ How would you add policy-as-code without creating an unreviewable delivery bottl
 - Start with high-impact invariants such as public exposure, encryption, required ownership, and disallowed regions; assign policy owners, tests, exceptions, and an expiry process.
 - Separate advisory findings from mandatory blocks, and provide a documented emergency exception with audit evidence rather than encouraging bypasses.
 - Policies cannot validate everything: provider APIs, runtime identity, and existing out-of-band resources may need complementary controls and monitoring.
+- Policy evaluation does not require a vendor platform: Open Policy Agent with Rego evaluates a Terraform or OpenTofu plan's JSON representation in CI just as Sentinel does inside HCP Terraform, keeping the gate portable across forks and tools.
 
 ## References
 
 - Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [HCP Terraform: Policy enforcement](https://developer.hashicorp.com/terraform/cloud-docs/policy-enforcement)
 - [Terraform: JSON output format](https://developer.hashicorp.com/terraform/internals/json-format)
+- [Open Policy Agent — policy language](https://www.openpolicyagent.org/docs/policy-language/)
+
 ## What to learn next
 
 - Official documentation: [Terraform language documentation](https://developer.hashicorp.com/terraform/language)

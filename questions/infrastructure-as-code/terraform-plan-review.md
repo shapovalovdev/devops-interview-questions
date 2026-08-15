@@ -8,6 +8,12 @@ sources:
   - url: https://developer.hashicorp.com/terraform/cli/commands/plan
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html
+    source_type: official-docs
+    verified_on: 2026-08-16
+  - url: https://opentofu.org/docs/cli/commands/plan/
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Review a Terraform plan before production apply
@@ -20,12 +26,16 @@ What must a production plan-review workflow establish before it applies infrastr
 - Inspect every create, update, replace, and destroy action; confirm scope, identities, regions, dependencies, and whether replacement causes downtime or data loss.
 - In automation, save a reviewed plan and apply that exact plan promptly. Re-plan if the configuration, inputs, credentials, or relevant remote state may have changed.
 - A speculative plan is evidence, not a reservation: other changes can make a later apply differ. Avoid `-auto-approve` unless a protected automation workflow provides equivalent controls.
+- Plan-before-apply review has named equivalents: a CloudFormation change set previews additions, modifications, and removals before execution, Pulumi's preview diffs the stack, and OpenTofu's plan command is the same contract — reviewing the exact recorded artifact is the shared discipline.
 
 ## References
 
 - Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: plan command](https://developer.hashicorp.com/terraform/cli/commands/plan)
 - [Terraform: apply command](https://developer.hashicorp.com/terraform/cli/commands/apply)
+- [AWS CloudFormation — change sets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html)
+- [OpenTofu — plan command](https://opentofu.org/docs/cli/commands/plan/)
+
 ## What to learn next
 
 - Official documentation: [Terraform language documentation](https://developer.hashicorp.com/terraform/language)

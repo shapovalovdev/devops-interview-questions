@@ -19,6 +19,7 @@ How would you govern risky database changes while allowing teams to ship frequen
 - Classify changes by observed lock, rewrite, data-loss, privilege, and reversibility risk, then provide automated preflight checks and documented safe patterns. Require evidence proportionate to risk: compatible application versions, rollout plan, runtime budget, monitoring, owner, and recovery procedure.
 - Make low-risk changes self-service and make exceptions explicit, time-bounded, and reviewed after execution. Keep a shared migration history and use incident learning to improve templates, tooling, and platform defaults rather than adding blanket approvals.
 - A CAB-style gate alone cannot predict runtime data size or long transactions, while unrestricted production DDL can create global outages. Governance must preserve emergency access but record it and reconcile drift afterward.
+- Risk classification generalizes once you know each engine's change matrix: lock, rewrite, and duration behavior differ per statement family on PostgreSQL exactly as online-DDL capability differs per operation on MySQL or SQL Server, so governance should classify by observed effect, not by tool.
 
 ## References
 

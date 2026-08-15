@@ -8,6 +8,9 @@ sources:
   - url: https://docs.aws.amazon.com/prescriptive-guidance/latest/strategy-application-portfolio-assessment-migration/introduction.html
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://learn.microsoft.com/azure/cloud-adoption-framework/migrate/
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Plan a safe cloud migration wave
@@ -20,12 +23,14 @@ How do you migrate a group of applications to cloud infrastructure without treat
 - Select a migration strategy per workload rather than assuming rehosting fits all. Establish the landing zone, identity, network, observability, backups, and operating model before moving production traffic.
 - Pilot with a low-risk wave, rehearse data synchronization and cutover, set explicit go/no-go criteria, and retain a time-bounded rollback or fail-forward plan.
 - Avoid measuring progress only by servers moved. A migration that leaves unowned operations, weak recovery, or incompatible data latency has moved risk rather than delivered a reliable service.
+- Wave planning is not AWS-proprietary: the Azure Cloud Adoption Framework migrate methodology and Google's migration guidance stage the same assess, group, and cut-over sequence with rollback gates, so present the dependency reasoning rather than a migration tool.
 
 ## References
 
 - Further reading (blog): [Complementary cloud practice article](https://aws.amazon.com/blogs/architecture/category/post-types/best-practices/)
 - [AWS Prescriptive Guidance: application portfolio assessment strategy](https://docs.aws.amazon.com/prescriptive-guidance/latest/strategy-application-portfolio-assessment-migration/introduction.html)
 - [Further reading: AWS migration readiness guide](https://docs.aws.amazon.com/prescriptive-guidance/latest/evaluating-migration-readiness/introduction.html)
+- [Azure Cloud Adoption Framework — migrate methodology](https://learn.microsoft.com/azure/cloud-adoption-framework/migrate/)
 
 ## What to learn next
 

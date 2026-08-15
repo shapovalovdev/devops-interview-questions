@@ -8,6 +8,9 @@ sources:
   - url: https://developer.hashicorp.com/terraform/language/providers/requirements
     source_type: official-docs
     verified_on: 2026-08-06
+  - url: https://opentofu.org/docs/language/files/dependency-lock/
+    source_type: official-docs
+    verified_on: 2026-08-16
 ---
 
 # Pin Terraform provider dependencies safely
@@ -20,12 +23,15 @@ How do provider constraints and the dependency lock file work together in a prod
 - Commit `.terraform.lock.hcl` for root modules so repeated initialization selects the recorded provider versions and verifies recorded checksums.
 - Upgrade intentionally in a branch, inspect the lock-file diff, run plans/tests, and verify provider release notes for changed resource semantics.
 - A constraint alone can still allow a newer compatible version; deleting or casually regenerating the lock file makes CI and developer machines less reproducible.
+- Reproducible dependency selection repeats across tools: OpenTofu maintains its own dependency lock file compatible in purpose, and Bicep or Pulumi pin module and provider versions through their package versioning — the constraint-plus-lock-file argument is the portable half.
 
 ## References
 
 - Further reading (blog): [Complementary infrastructure as code practice article](https://support.hashicorp.com/hc/en-us/articles/45101629429523-Best-Practices-Organising-Terraform-and-Application-Code)
 - [Terraform: Provider requirements](https://developer.hashicorp.com/terraform/language/providers/requirements)
 - [Terraform: Dependency lock file](https://developer.hashicorp.com/terraform/language/files/dependency-lock)
+- [OpenTofu — dependency lock file](https://opentofu.org/docs/language/files/dependency-lock/)
+
 ## What to learn next
 
 - Official documentation: [Terraform language documentation](https://developer.hashicorp.com/terraform/language)
