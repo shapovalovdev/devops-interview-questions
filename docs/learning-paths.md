@@ -54,3 +54,4 @@ Order by pedagogy rather than by the difficulty label. A staff Question on error
 ## Declared paths
 
 - [`sre-track`](../index.html#path=sre-track) — foundations to staff for engineers moving into an SRE or on-call role.
+- [`devops-platform`](../index.html#path=devops-platform) — substrate to product for engineers building and running delivery platforms.

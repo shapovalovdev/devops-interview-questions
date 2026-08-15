@@ -1358,5 +1358,293 @@ window.learningPaths = [
         "why": "The final step because it is the only one that consumes the output of every other: SLO gaps, incident history, measured toil, and experiment results become a funded plan with owners. The track ends where it began, on the promise, now with a way to invest in it."
       }
     ]
+  },
+  {
+    "slug": "devops-platform",
+    "title": "DevOps platform",
+    "audience": "Engineers building and running delivery platforms — the people who will operate Kubernetes and hand it to other teams",
+    "prerequisites": [],
+    "steps": [
+      {
+        "title": "Define an internal developer platform",
+        "theme": "platform-engineering",
+        "difficulty": "junior",
+        "href": "questions/platform-engineering/define-an-internal-developer-platform.html",
+        "why": "Everything later in this path is one layer of the product named here: a curated, supported set of capabilities offered to delivery teams as self-service. Opening on the definition keeps the Linux, container, and cluster chapters reading as what the platform is made of, rather than a tour of unrelated tools."
+      },
+      {
+        "title": "Diagnose a cgroup resource limit problem",
+        "theme": "linux",
+        "difficulty": "senior",
+        "href": "questions/linux/cgroups-resource-isolation.html",
+        "why": "The first promise a platform makes is bounded resources per tenant, and cgroups are the kernel mechanism that keeps it — container limits, cluster quotas, and fleet capacity envelopes are all cgroup controls in different clothes. The throttling-versus-utilisation gap taught here is the reading every later resource step assumes."
+      },
+      {
+        "title": "Govern a Linux security baseline without blocking delivery",
+        "theme": "linux",
+        "difficulty": "staff",
+        "href": "questions/linux/linux-security-baseline.html",
+        "why": "Before tenants arrive, the substrate they will share needs a hardening story. This step also introduces the pattern the whole path reuses at every layer — a versioned baseline, a threat rationale per control, exceptions with an owner and an expiry — on the most familiar ground available: Linux hosts."
+      },
+      {
+        "title": "Define a Linux fleet lifecycle standard",
+        "theme": "linux",
+        "difficulty": "staff",
+        "href": "questions/linux/fleet-os-lifecycle.html",
+        "why": "The baseline defined what every host must conform to; this step sets the fleet in motion. Image provenance, patch SLAs, staged promotion with rollback images, and published decision rights turn the static baseline into a lifecycle, using the same canary-and-batch motion the delivery chapter later applies to software."
+      },
+      {
+        "title": "Distinguish a container image from a running container",
+        "theme": "containers",
+        "difficulty": "junior",
+        "href": "questions/containers/container-image-and-runtime.html",
+        "why": "The path now drops from the fleet to the artifact every tenant submits. The image-versus-running-container distinction — read-only layers, one thin writable layer, and why that layer is not persistence — is the packaging contract the platform standardises, and the base-image program at the end of this chapter governs exactly it."
+      },
+      {
+        "title": "Apply CPU and memory constraints to a container",
+        "theme": "containers",
+        "difficulty": "middle",
+        "href": "questions/containers/resource-constraints.html",
+        "why": "The cgroup theory from the opening chapter becomes per-container vocabulary: what a memory limit does on breach, what a CPU weight does and does not promise, and why defaults are not isolation. Placed before Kubernetes so requests, limits, and QoS later arrive as a scheduling translation of a mechanism already understood."
+      },
+      {
+        "title": "Design a useful container health check",
+        "theme": "containers",
+        "difficulty": "middle",
+        "href": "questions/containers/container-healthcheck-design.html",
+        "why": "The second contract between tenant and platform: who decides a workload is healthy. Cheap deterministic checks, thresholds matched to startup, and the warning that a dependency-coupled probe turns an outage into mass restarts are precisely the failure the orchestrator probes and rollout steps below inherit, so the contract is set at the container layer first."
+      },
+      {
+        "title": "Design a governed base-image program",
+        "theme": "containers",
+        "difficulty": "staff",
+        "href": "questions/containers/platform-base-image-program.html",
+        "why": "The container chapter's synthesis and the first full platform programme on the path: versioned base images with digest references, support windows, automated rebuilds that reach consumers as pull requests, and exceptions with expiry. It consumes the image identity from the start of the chapter and re-instantiates the fleet baseline pattern for artifacts."
+      },
+      {
+        "title": "Explain the Linux primitives behind container isolation",
+        "theme": "advanced-containers",
+        "difficulty": "junior",
+        "href": "questions/advanced-containers/container-isolation-basics.html",
+        "why": "The platform must now say what a container actually defends. Namespaces, cgroups, and credentials layered onto an ordinary process — not a virtual machine — is the model every isolation decision in this chapter argues from, and its layered-not-absolute caveat is the honesty a multi-tenant platform owes its tenants."
+      },
+      {
+        "title": "Apply Linux capabilities with least privilege",
+        "theme": "advanced-containers",
+        "difficulty": "middle",
+        "href": "questions/advanced-containers/capabilities-least-privilege.html",
+        "why": "The first concrete tenant demand — one privileged operation — and the mechanism for granting it without handing over the host. Start from the default set, drop, then add the single capability proved necessary; that review vocabulary is what the admission guardrails later automate at the API boundary."
+      },
+      {
+        "title": "Explain user namespace UID and GID mapping",
+        "theme": "advanced-containers",
+        "difficulty": "middle",
+        "href": "questions/advanced-containers/user-namespace-mapping.html",
+        "why": "Extends capabilities with the strongest answer to the next tenant demand, a container that needs root: UID 0 inside mapping to an unprivileged host ID outside. Reading ownership, mounts, and capabilities against the mapping from both sides is exactly the check a platform runs before root-claiming images are allowed onto shared nodes."
+      },
+      {
+        "title": "Choose runtime isolation tiers for a multi-tenant platform",
+        "theme": "advanced-containers",
+        "difficulty": "staff",
+        "href": "questions/advanced-containers/tenant-isolation-strategy.html",
+        "why": "The payoff of the isolation chapter: classify tenants by trust and escape impact, offer a constrained default tier with stronger tiers as priced exceptions, and admit a shared kernel cannot satisfy every adversarial model. This is the tier menu the cluster tenancy decision later in the path draws from."
+      },
+      {
+        "title": "Read the essential parts of a Pod specification",
+        "theme": "kubernetes",
+        "difficulty": "junior",
+        "href": "questions/kubernetes/pod-spec-basics.html",
+        "why": "The Kubernetes chapter opens on the object tenants actually submit. Labels as the selector contract, containers with resources, probes, and security context, and why a bare Pod is nobody's production — the vocabulary that the requests, rollout, RBAC, and admission steps all read and write."
+      },
+      {
+        "title": "Set Pod resource requests and limits",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/resource-requests-limits-and-qos.html",
+        "why": "Resource limits return with cluster semantics: requests drive scheduling decisions, limits bound runtime, and the request/limit shape sets QoS class and eviction priority. The step only adds new knowledge because container-level limits are already in hand; what it contributes is the scheduler and the eviction order."
+      },
+      {
+        "title": "Explain a Kubernetes Deployment rollout and rollback",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/deployment-rollout-and-rollback.html",
+        "why": "Tenants do not ship Pods, they ship rollouts. maxSurge and maxUnavailable as capacity decisions, readiness gating traffic, and inspecting ReplicaSets and probe failures before rollback are the machinery progressive delivery later refines and cluster upgrades later depend on for drain capacity."
+      },
+      {
+        "title": "Design least-privilege Kubernetes RBAC",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/rbac-least-privilege.html",
+        "why": "Before the platform can enforce anything it must say who may act. Namespace-scoped bindings, the breadth hiding in list, watch, and secret reads, and workload identities kept separate from humans form the authorization layer that admission policy in the next step presumes and extends."
+      },
+      {
+        "title": "Establish Kubernetes admission policy guardrails",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/admission-policy-and-guardrails.html",
+        "why": "Where the platform's contract becomes executable: validate, mutate, or reject manifests at the API boundary so unsafe workloads never exist, staged warn-then-enforce, with CI pre-checks giving developers fast feedback. It is the Kubernetes instantiation of the versioned-baseline-plus-exceptions pattern established back on Linux hosts."
+      },
+      {
+        "title": "Plan a production Kubernetes cluster upgrade",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/cluster-upgrade-strategy.html",
+        "why": "Operating the cluster rather than only defending it: version-skew rules and API removals read before scheduling, node drains in small eviction batches that respect disruption budgets, distribution-specific rollback rehearsed in advance. The core-Kubernetes chapter closes on the recurring duty that otherwise becomes the platform's least-planned outage."
+      },
+      {
+        "title": "Explain a container network namespace",
+        "theme": "container-networking",
+        "difficulty": "junior",
+        "href": "questions/container-networking/container-network-namespace.html",
+        "why": "The network chapter restarts at the primitive the isolation chapter used: a namespace holding interfaces, addresses, routes, and sockets. Inspecting from the correct namespace — a listener on the host is not a listener in the container — is the habit the traffic-tracing and policy steps below demand."
+      },
+      {
+        "title": "Trace Kubernetes Service traffic",
+        "theme": "container-networking",
+        "difficulty": "senior",
+        "href": "questions/container-networking/kubernetes-service-traffic-path.html",
+        "why": "The platform operator's canonical traffic question, asked before anything is broken: selector, to ready endpoints, to implementation-specific dataplane. A Service name that resolves while having zero usable backends is the tenant-visible failure this step teaches you to explain, and it rehearses the readiness contract from the rollout step on network ground."
+      },
+      {
+        "title": "Validate Kubernetes NetworkPolicy enforcement",
+        "theme": "container-networking",
+        "difficulty": "senior",
+        "href": "questions/container-networking/network-policy-enforcement-limits.html",
+        "why": "The isolation promise of the runtime chapter meets the network: default-deny only exists if the installed plugin enforces it, so capability is verified before policy is trusted. Staged allow-listing of DNS and required flows is how a platform introduces tenant segmentation without causing the outage it was meant to prevent."
+      },
+      {
+        "title": "Define ingress and gateway boundaries",
+        "theme": "container-networking",
+        "difficulty": "senior",
+        "href": "questions/container-networking/ingress-gateway-boundary.html",
+        "why": "The front door every tenant shares. Deciding who owns listeners, certificates, TLS policy, and route delegation under Gateway API is an ownership migration, not a YAML rename, and it completes the in-cluster network story with the boundary teams outside the platform actually touch."
+      },
+      {
+        "title": "Define multi-tenant Kubernetes platform boundaries",
+        "theme": "kubernetes",
+        "difficulty": "staff",
+        "href": "questions/kubernetes/multi-tenant-platform-boundaries.html",
+        "why": "The synthesis the cluster and network chapters were building toward: tenant trust, blast radius, and the honest trade-off between shared control planes and dedicated ones. It consumes the RBAC, admission, quota, and network-policy decisions of the previous ten steps to answer the founding question — can these teams share this cluster?"
+      },
+      {
+        "title": "Design CI/CD quality gates for a service",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/pipeline-quality-gates.html",
+        "why": "The delivery chapter opens inside the pipeline a tenant's commit triggers: deterministic checks before merge, scans treated as risk evidence rather than guarantees, and the warning that slow, flaky, unowned gates degrade into bypasses. Everything later in the chapter — artifacts, provenance, reconciliation — sits on the far side of these gates."
+      },
+      {
+        "title": "Why should CI publish immutable release artifacts?",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/immutable-release-artifacts.html",
+        "why": "Build once, promote the digest: the identity discipline the base-image program applied to foundations, applied to every release. It precedes GitOps deliberately, because a reconciler that restores the declared state is only trustworthy when the state names immutable content instead of a mutable tag."
+      },
+      {
+        "title": "Design software supply-chain controls",
+        "theme": "security",
+        "difficulty": "senior",
+        "href": "questions/security/software-supply-chain-controls.html",
+        "why": "Extends artifact identity into proof: signed provenance binding the digest to a trusted builder, source revision, and declared inputs, verified before promotion. It sits here rather than in a security chapter because the control point is the delivery pipeline the previous two steps built, and its break-glass path is a platform interface."
+      },
+      {
+        "title": "Explain the four GitOps principles",
+        "theme": "ci-cd",
+        "difficulty": "junior",
+        "href": "questions/ci-cd/gitops-principles.html",
+        "why": "Names the operating model the platform hands to tenants: declarative desired state, versioned and immutable, pulled by agents, continuously reconciled. Learning the four principles as properties — and what each partial adoption still costs — is what turns the next step's push-versus-pull choice into an engineering decision."
+      },
+      {
+        "title": "Choose a pull-based reconciler or a push-based deployment pipeline",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/gitops-pull-versus-push-delivery.html",
+        "why": "The design decision itself: pull agents remove thirty sets of cluster credentials from CI, and where the reconciler runs decides whether one hub outage halts every cluster at once. It needs the principles first — otherwise a reconciler is just another deploy tool — and it makes drift the daily consequence."
+      },
+      {
+        "title": "Respond to Argo CD drift without masking an incident",
+        "theme": "ci-cd",
+        "difficulty": "senior",
+        "href": "questions/ci-cd/argo-cd-reconciliation-drift.html",
+        "why": "Reconciliation's sharp edge, and the platform's version of a 3am change: an operator's emergency edit now registers as drift. Classify the change before reverting it, make the durable fix in Git, and never normalise blind resync — the discipline the infrastructure and host drift steps later in the path reuse."
+      },
+      {
+        "title": "Establish organization-wide delivery standards",
+        "theme": "ci-cd",
+        "difficulty": "staff",
+        "href": "questions/ci-cd/platform-delivery-standards.html",
+        "why": "The delivery chapter's synthesis: publish the paved path as versioned workflows with provenance requirements, measured lead time, change-failure rate, and gate reliability, and exceptions that expire. This is where CI/CD stops being per-team tooling and becomes the capability the founding definition promised."
+      },
+      {
+        "title": "Why does Terraform use state?",
+        "theme": "infrastructure-as-code",
+        "difficulty": "middle",
+        "href": "questions/infrastructure-as-code/terraform-state-purpose.html",
+        "why": "The infrastructure chapter opens on the component that makes declarative infrastructure possible: state as the address-to-resource mapping, remote backends with locking, and the sensitivity of saved plans. Plan review and drift governance both presume state is owned, protected, and never directly edited."
+      },
+      {
+        "title": "Review a Terraform plan before production apply",
+        "theme": "infrastructure-as-code",
+        "difficulty": "middle",
+        "href": "questions/infrastructure-as-code/terraform-plan-review.html",
+        "why": "The infrastructure change contract: the plan is built from the same reviewed configuration, variables, and provider versions production will use, every create, replace, and destroy inspected, and the reviewed plan applied promptly or re-planned. It is the twin of the delivery chapter's merge gates — evidence reviewed before an irreversible action."
+      },
+      {
+        "title": "Govern infrastructure drift at organization scale",
+        "theme": "infrastructure-as-code",
+        "difficulty": "staff",
+        "href": "questions/infrastructure-as-code/iac-drift-governance.html",
+        "why": "Transplants the Argo CD drift lesson to infrastructure at organisation scale: scheduled read-only plan checks routed to owning teams, time-bounded emergency changes with an auditable record, and no auto-apply of every detected difference. This is what keeps GitOps honesty from ending at the cluster boundary."
+      },
+      {
+        "title": "Design safe configuration drift remediation",
+        "theme": "configuration-management",
+        "difficulty": "senior",
+        "href": "questions/configuration-management/configuration-drift-remediation.html",
+        "why": "The drift thread's last layer, host configuration, carries the invariant every reconciler above silently assumed: classify before converging, because overwriting an unrecorded emergency repair repeats the outage it fixed. With this step, declared state has been taught across workloads, infrastructure, and hosts."
+      },
+      {
+        "title": "Explain a paved road and a golden path",
+        "theme": "platform-engineering",
+        "difficulty": "junior",
+        "href": "questions/platform-engineering/explain-a-paved-road-and-a-golden-path.html",
+        "why": "The product chapter reopens with the vocabulary for everything the technical chapters built: the paved road as the supported, opinionated route the platform keeps working, deliberately distinct from rules that bind everyone. The road-versus-rule distinction reframes the admission guardrails from the cluster chapter as kindness rather than control."
+      },
+      {
+        "title": "Offer self-service with safe defaults",
+        "theme": "platform-engineering",
+        "difficulty": "junior",
+        "href": "questions/platform-engineering/offer-self-service-with-safe-defaults.html",
+        "why": "The mechanism that makes a road real: intent to a working, compliant result with no human in the platform queue, defaults the platform would defend in review, and escape hatches that cost something. Every default it lists — limits, probes, log pipelines, network policy — is a contract earlier chapters already taught."
+      },
+      {
+        "title": "Deliver secure platform defaults at scale",
+        "theme": "security",
+        "difficulty": "staff",
+        "href": "questions/security/secure-platform-defaults.html",
+        "why": "Security lands exactly where security decisions are made: the secure path must also be the easy path or shadow platforms appear. Templates that provision identity, secrets, TLS, and provenance by default, with risky choices made explicit and reviewable — the paved road instantiated for security rather than bolted on afterwards."
+      },
+      {
+        "title": "Publish platform SLOs and a support model",
+        "theme": "platform-engineering",
+        "difficulty": "middle",
+        "href": "questions/platform-engineering/publish-platform-slos-and-a-support-model.html",
+        "why": "The handover contract: per-capability objectives measured where developers experience them, control-plane and data-plane promises stated separately, and a support model with tiers, hours, and escalation. A team that operates Kubernetes but publishes no promises gives its tenants nothing they can depend on."
+      },
+      {
+        "title": "Measure platform adoption",
+        "theme": "platform-engineering",
+        "difficulty": "middle",
+        "href": "questions/platform-engineering/measure-platform-adoption.html",
+        "why": "Before defending the investment, learn what a number can and cannot say: workloads on the road and activity flowing through it rather than teams-once-onboarded, denominators stated, and mandated adoption worth nothing as evidence. This is the honest instrument the closing step must quote, or be dismissed as advocacy."
+      },
+      {
+        "title": "Justify continued platform investment",
+        "theme": "platform-engineering",
+        "difficulty": "staff",
+        "href": "questions/platform-engineering/justify-continued-platform-investment.html",
+        "why": "The final step because it consumes every other: cost avoided by standardisation, capability previously impossible, risk reduced — each with its own evidence, cohorts instead of a counterfactual, and the platform's own price included. The path ends where it began, on the platform as a product, now with the case that keeps it funded."
+      }
+    ]
   }
 ];
