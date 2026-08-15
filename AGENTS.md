@@ -1,5 +1,13 @@
 # Repository guidance
 
+## Epic and release gate
+
+Implementation work is only dispatched against a live epic and its release. The current epic is the wayfinder map [Complete the learning-path catalog](https://github.com/shapovalovdev/devops-interview-questions/issues/120); the release gate is the GitHub milestone [Learning paths v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/1). Rules:
+
+- Do not assign implementation work on an issue outside the current milestone; chart a new epic and milestone first (wayfinder, with the repository owner).
+- When the milestone closes, stop dispatching until a new epic and release are charted and recorded in `CONTEXT.md` and here.
+- Update both this section and `CONTEXT.md`'s "Goal and current epic" whenever the epic or release changes.
+
 ## Autonomous task loop
 
 For every implementation task:

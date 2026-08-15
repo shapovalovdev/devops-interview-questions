@@ -2,6 +2,10 @@
 
 This repository is a public, topic-organized collection of DevOps interview questions. It is designed for contributors and learners to find and maintain questions consistently.
 
+## Goal and current epic
+
+The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The current epic is the wayfinder map [Complete the learning-path catalog](https://github.com/shapovalovdev/devops-interview-questions/issues/120): cross-Theme learning paths beside the SRE track, plus a within-Theme suggested study order on all 39 related-materials pages. Its release gate is the GitHub milestone [Learning paths v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/1). Work is only dispatched on issues attached to that milestone; when the milestone closes, a new epic and release must be charted before further implementation work starts.
+
 ## Language
 
 **Question**:
