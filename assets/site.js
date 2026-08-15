@@ -8,9 +8,16 @@
   const themes = [...new Set(data.map((question) => question.theme))];
   const certifications = window.certifications || [];
   const mustKnowFilter = document.querySelector('#must-know-filter');
+  // A learning path is ordered data, so it is rendered as a sequence rather
+  // than folded into the filtered grid: the position of a step is the point.
+  const learningPaths = window.learningPaths || [];
+  const pathFilters = document.querySelector('#path-filters');
+  const pathView = document.querySelector('#path-view');
+  const questionZone = document.querySelector('#question-zone');
   let activeTheme = 'all';
   let activeCertification = 'all';
   let activeCollection = 'all';
+  let activePath = 'all';
 
   document.querySelector('#question-count').textContent = data.length;
   document.querySelector('#theme-count').textContent = themes.length;
@@ -36,11 +43,24 @@
       </div>`;
   }
 
+  function renderPathFilters() {
+    if (!learningPaths.length) return;
+    pathFilters.innerHTML = `
+      <p class="filter-heading">Learning paths <span>${learningPaths.length}</span></p>
+      <div class="filter-buttons">
+        ${learningPaths.map((path) => `
+          <button class="filter path-filter ${path.slug === activePath ? 'active' : ''}" type="button" data-path="${path.slug}" aria-pressed="${path.slug === activePath}">
+            ${escapeHtml(path.title)} <span class="filter-count">${path.steps.length}</span>
+          </button>`).join('')}
+      </div>`;
+  }
+
   function setHash(key, value) {
     const params = new URLSearchParams();
     if (key === 'theme' && value !== 'all') params.set('theme', value);
     if (key === 'certificate' && value !== 'all') params.set('certificate', value);
     if (key === 'collection' && value !== 'all') params.set('collection', value);
+    if (key === 'path' && value !== 'all') params.set('path', value);
     const hash = params.toString();
     history.pushState(null, '', hash ? `#${hash}` : `${location.pathname}${location.search}`);
   }
@@ -50,11 +70,55 @@
     const theme = params.get('theme');
     const certification = params.get('certificate');
     const collection = params.get('collection');
+    const path = params.get('path');
     activeTheme = themes.includes(theme) ? theme : 'all';
     activeCertification = certifications.some((item) => item.tag === certification) ? certification : 'all';
     activeCollection = collection === 'must-know' ? collection : 'all';
+    activePath = learningPaths.some((item) => item.slug === path) ? path : 'all';
     mustKnowFilter.setAttribute('aria-pressed', String(activeCollection === 'must-know'));
     mustKnowFilter.classList.toggle('active', activeCollection === 'must-know');
+  }
+
+  function renderPath() {
+    const path = learningPaths.find((item) => item.slug === activePath);
+    questionZone.hidden = Boolean(path);
+    pathView.hidden = !path;
+    if (!path) {
+      pathView.innerHTML = '';
+      return;
+    }
+    const prerequisites = path.prerequisites
+      .map((slug) => learningPaths.find((item) => item.slug === slug))
+      .filter(Boolean);
+    pathView.innerHTML = `
+      <header class="path-header">
+        <p class="eyebrow">LEARNING PATH / ${path.steps.length} STEPS IN ORDER</p>
+        <h2>${escapeHtml(path.title)}</h2>
+        <p class="path-audience">${escapeHtml(path.audience)}</p>
+        <p class="path-prerequisites">${prerequisites.length
+          ? `Complete first: ${prerequisites.map((item) => `<a href="#path=${item.slug}">${escapeHtml(item.title)}</a>`).join(', ')}`
+          : 'No prerequisite path — start here.'}</p>
+        <a class="path-exit" href="#">Back to the full database <b>→</b></a>
+      </header>
+      <ol class="path-steps">
+        ${path.steps.map((step, index) => `
+          <li class="path-step">
+            <p class="step-index">${String(index + 1).padStart(2, '0')}</p>
+            <div class="step-body">
+              <p class="card-top"><span>${label(step.theme)}</span><span>${step.difficulty}</span></p>
+              <h3><a href="${step.href}">${escapeHtml(step.title)}</a></h3>
+              <p class="step-why">${escapeHtml(step.why)}</p>
+            </div>
+          </li>`).join('')}
+      </ol>`;
+  }
+
+  function render() {
+    renderFilters();
+    renderCertificationFilters();
+    renderPathFilters();
+    renderQuestions();
+    renderPath();
   }
 
   function renderQuestions() {
@@ -82,10 +146,9 @@
     activeTheme = button.dataset.theme;
     activeCertification = 'all';
     activeCollection = 'all';
+    activePath = 'all';
     setHash('theme', activeTheme);
-    renderFilters();
-    renderCertificationFilters();
-    renderQuestions();
+    render();
   });
   certificationFilters.addEventListener('click', (event) => {
     const button = event.target.closest('button[data-certificate]');
@@ -93,26 +156,29 @@
     activeCertification = button.dataset.certificate;
     activeTheme = 'all';
     activeCollection = 'all';
+    activePath = 'all';
     setHash('certificate', activeCertification);
-    renderFilters();
-    renderCertificationFilters();
-    renderQuestions();
+    render();
+  });
+  pathFilters.addEventListener('click', (event) => {
+    const button = event.target.closest('button[data-path]');
+    if (!button) return;
+    activePath = activePath === button.dataset.path ? 'all' : button.dataset.path;
+    activeTheme = 'all'; activeCertification = 'all'; activeCollection = 'all';
+    setHash('path', activePath);
+    render();
   });
   mustKnowFilter.addEventListener('click', () => {
     activeCollection = activeCollection === 'must-know' ? 'all' : 'must-know';
-    activeTheme = 'all'; activeCertification = 'all';
+    activeTheme = 'all'; activeCertification = 'all'; activePath = 'all';
     setHash('collection', activeCollection);
-    renderFilters(); renderCertificationFilters(); renderQuestions();
+    render();
   });
   window.addEventListener('hashchange', () => {
     readHash();
-    renderFilters();
-    renderCertificationFilters();
-    renderQuestions();
+    render();
   });
   search.addEventListener('input', renderQuestions);
   readHash();
-  renderFilters();
-  renderCertificationFilters();
-  renderQuestions();
+  render();
 })();

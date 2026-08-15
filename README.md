@@ -10,6 +10,7 @@ A public, Markdown-first database of DevOps interview questions and concise answ
 - Follow the certification study maps in [`docs/certifications/`](./docs/certifications/), beginning with [CKA coverage](./docs/certifications/cka.md).
 - Practise with the public [interview drill deck](https://shapovalovdev.github.io/devops-interview-questions/session.html): select Themes and allocations, then share the generated URL to restore the same one-question-at-a-time session. The deck links to canonical Question pages for answer guides; it never duplicates answers in browser data.
 - For a short, cross-theme review, open the [must-know study collection](https://shapovalovdev.github.io/devops-interview-questions/#collection=must-know). Its controlled selection criteria are documented in [`docs/must-know.md`](./docs/must-know.md).
+- To study in order rather than by topic, follow a learning path: the [SRE track](https://shapovalovdev.github.io/devops-interview-questions/#path=sre-track) runs from what reliability means to staff-level error-budget governance, with every step stating why it comes where it does. Paths are ordered data in [`config/learning-paths.json`](./config/learning-paths.json) and the schema is documented in [`docs/learning-paths.md`](./docs/learning-paths.md).
 
 ## Repository tree
 

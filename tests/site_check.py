@@ -6,6 +6,8 @@ site = Path('index.html').resolve().as_uri()
 session_site = Path('session.html').resolve().as_uri()
 manifest = json.loads(Path('config/content-manifest.json').read_text(encoding='utf-8'))
 certifications = manifest['certifications']
+learning_paths = json.loads(Path('config/learning-paths.json').read_text(encoding='utf-8'))['paths']
+sre_track = next(path for path in learning_paths if path['slug'] == 'sre-track')
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=True)
@@ -37,6 +39,31 @@ with sync_playwright() as playwright:
     assert cards.count() == cka_count
     assert page.locator('#certification-filters button[data-certificate="cka"]').get_attribute('aria-pressed') == 'true'
 
+    # A learning path is ordered data: the landing view offers it, and the view
+    # renders a numbered sequence in manifest order instead of a filtered grid.
+    assert page.locator('#path-entry').get_attribute('href') == '#path=sre-track'
+    path_buttons = page.locator('#path-filters button[data-path]')
+    assert path_buttons.evaluate_all('(buttons) => buttons.map((button) => button.dataset.path)') == [
+        path['slug'] for path in learning_paths
+    ]
+    page.get_by_role('button', name=sre_track['title']).click()
+    assert page.url.endswith('#path=sre-track')
+    assert page.locator('#question-zone').is_hidden() and page.locator('#path-view').is_visible()
+    steps = page.locator('#path-view .path-step')
+    assert steps.count() == len(sre_track['steps'])
+    assert steps.locator('.step-why').all_inner_texts() == [step['why'] for step in sre_track['steps']]
+    assert steps.locator('.step-index').first.inner_text() == '01'
+    expected_links = [step['question'].replace('.md', '.html') for step in sre_track['steps']]
+    assert steps.locator('h3 a').evaluate_all(
+        '(links) => links.map((link) => link.getAttribute("href"))'
+    ) == expected_links
+    assert all(why.strip() for why in steps.locator('.step-why').all_inner_texts())
+    page.get_by_role('link', name='Back to the full database').click()
+    # Leaving the path is hash-driven, so wait for the hashchange render rather
+    # than reading the DOM in the same tick as the click.
+    page.wait_for_function("() => document.querySelector('#path-view').hidden")
+    assert page.locator('#question-zone').is_visible()
+
     # Hash navigation also works at a narrow touch viewport.
     mobile = browser.new_page(viewport={"width": 390, "height": 844})
     mobile.goto(f'{site}#certificate=lfcs')
@@ -47,6 +74,18 @@ with sync_playwright() as playwright:
     mobile.goto(f'{site}#collection=must-know')
     mobile.wait_for_load_state('networkidle')
     assert mobile.locator('.question-card').count() == mobile.evaluate("window.questions.filter((question) => question.tags.includes('must-know')).length")
+
+    # The ordered path view is reachable by direct URL state at 390px, keeps its
+    # sequence, and does not force the page to scroll sideways.
+    mobile.goto(f'{site}#path=sre-track')
+    mobile.wait_for_load_state('networkidle')
+    mobile_steps = mobile.locator('#path-view .path-step')
+    assert mobile_steps.count() == len(sre_track['steps'])
+    assert mobile.locator('#question-zone').is_hidden()
+    assert mobile_steps.locator('.step-index').all_inner_texts() == [
+        f'{index:02d}' for index in range(1, len(sre_track['steps']) + 1)
+    ]
+    assert mobile.evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth')
 
     # A narrow touch viewport can create, navigate, reveal, and share a session
     # without embedding a duplicate answer in browser data.
