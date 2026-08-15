@@ -1230,6 +1230,76 @@ window.learningPaths = [
         "difficulty": "middle",
         "href": "questions/sre/design-multiwindow-burn-alert.html",
         "why": "Deliberately after the senior burn-rate theory even though it is labelled middle: the short-and-long-window construction is a design decision rather than a copied recipe only once you can compute the burn rate it thresholds."
+      },
+      {
+        "title": "Read alert context before escalating",
+        "theme": "troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/troubleshooting/read-alert-context.html",
+        "why": "The incident stage starts where a page starts. Having just built alerts, the first responder skill is reading one back critically — what it measures, over what window, and whether it is a detector failure rather than an outage."
+      },
+      {
+        "title": "Establish impact before changing a failing service",
+        "theme": "troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/troubleshooting/establish-impact.html",
+        "why": "Comes before any mitigation step because it fixes the order of operations for the whole stage: record a baseline and form one falsifiable hypothesis before changing anything, since changing several variables at once destroys the evidence."
+      },
+      {
+        "title": "Triage an error-budget burn alert",
+        "theme": "troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/troubleshooting/debug-error-budget.html",
+        "why": "The direct sequel to the multi-window burn alert you designed — this is what to do when it fires. It tells you to validate the numerator, denominator, window, and exclusions first, which is only a meaningful instruction to someone who defined those fields earlier in this track."
+      },
+      {
+        "title": "Triage a production incident",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/triage-production-incident.html",
+        "why": "Scales the single-responder method up to a declared incident with a lead, a severity, and an update cadence. This is where the track stops teaching a debugging technique and starts teaching a role."
+      },
+      {
+        "title": "Verify recovery rather than trusting a green deployment",
+        "theme": "troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/troubleshooting/verify-recovery.html",
+        "why": "Near the end of the incident stage despite its junior label, because \"is it actually over?\" is only answerable once you hold an impact statement and an SLI to check it against. It is the antidote to the briefly green dashboard the previous steps can produce."
+      },
+      {
+        "title": "Write a blameless postmortem",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/write-blameless-postmortem.html",
+        "why": "Closes the loop the page opened, and it depends on the evidence habits built from the hung-process step onward: a postmortem can only be written from the timestamps, alert payloads, and change records that triage bothered to preserve."
+      },
+      {
+        "title": "Choose timeouts, retries, and backoff",
+        "theme": "distributed-systems",
+        "difficulty": "junior",
+        "href": "questions/distributed-systems/timeouts-retries-backoff.html",
+        "why": "The track turns from responding to failure to designing against it. Deadlines, bounded attempts, and jittered backoff come first because retry amplification is the mechanism underneath most of the cascades in the steps that follow."
+      },
+      {
+        "title": "Make a retried write idempotent",
+        "theme": "distributed-systems",
+        "difficulty": "junior",
+        "href": "questions/distributed-systems/idempotent-operations.html",
+        "why": "Immediately after retries, because the previous step is only safe advice when a repeated write is safe. A timeout means the caller lacks an answer, not that the server did nothing, and that distinction is the entire reason idempotency keys exist."
+      },
+      {
+        "title": "Use a circuit breaker without masking failure",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/circuit-breakers.html",
+        "why": "A retry budget protects the caller; a breaker protects the dependency. It belongs after both, because its failure modes — synchronised half-open probes, a silently open circuit hiding a long outage — are the retry problems you have just learned to recognise, one layer out."
+      },
+      {
+        "title": "Prevent cascading failures",
+        "theme": "sre",
+        "difficulty": "senior",
+        "href": "questions/sre/prevent-cascading-failures.html",
+        "why": "The synthesis of this stage: timeouts, bulkheads, backpressure, and degradation set as one compatible system instead of four independent settings. It is unreadable before the three primitives above it, and it is the reason the next stage exists."
       }
     ]
   }

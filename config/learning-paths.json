@@ -94,6 +94,46 @@
         {
           "question": "questions/sre/design-multiwindow-burn-alert.md",
           "why": "Deliberately after the senior burn-rate theory even though it is labelled middle: the short-and-long-window construction is a design decision rather than a copied recipe only once you can compute the burn rate it thresholds."
+        },
+        {
+          "question": "questions/troubleshooting/read-alert-context.md",
+          "why": "The incident stage starts where a page starts. Having just built alerts, the first responder skill is reading one back critically — what it measures, over what window, and whether it is a detector failure rather than an outage."
+        },
+        {
+          "question": "questions/troubleshooting/establish-impact.md",
+          "why": "Comes before any mitigation step because it fixes the order of operations for the whole stage: record a baseline and form one falsifiable hypothesis before changing anything, since changing several variables at once destroys the evidence."
+        },
+        {
+          "question": "questions/troubleshooting/debug-error-budget.md",
+          "why": "The direct sequel to the multi-window burn alert you designed — this is what to do when it fires. It tells you to validate the numerator, denominator, window, and exclusions first, which is only a meaningful instruction to someone who defined those fields earlier in this track."
+        },
+        {
+          "question": "questions/sre/triage-production-incident.md",
+          "why": "Scales the single-responder method up to a declared incident with a lead, a severity, and an update cadence. This is where the track stops teaching a debugging technique and starts teaching a role."
+        },
+        {
+          "question": "questions/troubleshooting/verify-recovery.md",
+          "why": "Near the end of the incident stage despite its junior label, because \"is it actually over?\" is only answerable once you hold an impact statement and an SLI to check it against. It is the antidote to the briefly green dashboard the previous steps can produce."
+        },
+        {
+          "question": "questions/sre/write-blameless-postmortem.md",
+          "why": "Closes the loop the page opened, and it depends on the evidence habits built from the hung-process step onward: a postmortem can only be written from the timestamps, alert payloads, and change records that triage bothered to preserve."
+        },
+        {
+          "question": "questions/distributed-systems/timeouts-retries-backoff.md",
+          "why": "The track turns from responding to failure to designing against it. Deadlines, bounded attempts, and jittered backoff come first because retry amplification is the mechanism underneath most of the cascades in the steps that follow."
+        },
+        {
+          "question": "questions/distributed-systems/idempotent-operations.md",
+          "why": "Immediately after retries, because the previous step is only safe advice when a repeated write is safe. A timeout means the caller lacks an answer, not that the server did nothing, and that distinction is the entire reason idempotency keys exist."
+        },
+        {
+          "question": "questions/distributed-systems/circuit-breakers.md",
+          "why": "A retry budget protects the caller; a breaker protects the dependency. It belongs after both, because its failure modes — synchronised half-open probes, a silently open circuit hiding a long outage — are the retry problems you have just learned to recognise, one layer out."
+        },
+        {
+          "question": "questions/sre/prevent-cascading-failures.md",
+          "why": "The synthesis of this stage: timeouts, bulkheads, backpressure, and degradation set as one compatible system instead of four independent settings. It is unreadable before the three primitives above it, and it is the reason the next stage exists."
         }
       ]
     }
