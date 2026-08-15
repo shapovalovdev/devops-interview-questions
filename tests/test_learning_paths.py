@@ -46,7 +46,7 @@ class LearningPathManifest(unittest.TestCase):
 
     def test_every_path_declares_the_required_fields(self) -> None:
         slugs = [path["slug"] for path in self.paths]
-        self.assertEqual(slugs, sorted(set(slugs), key=slugs.index), "path slugs must not be duplicated")
+        self.assertEqual(len(slugs), len(set(slugs)), f"path slugs must not be duplicated: {slugs}")
         for path in self.paths:
             with self.subTest(path=path.get("slug")):
                 self.assertEqual(
@@ -139,6 +139,13 @@ class GeneratedLearningPathCatalog(unittest.TestCase):
                     [step["why"] for step in generated["steps"]],
                     [step["why"] for step in declared["steps"]],
                     "the published steps must keep the manifest order and reasons",
+                )
+                # A `why` explains a position, so it is only correct next to the
+                # Question the manifest put there.
+                self.assertEqual(
+                    [step["href"] for step in generated["steps"]],
+                    [f"{step['question'].removesuffix('.md')}.html" for step in declared["steps"]],
+                    "each published step must link to the Question the manifest ordered at that position",
                 )
 
     def test_generated_steps_link_to_published_question_pages(self) -> None:
