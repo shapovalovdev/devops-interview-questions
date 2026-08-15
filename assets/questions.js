@@ -1447,6 +1447,20 @@ window.learningPaths = [
         "why": "The container chapter's synthesis and the first full platform programme on the path: versioned base images with digest references, support windows, automated rebuilds that reach consumers as pull requests, and exceptions with expiry. It consumes the image identity from the start of the chapter and re-instantiates the fleet baseline pattern for artifacts."
       },
       {
+        "title": "What /dev/kvm exposes to QEMU",
+        "theme": "qemu-kvm",
+        "difficulty": "junior",
+        "href": "questions/qemu-kvm/what-dev-kvm-exposes.html",
+        "why": "The isolation chapter this path enters next opens by contrasting containers with virtual machines, and that contrast only teaches once the virtual machine is concrete: an ordinary QEMU process that opens /dev/kvm, with the kernel executing guest instructions natively and handing control back only at exits it refuses to handle itself. Placed here, VMs and containers both resolve into processes on a shared host — the exact frame the isolation model argues from."
+      },
+      {
+        "title": "Why virtio beats emulated devices",
+        "theme": "qemu-kvm",
+        "difficulty": "junior",
+        "href": "questions/qemu-kvm/why-virtio-beats-emulated-devices.html",
+        "why": "The previous step left one bill unpaid: guest code runs natively only until it touches a device, and every emulated-device access is a trap into slow translation. Virtio is the escape — a guest that knows it is virtualised and cooperates through paravirtual devices — and it sharpens the isolation contrast directly ahead: a container needs no virtio driver because it already runs against the host kernel's real interfaces, which is the shortest honest answer to how the two models differ."
+      },
+      {
         "title": "Explain the Linux primitives behind container isolation",
         "theme": "advanced-containers",
         "difficulty": "junior",
@@ -1515,6 +1529,34 @@ window.learningPaths = [
         "difficulty": "senior",
         "href": "questions/kubernetes/cluster-upgrade-strategy.html",
         "why": "Operating the cluster rather than only defending it: version-skew rules and API removals read before scheduling, node drains in small eviction batches that respect disruption budgets, distribution-specific rollback rehearsed in advance. The core-Kubernetes chapter closes on the recurring duty that otherwise becomes the platform's least-planned outage."
+      },
+      {
+        "title": "Run a live migration you can trust",
+        "theme": "qemu-kvm",
+        "difficulty": "senior",
+        "href": "questions/qemu-kvm/run-a-live-migration-you-trust.html",
+        "why": "The upgrade step just evacuated nodes in small drain batches a disruption budget could absorb; this is the identical duty one layer down, where firmware maintenance must move a host's guests — often the cluster's own node VMs — without stopping them. Pre-copy convergence, dirty-page tracking, and a bounded downtime window are the VM fleet's drain-and-PDB machinery, so the step lands directly after the pattern it repeats."
+      },
+      {
+        "title": "Choose a libvirt CPU mode for a fleet",
+        "theme": "qemu-kvm",
+        "difficulty": "middle",
+        "href": "questions/qemu-kvm/choose-a-libvirt-cpu-mode.html",
+        "why": "Migration as taught in the previous step silently assumes the target host can serve the exact CPU the guest booted with. This step turns that assumption into a fleet template decision — host-passthrough, host-model, or a named baseline — because on hardware that refreshes unevenly the wrong mode surfaces only as the 3 a.m. migration failure, which is why it belongs immediately after the step that created the tension."
+      },
+      {
+        "title": "Pin a latency-sensitive VM to NUMA and hugepages",
+        "theme": "qemu-kvm",
+        "difficulty": "senior",
+        "href": "questions/qemu-kvm/pin-a-vm-to-numa-and-hugepages.html",
+        "why": "From fleet compatibility to one latency-sensitive guest: cross-socket memory hops and 4 kB page churn, not hypervisor overhead, are where VM jitter is usually born, and NUMA pinning with hugepages is the host-level answer. It follows the CPU-mode step because both buy performance by constraining placement, and every pin this step adds is a migration the two steps above must be re-checked against."
+      },
+      {
+        "title": "Set an honest overcommit policy for a VM fleet",
+        "theme": "qemu-kvm",
+        "difficulty": "staff",
+        "href": "questions/qemu-kvm/set-an-honest-overcommit-policy.html",
+        "why": "The tuning steps above asked what one VM may demand; this staff step asks what the fleet may honestly promise. Overcommit ratios become per-tier contracts exactly as container requests and limits became QoS classes in the cluster chapter, and the willingness to say which tiers are never packed is the capacity honesty the platform-SLO step near the path's end publishes outward, closing the VM fleet chapter as a contract rather than a ratio."
       },
       {
         "title": "Explain a container network namespace",
