@@ -3,7 +3,7 @@ title: "SRE Chaos Sandbox: Chaos on a Leash"
 theme: "sre"
 difficulty: "senior"
 question_ref: "chaos-engineering/exhaust-disk-and-file-descriptors.md"
-tags: [sre, troubleshooting, alerts, monitoring, chaos]
+tags: [sre, troubleshooting, incident-response, monitoring, chaos-engineering]
 why: "Real SRE operations involve responding to live alarms and diagnosing unknown state changes under pressure. Setting up a time-leashed chaos sandbox teaches how to manage on-call alerts, query journals, isolate latency, and build self-healing service definitions."
 checklist:
   - "Clone the devops-chaos-sandbox repository on the app server VM."

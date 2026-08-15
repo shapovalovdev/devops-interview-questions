@@ -45,6 +45,33 @@ rules for the five-category schema and duplicate-link rejection. The staged
 rollout and the path to global enforcement are recorded in
 `docs/research/link-audit-rollout.md`.
 
+`tests/validate_labs.py` holds every hands-on lab under `labs/<theme>/` to the
+same catalog rules the Question corpus obeys. A lab is a repository artifact and
+is deliberately absent from `assets/questions.js` and the site filters, but its
+front matter points into shared catalogs, so the validator requires:
+
+- all seven front-matter fields — `title`, `theme`, `difficulty`,
+  `question_ref`, `tags`, `why`, `checklist` — present and non-empty;
+- an allowed `difficulty`, and a `theme` that both matches the lab's folder and
+  is declared in `config/content-manifest.json`;
+- a `question_ref` of the form `<theme>/<question>.md` resolving to an existing
+  Question file, so a renamed or deleted Question fails the build;
+- every Tag present in `TAGS.md`;
+- at least three written-out checklist steps and a `why` that explains the lab;
+- a lab title heading, at least one instruction section, and HTTPS-only links.
+
+Lab URLs are audited for liveness by `tests/validate_learning_resources.py` on
+the same terms as Question URLs, so a dead lab link fails CI. Lab audit scope is
+read from `labs/` on disk rather than staged through
+`docs/research/link-audit-manifest.json`: manifest membership records manual
+five-resource curation, which labs do not carry, and reading from disk means a
+new lab is audited the moment it is committed.
+`tests/test_validate_labs.py` proves the gate bites — a lab pointing at a
+renamed Question, a missing or empty required field, an undeclared Tag or Theme,
+a Theme that disagrees with its folder, a short checklist, and an insecure link
+each fail a mutated copy of a fixture the same suite proves valid — and asserts
+that lab URLs are inside the live audit scope.
+
 `tests/validate_certification_question_workflow.py` validates the reusable certification workflow itself: its official-curriculum mapping, canonical-tag, original-content, source-and-blog, catalog, validation, CI, and issue-closure requirements; its issue template; and realistic workflow eval prompts.
 
 Certification-map invariants additionally require the published CCA curriculum map and at least 20 active Questions carrying the documented `cca` tag.
