@@ -37,7 +37,7 @@ input { appearance: none; width: 100%; border: 1px solid var(--ink); border-radi
 input:focus { outline: 2px solid var(--ember); }
 .filter-banks { padding-top: 1.7rem; }
 .filters, .filter-buttons { display: flex; align-content: flex-start; align-items: flex-start; flex-wrap: wrap; gap: .42rem; }
-.certification-filters { margin-top: 1.15rem; border-top: 1px solid var(--line); padding-top: .72rem; }
+.certification-filters, .path-filters { margin-top: 1.15rem; border-top: 1px solid var(--line); padding-top: .72rem; }
 .filter-heading { color: var(--ember); font-size: .68rem; letter-spacing: .09em; margin: 0 0 .55rem; text-transform: uppercase; }
 .filter-heading span { color: var(--muted); }
 .filter { cursor: pointer; border: 1px solid var(--ink); background: transparent; color: var(--ink); padding: .48rem .63rem; font: .68rem "DM Mono", monospace; text-transform: uppercase; transition: background .15s, color .15s, transform .15s; }
