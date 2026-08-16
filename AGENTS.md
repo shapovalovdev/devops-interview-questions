@@ -2,7 +2,7 @@
 
 ## Epic and release gate
 
-Implementation work is only dispatched against a live epic and its release. The epic [State the database's vendor scope honestly](https://github.com/shapovalovdev/devops-interview-questions/issues/135) and milestone [Vendor honesty v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/3) closed 2026-08-15 — **there is no active epic; do not dispatch implementation work** until the next epic and milestone are charted with wayfinder and recorded in `CONTEXT.md` and here. Rules:
+Implementation work is only dispatched against a live epic and its release. The current epic is the wayfinder map [Make study orders data, not prose](https://github.com/shapovalovdev/devops-interview-questions/issues/142); the release gate is the GitHub milestone [Study orders v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/4). Rules:
 
 - Do not assign implementation work on an issue outside the current milestone; chart a new epic and milestone first (wayfinder, with the repository owner).
 - When the milestone closes, stop dispatching until a new epic and release are charted and recorded in `CONTEXT.md` and here.

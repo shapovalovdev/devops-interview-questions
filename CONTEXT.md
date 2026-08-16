@@ -4,7 +4,7 @@ This repository is a public, topic-organized collection of DevOps interview ques
 
 ## Goal and current epic
 
-The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The epic [State the database's vendor scope honestly](https://github.com/shapovalovdev/devops-interview-questions/issues/135) and its release [Vendor honesty v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/3) closed on 2026-08-15 with every issue verified: six vendor-concentrated Themes state their bias with per-Question portability mappings (#110, #111), and the three Roman-track labs landed under validation (#134). The suite now runs 167 checks across 52 test modules. There is currently **no active epic**: dispatch is paused until the next epic is charted with wayfinder and recorded here and in `AGENTS.md`.
+The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The current epic is the wayfinder map [Make study orders data, not prose](https://github.com/shapovalovdev/devops-interview-questions/issues/142): the 39 per-Theme suggested study orders become ordered data in `config/study-orders.json`, the related-materials prose is generated from that single authority, and the site's Theme view surfaces the order. Its release gate is the GitHub milestone [Study orders v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/4). Work is only dispatched on issues attached to that milestone; when the milestone closes, a new epic and release must be charted before further implementation work starts.
 
 ## Language
 
