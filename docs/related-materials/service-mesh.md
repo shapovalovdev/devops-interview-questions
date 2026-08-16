@@ -36,8 +36,38 @@ framing.
 
 ## Suggested study order
 
-Learn the control-plane/data-plane and workload-identity model first. Then
-practice enrollment, mutual TLS, traffic management, gateways, and telemetry in
-a disposable cluster. Finish with upgrades, policy lifecycle, multicluster
-boundaries, and the platform ownership decisions that determine whether a mesh
-improves rather than complicates reliability.
+The control-plane, data-plane, and identity model first, practice in a
+disposable cluster second, ownership decisions last.
+
+1. [Distinguish a mesh control plane from its data plane](../../questions/service-mesh/service-mesh-control-data-plane.html)
+    — The control-plane and data-plane split explains what a mesh actually adds.
+2. [Explain workload identity in a service mesh](../../questions/service-mesh/service-mesh-identity.html)
+    — Workload identity is the foundation everything else the mesh promises
+    stands on.
+3. [Verify sidecar enrollment before troubleshooting mesh policy](../../questions/service-mesh/service-mesh-sidecar-injection.html)
+    — Enrollment is verified before policy, or nothing downstream can even be
+    debugged.
+4. [Enforce Istio mutual TLS incrementally](../../questions/service-mesh/istio-mutual-tls.html)
+    — Mutual TLS is enforced incrementally once enrollment is trustworthy.
+5. [Route mesh traffic with a VirtualService](../../questions/service-mesh/istio-virtualservice-routing.html)
+    — Traffic management opens with the routing rules a mesh can express.
+6. [Apply traffic policies with a DestinationRule](../../questions/service-mesh/istio-destination-rule-policies.html)
+    — DestinationRules carry the traffic and resilience policies routing depends
+    on.
+7. [Shift traffic progressively with Istio](../../questions/service-mesh/istio-progressive-traffic-shift.html)
+    — Progressive traffic shifts are traffic management with a safety contract.
+8. [Configure Istio ingress and egress boundaries](../../questions/service-mesh/istio-ingress-egress-gateways.html)
+    — Gateways govern where mesh traffic meets the outside world.
+9. [Use mesh telemetry without mistaking it for complete observability](../../questions/service-mesh/service-mesh-observability.html)
+    — Mesh telemetry is used without mistaking it for complete observability.
+10. [Upgrade Istio with a bounded canary](../../questions/service-mesh/istio-canary-upgrade.html)
+    — Upgrades come late because they risk everything above them at once.
+11. [Design service-mesh boundaries across multiple clusters](../../questions/service-mesh/service-mesh-multicluster-boundaries.html)
+    — Multicluster boundaries extend the identity and policy model across
+    clusters.
+12. [Make a service-mesh adoption decision with measurable outcomes](../../questions/service-mesh/service-mesh-adoption-decision.html)
+    — The adoption decision is made with measurable outcomes, after the
+    mechanics are known.
+13. [Establish safe service-mesh platform guardrails](../../questions/service-mesh/service-mesh-platform-guardrails.html)
+    — Platform guardrails close the Theme: whether the mesh improves reliability
+    or merely complicates it.
