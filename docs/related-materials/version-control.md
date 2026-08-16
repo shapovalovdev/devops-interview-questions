@@ -21,7 +21,15 @@ bad changes without confusing a shared-history recovery with a local rewrite.
 
 ## Suggested study order
 
-First learn how commits, references, and the working tree relate. Practice
-reset and revert on a disposable repository, then use the Git manual to decide
-whether a shared branch needs an additive revert or an explicitly coordinated
-history rewrite.
+Recovery reading starts with how commits, references, and the working tree
+relate, because every undo decision hangs on that model.
+
+1. [Explain Git's object model](../../questions/version-control/git-object-model.html)
+    — How commits, references, and the working tree relate is the model every
+    recovery decision hangs on.
+2. [Choose between Git revert and reset for a bad change](../../questions/version-control/revert-versus-reset.html)
+    — Reset and revert are practised on a disposable repository before they
+    touch shared history.
+3. [Repair a shared branch with a force push safely](../../questions/version-control/safe-force-push.html)
+    — Repairing a shared branch prices the additive revert against the
+    explicitly coordinated history rewrite.

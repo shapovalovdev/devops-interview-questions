@@ -12,18 +12,61 @@ Use these resources alongside the Logging Questions. They are selected for the p
 
 ## Suggested study order
 
-Begin where container logs begin: why services write to standard streams, what
-syslog facilities and severity mean, and how structured logs with request
-correlation turn streams into evidence. Design the data model next — field
-choices, the log-level policy, multiline exception parsing, rotation without
-duplicate or missing events, timestamps that survive incident analysis —
-because the pipeline questions are about moving and protecting that model. The
-platform tier follows: collector buffering and backpressure, a
-delivery-pipeline SLO, schema evolution without breaking consumers, and the
-slow expensive query that poor field design writes. Then the duties that
-outrank features: keeping secrets out of logs and privacy by design, with
-retention, cost attribution and reduction, tenant isolation, and log integrity
-for investigations beside them. Finish with use and strategy — correlating
-trace context with logs, reading logs across services mid-incident, then the
-migration from fragmented logging, ownership boundaries, and the
-organization-wide platform decision.
+Streams before data model, data model before pipeline, pipeline before duties
+and strategy — the pipeline questions are about moving and protecting the model.
+
+1. [Explain why containers log to standard streams](../../questions/logging/stdout-in-containers.html)
+    — The Theme begins where container logs begin: standard streams as the
+    platform contract.
+2. [Explain syslog facilities and severity](../../questions/logging/syslog-basics.html)
+    — Facilities and severity are the vocabulary those streams inherit from
+    syslog.
+3. [Design structured logs for request correlation](../../questions/logging/structured-log-correlation.html)
+    — Structured logs with request correlation turn raw streams into evidence.
+4. [Choose fields for a log data model](../../questions/logging/log-data-model.html)
+    — The data model decides what the pipeline will even be able to answer.
+5. [Define a production log-level policy](../../questions/logging/log-level-policy.html)
+    — The level policy keeps volume honest before the model grows unwieldy.
+6. [Parse multiline exception logs safely](../../questions/logging/multiline-log-parsing.html)
+    — Multiline exceptions parse safely or the model's best evidence corrupts
+    itself.
+7. [Handle log rotation without duplicate or missing events](../../questions/logging/rotation-and-tailers.html)
+    — Rotation without duplicate or missing events keeps the stream continuous.
+8. [Make log timestamps useful in incident analysis](../../questions/logging/timestamp-correctness.html)
+    — Timestamps that survive incident analysis are the model's spine.
+9. [Design collector buffering and backpressure](../../questions/logging/collector-buffering.html)
+    — The platform tier opens with buffering and backpressure, the pipeline's
+    shock absorbers.
+10. [Define an SLO for a log delivery pipeline](../../questions/logging/log-pipeline-slo.html)
+    — The delivery SLO promises exactly what the buffering tier made possible.
+11. [Evolve a log schema without breaking consumers](../../questions/logging/schema-evolution.html)
+    — Evolving the schema without breaking consumers keeps those promises across
+    versions.
+12. [Diagnose a slow expensive log query](../../questions/logging/log-query-performance.html)
+    — The slow expensive query is the bill that poor field design writes.
+13. [Prevent secrets from entering logs](../../questions/logging/secret-redaction.html)
+    — The duties open with keeping secrets out of logs, which outranks any
+    feature.
+14. [Govern logging with privacy by design](../../questions/logging/privacy-by-design.html)
+    — Privacy by design governs the whole pipeline rather than filtering at the
+    end.
+15. [Define a log retention policy](../../questions/logging/log-retention-policy.html)
+    — Retention decides what the platform keeps and what it owes regulators.
+16. [Attribute and reduce logging cost safely](../../questions/logging/log-cost-attribution.html)
+    — Cost attribution prices the volume the levels and retention allowed.
+17. [Isolate tenants in a shared logging platform](../../questions/logging/tenant-isolation.html)
+    — Tenant isolation keeps one customer's evidence away from another's eyes.
+18. [Preserve log integrity for an investigation](../../questions/logging/log-forensics-integrity.html)
+    — Integrity for investigations is the duty tier's own close.
+19. [Correlate trace context with logs](../../questions/logging/trace-log-correlation.html)
+    — Use opens with trace context correlated back into logs.
+20. [Use logs effectively during a cross-service incident](../../questions/logging/logging-incident-command.html)
+    — Reading logs across services mid-incident is the use case everything above
+    served.
+21. [Migrate a company from fragmented logging to a common platform](../../questions/logging/logging-migration.html)
+    — The strategy tier opens with migrating off fragmented logging.
+22. [Define ownership boundaries for a logging service](../../questions/logging/logging-service-ownership.html)
+    — Ownership boundaries decide who actually runs the platform the migration
+    built.
+23. [Set a platform strategy for organization-wide logging](../../questions/logging/organization-logging-platform.html)
+    — The organization-wide platform decision closes the Theme at fleet scale.

@@ -1,12 +1,12 @@
 """Every related-materials page must ship within-Theme reading guidance.
 
-Issue #116 completed the "Suggested study order" set for all thirty-nine
-Themes.  A related-materials page is the front door of a Theme for a reader
-who is already browsing it, so a Theme that ships without the section hands
-that reader a link list with no order through its Questions.  These checks
-keep the set complete: a new Theme cannot publish its related-materials page
-without a study-order section, and the section must actually guide rather
-than act as a one-line stub.
+The "Suggested study order" section of a related-materials page is generated
+from `config/study-orders.json` by `scripts/generate_question_catalog.py`, so
+the set stays complete by construction: a new Theme cannot publish its
+related-materials page without a study-order section, and the section must
+actually guide rather than act as a one-line stub.  The byte-level contract
+with the manifest is defended by `test_study_order_generation.py`; these
+checks keep the reader-facing floor.
 """
 
 from __future__ import annotations

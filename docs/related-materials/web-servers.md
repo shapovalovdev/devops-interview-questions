@@ -23,7 +23,34 @@ dependencies.
 
 ## Suggested study order
 
-Begin with virtual hosts, static content, TLS and request logging. Then proxy a
-small application and deliberately break DNS, certificates, upstream
-connectivity, cache keys and timeouts. Finish with capacity drills, deployment
-draining, security boundaries and multi-tenant platform decisions.
+Serve and log first, then proxy and deliberately break it, then run the edge
+like a platform.
+
+1. [Configure virtual-host routing safely](../../questions/web-servers/virtual-host-routing.html)
+    — Virtual hosts are the first routing decision a web server ever makes.
+2. [Serve static content with correct cache control](../../questions/web-servers/static-content-cache-control.html)
+    — Static content with correct cache control is the first thing served at
+    scale.
+3. [Deploy a TLS certificate on a web server](../../questions/web-servers/tls-certificate-deployment.html)
+    — TLS deployment secures what the routing just exposed.
+4. [Design useful web-server access logs](../../questions/web-servers/access-log-design.html)
+    — Request logging is designed before an incident needs it.
+5. [Debug a 502 response from a reverse proxy](../../questions/web-servers/reverse-proxy-502-debugging.html)
+    — Proxying begins by deliberately breaking DNS and upstream connectivity and
+    reading the resulting 502.
+6. [Establish a TLS security baseline at the edge](../../questions/web-servers/tls-security-baseline.html)
+    — The edge TLS baseline hardens what the deployment step merely made work.
+7. [Prevent a reverse-proxy cache from serving the wrong response](../../questions/web-servers/cache-proxy-correctness.html)
+    — Breaking cache keys teaches exactly what a proxy must never serve wrong.
+8. [Set reverse-proxy timeouts from a request budget](../../questions/web-servers/proxy-timeout-budget.html)
+    — Timeouts are allocated from a request budget rather than set as
+    independent knobs.
+9. [Model web-server connection capacity](../../questions/web-servers/connection-capacity-model.html)
+    — Capacity drills model what the proxy tier can actually hold.
+10. [Reload and drain a web server without dropping traffic](../../questions/web-servers/graceful-reload-and-drain.html)
+    — Deployment draining reloads the server without dropping live traffic.
+11. [Define WAF and application-security boundaries](../../questions/web-servers/waf-and-application-boundaries.html)
+    — Security boundaries assign what the edge owes versus what the application
+    owes.
+12. [Design multi-tenant isolation at the web edge](../../questions/web-servers/multi-tenant-edge-isolation.html)
+    — Multi-tenant platform decisions close the Theme at edge scale.

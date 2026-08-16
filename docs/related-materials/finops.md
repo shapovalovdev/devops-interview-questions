@@ -33,12 +33,63 @@ read and cover the same ground for interview preparation.
 
 ## Suggested study order
 
-Start with the billing data model — line items, usage quantity versus rate,
-amortised versus unblended cost — and the vocabulary of allocation, showback,
-and chargeback. Then work through tagging and account structure, rightsizing
-and utilisation, commitment discounts and their risk, spot strategy, storage
-tiering, and egress. Move on to Kubernetes cost attribution, idle capacity, and
-autoscaling economics, then to budgets, anomaly detection, and forecasting.
-Finish with the trade-offs a senior engineer is actually asked to make: cost
-against reliability and latency, engineering time against infrastructure spend,
-and the governance and incentives that keep a FinOps practice honest.
+The billing data model before allocation, allocation before optimisation,
+optimisation before the trade-offs a senior engineer is actually asked to make.
+
+1. [Read a cloud bill and find its drivers](../../questions/finops/read-a-cloud-bill-and-find-its-drivers.html)
+    — Line items, usage quantity versus rate, amortised versus unblended — the
+    data model everything else reads.
+2. [Normalise multi-cloud billing data with FOCUS](../../questions/finops/normalise-multi-cloud-billing-data-with-focus.html)
+    — FOCUS normalisation makes multi-cloud bills comparable before any analysis
+    begins.
+3. [Explain showback and chargeback](../../questions/finops/explain-showback-and-chargeback.html)
+    — Showback and chargeback are the vocabulary of allocation the billing model
+    feeds.
+4. [Allocate shared and untaggable cost](../../questions/finops/allocate-shared-and-untaggable-cost.html)
+    — Shared and untaggable cost is where honest allocation actually gets hard.
+5. [Tag resources for cost allocation](../../questions/finops/tag-resources-for-cost-allocation.html)
+    — Tagging is the mechanism the whole allocation vocabulary depends on.
+6. [Design account structure for cost visibility](../../questions/finops/design-account-structure-for-cost-visibility.html)
+    — Account structure decides whether the tags can even do their job.
+7. [Rightsize overprovisioned compute](../../questions/finops/rightsize-overprovisioned-compute.html)
+    — Rightsizing is the first optimisation, and it presumes allocation that is
+    already visible.
+8. [Compare on-demand, committed, and spot pricing](../../questions/finops/compare-on-demand-committed-and-spot-pricing.html)
+    — On-demand, committed, and spot are the trade every commitment decision
+    makes.
+9. [Build a commitment discount portfolio](../../questions/finops/build-a-commitment-discount-portfolio.html)
+    — A portfolio prices commitment risk instead of chasing the maximum
+    discount.
+10. [Manage commitment risk on a changing fleet](../../questions/finops/manage-commitment-risk-on-a-changing-fleet.html)
+    — A changing fleet makes yesterday's commitments a liability to be managed.
+11. [Run production work on spot capacity](../../questions/finops/run-production-work-on-spot-capacity.html)
+    — Spot strategy spends the pricing knowledge on work that genuinely
+    tolerates eviction.
+12. [Tier object storage with lifecycle rules](../../questions/finops/tier-object-storage-with-lifecycle-rules.html)
+    — Storage tiering is the same commitment logic applied to bytes.
+13. [Trace an unexplained data transfer bill](../../questions/finops/trace-an-unexplained-data-transfer-bill.html)
+    — Egress archaeology closes the optimisation tier with its most surprising
+    bill.
+14. [Attribute Kubernetes cluster cost to teams](../../questions/finops/attribute-kubernetes-cluster-cost-to-teams.html)
+    — Kubernetes attribution extends allocation to where the bill is densest.
+15. [Reclaim idle Kubernetes capacity](../../questions/finops/reclaim-idle-kubernetes-capacity.html)
+    — Idle capacity is the Kubernetes bill's silent majority.
+16. [Tune autoscaling for cost and latency](../../questions/finops/tune-autoscaling-for-cost-and-latency.html)
+    — Autoscaling economics trade latency against spend with every step size.
+17. [Set a cloud budget and alert](../../questions/finops/set-a-cloud-budget-and-alert.html)
+    — Budgets convert spend into a decision someone actually gets woken by.
+18. [Investigate a cost anomaly alert](../../questions/finops/investigate-a-cost-anomaly-alert.html)
+    — Anomaly investigation is the budget alert's diagnostic sequel.
+19. [Forecast next quarter cloud spend](../../questions/finops/forecast-next-quarter-cloud-spend.html)
+    — Forecasting makes the spend a plan rather than a quarterly surprise.
+20. [Trade cost against reliability](../../questions/finops/trade-cost-against-reliability.html)
+    — The senior trade-offs open exactly where reliability and latency meet the
+    bill.
+21. [Weigh engineering time against infrastructure cost](../../questions/finops/weigh-engineering-time-against-infrastructure-cost.html)
+    — Engineering time is the other currency every optimisation above spent
+    silently.
+22. [Set incentives for cost accountability](../../questions/finops/set-incentives-for-cost-accountability.html)
+    — Incentives keep the practice honest when its metrics are gameable.
+23. [Stand up a FinOps practice](../../questions/finops/stand-up-a-finops-practice.html)
+    — Standing up the practice is the organizational capstone the tiers above
+    justify.
