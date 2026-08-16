@@ -2003,3 +2003,6476 @@ window.learningPaths = [
     ]
   }
 ];
+
+window.studyOrders = [
+  {
+    "theme": "advanced-containers",
+    "note": "Isolation primitives first and platform programmes last: the order builds from the kernel mechanisms a container actually defends with to the incidents and governance that spend them.",
+    "steps": [
+      {
+        "title": "Explain the Linux primitives behind container isolation",
+        "theme": "advanced-containers",
+        "difficulty": "junior",
+        "href": "questions/advanced-containers/container-isolation-basics.html",
+        "why": "Namespaces and cgroups layered onto an ordinary process are the model every isolation decision in this Theme argues from."
+      },
+      {
+        "title": "Explain mount namespaces and a container root filesystem",
+        "theme": "advanced-containers",
+        "difficulty": "junior",
+        "href": "questions/advanced-containers/mount-namespace-basics.html",
+        "why": "The mount namespace holds the container's root filesystem, so it comes directly after the primitives that define what a container is."
+      },
+      {
+        "title": "Explain PID namespaces and container process visibility",
+        "theme": "advanced-containers",
+        "difficulty": "junior",
+        "href": "questions/advanced-containers/pid-namespace-basics.html",
+        "why": "PID namespaces explain why a container sees itself as process one and why host-side tools must name the namespace first."
+      },
+      {
+        "title": "Design correct PID 1 signal handling in a container",
+        "theme": "advanced-containers",
+        "difficulty": "junior",
+        "href": "questions/advanced-containers/pid-one-signal-handling.html",
+        "why": "Signal handling only becomes a design problem once the PID namespace has made the container's first process special."
+      },
+      {
+        "title": "Explain a container network namespace",
+        "theme": "advanced-containers",
+        "difficulty": "junior",
+        "href": "questions/advanced-containers/network-namespace-basics.html",
+        "why": "The network namespace completes the isolation picture with interfaces, addresses, and sockets of the container's own."
+      },
+      {
+        "title": "Decide when containers should share a namespace",
+        "theme": "advanced-containers",
+        "difficulty": "senior",
+        "href": "questions/advanced-containers/namespace-sharing-tradeoffs.html",
+        "why": "With all three namespaces understood, sharing any of them becomes an informed trade-off rather than a convenience."
+      },
+      {
+        "title": "Explain cgroup resource accounting for containers",
+        "theme": "advanced-containers",
+        "difficulty": "middle",
+        "href": "questions/advanced-containers/cgroup-resource-accounting.html",
+        "why": "Cgroups move from model to measurement: what the kernel charges the container for CPU, memory, and I/O."
+      },
+      {
+        "title": "Diagnose cgroup CPU throttling in a container",
+        "theme": "advanced-containers",
+        "difficulty": "middle",
+        "href": "questions/advanced-containers/cpu-quotas-and-throttling.html",
+        "why": "CPU quota throttling is the first accounting figure operators actually feel, and it misreads without the accounting model before it."
+      },
+      {
+        "title": "Investigate a container cgroup memory limit and OOM kill",
+        "theme": "advanced-containers",
+        "difficulty": "middle",
+        "href": "questions/advanced-containers/memory-limits-and-oom.html",
+        "why": "Memory limits fail differently from CPU quotas, and the OOM kill inside a cgroup is only legible with the accounting in hand."
+      },
+      {
+        "title": "Use the cgroup PIDs controller to contain fork storms",
+        "theme": "advanced-containers",
+        "difficulty": "middle",
+        "href": "questions/advanced-containers/pids-controller-protection.html",
+        "why": "The PIDs controller bounds the one resource a fork storm spends, completing the cgroup controls before migrating them."
+      },
+      {
+        "title": "Lead a cgroup v2 migration for container hosts",
+        "theme": "advanced-containers",
+        "difficulty": "staff",
+        "href": "questions/advanced-containers/cgroup-v2-migration.html",
+        "why": "Migrating hosts to cgroup v2 is safe only once the accounting, throttling, and controllers it reshuffles are understood."
+      },
+      {
+        "title": "Explain overlay filesystem copy-up and container writes",
+        "theme": "advanced-containers",
+        "difficulty": "senior",
+        "href": "questions/advanced-containers/overlay-filesystem-copy-up.html",
+        "why": "Copy-up explains where container writes actually land, the filesystem fact every runtime tier below builds on."
+      },
+      {
+        "title": "Apply Linux capabilities with least privilege",
+        "theme": "advanced-containers",
+        "difficulty": "middle",
+        "href": "questions/advanced-containers/capabilities-least-privilege.html",
+        "why": "Dropping capabilities is the first concrete narrowing of what a container may ask its host's kernel to do."
+      },
+      {
+        "title": "Control device access for a container workload",
+        "theme": "advanced-containers",
+        "difficulty": "middle",
+        "href": "questions/advanced-containers/device-access-control.html",
+        "why": "Device rules govern the kernel interface underneath the capabilities, the second thing least privilege must bound."
+      },
+      {
+        "title": "Design a seccomp profile for a container workload",
+        "theme": "advanced-containers",
+        "difficulty": "middle",
+        "href": "questions/advanced-containers/seccomp-profile-design.html",
+        "why": "Seccomp filters the syscall surface itself, the deepest of the three hardening mechanisms and last for that reason."
+      },
+      {
+        "title": "Run a workload with a read-only root filesystem",
+        "theme": "advanced-containers",
+        "difficulty": "middle",
+        "href": "questions/advanced-containers/readonly-root-filesystem.html",
+        "why": "A read-only root filesystem turns the copy-up and mount knowledge above into an enforced runtime policy."
+      },
+      {
+        "title": "Explain user namespace UID and GID mapping",
+        "theme": "advanced-containers",
+        "difficulty": "middle",
+        "href": "questions/advanced-containers/user-namespace-mapping.html",
+        "why": "UID mapping is the strongest answer to a container that needs root, and it presumes the capability and mount tiers before it."
+      },
+      {
+        "title": "Evaluate rootless container runtime boundaries",
+        "theme": "advanced-containers",
+        "difficulty": "middle",
+        "href": "questions/advanced-containers/rootless-runtime-boundaries.html",
+        "why": "Rootless operation composes every namespace and capability lesson into a whole runtime, and its limits read only then."
+      },
+      {
+        "title": "Choose runtime isolation tiers for a multi-tenant platform",
+        "theme": "advanced-containers",
+        "difficulty": "staff",
+        "href": "questions/advanced-containers/tenant-isolation-strategy.html",
+        "why": "Tiered isolation for multi-tenant platforms spends the whole primitive tier deciding what each tier of tenant may risk."
+      },
+      {
+        "title": "Establish a container runtime hardening baseline",
+        "theme": "advanced-containers",
+        "difficulty": "senior",
+        "href": "questions/advanced-containers/runtime-hardening-baseline.html",
+        "why": "A baseline turns per-mechanism hardening into a versioned standard the exceptions below are measured against."
+      },
+      {
+        "title": "Review a privileged-container exception",
+        "theme": "advanced-containers",
+        "difficulty": "senior",
+        "href": "questions/advanced-containers/privileged-container-exception.html",
+        "why": "Reviewing a privileged exception is the baseline applied to the one workload that refuses to meet it."
+      },
+      {
+        "title": "Govern runtime-isolation exceptions across an organization",
+        "theme": "advanced-containers",
+        "difficulty": "staff",
+        "href": "questions/advanced-containers/runtime-exception-governance.html",
+        "why": "Governing exceptions across an organization replaces folklore with owners, expiry dates, and records."
+      },
+      {
+        "title": "Set a multi-year container runtime isolation roadmap",
+        "theme": "advanced-containers",
+        "difficulty": "staff",
+        "href": "questions/advanced-containers/runtime-isolation-roadmap.html",
+        "why": "A multi-year roadmap prices the isolation tiers the platform will owe as its workloads and adversaries mature."
+      },
+      {
+        "title": "Respond to a suspected container escape",
+        "theme": "advanced-containers",
+        "difficulty": "senior",
+        "href": "questions/advanced-containers/container-escape-incident.html",
+        "why": "The escape response is the incident face of everything above: what was claimed, what held, and what to preserve."
+      },
+      {
+        "title": "Design container-host incident readiness for isolation failures",
+        "theme": "advanced-containers",
+        "difficulty": "staff",
+        "href": "questions/advanced-containers/container-host-incident-readiness.html",
+        "why": "Readiness design closes the Theme by making escape response a rehearsed platform capability instead of improvisation."
+      }
+    ]
+  },
+  {
+    "theme": "backend-architecture",
+    "note": "The reading spine walks the backend path first — stateless service, the API fork, the transaction sequence — before widening to the boundary questions and the portfolio tier that presupposes a running system.",
+    "steps": [
+      {
+        "title": "Design a stateless backend service",
+        "theme": "backend-architecture",
+        "difficulty": "junior",
+        "href": "questions/backend-architecture/stateless-service-design.html",
+        "why": "The spine opens by naming what stays out of the request process, because every later pattern coordinates state that already left."
+      },
+      {
+        "title": "Choose synchronous versus asynchronous API processing",
+        "theme": "backend-architecture",
+        "difficulty": "junior",
+        "href": "questions/backend-architecture/synchronous-versus-asynchronous-api.html",
+        "why": "The synchronous-asynchronous fork is the first real design decision, and the queueing and outbox stages live on its asynchronous branch."
+      },
+      {
+        "title": "Design resource-oriented HTTP endpoints",
+        "theme": "backend-architecture",
+        "difficulty": "junior",
+        "href": "questions/backend-architecture/rest-resource-semantics.html",
+        "why": "Resource-oriented endpoints settle the API surface before its failure modes arrive."
+      },
+      {
+        "title": "Separate authentication from authorization",
+        "theme": "backend-architecture",
+        "difficulty": "middle",
+        "href": "questions/backend-architecture/authentication-authorization-boundary.html",
+        "why": "Separating authentication from authorization completes the surface and prevents the conflation the boundary questions would inherit."
+      },
+      {
+        "title": "Choose a transaction boundary",
+        "theme": "backend-architecture",
+        "difficulty": "middle",
+        "href": "questions/backend-architecture/transaction-boundaries.html",
+        "why": "The transaction sequence starts here because the unit it defines is what retries and idempotency keys repeat."
+      },
+      {
+        "title": "Make backend retries safe",
+        "theme": "backend-architecture",
+        "difficulty": "middle",
+        "href": "questions/backend-architecture/retry-backoff-and-jitter.html",
+        "why": "A retry is only affordable once the unit it repeats is short, which is exactly why boundaries come first."
+      },
+      {
+        "title": "Implement idempotency keys for mutations",
+        "theme": "backend-architecture",
+        "difficulty": "middle",
+        "href": "questions/backend-architecture/idempotency-keys.html",
+        "why": "Keys turn safe retries into a production contract for mutations, directly after the retry discipline they serve."
+      },
+      {
+        "title": "Use a transactional outbox for event publication",
+        "theme": "backend-architecture",
+        "difficulty": "middle",
+        "href": "questions/backend-architecture/transactional-outbox.html",
+        "why": "The outbox only makes sense once you have felt the dual-write it fixes, so it follows boundaries, retries, and keys."
+      },
+      {
+        "title": "Coordinate a saga with compensations",
+        "theme": "backend-architecture",
+        "difficulty": "senior",
+        "href": "questions/backend-architecture/saga-compensation.html",
+        "why": "Compensation extends atomicity across services and presumes the outbox's guaranteed events as its transport."
+      },
+      {
+        "title": "Operate a circuit breaker",
+        "theme": "backend-architecture",
+        "difficulty": "middle",
+        "href": "questions/backend-architecture/circuit-breaker-operations.html",
+        "why": "Operating the breaker after the retries it judges keeps the operator honest about what it masks."
+      },
+      {
+        "title": "Explain the role of an API gateway",
+        "theme": "backend-architecture",
+        "difficulty": "junior",
+        "href": "questions/backend-architecture/api-gateway-basics.html",
+        "why": "The gateway is the first boundary question, consuming the API surface settled at the start of the spine."
+      },
+      {
+        "title": "Govern API versioning and deprecation",
+        "theme": "backend-architecture",
+        "difficulty": "senior",
+        "href": "questions/backend-architecture/api-versioning-policy.html",
+        "why": "Versioning and deprecation govern how the surface may change without breaking the contracts above."
+      },
+      {
+        "title": "Design an API rate-limiting policy",
+        "theme": "backend-architecture",
+        "difficulty": "middle",
+        "href": "questions/backend-architecture/rate-limiting-policy.html",
+        "why": "Rate limiting protects the settled surface under load, a policy question once gateway and versioning exist."
+      },
+      {
+        "title": "Design cursor pagination",
+        "theme": "backend-architecture",
+        "difficulty": "middle",
+        "href": "questions/backend-architecture/cursor-pagination.html",
+        "why": "Cursor pagination fixes the one read pattern offset paging quietly breaks at scale."
+      },
+      {
+        "title": "Design multi-tenant isolation",
+        "theme": "backend-architecture",
+        "difficulty": "senior",
+        "href": "questions/backend-architecture/multi-tenancy-isolation.html",
+        "why": "Tenant isolation widens the boundary questions from per-request correctness to per-customer state."
+      },
+      {
+        "title": "Design a durable background job contract",
+        "theme": "backend-architecture",
+        "difficulty": "middle",
+        "href": "questions/backend-architecture/background-job-contract.html",
+        "why": "The durable background job gives the asynchronous fork from step two its own operable contract."
+      },
+      {
+        "title": "Design a developer-portal catalog contract teams can trust",
+        "theme": "backend-architecture",
+        "difficulty": "staff",
+        "href": "questions/backend-architecture/developer-portal-catalog-contract.html",
+        "why": "The catalog makes service boundaries discoverable, which only matters once those boundaries exist to publish."
+      },
+      {
+        "title": "Decompose a monolith without a rewrite",
+        "theme": "backend-architecture",
+        "difficulty": "senior",
+        "href": "questions/backend-architecture/monolith-decomposition.html",
+        "why": "Decomposition opens the portfolio tier by re-cutting a running system along the seams the spine taught."
+      },
+      {
+        "title": "Set platform and product-service boundaries",
+        "theme": "backend-architecture",
+        "difficulty": "staff",
+        "href": "questions/backend-architecture/platform-boundary-strategy.html",
+        "why": "Platform and product-service boundaries decide which side of each seam owns what, after decomposition shows what bad seams cost."
+      },
+      {
+        "title": "Design cache invalidation for mutable data",
+        "theme": "backend-architecture",
+        "difficulty": "senior",
+        "href": "questions/backend-architecture/cache-invalidation-strategy.html",
+        "why": "Invalidation for mutable data is the hardest boundary to hold and presumes the seam that owns the data."
+      },
+      {
+        "title": "Manage an architecture decision portfolio",
+        "theme": "backend-architecture",
+        "difficulty": "staff",
+        "href": "questions/backend-architecture/architecture-decision-portfolio.html",
+        "why": "A decision portfolio governs the record of choices the tiers above kept making implicitly."
+      },
+      {
+        "title": "Govern evolutionary backend architecture",
+        "theme": "backend-architecture",
+        "difficulty": "staff",
+        "href": "questions/backend-architecture/evolutionary-architecture-governance.html",
+        "why": "Evolutionary governance makes change itself a managed process rather than a series of surprises."
+      },
+      {
+        "title": "Prioritize backend resilience investments",
+        "theme": "backend-architecture",
+        "difficulty": "staff",
+        "href": "questions/backend-architecture/resilience-investment-model.html",
+        "why": "Prioritizing resilience investments is last because it prices everything the Theme has built."
+      }
+    ]
+  },
+  {
+    "theme": "caching",
+    "note": "Placement, TTL, and hit ratio come before invalidation and stampedes because every later mechanism tightens or backs up the contract a bound on wrongness sets.",
+    "steps": [
+      {
+        "title": "Compare cache placement layers",
+        "theme": "caching",
+        "difficulty": "junior",
+        "href": "questions/caching/cache-placement-layers.html",
+        "why": "Where the copy lives is the first of the three decisions every caching question ultimately reduces to."
+      },
+      {
+        "title": "Explain cache-aside basics",
+        "theme": "caching",
+        "difficulty": "junior",
+        "href": "questions/caching/cache-aside-basics.html",
+        "why": "Cache-aside is the pattern most services actually run, so it anchors the mechanics tier before any variation."
+      },
+      {
+        "title": "Explain a read-through cache",
+        "theme": "caching",
+        "difficulty": "junior",
+        "href": "questions/caching/read-through-cache-basics.html",
+        "why": "Read-through is the managed counterpoint, and the difference between them only teaches when placed side by side."
+      },
+      {
+        "title": "Choose a TTL for a cached value",
+        "theme": "caching",
+        "difficulty": "junior",
+        "href": "questions/caching/ttl-selection-basics.html",
+        "why": "The TTL is the explicit contract for how wrong a value may be and for how long, set before keys or invalidation tighten it."
+      },
+      {
+        "title": "Interpret a cache hit ratio honestly",
+        "theme": "caching",
+        "difficulty": "junior",
+        "href": "questions/caching/cache-hit-ratio-basics.html",
+        "why": "Reading a hit ratio honestly calibrates the mechanics before the policy questions arrive."
+      },
+      {
+        "title": "Design cache keys safely",
+        "theme": "caching",
+        "difficulty": "middle",
+        "href": "questions/caching/cache-key-design.html",
+        "why": "Keys carry the tenant and representation boundaries, so they precede invalidation — policy built on unsafe keys is wasted work."
+      },
+      {
+        "title": "Design cache invalidation policy",
+        "theme": "caching",
+        "difficulty": "middle",
+        "href": "questions/caching/cache-invalidation-policy.html",
+        "why": "Invalidation is the hard problem, and it needs safe keys and the TTL backstop already in place."
+      },
+      {
+        "title": "Choose a cache eviction policy",
+        "theme": "caching",
+        "difficulty": "middle",
+        "href": "questions/caching/cache-eviction-policy.html",
+        "why": "Eviction governs what the cache keeps when memory runs out, the mechanical sibling of invalidation."
+      },
+      {
+        "title": "Prevent a cache stampede",
+        "theme": "caching",
+        "difficulty": "middle",
+        "href": "questions/caching/cache-stampede-control.html",
+        "why": "A stampede is what the invalidation and TTL model produces at expiry, so it follows them directly."
+      },
+      {
+        "title": "Cache negative results safely",
+        "theme": "caching",
+        "difficulty": "middle",
+        "href": "questions/caching/negative-caching.html",
+        "why": "Caching failures and misses extends the same wrongness contract to values that are absent."
+      },
+      {
+        "title": "Tune Redis maxmemory and eviction behaviour",
+        "theme": "caching",
+        "difficulty": "middle",
+        "href": "questions/caching/redis-maxmemory-tuning.html",
+        "why": "Redis under memory pressure is where the operational tier starts, because eviction becomes an incident when maxmemory is wrong."
+      },
+      {
+        "title": "Operate Redis replication and failover for a cache tier",
+        "theme": "caching",
+        "difficulty": "senior",
+        "href": "questions/caching/redis-failover-operations.html",
+        "why": "Failover is the cache tier's outage rehearsal, and it presumes the tuning that shaped its steady state."
+      },
+      {
+        "title": "Operate Memcached memory and slab allocation",
+        "theme": "caching",
+        "difficulty": "middle",
+        "href": "questions/caching/memcached-slab-tuning.html",
+        "why": "Memcached's slab allocator is the counter-example that keeps Redis habits from hardening into folklore."
+      },
+      {
+        "title": "Design cache coherence across regions",
+        "theme": "caching",
+        "difficulty": "staff",
+        "href": "questions/caching/multi-region-cache-coherence.html",
+        "why": "Multi-region coherence widens every earlier contract across distance and replication."
+      },
+      {
+        "title": "Build a cache capacity and cost model",
+        "theme": "caching",
+        "difficulty": "staff",
+        "href": "questions/caching/cache-capacity-cost-model.html",
+        "why": "The capacity and cost model prices the tier the coherence question just made global."
+      },
+      {
+        "title": "Set SLOs that survive a degraded cache",
+        "theme": "caching",
+        "difficulty": "staff",
+        "href": "questions/caching/cache-slo-degradation-policy.html",
+        "why": "SLOs that survive a degraded cache promise the degradation the tiers above rehearsed."
+      },
+      {
+        "title": "Govern a shared cache platform",
+        "theme": "caching",
+        "difficulty": "staff",
+        "href": "questions/caching/shared-cache-platform-governance.html",
+        "why": "Governing a shared cache platform is the close, because a cache other teams depend on is a product."
+      }
+    ]
+  },
+  {
+    "theme": "certification-last-minute-review",
+    "note": "Read this Theme as a rehearsal, in roughly the order the exam weights the platform, from the Pod outward through the surrounding services to the runbooks and the two meta-questions that run the last week.",
+    "steps": [
+      {
+        "title": "Read Pod phase, container state, and restart evidence",
+        "theme": "certification-last-minute-review",
+        "difficulty": "junior",
+        "href": "questions/certification-last-minute-review/pod-lifecycle-signals.html",
+        "why": "The exam weights the Pod first, and phase, container state, and restart evidence are how every scenario item opens."
+      },
+      {
+        "title": "Select startup, readiness, and liveness probes",
+        "theme": "certification-last-minute-review",
+        "difficulty": "middle",
+        "href": "questions/certification-last-minute-review/probe-selection.html",
+        "why": "Probes decide restart evidence before any surrounding service can be blamed for it."
+      },
+      {
+        "title": "Explain requests, limits, QoS, and a Pending Pod",
+        "theme": "certification-last-minute-review",
+        "difficulty": "middle",
+        "href": "questions/certification-last-minute-review/resource-requests-limits.html",
+        "why": "Requests, limits, and QoS explain the Pending Pod that scenario items love to hide."
+      },
+      {
+        "title": "Review a Pod security context for least privilege",
+        "theme": "certification-last-minute-review",
+        "difficulty": "senior",
+        "href": "questions/certification-last-minute-review/security-context-review.html",
+        "why": "The security context review completes the Pod-level opening the exam always starts from."
+      },
+      {
+        "title": "Choose ConfigMaps and Secrets without overstating protection",
+        "theme": "certification-last-minute-review",
+        "difficulty": "middle",
+        "href": "questions/certification-last-minute-review/configmap-secret-boundaries.html",
+        "why": "ConfigMaps versus Secrets is the first layer around the Pod, and scenario items fail here far more often than at exotic ones."
+      },
+      {
+        "title": "Debug a Service with no reachable backends",
+        "theme": "certification-last-minute-review",
+        "difficulty": "junior",
+        "href": "questions/certification-last-minute-review/service-endpoints-debug.html",
+        "why": "The Service with no reachable backends is the canonical scenario failure at the service layer."
+      },
+      {
+        "title": "Debug Kubernetes DNS before changing application code",
+        "theme": "certification-last-minute-review",
+        "difficulty": "middle",
+        "href": "questions/certification-last-minute-review/dns-debugging.html",
+        "why": "DNS debugging recurs inside Kubernetes with harder symptoms than the host version ever shows."
+      },
+      {
+        "title": "Reason about NetworkPolicy enforcement and default deny",
+        "theme": "certification-last-minute-review",
+        "difficulty": "middle",
+        "href": "questions/certification-last-minute-review/networkpolicy-semantics.html",
+        "why": "Default deny and enforcement semantics decide whether the isolation the exam describes actually exists."
+      },
+      {
+        "title": "Diagnose an RBAC denial without broadening access",
+        "theme": "certification-last-minute-review",
+        "difficulty": "middle",
+        "href": "questions/certification-last-minute-review/rbac-least-privilege.html",
+        "why": "The RBAC denial without broadening access is the last surrounding layer and the easiest one to flunk."
+      },
+      {
+        "title": "Combine node selectors, affinity, taints, and tolerations",
+        "theme": "certification-last-minute-review",
+        "difficulty": "middle",
+        "href": "questions/certification-last-minute-review/scheduling-constraints.html",
+        "why": "Scheduling comes before storage and control-plane items because a Pending PVC presumes placement reasoning already works."
+      },
+      {
+        "title": "Use PodDisruptionBudgets without blocking maintenance",
+        "theme": "certification-last-minute-review",
+        "difficulty": "senior",
+        "href": "questions/certification-last-minute-review/pod-disruption-budget.html",
+        "why": "Disruption budgets complete the scheduling story for the voluntary disruptions the exam asks about."
+      },
+      {
+        "title": "Debug a PersistentVolumeClaim that stays Pending",
+        "theme": "certification-last-minute-review",
+        "difficulty": "middle",
+        "href": "questions/certification-last-minute-review/pvc-binding.html",
+        "why": "The Pending PVC is the storage item the scheduling tier just made legible."
+      },
+      {
+        "title": "Triage an unavailable Kubernetes control plane",
+        "theme": "certification-last-minute-review",
+        "difficulty": "senior",
+        "href": "questions/certification-last-minute-review/control-plane-triage.html",
+        "why": "An unavailable control plane presumes you can already reason about where the workloads run."
+      },
+      {
+        "title": "Operate Jobs and CronJobs without uncontrolled retries",
+        "theme": "certification-last-minute-review",
+        "difficulty": "middle",
+        "href": "questions/certification-last-minute-review/job-cronjob-cleanup.html",
+        "why": "Jobs and CronJobs without uncontrolled retries open the runbook set that converts knowledge into sequence."
+      },
+      {
+        "title": "Plan and validate an etcd backup and restore",
+        "theme": "certification-last-minute-review",
+        "difficulty": "senior",
+        "href": "questions/certification-last-minute-review/etcd-backup-restore.html",
+        "why": "The etcd backup and restore is the runbook the exam trusts you can validate, not just describe."
+      },
+      {
+        "title": "Build a safe Kubernetes cluster upgrade runbook",
+        "theme": "certification-last-minute-review",
+        "difficulty": "senior",
+        "href": "questions/certification-last-minute-review/cluster-upgrade-runbook.html",
+        "why": "The upgrade runbook spends the version-skew and drain discipline the runbook set just assembled."
+      },
+      {
+        "title": "Evaluate a Kubernetes disaster-recovery exercise",
+        "theme": "certification-last-minute-review",
+        "difficulty": "staff",
+        "href": "questions/certification-last-minute-review/staff-disaster-recovery-exercise.html",
+        "why": "The disaster-recovery exercise converts the runbooks into a rehearsed motion with evidence."
+      },
+      {
+        "title": "Lead a Kubernetes incident while preserving recovery options",
+        "theme": "certification-last-minute-review",
+        "difficulty": "staff",
+        "href": "questions/certification-last-minute-review/staff-incident-command.html",
+        "why": "Leading an incident while preserving recovery options is the runbook set's human tier."
+      },
+      {
+        "title": "Prioritize certification review under a two-hour deadline",
+        "theme": "certification-last-minute-review",
+        "difficulty": "staff",
+        "href": "questions/certification-last-minute-review/staff-certification-prioritization.html",
+        "why": "The two-hour deadline question is how the last week before the exam should actually run."
+      },
+      {
+        "title": "Keep certification preparation ethical and operationally useful",
+        "theme": "certification-last-minute-review",
+        "difficulty": "staff",
+        "href": "questions/certification-last-minute-review/staff-certification-boundaries.html",
+        "why": "Keeping preparation ethical closes the Theme because rehearsal that cheats the exam cheats the job."
+      }
+    ]
+  },
+  {
+    "theme": "chaos-engineering",
+    "note": "Definition and hypothesis before faults, faults before programmes: the order starts with what chaos engineering claims, ends with what it costs to run across many teams.",
+    "steps": [
+      {
+        "title": "Define chaos engineering and what it is for",
+        "theme": "chaos-engineering",
+        "difficulty": "junior",
+        "href": "questions/chaos-engineering/define-chaos-engineering.html",
+        "why": "The definition, including why an experiment is not a test, anchors every experiment the Theme later runs."
+      },
+      {
+        "title": "State a steady-state hypothesis",
+        "theme": "chaos-engineering",
+        "difficulty": "junior",
+        "href": "questions/chaos-engineering/state-a-steady-state-hypothesis.html",
+        "why": "An experiment needs a falsifiable steady-state claim before it needs a fault or a tool."
+      },
+      {
+        "title": "Design a hypothesis-driven chaos experiment",
+        "theme": "chaos-engineering",
+        "difficulty": "middle",
+        "href": "questions/chaos-engineering/design-a-hypothesis-driven-experiment.html",
+        "why": "Designing the full experiment turns the hypothesis into a procedure with a written result."
+      },
+      {
+        "title": "Control the blast radius of an experiment",
+        "theme": "chaos-engineering",
+        "difficulty": "middle",
+        "href": "questions/chaos-engineering/control-the-blast-radius.html",
+        "why": "Bounding the fault comes before injecting any, because every later fault assumes the bound holds."
+      },
+      {
+        "title": "Abort a running chaos experiment",
+        "theme": "chaos-engineering",
+        "difficulty": "junior",
+        "href": "questions/chaos-engineering/abort-a-running-experiment.html",
+        "why": "Abort criteria are the other half of blast-radius control: what makes you stop."
+      },
+      {
+        "title": "Simulate a downstream dependency failure",
+        "theme": "chaos-engineering",
+        "difficulty": "middle",
+        "href": "questions/chaos-engineering/simulate-a-downstream-dependency-failure.html",
+        "why": "A single dependency fault is the smallest experiment the bounds above can safely hold."
+      },
+      {
+        "title": "Inject latency into a single dependency",
+        "theme": "chaos-engineering",
+        "difficulty": "junior",
+        "href": "questions/chaos-engineering/inject-latency-into-a-dependency.html",
+        "why": "Latency exposes the timeout and retry behaviour that hard failure hides completely."
+      },
+      {
+        "title": "Inject packet loss and network partitions",
+        "theme": "chaos-engineering",
+        "difficulty": "middle",
+        "href": "questions/chaos-engineering/inject-packet-loss-and-partitions.html",
+        "why": "Packet loss and partitions add the partial failure shapes between latency and outright outage."
+      },
+      {
+        "title": "Exhaust CPU and memory deliberately",
+        "theme": "chaos-engineering",
+        "difficulty": "middle",
+        "href": "questions/chaos-engineering/exhaust-cpu-and-memory.html",
+        "why": "Resource exhaustion moves the fault vocabulary from the network onto the host's own capacity."
+      },
+      {
+        "title": "Exhaust disk space and file descriptors",
+        "theme": "chaos-engineering",
+        "difficulty": "middle",
+        "href": "questions/chaos-engineering/exhaust-disk-and-file-descriptors.html",
+        "why": "Disk and descriptor exhaustion complete the resource tier with slower and subtler saturation."
+      },
+      {
+        "title": "Run pod-level chaos in Kubernetes",
+        "theme": "chaos-engineering",
+        "difficulty": "middle",
+        "href": "questions/chaos-engineering/run-pod-level-chaos-in-kubernetes.html",
+        "why": "Pod-level chaos applies the fault vocabulary to the platform most teams actually run."
+      },
+      {
+        "title": "Terminate a node and verify real recovery",
+        "theme": "chaos-engineering",
+        "difficulty": "middle",
+        "href": "questions/chaos-engineering/terminate-a-node-and-verify-recovery.html",
+        "why": "Node termination verifies real recovery rather than a briefly green dashboard."
+      },
+      {
+        "title": "Simulate an availability-zone or region failure",
+        "theme": "chaos-engineering",
+        "difficulty": "senior",
+        "href": "questions/chaos-engineering/simulate-a-zone-or-region-failure.html",
+        "why": "Zone failure is the widest blast radius the earlier bounds make survivable."
+      },
+      {
+        "title": "Decide whether to experiment in production or staging",
+        "theme": "chaos-engineering",
+        "difficulty": "senior",
+        "href": "questions/chaos-engineering/choose-production-or-staging.html",
+        "why": "Production versus staging is a trade-off question that only exists once the faults themselves are known."
+      },
+      {
+        "title": "Run data-layer chaos without risking the data",
+        "theme": "chaos-engineering",
+        "difficulty": "senior",
+        "href": "questions/chaos-engineering/run-data-layer-chaos-safely.html",
+        "why": "Data-layer risk deserves its own care tier after the compute and network tiers are rehearsed."
+      },
+      {
+        "title": "Facilitate a game day",
+        "theme": "chaos-engineering",
+        "difficulty": "middle",
+        "href": "questions/chaos-engineering/facilitate-a-game-day.html",
+        "why": "Game days make experimentation a team practice rather than a solo technique."
+      },
+      {
+        "title": "Select experiments from incident history",
+        "theme": "chaos-engineering",
+        "difficulty": "senior",
+        "href": "questions/chaos-engineering/select-experiments-from-incident-history.html",
+        "why": "Incident history chooses the next experiments better than curiosity ever does."
+      },
+      {
+        "title": "Govern consent and ethics for production experiments",
+        "theme": "chaos-engineering",
+        "difficulty": "staff",
+        "href": "questions/chaos-engineering/govern-consent-for-production-experiments.html",
+        "why": "Consent and ethics govern who may run what in production, and with whose permission."
+      },
+      {
+        "title": "Justify the cost of a chaos engineering programme",
+        "theme": "chaos-engineering",
+        "difficulty": "staff",
+        "href": "questions/chaos-engineering/justify-the-cost-of-a-chaos-programme.html",
+        "why": "Cost justification prices the programme the practice has by now become."
+      },
+      {
+        "title": "Run a chaos engineering programme across many teams",
+        "theme": "chaos-engineering",
+        "difficulty": "staff",
+        "href": "questions/chaos-engineering/run-a-chaos-engineering-programme.html",
+        "why": "Running the programme across many teams is the governance capstone the whole order built toward."
+      }
+    ]
+  },
+  {
+    "theme": "ci-cd",
+    "note": "Read the pipeline before the deployment machinery, artifact identity before GitOps, reconciliation before progressive delivery — every later stage promotes something an earlier gate passed.",
+    "steps": [
+      {
+        "title": "Choose CI pipeline triggers",
+        "theme": "ci-cd",
+        "difficulty": "junior",
+        "href": "questions/ci-cd/trigger-a-pipeline.html",
+        "why": "What triggers CI decides what every later gate and promotion reacts to."
+      },
+      {
+        "title": "Design CI/CD quality gates for a service",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/pipeline-quality-gates.html",
+        "why": "Gates prove things about a change, and everything later in the Theme is a promotion of something a gate passed."
+      },
+      {
+        "title": "Parallelize a CI test suite safely",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/parallelize-test-suite.html",
+        "why": "Safe test parallelization keeps the gate fast without making it blind."
+      },
+      {
+        "title": "Handle flaky tests without masking regressions",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/retry-flaky-tests.html",
+        "why": "Flaky-test handling preserves the gate's signal instead of masking regressions to keep it green."
+      },
+      {
+        "title": "Triage a failed CI job from its logs",
+        "theme": "ci-cd",
+        "difficulty": "junior",
+        "href": "questions/ci-cd/read-ci-logs.html",
+        "why": "Triaging a failed job from its logs is the human skill the pipeline tier ends on."
+      },
+      {
+        "title": "Why should CI publish immutable release artifacts?",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/immutable-release-artifacts.html",
+        "why": "Artifact identity comes next because GitOps reconciliation only means something once declared state names a digest."
+      },
+      {
+        "title": "Produce a traceable semantic-version release",
+        "theme": "ci-cd",
+        "difficulty": "junior",
+        "href": "questions/ci-cd/semantic-version-release.html",
+        "why": "Traceable semantic versions make the digest human-readable without ever replacing it."
+      },
+      {
+        "title": "Verify supply-chain provenance before deployment",
+        "theme": "ci-cd",
+        "difficulty": "senior",
+        "href": "questions/ci-cd/supply-chain-provenance.html",
+        "why": "Provenance verification binds the artifact to a trusted builder, source revision, and declared inputs."
+      },
+      {
+        "title": "Set artifact retention and promotion rules",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/artifact-retention-and-promotion.html",
+        "why": "Retention and promotion rules decide how long that identity stays trustworthy across environments."
+      },
+      {
+        "title": "Explain the four GitOps principles",
+        "theme": "ci-cd",
+        "difficulty": "junior",
+        "href": "questions/ci-cd/gitops-principles.html",
+        "why": "The four principles name the operating model the delivery machinery is about to adopt."
+      },
+      {
+        "title": "Choose a pull-based reconciler or a push-based deployment pipeline",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/gitops-pull-versus-push-delivery.html",
+        "why": "Pull versus push is a design decision rather than a preference, and it needs the principles first."
+      },
+      {
+        "title": "Respond to Argo CD drift without masking an incident",
+        "theme": "ci-cd",
+        "difficulty": "senior",
+        "href": "questions/ci-cd/argo-cd-reconciliation-drift.html",
+        "why": "Responding to drift without masking an incident keeps reconciliation honest."
+      },
+      {
+        "title": "Establish organization-wide delivery standards",
+        "theme": "ci-cd",
+        "difficulty": "staff",
+        "href": "questions/ci-cd/platform-delivery-standards.html",
+        "why": "Organization-wide delivery standards close the GitOps sequence by making it a paved path."
+      },
+      {
+        "title": "Choose a progressive Argo Rollouts strategy",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/argo-rollouts-progressive-delivery.html",
+        "why": "Progressive delivery comes after reconciliation because a rollout refines what the reconciler already guarantees."
+      },
+      {
+        "title": "Define an Argo Rollouts AnalysisTemplate safely",
+        "theme": "ci-cd",
+        "difficulty": "senior",
+        "href": "questions/ci-cd/argo-rollouts-analysis.html",
+        "why": "AnalysisTemplates decide what evidence advances or stops the rollout strategies above."
+      },
+      {
+        "title": "Decide whether to advance or stop a canary deployment",
+        "theme": "ci-cd",
+        "difficulty": "senior",
+        "href": "questions/ci-cd/canary-deployment-decision.html",
+        "why": "The advance-or-stop call is the judgement the AnalysisTemplate automates."
+      },
+      {
+        "title": "Plan a blue-green production cutover",
+        "theme": "ci-cd",
+        "difficulty": "senior",
+        "href": "questions/ci-cd/blue-green-cutover.html",
+        "why": "Blue-green trades the gradual canary for a controlled instant switch."
+      },
+      {
+        "title": "Design a deployment rollback",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/roll-back-a-deployment.html",
+        "why": "Rollback design completes the delivery tier with the path every step above may one day need."
+      },
+      {
+        "title": "Explain when to use Argo Workflows",
+        "theme": "ci-cd",
+        "difficulty": "junior",
+        "href": "questions/ci-cd/argo-workflows-fundamentals.html",
+        "why": "Argo Workflows extends the automation past deployment, and only after deployment itself is safe."
+      },
+      {
+        "title": "Model failure and parallelism in an Argo Workflow DAG",
+        "theme": "ci-cd",
+        "difficulty": "senior",
+        "href": "questions/ci-cd/argo-workflows-dag-failure.html",
+        "why": "Modelling failure and parallelism in a DAG keeps the workflow honest under real load."
+      },
+      {
+        "title": "Pass artifacts safely between Argo Workflow steps",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/argo-workflow-artifacts.html",
+        "why": "Passing artifacts between steps carries the identity discipline up into orchestration."
+      },
+      {
+        "title": "Reuse Argo Workflow templates without losing control",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/argo-workflow-template-reuse.html",
+        "why": "Template reuse keeps the workflow fleet maintainable rather than copy-pasted."
+      },
+      {
+        "title": "Explain the Argo Events event path",
+        "theme": "ci-cd",
+        "difficulty": "junior",
+        "href": "questions/ci-cd/argo-events-architecture.html",
+        "why": "The Argo Events event path explains what triggers the automation the workflows run."
+      },
+      {
+        "title": "Design an Argo Events Sensor for a production trigger",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/argo-events-sensor-dependencies.html",
+        "why": "Sensor dependencies make event triggers reliable enough to own in production."
+      },
+      {
+        "title": "Design a multi-team pipeline architecture",
+        "theme": "ci-cd",
+        "difficulty": "staff",
+        "href": "questions/ci-cd/multi-team-pipeline-architecture.html",
+        "why": "Multi-team pipeline architecture opens the platform tier the whole tool tier serves."
+      },
+      {
+        "title": "Choose reusable workflow boundaries",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/reusable-workflow-boundaries.html",
+        "why": "Reusable workflow boundaries keep the shared pipelines composable across many teams."
+      },
+      {
+        "title": "Protect deployment secrets in CI/CD",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/protect-deployment-secrets.html",
+        "why": "Secrets protection is the first platform duty the shared machinery owes its tenants."
+      },
+      {
+        "title": "Apply least privilege to a workflow token",
+        "theme": "ci-cd",
+        "difficulty": "middle",
+        "href": "questions/ci-cd/least-privilege-workflow-token.html",
+        "why": "Least-privilege tokens bound what the delivery automation itself may do."
+      },
+      {
+        "title": "Build a CI/CD cost and capacity model",
+        "theme": "ci-cd",
+        "difficulty": "staff",
+        "href": "questions/ci-cd/ci-cd-cost-capacity-model.html",
+        "why": "The cost and capacity model prices the platform the teams now share."
+      },
+      {
+        "title": "Decide whether to freeze deployments during an incident",
+        "theme": "ci-cd",
+        "difficulty": "senior",
+        "href": "questions/ci-cd/incident-change-freeze.html",
+        "why": "Freeze decisions during incidents connect delivery governance back to incident governance."
+      },
+      {
+        "title": "Recover the delivery platform during an outage",
+        "theme": "ci-cd",
+        "difficulty": "staff",
+        "href": "questions/ci-cd/disaster-recover-delivery-platform.html",
+        "why": "Recovering the delivery platform itself during an outage is the failure the whole Theme rehearses for."
+      }
+    ]
+  },
+  {
+    "theme": "cloud",
+    "note": "Boundaries first, then the resilience rungs, then governance: the order follows how a workload lands in AWS and only afterwards how an organization governs many of them.",
+    "steps": [
+      {
+        "title": "Choose an appropriate cloud service model",
+        "theme": "cloud",
+        "difficulty": "junior",
+        "href": "questions/cloud/cloud-service-models.html",
+        "why": "Service and shared-responsibility boundaries decide what the provider owes before anything is built."
+      },
+      {
+        "title": "Explain the network boundaries of an AWS VPC",
+        "theme": "cloud",
+        "difficulty": "junior",
+        "href": "questions/cloud/vpc-network-foundations.html",
+        "why": "The VPC is the network boundary every later resource lands inside."
+      },
+      {
+        "title": "Choose security groups and network ACLs deliberately",
+        "theme": "cloud",
+        "difficulty": "middle",
+        "href": "questions/cloud/security-groups-and-network-acls.html",
+        "why": "Security groups and network ACLs are the VPC's own traffic controls, learned beside the boundary they police."
+      },
+      {
+        "title": "Provide controlled Internet egress from a private subnet",
+        "theme": "cloud",
+        "difficulty": "middle",
+        "href": "questions/cloud/private-subnet-egress.html",
+        "why": "Controlled egress from a private subnet completes the VPC story with the pattern most workloads need."
+      },
+      {
+        "title": "Diagnose an unexpected AWS IAM authorization decision",
+        "theme": "cloud",
+        "difficulty": "middle",
+        "href": "questions/cloud/iam-policy-evaluation.html",
+        "why": "IAM policy evaluation explains the denials and grants every later permission puzzle reduces to."
+      },
+      {
+        "title": "Apply least privilege to a cloud workload identity",
+        "theme": "cloud",
+        "difficulty": "middle",
+        "href": "questions/cloud/least-privilege-workload-identity.html",
+        "why": "Workload identity applies the evaluation model to machines rather than people."
+      },
+      {
+        "title": "Rotate cloud workload secrets without an outage",
+        "theme": "cloud",
+        "difficulty": "senior",
+        "href": "questions/cloud/secrets-manager-rotation.html",
+        "why": "Rotating workload secrets without an outage operationalizes the identity tier's most dangerous credential."
+      },
+      {
+        "title": "Choose Regions and Availability Zones for a workload",
+        "theme": "cloud",
+        "difficulty": "junior",
+        "href": "questions/cloud/regions-and-availability-zones.html",
+        "why": "Regions and zones are the fault domains the resilience tier is measured against."
+      },
+      {
+        "title": "Design a cloud load-balancer health check",
+        "theme": "cloud",
+        "difficulty": "middle",
+        "href": "questions/cloud/load-balancer-health-checks.html",
+        "why": "Health checks decide how those fault domains hand traffic to healthy targets."
+      },
+      {
+        "title": "Configure target-tracking autoscaling safely",
+        "theme": "cloud",
+        "difficulty": "middle",
+        "href": "questions/cloud/autoscaling-target-tracking.html",
+        "why": "Target-tracking autoscaling responds to demand inside the same fault domains."
+      },
+      {
+        "title": "Prevent cloud service quotas from becoming an outage",
+        "theme": "cloud",
+        "difficulty": "senior",
+        "href": "questions/cloud/cloud-quota-capacity-planning.html",
+        "why": "Quota planning keeps the scaling tier's ceiling from becoming the outage."
+      },
+      {
+        "title": "Design cloud disaster recovery from RTO and RPO",
+        "theme": "cloud",
+        "difficulty": "senior",
+        "href": "questions/cloud/disaster-recovery-rto-rpo.html",
+        "why": "RTO and RPO turn resilience from adjectives into numbers with owners."
+      },
+      {
+        "title": "Set a cloud reliability strategy across product teams",
+        "theme": "cloud",
+        "difficulty": "staff",
+        "href": "questions/cloud/cloud-reliability-strategy.html",
+        "why": "The reliability strategy spends the whole resilience tier across product teams."
+      },
+      {
+        "title": "Design a CloudWatch alarm that supports action",
+        "theme": "cloud",
+        "difficulty": "middle",
+        "href": "questions/cloud/cloudwatch-alarm-design.html",
+        "why": "Alarm design makes the resilience work observable and actionable."
+      },
+      {
+        "title": "Prove a managed database backup can be restored",
+        "theme": "cloud",
+        "difficulty": "middle",
+        "href": "questions/cloud/managed-database-backup-restore.html",
+        "why": "A managed backup only counts once its restore has actually been proven."
+      },
+      {
+        "title": "Choose object storage for durable application data",
+        "theme": "cloud",
+        "difficulty": "junior",
+        "href": "questions/cloud/object-storage-durability.html",
+        "why": "Durability design decides which data the recovery tier can lean on."
+      },
+      {
+        "title": "Use CloudTrail as audit evidence during a change investigation",
+        "theme": "cloud",
+        "difficulty": "middle",
+        "href": "questions/cloud/cloudtrail-audit-evidence.html",
+        "why": "CloudTrail is the evidence an investigation reads after the tiers above have acted."
+      },
+      {
+        "title": "Lead an AWS workload incident response",
+        "theme": "cloud",
+        "difficulty": "senior",
+        "href": "questions/cloud/cloud-incident-response.html",
+        "why": "Incident response spends the observability, recovery, and evidence tiers in one motion."
+      },
+      {
+        "title": "Define AWS multi-account boundaries",
+        "theme": "cloud",
+        "difficulty": "middle",
+        "href": "questions/cloud/multi-account-boundaries.html",
+        "why": "Account boundaries are the governance tier's unit of isolation."
+      },
+      {
+        "title": "Establish a governed cloud landing zone",
+        "theme": "cloud",
+        "difficulty": "staff",
+        "href": "questions/cloud/landing-zone-governance.html",
+        "why": "The landing zone makes those boundaries a governed default rather than an aspiration."
+      },
+      {
+        "title": "Design a cloud resource tagging strategy",
+        "theme": "cloud",
+        "difficulty": "junior",
+        "href": "questions/cloud/resource-tagging-strategy.html",
+        "why": "Tagging is the metadata every cost and governance decision keys on."
+      },
+      {
+        "title": "Establish cloud cost governance without blocking delivery",
+        "theme": "cloud",
+        "difficulty": "staff",
+        "href": "questions/cloud/cloud-finops-governance.html",
+        "why": "FinOps governance prices the platform without blocking the delivery it exists for."
+      },
+      {
+        "title": "Govern data classification in cloud services",
+        "theme": "cloud",
+        "difficulty": "staff",
+        "href": "questions/cloud/data-classification-governance.html",
+        "why": "Data classification decides the handling rules the platform must enforce."
+      },
+      {
+        "title": "Govern cloud identity at organization scale",
+        "theme": "cloud",
+        "difficulty": "staff",
+        "href": "questions/cloud/cloud-identity-governance.html",
+        "why": "Organization-wide identity governance closes the Theme at the scale the opening tiers never reached."
+      }
+    ]
+  },
+  {
+    "theme": "configuration-management",
+    "note": "Vocabulary before idempotence, idempotence before fleet safety, fleet safety before strategy, and drift remediation last because classify-before-converging only lands on someone who has seen what unrecorded changes cost.",
+    "steps": [
+      {
+        "title": "Explain an Ansible inventory and host groups",
+        "theme": "configuration-management",
+        "difficulty": "junior",
+        "href": "questions/configuration-management/ansible-inventory-basics.html",
+        "why": "Inventory and host groups are the vocabulary every remaining Question in the Theme leans on."
+      },
+      {
+        "title": "Explain plays, tasks, and modules in Ansible",
+        "theme": "configuration-management",
+        "difficulty": "junior",
+        "href": "questions/configuration-management/ansible-playbook-basics.html",
+        "why": "Plays, tasks, and modules run against the inventory the Theme has just defined."
+      },
+      {
+        "title": "Deliver a configuration file with an Ansible template",
+        "theme": "configuration-management",
+        "difficulty": "junior",
+        "href": "questions/configuration-management/ansible-templates.html",
+        "why": "Templates deliver the first configuration content the plays must manage reproducibly."
+      },
+      {
+        "title": "Use Ansible handlers for service reloads",
+        "theme": "configuration-management",
+        "difficulty": "junior",
+        "href": "questions/configuration-management/ansible-handlers.html",
+        "why": "Handlers sequence reloads so template changes take effect exactly once."
+      },
+      {
+        "title": "Use Ansible variables without creating precedence surprises",
+        "theme": "configuration-management",
+        "difficulty": "junior",
+        "href": "questions/configuration-management/ansible-variables-basics.html",
+        "why": "Variables parameterize the plays without creating precedence surprises."
+      },
+      {
+        "title": "Gather and use Ansible facts deliberately",
+        "theme": "configuration-management",
+        "difficulty": "middle",
+        "href": "questions/configuration-management/ansible-facts.html",
+        "why": "Facts let the playbook reason about the host it is about to change."
+      },
+      {
+        "title": "Target Ansible tasks with tags safely",
+        "theme": "configuration-management",
+        "difficulty": "middle",
+        "href": "questions/configuration-management/ansible-tags.html",
+        "why": "Tags target subsets of the vocabulary once the whole play has grown."
+      },
+      {
+        "title": "Explain idempotence in an Ansible playbook",
+        "theme": "configuration-management",
+        "difficulty": "middle",
+        "href": "questions/configuration-management/ansible-idempotence.html",
+        "why": "Idempotence makes re-runs meaningful, and it is the property everything after depends on."
+      },
+      {
+        "title": "Validate an Ansible change with check and diff mode",
+        "theme": "configuration-management",
+        "difficulty": "middle",
+        "href": "questions/configuration-management/ansible-check-diff.html",
+        "why": "Check and diff mode validate a change, which is only interesting once a no-op re-run means something."
+      },
+      {
+        "title": "Set safe Ansible concurrency for a fleet change",
+        "theme": "configuration-management",
+        "difficulty": "senior",
+        "href": "questions/configuration-management/ansible-concurrency-limits.html",
+        "why": "The fleet-safety tier widens in order, and concurrency limits bound the blast radius first."
+      },
+      {
+        "title": "Perform an Ansible rolling configuration update",
+        "theme": "configuration-management",
+        "difficulty": "middle",
+        "href": "questions/configuration-management/ansible-rolling-update.html",
+        "why": "Rolling updates batch that blast radius across the inventory in waves."
+      },
+      {
+        "title": "Coordinate a configuration change with Ansible delegation",
+        "theme": "configuration-management",
+        "difficulty": "middle",
+        "href": "questions/configuration-management/ansible-delegation.html",
+        "why": "Delegation widens where change happens by moving tasks to another host."
+      },
+      {
+        "title": "Handle Ansible task failures without concealing drift",
+        "theme": "configuration-management",
+        "difficulty": "middle",
+        "href": "questions/configuration-management/ansible-error-handling.html",
+        "why": "Failure handling must not conceal drift, the widest blast radius of the four controls."
+      },
+      {
+        "title": "Design a reusable Ansible role",
+        "theme": "configuration-management",
+        "difficulty": "middle",
+        "href": "questions/configuration-management/ansible-role-design.html",
+        "why": "Reusable roles open the craft tier with composition done deliberately."
+      },
+      {
+        "title": "Pin and update Ansible collections safely",
+        "theme": "configuration-management",
+        "difficulty": "senior",
+        "href": "questions/configuration-management/ansible-collection-pinning.html",
+        "why": "Pinned collections keep those roles reproducible across fleets and across time."
+      },
+      {
+        "title": "Build an Ansible content test strategy",
+        "theme": "configuration-management",
+        "difficulty": "senior",
+        "href": "questions/configuration-management/ansible-test-strategy.html",
+        "why": "A content test strategy treats the roles as the products they now are."
+      },
+      {
+        "title": "Apply least privilege to Ansible privilege escalation",
+        "theme": "configuration-management",
+        "difficulty": "senior",
+        "href": "questions/configuration-management/ansible-privilege-escalation.html",
+        "why": "Least-privilege escalation bounds what the automation itself is allowed to do."
+      },
+      {
+        "title": "Protect secrets used by Ansible automation",
+        "theme": "configuration-management",
+        "difficulty": "middle",
+        "href": "questions/configuration-management/ansible-vault-secrets.html",
+        "why": "Protected secrets close the craft tier with its most sensitive payload."
+      },
+      {
+        "title": "Create a risk-based configuration change model",
+        "theme": "configuration-management",
+        "difficulty": "staff",
+        "href": "questions/configuration-management/cm-change-risk-model.html",
+        "why": "The risk-based change model opens strategy by pricing fleet changes."
+      },
+      {
+        "title": "Define configuration ownership across a platform fleet",
+        "theme": "configuration-management",
+        "difficulty": "staff",
+        "href": "questions/configuration-management/cm-fleet-ownership.html",
+        "why": "Ownership decides who may change what across the fleet."
+      },
+      {
+        "title": "Establish configuration-management platform guardrails",
+        "theme": "configuration-management",
+        "difficulty": "staff",
+        "href": "questions/configuration-management/cm-platform-guardrails.html",
+        "why": "Guardrails enforce the ownership model without blocking the teams it governs."
+      },
+      {
+        "title": "Design resilience for a configuration-management control plane",
+        "theme": "configuration-management",
+        "difficulty": "staff",
+        "href": "questions/configuration-management/cm-resilience-strategy.html",
+        "why": "Control-plane resilience keeps the automation itself from becoming the outage."
+      },
+      {
+        "title": "Standardize configuration management without blocking teams",
+        "theme": "configuration-management",
+        "difficulty": "staff",
+        "href": "questions/configuration-management/cm-standardization-strategy.html",
+        "why": "Standardizing without blocking teams is the strategy capstone the guardrails made possible."
+      },
+      {
+        "title": "Design safe configuration drift remediation",
+        "theme": "configuration-management",
+        "difficulty": "senior",
+        "href": "questions/configuration-management/configuration-drift-remediation.html",
+        "why": "Drift remediation is last of all because classify-before-converging only lands on someone who has seen unrecorded changes cost an outage."
+      }
+    ]
+  },
+  {
+    "theme": "container-networking",
+    "note": "Start inside one container's namespace and finish at platform governance, because choosing a dataplane presumes knowing what it replaces.",
+    "steps": [
+      {
+        "title": "Explain a container network namespace",
+        "theme": "container-networking",
+        "difficulty": "junior",
+        "href": "questions/container-networking/container-network-namespace.html",
+        "why": "The namespace is the vantage point you must inspect from before any driver or cluster layer makes sense."
+      },
+      {
+        "title": "Explain Docker network drivers",
+        "theme": "container-networking",
+        "difficulty": "junior",
+        "href": "questions/container-networking/network-driver-basics.html",
+        "why": "Bridge, overlay, and host drivers are the first thing the namespace connects to."
+      },
+      {
+        "title": "Use a user-defined bridge for service discovery",
+        "theme": "container-networking",
+        "difficulty": "junior",
+        "href": "questions/container-networking/user-defined-bridge-dns.html",
+        "why": "The user-defined bridge brings DNS-based service discovery to plain Docker networking."
+      },
+      {
+        "title": "Design network aliases for service lifecycle",
+        "theme": "container-networking",
+        "difficulty": "middle",
+        "href": "questions/container-networking/network-alias-lifecycle.html",
+        "why": "Aliases make that discovery survive service lifecycle events rather than depend on coincidences."
+      },
+      {
+        "title": "Distinguish EXPOSE from port publishing",
+        "theme": "container-networking",
+        "difficulty": "junior",
+        "href": "questions/container-networking/expose-versus-publish.html",
+        "why": "EXPOSE documents while publishing forwards, and confusing the two breaks the model early."
+      },
+      {
+        "title": "Debug container DNS resolution",
+        "theme": "container-networking",
+        "difficulty": "junior",
+        "href": "questions/container-networking/container-dns-resolution.html",
+        "why": "Container DNS failures recur later in Kubernetes with harder symptoms, so they are debugged here first."
+      },
+      {
+        "title": "Debug failed container egress",
+        "theme": "container-networking",
+        "difficulty": "middle",
+        "href": "questions/container-networking/container-egress-debugging.html",
+        "why": "Failed egress is the other pre-cluster failure the Theme insists you meet early."
+      },
+      {
+        "title": "Trace Kubernetes Service traffic",
+        "theme": "container-networking",
+        "difficulty": "senior",
+        "href": "questions/container-networking/kubernetes-service-traffic-path.html",
+        "why": "A name that resolves with zero usable backends is the canonical tenant complaint, so Service traffic is traced early."
+      },
+      {
+        "title": "Diagnose an MTU mismatch across container paths",
+        "theme": "container-networking",
+        "difficulty": "senior",
+        "href": "questions/container-networking/mtu-mismatch-troubleshooting.html",
+        "why": "MTU symptoms only become legible after the Service traces the Theme has just taught."
+      },
+      {
+        "title": "Validate Kubernetes NetworkPolicy enforcement",
+        "theme": "container-networking",
+        "difficulty": "senior",
+        "href": "questions/container-networking/network-policy-enforcement-limits.html",
+        "why": "Default deny only exists if the installed plugin enforces it, so capability is verified before policy is trusted."
+      },
+      {
+        "title": "Segment a multi-tier application with Docker networks",
+        "theme": "container-networking",
+        "difficulty": "middle",
+        "href": "questions/container-networking/multi-network-segmentation.html",
+        "why": "Multi-tier segmentation applies the verified policy to a real application topology."
+      },
+      {
+        "title": "Define ingress and gateway boundaries",
+        "theme": "container-networking",
+        "difficulty": "senior",
+        "href": "questions/container-networking/ingress-gateway-boundary.html",
+        "why": "The gateway is about who owns the front door, a question that only opens after what-may-talk is settled."
+      },
+      {
+        "title": "Explain Cilium's eBPF datapath trade-offs",
+        "theme": "container-networking",
+        "difficulty": "middle",
+        "href": "questions/container-networking/cilium-ebpf-datapath-tradeoffs.html",
+        "why": "The Cilium family opens with its dataplane, the replacement everything else in the family presumes."
+      },
+      {
+        "title": "Evaluate Cilium kube-proxy replacement",
+        "theme": "container-networking",
+        "difficulty": "senior",
+        "href": "questions/container-networking/cilium-kube-proxy-replacement.html",
+        "why": "Replacing kube-proxy is the concrete trade the dataplane question frames."
+      },
+      {
+        "title": "Apply Cilium identity-aware L7 network policy",
+        "theme": "container-networking",
+        "difficulty": "senior",
+        "href": "questions/container-networking/cilium-l7-network-policy.html",
+        "why": "Identity-aware L7 policy is what the eBPF dataplane uniquely buys."
+      },
+      {
+        "title": "Design controlled egress with Cilium Egress Gateway",
+        "theme": "container-networking",
+        "difficulty": "senior",
+        "href": "questions/container-networking/cilium-egress-gateway-design.html",
+        "why": "Egress Gateway extends the identity model to outbound traffic."
+      },
+      {
+        "title": "Advertise Kubernetes routes with Cilium BGP Control Plane",
+        "theme": "container-networking",
+        "difficulty": "senior",
+        "href": "questions/container-networking/cilium-bgp-external-routing.html",
+        "why": "BGP advertisement connects the cluster to the network that surrounds it."
+      },
+      {
+        "title": "Prepare clusters for Cilium Cluster Mesh",
+        "theme": "container-networking",
+        "difficulty": "senior",
+        "href": "questions/container-networking/cilium-clustermesh-prerequisites.html",
+        "why": "Cluster Mesh presumes the dataplane and routing decisions made above it."
+      },
+      {
+        "title": "Configure and troubleshoot a multi-interface Pod with Multus",
+        "theme": "container-networking",
+        "difficulty": "senior",
+        "href": "questions/container-networking/multus-multi-interface-pod-troubleshooting.html",
+        "why": "Multus adds per-Pod interfaces, the multi-network edge case after the Cilium core."
+      },
+      {
+        "title": "Establish container network observability standards",
+        "theme": "container-networking",
+        "difficulty": "staff",
+        "href": "questions/container-networking/network-observability-standard.html",
+        "why": "Observability standards open the platform tier every tool family above must serve."
+      },
+      {
+        "title": "Enable IPv6 container networking safely",
+        "theme": "container-networking",
+        "difficulty": "middle",
+        "href": "questions/container-networking/ipv6-container-networking.html",
+        "why": "IPv6 enablement is a platform programme the standards tier makes safe to attempt."
+      },
+      {
+        "title": "Define a multi-cluster connectivity strategy",
+        "theme": "container-networking",
+        "difficulty": "staff",
+        "href": "questions/container-networking/multi-cluster-connectivity-strategy.html",
+        "why": "The multi-cluster strategy spends the single-cluster story across boundaries."
+      },
+      {
+        "title": "Govern workload egress on a container platform",
+        "theme": "container-networking",
+        "difficulty": "staff",
+        "href": "questions/container-networking/platform-egress-governance.html",
+        "why": "Egress governance turns connectivity into policy with named owners."
+      },
+      {
+        "title": "Govern high-risk container network changes",
+        "theme": "container-networking",
+        "difficulty": "staff",
+        "href": "questions/container-networking/network-change-governance.html",
+        "why": "High-risk change control keeps the platform's own network mutations survivable."
+      },
+      {
+        "title": "Design container network security architecture",
+        "theme": "container-networking",
+        "difficulty": "staff",
+        "href": "questions/container-networking/container-network-security-architecture.html",
+        "why": "The security architecture closes the Theme by composing policy, identity, and boundaries into one design."
+      }
+    ]
+  },
+  {
+    "theme": "containers",
+    "note": "Artifact before lifecycle, lifecycle before constraints and probes, hardening before platform scope — each tier consumes the habits the previous one built.",
+    "steps": [
+      {
+        "title": "Distinguish a container image from a running container",
+        "theme": "containers",
+        "difficulty": "junior",
+        "href": "questions/containers/container-image-and-runtime.html",
+        "why": "Image versus running container, read-only layers plus one writable layer, is the packaging fact everything else extends."
+      },
+      {
+        "title": "Order a Dockerfile for safe cache reuse",
+        "theme": "containers",
+        "difficulty": "middle",
+        "href": "questions/containers/build-cache-ordering.html",
+        "why": "A Dockerfile ordered for safe cache reuse makes builds predictable enough to keep honest."
+      },
+      {
+        "title": "Build a small runtime image with multi-stage builds",
+        "theme": "containers",
+        "difficulty": "middle",
+        "href": "questions/containers/multi-stage-runtime-image.html",
+        "why": "Multi-stage builds shrink the artifact the cache discipline just made predictable."
+      },
+      {
+        "title": "Choose between CMD and ENTRYPOINT in a Docker image",
+        "theme": "containers",
+        "difficulty": "middle",
+        "href": "questions/containers/cmd-and-entrypoint.html",
+        "why": "CMD versus ENTRYPOINT decides what the image actually runs, the contract inside the artifact."
+      },
+      {
+        "title": "Distinguish image tags from digests",
+        "theme": "containers",
+        "difficulty": "junior",
+        "href": "questions/containers/image-tag-and-digest.html",
+        "why": "Tags are names and digests are identity, so the artifact you run is the artifact you mean."
+      },
+      {
+        "title": "Control Docker build context with .dockerignore",
+        "theme": "containers",
+        "difficulty": "junior",
+        "href": "questions/containers/dockerfile-build-context.html",
+        "why": "Build-context control keeps the build's inputs as small as its promises."
+      },
+      {
+        "title": "Explain container lifecycle states and restart policy",
+        "theme": "containers",
+        "difficulty": "junior",
+        "href": "questions/containers/container-lifecycle-states.html",
+        "why": "Lifecycle follows artifact: states and restart policy define what the runtime does with the image."
+      },
+      {
+        "title": "Investigate a container that exits immediately",
+        "theme": "containers",
+        "difficulty": "junior",
+        "href": "questions/containers/inspect-container-failure.html",
+        "why": "The immediately exiting container is the first lifecycle evidence you learn to read."
+      },
+      {
+        "title": "Make a container stop gracefully",
+        "theme": "containers",
+        "difficulty": "middle",
+        "href": "questions/containers/pid-one-and-graceful-shutdown.html",
+        "why": "Graceful stops complete the lifecycle tier by making exit behaviour a contract."
+      },
+      {
+        "title": "Triage a container service restart storm",
+        "theme": "containers",
+        "difficulty": "senior",
+        "href": "questions/containers/container-incident-triage.html",
+        "why": "The restart storm is what bad lifecycle configuration produces, diagnosed with the tiers above."
+      },
+      {
+        "title": "Apply CPU and memory constraints to a container",
+        "theme": "containers",
+        "difficulty": "middle",
+        "href": "questions/containers/resource-constraints.html",
+        "why": "A limit is only sensible once the restart policy's verdict is understood, which is why constraints follow lifecycle."
+      },
+      {
+        "title": "Design a useful container health check",
+        "theme": "containers",
+        "difficulty": "middle",
+        "href": "questions/containers/container-healthcheck-design.html",
+        "why": "A probe is a decision about who declares health, made after the runtime can act on that verdict."
+      },
+      {
+        "title": "Run a containerized service as a non-root user",
+        "theme": "containers",
+        "difficulty": "middle",
+        "href": "questions/containers/non-root-container.html",
+        "why": "Hardening opens with the user: the service runs as non-root by default."
+      },
+      {
+        "title": "Reduce Linux capabilities for a containerized service",
+        "theme": "containers",
+        "difficulty": "senior",
+        "href": "questions/containers/container-capabilities-security.html",
+        "why": "Dropped capabilities bound what even a non-root container may ask the kernel for."
+      },
+      {
+        "title": "Evaluate Docker rootless mode for a build worker",
+        "theme": "containers",
+        "difficulty": "senior",
+        "href": "questions/containers/rootless-mode-boundaries.html",
+        "why": "Rootless mode removes the daemon's own privilege, and its limits read only with the tiers above."
+      },
+      {
+        "title": "Define a container logging contract",
+        "theme": "containers",
+        "difficulty": "middle",
+        "href": "questions/containers/container-logging-contract.html",
+        "why": "The logging contract keeps the hardened runtime observable."
+      },
+      {
+        "title": "Choose a Docker volume or a bind mount",
+        "theme": "containers",
+        "difficulty": "middle",
+        "href": "questions/containers/volume-versus-bind-mount.html",
+        "why": "Volumes versus bind mounts is the persistence decision the writable layer refused to be."
+      },
+      {
+        "title": "Use a private dependency credential during an image build",
+        "theme": "containers",
+        "difficulty": "middle",
+        "href": "questions/containers/build-secrets.html",
+        "why": "Private build credentials close the hardening tier with the secret that must never reach the image."
+      },
+      {
+        "title": "Design a governed base-image program",
+        "theme": "containers",
+        "difficulty": "staff",
+        "href": "questions/containers/platform-base-image-program.html",
+        "why": "The governed base-image program is the first full platform programme, consuming the artifact identity from the start."
+      },
+      {
+        "title": "Maintain a base-image update policy",
+        "theme": "containers",
+        "difficulty": "senior",
+        "href": "questions/containers/base-image-update-policy.html",
+        "why": "The update policy keeps the program's images current without surprising its consumers."
+      },
+      {
+        "title": "Build an image supply-chain control plane",
+        "theme": "containers",
+        "difficulty": "staff",
+        "href": "questions/containers/image-supply-chain-control-plane.html",
+        "why": "The supply-chain control plane makes provenance and promotion enforceable rather than aspirational."
+      },
+      {
+        "title": "Release a multi-platform container image",
+        "theme": "containers",
+        "difficulty": "senior",
+        "href": "questions/containers/multi-platform-image-release.html",
+        "why": "Multi-platform releases extend the identity discipline across architectures."
+      },
+      {
+        "title": "Set a container-platform cost and capacity model",
+        "theme": "containers",
+        "difficulty": "staff",
+        "href": "questions/containers/container-platform-cost-model.html",
+        "why": "The cost and capacity model prices the platform the program has become."
+      },
+      {
+        "title": "Define tenant isolation boundaries for a container platform",
+        "theme": "containers",
+        "difficulty": "staff",
+        "href": "questions/containers/tenant-isolation-boundaries.html",
+        "why": "Tenant boundaries decide who may share the platform the tiers above just built."
+      },
+      {
+        "title": "Lead a container runtime migration",
+        "theme": "containers",
+        "difficulty": "staff",
+        "href": "questions/containers/container-runtime-migration.html",
+        "why": "Runtime migration closes the Theme by changing the substrate underneath everything it taught."
+      }
+    ]
+  },
+  {
+    "theme": "databases",
+    "note": "Constraints and transactions before query plans, query plans before recovery — the order runs from the relational basics to keeping a production PostgreSQL alive.",
+    "steps": [
+      {
+        "title": "Explain relational tables, keys, and constraints",
+        "theme": "databases",
+        "difficulty": "junior",
+        "href": "questions/databases/relational-data-model-basics.html",
+        "why": "Tables, keys, and constraints are the contract every later query, lock, and recovery presumes."
+      },
+      {
+        "title": "Explain database transaction boundaries",
+        "theme": "databases",
+        "difficulty": "junior",
+        "href": "questions/databases/transaction-basics.html",
+        "why": "Transactions define the unit of atomicity before concurrency arrives to complicate it."
+      },
+      {
+        "title": "Design least-privilege PostgreSQL roles",
+        "theme": "databases",
+        "difficulty": "middle",
+        "href": "questions/databases/role-privilege-design.html",
+        "why": "Least-privilege roles decide who may hold the power the transaction gives."
+      },
+      {
+        "title": "Explain PostgreSQL connection authentication",
+        "theme": "databases",
+        "difficulty": "junior",
+        "href": "questions/databases/connection-authentication-basics.html",
+        "why": "Connection authentication is the door the roles and transactions sit behind."
+      },
+      {
+        "title": "Read a basic PostgreSQL query plan",
+        "theme": "databases",
+        "difficulty": "junior",
+        "href": "questions/databases/sql-query-plan-basics.html",
+        "why": "Reading a query plan turns slow performance into evidence instead of folklore."
+      },
+      {
+        "title": "Explain database index trade-offs",
+        "theme": "databases",
+        "difficulty": "middle",
+        "href": "questions/databases/index-tradeoffs.html",
+        "why": "Indexes are the plan's main lever, with write costs that must be priced rather than ignored."
+      },
+      {
+        "title": "Triage PostgreSQL lock contention",
+        "theme": "databases",
+        "difficulty": "middle",
+        "href": "questions/databases/lock-contention-triage.html",
+        "why": "Lock contention is the concurrency face of the plans and indexes above."
+      },
+      {
+        "title": "Diagnose long transactions in an MVCC database",
+        "theme": "databases",
+        "difficulty": "middle",
+        "href": "questions/databases/mvcc-and-long-transactions.html",
+        "why": "MVCC explains why long transactions poison even correctly indexed tables."
+      },
+      {
+        "title": "Explain database backup and restore validation",
+        "theme": "databases",
+        "difficulty": "junior",
+        "href": "questions/databases/backup-restore-basics.html",
+        "why": "Backups open the durability tier, and only a validated restore makes them real."
+      },
+      {
+        "title": "Design PostgreSQL point-in-time recovery",
+        "theme": "databases",
+        "difficulty": "senior",
+        "href": "questions/databases/point-in-time-recovery-design.html",
+        "why": "Point-in-time recovery bounds how much a restore can lose, the arithmetic the backup proved."
+      },
+      {
+        "title": "Respond to PostgreSQL replication lag",
+        "theme": "databases",
+        "difficulty": "middle",
+        "href": "questions/databases/replication-lag-response.html",
+        "why": "Replication adds the read copies the failover tier will depend on."
+      },
+      {
+        "title": "Design PostgreSQL high availability and failover",
+        "theme": "databases",
+        "difficulty": "senior",
+        "href": "questions/databases/high-availability-failover.html",
+        "why": "Failover spends the replication design on the day the primary dies."
+      },
+      {
+        "title": "Govern capacity for a multi-team database platform",
+        "theme": "databases",
+        "difficulty": "staff",
+        "href": "questions/databases/database-capacity-governance.html",
+        "why": "Capacity governance prices a database platform shared by many teams."
+      },
+      {
+        "title": "Plan a near-zero-downtime PostgreSQL major upgrade",
+        "theme": "databases",
+        "difficulty": "senior",
+        "href": "questions/databases/zero-downtime-major-upgrade.html",
+        "why": "The near-zero-downtime major upgrade is the durability tier's capstone, consuming replication, failover, and capacity at once."
+      }
+    ]
+  },
+  {
+    "theme": "distributed-systems",
+    "note": "This is the failure-and-consistency spine the backend and SRE paths share, and its order is earned rather than chosen.",
+    "steps": [
+      {
+        "title": "Choose timeouts, retries, and backoff",
+        "theme": "distributed-systems",
+        "difficulty": "junior",
+        "href": "questions/distributed-systems/timeouts-retries-backoff.html",
+        "why": "Everything later either retries or survives a retried caller, so deadlines and backoff come first."
+      },
+      {
+        "title": "Make a retried write idempotent",
+        "theme": "distributed-systems",
+        "difficulty": "junior",
+        "href": "questions/distributed-systems/idempotent-operations.html",
+        "why": "A retry is only safe advice when the repeated write is safe, so idempotency follows immediately."
+      },
+      {
+        "title": "Use a circuit breaker without masking failure",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/circuit-breakers.html",
+        "why": "The breaker protects the dependency the retries above would happily hammer."
+      },
+      {
+        "title": "Shed load to preserve a critical service",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/load-shedding.html",
+        "why": "Shedding closes the failure stage by protecting the service instead of the dependency."
+      },
+      {
+        "title": "Design service discovery and client load balancing",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/service-discovery.html",
+        "why": "Discovery with client load balancing earns its place once retries exist to hide transient failures."
+      },
+      {
+        "title": "Consume an at-least-once event stream safely",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/at-least-once-delivery.html",
+        "why": "Delivery opens the transport tier by assuming the duplicates the failure stage created."
+      },
+      {
+        "title": "Operate a dead-letter queue",
+        "theme": "distributed-systems",
+        "difficulty": "senior",
+        "href": "questions/distributed-systems/dead-letter-queues.html",
+        "why": "Dead-lettering contains the poison messages the delivery tier now admits."
+      },
+      {
+        "title": "Evolve an event schema safely",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/schema-evolution.html",
+        "why": "Schema evolution keeps events flowing across versions of every producer and consumer."
+      },
+      {
+        "title": "Apply the transactional outbox pattern",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/outbox-pattern.html",
+        "why": "The outbox resolves the dual-write the transaction and delivery tiers exposed on purpose."
+      },
+      {
+        "title": "Coordinate a multi-service saga",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/saga-compensation.html",
+        "why": "Compensation extends the outbox's guarantees across multi-service workflows."
+      },
+      {
+        "title": "Explain consistency and availability during a network partition",
+        "theme": "distributed-systems",
+        "difficulty": "junior",
+        "href": "questions/distributed-systems/consistency-and-availability.html",
+        "why": "The replication ladder opens with the partition decision every rung below hangs from."
+      },
+      {
+        "title": "Explain safe leader election",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/leader-election.html",
+        "why": "Leadership is the first mechanism the partition decision actually needs."
+      },
+      {
+        "title": "Handle clock skew in a distributed service",
+        "theme": "distributed-systems",
+        "difficulty": "junior",
+        "href": "questions/distributed-systems/clock-skew.html",
+        "why": "Clock skew belongs at leader election because both are trust-in-coordination problems."
+      },
+      {
+        "title": "Design a quorum for replicated writes",
+        "theme": "distributed-systems",
+        "difficulty": "junior",
+        "href": "questions/distributed-systems/quorum-basics.html",
+        "why": "Quorums carry the committed position through the membership the election produced."
+      },
+      {
+        "title": "Use fencing tokens to prevent stale writers",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/fencing-tokens.html",
+        "why": "Fencing makes the stale writer visible and rejectable at the point of side effect."
+      },
+      {
+        "title": "Plan anti-entropy repair",
+        "theme": "distributed-systems",
+        "difficulty": "senior",
+        "href": "questions/distributed-systems/anti-entropy-repair.html",
+        "why": "Anti-entropy repair is the replication tier's own healing mechanism, defined against replication itself."
+      },
+      {
+        "title": "Diagnose replication lag",
+        "theme": "distributed-systems",
+        "difficulty": "middle",
+        "href": "questions/distributed-systems/replication-lag.html",
+        "why": "Lag is the operational face of the replication the ladder just built."
+      },
+      {
+        "title": "Provide read-your-writes consistency",
+        "theme": "distributed-systems",
+        "difficulty": "senior",
+        "href": "questions/distributed-systems/read-your-writes.html",
+        "why": "Read-your-writes is the user-facing promise extracted from measured lag."
+      },
+      {
+        "title": "Choose a linearizable read",
+        "theme": "distributed-systems",
+        "difficulty": "senior",
+        "href": "questions/distributed-systems/linearizable-read.html",
+        "why": "The linearizable read tops the guarantee ladder and prices it honestly in latency."
+      },
+      {
+        "title": "Design multi-region failover",
+        "theme": "distributed-systems",
+        "difficulty": "staff",
+        "href": "questions/distributed-systems/multi-region-failover.html",
+        "why": "The operational tier opens by spending the whole ladder across regions."
+      },
+      {
+        "title": "Lead a cross-service consistency incident",
+        "theme": "distributed-systems",
+        "difficulty": "staff",
+        "href": "questions/distributed-systems/incident-command.html",
+        "why": "The cross-service consistency incident is the ladder breaking in public."
+      },
+      {
+        "title": "Govern a high-risk distributed state change",
+        "theme": "distributed-systems",
+        "difficulty": "staff",
+        "href": "questions/distributed-systems/change-safety.html",
+        "why": "High-risk state changes govern the mutations the ladder made possible."
+      },
+      {
+        "title": "Protect tenant fairness in a shared distributed platform",
+        "theme": "distributed-systems",
+        "difficulty": "staff",
+        "href": "questions/distributed-systems/tenant-fairness.html",
+        "why": "Tenant fairness protects the shared platforms the ladder now underpins."
+      },
+      {
+        "title": "Establish data-integrity controls across services",
+        "theme": "distributed-systems",
+        "difficulty": "staff",
+        "href": "questions/distributed-systems/data-integrity.html",
+        "why": "End-to-end data-integrity controls are the staff capstone consuming every mechanism above at once."
+      }
+    ]
+  },
+  {
+    "theme": "finops",
+    "note": "The billing data model before allocation, allocation before optimisation, optimisation before the trade-offs a senior engineer is actually asked to make.",
+    "steps": [
+      {
+        "title": "Read a cloud bill and find its drivers",
+        "theme": "finops",
+        "difficulty": "junior",
+        "href": "questions/finops/read-a-cloud-bill-and-find-its-drivers.html",
+        "why": "Line items, usage quantity versus rate, amortised versus unblended — the data model everything else reads."
+      },
+      {
+        "title": "Normalise multi-cloud billing data with FOCUS",
+        "theme": "finops",
+        "difficulty": "middle",
+        "href": "questions/finops/normalise-multi-cloud-billing-data-with-focus.html",
+        "why": "FOCUS normalisation makes multi-cloud bills comparable before any analysis begins."
+      },
+      {
+        "title": "Explain showback and chargeback",
+        "theme": "finops",
+        "difficulty": "junior",
+        "href": "questions/finops/explain-showback-and-chargeback.html",
+        "why": "Showback and chargeback are the vocabulary of allocation the billing model feeds."
+      },
+      {
+        "title": "Allocate shared and untaggable cost",
+        "theme": "finops",
+        "difficulty": "middle",
+        "href": "questions/finops/allocate-shared-and-untaggable-cost.html",
+        "why": "Shared and untaggable cost is where honest allocation actually gets hard."
+      },
+      {
+        "title": "Tag resources for cost allocation",
+        "theme": "finops",
+        "difficulty": "junior",
+        "href": "questions/finops/tag-resources-for-cost-allocation.html",
+        "why": "Tagging is the mechanism the whole allocation vocabulary depends on."
+      },
+      {
+        "title": "Design account structure for cost visibility",
+        "theme": "finops",
+        "difficulty": "senior",
+        "href": "questions/finops/design-account-structure-for-cost-visibility.html",
+        "why": "Account structure decides whether the tags can even do their job."
+      },
+      {
+        "title": "Rightsize overprovisioned compute",
+        "theme": "finops",
+        "difficulty": "middle",
+        "href": "questions/finops/rightsize-overprovisioned-compute.html",
+        "why": "Rightsizing is the first optimisation, and it presumes allocation that is already visible."
+      },
+      {
+        "title": "Compare on-demand, committed, and spot pricing",
+        "theme": "finops",
+        "difficulty": "junior",
+        "href": "questions/finops/compare-on-demand-committed-and-spot-pricing.html",
+        "why": "On-demand, committed, and spot are the trade every commitment decision makes."
+      },
+      {
+        "title": "Build a commitment discount portfolio",
+        "theme": "finops",
+        "difficulty": "middle",
+        "href": "questions/finops/build-a-commitment-discount-portfolio.html",
+        "why": "A portfolio prices commitment risk instead of chasing the maximum discount."
+      },
+      {
+        "title": "Manage commitment risk on a changing fleet",
+        "theme": "finops",
+        "difficulty": "senior",
+        "href": "questions/finops/manage-commitment-risk-on-a-changing-fleet.html",
+        "why": "A changing fleet makes yesterday's commitments a liability to be managed."
+      },
+      {
+        "title": "Run production work on spot capacity",
+        "theme": "finops",
+        "difficulty": "middle",
+        "href": "questions/finops/run-production-work-on-spot-capacity.html",
+        "why": "Spot strategy spends the pricing knowledge on work that genuinely tolerates eviction."
+      },
+      {
+        "title": "Tier object storage with lifecycle rules",
+        "theme": "finops",
+        "difficulty": "middle",
+        "href": "questions/finops/tier-object-storage-with-lifecycle-rules.html",
+        "why": "Storage tiering is the same commitment logic applied to bytes."
+      },
+      {
+        "title": "Trace an unexplained data transfer bill",
+        "theme": "finops",
+        "difficulty": "middle",
+        "href": "questions/finops/trace-an-unexplained-data-transfer-bill.html",
+        "why": "Egress archaeology closes the optimisation tier with its most surprising bill."
+      },
+      {
+        "title": "Attribute Kubernetes cluster cost to teams",
+        "theme": "finops",
+        "difficulty": "middle",
+        "href": "questions/finops/attribute-kubernetes-cluster-cost-to-teams.html",
+        "why": "Kubernetes attribution extends allocation to where the bill is densest."
+      },
+      {
+        "title": "Reclaim idle Kubernetes capacity",
+        "theme": "finops",
+        "difficulty": "middle",
+        "href": "questions/finops/reclaim-idle-kubernetes-capacity.html",
+        "why": "Idle capacity is the Kubernetes bill's silent majority."
+      },
+      {
+        "title": "Tune autoscaling for cost and latency",
+        "theme": "finops",
+        "difficulty": "senior",
+        "href": "questions/finops/tune-autoscaling-for-cost-and-latency.html",
+        "why": "Autoscaling economics trade latency against spend with every step size."
+      },
+      {
+        "title": "Set a cloud budget and alert",
+        "theme": "finops",
+        "difficulty": "junior",
+        "href": "questions/finops/set-a-cloud-budget-and-alert.html",
+        "why": "Budgets convert spend into a decision someone actually gets woken by."
+      },
+      {
+        "title": "Investigate a cost anomaly alert",
+        "theme": "finops",
+        "difficulty": "middle",
+        "href": "questions/finops/investigate-a-cost-anomaly-alert.html",
+        "why": "Anomaly investigation is the budget alert's diagnostic sequel."
+      },
+      {
+        "title": "Forecast next quarter cloud spend",
+        "theme": "finops",
+        "difficulty": "middle",
+        "href": "questions/finops/forecast-next-quarter-cloud-spend.html",
+        "why": "Forecasting makes the spend a plan rather than a quarterly surprise."
+      },
+      {
+        "title": "Trade cost against reliability",
+        "theme": "finops",
+        "difficulty": "senior",
+        "href": "questions/finops/trade-cost-against-reliability.html",
+        "why": "The senior trade-offs open exactly where reliability and latency meet the bill."
+      },
+      {
+        "title": "Weigh engineering time against infrastructure cost",
+        "theme": "finops",
+        "difficulty": "staff",
+        "href": "questions/finops/weigh-engineering-time-against-infrastructure-cost.html",
+        "why": "Engineering time is the other currency every optimisation above spent silently."
+      },
+      {
+        "title": "Set incentives for cost accountability",
+        "theme": "finops",
+        "difficulty": "staff",
+        "href": "questions/finops/set-incentives-for-cost-accountability.html",
+        "why": "Incentives keep the practice honest when its metrics are gameable."
+      },
+      {
+        "title": "Stand up a FinOps practice",
+        "theme": "finops",
+        "difficulty": "staff",
+        "href": "questions/finops/stand-up-a-finops-practice.html",
+        "why": "Standing up the practice is the organizational capstone the tiers above justify."
+      }
+    ]
+  },
+  {
+    "theme": "hardware",
+    "note": "Components before the diagnostics they produce, failures before the practice tier that instruments them, and lifecycle economics only once a fleet is trustworthy.",
+    "steps": [
+      {
+        "title": "Explain the roles of core server components",
+        "theme": "hardware",
+        "difficulty": "junior",
+        "href": "questions/hardware/server-component-basics.html",
+        "why": "What CPU, memory, NIC, controller, and PSU each contribute: every later diagnostic is one of those components talking."
+      },
+      {
+        "title": "Interpret disk health signals without overtrusting SMART",
+        "theme": "hardware",
+        "difficulty": "junior",
+        "href": "questions/hardware/smart-health-basics.html",
+        "why": "SMART is the disks speaking for themselves, interpreted without overtrusting a single score."
+      },
+      {
+        "title": "Triage a degrading production disk",
+        "theme": "hardware",
+        "difficulty": "middle",
+        "href": "questions/hardware/disk-failure-triage.html",
+        "why": "A degrading production disk is the first triage the health signals above must support."
+      },
+      {
+        "title": "Respond to a suspected storage-controller failure",
+        "theme": "hardware",
+        "difficulty": "senior",
+        "href": "questions/hardware/storage-controller-failure-response.html",
+        "why": "The suspected controller failure is the disk trio's confounder, so it comes last among them."
+      },
+      {
+        "title": "Respond to corrected and uncorrected memory errors",
+        "theme": "hardware",
+        "difficulty": "middle",
+        "href": "questions/hardware/ecc-memory-errors.html",
+        "why": "Corrected and uncorrected memory errors complete the set of components that actually fail."
+      },
+      {
+        "title": "Explain RAID redundancy and its limits",
+        "theme": "hardware",
+        "difficulty": "junior",
+        "href": "questions/hardware/raid-redundancy-basics.html",
+        "why": "RAID follows the disks directly because it exists to survive their failure."
+      },
+      {
+        "title": "Operate safely during a RAID rebuild",
+        "theme": "hardware",
+        "difficulty": "middle",
+        "href": "questions/hardware/raid-rebuild-safety.html",
+        "why": "The rebuild question follows RAID because a rebuild is when a degraded array is most dangerous."
+      },
+      {
+        "title": "Govern rack power and cooling capacity",
+        "theme": "hardware",
+        "difficulty": "staff",
+        "href": "questions/hardware/rack-power-cooling-governance.html",
+        "why": "Power and cooling are taken as one unit with the compute they serve because they fail together."
+      },
+      {
+        "title": "Diagnose thermal throttling on a server",
+        "theme": "hardware",
+        "difficulty": "middle",
+        "href": "questions/hardware/thermal-throttling-diagnosis.html",
+        "why": "Thermal throttling is the power-and-cooling unit's performance symptom."
+      },
+      {
+        "title": "Isolate a server network-interface fault",
+        "theme": "hardware",
+        "difficulty": "middle",
+        "href": "questions/hardware/network-interface-fault-isolation.html",
+        "why": "NIC fault isolation moves from chassis failures out to the network edge."
+      },
+      {
+        "title": "Place a latency-sensitive workload on a NUMA server",
+        "theme": "hardware",
+        "difficulty": "senior",
+        "href": "questions/hardware/numa-aware-workload-placement.html",
+        "why": "NUMA placement is the topology question the component question quietly opened."
+      },
+      {
+        "title": "Design a representative hardware performance benchmark",
+        "theme": "hardware",
+        "difficulty": "senior",
+        "href": "questions/hardware/hardware-performance-benchmark.html",
+        "why": "The practice tier opens with benchmarks that represent the workloads, after the failures they instrument."
+      },
+      {
+        "title": "Build a hardware capacity baseline",
+        "theme": "hardware",
+        "difficulty": "middle",
+        "href": "questions/hardware/hardware-capacity-baseline.html",
+        "why": "The capacity baseline is what a benchmark becomes when it is kept honestly."
+      },
+      {
+        "title": "Plan a production server firmware upgrade",
+        "theme": "hardware",
+        "difficulty": "middle",
+        "href": "questions/hardware/firmware-upgrade-runbook.html",
+        "why": "Firmware upgrades are the practice tier's riskiest routine."
+      },
+      {
+        "title": "Govern firmware risk across a server fleet",
+        "theme": "hardware",
+        "difficulty": "staff",
+        "href": "questions/hardware/fleet-firmware-governance.html",
+        "why": "Fleet firmware governance prices that upgrade risk across every host at once."
+      },
+      {
+        "title": "Use secure boot and platform attestation appropriately",
+        "theme": "hardware",
+        "difficulty": "senior",
+        "href": "questions/hardware/secure-boot-attestation.html",
+        "why": "Secure boot and attestation turn the boot chain into a measured supply chain."
+      },
+      {
+        "title": "Validate redundant server power paths",
+        "theme": "hardware",
+        "difficulty": "middle",
+        "href": "questions/hardware/redundant-power-validation.html",
+        "why": "Redundant power paths are proven rather than assumed, which is why validation follows the design."
+      },
+      {
+        "title": "Maintain a trustworthy server hardware inventory",
+        "theme": "hardware",
+        "difficulty": "junior",
+        "href": "questions/hardware/asset-inventory-basics.html",
+        "why": "Lifecycle economics open with an inventory worth trusting."
+      },
+      {
+        "title": "Plan a hardware refresh without service interruption",
+        "theme": "hardware",
+        "difficulty": "senior",
+        "href": "questions/hardware/hardware-refresh-migration.html",
+        "why": "Refresh planning spends the inventory and the failure models together."
+      },
+      {
+        "title": "Design spares and failure-domain strategy for physical infrastructure",
+        "theme": "hardware",
+        "difficulty": "staff",
+        "href": "questions/hardware/spares-and-failure-domain-strategy.html",
+        "why": "Spares and failure domains decide what any single failure is allowed to cost."
+      },
+      {
+        "title": "Define a standard hardware platform without blocking product teams",
+        "theme": "hardware",
+        "difficulty": "staff",
+        "href": "questions/hardware/platform-standardization.html",
+        "why": "The standard hardware platform is the lifecycle answer to heterogeneous fleets."
+      },
+      {
+        "title": "Recover access to an unreachable server without physical presence",
+        "theme": "hardware",
+        "difficulty": "middle",
+        "href": "questions/hardware/out-of-band-server-recovery.html",
+        "why": "Recovering an unreachable server without physical presence is the operational extreme the inventory enables."
+      },
+      {
+        "title": "Plan graceful shutdown for loss of utility power",
+        "theme": "hardware",
+        "difficulty": "junior",
+        "href": "questions/hardware/ups-graceful-shutdown.html",
+        "why": "Graceful shutdown on lost utility power is the other operational extreme, and the Theme's close."
+      }
+    ]
+  },
+  {
+    "theme": "infrastructure-as-code",
+    "note": "State before language, language before module craft, surgery before the plan-review hinge, and drift governance last — the tier that makes IaC an organizational capability.",
+    "steps": [
+      {
+        "title": "Why does Terraform use state?",
+        "theme": "infrastructure-as-code",
+        "difficulty": "middle",
+        "href": "questions/infrastructure-as-code/terraform-state-purpose.html",
+        "why": "Why Terraform keeps state turns backends, locking, and ownership into engineering rather than ritual."
+      },
+      {
+        "title": "Handle Terraform state lock contention",
+        "theme": "infrastructure-as-code",
+        "difficulty": "middle",
+        "href": "questions/infrastructure-as-code/state-lock-contention.html",
+        "why": "Lock contention is the state model's operational failure mode, met before configuration begins."
+      },
+      {
+        "title": "Explain a Terraform root module and resource address",
+        "theme": "infrastructure-as-code",
+        "difficulty": "junior",
+        "href": "questions/infrastructure-as-code/terraform-configuration-basics.html",
+        "why": "Root modules and resource addresses are the language tier the state maps onto."
+      },
+      {
+        "title": "Define safe Terraform input variables",
+        "theme": "infrastructure-as-code",
+        "difficulty": "junior",
+        "href": "questions/infrastructure-as-code/input-variables-and-validation.html",
+        "why": "Safe input variables keep the language tier's interfaces honest at the boundary."
+      },
+      {
+        "title": "Distinguish Terraform local values from data sources",
+        "theme": "infrastructure-as-code",
+        "difficulty": "junior",
+        "href": "questions/infrastructure-as-code/local-values-and-data-sources.html",
+        "why": "Local values versus data sources decides where each value should actually live."
+      },
+      {
+        "title": "Choose for_each or count for repeated Terraform resources",
+        "theme": "infrastructure-as-code",
+        "difficulty": "middle",
+        "href": "questions/infrastructure-as-code/for-each-versus-count.html",
+        "why": "for_each versus count is the repetition decision every module below inherits."
+      },
+      {
+        "title": "Model Terraform dependencies without overusing depends_on",
+        "theme": "infrastructure-as-code",
+        "difficulty": "middle",
+        "href": "questions/infrastructure-as-code/explicit-dependencies.html",
+        "why": "depends_on is a smell precisely when the language tier is properly understood."
+      },
+      {
+        "title": "Design a stable Terraform module interface",
+        "theme": "infrastructure-as-code",
+        "difficulty": "middle",
+        "href": "questions/infrastructure-as-code/module-interface-design.html",
+        "why": "Module craft opens with stable interfaces, the product's front door."
+      },
+      {
+        "title": "Treat shared Terraform modules as internal products",
+        "theme": "infrastructure-as-code",
+        "difficulty": "staff",
+        "href": "questions/infrastructure-as-code/iac-module-product-strategy.html",
+        "why": "Shared modules are products, with users, versions, and support obligations."
+      },
+      {
+        "title": "Design Terraform outputs without exposing secrets",
+        "theme": "infrastructure-as-code",
+        "difficulty": "junior",
+        "href": "questions/infrastructure-as-code/output-contracts-and-sensitive-data.html",
+        "why": "Outputs must not leak the secrets the modules handled safely internally."
+      },
+      {
+        "title": "Pin Terraform provider dependencies safely",
+        "theme": "infrastructure-as-code",
+        "difficulty": "junior",
+        "href": "questions/infrastructure-as-code/provider-version-pinning.html",
+        "why": "Pinned providers keep the whole craft reproducible across time."
+      },
+      {
+        "title": "Import an existing resource into Terraform",
+        "theme": "infrastructure-as-code",
+        "difficulty": "middle",
+        "href": "questions/infrastructure-as-code/import-existing-infrastructure.html",
+        "why": "The surgery set opens by bringing existing resources under management."
+      },
+      {
+        "title": "Refactor Terraform resource addresses safely",
+        "theme": "infrastructure-as-code",
+        "difficulty": "senior",
+        "href": "questions/infrastructure-as-code/safe-resource-refactoring.html",
+        "why": "Refactoring resource addresses safely is the surgery the import made necessary."
+      },
+      {
+        "title": "Use Terraform lifecycle rules without masking risk",
+        "theme": "infrastructure-as-code",
+        "difficulty": "middle",
+        "href": "questions/infrastructure-as-code/resource-lifecycle-controls.html",
+        "why": "Lifecycle rules must not mask the very risk the surgery tier exists to expose."
+      },
+      {
+        "title": "Migrate Terraform state to a remote backend",
+        "theme": "infrastructure-as-code",
+        "difficulty": "middle",
+        "href": "questions/infrastructure-as-code/remote-backend-migration.html",
+        "why": "Migrating state to a remote backend completes the surgery with the state tier's opening promise."
+      },
+      {
+        "title": "Review a Terraform plan before production apply",
+        "theme": "infrastructure-as-code",
+        "difficulty": "middle",
+        "href": "questions/infrastructure-as-code/terraform-plan-review.html",
+        "why": "The plan review is the hinge: the change contract, read after the language that produces plans and before anything that automates them."
+      },
+      {
+        "title": "Build a Terraform testing strategy",
+        "theme": "infrastructure-as-code",
+        "difficulty": "senior",
+        "href": "questions/infrastructure-as-code/terraform-test-strategy.html",
+        "why": "Testing follows the hinge because tests generate and check exactly those plans."
+      },
+      {
+        "title": "Design policy-as-code gates for Terraform delivery",
+        "theme": "infrastructure-as-code",
+        "difficulty": "senior",
+        "href": "questions/infrastructure-as-code/policy-as-code-gates.html",
+        "why": "Policy-as-code gates automate the review the hinge taught humans to perform."
+      },
+      {
+        "title": "Isolate Terraform environments and blast radius",
+        "theme": "infrastructure-as-code",
+        "difficulty": "senior",
+        "href": "questions/infrastructure-as-code/multi-environment-isolation.html",
+        "why": "Environment isolation bounds the blast radius the automation above can reach."
+      },
+      {
+        "title": "Plan a zero-downtime infrastructure migration with Terraform",
+        "theme": "infrastructure-as-code",
+        "difficulty": "senior",
+        "href": "questions/infrastructure-as-code/zero-downtime-iac-migration.html",
+        "why": "The zero-downtime migration spends review, tests, and gates on one real change."
+      },
+      {
+        "title": "Detect and handle infrastructure drift",
+        "theme": "infrastructure-as-code",
+        "difficulty": "middle",
+        "href": "questions/infrastructure-as-code/infrastructure-drift.html",
+        "why": "Drift detection opens the close: declared state meets operational reality."
+      },
+      {
+        "title": "Govern infrastructure drift at organization scale",
+        "theme": "infrastructure-as-code",
+        "difficulty": "staff",
+        "href": "questions/infrastructure-as-code/iac-drift-governance.html",
+        "why": "Organization-scale drift governance routes differences to owners rather than auto-applying them."
+      },
+      {
+        "title": "Create a risk-based IaC change-management model",
+        "theme": "infrastructure-as-code",
+        "difficulty": "staff",
+        "href": "questions/infrastructure-as-code/iac-change-risk-management.html",
+        "why": "The risk-based change model prices what the drift tier keeps finding."
+      },
+      {
+        "title": "Establish infrastructure-as-code platform guardrails",
+        "theme": "infrastructure-as-code",
+        "difficulty": "staff",
+        "href": "questions/infrastructure-as-code/iac-platform-guardrails.html",
+        "why": "Platform guardrails enforce the model without blocking every team that touches it."
+      },
+      {
+        "title": "Define an infrastructure-as-code state ownership model",
+        "theme": "infrastructure-as-code",
+        "difficulty": "staff",
+        "href": "questions/infrastructure-as-code/iac-state-ownership-model.html",
+        "why": "State ownership is last because it is the tier that makes IaC an organizational capability rather than a tool."
+      }
+    ]
+  },
+  {
+    "theme": "kubernetes",
+    "note": "This Theme climbs the same route the platform path climbs: from the object a tenant submits to the cluster an operator runs.",
+    "steps": [
+      {
+        "title": "Explain cloud-native principles and open-source collaboration",
+        "theme": "kubernetes",
+        "difficulty": "junior",
+        "href": "questions/kubernetes/cloud-native-principles-and-community.html",
+        "why": "Cloud-native principles come first: what the platform promises and how its community governs change."
+      },
+      {
+        "title": "Distinguish labels, selectors, and annotations",
+        "theme": "kubernetes",
+        "difficulty": "junior",
+        "href": "questions/kubernetes/labels-selectors-and-annotations.html",
+        "why": "Labels and selectors are the query contract every object below carries."
+      },
+      {
+        "title": "Read the essential parts of a Pod specification",
+        "theme": "kubernetes",
+        "difficulty": "junior",
+        "href": "questions/kubernetes/pod-spec-basics.html",
+        "why": "The Pod specification is the object a tenant actually submits, so it opens the workload tier."
+      },
+      {
+        "title": "Select Kubernetes readiness, liveness, and startup probes",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/probe-selection.html",
+        "why": "Probes decide readiness and liveness inside the specification the Theme has just read."
+      },
+      {
+        "title": "Explain Pod lifecycle and container restarts",
+        "theme": "kubernetes",
+        "difficulty": "junior",
+        "href": "questions/kubernetes/pod-lifecycle-and-restarts.html",
+        "why": "Lifecycle and restarts define what the cluster does with the probe's verdict."
+      },
+      {
+        "title": "Set Pod resource requests and limits",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/resource-requests-limits-and-qos.html",
+        "why": "Requests, limits, and QoS come before any rollout question because capacity decisions drive maxSurge and maxUnavailable."
+      },
+      {
+        "title": "Explain a Kubernetes Deployment rollout and rollback",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/deployment-rollout-and-rollback.html",
+        "why": "Rollout and rollback are the capacity decisions the requests tier just priced."
+      },
+      {
+        "title": "Choose StatefulSet or Deployment",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/statefulset-versus-deployment.html",
+        "why": "StatefulSet versus Deployment is the workload choice the rollout machinery serves."
+      },
+      {
+        "title": "Deliver application configuration with ConfigMaps",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/configmap-delivery.html",
+        "why": "ConfigMap delivery decouples configuration from the images the rollouts promote."
+      },
+      {
+        "title": "Choose an init container or sidecar for an application Pod",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/multi-container-pod-patterns.html",
+        "why": "Init containers versus sidecars compose the Pod the specification defined."
+      },
+      {
+        "title": "Place Kubernetes workloads with affinity and taints",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/scheduling-affinity-and-taints.html",
+        "why": "Affinity and taints place the workloads the objects above create."
+      },
+      {
+        "title": "Explain Kubernetes Service discovery",
+        "theme": "kubernetes",
+        "difficulty": "junior",
+        "href": "questions/kubernetes/service-discovery-basics.html",
+        "why": "Service discovery makes the placed workload reachable by name."
+      },
+      {
+        "title": "Expose an application with the right Service type",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/service-types-and-endpoints.html",
+        "why": "The right Service type and its endpoints complete the reachability story."
+      },
+      {
+        "title": "Debug a failing Kubernetes application with built-in CLI tools",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/application-debugging-with-cli.html",
+        "why": "The debugging set lands mid-Theme on purpose, once every object it reads has been introduced."
+      },
+      {
+        "title": "Debug CoreDNS and Kubernetes Service resolution",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/coredns-service-debugging.html",
+        "why": "CoreDNS failures are the discovery tier breaking, read with the CLI tier above."
+      },
+      {
+        "title": "Triage a Kubernetes node that becomes NotReady",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/node-not-ready-triage.html",
+        "why": "The NotReady node moves debugging from objects to the machines that run them."
+      },
+      {
+        "title": "Triage a Kubernetes control-plane availability incident",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/control-plane-incident-triage.html",
+        "why": "The control-plane incident is the hardest debugging case the tier builds toward."
+      },
+      {
+        "title": "Design least-privilege Kubernetes RBAC",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/rbac-least-privilege.html",
+        "why": "Security opens with who may act, before the platform can enforce anything."
+      },
+      {
+        "title": "Give a Kubernetes workload the least-privilege ServiceAccount",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/service-account-workload-identity.html",
+        "why": "Workload identities are kept separate from humans, the RBAC tier applied to software."
+      },
+      {
+        "title": "Establish Kubernetes admission policy guardrails",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/admission-policy-and-guardrails.html",
+        "why": "Admission policy makes the platform's contract executable at the API boundary."
+      },
+      {
+        "title": "Explain Kyverno policy-engine fundamentals",
+        "theme": "kubernetes",
+        "difficulty": "junior",
+        "href": "questions/kubernetes/kyverno-policy-engine-basics.html",
+        "why": "The Kyverno family opens with the policy engine's model."
+      },
+      {
+        "title": "Design a maintainable Kyverno policy set",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/kyverno-policy-authoring-design.html",
+        "why": "Authoring a maintainable policy set is the engine's first real use."
+      },
+      {
+        "title": "Test Kyverno policy changes with the CLI in CI",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/kyverno-cli-policy-ci.html",
+        "why": "Testing policy in CI gives the set the delivery discipline the Theme teaches elsewhere."
+      },
+      {
+        "title": "Install or upgrade Kyverno without blocking the cluster",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/kyverno-installation-upgrade-safety.html",
+        "why": "Installing or upgrading Kyverno must never block the cluster it guards."
+      },
+      {
+        "title": "Roll out Kyverno enforcement using policy reports",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/kyverno-enforcement-and-policy-reports.html",
+        "why": "Rolling out enforcement through policy reports is warn-then-enforce made data."
+      },
+      {
+        "title": "Design a production Kubernetes policy exception process",
+        "theme": "kubernetes",
+        "difficulty": "staff",
+        "href": "questions/kubernetes/production-policy-exception-process.html",
+        "why": "The exception process keeps the guardrails honest when a workload cannot meet them."
+      },
+      {
+        "title": "Govern the Kyverno policy lifecycle and exceptions",
+        "theme": "kubernetes",
+        "difficulty": "staff",
+        "href": "questions/kubernetes/kyverno-policy-lifecycle-governance.html",
+        "why": "Lifecycle governance keeps the policy set alive long after the rollout succeeds."
+      },
+      {
+        "title": "Design a Kubernetes audit policy for security detection",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/audit-policy-runtime-detection.html",
+        "why": "Audit policy turns runtime behaviour into detectable evidence."
+      },
+      {
+        "title": "Apply seccomp and AppArmor to a Kubernetes workload",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/seccomp-apparmor-workload.html",
+        "why": "Seccomp and AppArmor harden the workload itself rather than its surroundings."
+      },
+      {
+        "title": "Use RuntimeClass for higher-risk workload isolation",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/runtimeclass-sandbox-isolation.html",
+        "why": "RuntimeClass buys higher-risk workloads a stronger sandbox on demand."
+      },
+      {
+        "title": "Remediate a Kubernetes CIS benchmark finding",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/cis-benchmark-remediation.html",
+        "why": "The CIS benchmark closes the security movement with its outer measurement."
+      },
+      {
+        "title": "Design PersistentVolumeClaim lifecycle for a stateful workload",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/persistent-volume-claim-lifecycle.html",
+        "why": "Storage opens with the claim lifecycle every stateful workload rides."
+      },
+      {
+        "title": "Configure HorizontalPodAutoscaler behavior",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/hpa-behavior-and-metrics.html",
+        "why": "The autoscaler scales the workloads the placement tier pinned down."
+      },
+      {
+        "title": "Use PodDisruptionBudgets for voluntary disruptions",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/pod-disruption-budget-design.html",
+        "why": "Disruption budgets bound the voluntary disruptions autoscaling and upgrades cause."
+      },
+      {
+        "title": "Configure TLS for Kubernetes Ingress safely",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/ingress-tls-security.html",
+        "why": "Ingress TLS secures the traffic the Service tier exposed."
+      },
+      {
+        "title": "Govern a migration from Ingress to Gateway API",
+        "theme": "kubernetes",
+        "difficulty": "staff",
+        "href": "questions/kubernetes/gateway-migration-governance.html",
+        "why": "The Gateway API migration is an ownership change, governed rather than renamed."
+      },
+      {
+        "title": "Design a highly available kubeadm control plane",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/ha-control-plane-design.html",
+        "why": "The operator tier opens by making the control plane itself highly available."
+      },
+      {
+        "title": "Build and maintain a kubeadm-managed cluster",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/kubeadm-cluster-lifecycle.html",
+        "why": "The kubeadm lifecycle keeps the HA design reproducible from day one."
+      },
+      {
+        "title": "Plan a production Kubernetes cluster upgrade",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/cluster-upgrade-strategy.html",
+        "why": "The production upgrade spends the version-skew rules and drain capacity the tiers above built."
+      },
+      {
+        "title": "Migrate an application away from a deprecated Kubernetes API",
+        "theme": "kubernetes",
+        "difficulty": "senior",
+        "href": "questions/kubernetes/api-deprecation-migration.html",
+        "why": "Deprecated API migrations are the upgrade's application-facing half."
+      },
+      {
+        "title": "Explain the roles of Cilium agents, operator, and Envoy",
+        "theme": "kubernetes",
+        "difficulty": "junior",
+        "href": "questions/kubernetes/cilium-component-roles.html",
+        "why": "The Cilium questions open with what each component actually does."
+      },
+      {
+        "title": "Validate a new Cilium installation before production traffic",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/cilium-install-connectivity-validation.html",
+        "why": "A new Cilium installation is validated before it carries production traffic."
+      },
+      {
+        "title": "Choose a Cilium IPAM mode for a Kubernetes cluster",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/cilium-ipam-mode-selection.html",
+        "why": "IPAM mode decides where pod addresses come from."
+      },
+      {
+        "title": "Choose a Cilium policy-enforcement mode",
+        "theme": "kubernetes",
+        "difficulty": "middle",
+        "href": "questions/kubernetes/cilium-policy-enforcement-modes.html",
+        "why": "Enforcement mode selection sets what policy can honestly promise."
+      },
+      {
+        "title": "Lead Kubernetes disaster recovery and restore exercises",
+        "theme": "kubernetes",
+        "difficulty": "staff",
+        "href": "questions/kubernetes/disaster-recovery-and-restore-exercise.html",
+        "why": "Disaster-recovery exercises rehearse the control-plane tiers' worst day."
+      },
+      {
+        "title": "Set Kubernetes platform SLO and capacity governance",
+        "theme": "kubernetes",
+        "difficulty": "staff",
+        "href": "questions/kubernetes/platform-slo-and-capacity-governance.html",
+        "why": "Platform SLOs and capacity governance publish what the operator tier promises."
+      },
+      {
+        "title": "Define multi-tenant Kubernetes platform boundaries",
+        "theme": "kubernetes",
+        "difficulty": "staff",
+        "href": "questions/kubernetes/multi-tenant-platform-boundaries.html",
+        "why": "The multi-tenant boundaries decision is last and hardest because every earlier chapter feeds it."
+      }
+    ]
+  },
+  {
+    "theme": "linux",
+    "note": "Boot, process states, and load average open the Theme because half its incidents are misread without that trio, and the close is fleet scope.",
+    "steps": [
+      {
+        "title": "Explain the Linux boot sequence",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/linux-boot-sequence.html",
+        "why": "The boot sequence opens the Theme because half its incidents are misread without it."
+      },
+      {
+        "title": "Explain Linux process states during an incident",
+        "theme": "linux",
+        "difficulty": "junior",
+        "href": "questions/linux/process-states.html",
+        "why": "Process states are the smallest unit of host evidence the Theme ever reads."
+      },
+      {
+        "title": "Interpret a high Linux load average",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/load-average-interpretation.html",
+        "why": "Load average counts uninterruptible sleep, so it is only honest after process states."
+      },
+      {
+        "title": "Diagnose a systemd service that repeatedly fails",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/systemd-service-failure.html",
+        "why": "The repeatedly failing unit is the first host object an operator actually touches."
+      },
+      {
+        "title": "Design a graceful Linux service shutdown",
+        "theme": "linux",
+        "difficulty": "junior",
+        "href": "questions/linux/signals-and-graceful-shutdown.html",
+        "why": "The graceful-shutdown contract resolves the restart-amplification trap the failing unit exposed."
+      },
+      {
+        "title": "Use strace safely to investigate a hung Linux process",
+        "theme": "linux",
+        "difficulty": "senior",
+        "href": "questions/linux/strace-production-safely.html",
+        "why": "strace covers the cases systemd hides, used safely on a production host."
+      },
+      {
+        "title": "Debug process visibility across PID namespaces",
+        "theme": "linux",
+        "difficulty": "senior",
+        "href": "questions/linux/pid-namespaces-debugging.html",
+        "why": "PID-namespace visibility completes the debugging pair for container-era hosts."
+      },
+      {
+        "title": "Explain mounts and filesystem types on Linux",
+        "theme": "linux",
+        "difficulty": "junior",
+        "href": "questions/linux/mounts-and-filesystem-types.html",
+        "why": "Storage opens with what is mounted where, and as what filesystem."
+      },
+      {
+        "title": "Configure LVM storage for a growing service",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/configure-lvm-storage.html",
+        "why": "LVM grows the storage story beyond a single device."
+      },
+      {
+        "title": "Explain Linux permissions and umask",
+        "theme": "linux",
+        "difficulty": "junior",
+        "href": "questions/linux/permissions-and-umask.html",
+        "why": "Permissions and umask decide who may read what the mounts exposed."
+      },
+      {
+        "title": "Respond to a filesystem mounted read-only after errors",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/filesystem-check-failure.html",
+        "why": "The filesystem mounted read-only after errors is the storage tier's own failure mode."
+      },
+      {
+        "title": "Recover disk space held by deleted open files",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/deleted-open-files.html",
+        "why": "Space held by deleted open files is the storage tier's most famous surprise."
+      },
+      {
+        "title": "Investigate a Linux out-of-memory kill",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/oom-killer-investigation.html",
+        "why": "Memory opens with the kernel's own kill decision, interpretable with process state in hand."
+      },
+      {
+        "title": "Diagnose a cgroup resource limit problem",
+        "theme": "linux",
+        "difficulty": "senior",
+        "href": "questions/linux/cgroups-resource-isolation.html",
+        "why": "The cgroup limit problem is memory pressure with a named owner."
+      },
+      {
+        "title": "Diagnose too many open files in a Linux service",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/file-descriptor-exhaustion.html",
+        "why": "File-descriptor exhaustion comes last so its usage-versus-limit alerting lesson follows two different exhaustion shapes."
+      },
+      {
+        "title": "Maintain package repositories without breaking fleet updates",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/maintain-package-repositories.html",
+        "why": "The change tier opens with where the fleet's software actually comes from."
+      },
+      {
+        "title": "Plan a production Linux kernel upgrade and rollback",
+        "theme": "linux",
+        "difficulty": "senior",
+        "href": "questions/linux/kernel-upgrade-rollback.html",
+        "why": "The kernel upgrade with rollback is the change tier's highest-stakes routine."
+      },
+      {
+        "title": "Choose between cron and systemd timers",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/cron-versus-systemd-timers.html",
+        "why": "Cron versus systemd timers is the scheduling decision the change tier makes daily."
+      },
+      {
+        "title": "Integrate LDAP users through SSSD safely",
+        "theme": "linux",
+        "difficulty": "senior",
+        "href": "questions/linux/integrate-ldap-users-with-sssd.html",
+        "why": "SSSD brings external identity onto the host the Theme has been changing."
+      },
+      {
+        "title": "Manage a libvirt virtual machine change safely",
+        "theme": "linux",
+        "difficulty": "senior",
+        "href": "questions/linux/manage-libvirt-virtual-machines.html",
+        "why": "A libvirt change is the host learning it runs someone else's workload."
+      },
+      {
+        "title": "Investigate a failure that occurred only during the previous boot",
+        "theme": "linux",
+        "difficulty": "middle",
+        "href": "questions/linux/previous-boot-log-analysis.html",
+        "why": "The failure that happened only during the previous boot is change diagnosis with cold evidence."
+      },
+      {
+        "title": "Define SLOs for a Linux host platform",
+        "theme": "linux",
+        "difficulty": "staff",
+        "href": "questions/linux/linux-platform-slo.html",
+        "why": "Fleet scope opens by promising what the host platform will deliver."
+      },
+      {
+        "title": "Govern a Linux security baseline without blocking delivery",
+        "theme": "linux",
+        "difficulty": "staff",
+        "href": "questions/linux/linux-security-baseline.html",
+        "why": "The security baseline governs every host the SLO just made a promise about."
+      },
+      {
+        "title": "Design a Linux incident evidence and forensics policy",
+        "theme": "linux",
+        "difficulty": "staff",
+        "href": "questions/linux/linux-incident-forensics-policy.html",
+        "why": "The forensics policy decides what evidence the fleet preserves when promises break."
+      },
+      {
+        "title": "Establish Linux fleet capacity governance",
+        "theme": "linux",
+        "difficulty": "staff",
+        "href": "questions/linux/fleet-capacity-governance.html",
+        "why": "Capacity governance prices the fleet the baseline standardized."
+      },
+      {
+        "title": "Define a Linux fleet lifecycle standard",
+        "theme": "linux",
+        "difficulty": "staff",
+        "href": "questions/linux/fleet-os-lifecycle.html",
+        "why": "The fleet lifecycle standard closes the Theme at the same altitude the platform path reaches."
+      }
+    ]
+  },
+  {
+    "theme": "linux-networking",
+    "note": "Interfaces, addresses, and routes before MTU and packet capture, and the namespace and policy tier only once single-host diagnosis is reliable.",
+    "steps": [
+      {
+        "title": "Inspect Linux interface state and addresses",
+        "theme": "linux-networking",
+        "difficulty": "junior",
+        "href": "questions/linux-networking/interface-state-and-addresses.html",
+        "why": "Interfaces and addresses are the first facts every later diagnosis reads."
+      },
+      {
+        "title": "Explain a Linux default route",
+        "theme": "linux-networking",
+        "difficulty": "junior",
+        "href": "questions/linux-networking/default-route-basics.html",
+        "why": "The default route decides where everything unmentioned actually goes."
+      },
+      {
+        "title": "Debug a Linux route with ip route get",
+        "theme": "linux-networking",
+        "difficulty": "middle",
+        "href": "questions/linux-networking/route-get-debugging.html",
+        "why": "ip route get shows the kernel's routing decision for one packet, the route tier's tool."
+      },
+      {
+        "title": "Explain Linux DNS resolver configuration",
+        "theme": "linux-networking",
+        "difficulty": "junior",
+        "href": "questions/linux-networking/dns-resolver-configuration.html",
+        "why": "Resolver configuration decides which names the host can even ask about."
+      },
+      {
+        "title": "Identify the process listening on a Linux port",
+        "theme": "linux-networking",
+        "difficulty": "junior",
+        "href": "questions/linux-networking/socket-listener-inspection.html",
+        "why": "Socket state answers who is listening, the question before any connectivity debugging."
+      },
+      {
+        "title": "Triage TCP connection states on Linux",
+        "theme": "linux-networking",
+        "difficulty": "middle",
+        "href": "questions/linux-networking/tcp-connection-state-triage.html",
+        "why": "Connection states show the handshake's aftermath from the host's side."
+      },
+      {
+        "title": "Diagnose an MTU mismatch on Linux",
+        "theme": "linux-networking",
+        "difficulty": "middle",
+        "href": "questions/linux-networking/mtu-mismatch-triage.html",
+        "why": "MTU mismatches fail only for large packets, so they follow the state tier that can prove it."
+      },
+      {
+        "title": "Triage a failed Linux neighbour entry",
+        "theme": "linux-networking",
+        "difficulty": "middle",
+        "href": "questions/linux-networking/neighbour-table-triage.html",
+        "why": "Neighbour discovery is layer-two reachability, the tier underneath routing."
+      },
+      {
+        "title": "Triage a Linux host firewall path",
+        "theme": "linux-networking",
+        "difficulty": "middle",
+        "href": "questions/linux-networking/firewall-path-triage.html",
+        "why": "Firewall paths are where correct routes still silently drop packets."
+      },
+      {
+        "title": "Capture Linux packets without losing diagnostic value",
+        "theme": "linux-networking",
+        "difficulty": "middle",
+        "href": "questions/linux-networking/packet-capture-scope.html",
+        "why": "Capturing with the right scope keeps evidence without drowning the reader."
+      },
+      {
+        "title": "Diagnose a Linux TCP accept-backlog overflow",
+        "theme": "linux-networking",
+        "difficulty": "senior",
+        "href": "questions/linux-networking/tcp-backlog-overflow.html",
+        "why": "The accept-backlog overflow is the socket tier's saturation failure."
+      },
+      {
+        "title": "Debug connectivity across a Linux network namespace",
+        "theme": "linux-networking",
+        "difficulty": "middle",
+        "href": "questions/linux-networking/network-namespace-connectivity.html",
+        "why": "Namespaces reopen every earlier tool from a different vantage point."
+      },
+      {
+        "title": "Diagnose Linux policy routing rules",
+        "theme": "linux-networking",
+        "difficulty": "middle",
+        "href": "questions/linux-networking/policy-routing-with-rules.html",
+        "why": "Policy routing answers why the seemingly wrong interface answered."
+      },
+      {
+        "title": "Select a Linux traffic-control investigation path",
+        "theme": "linux-networking",
+        "difficulty": "senior",
+        "href": "questions/linux-networking/traffic-control-qdisc.html",
+        "why": "The qdisc investigation shows shaping and queueing the routes never mentioned."
+      },
+      {
+        "title": "Build a Linux network capacity strategy",
+        "theme": "linux-networking",
+        "difficulty": "staff",
+        "href": "questions/linux-networking/linux-network-capacity-strategy.html",
+        "why": "The capacity strategy prices the host network the diagnostics kept honest."
+      },
+      {
+        "title": "Lead a Linux networking incident response",
+        "theme": "linux-networking",
+        "difficulty": "staff",
+        "href": "questions/linux-networking/linux-network-incident-command.html",
+        "why": "Incident command spends the whole diagnostic stack under real pressure."
+      },
+      {
+        "title": "Set zero-trust Linux host network boundaries",
+        "theme": "linux-networking",
+        "difficulty": "staff",
+        "href": "questions/linux-networking/zero-trust-host-network-boundaries.html",
+        "why": "Zero-trust boundaries close the Theme by removing the trusted-host assumption everything above leaned on."
+      }
+    ]
+  },
+  {
+    "theme": "linux-performance",
+    "note": "Work this Theme as a resource tour, one subsystem at a time, before any governance question.",
+    "steps": [
+      {
+        "title": "Use vmstat for a first performance pass",
+        "theme": "linux-performance",
+        "difficulty": "junior",
+        "href": "questions/linux-performance/vmstat-first-pass.html",
+        "why": "vmstat is the cheap first pass whose whole job is pointing at the next tool."
+      },
+      {
+        "title": "Read CPU utilization before tuning",
+        "theme": "linux-performance",
+        "difficulty": "junior",
+        "href": "questions/linux-performance/cpu-utilization-basics.html",
+        "why": "Reading CPU utilization correctly prevents tuning a number that was never the problem."
+      },
+      {
+        "title": "Investigate a growing CPU run queue",
+        "theme": "linux-performance",
+        "difficulty": "middle",
+        "href": "questions/linux-performance/cpu-run-queue-triage.html",
+        "why": "The growing run queue is the saturation the utilization average hid."
+      },
+      {
+        "title": "Interpret Linux load average correctly",
+        "theme": "linux-performance",
+        "difficulty": "junior",
+        "href": "questions/linux-performance/load-average-meaning.html",
+        "why": "Load average interpreted honestly follows the queue, since it counts runnable and uninterruptible work alike."
+      },
+      {
+        "title": "Investigate excess context switching",
+        "theme": "linux-performance",
+        "difficulty": "middle",
+        "href": "questions/linux-performance/context-switch-analysis.html",
+        "why": "Excess context switching continues the CPU story at the scheduler."
+      },
+      {
+        "title": "Profile CPU with perf safely in production",
+        "theme": "linux-performance",
+        "difficulty": "senior",
+        "href": "questions/linux-performance/perf-sampling-safety.html",
+        "why": "perf profiling goes deeper than the counters, used safely in production."
+      },
+      {
+        "title": "Diagnose cgroup CPU throttling",
+        "theme": "linux-performance",
+        "difficulty": "senior",
+        "href": "questions/linux-performance/cpu-throttling-diagnosis.html",
+        "why": "Cgroup CPU throttling is the container-era ceiling the scheduler tier explains."
+      },
+      {
+        "title": "Distinguish free memory from available memory",
+        "theme": "linux-performance",
+        "difficulty": "junior",
+        "href": "questions/linux-performance/memory-available-basics.html",
+        "why": "Memory opens with free versus available, the distinction every capacity claim leans on."
+      },
+      {
+        "title": "Analyze a Linux OOM kill",
+        "theme": "linux-performance",
+        "difficulty": "middle",
+        "href": "questions/linux-performance/oom-killer-analysis.html",
+        "why": "The OOM analysis needs the pressure picture the available-memory tier built."
+      },
+      {
+        "title": "Investigate page-cache reclaim and memory pressure",
+        "theme": "linux-performance",
+        "difficulty": "middle",
+        "href": "questions/linux-performance/page-cache-reclaim.html",
+        "why": "Page-cache reclaim explains memory pressure with no process to blame."
+      },
+      {
+        "title": "Use pressure stall information to find contention",
+        "theme": "linux-performance",
+        "difficulty": "middle",
+        "href": "questions/linux-performance/pressure-stall-information.html",
+        "why": "PSI quantifies the contention the tiers above could only infer."
+      },
+      {
+        "title": "Respond to sustained swap activity",
+        "theme": "linux-performance",
+        "difficulty": "middle",
+        "href": "questions/linux-performance/swap-activity-response.html",
+        "why": "Sustained swap is the memory tier's slow failure, responded to rather than feared."
+      },
+      {
+        "title": "Interpret iowait without blaming storage immediately",
+        "theme": "linux-performance",
+        "difficulty": "middle",
+        "href": "questions/linux-performance/iowait-interpretation.html",
+        "why": "The I/O group opens with iowait read without immediately blaming storage."
+      },
+      {
+        "title": "Diagnose a full filesystem with free-looking space",
+        "theme": "linux-performance",
+        "difficulty": "junior",
+        "href": "questions/linux-performance/disk-space-versus-inodes.html",
+        "why": "The full filesystem with free-looking space is the I/O tier's famous trap."
+      },
+      {
+        "title": "Diagnose file-descriptor exhaustion",
+        "theme": "linux-performance",
+        "difficulty": "middle",
+        "href": "questions/linux-performance/file-descriptor-exhaustion.html",
+        "why": "Descriptor exhaustion completes the exhaustion shapes with a slow leak against a limit."
+      },
+      {
+        "title": "Triage TCP retransmissions on a Linux service",
+        "theme": "linux-performance",
+        "difficulty": "middle",
+        "href": "questions/linux-performance/network-retransmission-triage.html",
+        "why": "TCP retransmissions bring the resource tour to the network interface."
+      },
+      {
+        "title": "Diagnose network softirq saturation",
+        "theme": "linux-performance",
+        "difficulty": "middle",
+        "href": "questions/linux-performance/softirq-saturation.html",
+        "why": "Softirq saturation is the network stack's own saturation signature."
+      },
+      {
+        "title": "Recognize NUMA locality as a performance constraint",
+        "theme": "linux-performance",
+        "difficulty": "senior",
+        "href": "questions/linux-performance/numa-locality.html",
+        "why": "NUMA locality becomes a constraint worth naming once single-host diagnosis is reliable."
+      },
+      {
+        "title": "Evaluate kernel samepage merging safely",
+        "theme": "linux-performance",
+        "difficulty": "senior",
+        "href": "questions/linux-performance/kernel-samepage-merging.html",
+        "why": "KSM prices memory deduplication honestly against its own CPU cost."
+      },
+      {
+        "title": "Design a noisy-neighbor performance policy",
+        "theme": "linux-performance",
+        "difficulty": "staff",
+        "href": "questions/linux-performance/noisy-neighbor-policy.html",
+        "why": "The noisy-neighbour policy makes co-tenancy a governed trade rather than a gamble."
+      },
+      {
+        "title": "Govern performance-observability overhead",
+        "theme": "linux-performance",
+        "difficulty": "staff",
+        "href": "questions/linux-performance/observability-overhead-governance.html",
+        "why": "Observability overhead is governed rather than assumed to be free."
+      },
+      {
+        "title": "Establish a Linux performance baseline program",
+        "theme": "linux-performance",
+        "difficulty": "staff",
+        "href": "questions/linux-performance/performance-baseline-program.html",
+        "why": "The programme tier opens by making baselines an organizational habit."
+      },
+      {
+        "title": "Build a capacity model for a Linux service",
+        "theme": "linux-performance",
+        "difficulty": "staff",
+        "href": "questions/linux-performance/performance-capacity-model.html",
+        "why": "The capacity model turns those baselines into provisioning plans."
+      },
+      {
+        "title": "Lead a Linux performance incident",
+        "theme": "linux-performance",
+        "difficulty": "staff",
+        "href": "questions/linux-performance/performance-incident-command.html",
+        "why": "Leading the performance incident closes the Theme with the tools as a method."
+      }
+    ]
+  },
+  {
+    "theme": "linux-troubleshooting",
+    "note": "Booting failures first, because every later diagnosis presumes a booted machine; diagnostics before the fleet programmes that organize them.",
+    "steps": [
+      {
+        "title": "Recover safely from a Linux boot failure after a configuration change",
+        "theme": "linux-troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/linux-troubleshooting/repair-boot-failure.html",
+        "why": "The boot that fails after a change comes first because everything later presumes a booted machine."
+      },
+      {
+        "title": "Debug a failed network or local mount at boot",
+        "theme": "linux-troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/linux-troubleshooting/debug-failed-mount.html",
+        "why": "The mount that blocks startup is the boot's most common hostage."
+      },
+      {
+        "title": "Recover from an interrupted Linux package transaction safely",
+        "theme": "linux-troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/linux-troubleshooting/recover-package-manager.html",
+        "why": "The interrupted package transaction leaves the host between states, recovered before services arrive."
+      },
+      {
+        "title": "Debug a Linux `Permission denied` failure for a service",
+        "theme": "linux-troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/linux-troubleshooting/debug-permission-denied.html",
+        "why": "The service tier opens with the filesystem saying no to a service."
+      },
+      {
+        "title": "Inspect a Linux service that is failing after a restart",
+        "theme": "linux-troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/linux-troubleshooting/inspect-service-logs.html",
+        "why": "The service failing after a restart is read from its logs before anything is touched."
+      },
+      {
+        "title": "Diagnose a systemd service that starts before its dependency is usable",
+        "theme": "linux-troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/linux-troubleshooting/diagnose-systemd-dependency.html",
+        "why": "The unit that starts before its dependency is an ordering problem, and it reads only with unit literacy."
+      },
+      {
+        "title": "Diagnose a Linux filesystem reported as full",
+        "theme": "linux-troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/linux-troubleshooting/diagnose-full-filesystem.html",
+        "why": "Resource exhaustion opens with the full filesystem and its several different causes."
+      },
+      {
+        "title": "Investigate a service that reports too many open files",
+        "theme": "linux-troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/linux-troubleshooting/investigate-file-descriptors.html",
+        "why": "Too many open files is exhaustion with a per-process culprit to find."
+      },
+      {
+        "title": "Diagnose an OOM-killed service in a cgroup-aware host",
+        "theme": "linux-troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/linux-troubleshooting/diagnose-oom-kill.html",
+        "why": "The OOM kill on a cgroup-aware host needs the cgroup boundaries named."
+      },
+      {
+        "title": "Investigate Linux memory pressure without immediately adding RAM",
+        "theme": "linux-troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/linux-troubleshooting/investigate-memory-pressure.html",
+        "why": "Memory pressure investigated without immediately adding RAM is the disciplined sequel to the kill."
+      },
+      {
+        "title": "Investigate accumulating zombie processes on Linux",
+        "theme": "linux-troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/linux-troubleshooting/investigate-zombie-processes.html",
+        "why": "Zombies accumulate when a parent forgets, harmless right up until they are not."
+      },
+      {
+        "title": "Investigate a Linux hung-task warning or D-state process",
+        "theme": "linux-troubleshooting",
+        "difficulty": "senior",
+        "href": "questions/linux-troubleshooting/investigate-hung-task.html",
+        "why": "The D-state hung task is where process-state knowledge pays for itself."
+      },
+      {
+        "title": "Analyze a host with a high load average but low CPU utilization",
+        "theme": "linux-troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/linux-troubleshooting/analyze-load-average.html",
+        "why": "High load with low CPU bridges pure CPU thinking into storage I/O latency."
+      },
+      {
+        "title": "Perform first-pass storage I/O latency triage on Linux",
+        "theme": "linux-troubleshooting",
+        "difficulty": "senior",
+        "href": "questions/linux-troubleshooting/perform-storage-io-triage.html",
+        "why": "First-pass storage I/O triage follows the bridge that pointed here."
+      },
+      {
+        "title": "Trace an intermittent DNS resolution failure on Linux",
+        "theme": "linux-troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/linux-troubleshooting/trace-dns-failure.html",
+        "why": "The network set opens with intermittent DNS, the flakiest dependency of all."
+      },
+      {
+        "title": "Trace suspected connection-tracking exhaustion on a Linux node",
+        "theme": "linux-troubleshooting",
+        "difficulty": "senior",
+        "href": "questions/linux-troubleshooting/trace-conntrack-exhaustion.html",
+        "why": "Connection-tracking exhaustion fails new connections while the old ones keep living."
+      },
+      {
+        "title": "Triage packet loss from a Linux host to a critical dependency",
+        "theme": "linux-troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/linux-troubleshooting/triage-network-packet-loss.html",
+        "why": "Packet loss to a critical dependency is measured rather than assumed."
+      },
+      {
+        "title": "Diagnose an application stalled on an NFS mount",
+        "theme": "linux-troubleshooting",
+        "difficulty": "senior",
+        "href": "questions/linux-troubleshooting/diagnose-nfs-stall.html",
+        "why": "The NFS-stalled application shows local symptoms with remote causes."
+      },
+      {
+        "title": "Resolve clock skew that is breaking Linux service authentication",
+        "theme": "linux-troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/linux-troubleshooting/resolve-clock-skew.html",
+        "why": "Clock skew breaking authentication is time, the quietest dependency on the host."
+      },
+      {
+        "title": "Lead evidence-preserving triage after a Linux kernel panic",
+        "theme": "linux-troubleshooting",
+        "difficulty": "senior",
+        "href": "questions/linux-troubleshooting/debug-kernel-panic.html",
+        "why": "The kernel panic is kept last among diagnostics because it is pure evidence-preservation discipline."
+      },
+      {
+        "title": "Design an evidence-driven Linux troubleshooting runbook program",
+        "theme": "linux-troubleshooting",
+        "difficulty": "staff",
+        "href": "questions/linux-troubleshooting/design-linux-troubleshooting-runbooks.html",
+        "why": "The fleet tier opens by making the diagnostics above a runbook programme."
+      },
+      {
+        "title": "Architect Linux fleet observability for rapid fault isolation",
+        "theme": "linux-troubleshooting",
+        "difficulty": "staff",
+        "href": "questions/linux-troubleshooting/architect-linux-observability.html",
+        "why": "Fleet observability finds the faults before the runbooks ever fire."
+      },
+      {
+        "title": "Lead capacity and saturation risk management for a Linux platform",
+        "theme": "linux-troubleshooting",
+        "difficulty": "staff",
+        "href": "questions/linux-troubleshooting/lead-linux-capacity-risk.html",
+        "why": "Capacity and saturation risk management governs the fleet's future failures."
+      },
+      {
+        "title": "Coordinate a cross-team major incident rooted in Linux host failures",
+        "theme": "linux-troubleshooting",
+        "difficulty": "staff",
+        "href": "questions/linux-troubleshooting/coordinate-linux-major-incident.html",
+        "why": "The cross-team major incident closes the Theme at the scale the runbooks organize."
+      }
+    ]
+  },
+  {
+    "theme": "logging",
+    "note": "Streams before data model, data model before pipeline, pipeline before duties and strategy — the pipeline questions are about moving and protecting the model.",
+    "steps": [
+      {
+        "title": "Explain why containers log to standard streams",
+        "theme": "logging",
+        "difficulty": "junior",
+        "href": "questions/logging/stdout-in-containers.html",
+        "why": "The Theme begins where container logs begin: standard streams as the platform contract."
+      },
+      {
+        "title": "Explain syslog facilities and severity",
+        "theme": "logging",
+        "difficulty": "junior",
+        "href": "questions/logging/syslog-basics.html",
+        "why": "Facilities and severity are the vocabulary those streams inherit from syslog."
+      },
+      {
+        "title": "Design structured logs for request correlation",
+        "theme": "logging",
+        "difficulty": "middle",
+        "href": "questions/logging/structured-log-correlation.html",
+        "why": "Structured logs with request correlation turn raw streams into evidence."
+      },
+      {
+        "title": "Choose fields for a log data model",
+        "theme": "logging",
+        "difficulty": "junior",
+        "href": "questions/logging/log-data-model.html",
+        "why": "The data model decides what the pipeline will even be able to answer."
+      },
+      {
+        "title": "Define a production log-level policy",
+        "theme": "logging",
+        "difficulty": "junior",
+        "href": "questions/logging/log-level-policy.html",
+        "why": "The level policy keeps volume honest before the model grows unwieldy."
+      },
+      {
+        "title": "Parse multiline exception logs safely",
+        "theme": "logging",
+        "difficulty": "middle",
+        "href": "questions/logging/multiline-log-parsing.html",
+        "why": "Multiline exceptions parse safely or the model's best evidence corrupts itself."
+      },
+      {
+        "title": "Handle log rotation without duplicate or missing events",
+        "theme": "logging",
+        "difficulty": "middle",
+        "href": "questions/logging/rotation-and-tailers.html",
+        "why": "Rotation without duplicate or missing events keeps the stream continuous."
+      },
+      {
+        "title": "Make log timestamps useful in incident analysis",
+        "theme": "logging",
+        "difficulty": "middle",
+        "href": "questions/logging/timestamp-correctness.html",
+        "why": "Timestamps that survive incident analysis are the model's spine."
+      },
+      {
+        "title": "Design collector buffering and backpressure",
+        "theme": "logging",
+        "difficulty": "middle",
+        "href": "questions/logging/collector-buffering.html",
+        "why": "The platform tier opens with buffering and backpressure, the pipeline's shock absorbers."
+      },
+      {
+        "title": "Define an SLO for a log delivery pipeline",
+        "theme": "logging",
+        "difficulty": "senior",
+        "href": "questions/logging/log-pipeline-slo.html",
+        "why": "The delivery SLO promises exactly what the buffering tier made possible."
+      },
+      {
+        "title": "Evolve a log schema without breaking consumers",
+        "theme": "logging",
+        "difficulty": "senior",
+        "href": "questions/logging/schema-evolution.html",
+        "why": "Evolving the schema without breaking consumers keeps those promises across versions."
+      },
+      {
+        "title": "Diagnose a slow expensive log query",
+        "theme": "logging",
+        "difficulty": "middle",
+        "href": "questions/logging/log-query-performance.html",
+        "why": "The slow expensive query is the bill that poor field design writes."
+      },
+      {
+        "title": "Prevent secrets from entering logs",
+        "theme": "logging",
+        "difficulty": "junior",
+        "href": "questions/logging/secret-redaction.html",
+        "why": "The duties open with keeping secrets out of logs, which outranks any feature."
+      },
+      {
+        "title": "Govern logging with privacy by design",
+        "theme": "logging",
+        "difficulty": "staff",
+        "href": "questions/logging/privacy-by-design.html",
+        "why": "Privacy by design governs the whole pipeline rather than filtering at the end."
+      },
+      {
+        "title": "Define a log retention policy",
+        "theme": "logging",
+        "difficulty": "middle",
+        "href": "questions/logging/log-retention-policy.html",
+        "why": "Retention decides what the platform keeps and what it owes regulators."
+      },
+      {
+        "title": "Attribute and reduce logging cost safely",
+        "theme": "logging",
+        "difficulty": "senior",
+        "href": "questions/logging/log-cost-attribution.html",
+        "why": "Cost attribution prices the volume the levels and retention allowed."
+      },
+      {
+        "title": "Isolate tenants in a shared logging platform",
+        "theme": "logging",
+        "difficulty": "senior",
+        "href": "questions/logging/tenant-isolation.html",
+        "why": "Tenant isolation keeps one customer's evidence away from another's eyes."
+      },
+      {
+        "title": "Preserve log integrity for an investigation",
+        "theme": "logging",
+        "difficulty": "senior",
+        "href": "questions/logging/log-forensics-integrity.html",
+        "why": "Integrity for investigations is the duty tier's own close."
+      },
+      {
+        "title": "Correlate trace context with logs",
+        "theme": "logging",
+        "difficulty": "middle",
+        "href": "questions/logging/trace-log-correlation.html",
+        "why": "Use opens with trace context correlated back into logs."
+      },
+      {
+        "title": "Use logs effectively during a cross-service incident",
+        "theme": "logging",
+        "difficulty": "staff",
+        "href": "questions/logging/logging-incident-command.html",
+        "why": "Reading logs across services mid-incident is the use case everything above served."
+      },
+      {
+        "title": "Migrate a company from fragmented logging to a common platform",
+        "theme": "logging",
+        "difficulty": "staff",
+        "href": "questions/logging/logging-migration.html",
+        "why": "The strategy tier opens with migrating off fragmented logging."
+      },
+      {
+        "title": "Define ownership boundaries for a logging service",
+        "theme": "logging",
+        "difficulty": "staff",
+        "href": "questions/logging/logging-service-ownership.html",
+        "why": "Ownership boundaries decide who actually runs the platform the migration built."
+      },
+      {
+        "title": "Set a platform strategy for organization-wide logging",
+        "theme": "logging",
+        "difficulty": "staff",
+        "href": "questions/logging/organization-logging-platform.html",
+        "why": "The organization-wide platform decision closes the Theme at fleet scale."
+      }
+    ]
+  },
+  {
+    "theme": "network-storage",
+    "note": "Decide the access shape before the protocol, because the NAS, SAN, or object question routes you to everything that follows.",
+    "steps": [
+      {
+        "title": "Choose NAS, SAN, or object storage for a workload",
+        "theme": "network-storage",
+        "difficulty": "junior",
+        "href": "questions/network-storage/nas-san-object-storage.html",
+        "why": "The NAS, SAN, or object question comes first because it routes everything that follows."
+      },
+      {
+        "title": "Mount an NFS export safely",
+        "theme": "network-storage",
+        "difficulty": "junior",
+        "href": "questions/network-storage/nfs-mount-basics.html",
+        "why": "NFS opens the file chapter by mounting an export safely."
+      },
+      {
+        "title": "Select an NFS protocol version",
+        "theme": "network-storage",
+        "difficulty": "middle",
+        "href": "questions/network-storage/nfs-version-selection.html",
+        "why": "The protocol version changes failure behaviour, so it is chosen before that behaviour is tuned."
+      },
+      {
+        "title": "Choose NFS failure behavior",
+        "theme": "network-storage",
+        "difficulty": "middle",
+        "href": "questions/network-storage/nfs-hard-soft-mounts.html",
+        "why": "Hard versus soft mounts decide what the client does when the server vanishes."
+      },
+      {
+        "title": "Explain NFS cache coherency",
+        "theme": "network-storage",
+        "difficulty": "middle",
+        "href": "questions/network-storage/nfs-caching-coherency.html",
+        "why": "Cache coherency explains why NFS reads can surprise the writer."
+      },
+      {
+        "title": "Diagnose NFS ownership and identity mapping",
+        "theme": "network-storage",
+        "difficulty": "middle",
+        "href": "questions/network-storage/nfs-identity-mapping.html",
+        "why": "Identity mapping decides whose permissions the export actually enforces."
+      },
+      {
+        "title": "Plan NFS lock recovery",
+        "theme": "network-storage",
+        "difficulty": "middle",
+        "href": "questions/network-storage/nfs-lock-recovery.html",
+        "why": "Lock recovery is incomprehensible until coherency has already worried you, so it comes last."
+      },
+      {
+        "title": "Explain an SMB file share",
+        "theme": "network-storage",
+        "difficulty": "junior",
+        "href": "questions/network-storage/smb-share-basics.html",
+        "why": "SMB mirrors the NFS chapter, opening with the share itself."
+      },
+      {
+        "title": "Apply SMB signing and encryption",
+        "theme": "network-storage",
+        "difficulty": "middle",
+        "href": "questions/network-storage/smb-signing-encryption.html",
+        "why": "Signing and encryption are SMB's security tier above the share."
+      },
+      {
+        "title": "Explain iSCSI initiators and targets",
+        "theme": "network-storage",
+        "difficulty": "junior",
+        "href": "questions/network-storage/iscsi-initiator-target.html",
+        "why": "The block chapter opens with the iSCSI initiator and target model."
+      },
+      {
+        "title": "Validate iSCSI multipathing",
+        "theme": "network-storage",
+        "difficulty": "middle",
+        "href": "questions/network-storage/iscsi-multipathing.html",
+        "why": "Multipathing validation proves the redundancy the block path claims."
+      },
+      {
+        "title": "Design an NVMe over Fabrics deployment",
+        "theme": "network-storage",
+        "difficulty": "senior",
+        "href": "questions/network-storage/nvmeof-fabrics-design.html",
+        "why": "NVMe over Fabrics is the block chapter's modern transport."
+      },
+      {
+        "title": "Prevent multi-writer block-storage corruption",
+        "theme": "network-storage",
+        "difficulty": "middle",
+        "href": "questions/network-storage/block-storage-single-writer.html",
+        "why": "The multi-writer corruption question stands guard over the whole block story."
+      },
+      {
+        "title": "Design for object-storage consistency and retries",
+        "theme": "network-storage",
+        "difficulty": "junior",
+        "href": "questions/network-storage/object-storage-consistency.html",
+        "why": "Object storage opens with consistency and retry design."
+      },
+      {
+        "title": "Design object lifecycle and retention rules",
+        "theme": "network-storage",
+        "difficulty": "middle",
+        "href": "questions/network-storage/object-lifecycle-retention.html",
+        "why": "Lifecycle and retention rules govern what object storage keeps and for how long."
+      },
+      {
+        "title": "Choose Ceph replication or erasure coding",
+        "theme": "network-storage",
+        "difficulty": "senior",
+        "href": "questions/network-storage/ceph-replication-vs-erasure-coding.html",
+        "why": "Ceph opens with its core durability trade, replication versus erasure coding."
+      },
+      {
+        "title": "Protect Ceph recovery capacity",
+        "theme": "network-storage",
+        "difficulty": "senior",
+        "href": "questions/network-storage/ceph-recovery-capacity.html",
+        "why": "Recovery capacity is what keeps a degraded Ceph cluster alive."
+      },
+      {
+        "title": "Distinguish snapshots from backups",
+        "theme": "network-storage",
+        "difficulty": "middle",
+        "href": "questions/network-storage/snapshots-versus-backups.html",
+        "why": "Platform resilience opens by distinguishing snapshots from backups."
+      },
+      {
+        "title": "Design cross-region storage resilience",
+        "theme": "network-storage",
+        "difficulty": "staff",
+        "href": "questions/network-storage/cross-region-storage-resilience.html",
+        "why": "Cross-region design spends the snapshot-versus-backup distinction at distance."
+      },
+      {
+        "title": "Build ransomware-resilient storage backups",
+        "theme": "network-storage",
+        "difficulty": "senior",
+        "href": "questions/network-storage/ransomware-resilient-backups.html",
+        "why": "Ransomware-resilient backups assume the adversary reaches the primary copy."
+      },
+      {
+        "title": "Run a storage disaster-recovery exercise",
+        "theme": "network-storage",
+        "difficulty": "staff",
+        "href": "questions/network-storage/storage-disaster-recovery-exercise.html",
+        "why": "The disaster-recovery exercise proves the resilience tier rather than describing it."
+      },
+      {
+        "title": "Investigate network-storage latency",
+        "theme": "network-storage",
+        "difficulty": "senior",
+        "href": "questions/network-storage/storage-performance-investigation.html",
+        "why": "Latency triage is the operations tier's daily question."
+      },
+      {
+        "title": "Define storage platform service tiers",
+        "theme": "network-storage",
+        "difficulty": "staff",
+        "href": "questions/network-storage/storage-platform-service-tiers.html",
+        "why": "Service tiers promise latency and capacity per class of workload."
+      },
+      {
+        "title": "Establish storage tenancy boundaries",
+        "theme": "network-storage",
+        "difficulty": "staff",
+        "href": "questions/network-storage/storage-security-tenancy.html",
+        "why": "Tenancy boundaries keep tenants apart on shared storage."
+      },
+      {
+        "title": "Govern storage cost and capacity across teams",
+        "theme": "network-storage",
+        "difficulty": "staff",
+        "href": "questions/network-storage/storage-cost-and-capacity-governance.html",
+        "why": "Cost and capacity governance closes the Theme at platform scale."
+      }
+    ]
+  },
+  {
+    "theme": "networking",
+    "note": "Build the stack bottom-up and resolve names before connections, because most service-down reports in this Theme start at resolution.",
+    "steps": [
+      {
+        "title": "Map a request to network layers",
+        "theme": "networking",
+        "difficulty": "junior",
+        "href": "questions/networking/osi-and-tcp-ip-layers.html",
+        "why": "Mapping a request to network layers is the map every later diagnosis navigates."
+      },
+      {
+        "title": "Calculate an IPv4 CIDR range",
+        "theme": "networking",
+        "difficulty": "junior",
+        "href": "questions/networking/cidr-address-calculation.html",
+        "why": "CIDR arithmetic is the addressing vocabulary the map requires."
+      },
+      {
+        "title": "Use private IPv4 address space safely",
+        "theme": "networking",
+        "difficulty": "junior",
+        "href": "questions/networking/private-address-space.html",
+        "why": "Private address space used correctly keeps routing honest."
+      },
+      {
+        "title": "Explain ports and sockets",
+        "theme": "networking",
+        "difficulty": "junior",
+        "href": "questions/networking/ports-and-sockets.html",
+        "why": "Ports versus sockets separates names from actual endpoints."
+      },
+      {
+        "title": "Choose between TCP and UDP",
+        "theme": "networking",
+        "difficulty": "junior",
+        "href": "questions/networking/tcp-versus-udp.html",
+        "why": "TCP or UDP is the transport choice everything above enables."
+      },
+      {
+        "title": "Select DNS record types and TTLs",
+        "theme": "networking",
+        "difficulty": "middle",
+        "href": "questions/networking/dns-record-types-and-ttl.html",
+        "why": "Names before connections: record types and TTLs are DNS's own contract."
+      },
+      {
+        "title": "Trace a DNS lookup from an application to an answer",
+        "theme": "networking",
+        "difficulty": "middle",
+        "href": "questions/networking/dns-resolution-path.html",
+        "why": "The lookup traced from application to authoritative answer is the path most service-down reports start on."
+      },
+      {
+        "title": "Debug an authoritative DNS delegation",
+        "theme": "networking",
+        "difficulty": "middle",
+        "href": "questions/networking/authoritative-dns-delegation.html",
+        "why": "The delegation failure is name resolution breaking at its root."
+      },
+      {
+        "title": "Diagnose a failed TCP three-way handshake",
+        "theme": "networking",
+        "difficulty": "middle",
+        "href": "questions/networking/tcp-three-way-handshake.html",
+        "why": "The failed handshake separates a host with nothing listening from one silently dropping packets."
+      },
+      {
+        "title": "Interpret TCP retransmissions and timeouts",
+        "theme": "networking",
+        "difficulty": "middle",
+        "href": "questions/networking/tcp-retransmission-and-timeouts.html",
+        "why": "Retransmissions and timeouts quantify how much distress the transport is actually in."
+      },
+      {
+        "title": "Diagnose a path MTU discovery black hole",
+        "theme": "networking",
+        "difficulty": "middle",
+        "href": "questions/networking/path-mtu-discovery.html",
+        "why": "The MTU black hole fails only the big packets, found after transport works."
+      },
+      {
+        "title": "Debug a TLS handshake failure",
+        "theme": "networking",
+        "difficulty": "middle",
+        "href": "questions/networking/tls-handshake-failure.html",
+        "why": "TLS fails on top of a working transport, so it is diagnosed last in the group."
+      },
+      {
+        "title": "Diagnose route selection and asymmetric paths",
+        "theme": "networking",
+        "difficulty": "middle",
+        "href": "questions/networking/route-selection-and-asymmetry.html",
+        "why": "Routing diagnosis opens with selection and the asymmetric paths it hides."
+      },
+      {
+        "title": "Troubleshoot NAT connection failures",
+        "theme": "networking",
+        "difficulty": "middle",
+        "href": "questions/networking/nat-connection-troubleshooting.html",
+        "why": "NAT connection failures are routing's stateful cousin, diagnosed after plain selection is understood."
+      },
+      {
+        "title": "Design load-balancer health checks",
+        "theme": "networking",
+        "difficulty": "senior",
+        "href": "questions/networking/load-balancer-health-check-design.html",
+        "why": "Health-check design is undecidable until you know what a completed handshake actually proves."
+      },
+      {
+        "title": "Operate a dual-stack service",
+        "theme": "networking",
+        "difficulty": "middle",
+        "href": "questions/networking/ipv6-dual-stack-basics.html",
+        "why": "The policy tier opens with operating a dual-stack service."
+      },
+      {
+        "title": "Plan a dual-stack migration",
+        "theme": "networking",
+        "difficulty": "senior",
+        "href": "questions/networking/dual-stack-migration-plan.html",
+        "why": "The migration plan is the dual-stack strategy set in motion."
+      },
+      {
+        "title": "Design network segmentation for a service",
+        "theme": "networking",
+        "difficulty": "senior",
+        "href": "questions/networking/network-segmentation-design.html",
+        "why": "Segmentation decides what may talk to what, as policy."
+      },
+      {
+        "title": "Govern production network egress",
+        "theme": "networking",
+        "difficulty": "staff",
+        "href": "questions/networking/egress-governance.html",
+        "why": "Egress governance turns outbound traffic into policy with owners."
+      },
+      {
+        "title": "Create a network capacity model",
+        "theme": "networking",
+        "difficulty": "staff",
+        "href": "questions/networking/network-capacity-model.html",
+        "why": "The remainder opens with the capacity model, answered for a network rather than a host."
+      },
+      {
+        "title": "Build safe network change delivery",
+        "theme": "networking",
+        "difficulty": "staff",
+        "href": "questions/networking/network-change-management.html",
+        "why": "Safe change delivery keeps the network itself from being the outage."
+      },
+      {
+        "title": "Design multi-region connectivity boundaries",
+        "theme": "networking",
+        "difficulty": "staff",
+        "href": "questions/networking/multi-region-connectivity-architecture.html",
+        "why": "Multi-region boundaries spend the capacity and change tiers at scale."
+      },
+      {
+        "title": "Respond to a BGP route leak risk",
+        "theme": "networking",
+        "difficulty": "senior",
+        "href": "questions/networking/bgp-route-leak-response.html",
+        "why": "The BGP route leak is the internet's failure mode arriving at your door."
+      },
+      {
+        "title": "Lead a DNS incident response",
+        "theme": "networking",
+        "difficulty": "senior",
+        "href": "questions/networking/dns-incident-response.html",
+        "why": "DNS incident response is the resolution tier's worst day, rehearsed."
+      },
+      {
+        "title": "Set a network reliability strategy",
+        "theme": "networking",
+        "difficulty": "staff",
+        "href": "questions/networking/network-reliability-strategy.html",
+        "why": "The reliability strategy closes the Theme as a funded promise."
+      }
+    ]
+  },
+  {
+    "theme": "observability",
+    "note": "Define an SLI and an SLO before touching a tool: until a target exists, nothing here knows whether it is succeeding.",
+    "steps": [
+      {
+        "title": "Define an SLI and SLO for an API",
+        "theme": "observability",
+        "difficulty": "junior",
+        "href": "questions/observability/define-an-sli-and-slo.html",
+        "why": "Until a target exists, nothing in the Theme knows whether it is succeeding."
+      },
+      {
+        "title": "Compare metrics, logs, and traces during an incident",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/three-observability-signals.html",
+        "why": "The signal map compares metrics, logs, and traces during an incident."
+      },
+      {
+        "title": "Choose a counter, gauge, histogram, or summary",
+        "theme": "observability",
+        "difficulty": "junior",
+        "href": "questions/observability/describe-metric-types.html",
+        "why": "Counter versus histogram decides whether tail behaviour is measurable at all."
+      },
+      {
+        "title": "Explain a metrics time series and its labels",
+        "theme": "observability",
+        "difficulty": "junior",
+        "href": "questions/observability/explain-time-series-labels.html",
+        "why": "Time-series anatomy shows what the metric types actually produce."
+      },
+      {
+        "title": "Instrument a distributed trace for an API request",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/instrument-a-trace.html",
+        "why": "Instrumentation begins with one request traced end to end."
+      },
+      {
+        "title": "Design trace sampling without losing incidents",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/design-telemetry-sampling.html",
+        "why": "Sampling design keeps tracing affordable without losing the incidents."
+      },
+      {
+        "title": "Diagnose missing trace context across services",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/propagate-trace-context.html",
+        "why": "Missing trace context is the diagnosis the sampling tier must survive, and the bridge that correlates context back into logs."
+      },
+      {
+        "title": "Measure and improve tail latency",
+        "theme": "observability",
+        "difficulty": "senior",
+        "href": "questions/observability/measure-tail-latency.html",
+        "why": "Measurement deepens before alerting does: tails need histograms and traces in place first."
+      },
+      {
+        "title": "Design a useful service dashboard",
+        "theme": "observability",
+        "difficulty": "junior",
+        "href": "questions/observability/design-a-dashboard.html",
+        "why": "Useful dashboards make the measurements readable under pressure."
+      },
+      {
+        "title": "Combine black-box and white-box monitoring",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/compare-blackbox-whitebox.html",
+        "why": "Black-box against white-box chooses the vantage point per question."
+      },
+      {
+        "title": "Use recording rules for expensive PromQL",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/use-recording-rules.html",
+        "why": "Recording rules make expensive PromQL affordable at query time."
+      },
+      {
+        "title": "Control metric-label cardinality",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/control-metric-cardinality.html",
+        "why": "Cardinality kept under control is the budget the rules and dashboards spend."
+      },
+      {
+        "title": "Build an actionable production alert",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/build-an-actionable-alert.html",
+        "why": "The alerting arc opens with an alert an owner can actually act on."
+      },
+      {
+        "title": "Reduce alert fatigue without hiding risk",
+        "theme": "observability",
+        "difficulty": "senior",
+        "href": "questions/observability/investigate-alert-fatigue.html",
+        "why": "Reducing alert fatigue without hiding risk keeps the alerts trusted."
+      },
+      {
+        "title": "Explain an SLO error-budget burn-rate alert",
+        "theme": "observability",
+        "difficulty": "senior",
+        "href": "questions/observability/slo-burn-rate.html",
+        "why": "The burn-rate alert closes the loop back to the opening SLO."
+      },
+      {
+        "title": "Operate a reliable telemetry collection pipeline",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/operate-a-telemetry-pipeline.html",
+        "why": "The platform tier opens with pipeline reliability, the substrate everything rode."
+      },
+      {
+        "title": "Debug gaps in production telemetry",
+        "theme": "observability",
+        "difficulty": "senior",
+        "href": "questions/observability/debug-telemetry-gaps.html",
+        "why": "Telemetry gaps are found before they are needed, not discovered mid-incident."
+      },
+      {
+        "title": "Validate telemetry data quality after a release",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/validate-telemetry-data-quality.html",
+        "why": "Data-quality validation catches the release that silently broke the pipeline."
+      },
+      {
+        "title": "Set telemetry retention and query-cost controls",
+        "theme": "observability",
+        "difficulty": "senior",
+        "href": "questions/observability/set-observability-retention.html",
+        "why": "Retention and query-cost controls price the history the platform keeps."
+      },
+      {
+        "title": "Govern telemetry cost across teams",
+        "theme": "observability",
+        "difficulty": "staff",
+        "href": "questions/observability/govern-telemetry-cost.html",
+        "why": "Cost governance spends the retention decisions across every team."
+      },
+      {
+        "title": "Design multi-tenant observability boundaries",
+        "theme": "observability",
+        "difficulty": "staff",
+        "href": "questions/observability/design-multitenant-observability.html",
+        "why": "Tenant boundaries keep one team's data out of another's console."
+      },
+      {
+        "title": "Design an incident evidence strategy",
+        "theme": "observability",
+        "difficulty": "staff",
+        "href": "questions/observability/design-incident-evidence.html",
+        "why": "The evidence strategy makes incidents investigable after the fact."
+      },
+      {
+        "title": "Investigate a failed request with Cilium Hubble",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/cilium-hubble-flow-observation.html",
+        "why": "Hubble covers the network blind spot the signal map left open."
+      },
+      {
+        "title": "Establish an observability platform product",
+        "theme": "observability",
+        "difficulty": "staff",
+        "href": "questions/observability/establish-observability-platform.html",
+        "why": "The observability platform as a product is the tier's synthesis."
+      },
+      {
+        "title": "Govern an organization-wide SLO program",
+        "theme": "observability",
+        "difficulty": "staff",
+        "href": "questions/observability/govern-an-slo-program.html",
+        "why": "The organization-wide SLO program is the Theme's close."
+      }
+    ]
+  },
+  {
+    "theme": "performance-engineering",
+    "note": "Measurement literacy before optimization, diagnosis before capacity and economics, and contracts and portfolios to close.",
+    "steps": [
+      {
+        "title": "Why use latency percentiles instead of an average?",
+        "theme": "performance-engineering",
+        "difficulty": "junior",
+        "href": "questions/performance-engineering/measure-latency-percentiles.html",
+        "why": "Latency percentiles instead of averages is the literacy the whole Theme stands on."
+      },
+      {
+        "title": "How should an engineer choose latency histogram buckets?",
+        "theme": "performance-engineering",
+        "difficulty": "middle",
+        "href": "questions/performance-engineering/choose-histogram-buckets.html",
+        "why": "Histogram buckets chosen around objectives make the percentiles measurable."
+      },
+      {
+        "title": "What makes a performance objective actionable?",
+        "theme": "performance-engineering",
+        "difficulty": "junior",
+        "href": "questions/performance-engineering/define-performance-objectives.html",
+        "why": "An objective somebody can act on turns measurement into actual work."
+      },
+      {
+        "title": "How do you select a load model for a production-facing service?",
+        "theme": "performance-engineering",
+        "difficulty": "middle",
+        "href": "questions/performance-engineering/select-load-test-model.html",
+        "why": "The load model decides what the numbers will even mean before they are gathered."
+      },
+      {
+        "title": "How are throughput, concurrency, and latency related during a load test?",
+        "theme": "performance-engineering",
+        "difficulty": "junior",
+        "href": "questions/performance-engineering/throughput-and-concurrency.html",
+        "why": "How throughput, concurrency, and latency relate explains most reports that the service is slow."
+      },
+      {
+        "title": "How do you find the critical path of a slow distributed request?",
+        "theme": "performance-engineering",
+        "difficulty": "middle",
+        "href": "questions/performance-engineering/trace-critical-path.html",
+        "why": "The critical path of a slow distributed request localizes the blame honestly."
+      },
+      {
+        "title": "What evidence distinguishes a bottleneck from a busy component?",
+        "theme": "performance-engineering",
+        "difficulty": "junior",
+        "href": "questions/performance-engineering/identify-bottleneck-signals.html",
+        "why": "Bottleneck versus busy is the evidence question the diagnostic tier opens with."
+      },
+      {
+        "title": "How do you investigate a CPU hotspot without optimizing the wrong code?",
+        "theme": "performance-engineering",
+        "difficulty": "middle",
+        "href": "questions/performance-engineering/profile-cpu-hotspots.html",
+        "why": "CPU hotspots follow, investigated without optimizing the wrong code."
+      },
+      {
+        "title": "How do you investigate a database query performance regression?",
+        "theme": "performance-engineering",
+        "difficulty": "middle",
+        "href": "questions/performance-engineering/database-query-regression.html",
+        "why": "Query regressions are the database tier of the same diagnosis."
+      },
+      {
+        "title": "How do you size a client connection pool safely?",
+        "theme": "performance-engineering",
+        "difficulty": "middle",
+        "href": "questions/performance-engineering/connection-pool-sizing.html",
+        "why": "Pool sizing is the concurrency question the load model framed earlier."
+      },
+      {
+        "title": "How do you evaluate whether a cache improves a service?",
+        "theme": "performance-engineering",
+        "difficulty": "middle",
+        "href": "questions/performance-engineering/cache-performance-evaluation.html",
+        "why": "Whether the cache actually helps is asked before crediting it with the improvement."
+      },
+      {
+        "title": "How would you establish a capacity baseline for a service?",
+        "theme": "performance-engineering",
+        "difficulty": "middle",
+        "href": "questions/performance-engineering/capacity-baseline-design.html",
+        "why": "The capacity tier opens with a baseline that survives scrutiny."
+      },
+      {
+        "title": "How should capacity economics influence performance governance?",
+        "theme": "performance-engineering",
+        "difficulty": "staff",
+        "href": "questions/performance-engineering/capacity-economics-governance.html",
+        "why": "Capacity economics influence what the baseline can honestly recommend."
+      },
+      {
+        "title": "How do you diagnose and mitigate noisy-neighbor performance?",
+        "theme": "performance-engineering",
+        "difficulty": "senior",
+        "href": "questions/performance-engineering/multi-tenant-noisy-neighbor.html",
+        "why": "Noisy neighbours are the multi-tenant version of the capacity problem."
+      },
+      {
+        "title": "When and how should a service shed load?",
+        "theme": "performance-engineering",
+        "difficulty": "senior",
+        "href": "questions/performance-engineering/load-shedding-design.html",
+        "why": "Load shedding is a performance tool here, not only an emergency brake."
+      },
+      {
+        "title": "What must stay controlled when you compare two performance runs?",
+        "theme": "performance-engineering",
+        "difficulty": "junior",
+        "href": "questions/performance-engineering/benchmark-control-variables.html",
+        "why": "Experiment integrity opens with comparisons whose variables stayed controlled."
+      },
+      {
+        "title": "How do you run performance experiments without endangering production?",
+        "theme": "performance-engineering",
+        "difficulty": "senior",
+        "href": "questions/performance-engineering/benchmark-production-safety.html",
+        "why": "Production experiments run safely or they do not run at all."
+      },
+      {
+        "title": "What should a performance regression check in CI actually prove?",
+        "theme": "performance-engineering",
+        "difficulty": "middle",
+        "href": "questions/performance-engineering/performance-regression-ci.html",
+        "why": "A CI regression check must prove only what it can honestly prove."
+      },
+      {
+        "title": "How do performance budgets change API and dependency design?",
+        "theme": "performance-engineering",
+        "difficulty": "senior",
+        "href": "questions/performance-engineering/performance-budget-api.html",
+        "why": "Contracts open with performance budgets shaping API and dependency design."
+      },
+      {
+        "title": "What cross-team contracts prevent performance regressions in a platform?",
+        "theme": "performance-engineering",
+        "difficulty": "staff",
+        "href": "questions/performance-engineering/cross-team-performance-contracts.html",
+        "why": "Cross-team contracts keep regressions from crossing team borders unnoticed."
+      },
+      {
+        "title": "How do you design a performance observability strategy across many services?",
+        "theme": "performance-engineering",
+        "difficulty": "staff",
+        "href": "questions/performance-engineering/performance-observability-strategy.html",
+        "why": "Observability across services watches those contracts actually hold."
+      },
+      {
+        "title": "How should a staff engineer evaluate resilience versus performance trade-offs?",
+        "theme": "performance-engineering",
+        "difficulty": "staff",
+        "href": "questions/performance-engineering/resilience-performance-tradeoffs.html",
+        "why": "Resilience versus performance is the staff trade the contracts just priced."
+      },
+      {
+        "title": "How would a staff engineer prioritize a portfolio of performance work?",
+        "theme": "performance-engineering",
+        "difficulty": "staff",
+        "href": "questions/performance-engineering/performance-investment-portfolio.html",
+        "why": "The staff-level portfolio prioritizes all the work the contracts surfaced."
+      },
+      {
+        "title": "How do you triage a p99 latency regression?",
+        "theme": "performance-engineering",
+        "difficulty": "senior",
+        "href": "questions/performance-engineering/tail-latency-triage.html",
+        "why": "The p99 triage stays last as a dress rehearsal for the whole diagnostic tier above."
+      },
+      {
+        "title": "Why can high-cardinality metrics become a performance incident?",
+        "theme": "performance-engineering",
+        "difficulty": "middle",
+        "href": "questions/performance-engineering/avoid-metric-cardinality.html",
+        "why": "The high-cardinality incident is the other dress rehearsal, turning measurement itself into the outage."
+      }
+    ]
+  },
+  {
+    "theme": "platform-engineering",
+    "note": "Definition, road, and product before self-service mechanics, and the judgement calls only after the operating model exists.",
+    "steps": [
+      {
+        "title": "Define an internal developer platform",
+        "theme": "platform-engineering",
+        "difficulty": "junior",
+        "href": "questions/platform-engineering/define-an-internal-developer-platform.html",
+        "why": "What an internal developer platform is names the product everything else serves."
+      },
+      {
+        "title": "Explain a paved road and a golden path",
+        "theme": "platform-engineering",
+        "difficulty": "junior",
+        "href": "questions/platform-engineering/explain-a-paved-road-and-a-golden-path.html",
+        "why": "The paved road and golden path give the platform its central metaphor."
+      },
+      {
+        "title": "Treat the platform as a product",
+        "theme": "platform-engineering",
+        "difficulty": "junior",
+        "href": "questions/platform-engineering/treat-the-platform-as-a-product.html",
+        "why": "Platform-as-a-product is the operating model that separates it from a ticket queue."
+      },
+      {
+        "title": "Offer self-service with safe defaults",
+        "theme": "platform-engineering",
+        "difficulty": "junior",
+        "href": "questions/platform-engineering/offer-self-service-with-safe-defaults.html",
+        "why": "Self-service with safe defaults is the mechanism that makes the road real."
+      },
+      {
+        "title": "Choose a guardrail over a gate",
+        "theme": "platform-engineering",
+        "difficulty": "middle",
+        "href": "questions/platform-engineering/choose-a-guardrail-over-a-gate.html",
+        "why": "Guardrails versus gates decides how the defaults treat every deviation."
+      },
+      {
+        "title": "Version a platform interface",
+        "theme": "platform-engineering",
+        "difficulty": "middle",
+        "href": "questions/platform-engineering/version-a-platform-interface.html",
+        "why": "Interface versioning and deprecation keep the road's promises honest over time."
+      },
+      {
+        "title": "Publish platform SLOs and a support model",
+        "theme": "platform-engineering",
+        "difficulty": "middle",
+        "href": "questions/platform-engineering/publish-platform-slos-and-a-support-model.html",
+        "why": "SLOs and a support model publish what tenants may actually depend on."
+      },
+      {
+        "title": "Onboard a team onto the platform",
+        "theme": "platform-engineering",
+        "difficulty": "middle",
+        "href": "questions/platform-engineering/onboard-a-team-onto-the-platform.html",
+        "why": "Onboarding is the first lifecycle moment those promises must survive."
+      },
+      {
+        "title": "Plan a migration onto the paved road",
+        "theme": "platform-engineering",
+        "difficulty": "senior",
+        "href": "questions/platform-engineering/plan-a-migration-onto-the-paved-road.html",
+        "why": "Migration moves existing teams onto the road without coercion."
+      },
+      {
+        "title": "Measure platform adoption",
+        "theme": "platform-engineering",
+        "difficulty": "middle",
+        "href": "questions/platform-engineering/measure-platform-adoption.html",
+        "why": "Adoption measurement says what a number can and cannot prove."
+      },
+      {
+        "title": "Measure developer experience",
+        "theme": "platform-engineering",
+        "difficulty": "middle",
+        "href": "questions/platform-engineering/measure-developer-experience.html",
+        "why": "The judgement calls open with developer experience measured honestly."
+      },
+      {
+        "title": "Reduce cognitive load with team topologies",
+        "theme": "platform-engineering",
+        "difficulty": "senior",
+        "href": "questions/platform-engineering/reduce-cognitive-load-with-team-topologies.html",
+        "why": "Cognitive load and interaction modes decide what the platform should absorb."
+      },
+      {
+        "title": "Decide build versus buy for a capability",
+        "theme": "platform-engineering",
+        "difficulty": "senior",
+        "href": "questions/platform-engineering/decide-build-versus-buy-for-a-capability.html",
+        "why": "Build versus buy prices each capability the platform might own."
+      },
+      {
+        "title": "Contain a noisy neighbour on a shared platform",
+        "theme": "platform-engineering",
+        "difficulty": "middle",
+        "href": "questions/platform-engineering/contain-a-noisy-neighbour-on-a-shared-platform.html",
+        "why": "Noisy neighbours are the multi-tenancy judgement the sharing model creates."
+      },
+      {
+        "title": "Run a platform-wide incident",
+        "theme": "platform-engineering",
+        "difficulty": "middle",
+        "href": "questions/platform-engineering/run-a-platform-wide-incident.html",
+        "why": "Platform incident response and blast radius are the judgement under pressure."
+      },
+      {
+        "title": "Size and staff a platform team",
+        "theme": "platform-engineering",
+        "difficulty": "staff",
+        "href": "questions/platform-engineering/size-and-staff-a-platform-team.html",
+        "why": "Cost and staffing size the team all the decisions above implied."
+      },
+      {
+        "title": "Recognise when a platform team is the wrong answer",
+        "theme": "platform-engineering",
+        "difficulty": "staff",
+        "href": "questions/platform-engineering/recognise-when-a-platform-team-is-the-wrong-answer.html",
+        "why": "Knowing when a platform team is the wrong answer is the staff-level close."
+      }
+    ]
+  },
+  {
+    "theme": "processes",
+    "note": "The vocabulary of procfs, PIDs, states, and signals before lifecycles, and real service lifecycles before fleet governance.",
+    "steps": [
+      {
+        "title": "Read a process status safely",
+        "theme": "processes",
+        "difficulty": "junior",
+        "href": "questions/processes/read-process-status.html",
+        "why": "/proc and process status are the primary sources the Theme reads first."
+      },
+      {
+        "title": "Explain PIDs and parent processes",
+        "theme": "processes",
+        "difficulty": "junior",
+        "href": "questions/processes/pid-and-parent-process.html",
+        "why": "PIDs and parentage explain the family tree every status line belongs to."
+      },
+      {
+        "title": "Interpret process state and load average",
+        "theme": "processes",
+        "difficulty": "middle",
+        "href": "questions/processes/process-state-and-load.html",
+        "why": "Process states and load average connect kernel state to the number everyone quotes."
+      },
+      {
+        "title": "Choose a signal for a running process",
+        "theme": "processes",
+        "difficulty": "junior",
+        "href": "questions/processes/signal-basics.html",
+        "why": "Choosing a signal is the first act performed on a process you understand."
+      },
+      {
+        "title": "Explain the fork exec wait lifecycle",
+        "theme": "processes",
+        "difficulty": "middle",
+        "href": "questions/processes/fork-exec-wait-lifecycle.html",
+        "why": "fork, exec, and wait explain how processes come to exist and to exit."
+      },
+      {
+        "title": "Control file descriptor inheritance across exec",
+        "theme": "processes",
+        "difficulty": "middle",
+        "href": "questions/processes/file-descriptor-inheritance.html",
+        "why": "Descriptor inheritance decides what an exec'd child actually holds open."
+      },
+      {
+        "title": "Model a service lifecycle with systemd",
+        "theme": "processes",
+        "difficulty": "middle",
+        "href": "questions/processes/systemd-service-lifecycle.html",
+        "why": "Unit, cgroup, and kill semantics turn kernel primitives into real service lifecycles."
+      },
+      {
+        "title": "Diagnose a per-process resource limit",
+        "theme": "processes",
+        "difficulty": "middle",
+        "href": "questions/processes/resource-limits.html",
+        "why": "Per-process limits are the controls the lifecycle tier finally makes sensible."
+      },
+      {
+        "title": "Define process observability without exposing secrets",
+        "theme": "processes",
+        "difficulty": "staff",
+        "href": "questions/processes/process-observability-standard.html",
+        "why": "The observability standard decides what the fleet knows about its processes."
+      },
+      {
+        "title": "Triage a hung process without destroying evidence",
+        "theme": "processes",
+        "difficulty": "middle",
+        "href": "questions/processes/hung-process-triage.html",
+        "why": "Hung-process triage is evidence preservation under pressure, the use case the tier above serves."
+      },
+      {
+        "title": "Design guardrails for automated process remediation",
+        "theme": "processes",
+        "difficulty": "staff",
+        "href": "questions/processes/process-remediation-guardrails.html",
+        "why": "Organization-wide guardrails close the Theme by governing automated process remediation."
+      }
+    ]
+  },
+  {
+    "theme": "qemu-kvm",
+    "note": "The three-boxes picture opens the Theme because every later answer assumes you know which layer owns what.",
+    "steps": [
+      {
+        "title": "Split QEMU's job from KVM's job",
+        "theme": "qemu-kvm",
+        "difficulty": "junior",
+        "href": "questions/qemu-kvm/split-qemu-from-kvm.html",
+        "why": "The three-boxes picture opens the Theme: kernel, QEMU, and libvirt each own a layer."
+      },
+      {
+        "title": "What /dev/kvm exposes to QEMU",
+        "theme": "qemu-kvm",
+        "difficulty": "junior",
+        "href": "questions/qemu-kvm/what-dev-kvm-exposes.html",
+        "why": "What /dev/kvm exposes makes the kernel's half of that split concrete."
+      },
+      {
+        "title": "Why virtio beats emulated devices",
+        "theme": "qemu-kvm",
+        "difficulty": "junior",
+        "href": "questions/qemu-kvm/why-virtio-beats-emulated-devices.html",
+        "why": "Virtio's shared-ring mechanism is half the performance vocabulary the Theme speaks."
+      },
+      {
+        "title": "Read a libvirt domain's states",
+        "theme": "qemu-kvm",
+        "difficulty": "junior",
+        "href": "questions/qemu-kvm/read-libvirt-domain-states.html",
+        "why": "Domain states are the operating grammar you read before acting on any guest."
+      },
+      {
+        "title": "Choose raw or qcow2 for a disk image",
+        "theme": "qemu-kvm",
+        "difficulty": "junior",
+        "href": "questions/qemu-kvm/choose-raw-or-qcow2.html",
+        "why": "Raw or qcow2 is the first decision a new domain actually forces."
+      },
+      {
+        "title": "Diagnose a guest silently running under TCG",
+        "theme": "qemu-kvm",
+        "difficulty": "middle",
+        "href": "questions/qemu-kvm/diagnose-fallback-to-tcg.html",
+        "why": "The silent TCG fallback is the foundations inverted, rehearsed as a 3 a.m. page."
+      },
+      {
+        "title": "Pick bridged or macvtap guest networking",
+        "theme": "qemu-kvm",
+        "difficulty": "middle",
+        "href": "questions/qemu-kvm/pick-bridged-or-macvtap.html",
+        "why": "Bridged versus macvtap carries the other surprise every operator meets exactly once."
+      },
+      {
+        "title": "Use the QEMU monitor without desyncing libvirt",
+        "theme": "qemu-kvm",
+        "difficulty": "middle",
+        "href": "questions/qemu-kvm/use-the-qemu-monitor-without-desync.html",
+        "why": "The monitor ownership rule keeps every later procedure truthful with libvirt."
+      },
+      {
+        "title": "Convert and rebase disk images with qemu-img",
+        "theme": "qemu-kvm",
+        "difficulty": "middle",
+        "href": "questions/qemu-kvm/convert-and-rebase-with-qemu-img.html",
+        "why": "The storage line runs image-first: convert and rebase with qemu-img."
+      },
+      {
+        "title": "Model storage as libvirt pools and volumes",
+        "theme": "qemu-kvm",
+        "difficulty": "middle",
+        "href": "questions/qemu-kvm/model-storage-as-pools-and-volumes.html",
+        "why": "Pools and volumes manage what qemu-img just produced."
+      },
+      {
+        "title": "Choose internal or external disk snapshots",
+        "theme": "qemu-kvm",
+        "difficulty": "middle",
+        "href": "questions/qemu-kvm/choose-internal-or-external-snapshots.html",
+        "why": "Snapshots are the point-in-time decision on top of managed storage."
+      },
+      {
+        "title": "Operate memory ballooning under host pressure",
+        "theme": "qemu-kvm",
+        "difficulty": "middle",
+        "href": "questions/qemu-kvm/operate-memory-ballooning.html",
+        "why": "Ballooning is the memory lever pulled when host memory runs short."
+      },
+      {
+        "title": "Decide when nested virtualization is worth it",
+        "theme": "qemu-kvm",
+        "difficulty": "middle",
+        "href": "questions/qemu-kvm/decide-on-nested-virtualization.html",
+        "why": "Nested virtualization returns to the TCG diagnosis's outer-hypervisor cause, priced this time."
+      },
+      {
+        "title": "Run a live migration you can trust",
+        "theme": "qemu-kvm",
+        "difficulty": "senior",
+        "href": "questions/qemu-kvm/run-a-live-migration-you-trust.html",
+        "why": "The senior band opens with migration, which consumes CPU modes, shared storage, and downtime budgets in one motion."
+      },
+      {
+        "title": "Choose a libvirt CPU mode for a fleet",
+        "theme": "qemu-kvm",
+        "difficulty": "middle",
+        "href": "questions/qemu-kvm/choose-a-libvirt-cpu-mode.html",
+        "why": "Migration silently assumes the target serves the exact CPU the guest booted with, so the fleet CPU-mode decision lands directly after it."
+      },
+      {
+        "title": "Respect machine types when editing guests",
+        "theme": "qemu-kvm",
+        "difficulty": "middle",
+        "href": "questions/qemu-kvm/respect-machine-types.html",
+        "why": "Machine types obey the same rule as CPU modes: never silently change what the guest booted last time."
+      },
+      {
+        "title": "Find where virtualization steals your performance",
+        "theme": "qemu-kvm",
+        "difficulty": "senior",
+        "href": "questions/qemu-kvm/find-virtualization-overhead.html",
+        "why": "The overhead investigation supplies the evidence discipline that settles the hypervisor-tax argument."
+      },
+      {
+        "title": "Pin a latency-sensitive VM to NUMA and hugepages",
+        "theme": "qemu-kvm",
+        "difficulty": "senior",
+        "href": "questions/qemu-kvm/pin-a-vm-to-numa-and-hugepages.html",
+        "why": "NUMA pinning and hugepages buy latency by constraining placement."
+      },
+      {
+        "title": "Design backups for running VMs",
+        "theme": "qemu-kvm",
+        "difficulty": "senior",
+        "href": "questions/qemu-kvm/design-running-vm-backups.html",
+        "why": "Backups for running VMs join the snapshot machinery with consistency."
+      },
+      {
+        "title": "Secure libvirt and QEMU access on a shared host",
+        "theme": "qemu-kvm",
+        "difficulty": "senior",
+        "href": "questions/qemu-kvm/secure-libvirt-and-qemu-access.html",
+        "why": "The shared-host permissions model is the one the TCG diagnosis only hinted at."
+      },
+      {
+        "title": "Design live migration for a fleet with mixed CPU generations",
+        "theme": "qemu-kvm",
+        "difficulty": "staff",
+        "href": "questions/qemu-kvm/migrate-a-fleet-with-mixed-cpus.html",
+        "why": "The staff band opens with fleet migration across mixed CPU generations."
+      },
+      {
+        "title": "Set an honest overcommit policy for a VM fleet",
+        "theme": "qemu-kvm",
+        "difficulty": "staff",
+        "href": "questions/qemu-kvm/set-an-honest-overcommit-policy.html",
+        "why": "The overcommit policy makes fleet capacity a contract rather than a ratio."
+      },
+      {
+        "title": "Choose the storage architecture for a VM fleet",
+        "theme": "qemu-kvm",
+        "difficulty": "staff",
+        "href": "questions/qemu-kvm/choose-fleet-vm-storage.html",
+        "why": "The fleet storage architecture is the storage line at fleet scale."
+      },
+      {
+        "title": "Harden a multi-tenant KVM host",
+        "theme": "qemu-kvm",
+        "difficulty": "staff",
+        "href": "questions/qemu-kvm/harden-a-multi-tenant-kvm-host.html",
+        "why": "Hardening a shared host is isolation with adversaries, not just tenants."
+      },
+      {
+        "title": "Govern QEMU upgrades across a fleet",
+        "theme": "qemu-kvm",
+        "difficulty": "staff",
+        "href": "questions/qemu-kvm/govern-qemu-upgrades.html",
+        "why": "A governed upgrade is machine types, migration, and hardening used as one maintenance motion: the whole course as a single change."
+      }
+    ]
+  },
+  {
+    "theme": "queue-messaging",
+    "note": "Semantics, routing, and delivery guarantees before platform mechanics, and the platform questions — security, recovery, SLOs — last.",
+    "steps": [
+      {
+        "title": "Choose a work queue or an event log",
+        "theme": "queue-messaging",
+        "difficulty": "junior",
+        "href": "questions/queue-messaging/choose-a-queue-or-log.html",
+        "why": "Queue versus log semantics decide deletion, replay, and ordering before any platform is chosen."
+      },
+      {
+        "title": "Explain RabbitMQ exchanges, bindings, and queues",
+        "theme": "queue-messaging",
+        "difficulty": "junior",
+        "href": "questions/queue-messaging/explain-rabbitmq-routing.html",
+        "why": "Routing through exchanges and bindings is the vocabulary of the queue side."
+      },
+      {
+        "title": "Acknowledge RabbitMQ work safely",
+        "theme": "queue-messaging",
+        "difficulty": "junior",
+        "href": "questions/queue-messaging/acknowledge-rabbitmq-work-safely.html",
+        "why": "Acknowledgements make at-least-once work safe on the queue side."
+      },
+      {
+        "title": "Explain at-most-once, at-least-once, and exactly-once claims",
+        "theme": "queue-messaging",
+        "difficulty": "junior",
+        "href": "questions/queue-messaging/explain-delivery-semantics.html",
+        "why": "Delivery semantics are end-to-end claims, and exactly-once stops at the consumer."
+      },
+      {
+        "title": "Explain Kafka topics and partitions",
+        "theme": "queue-messaging",
+        "difficulty": "junior",
+        "href": "questions/queue-messaging/explain-kafka-topics-and-partitions.html",
+        "why": "Topics and partitions are the log platform's unit of both parallelism and ordering."
+      },
+      {
+        "title": "Preserve required ordering in asynchronous processing",
+        "theme": "queue-messaging",
+        "difficulty": "middle",
+        "href": "questions/queue-messaging/preserve-order-in-async-processing.html",
+        "why": "Ordering per key is what partitions make possible, made deliberate here."
+      },
+      {
+        "title": "Commit Kafka offsets after processing effects",
+        "theme": "queue-messaging",
+        "difficulty": "middle",
+        "href": "questions/queue-messaging/commit-kafka-offsets-after-effects.html",
+        "why": "Committing offsets after effects is the smallest dual-write, met before any general pattern."
+      },
+      {
+        "title": "Handle Kafka consumer rebalances safely",
+        "theme": "queue-messaging",
+        "difficulty": "middle",
+        "href": "questions/queue-messaging/handle-kafka-consumer-rebalances.html",
+        "why": "Rebalances are the log platform's failure choreography for consumers."
+      },
+      {
+        "title": "Choose Kafka retention or log compaction",
+        "theme": "queue-messaging",
+        "difficulty": "middle",
+        "href": "questions/queue-messaging/choose-kafka-retention-or-compaction.html",
+        "why": "Retention versus compaction is what the log keeps, and for whom."
+      },
+      {
+        "title": "Manage event schema evolution",
+        "theme": "queue-messaging",
+        "difficulty": "senior",
+        "href": "questions/queue-messaging/manage-event-schema-evolution.html",
+        "why": "Schema evolution keeps producers and consumers compatible across time."
+      },
+      {
+        "title": "Plan Kafka partition capacity",
+        "theme": "queue-messaging",
+        "difficulty": "senior",
+        "href": "questions/queue-messaging/plan-kafka-partition-capacity.html",
+        "why": "Partition capacity prices the parallelism everything above assumed."
+      },
+      {
+        "title": "Design multi-tenant messaging security",
+        "theme": "queue-messaging",
+        "difficulty": "staff",
+        "href": "questions/queue-messaging/design-multi-tenant-messaging-security.html",
+        "why": "The platform tier opens with tenants kept apart on shared brokers."
+      },
+      {
+        "title": "Design Kafka disaster recovery",
+        "theme": "queue-messaging",
+        "difficulty": "senior",
+        "href": "questions/queue-messaging/design-kafka-disaster-recovery.html",
+        "why": "Disaster recovery for the log platform replays what retention kept."
+      },
+      {
+        "title": "Triage Kafka consumer lag",
+        "theme": "queue-messaging",
+        "difficulty": "middle",
+        "href": "questions/queue-messaging/triage-kafka-consumer-lag.html",
+        "why": "Consumer lag is the platform's daily symptom, triaged before the worst day."
+      },
+      {
+        "title": "Respond to a RabbitMQ cluster incident",
+        "theme": "queue-messaging",
+        "difficulty": "senior",
+        "href": "questions/queue-messaging/respond-to-rabbitmq-cluster-incident.html",
+        "why": "The RabbitMQ cluster incident is the queue side's own worst day."
+      },
+      {
+        "title": "Define messaging platform SLOs",
+        "theme": "queue-messaging",
+        "difficulty": "staff",
+        "href": "questions/queue-messaging/define-messaging-slos.html",
+        "why": "Reliability SLOs close the Theme by promising what the platform delivers."
+      }
+    ]
+  },
+  {
+    "theme": "security",
+    "note": "Identity, access control, secrets, and TLS before delivery and container controls, then detection and incident handling, then the risk governance and recovery design that spend them.",
+    "steps": [
+      {
+        "title": "Apply least privilege to a workload identity",
+        "theme": "security",
+        "difficulty": "middle",
+        "href": "questions/security/least-privilege-iam.html",
+        "why": "Identity opens the Theme because every later control binds itself to one."
+      },
+      {
+        "title": "Choose multi-factor authentication for privileged access",
+        "theme": "security",
+        "difficulty": "junior",
+        "href": "questions/security/multi-factor-authentication.html",
+        "why": "MFA for privileged access is the identity tier's strongest gate."
+      },
+      {
+        "title": "Design zero-trust service access",
+        "theme": "security",
+        "difficulty": "senior",
+        "href": "questions/security/zero-trust-service-access.html",
+        "why": "Zero-trust access removes network location as an implicit grant."
+      },
+      {
+        "title": "Describe a secure secret-management lifecycle",
+        "theme": "security",
+        "difficulty": "middle",
+        "href": "questions/security/secret-management-lifecycle.html",
+        "why": "The secret lifecycle governs the credentials the identity tier issues."
+      },
+      {
+        "title": "Store application passwords safely",
+        "theme": "security",
+        "difficulty": "junior",
+        "href": "questions/security/password-storage.html",
+        "why": "Storing passwords safely is that lifecycle's most abused corner."
+      },
+      {
+        "title": "Explain TLS certificate validation",
+        "theme": "security",
+        "difficulty": "junior",
+        "href": "questions/security/tls-certificate-basics.html",
+        "why": "TLS validation is the transport trust the tiers above ride on."
+      },
+      {
+        "title": "Set web security headers deliberately",
+        "theme": "security",
+        "difficulty": "middle",
+        "href": "questions/security/security-headers.html",
+        "why": "Security headers complete the browser-facing controls of the transport tier."
+      },
+      {
+        "title": "Secure shared CI runners",
+        "theme": "security",
+        "difficulty": "middle",
+        "href": "questions/security/secure-ci-runners.html",
+        "why": "Secure delivery opens with the runners, where pipeline code meets secrets."
+      },
+      {
+        "title": "Deliver secrets to a GitOps-reconciled cluster",
+        "theme": "security",
+        "difficulty": "senior",
+        "href": "questions/security/gitops-secret-delivery.html",
+        "why": "Secret delivery to a reconciled cluster keeps GitOps honest about sensitive state."
+      },
+      {
+        "title": "Verify container image provenance before deployment",
+        "theme": "security",
+        "difficulty": "senior",
+        "href": "questions/security/container-image-provenance.html",
+        "why": "Image provenance verifies what the delivery tier actually ships."
+      },
+      {
+        "title": "Harden a container runtime workload",
+        "theme": "security",
+        "difficulty": "middle",
+        "href": "questions/security/container-runtime-hardening.html",
+        "why": "Runtime hardening bounds what the shipped workloads may do."
+      },
+      {
+        "title": "Enforce Kubernetes Pod Security Standards",
+        "theme": "security",
+        "difficulty": "middle",
+        "href": "questions/security/kubernetes-pod-security.html",
+        "why": "Pod Security Standards enforce that hardening at the platform boundary."
+      },
+      {
+        "title": "Design software supply-chain controls",
+        "theme": "security",
+        "difficulty": "senior",
+        "href": "questions/security/software-supply-chain-controls.html",
+        "why": "Supply-chain controls compose signing, provenance, and verification into one system."
+      },
+      {
+        "title": "Design useful security event logging",
+        "theme": "security",
+        "difficulty": "junior",
+        "href": "questions/security/security-logging-basics.html",
+        "why": "Detection opens with deciding which events are worth logging."
+      },
+      {
+        "title": "Triage a suspected security incident",
+        "theme": "security",
+        "difficulty": "middle",
+        "href": "questions/security/security-incident-triage.html",
+        "why": "Incident triage decides what the detected events actually mean."
+      },
+      {
+        "title": "Respond to a leaked production secret",
+        "theme": "security",
+        "difficulty": "middle",
+        "href": "questions/security/secret-leak-response.html",
+        "why": "A leaked secret gets a response runbook, not just a rotation."
+      },
+      {
+        "title": "Triage a production vulnerability report",
+        "theme": "security",
+        "difficulty": "middle",
+        "href": "questions/security/vulnerability-triage.html",
+        "why": "Vulnerability reports are triaged by exploitation reality, not CVSS folklore."
+      },
+      {
+        "title": "Manage vulnerable application dependencies",
+        "theme": "security",
+        "difficulty": "middle",
+        "href": "questions/security/dependency-vulnerability-management.html",
+        "why": "Dependency management is vulnerability triage at fleet scale."
+      },
+      {
+        "title": "Explain risk-based patch management",
+        "theme": "security",
+        "difficulty": "junior",
+        "href": "questions/security/patch-management-basics.html",
+        "why": "Risk-based patching closes detection and response with a defensible cadence."
+      },
+      {
+        "title": "Design production network segmentation",
+        "theme": "security",
+        "difficulty": "senior",
+        "href": "questions/security/production-segmentation.html",
+        "why": "Resilience opens with segmentation that contains the blast radius."
+      },
+      {
+        "title": "Design recoverable backups for ransomware",
+        "theme": "security",
+        "difficulty": "senior",
+        "href": "questions/security/ransomware-recovery-design.html",
+        "why": "Ransomware recovery assumes the adversary held the backups too."
+      },
+      {
+        "title": "Govern security-control exceptions",
+        "theme": "security",
+        "difficulty": "staff",
+        "href": "questions/security/security-exception-governance.html",
+        "why": "Risk governance opens with exceptions that are owned, priced, and expiring."
+      },
+      {
+        "title": "Define security metrics that drive engineering decisions",
+        "theme": "security",
+        "difficulty": "staff",
+        "href": "questions/security/security-metrics-program.html",
+        "why": "Metrics exist to drive engineering decisions rather than dashboard theatre."
+      },
+      {
+        "title": "Establish a security platform risk model",
+        "theme": "security",
+        "difficulty": "staff",
+        "href": "questions/security/security-platform-risk-model.html",
+        "why": "The platform risk model names what the organization explicitly accepts."
+      },
+      {
+        "title": "Deliver secure platform defaults at scale",
+        "theme": "security",
+        "difficulty": "staff",
+        "href": "questions/security/secure-platform-defaults.html",
+        "why": "Secure defaults at scale make the safe path the easy path for every team."
+      },
+      {
+        "title": "Build organization-wide incident readiness",
+        "theme": "security",
+        "difficulty": "staff",
+        "href": "questions/security/organization-incident-readiness.html",
+        "why": "Organization-wide readiness is the Theme's close: every control rehearsed together."
+      }
+    ]
+  },
+  {
+    "theme": "serverless",
+    "note": "Execution model and invocation semantics before idempotency and concurrency, because the platform's delivery rules decide what correctness costs.",
+    "steps": [
+      {
+        "title": "Explain the serverless function execution model",
+        "theme": "serverless",
+        "difficulty": "junior",
+        "href": "questions/serverless/explain-serverless-execution-model.html",
+        "why": "The execution model comes first because everything disappears between requests."
+      },
+      {
+        "title": "Explain serverless payload, memory, and duration limits",
+        "theme": "serverless",
+        "difficulty": "junior",
+        "href": "questions/serverless/explain-function-payload-limits.html",
+        "why": "Quotas are the platform's opinions, learned before they bite in production."
+      },
+      {
+        "title": "Explain synchronous and asynchronous serverless invocation",
+        "theme": "serverless",
+        "difficulty": "junior",
+        "href": "questions/serverless/explain-invocation-delivery-semantics.html",
+        "why": "Synchronous, asynchronous, and poll-based invocation decide who owns the retry."
+      },
+      {
+        "title": "Design idempotent serverless functions",
+        "theme": "serverless",
+        "difficulty": "middle",
+        "href": "questions/serverless/design-idempotent-functions.html",
+        "why": "Idempotency is practised against the delivery semantics established above."
+      },
+      {
+        "title": "Design idempotent serverless event processing",
+        "theme": "serverless",
+        "difficulty": "senior",
+        "href": "questions/serverless/design-idempotent-serverless-events.html",
+        "why": "Event-processing idempotency separates the event key from the business key."
+      },
+      {
+        "title": "Design serverless function timeouts and deadlines",
+        "theme": "serverless",
+        "difficulty": "middle",
+        "href": "questions/serverless/design-function-timeouts.html",
+        "why": "Timeouts and deadlines bound exactly what the platform will retry."
+      },
+      {
+        "title": "Handle serverless failures and poison events",
+        "theme": "serverless",
+        "difficulty": "senior",
+        "href": "questions/serverless/handle-serverless-failures.html",
+        "why": "Failure and poison-event handling is where those retries finally surface."
+      },
+      {
+        "title": "Manage serverless function concurrency safely",
+        "theme": "serverless",
+        "difficulty": "middle",
+        "href": "questions/serverless/manage-function-concurrency.html",
+        "why": "Concurrency controls protect the backing services from the whole fleet."
+      },
+      {
+        "title": "Manage database connections from serverless functions",
+        "theme": "serverless",
+        "difficulty": "middle",
+        "href": "questions/serverless/manage-serverless-database-connections.html",
+        "why": "Connection management is the stateful dependency serverless starves."
+      },
+      {
+        "title": "Reduce a serverless deployment package and its dependency weight",
+        "theme": "serverless",
+        "difficulty": "middle",
+        "href": "questions/serverless/reduce-function-package-size.html",
+        "why": "Packaging closes the practised tier with cold-start economics."
+      },
+      {
+        "title": "Trace a request across ephemeral serverless components",
+        "theme": "serverless",
+        "difficulty": "middle",
+        "href": "questions/serverless/trace-ephemeral-function-requests.html",
+        "why": "Tracing ephemeral compute is the observability you cannot log into."
+      },
+      {
+        "title": "Control serverless cost without hiding demand",
+        "theme": "serverless",
+        "difficulty": "senior",
+        "href": "questions/serverless/control-serverless-cost.html",
+        "why": "Cost attribution watches the demand the concurrency tier just throttled."
+      },
+      {
+        "title": "Secure serverless function identity",
+        "theme": "serverless",
+        "difficulty": "middle",
+        "href": "questions/serverless/secure-function-identity.html",
+        "why": "Least-privilege execution roles bound what each function may touch."
+      },
+      {
+        "title": "Decide between managed functions and long-running compute",
+        "theme": "serverless",
+        "difficulty": "staff",
+        "href": "questions/serverless/choose-serverless-versus-long-running-compute.html",
+        "why": "When managed functions beat long-running services is the platform-level close."
+      }
+    ]
+  },
+  {
+    "theme": "service-mesh",
+    "note": "The control-plane, data-plane, and identity model first, practice in a disposable cluster second, ownership decisions last.",
+    "steps": [
+      {
+        "title": "Distinguish a mesh control plane from its data plane",
+        "theme": "service-mesh",
+        "difficulty": "junior",
+        "href": "questions/service-mesh/service-mesh-control-data-plane.html",
+        "why": "The control-plane and data-plane split explains what a mesh actually adds."
+      },
+      {
+        "title": "Explain workload identity in a service mesh",
+        "theme": "service-mesh",
+        "difficulty": "junior",
+        "href": "questions/service-mesh/service-mesh-identity.html",
+        "why": "Workload identity is the foundation everything else the mesh promises stands on."
+      },
+      {
+        "title": "Verify sidecar enrollment before troubleshooting mesh policy",
+        "theme": "service-mesh",
+        "difficulty": "junior",
+        "href": "questions/service-mesh/service-mesh-sidecar-injection.html",
+        "why": "Enrollment is verified before policy, or nothing downstream can even be debugged."
+      },
+      {
+        "title": "Enforce Istio mutual TLS incrementally",
+        "theme": "service-mesh",
+        "difficulty": "senior",
+        "href": "questions/service-mesh/istio-mutual-tls.html",
+        "why": "Mutual TLS is enforced incrementally once enrollment is trustworthy."
+      },
+      {
+        "title": "Route mesh traffic with a VirtualService",
+        "theme": "service-mesh",
+        "difficulty": "middle",
+        "href": "questions/service-mesh/istio-virtualservice-routing.html",
+        "why": "Traffic management opens with the routing rules a mesh can express."
+      },
+      {
+        "title": "Apply traffic policies with a DestinationRule",
+        "theme": "service-mesh",
+        "difficulty": "middle",
+        "href": "questions/service-mesh/istio-destination-rule-policies.html",
+        "why": "DestinationRules carry the traffic and resilience policies routing depends on."
+      },
+      {
+        "title": "Shift traffic progressively with Istio",
+        "theme": "service-mesh",
+        "difficulty": "senior",
+        "href": "questions/service-mesh/istio-progressive-traffic-shift.html",
+        "why": "Progressive traffic shifts are traffic management with a safety contract."
+      },
+      {
+        "title": "Configure Istio ingress and egress boundaries",
+        "theme": "service-mesh",
+        "difficulty": "middle",
+        "href": "questions/service-mesh/istio-ingress-egress-gateways.html",
+        "why": "Gateways govern where mesh traffic meets the outside world."
+      },
+      {
+        "title": "Use mesh telemetry without mistaking it for complete observability",
+        "theme": "service-mesh",
+        "difficulty": "junior",
+        "href": "questions/service-mesh/service-mesh-observability.html",
+        "why": "Mesh telemetry is used without mistaking it for complete observability."
+      },
+      {
+        "title": "Upgrade Istio with a bounded canary",
+        "theme": "service-mesh",
+        "difficulty": "staff",
+        "href": "questions/service-mesh/istio-canary-upgrade.html",
+        "why": "Upgrades come late because they risk everything above them at once."
+      },
+      {
+        "title": "Design service-mesh boundaries across multiple clusters",
+        "theme": "service-mesh",
+        "difficulty": "staff",
+        "href": "questions/service-mesh/service-mesh-multicluster-boundaries.html",
+        "why": "Multicluster boundaries extend the identity and policy model across clusters."
+      },
+      {
+        "title": "Make a service-mesh adoption decision with measurable outcomes",
+        "theme": "service-mesh",
+        "difficulty": "staff",
+        "href": "questions/service-mesh/service-mesh-adoption-decision.html",
+        "why": "The adoption decision is made with measurable outcomes, after the mechanics are known."
+      },
+      {
+        "title": "Establish safe service-mesh platform guardrails",
+        "theme": "service-mesh",
+        "difficulty": "staff",
+        "href": "questions/service-mesh/service-mesh-platform-guardrails.html",
+        "why": "Platform guardrails close the Theme: whether the mesh improves reliability or merely complicates it."
+      }
+    ]
+  },
+  {
+    "theme": "shell-scripting",
+    "note": "The contract before the tricks: interpreter, exit statuses, and quoting carry every later technique from snippet to fleet service.",
+    "steps": [
+      {
+        "title": "Execute a shell script with an explicit interpreter",
+        "theme": "shell-scripting",
+        "difficulty": "junior",
+        "href": "questions/shell-scripting/execute-a-script-portably.html",
+        "why": "Running with an explicit interpreter is the contract underneath every later technique."
+      },
+      {
+        "title": "Use exit statuses as an automation contract",
+        "theme": "shell-scripting",
+        "difficulty": "junior",
+        "href": "questions/shell-scripting/use-exit-statuses.html",
+        "why": "Exit statuses are the automation contract everything downstream reads."
+      },
+      {
+        "title": "Explain shell quoting and variable expansion",
+        "theme": "shell-scripting",
+        "difficulty": "junior",
+        "href": "questions/shell-scripting/shell-quoting-and-expansion.html",
+        "why": "Quoting and variable expansion under control is the third thing every later technique defends."
+      },
+      {
+        "title": "Prevent command injection in an automation script",
+        "theme": "shell-scripting",
+        "difficulty": "middle",
+        "href": "questions/shell-scripting/avoid-command-injection.html",
+        "why": "Command injection is what uncontrolled quoting costs, met immediately after quoting."
+      },
+      {
+        "title": "Handle shell-script arguments without losing boundaries",
+        "theme": "shell-scripting",
+        "difficulty": "junior",
+        "href": "questions/shell-scripting/handle-script-arguments.html",
+        "why": "Argument boundaries extend the contract to the inputs a script accepts."
+      },
+      {
+        "title": "Parse command-line options with getopts",
+        "theme": "shell-scripting",
+        "difficulty": "middle",
+        "href": "questions/shell-scripting/parse-options-with-getopts.html",
+        "why": "getopts parses options without losing the boundaries established above."
+      },
+      {
+        "title": "Use Bash arrays for command arguments",
+        "theme": "shell-scripting",
+        "difficulty": "middle",
+        "href": "questions/shell-scripting/use-arrays-for-arguments.html",
+        "why": "Arrays carry command arguments as words rather than one fragile string."
+      },
+      {
+        "title": "Read arbitrary input lines safely in Bash",
+        "theme": "shell-scripting",
+        "difficulty": "junior",
+        "href": "questions/shell-scripting/read-lines-safely.html",
+        "why": "Reading arbitrary input lines safely is the boundary tier's last skill."
+      },
+      {
+        "title": "Preserve the failed command in a pipeline",
+        "theme": "shell-scripting",
+        "difficulty": "middle",
+        "href": "questions/shell-scripting/preserve-pipeline-failures.html",
+        "why": "Pipelines that preserve the failed command extend the exit-status contract."
+      },
+      {
+        "title": "Use command substitution without hiding failures",
+        "theme": "shell-scripting",
+        "difficulty": "middle",
+        "href": "questions/shell-scripting/use-command-substitution-deliberately.html",
+        "why": "Command substitution used deliberately does not hide the failures inside it."
+      },
+      {
+        "title": "Apply Bash strict mode with context",
+        "theme": "shell-scripting",
+        "difficulty": "middle",
+        "href": "questions/shell-scripting/choose-strict-mode.html",
+        "why": "Strict mode is the first step from snippet toward service."
+      },
+      {
+        "title": "Create and clean temporary files safely",
+        "theme": "shell-scripting",
+        "difficulty": "middle",
+        "href": "questions/shell-scripting/manage-temporary-files.html",
+        "why": "Temporary-file hygiene keeps the service from littering its host."
+      },
+      {
+        "title": "Handle termination signals and cleanup",
+        "theme": "shell-scripting",
+        "difficulty": "middle",
+        "href": "questions/shell-scripting/handle-signals-and-cleanup.html",
+        "why": "Termination signals and cleanup make the exit paths deliberate."
+      },
+      {
+        "title": "Prevent overlapping scheduled script runs",
+        "theme": "shell-scripting",
+        "difficulty": "senior",
+        "href": "questions/shell-scripting/lock-singleton-job.html",
+        "why": "Preventing overlapping scheduled runs completes the snippet-to-service tier."
+      },
+      {
+        "title": "Make a remediation script idempotent",
+        "theme": "shell-scripting",
+        "difficulty": "senior",
+        "href": "questions/shell-scripting/implement-idempotent-remediation.html",
+        "why": "The fleet tier opens with remediation that is safe to re-run."
+      },
+      {
+        "title": "Control concurrent jobs in a Bash worker",
+        "theme": "shell-scripting",
+        "difficulty": "senior",
+        "href": "questions/shell-scripting/control-concurrent-jobs.html",
+        "why": "Controlled concurrency keeps the worker from stampeding the fleet it serves."
+      },
+      {
+        "title": "Make shell-script logs useful without leaking secrets",
+        "theme": "shell-scripting",
+        "difficulty": "middle",
+        "href": "questions/shell-scripting/log-without-secrets.html",
+        "why": "Fleet logs stay useful without leaking the secrets they pass near."
+      },
+      {
+        "title": "Debug a failing production script safely",
+        "theme": "shell-scripting",
+        "difficulty": "senior",
+        "href": "questions/shell-scripting/debug-production-script-safely.html",
+        "why": "Debugging in production preserves evidence rather than destroying it."
+      },
+      {
+        "title": "Test a shell script before production",
+        "theme": "shell-scripting",
+        "difficulty": "senior",
+        "href": "questions/shell-scripting/test-shell-scripts.html",
+        "why": "Testing before production is the fleet tier's own gate."
+      },
+      {
+        "title": "Find shell-script defects before deployment",
+        "theme": "shell-scripting",
+        "difficulty": "middle",
+        "href": "questions/shell-scripting/debug-with-shellcheck.html",
+        "why": "Static defect-finding wraps the fleet tier from the outside."
+      },
+      {
+        "title": "Govern the shell-script supply chain",
+        "theme": "shell-scripting",
+        "difficulty": "staff",
+        "href": "questions/shell-scripting/govern-shell-script-supply-chain.html",
+        "why": "Supply-chain governance wraps the same tier from the other side."
+      },
+      {
+        "title": "Decide when to replace a shell script",
+        "theme": "shell-scripting",
+        "difficulty": "staff",
+        "href": "questions/shell-scripting/decide-when-to-replace-shell.html",
+        "why": "The judgement tier opens with knowing when shell is the wrong tool."
+      },
+      {
+        "title": "Measure shell-automation reliability",
+        "theme": "shell-scripting",
+        "difficulty": "staff",
+        "href": "questions/shell-scripting/measure-automation-reliability.html",
+        "why": "Reliability measurement makes the fleet's scripts an accountable service."
+      },
+      {
+        "title": "Design a fleet-remediation runbook",
+        "theme": "shell-scripting",
+        "difficulty": "staff",
+        "href": "questions/shell-scripting/design-fleet-remediation-runbook.html",
+        "why": "The runbook owes its reader judgement, not just a command list."
+      },
+      {
+        "title": "Define a safe shell-automation standard",
+        "theme": "shell-scripting",
+        "difficulty": "staff",
+        "href": "questions/shell-scripting/define-shell-automation-standard.html",
+        "why": "The organization-wide standard closes the Theme by deciding what to actually mandate."
+      }
+    ]
+  },
+  {
+    "theme": "sre",
+    "note": "Take the promise first — reliability, user-journey SLI, error budget — because alerting, incidents, and governance are all arithmetic on it.",
+    "steps": [
+      {
+        "title": "Define service reliability and the role of an SRE",
+        "theme": "sre",
+        "difficulty": "junior",
+        "href": "questions/sre/define-service-reliability.html",
+        "why": "The promise comes first: reliability as a measured user outcome, SRE as shared ownership of it."
+      },
+      {
+        "title": "Choose a user-journey SLI",
+        "theme": "sre",
+        "difficulty": "junior",
+        "href": "questions/sre/define-user-journey-sli.html",
+        "why": "The user-journey SLI makes the promise arithmetic, which is why it precedes any budget."
+      },
+      {
+        "title": "Explain an error budget",
+        "theme": "sre",
+        "difficulty": "junior",
+        "href": "questions/sre/explain-error-budget.html",
+        "why": "The budget is arithmetic on the SLI, and the SLI is a claim about users."
+      },
+      {
+        "title": "Classify an alert as a page, ticket, or log",
+        "theme": "sre",
+        "difficulty": "junior",
+        "href": "questions/sre/classify-alert-urgency.html",
+        "why": "Alerting follows definitions: page, ticket, or log is the cheapest filter in the Theme."
+      },
+      {
+        "title": "Design a multi-window burn-rate alert",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/design-multiwindow-burn-alert.html",
+        "why": "The multi-window burn alert spends the budget's maths the definitions built."
+      },
+      {
+        "title": "Establish an effective on-call handoff",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/establish-oncall-handoff.html",
+        "why": "The incident arc reads like a shift, and it opens with a real handoff."
+      },
+      {
+        "title": "Assign incident-management roles",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/assign-incident-roles.html",
+        "why": "Roles keep the incident organized before the pressure actually arrives."
+      },
+      {
+        "title": "Triage a production incident",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/triage-production-incident.html",
+        "why": "Triage is the single-responder method running inside a declared incident."
+      },
+      {
+        "title": "Coordinate a major incident across teams",
+        "theme": "sre",
+        "difficulty": "senior",
+        "href": "questions/sre/coordinate-major-incident.html",
+        "why": "The cross-team major incident scales the same method across organizations."
+      },
+      {
+        "title": "Write an actionable runbook",
+        "theme": "sre",
+        "difficulty": "junior",
+        "href": "questions/sre/write-actionable-runbook.html",
+        "why": "The actionable runbook makes the recurring work of the arc repeatable."
+      },
+      {
+        "title": "Write a blameless postmortem",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/write-blameless-postmortem.html",
+        "why": "The blameless postmortem closes the arc on the evidence every step preserved."
+      },
+      {
+        "title": "Prevent cascading failures",
+        "theme": "sre",
+        "difficulty": "senior",
+        "href": "questions/sre/prevent-cascading-failures.html",
+        "why": "Reliability engineering proper opens with cascades contained as one compatible system."
+      },
+      {
+        "title": "Protect a service from overload",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/protect-service-from-overload.html",
+        "why": "Overload protection is admission control at the service's own limits."
+      },
+      {
+        "title": "Manage critical state for reliability",
+        "theme": "sre",
+        "difficulty": "senior",
+        "href": "questions/sre/manage-critical-state.html",
+        "why": "Critical state is named and protected, never discovered mid-failure."
+      },
+      {
+        "title": "Test a disaster-recovery plan",
+        "theme": "sre",
+        "difficulty": "senior",
+        "href": "questions/sre/test-disaster-recovery.html",
+        "why": "The disaster-recovery plan is tested, or it is only a document."
+      },
+      {
+        "title": "Plan service capacity",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/plan-service-capacity.html",
+        "why": "Capacity planning turns forecast demand into provisioned headroom with a defensible margin."
+      },
+      {
+        "title": "Run a production-readiness review",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/run-production-readiness-review.html",
+        "why": "The readiness review walks every earlier step for a service you did not build."
+      },
+      {
+        "title": "Measure and reduce toil",
+        "theme": "sre",
+        "difficulty": "middle",
+        "href": "questions/sre/measure-and-reduce-toil.html",
+        "why": "Toil is priced after the incident work, because you can only price what you have felt."
+      },
+      {
+        "title": "Measure platform impact with DORA metrics without gaming teams",
+        "theme": "sre",
+        "difficulty": "staff",
+        "href": "questions/sre/measure-platform-impact-with-dora.html",
+        "why": "DORA metrics are trusted only once you have watched teams try to game them."
+      },
+      {
+        "title": "Govern an error-budget policy",
+        "theme": "sre",
+        "difficulty": "staff",
+        "href": "questions/sre/govern-error-budget-policy.html",
+        "why": "The budget policy is the organizational decision the arithmetic was always heading toward."
+      },
+      {
+        "title": "Define an SRE engagement model",
+        "theme": "sre",
+        "difficulty": "staff",
+        "href": "questions/sre/define-sre-engagement-model.html",
+        "why": "The engagement model decides how SRE meets its partner teams."
+      },
+      {
+        "title": "Establish service ownership and reliability accountability",
+        "theme": "sre",
+        "difficulty": "staff",
+        "href": "questions/sre/establish-service-ownership.html",
+        "why": "Ownership and accountability name who answers for reliability in the end."
+      },
+      {
+        "title": "Design an organizational incident-management program",
+        "theme": "sre",
+        "difficulty": "staff",
+        "href": "questions/sre/design-organizational-incident-program.html",
+        "why": "The incident program scales the whole arc beyond one team's shift."
+      },
+      {
+        "title": "Design a reliable product launch",
+        "theme": "sre",
+        "difficulty": "senior",
+        "href": "questions/sre/design-reliable-launch.html",
+        "why": "The reliable launch applies every prior habit to a brand-new service."
+      },
+      {
+        "title": "Build a reliability investment roadmap",
+        "theme": "sre",
+        "difficulty": "staff",
+        "href": "questions/sre/build-reliability-roadmap.html",
+        "why": "The roadmap closes the Theme by turning everything above into funded work."
+      }
+    ]
+  },
+  {
+    "theme": "storage",
+    "note": "The shape question comes first because block, file, or object decides every later answer, and the close is platform scope.",
+    "steps": [
+      {
+        "title": "Choose between block, file, and object storage",
+        "theme": "storage",
+        "difficulty": "junior",
+        "href": "questions/storage/block-file-object-storage.html",
+        "why": "Block, file, or object comes first because it decides every later answer."
+      },
+      {
+        "title": "Mount persistent storage safely on Linux",
+        "theme": "storage",
+        "difficulty": "junior",
+        "href": "questions/storage/mount-persistent-storage.html",
+        "why": "Mounting persistent storage safely is the hands-on first step."
+      },
+      {
+        "title": "Operate NFS shared storage safely",
+        "theme": "storage",
+        "difficulty": "middle",
+        "href": "questions/storage/operate-nfs-shared-storage.html",
+        "why": "NFS as the first real workload teaches shared storage's surprises early."
+      },
+      {
+        "title": "Choose block-volume performance for a workload",
+        "theme": "storage",
+        "difficulty": "middle",
+        "href": "questions/storage/choose-volume-performance.html",
+        "why": "The performance and protection pairing opens with choosing block-volume performance for the workload."
+      },
+      {
+        "title": "Create an application-consistent volume snapshot",
+        "theme": "storage",
+        "difficulty": "middle",
+        "href": "questions/storage/design-consistent-snapshot.html",
+        "why": "Application-consistent snapshots capture state that is actually restorable."
+      },
+      {
+        "title": "Plan for performance when restoring a volume from a snapshot",
+        "theme": "storage",
+        "difficulty": "middle",
+        "href": "questions/storage/handle-snapshot-restore-latency.html",
+        "why": "Restore-from-snapshot planning prices the latency the snapshot hid."
+      },
+      {
+        "title": "Distinguish backups from storage snapshots",
+        "theme": "storage",
+        "difficulty": "junior",
+        "href": "questions/storage/distinguish-backups-and-snapshots.html",
+        "why": "The distinction is stated before the exercise that proves it."
+      },
+      {
+        "title": "Run a meaningful backup restore exercise",
+        "theme": "storage",
+        "difficulty": "middle",
+        "href": "questions/storage/restore-backup-exercise.html",
+        "why": "The restore exercise is what a backup claim is finally worth."
+      },
+      {
+        "title": "Diagnose a full filesystem when free space remains",
+        "theme": "storage",
+        "difficulty": "middle",
+        "href": "questions/storage/inode-exhaustion.html",
+        "why": "The incident set opens with the full filesystem that still shows free space."
+      },
+      {
+        "title": "Recover storage held by deleted open files",
+        "theme": "storage",
+        "difficulty": "middle",
+        "href": "questions/storage/diagnose-deleted-open-files.html",
+        "why": "Space held by deleted open files is the storage incident everyone meets once."
+      },
+      {
+        "title": "Respond to suspected filesystem corruption",
+        "theme": "storage",
+        "difficulty": "middle",
+        "href": "questions/storage/diagnose-filesystem-corruption.html",
+        "why": "Suspected corruption is responded to, not blindly repaired."
+      },
+      {
+        "title": "Explain RAID redundancy and its limits",
+        "theme": "storage",
+        "difficulty": "junior",
+        "href": "questions/storage/explain-raid-redundancy.html",
+        "why": "RAID limits sit between the incidents and the rebuild that actually kills arrays."
+      },
+      {
+        "title": "Plan a degraded RAID rebuild without compounding risk",
+        "theme": "storage",
+        "difficulty": "senior",
+        "href": "questions/storage/plan-raid-rebuild-risk.html",
+        "why": "The degraded rebuild is planned because a rebuild is when an array dies."
+      },
+      {
+        "title": "Investigate a storage latency incident",
+        "theme": "storage",
+        "difficulty": "middle",
+        "href": "questions/storage/investigate-storage-latency.html",
+        "why": "The storage latency incident closes the incident set."
+      },
+      {
+        "title": "Design database point-in-time recovery",
+        "theme": "storage",
+        "difficulty": "senior",
+        "href": "questions/storage/database-point-in-time-recovery.html",
+        "why": "The resilience tier opens with database point-in-time recovery as its strictest form."
+      },
+      {
+        "title": "Design cross-region storage recovery",
+        "theme": "storage",
+        "difficulty": "senior",
+        "href": "questions/storage/design-cross-region-recovery.html",
+        "why": "Cross-region recovery spends the resilience tier at distance."
+      },
+      {
+        "title": "Design immutable recovery copies against ransomware",
+        "theme": "storage",
+        "difficulty": "senior",
+        "href": "questions/storage/design-immutable-recovery.html",
+        "why": "Immutable copies assume the ransomware reached everything else first."
+      },
+      {
+        "title": "Design an object-storage lifecycle policy",
+        "theme": "storage",
+        "difficulty": "middle",
+        "href": "questions/storage/manage-object-lifecycle.html",
+        "why": "The object lifecycle policy automates what retention demands of objects."
+      },
+      {
+        "title": "Govern data retention and deletion across storage systems",
+        "theme": "storage",
+        "difficulty": "staff",
+        "href": "questions/storage/govern-data-retention.html",
+        "why": "Retention governance closes the resilience tier with deletion as a duty."
+      },
+      {
+        "title": "Set storage SLOs for a platform",
+        "theme": "storage",
+        "difficulty": "staff",
+        "href": "questions/storage/set-storage-slos.html",
+        "why": "Platform scope opens with SLOs the storage platform will defend."
+      },
+      {
+        "title": "Use storage quotas without surprising tenants",
+        "theme": "storage",
+        "difficulty": "junior",
+        "href": "questions/storage/control-storage-quotas.html",
+        "why": "Quotas allocate the platform's storage without surprising the tenants who hit them."
+      },
+      {
+        "title": "Migrate stateful storage with controlled downtime",
+        "theme": "storage",
+        "difficulty": "senior",
+        "href": "questions/storage/migrate-stateful-storage.html",
+        "why": "Stateful migration moves live data with controlled downtime."
+      },
+      {
+        "title": "Manage storage cost and capacity as a portfolio",
+        "theme": "storage",
+        "difficulty": "staff",
+        "href": "questions/storage/manage-storage-cost-and-capacity.html",
+        "why": "Cost and capacity as a portfolio prices the whole estate together."
+      },
+      {
+        "title": "Lead an organization-wide storage disaster-recovery strategy",
+        "theme": "storage",
+        "difficulty": "staff",
+        "href": "questions/storage/lead-storage-disaster-recovery.html",
+        "why": "The organization-wide disaster-recovery strategy is storage's staff-level close."
+      },
+      {
+        "title": "Build a self-service storage platform with guardrails",
+        "theme": "storage",
+        "difficulty": "staff",
+        "href": "questions/storage/build-self-service-storage-platform.html",
+        "why": "The self-service platform wraps the whole subject in guardrails."
+      }
+    ]
+  },
+  {
+    "theme": "systems-performance",
+    "note": "Method before metrics, resources before tools, tools before benchmark validity — the staff tier spends the whole method.",
+    "steps": [
+      {
+        "title": "Why establish a baseline before performance tuning?",
+        "theme": "systems-performance",
+        "difficulty": "junior",
+        "href": "questions/systems-performance/baseline-before-tuning.html",
+        "why": "A baseline is why tuning can be judged at all, so method comes before metrics."
+      },
+      {
+        "title": "How do you apply the USE method to a production resource?",
+        "theme": "systems-performance",
+        "difficulty": "junior",
+        "href": "questions/systems-performance/use-method-basics.html",
+        "why": "The USE method turns checking everything into a directed question."
+      },
+      {
+        "title": "What is the difference between CPU utilization and CPU saturation?",
+        "theme": "systems-performance",
+        "difficulty": "junior",
+        "href": "questions/systems-performance/cpu-utilization-and-saturation.html",
+        "why": "Utilization versus saturation decides which question to ask next of a resource."
+      },
+      {
+        "title": "What is a safe first pass for investigating unexpected CPU consumption?",
+        "theme": "systems-performance",
+        "difficulty": "junior",
+        "href": "questions/systems-performance/cpu-profiling-first-pass.html",
+        "why": "CPU leads the resources with a safe first pass on unexpected consumption."
+      },
+      {
+        "title": "When are high context-switch rates a performance concern?",
+        "theme": "systems-performance",
+        "difficulty": "middle",
+        "href": "questions/systems-performance/context-switch-investigation.html",
+        "why": "Context-switch rates matter only against a threshold worth the name."
+      },
+      {
+        "title": "How do you investigate high CPU steal time on a virtual machine?",
+        "theme": "systems-performance",
+        "difficulty": "senior",
+        "href": "questions/systems-performance/cpu-steal-time-cloud.html",
+        "why": "Steal time is somebody else's saturation billed to your virtual machine."
+      },
+      {
+        "title": "How do you prove lock contention is causing an application latency regression?",
+        "theme": "systems-performance",
+        "difficulty": "senior",
+        "href": "questions/systems-performance/lock-contention-analysis.html",
+        "why": "Proving lock contention closes the CPU chapter where the application meets the scheduler."
+      },
+      {
+        "title": "Which signals distinguish memory use from memory pressure on Linux?",
+        "theme": "systems-performance",
+        "difficulty": "middle",
+        "href": "questions/systems-performance/memory-pressure-signals.html",
+        "why": "Memory opens with use versus pressure, the distinction everything leans on."
+      },
+      {
+        "title": "How does the Linux page cache affect filesystem performance measurements?",
+        "theme": "systems-performance",
+        "difficulty": "middle",
+        "href": "questions/systems-performance/filesystem-cache-behavior.html",
+        "why": "The page cache explains the filesystem measurements that confused everyone."
+      },
+      {
+        "title": "What does Linux pressure stall information add to resource monitoring?",
+        "theme": "systems-performance",
+        "difficulty": "middle",
+        "href": "questions/systems-performance/pressure-stall-information.html",
+        "why": "PSI quantifies the stall the pressure signals could only infer."
+      },
+      {
+        "title": "How do you investigate an OOM-killer incident without treating the kill as the root cause?",
+        "theme": "systems-performance",
+        "difficulty": "middle",
+        "href": "questions/systems-performance/oom-killer-incident.html",
+        "why": "The OOM investigation refuses to treat the kill itself as the root cause."
+      },
+      {
+        "title": "How do you break down elevated disk I/O latency?",
+        "theme": "systems-performance",
+        "difficulty": "middle",
+        "href": "questions/systems-performance/disk-latency-breakdown.html",
+        "why": "Storage follows the memory chapter with a structured disk-latency breakdown."
+      },
+      {
+        "title": "How do TCP retransmissions inform a latency investigation?",
+        "theme": "systems-performance",
+        "difficulty": "middle",
+        "href": "questions/systems-performance/network-retransmission-triage.html",
+        "why": "TCP retransmissions inform the latency investigation from the network side."
+      },
+      {
+        "title": "How can NUMA locality cause a performance regression on a large host?",
+        "theme": "systems-performance",
+        "difficulty": "senior",
+        "href": "questions/systems-performance/numa-locality-performance.html",
+        "why": "NUMA locality is the topology regression large hosts quietly hide."
+      },
+      {
+        "title": "How do you investigate a tail-latency incident when average latency is normal?",
+        "theme": "systems-performance",
+        "difficulty": "senior",
+        "href": "questions/systems-performance/tail-latency-incident.html",
+        "why": "The tail-latency incident with a normal average ties the resource chapters into one case."
+      },
+      {
+        "title": "How do you select ftrace events for a latency investigation?",
+        "theme": "systems-performance",
+        "difficulty": "middle",
+        "href": "questions/systems-performance/ftrace-event-selection.html",
+        "why": "Tools arrive late on purpose, because they assume you know what you are looking for."
+      },
+      {
+        "title": "How do you use sampling profilers without distorting production performance?",
+        "theme": "systems-performance",
+        "difficulty": "middle",
+        "href": "questions/systems-performance/perf-sampling-and-overhead.html",
+        "why": "Sampling profilers are used without distorting the production being measured."
+      },
+      {
+        "title": "What safeguards are needed when using eBPF for production observability?",
+        "theme": "systems-performance",
+        "difficulty": "middle",
+        "href": "questions/systems-performance/ebpf-observability-safety.html",
+        "why": "eBPF carries safeguards because it is powerful in exactly the wrong places."
+      },
+      {
+        "title": "How do you review whether a benchmark result is valid for a production decision?",
+        "theme": "systems-performance",
+        "difficulty": "senior",
+        "href": "questions/systems-performance/benchmark-validity-review.html",
+        "why": "Benchmark validity decides whether measurements ever become decisions."
+      },
+      {
+        "title": "How would you govern a capacity model for a multi-tenant platform?",
+        "theme": "systems-performance",
+        "difficulty": "staff",
+        "href": "questions/systems-performance/capacity-model-governance.html",
+        "why": "The capacity model is governed, not worshipped, once it drives decisions."
+      },
+      {
+        "title": "How do you use performance budgets in architecture governance?",
+        "theme": "systems-performance",
+        "difficulty": "staff",
+        "href": "questions/systems-performance/performance-budget-architecture.html",
+        "why": "The closing three open with performance budgets in architecture governance."
+      },
+      {
+        "title": "How should a staff engineer lead a cross-layer performance incident?",
+        "theme": "systems-performance",
+        "difficulty": "staff",
+        "href": "questions/systems-performance/performance-incident-command.html",
+        "why": "Leading a cross-layer incident spends the whole method under pressure."
+      },
+      {
+        "title": "How would you design a systems-performance observability program across teams?",
+        "theme": "systems-performance",
+        "difficulty": "staff",
+        "href": "questions/systems-performance/performance-observability-program.html",
+        "why": "The observability program is the staff-level synthesis of everything above."
+      }
+    ]
+  },
+  {
+    "theme": "testing-strategy",
+    "note": "Grow outward from the unit test: each ring only earns its cost once the ring inside it is honest.",
+    "steps": [
+      {
+        "title": "Design a focused unit test",
+        "theme": "testing-strategy",
+        "difficulty": "junior",
+        "href": "questions/testing-strategy/unit-test-design.html",
+        "why": "Grow outward from the unit test: one focused test is the atom of the suite."
+      },
+      {
+        "title": "Name test cases for diagnosis",
+        "theme": "testing-strategy",
+        "difficulty": "junior",
+        "href": "questions/testing-strategy/test-case-naming.html",
+        "why": "A test named for diagnosis fails helpfully instead of mysteriously."
+      },
+      {
+        "title": "Define test-pyramid boundaries",
+        "theme": "testing-strategy",
+        "difficulty": "junior",
+        "href": "questions/testing-strategy/test-pyramid-boundaries.html",
+        "why": "Pyramid boundaries say where the unit layer stops and cost begins."
+      },
+      {
+        "title": "Treat coverage as a testing signal",
+        "theme": "testing-strategy",
+        "difficulty": "junior",
+        "href": "questions/testing-strategy/test-coverage-signal.html",
+        "why": "Coverage as a signal calibrates the layer before it grows any further."
+      },
+      {
+        "title": "Evaluate mutation testing trade-offs",
+        "theme": "testing-strategy",
+        "difficulty": "senior",
+        "href": "questions/testing-strategy/mutation-testing-tradeoffs.html",
+        "why": "Mutation testing prices what the coverage number actually proves."
+      },
+      {
+        "title": "Design isolated test data",
+        "theme": "testing-strategy",
+        "difficulty": "senior",
+        "href": "questions/testing-strategy/test-data-isolation.html",
+        "why": "Isolated test data keeps the unit layer honest under repetition."
+      },
+      {
+        "title": "Manage test data safely",
+        "theme": "testing-strategy",
+        "difficulty": "middle",
+        "href": "questions/testing-strategy/test-data-management.html",
+        "why": "Safe data management governs everything the tests consume."
+      },
+      {
+        "title": "Choose integration test boundaries",
+        "theme": "testing-strategy",
+        "difficulty": "middle",
+        "href": "questions/testing-strategy/integration-test-boundaries.html",
+        "why": "Integration is the next ring, with boundaries chosen first."
+      },
+      {
+        "title": "Define integration test data contracts",
+        "theme": "testing-strategy",
+        "difficulty": "middle",
+        "href": "questions/testing-strategy/integration-test-data-contract.html",
+        "why": "Data contracts make those integration boundaries actually testable."
+      },
+      {
+        "title": "Use contract tests between services",
+        "theme": "testing-strategy",
+        "difficulty": "middle",
+        "href": "questions/testing-strategy/contract-testing-boundaries.html",
+        "why": "Contract tests verify a boundary from both of its sides."
+      },
+      {
+        "title": "Adopt consumer-driven contracts",
+        "theme": "testing-strategy",
+        "difficulty": "middle",
+        "href": "questions/testing-strategy/consumer-driven-contracts.html",
+        "why": "Consumer-driven contracts only have something to verify once the boundaries exist."
+      },
+      {
+        "title": "Control end-to-end test scope",
+        "theme": "testing-strategy",
+        "difficulty": "middle",
+        "href": "questions/testing-strategy/end-to-end-test-scope.html",
+        "why": "Scope control keeps the expensive ring from exploding."
+      },
+      {
+        "title": "Design ephemeral test environments",
+        "theme": "testing-strategy",
+        "difficulty": "middle",
+        "href": "questions/testing-strategy/ephemeral-test-environments.html",
+        "why": "Ephemeral environments give every run its own disposable world."
+      },
+      {
+        "title": "Set shared test environment policy",
+        "theme": "testing-strategy",
+        "difficulty": "middle",
+        "href": "questions/testing-strategy/shared-test-environment-policy.html",
+        "why": "The shared-environment policy governs the world that cannot be ephemeral."
+      },
+      {
+        "title": "Define a flaky-test quarantine policy",
+        "theme": "testing-strategy",
+        "difficulty": "senior",
+        "href": "questions/testing-strategy/flaky-test-quarantine-policy.html",
+        "why": "The flaky quarantine keeps the suite's confidence measurable."
+      },
+      {
+        "title": "Design release gates as risk controls",
+        "theme": "testing-strategy",
+        "difficulty": "staff",
+        "href": "questions/testing-strategy/release-gate-design.html",
+        "why": "Release opens with gates treated as risk controls rather than rituals."
+      },
+      {
+        "title": "Place performance tests in CI",
+        "theme": "testing-strategy",
+        "difficulty": "senior",
+        "href": "questions/testing-strategy/performance-tests-in-ci.html",
+        "why": "Performance tests in CI prove only what they can honestly prove."
+      },
+      {
+        "title": "Use shadow traffic safely",
+        "theme": "testing-strategy",
+        "difficulty": "staff",
+        "href": "questions/testing-strategy/shadow-traffic-testing.html",
+        "why": "Shadow traffic rehearses production without betting the production on it."
+      },
+      {
+        "title": "Set production experiment guardrails",
+        "theme": "testing-strategy",
+        "difficulty": "staff",
+        "href": "questions/testing-strategy/production-experiment-guardrails.html",
+        "why": "Production experiments run inside guardrails or they do not run."
+      },
+      {
+        "title": "Set security testing boundaries",
+        "theme": "testing-strategy",
+        "difficulty": "senior",
+        "href": "questions/testing-strategy/security-test-boundaries.html",
+        "why": "Security testing boundaries keep the tests from becoming the attack."
+      },
+      {
+        "title": "Design accessibility testing strategy",
+        "theme": "testing-strategy",
+        "difficulty": "junior",
+        "href": "questions/testing-strategy/accessibility-test-strategy.html",
+        "why": "Accessibility strategy is a different risk with the same shape of decision."
+      },
+      {
+        "title": "Make test failures observable",
+        "theme": "testing-strategy",
+        "difficulty": "senior",
+        "href": "questions/testing-strategy/test-observability.html",
+        "why": "Suites stay alive for years only when failures are observable."
+      },
+      {
+        "title": "Model test execution cost",
+        "theme": "testing-strategy",
+        "difficulty": "middle",
+        "href": "questions/testing-strategy/test-execution-cost-model.html",
+        "why": "Execution cost is modelled rather than discovered at release time."
+      },
+      {
+        "title": "Set test-suite execution policy",
+        "theme": "testing-strategy",
+        "difficulty": "middle",
+        "href": "questions/testing-strategy/test-suite-execution-policy.html",
+        "why": "Execution policy decides what runs when, and who waits for it."
+      },
+      {
+        "title": "Assign test suite ownership",
+        "theme": "testing-strategy",
+        "difficulty": "staff",
+        "href": "questions/testing-strategy/test-suite-ownership.html",
+        "why": "Ownership assigns who answers when the policy fires red."
+      },
+      {
+        "title": "Prioritize quality investment portfolio",
+        "theme": "testing-strategy",
+        "difficulty": "staff",
+        "href": "questions/testing-strategy/quality-investment-portfolio.html",
+        "why": "The quality-investment portfolio closes the Theme by pricing all of it."
+      }
+    ]
+  },
+  {
+    "theme": "troubleshooting",
+    "note": "Begin the way a page begins — alert context, then impact — because those two habits preserve every option the rest of the Theme depends on.",
+    "steps": [
+      {
+        "title": "Read alert context before escalating",
+        "theme": "troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/troubleshooting/read-alert-context.html",
+        "why": "Begin the way a page begins: what the alert measures, over what window."
+      },
+      {
+        "title": "Establish impact before changing a failing service",
+        "theme": "troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/troubleshooting/establish-impact.html",
+        "why": "Impact is established before changing anything, or every option is lost."
+      },
+      {
+        "title": "Isolate a suspected change without guessing",
+        "theme": "troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/troubleshooting/isolate-change.html",
+        "why": "Isolating a suspected change without guessing is the first diagnostic act."
+      },
+      {
+        "title": "Decide whether a restart is a safe diagnostic action",
+        "theme": "troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/troubleshooting/safe-restart.html",
+        "why": "Whether a restart is a safe diagnostic action is decided, never assumed."
+      },
+      {
+        "title": "Contain a bad deployment while protecting evidence",
+        "theme": "troubleshooting",
+        "difficulty": "senior",
+        "href": "questions/troubleshooting/handle-bad-deployment.html",
+        "why": "Containing a bad deployment while protecting evidence keeps both options open."
+      },
+      {
+        "title": "Trace a dependency failure across service boundaries",
+        "theme": "troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/troubleshooting/trace-dependency-failure.html",
+        "why": "The dependency failure is traced across the boundaries it hides behind."
+      },
+      {
+        "title": "Diagnose DNS failure from client to authoritative data",
+        "theme": "troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/troubleshooting/diagnose-dns.html",
+        "why": "The specialist diagnoses open with DNS from client to authoritative data."
+      },
+      {
+        "title": "Diagnose a TLS handshake failure safely",
+        "theme": "troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/troubleshooting/debug-tls.html",
+        "why": "The TLS handshake is diagnosed safely rather than disabled in frustration."
+      },
+      {
+        "title": "Debug an authentication failure without weakening access control",
+        "theme": "troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/troubleshooting/debug-auth-failure.html",
+        "why": "Authentication is debugged without weakening the access control around it."
+      },
+      {
+        "title": "Debug latency without averaging away the incident",
+        "theme": "troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/troubleshooting/debug-latency.html",
+        "why": "Latency is debugged without averaging away the incident."
+      },
+      {
+        "title": "Investigate a production data mismatch safely",
+        "theme": "troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/troubleshooting/investigate-data-mismatch.html",
+        "why": "The data mismatch is investigated safely across its stores."
+      },
+      {
+        "title": "Triage a growing asynchronous work backlog",
+        "theme": "troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/troubleshooting/debug-queue-backlog.html",
+        "why": "The growing backlog is the asynchronous tier's fever chart."
+      },
+      {
+        "title": "Debug an observability gap during an active incident",
+        "theme": "troubleshooting",
+        "difficulty": "senior",
+        "href": "questions/troubleshooting/debug-observability-gap.html",
+        "why": "The observability gap mid-incident is a failure in its own right."
+      },
+      {
+        "title": "Stop a cascading failure while preserving useful traffic",
+        "theme": "troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/troubleshooting/reduce-cascading-failure.html",
+        "why": "Stopping the cascade while preserving useful traffic is the specialists' synthesis."
+      },
+      {
+        "title": "Triage an error-budget burn alert",
+        "theme": "troubleshooting",
+        "difficulty": "middle",
+        "href": "questions/troubleshooting/debug-error-budget.html",
+        "why": "The burn alert is triaged by validating its own arithmetic first."
+      },
+      {
+        "title": "Verify recovery rather than trusting a green deployment",
+        "theme": "troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/troubleshooting/verify-recovery.html",
+        "why": "Recovery is verified rather than trusted from a green dashboard."
+      },
+      {
+        "title": "Design reliable multi-team incident handoffs",
+        "theme": "troubleshooting",
+        "difficulty": "staff",
+        "href": "questions/troubleshooting/design-multi-team-handoff.html",
+        "why": "The final tier opens with handoffs that survive shift changes."
+      },
+      {
+        "title": "Lead a severe incident without uncontrolled changes",
+        "theme": "troubleshooting",
+        "difficulty": "senior",
+        "href": "questions/troubleshooting/lead-sev-incident.html",
+        "why": "Leading a severe incident means controlling the changes, not just the communications."
+      },
+      {
+        "title": "Govern risky mitigations during a business-critical outage",
+        "theme": "troubleshooting",
+        "difficulty": "staff",
+        "href": "questions/troubleshooting/govern-risky-mitigation.html",
+        "why": "Risky mitigations are governed during the business-critical outage itself."
+      },
+      {
+        "title": "Triage a regional outage with a safe traffic strategy",
+        "theme": "troubleshooting",
+        "difficulty": "senior",
+        "href": "questions/troubleshooting/triage-regional-outage.html",
+        "why": "The regional outage pairs diagnosis with a safe traffic strategy."
+      },
+      {
+        "title": "Build an incident timeline from reliable evidence",
+        "theme": "troubleshooting",
+        "difficulty": "junior",
+        "href": "questions/troubleshooting/collect-timeline.html",
+        "why": "Timelines are built from reliable evidence or not at all."
+      },
+      {
+        "title": "Design a production troubleshooting experiment",
+        "theme": "troubleshooting",
+        "difficulty": "senior",
+        "href": "questions/troubleshooting/design-runbook-experiment.html",
+        "why": "Designed troubleshooting experiments turn hypotheses into repeatable practice."
+      },
+      {
+        "title": "Build a learning loop from production troubleshooting",
+        "theme": "troubleshooting",
+        "difficulty": "staff",
+        "href": "questions/troubleshooting/build-learning-loop.html",
+        "why": "The learning loop makes each incident improve the system itself."
+      },
+      {
+        "title": "Reduce recurring incidents across a platform portfolio",
+        "theme": "troubleshooting",
+        "difficulty": "staff",
+        "href": "questions/troubleshooting/portfolio-recurrence.html",
+        "why": "Recurring incidents are reduced across the portfolio, not one service at a time."
+      },
+      {
+        "title": "Define an organization-wide troubleshooting strategy",
+        "theme": "troubleshooting",
+        "difficulty": "staff",
+        "href": "questions/troubleshooting/define-troubleshooting-strategy.html",
+        "why": "The organization-wide strategy is the same method at fleet scale."
+      }
+    ]
+  },
+  {
+    "theme": "version-control",
+    "note": "Recovery reading starts with how commits, references, and the working tree relate, because every undo decision hangs on that model.",
+    "steps": [
+      {
+        "title": "Explain Git's object model",
+        "theme": "version-control",
+        "difficulty": "junior",
+        "href": "questions/version-control/git-object-model.html",
+        "why": "How commits, references, and the working tree relate is the model every recovery decision hangs on."
+      },
+      {
+        "title": "Choose between Git revert and reset for a bad change",
+        "theme": "version-control",
+        "difficulty": "middle",
+        "href": "questions/version-control/revert-versus-reset.html",
+        "why": "Reset and revert are practised on a disposable repository before they touch shared history."
+      },
+      {
+        "title": "Repair a shared branch with a force push safely",
+        "theme": "version-control",
+        "difficulty": "senior",
+        "href": "questions/version-control/safe-force-push.html",
+        "why": "Repairing a shared branch prices the additive revert against the explicitly coordinated history rewrite."
+      }
+    ]
+  },
+  {
+    "theme": "web-servers",
+    "note": "Serve and log first, then proxy and deliberately break it, then run the edge like a platform.",
+    "steps": [
+      {
+        "title": "Configure virtual-host routing safely",
+        "theme": "web-servers",
+        "difficulty": "junior",
+        "href": "questions/web-servers/virtual-host-routing.html",
+        "why": "Virtual hosts are the first routing decision a web server ever makes."
+      },
+      {
+        "title": "Serve static content with correct cache control",
+        "theme": "web-servers",
+        "difficulty": "junior",
+        "href": "questions/web-servers/static-content-cache-control.html",
+        "why": "Static content with correct cache control is the first thing served at scale."
+      },
+      {
+        "title": "Deploy a TLS certificate on a web server",
+        "theme": "web-servers",
+        "difficulty": "junior",
+        "href": "questions/web-servers/tls-certificate-deployment.html",
+        "why": "TLS deployment secures what the routing just exposed."
+      },
+      {
+        "title": "Design useful web-server access logs",
+        "theme": "web-servers",
+        "difficulty": "junior",
+        "href": "questions/web-servers/access-log-design.html",
+        "why": "Request logging is designed before an incident needs it."
+      },
+      {
+        "title": "Debug a 502 response from a reverse proxy",
+        "theme": "web-servers",
+        "difficulty": "middle",
+        "href": "questions/web-servers/reverse-proxy-502-debugging.html",
+        "why": "Proxying begins by deliberately breaking DNS and upstream connectivity and reading the resulting 502."
+      },
+      {
+        "title": "Establish a TLS security baseline at the edge",
+        "theme": "web-servers",
+        "difficulty": "senior",
+        "href": "questions/web-servers/tls-security-baseline.html",
+        "why": "The edge TLS baseline hardens what the deployment step merely made work."
+      },
+      {
+        "title": "Prevent a reverse-proxy cache from serving the wrong response",
+        "theme": "web-servers",
+        "difficulty": "middle",
+        "href": "questions/web-servers/cache-proxy-correctness.html",
+        "why": "Breaking cache keys teaches exactly what a proxy must never serve wrong."
+      },
+      {
+        "title": "Set reverse-proxy timeouts from a request budget",
+        "theme": "web-servers",
+        "difficulty": "middle",
+        "href": "questions/web-servers/proxy-timeout-budget.html",
+        "why": "Timeouts are allocated from a request budget rather than set as independent knobs."
+      },
+      {
+        "title": "Model web-server connection capacity",
+        "theme": "web-servers",
+        "difficulty": "senior",
+        "href": "questions/web-servers/connection-capacity-model.html",
+        "why": "Capacity drills model what the proxy tier can actually hold."
+      },
+      {
+        "title": "Reload and drain a web server without dropping traffic",
+        "theme": "web-servers",
+        "difficulty": "middle",
+        "href": "questions/web-servers/graceful-reload-and-drain.html",
+        "why": "Deployment draining reloads the server without dropping live traffic."
+      },
+      {
+        "title": "Define WAF and application-security boundaries",
+        "theme": "web-servers",
+        "difficulty": "senior",
+        "href": "questions/web-servers/waf-and-application-boundaries.html",
+        "why": "Security boundaries assign what the edge owes versus what the application owes."
+      },
+      {
+        "title": "Design multi-tenant isolation at the web edge",
+        "theme": "web-servers",
+        "difficulty": "staff",
+        "href": "questions/web-servers/multi-tenant-edge-isolation.html",
+        "why": "Multi-tenant platform decisions close the Theme at edge scale."
+      }
+    ]
+  }
+];
