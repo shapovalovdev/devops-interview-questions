@@ -8,6 +8,8 @@ manifest = json.loads(Path('config/content-manifest.json').read_text(encoding='u
 certifications = manifest['certifications']
 learning_paths = json.loads(Path('config/learning-paths.json').read_text(encoding='utf-8'))['paths']
 sre_track = next(path for path in learning_paths if path['slug'] == 'sre-track')
+study_orders = json.loads(Path('config/study-orders.json').read_text(encoding='utf-8'))['themes']
+security_order = next(order for order in study_orders if order['theme'] == 'security')
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=True)
@@ -64,6 +66,31 @@ with sync_playwright() as playwright:
     page.wait_for_function("() => document.querySelector('#path-view').hidden")
     assert page.locator('#question-zone').is_visible()
 
+    # The within-Theme study order ships beside the catalog as window.studyOrders
+    # and the Theme view offers it as a collapsed panel: steps in manifest order,
+    # each with its why and a working Question link.  With no Theme active the
+    # panel is hidden.
+    assert page.evaluate('window.studyOrders.length') == len(study_orders)
+    assert page.locator('#study-order').is_hidden()
+    page.goto(f'{site}#theme=security')
+    page.wait_for_load_state('networkidle')
+    study_panel = page.locator('#study-order .study-order-panel')
+    assert study_panel.is_visible()
+    assert page.evaluate("document.querySelector('#study-order .study-order-panel').open") is False
+    study_panel.locator('summary').click()
+    assert page.evaluate("document.querySelector('#study-order .study-order-panel').open") is True
+    study_steps = page.locator('#study-order .path-step')
+    assert study_steps.count() == len(security_order['steps'])
+    assert study_steps.locator('.step-why').all_inner_texts() == [step['why'] for step in security_order['steps']]
+    assert study_steps.locator('h3 a').evaluate_all(
+        '(links) => links.map((link) => link.getAttribute("href"))'
+    ) == [step['question'].replace('.md', '.html') for step in security_order['steps']]
+    assert study_steps.locator('.step-index').all_inner_texts() == [
+        f'{index:02d}' for index in range(1, len(security_order['steps']) + 1)
+    ]
+    study_panel.locator('summary').click()
+    assert page.evaluate("document.querySelector('#study-order .study-order-panel').open") is False
+
     # Hash navigation also works at a narrow touch viewport.
     mobile = browser.new_page(viewport={"width": 390, "height": 844})
     mobile.goto(f'{site}#certificate=lfcs')
@@ -86,6 +113,20 @@ with sync_playwright() as playwright:
         f'{index:02d}' for index in range(1, len(sre_track['steps']) + 1)
     ]
     assert mobile.evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth')
+
+    # The study-order panel follows the theme hash at 390px too: collapsed by
+    # default, expandable without sideways scrolling, and gone without a theme.
+    mobile.goto(f'{site}#theme=security')
+    mobile.wait_for_load_state('networkidle')
+    assert mobile.locator('#study-order .study-order-panel').is_visible()
+    assert mobile.evaluate("document.querySelector('#study-order .study-order-panel').open") is False
+    mobile.locator('#study-order .study-order-panel summary').click()
+    assert mobile.evaluate("document.querySelector('#study-order .study-order-panel').open") is True
+    assert mobile.locator('#study-order .path-step').count() == len(security_order['steps'])
+    assert mobile.evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth')
+    mobile.goto(f'{site}#collection=must-know')
+    mobile.wait_for_load_state('networkidle')
+    assert mobile.locator('#study-order').is_hidden()
 
     # A narrow touch viewport can create, navigate, reveal, and share a session
     # without embedding a duplicate answer in browser data.

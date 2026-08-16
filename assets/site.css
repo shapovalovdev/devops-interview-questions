@@ -72,6 +72,15 @@ input:focus { outline: 2px solid var(--ember); }
 .step-body h3 { font: 600 clamp(1.15rem, 2vw, 1.7rem)/1.06 "Fraunces", serif; letter-spacing: -.03em; margin: .5rem 0 .55rem; max-width: 32ch; }
 .step-body h3 a { color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(23,32,29,.3); }
 .step-why { margin: 0; max-width: 78ch; line-height: 1.6; font-size: .78rem; color: var(--muted); }
+.study-order-panel { border: 1px solid var(--ink); background: rgba(255,255,255,.35); margin: 0 0 1.4rem; }
+.study-order-panel summary { display: flex; align-items: center; flex-wrap: wrap; gap: .8rem; cursor: pointer; padding: .8rem .9rem; font-size: .71rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink); list-style: none; }
+.study-order-panel summary::-webkit-details-marker { display: none; }
+.study-order-count { color: var(--muted); }
+.study-order-toggle { margin-left: auto; color: var(--ember); font-weight: 500; }
+.study-order-toggle::before { content: '+'; }
+.study-order-panel[open] .study-order-toggle::before { content: '−'; }
+.study-order-body { border-top: 1px solid var(--ink); padding: 1.1rem .9rem .9rem; }
+.study-order-note { max-width: 78ch; line-height: 1.6; font-size: .78rem; color: var(--muted); margin: 0 0 1.1rem; }
 footer { display: flex; justify-content: space-between; gap: 1rem; padding-top: 1rem; padding-bottom: 1.5rem; border-top: 1px solid var(--ink); color: var(--muted); }
 footer a { color: var(--ink); }
 .session-shell { max-width: 1100px; min-height: 100vh; padding-top: clamp(1.3rem, 4vw, 3rem); padding-bottom: 4rem; }

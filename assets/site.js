@@ -11,6 +11,10 @@
   // A learning path is ordered data, so it is rendered as a sequence rather
   // than folded into the filtered grid: the position of a step is the point.
   const learningPaths = window.learningPaths || [];
+  // A study order is the same idea inside one Theme: rendered beside the grid
+  // as a collapsed panel, because the grid stays the Theme view's subject.
+  const studyOrders = window.studyOrders || [];
+  const studyOrderView = document.querySelector('#study-order');
   const pathFilters = document.querySelector('#path-filters');
   const pathView = document.querySelector('#path-view');
   const questionZone = document.querySelector('#question-zone');
@@ -113,10 +117,39 @@
       </ol>`;
   }
 
+  function renderStudyOrder() {
+    const order = studyOrders.find((item) => item.theme === activeTheme);
+    if (!order) {
+      studyOrderView.hidden = true;
+      studyOrderView.innerHTML = '';
+      return;
+    }
+    studyOrderView.hidden = false;
+    studyOrderView.innerHTML = `
+      <details class="study-order-panel">
+        <summary>Suggested study order <span class="study-order-count">${order.steps.length} steps in order</span><span class="study-order-toggle" aria-hidden="true"></span></summary>
+        <div class="study-order-body">
+          <p class="study-order-note">${escapeHtml(order.note)}</p>
+          <ol class="path-steps">
+            ${order.steps.map((step, index) => `
+              <li class="path-step">
+                <p class="step-index">${String(index + 1).padStart(2, '0')}</p>
+                <div class="step-body">
+                  <p class="card-top"><span>${step.difficulty}</span></p>
+                  <h3><a href="${step.href}">${escapeHtml(step.title)}</a></h3>
+                  <p class="step-why">${escapeHtml(step.why)}</p>
+                </div>
+              </li>`).join('')}
+          </ol>
+        </div>
+      </details>`;
+  }
+
   function render() {
     renderFilters();
     renderCertificationFilters();
     renderPathFilters();
+    renderStudyOrder();
     renderQuestions();
     renderPath();
   }
