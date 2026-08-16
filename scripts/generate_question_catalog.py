@@ -11,6 +11,7 @@ QUESTIONS = ROOT / "questions"
 CATALOG = ROOT / "assets" / "questions.js"
 MANIFEST = ROOT / "config" / "content-manifest.json"
 LEARNING_PATHS = ROOT / "config" / "learning-paths.json"
+STUDY_ORDERS = ROOT / "config" / "study-orders.json"
 
 
 def front_matter(path: Path) -> dict[str, str]:
@@ -62,6 +63,42 @@ def learning_paths() -> list[dict]:
     return resolved
 
 
+def study_orders() -> list[dict]:
+    """Resolve `config/study-orders.json` into ordered, renderable steps.
+
+    A study order is the within-Theme sequence, so it is published per Theme
+    beside the cross-Theme `learningPaths`.  Steps resolve to catalog records
+    the same way path steps do: the manifest owns the order, the Question owns
+    the metadata, and the rendered link is `href` to avoid colliding with the
+    catalog's `path` key.
+    """
+    declaration = json.loads(STUDY_ORDERS.read_text(encoding="utf-8"))
+    resolved = []
+    for theme in declaration["themes"]:
+        steps = []
+        for step in theme["steps"]:
+            source = ROOT / step["question"]
+            assert source.is_file(), f"{theme['theme']}: missing Question {step['question']}"
+            fields = front_matter(source)
+            steps.append(
+                {
+                    "title": fields["title"],
+                    "theme": fields["theme"],
+                    "difficulty": fields["difficulty"],
+                    "href": source.relative_to(ROOT).with_suffix(".html").as_posix(),
+                    "why": step["why"],
+                }
+            )
+        resolved.append(
+            {
+                "theme": theme["theme"],
+                "note": theme["note"],
+                "steps": steps,
+            }
+        )
+    return resolved
+
+
 def main() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     records = []
@@ -100,8 +137,10 @@ def main() -> None:
     lines.append("];\n")
     paths = learning_paths()
     lines.append("window.learningPaths = " + json.dumps(paths, ensure_ascii=False, indent=2) + ";\n")
+    orders = study_orders()
+    lines.append("window.studyOrders = " + json.dumps(orders, ensure_ascii=False, indent=2) + ";\n")
     CATALOG.write_text("\n".join(lines), encoding="utf-8")
-    print(f"Generated {len(records)} catalog records and {len(paths)} learning paths.")
+    print(f"Generated {len(records)} catalog records, {len(paths)} learning paths, and {len(orders)} study orders.")
 
 
 if __name__ == "__main__":
