@@ -1,0 +1,1273 @@
+# The API contract for the Content API, version 1.
+#
+# This file is hand-written and is the source of truth for the wire format.
+# The service is tested against it (`tests/api/test_contract.py`); it is never
+# generated from the service, because a contract derived from an
+# implementation cannot catch the implementation drifting.
+#
+# The contract describes the whole v1 surface from the day it is written.  An
+# operation that is not implemented yet carries `x-implementation: stub` and
+# answers `501` until the slice that owns it lands; an implemented one carries
+# `x-implementation: implemented`.  `501` is deliberately absent from the
+# documented responses below: it is a fact about today's build, not a promise
+# of the published scheme, and the marker is what records it.  The coverage
+# census (`tests/api/test_coverage_census.py`) reads the marker to decide
+# whether an operation owes a test per documented status code or a single
+# `501` test.  By the end of the epic no `stub` marker may remain.
+#
+# Conventions that hold everywhere and are therefore stated once:
+#
+# - List responses are enveloped as `{items, total, limit, offset}` so a client
+#   can page without guessing how much it has not seen.
+# - Errors are `application/problem+json` per RFC 9457.  A stack trace is never
+#   part of a body.
+# - Reads are anonymous.  Every mutating request carries a Write credential in
+#   `X-API-Key`; the header is declared optional in the schema on purpose, so
+#   that omitting it produces the documented `401` rather than a schema `422`.
+# - `If-Match` on `PUT`, `PATCH`, and `DELETE` carries the item's
+#   `content_hash`.  It is declared optional for the same reason: a missing
+#   precondition is a documented `428`, not a malformed request.
+
+openapi: 3.1.0
+
+info:
+  title: Content API
+  version: 1.0.0
+  summary: Query and maintain the Question and Lab corpus in the Content store.
+  description: |
+    The Content API serves the Questions and Labs that live as Markdown under
+    `questions/` and `labs/` and are loaded into the Content store by Ingest.
+    Markdown in git stays the durable, reviewable record: writes accepted here
+    are rendered back to Markdown by Export, and CI refuses Drift between the
+    two.
+  license:
+    name: CC BY 4.0
+    url: https://creativecommons.org/licenses/by/4.0/
+
+tags:
+  - name: Service
+    description: Liveness and contract identification.
+  - name: Questions
+    description: The interview prompts that make up the corpus.
+  - name: Labs
+    description: Hands-on exercises, each preparing a learner for one Question.
+  - name: Taxonomy
+    description: Themes and tags, derived from the corpus rather than authored.
+  - name: Learning paths
+    description: Deliberate sequences through the corpus.
+  - name: Search
+    description: Free-text search across Questions and Labs together.
+
+paths:
+  /api/v1/health:
+    get:
+      operationId: getHealth
+      tags: [Service]
+      summary: Report that the service is up and which contract it serves.
+      x-implementation: implemented
+      responses:
+        '200':
+          description: The service is up.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthReport'
+
+  /api/v1/questions:
+    get:
+      operationId: listQuestions
+      tags: [Questions]
+      summary: List Questions, filtered, sorted, and paginated.
+      x-implementation: implemented
+      parameters:
+        - name: theme
+          in: query
+          required: false
+          description: Canonical Theme that owns the Question.
+          schema:
+            type: string
+        - name: difficulty
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Difficulty'
+        - name: type
+          in: query
+          required: false
+          description: The interview format of the Question.
+          schema:
+            $ref: '#/components/schemas/QuestionType'
+        - name: tag
+          in: query
+          required: false
+          description: A single tag; a Question matches when it carries the tag.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/FreeText'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Sort'
+      responses:
+        '200':
+          description: A page of Questions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionPage'
+        '422':
+          $ref: '#/components/responses/UnprocessableContent'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createQuestion
+      tags: [Questions]
+      summary: Create a Question.
+      x-implementation: stub
+      parameters:
+        - $ref: '#/components/parameters/WriteCredential'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionWrite'
+      responses:
+        '201':
+          description: The Question was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Question'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableContent'
+        '503':
+          $ref: '#/components/responses/ReadOnly'
+
+  /api/v1/questions/{theme}/{slug}:
+    get:
+      operationId: getQuestion
+      tags: [Questions]
+      summary: Read one Question by its id.
+      x-implementation: stub
+      parameters:
+        - $ref: '#/components/parameters/ThemePath'
+        - $ref: '#/components/parameters/SlugPath'
+        - $ref: '#/components/parameters/IfNoneMatch'
+      responses:
+        '200':
+          description: The Question.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Question'
+        '304':
+          $ref: '#/components/responses/NotModified'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      operationId: replaceQuestion
+      tags: [Questions]
+      summary: Replace a Question wholesale.
+      x-implementation: stub
+      parameters:
+        - $ref: '#/components/parameters/ThemePath'
+        - $ref: '#/components/parameters/SlugPath'
+        - $ref: '#/components/parameters/WriteCredential'
+        - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionWrite'
+      responses:
+        '200':
+          description: The replaced Question.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Question'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+        '422':
+          $ref: '#/components/responses/UnprocessableContent'
+        '428':
+          $ref: '#/components/responses/PreconditionRequired'
+        '503':
+          $ref: '#/components/responses/ReadOnly'
+    patch:
+      operationId: patchQuestion
+      tags: [Questions]
+      summary: Change only the supplied fields of a Question.
+      x-implementation: stub
+      parameters:
+        - $ref: '#/components/parameters/ThemePath'
+        - $ref: '#/components/parameters/SlugPath'
+        - $ref: '#/components/parameters/WriteCredential'
+        - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionPatch'
+      responses:
+        '200':
+          description: The patched Question.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Question'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+        '422':
+          $ref: '#/components/responses/UnprocessableContent'
+        '428':
+          $ref: '#/components/responses/PreconditionRequired'
+        '503':
+          $ref: '#/components/responses/ReadOnly'
+    delete:
+      operationId: deleteQuestion
+      tags: [Questions]
+      summary: Delete a Question.
+      x-implementation: stub
+      parameters:
+        - $ref: '#/components/parameters/ThemePath'
+        - $ref: '#/components/parameters/SlugPath'
+        - $ref: '#/components/parameters/WriteCredential'
+        - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '204':
+          description: The Question is gone.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+        '428':
+          $ref: '#/components/responses/PreconditionRequired'
+        '503':
+          $ref: '#/components/responses/ReadOnly'
+
+  /api/v1/labs:
+    get:
+      operationId: listLabs
+      tags: [Labs]
+      summary: List Labs, filtered, sorted, and paginated.
+      x-implementation: stub
+      parameters:
+        - name: theme
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: difficulty
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Difficulty'
+        - name: tag
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: question_ref
+          in: query
+          required: false
+          description: The id of the Question a Lab prepares a learner for.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/FreeText'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Sort'
+      responses:
+        '200':
+          description: A page of Labs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabPage'
+        '422':
+          $ref: '#/components/responses/UnprocessableContent'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createLab
+      tags: [Labs]
+      summary: Create a Lab.
+      x-implementation: stub
+      parameters:
+        - $ref: '#/components/parameters/WriteCredential'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabWrite'
+      responses:
+        '201':
+          description: The Lab was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lab'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableContent'
+        '503':
+          $ref: '#/components/responses/ReadOnly'
+
+  /api/v1/labs/{theme}/{slug}:
+    get:
+      operationId: getLab
+      tags: [Labs]
+      summary: Read one Lab by its id.
+      x-implementation: stub
+      parameters:
+        - $ref: '#/components/parameters/ThemePath'
+        - $ref: '#/components/parameters/SlugPath'
+        - $ref: '#/components/parameters/IfNoneMatch'
+      responses:
+        '200':
+          description: The Lab.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lab'
+        '304':
+          $ref: '#/components/responses/NotModified'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      operationId: replaceLab
+      tags: [Labs]
+      summary: Replace a Lab wholesale.
+      x-implementation: stub
+      parameters:
+        - $ref: '#/components/parameters/ThemePath'
+        - $ref: '#/components/parameters/SlugPath'
+        - $ref: '#/components/parameters/WriteCredential'
+        - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabWrite'
+      responses:
+        '200':
+          description: The replaced Lab.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lab'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+        '422':
+          $ref: '#/components/responses/UnprocessableContent'
+        '428':
+          $ref: '#/components/responses/PreconditionRequired'
+        '503':
+          $ref: '#/components/responses/ReadOnly'
+    patch:
+      operationId: patchLab
+      tags: [Labs]
+      summary: Change only the supplied fields of a Lab.
+      x-implementation: stub
+      parameters:
+        - $ref: '#/components/parameters/ThemePath'
+        - $ref: '#/components/parameters/SlugPath'
+        - $ref: '#/components/parameters/WriteCredential'
+        - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabPatch'
+      responses:
+        '200':
+          description: The patched Lab.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lab'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+        '422':
+          $ref: '#/components/responses/UnprocessableContent'
+        '428':
+          $ref: '#/components/responses/PreconditionRequired'
+        '503':
+          $ref: '#/components/responses/ReadOnly'
+    delete:
+      operationId: deleteLab
+      tags: [Labs]
+      summary: Delete a Lab.
+      x-implementation: stub
+      parameters:
+        - $ref: '#/components/parameters/ThemePath'
+        - $ref: '#/components/parameters/SlugPath'
+        - $ref: '#/components/parameters/WriteCredential'
+        - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '204':
+          description: The Lab is gone.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+        '428':
+          $ref: '#/components/responses/PreconditionRequired'
+        '503':
+          $ref: '#/components/responses/ReadOnly'
+
+  /api/v1/themes:
+    get:
+      operationId: listThemes
+      tags: [Taxonomy]
+      summary: List every canonical Theme with its counts.
+      description: |
+        Themes are derived from `config/content-manifest.json` and the corpus,
+        so the collection is small and is returned whole; the envelope still
+        applies, with `limit` reporting the size of the page returned.
+      x-implementation: stub
+      responses:
+        '200':
+          description: Every Theme.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemePage'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/themes/{name}:
+    get:
+      operationId: getTheme
+      tags: [Taxonomy]
+      summary: Read one Theme by its canonical name.
+      x-implementation: stub
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The canonical Theme name, as in `config/content-manifest.json`.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/IfNoneMatch'
+      responses:
+        '200':
+          description: The Theme.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Theme'
+        '304':
+          $ref: '#/components/responses/NotModified'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/tags:
+    get:
+      operationId: listTags
+      tags: [Taxonomy]
+      summary: List every tag with its counts.
+      description: |
+        Tags come from `TAGS.md` and the corpus and are returned whole, with
+        `limit` reporting the size of the page returned.
+      x-implementation: stub
+      responses:
+        '200':
+          description: Every tag.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagPage'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/learning-paths:
+    get:
+      operationId: listLearningPaths
+      tags: [Learning paths]
+      summary: List every learning path.
+      description: |
+        Learning paths come from `config/learning-paths.json` and are returned
+        whole, with `limit` reporting the size of the page returned.
+      x-implementation: stub
+      responses:
+        '200':
+          description: Every learning path.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LearningPathPage'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/learning-paths/{slug}:
+    get:
+      operationId: getLearningPath
+      tags: [Learning paths]
+      summary: Read one learning path, with its ordered steps.
+      x-implementation: stub
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/IfNoneMatch'
+      responses:
+        '200':
+          description: The learning path.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LearningPath'
+        '304':
+          $ref: '#/components/responses/NotModified'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/search:
+    get:
+      operationId: search
+      tags: [Search]
+      summary: Search Questions and Labs together, ranked by relevance.
+      x-implementation: stub
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: |
+            The search text.  It is required: a search with no query is
+            meaningless, and its absence is a `422`, not an empty result.
+          schema:
+            type: string
+            minLength: 1
+        - name: kind
+          in: query
+          required: false
+          description: Restrict the result to one kind of item.
+          schema:
+            $ref: '#/components/schemas/ItemKind'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: A ranked page of hits.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchPage'
+        '422':
+          $ref: '#/components/responses/UnprocessableContent'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+
+  parameters:
+
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of items in the page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 50
+
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Number of items to skip before the page starts.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: |
+        Sort key, optionally prefixed `-` for descending.  The default `id`
+        makes pagination deterministic, which is the whole point of pinning a
+        default at all.
+      schema:
+        $ref: '#/components/schemas/SortKey'
+
+    FreeText:
+      name: q
+      in: query
+      required: false
+      description: Free-text filter over title, prompt, and body.
+      schema:
+        type: string
+
+    ThemePath:
+      name: theme
+      in: path
+      required: true
+      description: The canonical Theme half of the item's id.
+      schema:
+        type: string
+
+    SlugPath:
+      name: slug
+      in: path
+      required: true
+      description: The slug half of the item's id.
+      schema:
+        type: string
+
+    WriteCredential:
+      name: X-API-Key
+      in: header
+      required: false
+      description: |
+        The Write credential.  Declared optional so that a missing credential
+        is answered with `401` rather than a schema validation `422`.
+      schema:
+        type: string
+
+    IfMatch:
+      name: If-Match
+      in: header
+      required: false
+      description: |
+        The `content_hash` the client believes the item currently has.
+        Declared optional so that its absence is the documented `428`.
+      schema:
+        type: string
+
+    IfNoneMatch:
+      name: If-None-Match
+      in: header
+      required: false
+      description: An ETag the client already holds; a match is answered `304`.
+      schema:
+        type: string
+
+  headers:
+
+    ETag:
+      description: The item's `content_hash`, quoted.
+      schema:
+        type: string
+
+  responses:
+
+    NotModified:
+      description: The client's ETag still matches; no body is returned.
+
+    Unauthorized:
+      description: No Write credential was presented.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+
+    Forbidden:
+      description: The Write credential presented is not the expected one.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+
+    NotFound:
+      description: No item with that id exists.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+
+    Conflict:
+      description: An item with that id already exists.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+
+    PreconditionFailed:
+      description: The `If-Match` value is stale; someone else wrote first.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+
+    UnprocessableContent:
+      description: |
+        The request is malformed, or it breaks a rule the Markdown validators
+        enforce — an unknown Theme, an unknown tag, a dangling `question_ref`.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+
+    PreconditionRequired:
+      description: The request must carry `If-Match`.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+
+    ReadOnly:
+      description: |
+        No Write credential is configured, so the service runs read-only and
+        refuses every write rather than defaulting to a well-known key.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+
+    InternalServerError:
+      description: The service failed unexpectedly. The body never carries a stack trace.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+
+  schemas:
+
+    Difficulty:
+      type: string
+      enum: [junior, middle, senior, staff]
+
+    QuestionType:
+      type: string
+      enum: [theory, scenario, troubleshooting]
+
+    ItemKind:
+      type: string
+      enum: [question, lab]
+
+    SortKey:
+      type: string
+      enum:
+        - id
+        - -id
+        - title
+        - -title
+        - difficulty
+        - -difficulty
+        - updated_at
+        - -updated_at
+      default: id
+
+    HealthReport:
+      type: object
+      required: [status, service, contract_version]
+      properties:
+        status:
+          type: string
+          const: ok
+        service:
+          type: string
+          description: The name of this service.
+        contract_version:
+          type: string
+          description: The major version of the contract this build serves.
+
+    Source:
+      type: object
+      description: An external document used to verify a Question's factual claims.
+      required: [url, source_type, verified_on]
+      properties:
+        url:
+          type: string
+        source_type:
+          type: string
+          enum: [standard, official-docs, official-api]
+        verified_on:
+          type: string
+          format: date
+
+    Question:
+      type: object
+      required:
+        - id
+        - theme
+        - slug
+        - title
+        - difficulty
+        - type
+        - tags
+        - sources
+        - prompt
+        - answer_guide
+        - body_markdown
+        - source_path
+        - content_hash
+        - updated_at
+      properties:
+        id:
+          type: string
+          description: '`<theme>/<slug>`, matching the path under `questions/` without `.md`.'
+        theme:
+          type: string
+        slug:
+          type: string
+        title:
+          type: string
+        difficulty:
+          $ref: '#/components/schemas/Difficulty'
+        type:
+          $ref: '#/components/schemas/QuestionType'
+        tags:
+          type: array
+          items:
+            type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+        prompt:
+          type: string
+          description: The question itself.
+        answer_guide:
+          type: array
+          description: The expected points that characterize a strong answer.
+          items:
+            type: string
+        body_markdown:
+          type: string
+        source_path:
+          type: string
+        content_hash:
+          type: string
+          description: sha256 of the source file; served as the ETag.
+        updated_at:
+          type: string
+          format: date-time
+
+    QuestionWrite:
+      type: object
+      description: The client-supplied half of a Question; derived fields are computed.
+      required:
+        - theme
+        - slug
+        - title
+        - difficulty
+        - type
+        - tags
+        - sources
+        - prompt
+        - answer_guide
+        - body_markdown
+      properties:
+        theme:
+          type: string
+        slug:
+          type: string
+        title:
+          type: string
+        difficulty:
+          $ref: '#/components/schemas/Difficulty'
+        type:
+          $ref: '#/components/schemas/QuestionType'
+        tags:
+          type: array
+          items:
+            type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+        prompt:
+          type: string
+        answer_guide:
+          type: array
+          items:
+            type: string
+        body_markdown:
+          type: string
+
+    QuestionPatch:
+      type: object
+      description: Only the supplied fields change; everything omitted is left alone.
+      properties:
+        title:
+          type: string
+        difficulty:
+          $ref: '#/components/schemas/Difficulty'
+        type:
+          $ref: '#/components/schemas/QuestionType'
+        tags:
+          type: array
+          items:
+            type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+        prompt:
+          type: string
+        answer_guide:
+          type: array
+          items:
+            type: string
+        body_markdown:
+          type: string
+
+    Lab:
+      type: object
+      required:
+        - id
+        - theme
+        - slug
+        - title
+        - difficulty
+        - tags
+        - question_ref
+        - why
+        - checklist
+        - body_markdown
+        - source_path
+        - content_hash
+        - updated_at
+      properties:
+        id:
+          type: string
+        theme:
+          type: string
+        slug:
+          type: string
+        title:
+          type: string
+        difficulty:
+          $ref: '#/components/schemas/Difficulty'
+        tags:
+          type: array
+          items:
+            type: string
+        question_ref:
+          type: string
+          description: The id of the Question this Lab prepares a learner for.
+        why:
+          type: string
+        checklist:
+          type: array
+          items:
+            type: string
+        body_markdown:
+          type: string
+        source_path:
+          type: string
+        content_hash:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+
+    LabWrite:
+      type: object
+      required:
+        - theme
+        - slug
+        - title
+        - difficulty
+        - tags
+        - question_ref
+        - why
+        - checklist
+        - body_markdown
+      properties:
+        theme:
+          type: string
+        slug:
+          type: string
+        title:
+          type: string
+        difficulty:
+          $ref: '#/components/schemas/Difficulty'
+        tags:
+          type: array
+          items:
+            type: string
+        question_ref:
+          type: string
+        why:
+          type: string
+        checklist:
+          type: array
+          items:
+            type: string
+        body_markdown:
+          type: string
+
+    LabPatch:
+      type: object
+      properties:
+        title:
+          type: string
+        difficulty:
+          $ref: '#/components/schemas/Difficulty'
+        tags:
+          type: array
+          items:
+            type: string
+        question_ref:
+          type: string
+        why:
+          type: string
+        checklist:
+          type: array
+          items:
+            type: string
+        body_markdown:
+          type: string
+
+    Theme:
+      type: object
+      required: [name, state, question_count, lab_count, difficulty_counts]
+      properties:
+        name:
+          type: string
+        state:
+          type: string
+          description: The Theme's declared state in `config/content-manifest.json`.
+        question_count:
+          type: integer
+        lab_count:
+          type: integer
+        difficulty_counts:
+          type: object
+          description: Question counts keyed by difficulty.
+          additionalProperties:
+            type: integer
+
+    Tag:
+      type: object
+      required: [name, question_count, lab_count]
+      properties:
+        name:
+          type: string
+        question_count:
+          type: integer
+        lab_count:
+          type: integer
+
+    LearningPathStep:
+      type: object
+      required: [question_id, why]
+      properties:
+        question_id:
+          type: string
+        why:
+          type: string
+          description: Why this step belongs here, in this order.
+
+    LearningPath:
+      type: object
+      required: [slug, title, description, steps]
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/LearningPathStep'
+
+    SearchHit:
+      type: object
+      required: [kind, score, item]
+      properties:
+        kind:
+          $ref: '#/components/schemas/ItemKind'
+        score:
+          type: number
+          description: Relevance, higher is better. Comparable only within one response.
+        item:
+          oneOf:
+            - $ref: '#/components/schemas/Question'
+            - $ref: '#/components/schemas/Lab'
+
+    Page:
+      type: object
+      description: The envelope every list response shares.
+      required: [items, total, limit, offset]
+      properties:
+        items:
+          type: array
+        total:
+          type: integer
+          description: How many items match before `limit` and `offset` are applied.
+        limit:
+          type: integer
+        offset:
+          type: integer
+
+    QuestionPage:
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/Question'
+
+    LabPage:
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/Lab'
+
+    ThemePage:
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/Theme'
+
+    TagPage:
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/Tag'
+
+    LearningPathPage:
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/LearningPath'
+
+    SearchPage:
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/SearchHit'
+
+    Problem:
+      type: object
+      description: An RFC 9457 problem document. It never carries a stack trace.
+      required: [type, title, status, detail, instance]
+      properties:
+        type:
+          type: string
+          description: A URI naming the problem kind.
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+          description: The request path the problem occurred on.
+        errors:
+          type: array
+          description: Field-level detail, when the problem is a validation failure.
+          items:
+            type: object
+            required: [field, message]
+            properties:
+              field:
+                type: string
+              message:
+                type: string

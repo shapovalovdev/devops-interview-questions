@@ -1,0 +1,8 @@
+# Runtime dependencies of the Content API service, and of nothing else.
+#
+# The static site build stays standard-library only: `scripts/build_site.py`
+# must keep working with none of these installed, and
+# `tests/test_api_dependency_separation.py` proves it on every run.
+fastapi==0.141.1
+uvicorn[standard]==0.52.3
+pydantic==2.13.4

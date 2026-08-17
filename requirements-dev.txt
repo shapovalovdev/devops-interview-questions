@@ -1,0 +1,8 @@
+# Test dependencies for the Content API. Installing these installs the service
+# dependencies too; the standard-library-only suite (`tests/run_all_tests.py`)
+# and the static site build must keep passing without any of them.
+-r requirements-api.txt
+pytest==9.1.1
+pytest-cov==7.1.0
+httpx==0.28.1
+PyYAML==6.0.3

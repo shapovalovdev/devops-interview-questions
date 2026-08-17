@@ -1,0 +1,126 @@
+"""The Store seam: how the Content API asks the Content store for records.
+
+Slice 1 owns the real SQLite Content store in `contentdb/`. This slice must not
+depend on it, so the API codes against the `Store` protocol below and tests
+against the in-memory fake in `api/testing.py`. Slice 3 swaps the real store in
+behind the same protocol.
+
+Two rules make that swap possible, and they are the reason this module looks the
+way it does.
+
+**Only plain data crosses the seam.** A query dataclass goes in; a `Page` of
+plain mappings comes out. The mappings are keyed by the field names the epic
+pins for a Question and a Lab, and their values are JSON-shaped — dates and
+timestamps are ISO 8601 strings, exactly as SQLite will hand them over. No
+Pydantic model appears anywhere below, so a store implementation never has to
+learn the API's serialization layer.
+
+**This module imports nothing outside the standard library.** `contentdb` is
+standard-library only, so an implementation that had to import `api/` to satisfy
+the protocol could not exist. Because the protocol is structural, `contentdb`
+does not have to import this module either: it can mirror `QuestionQuery` and
+`Page` with its own dataclasses, or return any object carrying the same fields.
+A test in `tests/api/test_store.py` imports this module in a clean interpreter
+and asserts that Pydantic never gets pulled in, so the rule cannot rot.
+"""
+
+from __future__ import annotations
+
+from collections.abc import Mapping, Sequence
+from dataclasses import dataclass
+from typing import Any, Protocol, runtime_checkable
+
+#: One Question, Lab, Theme, tag, or learning path as the store hands it over:
+#: a plain mapping keyed by the epic's field names.
+Record = Mapping[str, Any]
+
+#: The sort keys the contract accepts, without the optional `-` prefix.
+SORT_KEYS = ("id", "title", "difficulty", "updated_at")
+
+#: The default sort. `id` is unique across the corpus, so paging through a list
+#: with a stable `limit`/`offset` visits every item exactly once. A default of
+#: `-updated_at` would not: two Questions updated in the same second may swap
+#: places between two requests and a client would skip one and see another
+#: twice.
+DEFAULT_SORT = "id"
+
+
+@dataclass(frozen=True)
+class QuestionQuery:
+    """Everything `GET /api/v1/questions` asks the store for, in one value."""
+
+    theme: str | None = None
+    difficulty: str | None = None
+    type: str | None = None
+    tag: str | None = None
+    q: str | None = None
+    sort: str = DEFAULT_SORT
+    limit: int = 50
+    offset: int = 0
+
+
+@dataclass(frozen=True)
+class LabQuery:
+    """Everything `GET /api/v1/labs` asks the store for. Slice 3 implements it."""
+
+    theme: str | None = None
+    difficulty: str | None = None
+    tag: str | None = None
+    question_ref: str | None = None
+    q: str | None = None
+    sort: str = DEFAULT_SORT
+    limit: int = 50
+    offset: int = 0
+
+
+@dataclass(frozen=True)
+class SearchQuery:
+    """Everything `GET /api/v1/search` asks the store for. Slice 3 implements it."""
+
+    q: str
+    kind: str | None = None
+    limit: int = 50
+    offset: int = 0
+
+
+@dataclass(frozen=True)
+class Page:
+    """A window onto a result set, plus how large the whole result set is.
+
+    `total` counts the matches *before* `limit` and `offset` are applied, which
+    is what the list envelope reports and what lets a client know there is more
+    to fetch.
+    """
+
+    items: Sequence[Record]
+    total: int
+
+
+@runtime_checkable
+class Store(Protocol):
+    """Every read the Content API performs goes through this protocol.
+
+    The write surface belongs to slice 4, which also owns the `content_hash`
+    and Export semantics that make a write meaningful; declaring those methods
+    here now would be guessing at an agreement that has not been made.
+    """
+
+    def list_questions(self, query: QuestionQuery) -> Page: ...
+
+    def get_question(self, question_id: str) -> Record | None: ...
+
+    def list_labs(self, query: LabQuery) -> Page: ...
+
+    def get_lab(self, lab_id: str) -> Record | None: ...
+
+    def list_themes(self) -> Page: ...
+
+    def get_theme(self, name: str) -> Record | None: ...
+
+    def list_tags(self) -> Page: ...
+
+    def list_learning_paths(self) -> Page: ...
+
+    def get_learning_path(self, slug: str) -> Record | None: ...
+
+    def search(self, query: SearchQuery) -> Page: ...
