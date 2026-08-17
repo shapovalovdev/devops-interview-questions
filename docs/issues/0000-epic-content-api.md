@@ -8,7 +8,7 @@
 
 Questions and Labs are Markdown files rendered into a static site. Nothing can ask the corpus a question — "senior Kubernetes Questions tagged `cks`", "every Lab that prepares me for this Question" — without downloading and parsing the whole corpus in a browser. This epic puts the corpus in a **Content store** and serves it through a versioned **Content API**, so other tools (a trainer, a mobile client, an interview bot, the site itself) can consume it.
 
-Vocabulary is defined in [`CONTEXT.md`](../../CONTEXT.md); the architectural decision and its trade-offs are recorded in [ADR 0001](../adr/0001-sqlite-content-store-behind-a-fastapi-content-api.md).
+Vocabulary is defined in the repository's root `CONTEXT.md`; the architectural decision and its trade-offs are recorded in [ADR 0001](../adr/0001-sqlite-content-store-behind-a-fastapi-content-api.md).
 
 ## Shape
 
