@@ -2,7 +2,7 @@
 
 | | |
 | --- | --- |
-| **Status** | `ready-for-agent` |
+| **Status** | `in-progress` |
 | **Label** | `enhancement` |
 | **Epic** | [Content API v1](./0000-epic-content-api.md) |
 | **Depends on** | — |
