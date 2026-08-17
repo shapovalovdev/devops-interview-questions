@@ -39,6 +39,7 @@ This slice makes the Content API writable: create, replace, patch, and delete Qu
 
 ## Notes
 
+- Flip every write operation from `x-implementation: stub` to `x-implementation: implemented` in `api/openapi.yaml`. No stub may remain after this slice — the release gate checks. See the epic's **A complete contract, with stubs marked** section.
 - Work in a git worktree on branch `feature/api-write-surface`.
 - Use the `tdd` skill, and write the failure-path tests first — they are the point of this slice.
 - The store is opened writable here; keep the read path's connection handling coherent with slice 3's, and say in the docstring how concurrent readers and a writer coexist under SQLite's locking.

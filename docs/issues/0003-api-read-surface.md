@@ -36,6 +36,7 @@ This slice replaces slice 2's in-memory fake with the real Content store and imp
 
 ## Notes
 
+- Flip every read operation you implement from `x-implementation: stub` to `x-implementation: implemented` in `api/openapi.yaml`, which makes the coverage census demand a test for each of its documented status codes. See the epic's **A complete contract, with stubs marked** section.
 - Work in a git worktree on branch `feature/api-read-surface`.
 - Use the `tdd` skill.
 - Tests must build their fixture store by running Ingest over a small fixture corpus, plus at least one test against the real committed corpus so schema drift in real content is caught.

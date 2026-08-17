@@ -87,6 +87,30 @@ GET    /api/v1/search?q=&kind=            # questions and labs together
 - `POST` on an existing `id` → `409`. Unknown `id` → `404`. Body that violates the Theme or Tag vocabulary → `422`.
 - A write must be rejected if it would break a rule the Markdown validators enforce, with the same reason.
 
+**Sort and search parameters**
+
+`sort` on list endpoints accepts `id`, `title`, `difficulty`, `updated_at`, each optionally prefixed `-` for
+descending. The default is `id`, so pagination is deterministic. `q` on `/api/v1/search` is required — a
+search with no query is meaningless, and its absence is a documented `422`.
+
+**A complete contract, with stubs marked**
+
+The contract describes the whole v1 surface from the day it is written — every path, method, parameter,
+request body, header, and status code, including `X-API-Key`, `If-Match`, and their `401`, `403`, `409`,
+`412`, and `428` responses. It is the published API scheme, not a log of what happens to be built.
+
+An operation that is not yet implemented carries `x-implementation: stub` in the contract; an implemented
+one carries `x-implementation: implemented`. The two tests read that marker:
+
+- The **contract test** compares paths, methods, parameters, and request bodies for every operation, and
+  compares response status codes for implemented operations only.
+- The **coverage census** requires every documented status code of an implemented operation to be exercised
+  by a test, and requires each stub operation to have a test asserting its `501`.
+
+Flipping an operation to `implemented` is therefore what makes the census demand its full set of status
+codes — a slice cannot claim an endpoint without also testing every response the contract promises for it.
+By the end of slice 4 no `x-implementation: stub` may remain, and the release gate checks this.
+
 ## Slices
 
 | # | Slice | Depends on |
@@ -103,7 +127,9 @@ GET    /api/v1/search?q=&kind=            # questions and labs together
 The release **Content API v1** closes when:
 
 - every slice above is closed and verified;
-- `api/openapi.yaml` describes the served API exactly, proven by a contract test, and every documented path, method, and status code is exercised by at least one test;
+- `api/openapi.yaml` describes the served API exactly, proven by a contract test, carries no remaining
+  `x-implementation: stub` operation, and has every documented path, method, and status code exercised by at
+  least one test;
 - API tests and end-to-end tests against a running container both pass in GitHub Actions, with the coverage gate green;
 - `python tests/run_all_tests.py`, the existing content validators, and the static site build all still pass with no third-party package installed;
 - a Drift check proves the committed Markdown corpus and the Content store agree.
