@@ -78,7 +78,7 @@ checklist:
           valueFiles:
             - values.yaml
       destination:
-        server: https://kubernetes.default.svc
+        server: https://<cluster-api>  # внутри кластера это стандартный адрес kubernetes.default.svc
         namespace: orders
       syncPolicy:
         automated:
@@ -147,7 +147,7 @@ checklist:
 
 ## Exercise 6: контрольные вопросы (без подглядывания)
 
-1. **App-of-apps:** что это за паттерн, как выглядит корневое Application, указывающее на папку с другими Application, и какую проблему централизованного управления это решает? (Справка: https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-boilerplate/)
+1. **App-of-apps:** что это за паттерн, как выглядит корневое Application, указывающее на папку с другими Application, и какую проблему централизованного управления это решает? (Справка: https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/)
 2. **Pull vs push:** чем GitOps-pull (ArgoCD) отличается от CI-push (helm upgrade из pipeline)? Кто держит credentials кластера в каждой модели?
 3. **Источник истины:** почему в GitOps-модели нельзя считать источником истины вывод `kubectl get`? К чему приводит ручной `kubectl apply` поверх GitOps-приложения?
 4. **Rollback:** почему в GitOps откат релиза — это `git revert`, а не `kubectl rollout undo`? Что произойдёт с `rollout undo` при `selfHeal: true`?
