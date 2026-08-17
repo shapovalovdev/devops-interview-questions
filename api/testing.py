@@ -1,0 +1,289 @@
+"""An in-memory `Store` for tests and for the demo entrypoint.
+
+This is a fake, and it is named so that nothing mistakes it for the Content
+store. `create_app()` deliberately refuses to fall back to it: serving invented
+Questions from a production entrypoint would be a correctness bug, because a
+client cannot tell fabricated content from the corpus. The only two places it
+belongs are the test suite and `api/demo.py`, which announces in its name what
+it is serving.
+
+Like the real store, this one keeps plain mappings and hands back plain
+mappings — dates and timestamps as ISO 8601 strings, the way SQLite will store
+them — so the tests exercise the same seam slice 3 will implement.
+"""
+
+from __future__ import annotations
+
+from collections.abc import Iterable, Sequence
+from dataclasses import dataclass, field
+from typing import Any
+
+from api.store import Record, SORT_KEYS, LabQuery, Page, QuestionQuery, SearchQuery
+
+#: Difficulty sorts by seniority, not alphabetically; the two happen to agree
+#: today, but the corpus should not depend on that coincidence.
+DIFFICULTY_ORDER = {"junior": 0, "middle": 1, "senior": 2, "staff": 3}
+
+
+def _sort_value(record: Record, key: str) -> Any:
+    if key == "difficulty":
+        return DIFFICULTY_ORDER.get(str(record.get("difficulty")), len(DIFFICULTY_ORDER))
+    return record.get(key, "")
+
+
+def sorted_records(records: Iterable[Record], sort: str) -> list[Record]:
+    """Order records by the contract's sort vocabulary, `id` breaking every tie.
+
+    The tie-break is what makes `limit`/`offset` paging total: without it, two
+    records sharing a `title` could swap places between requests and a client
+    would miss one.
+    """
+    descending = sort.startswith("-")
+    key = sort.removeprefix("-")
+    if key not in SORT_KEYS:
+        raise ValueError(f"unsupported sort key: {sort!r}")
+    ascending = sorted(records, key=lambda record: (_sort_value(record, key), record["id"]))
+    return list(reversed(ascending)) if descending else ascending
+
+
+def _contains(record: Record, needle: str, fields: Sequence[str]) -> bool:
+    lowered = needle.lower()
+    return any(lowered in str(record.get(name, "")).lower() for name in fields)
+
+
+def _matches_question(record: Record, query: QuestionQuery) -> bool:
+    if query.theme is not None and record["theme"] != query.theme:
+        return False
+    if query.difficulty is not None and record["difficulty"] != query.difficulty:
+        return False
+    if query.type is not None and record["type"] != query.type:
+        return False
+    if query.tag is not None and query.tag not in record["tags"]:
+        return False
+    if query.q is not None and not _contains(record, query.q, ("title", "prompt", "body_markdown")):
+        return False
+    return True
+
+
+def _matches_lab(record: Record, query: LabQuery) -> bool:
+    if query.theme is not None and record["theme"] != query.theme:
+        return False
+    if query.difficulty is not None and record["difficulty"] != query.difficulty:
+        return False
+    if query.tag is not None and query.tag not in record["tags"]:
+        return False
+    if query.question_ref is not None and record["question_ref"] != query.question_ref:
+        return False
+    if query.q is not None and not _contains(record, query.q, ("title", "why", "body_markdown")):
+        return False
+    return True
+
+
+def _window(records: Sequence[Record], limit: int, offset: int) -> Page:
+    return Page(items=list(records[offset : offset + limit]), total=len(records))
+
+
+@dataclass
+class InMemoryStore:
+    """A `Store` backed by dictionaries, for tests and the demo service."""
+
+    questions: list[Record] = field(default_factory=list)
+    labs: list[Record] = field(default_factory=list)
+    themes: list[Record] = field(default_factory=list)
+    tags: list[Record] = field(default_factory=list)
+    learning_paths: list[Record] = field(default_factory=list)
+
+    def list_questions(self, query: QuestionQuery) -> Page:
+        matched = sorted_records(
+            [record for record in self.questions if _matches_question(record, query)], query.sort
+        )
+        return _window(matched, query.limit, query.offset)
+
+    def get_question(self, question_id: str) -> Record | None:
+        return next((record for record in self.questions if record["id"] == question_id), None)
+
+    def list_labs(self, query: LabQuery) -> Page:
+        matched = sorted_records(
+            [record for record in self.labs if _matches_lab(record, query)], query.sort
+        )
+        return _window(matched, query.limit, query.offset)
+
+    def get_lab(self, lab_id: str) -> Record | None:
+        return next((record for record in self.labs if record["id"] == lab_id), None)
+
+    def list_themes(self) -> Page:
+        return _window(self.themes, len(self.themes) or 1, 0)
+
+    def get_theme(self, name: str) -> Record | None:
+        return next((record for record in self.themes if record["name"] == name), None)
+
+    def list_tags(self) -> Page:
+        return _window(self.tags, len(self.tags) or 1, 0)
+
+    def list_learning_paths(self) -> Page:
+        return _window(self.learning_paths, len(self.learning_paths) or 1, 0)
+
+    def get_learning_path(self, slug: str) -> Record | None:
+        return next((record for record in self.learning_paths if record["slug"] == slug), None)
+
+    def search(self, query: SearchQuery) -> Page:
+        hits: list[Record] = []
+        if query.kind in (None, "question"):
+            hits += [r for r in self.questions if _contains(r, query.q, ("title", "prompt"))]
+        if query.kind in (None, "lab"):
+            hits += [r for r in self.labs if _contains(r, query.q, ("title", "why"))]
+        return _window(sorted(hits, key=lambda record: record["id"]), query.limit, query.offset)
+
+
+def question_record(
+    theme: str,
+    slug: str,
+    title: str,
+    difficulty: str,
+    type: str,
+    tags: list[str],
+    prompt: str,
+    updated_at: str,
+) -> dict[str, Any]:
+    """A Question record shaped exactly as the epic pins the resource."""
+    return {
+        "id": f"{theme}/{slug}",
+        "theme": theme,
+        "slug": slug,
+        "title": title,
+        "difficulty": difficulty,
+        "type": type,
+        "tags": tags,
+        "sources": [
+            {
+                "url": "https://kubernetes.io/docs/home/",
+                "source_type": "official-docs",
+                "verified_on": "2026-08-01",
+            }
+        ],
+        "prompt": prompt,
+        "answer_guide": [f"Name the trade-off behind {title.lower()}."],
+        "body_markdown": f"# {title}\n\n{prompt}\n",
+        "source_path": f"questions/{theme}/{slug}.md",
+        "content_hash": f"sha256:{theme}-{slug}",
+        "updated_at": updated_at,
+    }
+
+
+def lab_record(
+    theme: str,
+    slug: str,
+    title: str,
+    difficulty: str,
+    tags: list[str],
+    question_ref: str,
+    why: str,
+    updated_at: str,
+) -> dict[str, Any]:
+    """A Lab record shaped exactly as the epic pins the resource."""
+    return {
+        "id": f"{theme}/{slug}",
+        "theme": theme,
+        "slug": slug,
+        "title": title,
+        "difficulty": difficulty,
+        "tags": tags,
+        "question_ref": question_ref,
+        "why": why,
+        "checklist": [f"Work through {title.lower()} on a throwaway cluster."],
+        "body_markdown": f"# {title}\n\n{why}\n",
+        "source_path": f"labs/{theme}/{slug}.md",
+        "content_hash": f"sha256:{theme}-{slug}",
+        "updated_at": updated_at,
+    }
+
+
+def demo_corpus() -> InMemoryStore:
+    """A handful of obviously-fake records, enough to exercise every filter.
+
+    Every id carries a `demo-` prefix so that a record served by the demo
+    entrypoint can never be mistaken for a Question from the corpus.
+    """
+    questions = [
+        question_record(
+            "kubernetes", "demo-admission-guardrails", "Design admission guardrails",
+            "senior", "scenario", ["kubernetes", "security", "cks"],
+            "How would you stop an unsafe workload manifest reaching production?",
+            "2026-08-01T09:00:00Z",
+        ),
+        question_record(
+            "kubernetes", "demo-pod-disruption", "Reason about PodDisruptionBudgets",
+            "staff", "theory", ["kubernetes", "reliability"],
+            "When does a PodDisruptionBudget block a node drain?",
+            "2026-08-10T09:00:00Z",
+        ),
+        question_record(
+            "linux", "demo-exit-codes", "Explain process exit codes",
+            "junior", "theory", ["linux", "processes"],
+            "What does an exit status of 127 tell you?",
+            "2026-07-20T09:00:00Z",
+        ),
+        question_record(
+            "observability", "demo-cardinality", "Control metric cardinality",
+            "middle", "troubleshooting", ["observability", "prometheus"],
+            "Your series count exploded overnight. How do you bring it back?",
+            "2026-08-05T09:00:00Z",
+        ),
+    ]
+    labs = [
+        lab_record(
+            "kubernetes", "demo-admission-guardrails", "Break and repair an admission policy",
+            "senior", ["kubernetes", "security"], "kubernetes/demo-admission-guardrails",
+            "Practice writing a policy that rejects privileged pods.",
+            "2026-08-03T09:00:00Z",
+        ),
+        lab_record(
+            "linux", "demo-exit-codes", "Hunt a failing process by its exit code",
+            "junior", ["linux"], "linux/demo-exit-codes",
+            "Reproduce exit statuses 127 and 139 and diagnose each.",
+            "2026-07-22T09:00:00Z",
+        ),
+    ]
+    themes = [
+        {
+            "name": "kubernetes", "state": "active", "question_count": 2, "lab_count": 1,
+            "difficulty_counts": {"senior": 1, "staff": 1},
+        },
+        {
+            "name": "linux", "state": "active", "question_count": 1, "lab_count": 1,
+            "difficulty_counts": {"junior": 1},
+        },
+        {
+            "name": "observability", "state": "active", "question_count": 1, "lab_count": 0,
+            "difficulty_counts": {"middle": 1},
+        },
+    ]
+    tags = [
+        {"name": "kubernetes", "question_count": 2, "lab_count": 1},
+        {"name": "linux", "question_count": 1, "lab_count": 1},
+    ]
+    learning_paths = [
+        {
+            "slug": "demo-kubernetes-basics",
+            "title": "Kubernetes basics",
+            "description": "A first sequence through the Kubernetes Theme.",
+            "steps": [
+                {
+                    "question_id": "kubernetes/demo-admission-guardrails",
+                    "why": "Admission control is the guardrail every later step assumes.",
+                }
+            ],
+        }
+    ]
+    return InMemoryStore(
+        questions=questions,
+        labs=labs,
+        themes=themes,
+        tags=tags,
+        learning_paths=learning_paths,
+    )
+
+
+def demo_store() -> InMemoryStore:
+    """Factory form of `demo_corpus`, usable as a `CONTENT_API_STORE` target."""
+    return demo_corpus()

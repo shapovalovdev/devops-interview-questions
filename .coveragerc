@@ -1,0 +1,16 @@
+# Coverage settings for the Content API. `pytest --cov=api --cov-branch` reads this.
+[run]
+branch = True
+
+[report]
+exclude_lines =
+    pragma: no cover
+    if TYPE_CHECKING:
+    # A Protocol method body is three dots. Nothing there ever executes, by
+    # design: the protocol is the seam's documentation, and the implementations
+    # live in api/testing.py and, from slice 3, in contentdb/. Counting those
+    # bodies as missed lines — or their `def` as a branch that never reaches
+    # its body — would let the seam drag the coverage gate down and tempt
+    # someone to delete the documentation to make a number go up.
+    ^\s*\.\.\.\s*$
+    ^\s*def .*:\s*\.\.\.\s*$
