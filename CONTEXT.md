@@ -4,7 +4,7 @@ This repository is a public, topic-organized collection of DevOps interview ques
 
 ## Goal and current epic
 
-The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The epic [Make hands-on labs first-class site content](https://github.com/shapovalovdev/devops-interview-questions/issues/156) and its release [Labs on site v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/6) closed on 2026-08-17 with every issue verified: `window.labs` publishes all 11 labs with corpus-parity tests, and the site renders a labs view at `#labs` with theme-aware panels. There is currently **no active epic**: dispatch is paused until the next epic is charted with wayfinder and recorded here and in `AGENTS.md`.
+The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The current epic is the wayfinder map [Make the live link audit throttle-proof](https://github.com/shapovalovdev/devops-interview-questions/issues/160): github.com 404s are verified against raw.githubusercontent.com before failing CI, so throttling stops masquerading as dead links. Its release gate is the GitHub milestone [Link-audit resilience v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/7). Work is only dispatched on issues attached to that milestone; when the milestone closes, a new epic and release must be charted before further implementation work starts.
 
 ## Language
 
