@@ -8476,3 +8476,187 @@ window.studyOrders = [
     ]
   }
 ];
+
+window.labs = [
+  {
+    "title": "Redis как кэш Flask-приложения: от ручного кэша к TTL и eviction",
+    "theme": "caching",
+    "difficulty": "middle",
+    "tags": [
+      "caching",
+      "redis",
+      "docker",
+      "prometheus",
+      "monitoring",
+      "memory",
+      "healthchecks"
+    ],
+    "why": "A cache layer is named in four of the eight analyzed vacancies (Interlizing, efin, T1 pattern names Redis explicitly), yet candidates usually stop at installing it. This lab teaches hit-ratio thinking: cache-aside in the Flask app, TTL and invalidation choices, maxmemory eviction experiments with allkeys-lru versus volatile-star policies, and cache failure modes like stampede — the interview questions behind the install command.",
+    "questionTitle": "Tune Redis maxmemory and eviction behaviour",
+    "questionHref": "questions/caching/redis-maxmemory-tuning.html",
+    "slug": "caching/redis-practical"
+  },
+  {
+    "title": "ArgoCD: деплой Helm-чарта из Git вместо ручного helm upgrade",
+    "theme": "ci-cd",
+    "difficulty": "middle",
+    "tags": [
+      "ci-cd",
+      "kubernetes",
+      "argo-cd",
+      "gitops",
+      "deployment",
+      "git",
+      "delivery"
+    ],
+    "why": "ArgoCD is a hard requirement in efin A-tier vacancies and GitOps is a frequent senior interview topic. This lab teaches pull-based deployment and drift thinking rather than mere tool installation, closing the gap between running helm upgrade by hand and declarative delivery where Git is the single source of truth.",
+    "questionTitle": "Choose a pull-based reconciler or a push-based deployment pipeline",
+    "questionHref": "questions/ci-cd/gitops-pull-versus-push-delivery.html",
+    "slug": "ci-cd/argocd-gitops-deploy"
+  },
+  {
+    "title": "Explain idempotence in an Ansible playbook",
+    "theme": "configuration-management",
+    "difficulty": "middle",
+    "tags": [
+      "ansible",
+      "automation",
+      "configuration-management",
+      "reliability"
+    ],
+    "why": "An idempotent automation run behaves predictably. If a task executes twice, it must not mutate the target or trigger duplicate changes. This ensures that scheduled runs and retries can occur safely without risk of configuration drift or service interruption.",
+    "questionTitle": "Explain idempotence in an Ansible playbook",
+    "questionHref": "questions/configuration-management/ansible-idempotence.html",
+    "slug": "configuration-management/ansible-idempotence"
+  },
+  {
+    "title": "Configure database readiness wait-for logic in Ansible",
+    "theme": "configuration-management",
+    "difficulty": "middle",
+    "tags": [
+      "ansible",
+      "automation",
+      "configuration-management",
+      "reliability"
+    ],
+    "why": "Distributed services start up at different speeds. If the application server starts up before the database is ready, it will fail to connect and crash. Automating readiness checks via Ansible ensures playbooks execute smoothly without dependency race conditions.",
+    "questionTitle": "Design a reusable Ansible role",
+    "questionHref": "questions/configuration-management/ansible-role-design.html",
+    "slug": "configuration-management/ansible-wait-logic"
+  },
+  {
+    "title": "PostgreSQL: streaming-репликация, failover вручную и PITR",
+    "theme": "databases",
+    "difficulty": "middle",
+    "tags": [
+      "databases",
+      "postgresql",
+      "availability",
+      "storage",
+      "reliability",
+      "ansible"
+    ],
+    "why": "Backups, replication and migrations are a direct Interlizing job requirement, and T1 asks for Patroni diagnostics: doing failover and recovery by hand builds the exact mental model Patroni automates, without installing it yet.",
+    "questionTitle": "Design PostgreSQL high availability and failover",
+    "questionHref": "questions/databases/high-availability-failover.html",
+    "slug": "databases/postgresql-replication-pitr"
+  },
+  {
+    "title": "Kubernetes break-fix: kubeadm-кластер и диагностика CNI/ingress",
+    "theme": "kubernetes",
+    "difficulty": "middle",
+    "tags": [
+      "kubernetes",
+      "cni",
+      "networking",
+      "certificates",
+      "troubleshooting",
+      "fault-injection"
+    ],
+    "why": "Kubernetes appears in all eight target vacancies, and interviewers distinguish 'used k3s' from 'can repair a cluster'. This break-fix lab drills diagnosis through kubectl describe, logs, and events, plus control-plane understanding (etcd, apiserver, certificates), rather than deployment alone.",
+    "questionTitle": "Triage a Kubernetes node that becomes NotReady",
+    "questionHref": "questions/kubernetes/node-not-ready-triage.html",
+    "slug": "kubernetes/kubeadm-cni-ingress-break-fix"
+  },
+  {
+    "title": "Diagnose a systemd service that repeatedly fails",
+    "theme": "linux",
+    "difficulty": "middle",
+    "tags": [
+      "linux",
+      "debugging",
+      "troubleshooting",
+      "lfcs"
+    ],
+    "why": "Linux system processes are managed through systemd unit configurations. If a service crashes or rate-limits, you must be able to navigate dependencies, file sockets, environment contexts, and boot journals to isolate unit flaws from runtime exceptions.",
+    "questionTitle": "Diagnose a systemd service that repeatedly fails",
+    "questionHref": "questions/linux/systemd-service-failure.html",
+    "slug": "linux/systemd-service-failure"
+  },
+  {
+    "title": "Мониторинг и логи на существующем стенде: Prometheus + Alertmanager + Loki + Grafana",
+    "theme": "observability",
+    "difficulty": "middle",
+    "tags": [
+      "observability",
+      "monitoring",
+      "logging",
+      "prometheus",
+      "ansible"
+    ],
+    "why": "Monitoring appears in eight of the eight analyzed vacancies and logging in six of eight; Loki covers the practical logging side more cheaply and simply than ELK, and correlating metrics with logs in a single dashboard is exactly what Ostrovok, T1, and efin interviews ask for. A candidate with production Zabbix+Grafana experience and pet-level Prometheus closes the main gap here: transferring scattered Zabbix experience onto the Prometheus stack and learning to tie an alert to its cause through logs.",
+    "questionTitle": "Build an actionable production alert",
+    "questionHref": "questions/observability/build-an-actionable-alert.html",
+    "slug": "observability/prometheus-loki-telemetry"
+  },
+  {
+    "title": "Live-Migrate a libvirt Domain and Measure the Real Downtime",
+    "theme": "qemu-kvm",
+    "difficulty": "senior",
+    "tags": [
+      "kvm",
+      "libvirt",
+      "live-migration",
+      "migration",
+      "networking",
+      "performance",
+      "troubleshooting"
+    ],
+    "why": "Pre-copy live migration looks like one command until a maintenance window depends on it. This lab builds the two-host preconditions yourself — shared storage, a writable domain, a budgeted migration — then forces the failure modes (uncontrolled bandwidth, a runaway dirty rate) and measures actual cutover downtime with ping, so you learn why convergence settings exist and what a trusted migration window really contains.",
+    "questionTitle": "Run a live migration you can trust",
+    "questionHref": "questions/qemu-kvm/run-a-live-migration-you-trust.html",
+    "slug": "qemu-kvm/live-migrate-with-measured-downtime"
+  },
+  {
+    "title": "RabbitMQ на практике: асинхронная обработка вокруг существующего приложения",
+    "theme": "queue-messaging",
+    "difficulty": "middle",
+    "tags": [
+      "rabbitmq",
+      "message-queues",
+      "event-driven",
+      "observability",
+      "reliability"
+    ],
+    "why": "Message brokers appear in four of the eight current vacancies, while the queue-messaging bank holds about thirty questions with no practical footing. RabbitMQ is the cheapest entry into the topic: one evening with a compose stand teaches the basic vocabulary (exchange, binding, ack, DLQ) and removes the fear of those interview questions. Interlizing vacancies require RabbitMQ clusters and efin asks Kafka concepts, and both interview branches start with understanding how a broker differs from a log.",
+    "questionTitle": "Design RabbitMQ dead-letter handling",
+    "questionHref": "questions/queue-messaging/design-rabbitmq-dead-lettering.html",
+    "slug": "queue-messaging/rabbitmq-practical"
+  },
+  {
+    "title": "SRE Chaos Sandbox: Chaos on a Leash",
+    "theme": "sre",
+    "difficulty": "senior",
+    "tags": [
+      "sre",
+      "troubleshooting",
+      "incident-response",
+      "monitoring",
+      "chaos-engineering"
+    ],
+    "why": "Real SRE operations involve responding to live alarms and diagnosing unknown state changes under pressure. Setting up a time-leashed chaos sandbox teaches how to manage on-call alerts, query journals, isolate latency, and build self-healing service definitions.",
+    "questionTitle": "Exhaust disk space and file descriptors",
+    "questionHref": "questions/chaos-engineering/exhaust-disk-and-file-descriptors.html",
+    "slug": "sre/chaos-on-a-leash"
+  }
+];

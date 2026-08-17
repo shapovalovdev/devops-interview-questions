@@ -9,6 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 QUESTIONS = ROOT / "questions"
+LABS = ROOT / "labs"
 CATALOG = ROOT / "assets" / "questions.js"
 MANIFEST = ROOT / "config" / "content-manifest.json"
 LEARNING_PATHS = ROOT / "config" / "learning-paths.json"
@@ -29,6 +30,79 @@ def front_matter(path: Path) -> dict[str, str]:
             key, value = line.split(": ", 1)
             fields[key] = value
     return fields
+
+
+def _unquote(value: str) -> str:
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+        return value[1:-1]
+    return value
+
+
+def lab_front_matter(path: Path) -> dict[str, object]:
+    """Parse the YAML subset a lab's front matter uses.
+
+    Labs quote their scalars, carry an inline `tags: [a, b]` list, and open a
+    block `checklist:` of indented items — none of which the scalar-only
+    `front_matter()` above can read.  The shape mirrors `tests/validate_labs.py`,
+    which owns the contract; here it only has to not misread a field.
+    """
+    lines = path.read_text(encoding="utf-8").splitlines()
+    assert lines[0] == "---", f"{path}: front matter must begin with ---"
+    end = lines.index("---", 1)
+    fields: dict[str, object] = {}
+    open_list: str | None = None
+    for line in lines[1:end]:
+        if not line.strip():
+            continue
+        if line.startswith("  - "):
+            assert open_list, f"{path}: list item outside any front-matter field"
+            fields[open_list].append(_unquote(line.strip()[2:].strip()))  # type: ignore[union-attr]
+            continue
+        key, _, value = line.partition(":")
+        key, value = key.strip(), value.strip()
+        assert key not in fields, f"{path}: duplicate front-matter field {key}"
+        if not value:
+            fields[key] = []
+            open_list = key
+        elif value.startswith("[") and value.endswith("]"):
+            fields[key] = re.findall(r"[a-z0-9-]+", value)
+            open_list = None
+        else:
+            fields[key] = _unquote(value)
+            open_list = None
+    return fields
+
+
+def labs() -> list[dict]:
+    """Resolve each lab's front matter into renderable records.
+
+    A lab is not published as a Pages page, so it has no `href` of its own;
+    its stable identity is the `slug` of its source path, `<theme>/<file>`.
+    The linked Question is resolved the way path and study-order steps are:
+    title plus `questionHref`, never `path`, which is the Question catalog's
+    own key.  No manifest owns the order — labs publish sorted by theme then
+    slug so the catalog regenerates deterministically from the corpus alone.
+    """
+    records = []
+    for source in sorted(LABS.glob("*/*.md"), key=lambda path: (path.parent.name, path.stem)):
+        fields = lab_front_matter(source)
+        reference = str(fields["question_ref"])
+        question = QUESTIONS / reference
+        assert question.is_file(), f"{source}: question_ref points at a missing Question: questions/{reference}"
+        question_fields = front_matter(question)
+        records.append(
+            {
+                "title": fields["title"],
+                "theme": fields["theme"],
+                "difficulty": fields["difficulty"],
+                "tags": fields["tags"],
+                "why": fields["why"],
+                "questionTitle": question_fields["title"],
+                "questionHref": question.relative_to(ROOT).with_suffix(".html").as_posix(),
+                "slug": f"{source.parent.name}/{source.stem}",
+            }
+        )
+    return records
 
 
 def learning_paths() -> list[dict]:
@@ -215,11 +289,14 @@ def main() -> None:
     lines.append("window.learningPaths = " + json.dumps(paths, ensure_ascii=False, indent=2) + ";\n")
     orders = study_orders()
     lines.append("window.studyOrders = " + json.dumps(orders, ensure_ascii=False, indent=2) + ";\n")
+    published_labs = labs()
+    lines.append("window.labs = " + json.dumps(published_labs, ensure_ascii=False, indent=2) + ";\n")
     CATALOG.write_text("\n".join(lines), encoding="utf-8")
     rewritten = rewrite_study_orders()
     print(
         f"Generated {len(records)} catalog records, {len(paths)} learning paths, "
-        f"{len(orders)} study orders, and rewrote {rewritten} study-order sections."
+        f"{len(orders)} study orders, {len(published_labs)} labs, "
+        f"and rewrote {rewritten} study-order sections."
     )
 
 
