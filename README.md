@@ -46,6 +46,10 @@ devops_questions/
 └── TAGS.md
 ```
 
+## Self-hosting
+
+The site is fully static and ships as a Docker image: `docker build -t devops-questions . && docker run -p 8080:8080 devops-questions`. The full publishing matrix — GitHub Pages, Docker, and any plain static web server over `build/site/` — is documented in [`docs/publishing.md`](./docs/publishing.md).
+
 ## Content policy and attribution
 
 All questions in this repository are original or substantively paraphrased. The initial coverage was informed by the public [Swfuse DevOps interview collection](https://github.com/Swfuse/devops-interview/blob/main/interview.md), which is credited as a source baseline; its text is not reproduced here. Topic coverage is also mapped broadly to the [roadmap.sh DevOps roadmap](https://roadmap.sh/devops).

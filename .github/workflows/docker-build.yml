@@ -1,0 +1,41 @@
+name: Docker image build
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  docker-build:
+    name: Build image and smoke-test the served site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the site image
+        run: docker build -t devops-questions:ci .
+      - name: Serve the image
+        run: |
+          docker run -d --name site -p 8080:8080 devops-questions:ci
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1; then
+              echo "Site is up after ${i}s"
+              exit 0
+            fi
+            sleep 1
+          done
+          docker logs site
+          echo "Site did not come up within 30s" >&2
+          exit 1
+      - name: Smoke-test the index and a Question page
+        run: |
+          set -euo pipefail
+          curl -fsS http://127.0.0.1:8080/ | grep -q "<title>DevOps Question Field Manual</title>"
+          curl -fsS "http://127.0.0.1:8080/questions/ci-cd/argo-cd-application-sync.html" \
+            | grep -q "<title>Explain Argo CD Application synchronization</title>"
+          echo "Index and Question page smoke tests passed"
+      - name: Cleanup
+        if: always()
+        run: docker rm -f site

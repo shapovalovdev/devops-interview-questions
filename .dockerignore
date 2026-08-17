@@ -1,0 +1,13 @@
+# Keep the build context lean: the builder only needs questions/, docs/,
+# assets/, config/, the root pages, and scripts/build_site.py.
+.git
+.github
+.claude
+build
+dist
+skills
+tests
+node_modules
+__pycache__
+*.pyc
+.DS_Store
