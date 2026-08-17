@@ -614,6 +614,7 @@
         { "question": "questions/logging/stdout-in-containers.md", "why": "The Theme begins where container logs begin: standard streams as the platform contract." },
         { "question": "questions/logging/syslog-basics.md", "why": "Facilities and severity are the vocabulary those streams inherit from syslog." },
         { "question": "questions/logging/structured-log-correlation.md", "why": "Structured logs with request correlation turn raw streams into evidence." },
+        { "question": "questions/logging/structured-logging-json-format.md", "why": "Converting journald and Flask output to structured JSON makes the correlation fields above machine-readable instead of grep-dependent." },
         { "question": "questions/logging/log-data-model.md", "why": "The data model decides what the pipeline will even be able to answer." },
         { "question": "questions/logging/log-level-policy.md", "why": "The level policy keeps volume honest before the model grows unwieldy." },
         { "question": "questions/logging/multiline-log-parsing.md", "why": "Multiline exceptions parse safely or the model's best evidence corrupts itself." },
@@ -623,6 +624,8 @@
         { "question": "questions/logging/log-pipeline-slo.md", "why": "The delivery SLO promises exactly what the buffering tier made possible." },
         { "question": "questions/logging/schema-evolution.md", "why": "Evolving the schema without breaking consumers keeps those promises across versions." },
         { "question": "questions/logging/log-query-performance.md", "why": "The slow expensive query is the bill that poor field design writes." },
+        { "question": "questions/logging/logql-stream-filtering-basics.md", "why": "LogQL stream selectors and line filters are the query vocabulary the performance tier above is judged against." },
+        { "question": "questions/logging/loki-architecture-and-label-design.md", "why": "The Loki pipeline and its label model explain why stream selection, not index tuning, drives most query cost." },
         { "question": "questions/logging/secret-redaction.md", "why": "The duties open with keeping secrets out of logs, which outranks any feature." },
         { "question": "questions/logging/privacy-by-design.md", "why": "Privacy by design governs the whole pipeline rather than filtering at the end." },
         { "question": "questions/logging/log-retention-policy.md", "why": "Retention decides what the platform keeps and what it owes regulators." },
@@ -633,7 +636,10 @@
         { "question": "questions/logging/logging-incident-command.md", "why": "Reading logs across services mid-incident is the use case everything above served." },
         { "question": "questions/logging/logging-migration.md", "why": "The strategy tier opens with migrating off fragmented logging." },
         { "question": "questions/logging/logging-service-ownership.md", "why": "Ownership boundaries decide who actually runs the platform the migration built." },
-        { "question": "questions/logging/organization-logging-platform.md", "why": "The organization-wide platform decision closes the Theme at fleet scale." }
+        { "question": "questions/logging/organization-logging-platform.md", "why": "The organization-wide platform decision closes the Theme at fleet scale." },
+        { "question": "questions/logging/loki-vs-elk-tradeoffs.md", "why": "The Loki-versus-ELK cost comparison prices the two dominant log platform models before committing to one." },
+        { "question": "questions/logging/victoriametrics-vs-prometheus.md", "why": "The VictoriaMetrics comparison extends the build-versus-adopt decision to the metrics backend beside the log platform." },
+        { "question": "questions/logging/loki-retention-and-multi-tenancy.md", "why": "Retention and multi-tenancy design turns the platform choice into enforceable per-team data boundaries and lifetimes." }
       ]
     },
     {
