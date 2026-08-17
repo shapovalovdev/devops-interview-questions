@@ -2,7 +2,7 @@
 
 | | |
 | --- | --- |
-| **Status** | `needs-review` |
+| **Status** | `closed` |
 | **Label** | `enhancement` |
 | **Epic** | [Content API v1](./0000-epic-content-api.md) |
 | **Depends on** | — |

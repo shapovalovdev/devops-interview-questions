@@ -32,6 +32,18 @@ Ingest is one-way: Markdown becomes a Content store. This slice builds the retur
 - [ ] Tests are picked up by `python tests/run_all_tests.py`, run without network access, and cover round-trip fidelity, drift detection both ways, path-traversal refusal, and idempotence.
 - [ ] `python tests/run_all_tests.py` and `python scripts/build_site.py` still pass.
 
+## Inherited from slice 0001
+
+- `contentdb` is built and merged. Ingest reads the corpus; you are writing the reverse. Read
+  `contentdb/corpus.py` and `contentdb/frontmatter.py` first — they define what a record holds and how the
+  corpus's YAML subset is parsed, and your renderer must be their exact inverse.
+- Records cross the `Store` seam as **plain mappings** keyed by the epic's field names. `contentdb/models.py`
+  holds query and page types only, not record dataclasses.
+- `updated_at` is the file's git commit time in UTC, falling back to `1970-01-01T00:00:00Z` when git cannot
+  answer. **CI checks out shallow** (`actions/checkout@v4` with no `fetch-depth`), so every file would take
+  the fallback there. Nothing depends on it today, but your Drift gate might: if it does, set
+  `fetch-depth: 0` on the checkout in the workflow you touch, and say in the issue report that you did.
+
 ## Notes
 
 - Work in a git worktree on branch `feature/content-export-drift`.
