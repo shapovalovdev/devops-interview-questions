@@ -81,6 +81,15 @@ input:focus { outline: 2px solid var(--ember); }
 .study-order-panel[open] .study-order-toggle::before { content: '−'; }
 .study-order-body { border-top: 1px solid var(--ink); padding: 1.1rem .9rem .9rem; }
 .study-order-note { max-width: 78ch; line-height: 1.6; font-size: .78rem; color: var(--muted); margin: 0 0 1.1rem; }
+.labs-zone { padding: 1.6rem 0 5rem; }
+.lab-theme-group { margin: 1.6rem 0 0; }
+.lab-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); border-left: 1px solid var(--ink); }
+.lab-card { display: flex; flex-direction: column; padding: 1.1rem; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); background: rgba(245,241,232,.68); }
+.lab-card:hover { background: var(--acid); }
+.lab-card h3 { font: 600 clamp(1.15rem, 2vw, 1.7rem)/1.06 "Fraunces", serif; letter-spacing: -.03em; margin: .8rem 0 .55rem; }
+.lab-card .step-why { margin: 0 0 1rem; }
+.lab-card a { color: var(--ink); text-decoration: none; border-top: 1px solid rgba(23,32,29,.3); padding-top: .72rem; font-size: .72rem; margin-top: auto; }
+.lab-card a b { color: var(--ember); font-size: 1rem; float: right; }
 footer { display: flex; justify-content: space-between; gap: 1rem; padding-top: 1rem; padding-bottom: 1.5rem; border-top: 1px solid var(--ink); color: var(--muted); }
 footer a { color: var(--ink); }
 .session-shell { max-width: 1100px; min-height: 100vh; padding-top: clamp(1.3rem, 4vw, 3rem); padding-bottom: 4rem; }
@@ -112,5 +121,5 @@ button:disabled { opacity: .42; cursor: not-allowed; }
 .deck-actions { border-top: 1px solid var(--ink); padding-top: 1rem; }
 .deck-utility { align-items: center; margin-top: 1rem; font-size: .68rem; color: var(--muted); }
 @keyframes enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-@media (max-width: 780px) { .heading-row, .control-room, .session-header { grid-template-columns: 1fr; gap: 1.5rem; } .filter-banks { padding-top: 0; } .question-grid, .session-themes { grid-template-columns: 1fr; } .question-card { min-height: 13rem; } footer { flex-direction: column; } .session-builder, .interview-deck { padding: 1rem; } .interview-card { min-height: 19rem; } .deck-actions > * { flex: 1 1 28%; min-height: 3rem; } .deck-utility { align-items: stretch; } .entry-points { flex-direction: column; align-items: stretch; } .practice-entry { justify-content: space-between; } .path-step { grid-template-columns: 1fr; gap: .25rem; padding: 1rem .85rem; } .step-index { font-size: 1.4rem; } .step-body h3 { max-width: none; } }
-@media (min-width: 781px) and (max-width: 1050px) { .question-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 780px) { .heading-row, .control-room, .session-header { grid-template-columns: 1fr; gap: 1.5rem; } .filter-banks { padding-top: 0; } .question-grid, .session-themes, .lab-grid { grid-template-columns: 1fr; } .question-card { min-height: 13rem; } footer { flex-direction: column; } .session-builder, .interview-deck { padding: 1rem; } .interview-card { min-height: 19rem; } .deck-actions > * { flex: 1 1 28%; min-height: 3rem; } .deck-utility { align-items: stretch; } .entry-points { flex-direction: column; align-items: stretch; } .practice-entry { justify-content: space-between; } .path-step { grid-template-columns: 1fr; gap: .25rem; padding: 1rem .85rem; } .step-index { font-size: 1.4rem; } .step-body h3 { max-width: none; } }
+@media (min-width: 781px) and (max-width: 1050px) { .question-grid, .lab-grid { grid-template-columns: repeat(2, 1fr); } }

@@ -15,6 +15,11 @@
   // as a collapsed panel, because the grid stays the Theme view's subject.
   const studyOrders = window.studyOrders || [];
   const studyOrderView = document.querySelector('#study-order');
+  // A lab is practice data attached to a Theme: the whole catalog gets its
+  // own view, while a single Theme gets a collapsed strip beside the grid.
+  const labs = window.labs || [];
+  const labsView = document.querySelector('#labs-view');
+  const themeLabsView = document.querySelector('#theme-labs');
   const pathFilters = document.querySelector('#path-filters');
   const pathView = document.querySelector('#path-view');
   const questionZone = document.querySelector('#question-zone');
@@ -22,6 +27,7 @@
   let activeCertification = 'all';
   let activeCollection = 'all';
   let activePath = 'all';
+  let activeLabs = false;
 
   document.querySelector('#question-count').textContent = data.length;
   document.querySelector('#theme-count').textContent = themes.length;
@@ -79,14 +85,15 @@
     activeCertification = certifications.some((item) => item.tag === certification) ? certification : 'all';
     activeCollection = collection === 'must-know' ? collection : 'all';
     activePath = learningPaths.some((item) => item.slug === path) ? path : 'all';
+    activeLabs = params.has('labs');
     mustKnowFilter.setAttribute('aria-pressed', String(activeCollection === 'must-know'));
     mustKnowFilter.classList.toggle('active', activeCollection === 'must-know');
   }
 
   function renderPath() {
     const path = learningPaths.find((item) => item.slug === activePath);
-    questionZone.hidden = Boolean(path);
-    pathView.hidden = !path;
+    questionZone.hidden = Boolean(path) || activeLabs;
+    pathView.hidden = !path || activeLabs;
     if (!path) {
       pathView.innerHTML = '';
       return;
@@ -145,13 +152,79 @@
       </details>`;
   }
 
+  function renderThemeLabs() {
+    const themeLabs = labs.filter((lab) => lab.theme === activeTheme);
+    if (!themeLabs.length) {
+      themeLabsView.hidden = true;
+      themeLabsView.innerHTML = '';
+      return;
+    }
+    themeLabsView.hidden = false;
+    themeLabsView.innerHTML = `
+      <details class="study-order-panel">
+        <summary>Hands-on labs <span class="study-order-count">${themeLabs.length} lab${themeLabs.length === 1 ? '' : 's'}</span><span class="study-order-toggle" aria-hidden="true"></span></summary>
+        <div class="study-order-body">
+          <ol class="path-steps">
+            ${themeLabs.map((lab, index) => `
+              <li class="path-step">
+                <p class="step-index">${String(index + 1).padStart(2, '0')}</p>
+                <div class="step-body">
+                  <p class="card-top"><span>${label(lab.theme)}</span><span>${lab.difficulty}</span></p>
+                  <h3><a href="${lab.questionHref}">${escapeHtml(lab.title)}</a></h3>
+                  <p class="step-why">${escapeHtml(lab.why)}</p>
+                </div>
+              </li>`).join('')}
+          </ol>
+        </div>
+      </details>`;
+  }
+
+  function renderLabs() {
+    labsView.hidden = !activeLabs;
+    if (!activeLabs) {
+      labsView.innerHTML = '';
+      return;
+    }
+    // window.labs arrives sorted by theme then slug, so grouping while
+    // iterating keeps both the theme sections and the cards deterministic.
+    const groups = [];
+    labs.forEach((lab) => {
+      const group = groups[groups.length - 1];
+      if (group && group.theme === lab.theme) group.labs.push(lab);
+      else groups.push({ theme: lab.theme, labs: [lab] });
+    });
+    labsView.innerHTML = `
+      <header class="path-header">
+        <p class="eyebrow">HANDS-ON LABS / ${labs.length} LABS IN ${groups.length} THEMES</p>
+        <h2>Hands-on labs.</h2>
+        <p class="path-audience">Practice first: every lab is a guided exercise tied to the interview question it prepares you for, grouped by Theme.</p>
+        <a class="path-exit" href="#">Back to the full database <b>→</b></a>
+      </header>
+      ${groups.map((group) => `
+        <section class="lab-theme-group" data-theme="${group.theme}">
+          <p class="filter-heading">${label(group.theme)} <span>${group.labs.length}</span></p>
+          <div class="lab-grid">
+            ${group.labs.map((lab) => `
+              <article class="lab-card">
+                <p class="card-top"><span>${label(lab.theme)}</span><span>${lab.difficulty}</span></p>
+                <h3>${escapeHtml(lab.title)}</h3>
+                <div class="tags">${lab.tags.map((tag) => `<span>#${tag}</span>`).join('')}</div>
+                <p class="step-why">${escapeHtml(lab.why)}</p>
+                <a href="${lab.questionHref}">${escapeHtml(lab.questionTitle)} <b>→</b></a>
+              </article>`).join('')}
+          </div>
+        </section>`).join('')}`;
+  }
+
   function render() {
     renderFilters();
     renderCertificationFilters();
     renderPathFilters();
     renderStudyOrder();
+    renderThemeLabs();
     renderQuestions();
     renderPath();
+    renderLabs();
   }
 
   function renderQuestions() {
@@ -180,6 +253,7 @@
     activeCertification = 'all';
     activeCollection = 'all';
     activePath = 'all';
+    activeLabs = false;
     setHash('theme', activeTheme);
     render();
   });
@@ -190,6 +264,7 @@
     activeTheme = 'all';
     activeCollection = 'all';
     activePath = 'all';
+    activeLabs = false;
     setHash('certificate', activeCertification);
     render();
   });
@@ -198,12 +273,14 @@
     if (!button) return;
     activePath = activePath === button.dataset.path ? 'all' : button.dataset.path;
     activeTheme = 'all'; activeCertification = 'all'; activeCollection = 'all';
+    activeLabs = false;
     setHash('path', activePath);
     render();
   });
   mustKnowFilter.addEventListener('click', () => {
     activeCollection = activeCollection === 'must-know' ? 'all' : 'must-know';
     activeTheme = 'all'; activeCertification = 'all'; activePath = 'all';
+    activeLabs = false;
     setHash('collection', activeCollection);
     render();
   });
