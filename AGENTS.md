@@ -2,7 +2,7 @@
 
 ## Epic and release gate
 
-Implementation work is only dispatched against a live epic and its release. The epic [Publish the site anywhere, not only GitHub Pages](https://github.com/shapovalovdev/devops-interview-questions/issues/164) and milestone [Publish anywhere v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/8) closed 2026-08-17 — **there is no active epic; do not dispatch implementation work** until the next epic and milestone are charted with wayfinder and recorded in `CONTEXT.md` and here. Rules:
+Implementation work is only dispatched against a live epic and its release. The active epic is [serve Questions and Labs from a Content store through a Content API](docs/issues/0000-epic-content-api.md), release **Content API v1** ([milestone 10](https://github.com/shapovalovdev/devops-interview-questions/milestone/10)), charted 2026-08-17. Its queue is the local board at [`docs/issues/`](docs/issues/README.md). The previous epic, [Publish the site anywhere, not only GitHub Pages](https://github.com/shapovalovdev/devops-interview-questions/issues/164), closed the same day. Rules:
 
 - Do not assign implementation work on an issue outside the current milestone; chart a new epic and milestone first (wayfinder, with the repository owner).
 - When the milestone closes, stop dispatching until a new epic and release are charted and recorded in `CONTEXT.md` and here.

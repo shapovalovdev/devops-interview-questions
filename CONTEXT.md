@@ -4,7 +4,9 @@ This repository is a public, topic-organized collection of DevOps interview ques
 
 ## Goal and current epic
 
-The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The epic [Publish the site anywhere, not only GitHub Pages](https://github.com/shapovalovdev/devops-interview-questions/issues/164) and its release [Publish anywhere v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/8) closed on 2026-08-17 with every issue verified: the site builds with our own std-lib pipeline (`scripts/build_site.py`, URL parity, deterministic) and ships as a Docker image smoke-tested in CI, while GitHub Pages remains canonical. There is currently **no active epic**: dispatch is paused until the next epic is charted with wayfinder and recorded here and in `AGENTS.md`.
+The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The epic [Publish the site anywhere, not only GitHub Pages](https://github.com/shapovalovdev/devops-interview-questions/issues/164) and its release [Publish anywhere v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/8) closed on 2026-08-17 with every issue verified.
+
+The active epic, charted 2026-08-17, is [serve Questions and Labs from a Content store through a Content API](docs/issues/0000-epic-content-api.md), release **Content API v1**: the corpus becomes a queryable Content store with a versioned CRUD Content API over it, Markdown stays the durable record through Export and a Drift gate, and the whole surface is covered by API and end-to-end tests. See [ADR 0001](docs/adr/0001-sqlite-content-store-behind-a-fastapi-content-api.md) for the decision and [`docs/issues/`](docs/issues/README.md) for the queue.
 
 ## Language
 
@@ -79,3 +81,35 @@ _Avoid_: Local filesystems, generic cloud
 **Certification tag**:
 A normalized label that maps a canonical Question to one or more CNCF or Linux Foundation certification programs without duplicating the Question.
 _Avoid_: Certification-specific copy
+
+**Lab**:
+A guided hands-on exercise that prepares a learner for one specific Question, stated as a checklist of steps a learner performs on real infrastructure.
+_Avoid_: Tutorial, exercise page, walkthrough
+
+**Content store**:
+The queryable database record of every Question and Lab, holding the same fields the Markdown corpus carries.
+_Avoid_: Cache, index, mirror
+
+**Content API**:
+The versioned HTTP interface that reads and modifies Questions and Labs in the Content store.
+_Avoid_: Backend, service, endpoint
+
+**API contract**:
+The published OpenAPI description of the Content API, which is authored first and which every implementation and client is tested against.
+_Avoid_: Swagger docs, API scheme, endpoint list
+
+**Ingest**:
+The build step that loads the Markdown corpus into the Content store.
+_Avoid_: Import, seeding, sync
+
+**Export**:
+The reverse step that writes Content store records back to Markdown files so git remains the reviewable, durable record of content.
+_Avoid_: Dump, backup, snapshot
+
+**Drift**:
+Divergence between the Content store and the Markdown corpus, which CI detects and refuses.
+_Avoid_: Conflict, staleness, mismatch
+
+**Write credential**:
+The secret an API client must present to modify a Question or a Lab. Reads never require one.
+_Avoid_: Login, user account, session
