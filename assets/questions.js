@@ -578,6 +578,10 @@ window.questions = [
   {"title": "Use logs effectively during a cross-service incident", "theme": "logging", "difficulty": "staff", "type": "scenario", "tags": ["logging", "incident-management", "leadership", "troubleshooting"], "path": "questions/logging/logging-incident-command.html"},
   {"title": "Migrate a company from fragmented logging to a common platform", "theme": "logging", "difficulty": "staff", "type": "scenario", "tags": ["logging", "platform-engineering", "change-management", "leadership"], "path": "questions/logging/logging-migration.html"},
   {"title": "Define ownership boundaries for a logging service", "theme": "logging", "difficulty": "staff", "type": "scenario", "tags": ["logging", "platform-engineering", "reliability", "leadership"], "path": "questions/logging/logging-service-ownership.html"},
+  {"title": "Select and filter log streams with LogQL", "theme": "logging", "difficulty": "junior", "type": "theory", "tags": ["logging", "loki", "grafana", "debugging"], "path": "questions/logging/logql-stream-filtering-basics.html"},
+  {"title": "Explain Loki architecture and label design", "theme": "logging", "difficulty": "middle", "type": "theory", "tags": ["logging", "loki", "grafana", "observability"], "path": "questions/logging/loki-architecture-and-label-design.html"},
+  {"title": "Design Loki retention and multi-tenancy", "theme": "logging", "difficulty": "senior", "type": "scenario", "tags": ["logging", "loki", "grafana", "multi-tenancy"], "path": "questions/logging/loki-retention-and-multi-tenancy.html"},
+  {"title": "Compare Loki and ELK for log platform cost", "theme": "logging", "difficulty": "middle", "type": "theory", "tags": ["logging", "loki", "grafana", "cost-optimization"], "path": "questions/logging/loki-vs-elk-tradeoffs.html"},
   {"title": "Parse multiline exception logs safely", "theme": "logging", "difficulty": "middle", "type": "scenario", "tags": ["logging", "debugging", "troubleshooting", "observability"], "path": "questions/logging/multiline-log-parsing.html"},
   {"title": "Set a platform strategy for organization-wide logging", "theme": "logging", "difficulty": "staff", "type": "scenario", "tags": ["logging", "platform-engineering", "governance", "leadership"], "path": "questions/logging/organization-logging-platform.html"},
   {"title": "Govern logging with privacy by design", "theme": "logging", "difficulty": "staff", "type": "scenario", "tags": ["logging", "security", "governance", "leadership"], "path": "questions/logging/privacy-by-design.html"},
@@ -586,10 +590,12 @@ window.questions = [
   {"title": "Prevent secrets from entering logs", "theme": "logging", "difficulty": "junior", "type": "scenario", "tags": ["logging", "security", "incident-response", "troubleshooting"], "path": "questions/logging/secret-redaction.html"},
   {"title": "Explain why containers log to standard streams", "theme": "logging", "difficulty": "junior", "type": "theory", "tags": ["logging", "containers", "kubernetes", "observability"], "path": "questions/logging/stdout-in-containers.html"},
   {"title": "Design structured logs for request correlation", "theme": "logging", "difficulty": "middle", "type": "scenario", "tags": ["logging", "observability", "debugging", "incident-response", "otca"], "path": "questions/logging/structured-log-correlation.html"},
+  {"title": "Convert journald and Flask logs to structured JSON", "theme": "logging", "difficulty": "junior", "type": "scenario", "tags": ["logging", "observability", "debugging", "journald"], "path": "questions/logging/structured-logging-json-format.html"},
   {"title": "Explain syslog facilities and severity", "theme": "logging", "difficulty": "junior", "type": "theory", "tags": ["logging", "linux", "operations", "troubleshooting"], "path": "questions/logging/syslog-basics.html"},
   {"title": "Isolate tenants in a shared logging platform", "theme": "logging", "difficulty": "senior", "type": "scenario", "tags": ["logging", "security", "reliability", "platform-engineering"], "path": "questions/logging/tenant-isolation.html"},
   {"title": "Make log timestamps useful in incident analysis", "theme": "logging", "difficulty": "middle", "type": "scenario", "tags": ["logging", "time", "debugging", "incident-response"], "path": "questions/logging/timestamp-correctness.html"},
   {"title": "Correlate trace context with logs", "theme": "logging", "difficulty": "middle", "type": "scenario", "tags": ["logging", "observability", "debugging", "distributed-systems", "otca"], "path": "questions/logging/trace-log-correlation.html"},
+  {"title": "Explain VictoriaMetrics next to Prometheus", "theme": "logging", "difficulty": "middle", "type": "theory", "tags": ["logging", "monitoring", "prometheus", "cost-optimization", "observability"], "path": "questions/logging/victoriametrics-vs-prometheus.html"},
   {"title": "Prevent multi-writer block-storage corruption", "theme": "network-storage", "difficulty": "middle", "type": "scenario", "tags": ["storage", "networking", "reliability", "filesystem"], "path": "questions/network-storage/block-storage-single-writer.html"},
   {"title": "Protect Ceph recovery capacity", "theme": "network-storage", "difficulty": "senior", "type": "scenario", "tags": ["storage", "reliability", "performance", "capacity-planning", "monitoring"], "path": "questions/network-storage/ceph-recovery-capacity.html"},
   {"title": "Choose Ceph replication or erasure coding", "theme": "network-storage", "difficulty": "senior", "type": "scenario", "tags": ["storage", "networking", "reliability", "performance", "capacity-planning"], "path": "questions/network-storage/ceph-replication-vs-erasure-coding.html"},
@@ -5518,6 +5524,13 @@ window.studyOrders = [
         "why": "Structured logs with request correlation turn raw streams into evidence."
       },
       {
+        "title": "Convert journald and Flask logs to structured JSON",
+        "theme": "logging",
+        "difficulty": "junior",
+        "href": "questions/logging/structured-logging-json-format.html",
+        "why": "Converting journald and Flask output to structured JSON makes the correlation fields above machine-readable instead of grep-dependent."
+      },
+      {
         "title": "Choose fields for a log data model",
         "theme": "logging",
         "difficulty": "junior",
@@ -5579,6 +5592,20 @@ window.studyOrders = [
         "difficulty": "middle",
         "href": "questions/logging/log-query-performance.html",
         "why": "The slow expensive query is the bill that poor field design writes."
+      },
+      {
+        "title": "Select and filter log streams with LogQL",
+        "theme": "logging",
+        "difficulty": "junior",
+        "href": "questions/logging/logql-stream-filtering-basics.html",
+        "why": "LogQL stream selectors and line filters are the query vocabulary the performance tier above is judged against."
+      },
+      {
+        "title": "Explain Loki architecture and label design",
+        "theme": "logging",
+        "difficulty": "middle",
+        "href": "questions/logging/loki-architecture-and-label-design.html",
+        "why": "The Loki pipeline and its label model explain why stream selection, not index tuning, drives most query cost."
       },
       {
         "title": "Prevent secrets from entering logs",
@@ -5656,6 +5683,27 @@ window.studyOrders = [
         "difficulty": "staff",
         "href": "questions/logging/organization-logging-platform.html",
         "why": "The organization-wide platform decision closes the Theme at fleet scale."
+      },
+      {
+        "title": "Compare Loki and ELK for log platform cost",
+        "theme": "logging",
+        "difficulty": "middle",
+        "href": "questions/logging/loki-vs-elk-tradeoffs.html",
+        "why": "The Loki-versus-ELK cost comparison prices the two dominant log platform models before committing to one."
+      },
+      {
+        "title": "Explain VictoriaMetrics next to Prometheus",
+        "theme": "logging",
+        "difficulty": "middle",
+        "href": "questions/logging/victoriametrics-vs-prometheus.html",
+        "why": "The VictoriaMetrics comparison extends the build-versus-adopt decision to the metrics backend beside the log platform."
+      },
+      {
+        "title": "Design Loki retention and multi-tenancy",
+        "theme": "logging",
+        "difficulty": "senior",
+        "href": "questions/logging/loki-retention-and-multi-tenancy.html",
+        "why": "Retention and multi-tenancy design turns the platform choice into enforceable per-team data boundaries and lifetimes."
       }
     ]
   },
