@@ -4,7 +4,7 @@ This repository is a public, topic-organized collection of DevOps interview ques
 
 ## Goal and current epic
 
-The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The epic [Land the Roman-track lab pipeline](https://github.com/shapovalovdev/devops-interview-questions/issues/152) and its release [Roman labs v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/5) closed on 2026-08-17 with every issue verified: the Redis, ArgoCD, and PostgreSQL PITR labs landed under validation (11 labs, 1652 audited URLs, zero broken). There is currently **no active epic**: dispatch is paused until the next epic is charted with wayfinder and recorded here and in `AGENTS.md`.
+The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The current epic is the wayfinder map [Make hands-on labs first-class site content](https://github.com/shapovalovdev/devops-interview-questions/issues/156): labs publish into the site data layer with corpus-parity guarantees and render in a labs view (`#labs`) with theme awareness. Its release gate is the GitHub milestone [Labs on site v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/6). Work is only dispatched on issues attached to that milestone; when the milestone closes, a new epic and release must be charted before further implementation work starts.
 
 ## Language
 
