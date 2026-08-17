@@ -283,6 +283,9 @@ window.questions = [
   {"title": "Choose a Docker volume or a bind mount", "theme": "containers", "difficulty": "middle", "type": "scenario", "tags": ["containers", "docker", "storage", "volumes"], "path": "questions/containers/volume-versus-bind-mount.html"},
   {"title": "Operate PostgreSQL autovacuum safely", "theme": "databases", "difficulty": "middle", "type": "scenario", "tags": ["databases", "postgresql", "monitoring", "reliability", "performance"], "path": "questions/databases/autovacuum-operations.html"},
   {"title": "Explain database backup and restore validation", "theme": "databases", "difficulty": "junior", "type": "scenario", "tags": ["databases", "postgresql", "storage", "reliability"], "path": "questions/databases/backup-restore-basics.html"},
+  {"title": "Explain why column stores win analytics", "theme": "databases", "difficulty": "junior", "type": "theory", "tags": ["databases", "clickhouse", "performance"], "path": "questions/databases/clickhouse-column-store-analytics.html"},
+  {"title": "Control ClickHouse cost and retention for log ingestion", "theme": "databases", "difficulty": "middle", "type": "scenario", "tags": ["databases", "clickhouse", "logging", "cost-optimization", "reliability"], "path": "questions/databases/clickhouse-log-retention-cost-control.html"},
+  {"title": "Explain ClickHouse MergeTree table engine basics", "theme": "databases", "difficulty": "senior", "type": "theory", "tags": ["databases", "clickhouse", "storage", "performance"], "path": "questions/databases/clickhouse-mergetree-family-basics.html"},
   {"title": "Explain PostgreSQL connection authentication", "theme": "databases", "difficulty": "junior", "type": "theory", "tags": ["databases", "postgresql", "security", "least-privilege"], "path": "questions/databases/connection-authentication-basics.html"},
   {"title": "Size a PostgreSQL connection pool", "theme": "databases", "difficulty": "middle", "type": "scenario", "tags": ["databases", "postgresql", "capacity-planning", "performance", "reliability"], "path": "questions/databases/connection-pool-capacity.html"},
   {"title": "Respond to suspected PostgreSQL data corruption", "theme": "databases", "difficulty": "senior", "type": "troubleshooting", "tags": ["databases", "postgresql", "incident-response", "reliability", "storage"], "path": "questions/databases/data-corruption-response.html"},
@@ -291,12 +294,18 @@ window.questions = [
   {"title": "Establish database change governance without blocking delivery", "theme": "databases", "difficulty": "staff", "type": "scenario", "tags": ["databases", "postgresql", "governance", "deployment", "reliability"], "path": "questions/databases/database-change-governance.html"},
   {"title": "Lead a database disaster-recovery program", "theme": "databases", "difficulty": "staff", "type": "scenario", "tags": ["databases", "postgresql", "incident-response", "reliability", "governance"], "path": "questions/databases/database-disaster-recovery-program.html"},
   {"title": "Define SLOs for a shared database service", "theme": "databases", "difficulty": "staff", "type": "scenario", "tags": ["databases", "postgresql", "reliability", "monitoring", "governance"], "path": "questions/databases/database-service-slo.html"},
+  {"title": "Justify DCS-based leader election over floating-IP failover", "theme": "databases", "difficulty": "senior", "type": "theory", "tags": ["databases", "postgresql", "patroni", "distributed-systems", "availability"], "path": "questions/databases/dcs-based-failover-vs-floating-ip.html"},
   {"title": "Design PostgreSQL high availability and failover", "theme": "databases", "difficulty": "senior", "type": "scenario", "tags": ["databases", "postgresql", "availability", "reliability", "incident-response"], "path": "questions/databases/high-availability-failover.html"},
   {"title": "Explain database index trade-offs", "theme": "databases", "difficulty": "middle", "type": "theory", "tags": ["databases", "postgresql", "reliability", "troubleshooting"], "path": "questions/databases/index-tradeoffs.html"},
   {"title": "Select a PostgreSQL transaction isolation level", "theme": "databases", "difficulty": "middle", "type": "scenario", "tags": ["databases", "postgresql", "reliability", "troubleshooting"], "path": "questions/databases/isolation-level-selection.html"},
   {"title": "Triage PostgreSQL lock contention", "theme": "databases", "difficulty": "middle", "type": "troubleshooting", "tags": ["databases", "postgresql", "monitoring", "troubleshooting", "reliability"], "path": "questions/databases/lock-contention-triage.html"},
+  {"title": "Operate MongoDB from day one as a DevOps engineer", "theme": "databases", "difficulty": "middle", "type": "scenario", "tags": ["databases", "mongodb", "monitoring", "recovery", "operations"], "path": "questions/databases/mongodb-day-one-operations.html"},
+  {"title": "Explain MongoDB replica set fundamentals", "theme": "databases", "difficulty": "junior", "type": "theory", "tags": ["databases", "mongodb", "availability", "monitoring"], "path": "questions/databases/mongodb-replica-set-basics.html"},
+  {"title": "Choose between MongoDB and PostgreSQL data models", "theme": "databases", "difficulty": "junior", "type": "theory", "tags": ["databases", "mongodb", "postgresql", "architecture"], "path": "questions/databases/mongodb-vs-postgresql-model-choice.html"},
   {"title": "Diagnose long transactions in an MVCC database", "theme": "databases", "difficulty": "middle", "type": "troubleshooting", "tags": ["databases", "postgresql", "monitoring", "troubleshooting", "reliability"], "path": "questions/databases/mvcc-and-long-transactions.html"},
   {"title": "Choose a PostgreSQL partitioning strategy", "theme": "databases", "difficulty": "senior", "type": "scenario", "tags": ["databases", "postgresql", "performance", "capacity-planning", "reliability"], "path": "questions/databases/partitioning-strategy.html"},
+  {"title": "Explain what Patroni does for PostgreSQL high availability", "theme": "databases", "difficulty": "middle", "type": "theory", "tags": ["databases", "postgresql", "patroni", "availability"], "path": "questions/databases/patroni-role-in-postgresql-ha.html"},
+  {"title": "Diagnose a failed Patroni switchover", "theme": "databases", "difficulty": "middle", "type": "troubleshooting", "tags": ["databases", "postgresql", "patroni", "monitoring", "troubleshooting"], "path": "questions/databases/patroni-switchover-failure-diagnosis.html"},
   {"title": "Design PostgreSQL point-in-time recovery", "theme": "databases", "difficulty": "senior", "type": "scenario", "tags": ["databases", "postgresql", "storage", "reliability", "incident-response"], "path": "questions/databases/point-in-time-recovery-design.html"},
   {"title": "Explain relational tables, keys, and constraints", "theme": "databases", "difficulty": "junior", "type": "theory", "tags": ["databases", "postgresql", "reliability"], "path": "questions/databases/relational-data-model-basics.html"},
   {"title": "Respond to PostgreSQL replication lag", "theme": "databases", "difficulty": "middle", "type": "troubleshooting", "tags": ["databases", "postgresql", "monitoring", "troubleshooting", "availability"], "path": "questions/databases/replication-lag-response.html"},
@@ -3722,7 +3731,7 @@ window.studyOrders = [
   },
   {
     "theme": "databases",
-    "note": "Constraints and transactions before query plans, query plans before recovery — the order runs from the relational basics to keeping a production PostgreSQL alive.",
+    "note": "Constraints and transactions before query plans, query plans before recovery — then the same discipline applied to engine breadth: PostgreSQL failover automation with Patroni, MongoDB operations, and ClickHouse analytics.",
     "steps": [
       {
         "title": "Explain relational tables, keys, and constraints",
@@ -3807,6 +3816,69 @@ window.studyOrders = [
         "difficulty": "senior",
         "href": "questions/databases/high-availability-failover.html",
         "why": "Failover spends the replication design on the day the primary dies."
+      },
+      {
+        "title": "Explain what Patroni does for PostgreSQL high availability",
+        "theme": "databases",
+        "difficulty": "middle",
+        "href": "questions/databases/patroni-role-in-postgresql-ha.html",
+        "why": "Patroni automates the failover decisions the manual design above had to make by hand."
+      },
+      {
+        "title": "Justify DCS-based leader election over floating-IP failover",
+        "theme": "databases",
+        "difficulty": "senior",
+        "href": "questions/databases/dcs-based-failover-vs-floating-ip.html",
+        "why": "DCS-backed leader election explains why quorum beats floating-IP scripts for the same failover."
+      },
+      {
+        "title": "Diagnose a failed Patroni switchover",
+        "theme": "databases",
+        "difficulty": "middle",
+        "href": "questions/databases/patroni-switchover-failure-diagnosis.html",
+        "why": "A stalled switchover is where replication lag, DCS health, and promotion rules meet in one diagnosis."
+      },
+      {
+        "title": "Choose between MongoDB and PostgreSQL data models",
+        "theme": "databases",
+        "difficulty": "junior",
+        "href": "questions/databases/mongodb-vs-postgresql-model-choice.html",
+        "why": "Choosing a document or relational model is the first engine-breadth decision after PostgreSQL fluency."
+      },
+      {
+        "title": "Explain MongoDB replica set fundamentals",
+        "theme": "databases",
+        "difficulty": "junior",
+        "href": "questions/databases/mongodb-replica-set-basics.html",
+        "why": "Replica sets re-express replication, quorum, and elections in a second engine's vocabulary."
+      },
+      {
+        "title": "Operate MongoDB from day one as a DevOps engineer",
+        "theme": "databases",
+        "difficulty": "middle",
+        "href": "questions/databases/mongodb-day-one-operations.html",
+        "why": "Day-one MongoDB operations reapply the backup, index, and monitoring discipline to a new engine."
+      },
+      {
+        "title": "Explain why column stores win analytics",
+        "theme": "databases",
+        "difficulty": "junior",
+        "href": "questions/databases/clickhouse-column-store-analytics.html",
+        "why": "Column storage explains why a third engine class wins analytics where row stores strain."
+      },
+      {
+        "title": "Explain ClickHouse MergeTree table engine basics",
+        "theme": "databases",
+        "difficulty": "senior",
+        "href": "questions/databases/clickhouse-mergetree-family-basics.html",
+        "why": "MergeTree parts, merges, and ORDER BY are the internals that make the column-store promise real."
+      },
+      {
+        "title": "Control ClickHouse cost and retention for log ingestion",
+        "theme": "databases",
+        "difficulty": "middle",
+        "href": "questions/databases/clickhouse-log-retention-cost-control.html",
+        "why": "Log ingestion with TTL-based retention prices the analytics engine as an operational platform."
       },
       {
         "title": "Govern capacity for a multi-team database platform",
