@@ -44,3 +44,24 @@ See the epic's **A complete contract, with stubs marked** section for the rule t
   commands you ran with their results, test and coverage numbers, and anything left for human review.
   GitHub Issues are unavailable, so this file is the tracker — update its **Status** row as you go
   (`ready-for-agent` → `in-progress` → `needs-review`).
+
+## Coordinator rulings, 2026-08-17
+
+Two agents worked this slice concurrently by coordinator error, leaving the worktree with two partial
+implementations. These rulings settle every conflict between them. They are decisions, not suggestions.
+
+1. **Tests live in `tests/api/`.** Delete `api/tests/`, carrying across any test worth keeping. One suite,
+   one `conftest.py`. `pytest.ini` sets `testpaths = tests/api`.
+2. **Keep the committed `api/openapi.yaml`.** It matches the epic: the whole v1 surface, `501` deliberately
+   absent from documented responses, `x-implementation` carrying that fact instead.
+3. **Sort obeys the epic**: `id`, `title`, `difficulty`, `updated_at`, each optionally `-`-prefixed, default
+   `id`. A `-updated_at` default is a defect — pagination must be deterministic.
+4. **Plain mappings cross the `Store` seam**, keyed by the epic's field names, with a query dataclass in and
+   a page result out. No Pydantic model may cross it: `contentdb` is standard-library only and must be able
+   to implement this protocol in slice 3 without importing `api/`.
+5. **The census must not depend on test ordering or on a global mutated by middleware.** A partial run
+   (`-k`, `-x`, `-n`) must fail or skip loudly, never pass silently. A census that quietly reports success
+   because no test ran is worse than no census.
+6. **`create_app()` must not fall back to a fabricated corpus.** Serving invented Questions under a
+   production entrypoint is a correctness bug. With no store configured, fail fast with a message naming
+   what to configure. The in-memory fake belongs in tests and in an explicit, clearly named demo entrypoint.
