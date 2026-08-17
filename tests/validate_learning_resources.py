@@ -63,6 +63,7 @@ CONFIRMATION_DELAYS_SECONDS = (2.0, 5.0, 15.0)
 # the 1,600-URL manifest took 25-30 minutes against a three-minute floor.
 LIVE_CHECK_HOST_WORKERS = 32
 TRANSIENT_STATUSES = {403, 418, 429}
+GITHUB_BLOB_URL_PATTERN = re.compile(r"^https://github\.com/([^/]+)/([^/]+)/blob/([^/]+)/(.+)$")
 
 
 @dataclass(frozen=True)
@@ -227,6 +228,44 @@ def unverifiable_hosts() -> set[str]:
     return {entry["host"] for entry in data["hosts"]}
 
 
+def github_blob_raw_url(url: str) -> str | None:
+    """The raw.githubusercontent.com equivalent of a github.com blob URL.
+
+    Returns None for anything that is not a `github.com/<org>/<repo>/blob/
+    <ref>/<path>` URL, so callers can gate the raw recheck on it.
+    """
+    match = GITHUB_BLOB_URL_PATTERN.match(url)
+    if match is None:
+        return None
+    org, repo, ref, path = match.groups()
+    return f"https://raw.githubusercontent.com/{org}/{repo}/{ref}/{path}"
+
+
+def recheck_against_raw(raw_url: str, timeout: float, *, pacer: HostPacer) -> tuple[str, str]:
+    """Re-verify a github.com 404 once against raw.githubusercontent.com.
+
+    GitHub secondary rate limiting answers anonymous requests on github.com
+    with `404`, indistinguishable from a removed file, while
+    raw.githubusercontent.com is a separate rate-limit pool and returns `404`
+    only for content that is genuinely absent (including a missing ref).
+
+    Returns `("reachable", detail)`, `("missing", detail)`, or
+    `("inconclusive", detail)` for any other outcome — rate-limiting, server
+    errors, transport failures — which must never be read as a dead link.
+    Never raises.
+    """
+    try:
+        pacer.pace(raw_url)
+        result = fetch_result(raw_url, timeout)
+    except (OSError, urllib.error.URLError) as error:
+        return ("inconclusive", str(error))
+    if 200 <= result.status < 400:
+        return ("reachable", f"HTTP {result.status}")
+    if result.status == 404:
+        return ("missing", "HTTP 404")
+    return ("inconclusive", f"HTTP {result.status}")
+
+
 def confirm_permanent_failure(url: str, timeout: float, *, sleeper=time.sleep) -> FetchResult | None:
     """Re-check an apparently permanent failure with a browser User-Agent.
 
@@ -335,6 +374,14 @@ def check_url(
         if 200 <= result.status < 400:
             return LinkCheck(url, "ok", f"HTTP {result.status}", attempt + 1)
         if not is_transient_status(result.status):
+            raw_url = github_blob_raw_url(url) if result.status == 404 else None
+            if raw_url is not None:
+                verdict, detail = recheck_against_raw(raw_url, timeout, pacer=pacer)
+                if verdict == "reachable":
+                    return LinkCheck(url, "ok", f"HTTP 404 on github.com, {detail} on raw.githubusercontent.com", attempt + 1)
+                if verdict == "missing":
+                    return LinkCheck(url, "broken", "HTTP 404 on github.com and raw.githubusercontent.com", attempt + 1)
+                return LinkCheck(url, "indeterminate", f"HTTP 404 on github.com; raw recheck {detail}", attempt + 1)
             confirmed = confirm_permanent_failure(url, timeout, sleeper=sleeper)
             if confirmed is None:
                 return LinkCheck(url, "ok", f"HTTP {result.status} for the audit agent, 2xx for a browser agent", attempt + 1)
@@ -397,7 +444,7 @@ def validate_live(
     transient = [
         check
         for check in checks
-        if check.category in {"rate limited", "temporarily unavailable", "network unreachable", "unverifiable host"}
+        if check.category in {"rate limited", "temporarily unavailable", "network unreachable", "unverifiable host", "indeterminate"}
     ]
     failures = [check for check in checks if check.category in {"broken", "network error"}]
     if transient:
