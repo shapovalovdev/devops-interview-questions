@@ -36,8 +36,8 @@ orientation rather than a promise of identical semantics.
 ## Suggested study order
 
 Constraints and transactions before query plans, query plans before recovery —
-the order runs from the relational basics to keeping a production PostgreSQL
-alive.
+then the same discipline applied to engine breadth: PostgreSQL failover
+automation with Patroni, MongoDB operations, and ClickHouse analytics.
 
 1. [Explain relational tables, keys, and constraints](../../questions/databases/relational-data-model-basics.html)
     — Tables, keys, and constraints are the contract every later query, lock,
@@ -70,8 +70,35 @@ alive.
     — Replication adds the read copies the failover tier will depend on.
 12. [Design PostgreSQL high availability and failover](../../questions/databases/high-availability-failover.html)
     — Failover spends the replication design on the day the primary dies.
-13. [Govern capacity for a multi-team database platform](../../questions/databases/database-capacity-governance.html)
+13. [Explain what Patroni does for PostgreSQL high availability](../../questions/databases/patroni-role-in-postgresql-ha.html)
+    — Patroni automates the failover decisions the manual design above had to
+    make by hand.
+14. [Justify DCS-based leader election over floating-IP failover](../../questions/databases/dcs-based-failover-vs-floating-ip.html)
+    — DCS-backed leader election explains why quorum beats floating-IP scripts
+    for the same failover.
+15. [Diagnose a failed Patroni switchover](../../questions/databases/patroni-switchover-failure-diagnosis.html)
+    — A stalled switchover is where replication lag, DCS health, and promotion
+    rules meet in one diagnosis.
+16. [Choose between MongoDB and PostgreSQL data models](../../questions/databases/mongodb-vs-postgresql-model-choice.html)
+    — Choosing a document or relational model is the first engine-breadth
+    decision after PostgreSQL fluency.
+17. [Explain MongoDB replica set fundamentals](../../questions/databases/mongodb-replica-set-basics.html)
+    — Replica sets re-express replication, quorum, and elections in a second
+    engine's vocabulary.
+18. [Operate MongoDB from day one as a DevOps engineer](../../questions/databases/mongodb-day-one-operations.html)
+    — Day-one MongoDB operations reapply the backup, index, and monitoring
+    discipline to a new engine.
+19. [Explain why column stores win analytics](../../questions/databases/clickhouse-column-store-analytics.html)
+    — Column storage explains why a third engine class wins analytics where row
+    stores strain.
+20. [Explain ClickHouse MergeTree table engine basics](../../questions/databases/clickhouse-mergetree-family-basics.html)
+    — MergeTree parts, merges, and ORDER BY are the internals that make the
+    column-store promise real.
+21. [Control ClickHouse cost and retention for log ingestion](../../questions/databases/clickhouse-log-retention-cost-control.html)
+    — Log ingestion with TTL-based retention prices the analytics engine as an
+    operational platform.
+22. [Govern capacity for a multi-team database platform](../../questions/databases/database-capacity-governance.html)
     — Capacity governance prices a database platform shared by many teams.
-14. [Plan a near-zero-downtime PostgreSQL major upgrade](../../questions/databases/zero-downtime-major-upgrade.html)
+23. [Plan a near-zero-downtime PostgreSQL major upgrade](../../questions/databases/zero-downtime-major-upgrade.html)
     — The near-zero-downtime major upgrade is the durability tier's capstone,
     consuming replication, failover, and capacity at once.

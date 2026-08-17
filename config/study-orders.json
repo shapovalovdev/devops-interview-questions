@@ -297,7 +297,7 @@
     },
     {
       "theme": "databases",
-      "note": "Constraints and transactions before query plans, query plans before recovery — the order runs from the relational basics to keeping a production PostgreSQL alive.",
+      "note": "Constraints and transactions before query plans, query plans before recovery — then the same discipline applied to engine breadth: PostgreSQL failover automation with Patroni, MongoDB operations, and ClickHouse analytics.",
       "steps": [
         { "question": "questions/databases/relational-data-model-basics.md", "why": "Tables, keys, and constraints are the contract every later query, lock, and recovery presumes." },
         { "question": "questions/databases/transaction-basics.md", "why": "Transactions define the unit of atomicity before concurrency arrives to complicate it." },
@@ -311,6 +311,15 @@
         { "question": "questions/databases/point-in-time-recovery-design.md", "why": "Point-in-time recovery bounds how much a restore can lose, the arithmetic the backup proved." },
         { "question": "questions/databases/replication-lag-response.md", "why": "Replication adds the read copies the failover tier will depend on." },
         { "question": "questions/databases/high-availability-failover.md", "why": "Failover spends the replication design on the day the primary dies." },
+        { "question": "questions/databases/patroni-role-in-postgresql-ha.md", "why": "Patroni automates the failover decisions the manual design above had to make by hand." },
+        { "question": "questions/databases/dcs-based-failover-vs-floating-ip.md", "why": "DCS-backed leader election explains why quorum beats floating-IP scripts for the same failover." },
+        { "question": "questions/databases/patroni-switchover-failure-diagnosis.md", "why": "A stalled switchover is where replication lag, DCS health, and promotion rules meet in one diagnosis." },
+        { "question": "questions/databases/mongodb-vs-postgresql-model-choice.md", "why": "Choosing a document or relational model is the first engine-breadth decision after PostgreSQL fluency." },
+        { "question": "questions/databases/mongodb-replica-set-basics.md", "why": "Replica sets re-express replication, quorum, and elections in a second engine's vocabulary." },
+        { "question": "questions/databases/mongodb-day-one-operations.md", "why": "Day-one MongoDB operations reapply the backup, index, and monitoring discipline to a new engine." },
+        { "question": "questions/databases/clickhouse-column-store-analytics.md", "why": "Column storage explains why a third engine class wins analytics where row stores strain." },
+        { "question": "questions/databases/clickhouse-mergetree-family-basics.md", "why": "MergeTree parts, merges, and ORDER BY are the internals that make the column-store promise real." },
+        { "question": "questions/databases/clickhouse-log-retention-cost-control.md", "why": "Log ingestion with TTL-based retention prices the analytics engine as an operational platform." },
         { "question": "questions/databases/database-capacity-governance.md", "why": "Capacity governance prices a database platform shared by many teams." },
         { "question": "questions/databases/zero-downtime-major-upgrade.md", "why": "The near-zero-downtime major upgrade is the durability tier's capstone, consuming replication, failover, and capacity at once." }
       ]
