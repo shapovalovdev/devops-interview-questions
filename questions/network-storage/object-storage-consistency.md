@@ -29,6 +29,6 @@ How should an application safely write and read objects when requests can fail o
 
 - Official documentation: [Amazon S3 API reference](https://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html)
 - Manual or specification: [S3 API compatibility in Ceph RGW](https://docs.ceph.com/en/latest/radosgw/s3/)
-- Maintainer or personal blog: [MinIO engineering blog](https://blog.min.io/)
+- Maintainer or personal blog: [Backblaze cloud storage blog](https://www.backblaze.com/blog/cloud-storage/)
 - Technical blog: [Cloudflare Blog: R2 object storage](https://blog.cloudflare.com/introducing-r2-object-storage/)
 - Hands-on guide: [AWS S3 getting started](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html)

@@ -29,6 +29,6 @@ How would you design data resilience across regions without creating unsafe mult
 
 - Official documentation: [Amazon S3 replication](https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html)
 - Manual or specification: [Ceph multisite configuration](https://docs.ceph.com/en/latest/radosgw/multisite/)
-- Maintainer or personal blog: [MinIO engineering blog](https://blog.min.io/)
+- Maintainer or personal blog: [Backblaze cloud storage blog](https://www.backblaze.com/blog/cloud-storage/)
 - Technical blog: [AWS Storage Blog](https://aws.amazon.com/blogs/storage/)
 - Hands-on guide: [Amazon S3 replication walkthrough](https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-walkthrough1.html)
