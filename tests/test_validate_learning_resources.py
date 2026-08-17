@@ -16,7 +16,7 @@ from validate_learning_resources import (
     check_url,
     coverage_report,
     fetch_status,
-    github_blob_raw_url,
+    github_raw_url,
     host_queues,
     load_manifest,
     resource_links,
@@ -259,14 +259,50 @@ class LearningResourcesParserTests(unittest.TestCase):
     def test_blob_to_raw_rewrite_handles_refs_and_nested_paths(self) -> None:
         self.assertEqual(
             "https://raw.githubusercontent.com/org/repo/main/docs/deep/nested/file.md",
-            github_blob_raw_url("https://github.com/org/repo/blob/main/docs/deep/nested/file.md"),
+            github_raw_url("https://github.com/org/repo/blob/main/docs/deep/nested/file.md"),
         )
         self.assertEqual(
             "https://raw.githubusercontent.com/org/repo/v1.2.3/guide.md",
-            github_blob_raw_url("https://github.com/org/repo/blob/v1.2.3/guide.md"),
+            github_raw_url("https://github.com/org/repo/blob/v1.2.3/guide.md"),
         )
-        self.assertIsNone(github_blob_raw_url("https://github.com/org/repo/tree/main/docs"))
-        self.assertIsNone(github_blob_raw_url("https://example.com/org/repo/blob/main/file.md"))
+        self.assertEqual(
+            "https://raw.githubusercontent.com/wiki/org/repo/UserInternals.md",
+            github_raw_url("https://github.com/org/repo/wiki/UserInternals"),
+        )
+        self.assertIsNone(github_raw_url("https://github.com/org/repo/tree/main/docs"))
+        self.assertIsNone(github_raw_url("https://example.com/org/repo/blob/main/file.md"))
+
+    def test_github_wiki_404_with_raw_200_is_not_broken(self) -> None:
+        """Wiki pages hit the same secondary-rate-limit 404 masquerade as blobs."""
+
+        def response_for(request, timeout):
+            if request.full_url.startswith("https://raw.githubusercontent.com/"):
+                return Response()
+            raise HTTPError(request.full_url, 404, "not found", {}, None)
+
+        with patch("urllib.request.urlopen", side_effect=response_for):
+            result = check_url(
+                "https://github.com/memcached/memcached/wiki/UserInternals",
+                1,
+                sleeper=lambda _: None,
+                pacer=HostPacer(0),
+            )
+        self.assertEqual("ok", result.category)
+        self.assertIn("raw.githubusercontent.com", result.detail)
+
+    def test_github_wiki_404_with_raw_404_is_broken(self) -> None:
+        def response_for(request, timeout):
+            raise HTTPError(request.full_url, 404, "not found", {}, None)
+
+        with patch("urllib.request.urlopen", side_effect=response_for):
+            result = check_url(
+                "https://github.com/memcached/memcached/wiki/RemovedPage",
+                1,
+                sleeper=lambda _: None,
+                pacer=HostPacer(0),
+            )
+        self.assertEqual("broken", result.category)
+        self.assertIn("raw.githubusercontent.com", result.detail)
 
 
 class LiveCheckSchedulingTests(unittest.TestCase):
