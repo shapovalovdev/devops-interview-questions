@@ -91,6 +91,62 @@ with sync_playwright() as playwright:
     study_panel.locator('summary').click()
     assert page.evaluate("document.querySelector('#study-order .study-order-panel').open") is False
 
+    # The lab catalog ships beside the questions as window.labs and gets its
+    # own hash-state view: the landing entry points at #labs, the view renders
+    # every published lab grouped by Theme in catalog (theme-then-slug) order,
+    # and every card links to its referenced Question page.
+    labs = page.evaluate('window.labs')
+    assert labs and len(labs) == len({lab['slug'] for lab in labs})
+    assert page.locator('#labs-entry').get_attribute('href') == '#labs'
+    page.locator('#labs-entry').click()
+    page.wait_for_function("() => !document.querySelector('#labs-view').hidden")
+    assert page.url.endswith('#labs')
+    assert page.locator('#question-zone').is_hidden() and page.locator('#path-view').is_hidden()
+    lab_cards = page.locator('#labs-view .lab-card')
+    assert lab_cards.count() == len(labs)
+    assert lab_cards.locator('h3').all_inner_texts() == [lab['title'] for lab in labs]
+    assert all(why.strip() for why in lab_cards.locator('.step-why').all_inner_texts())
+    lab_links = lab_cards.locator('a').evaluate_all('(links) => links.map((link) => link.getAttribute("href"))')
+    assert lab_links == [lab['questionHref'] for lab in labs]
+    # Question pages are Jekyll-built from Markdown, so the .html target is
+    # verified through its published-source .md counterpart.
+    assert all(Path(href).suffix == '.html' and Path(href).with_suffix('.md').resolve().is_file() for href in lab_links)
+    lab_groups = page.locator('#labs-view .lab-theme-group')
+    expected_groups = []
+    for lab in labs:
+        if not expected_groups or expected_groups[-1][0] != lab['theme']:
+            expected_groups.append((lab['theme'], []))
+        expected_groups[-1][1].append(lab['title'])
+    assert lab_groups.locator('.lab-card').count() == len(labs)
+    for index, (theme, titles) in enumerate(expected_groups):
+        assert lab_groups.nth(index).get_attribute('data-theme') == theme
+        assert lab_groups.nth(index).locator('.lab-card h3').all_inner_texts() == titles
+    page.get_by_role('link', name='Back to the full database').click()
+    page.wait_for_function("() => document.querySelector('#labs-view').hidden")
+    assert page.locator('#question-zone').is_visible()
+
+    # A Theme with labs shows a collapsed labs strip listing exactly that
+    # Theme's labs; a Theme without labs shows no strip at all.
+    page.goto(f'{site}#theme=configuration-management')
+    page.wait_for_load_state('networkidle')
+    theme_labs = [lab for lab in labs if lab['theme'] == 'configuration-management']
+    assert len(theme_labs) > 1
+    labs_panel = page.locator('#theme-labs .study-order-panel')
+    assert labs_panel.is_visible()
+    assert page.evaluate("document.querySelector('#theme-labs .study-order-panel').open") is False
+    labs_panel.locator('summary').click()
+    assert page.evaluate("document.querySelector('#theme-labs .study-order-panel').open") is True
+    labs_steps = page.locator('#theme-labs .path-step')
+    assert labs_steps.count() == len(theme_labs)
+    assert labs_steps.locator('h3 a').evaluate_all(
+        '(links) => links.map((link) => link.getAttribute("href"))'
+    ) == [lab['questionHref'] for lab in theme_labs]
+    assert labs_steps.locator('h3').all_inner_texts() == [lab['title'] for lab in theme_labs]
+    page.goto(f'{site}#theme=security')
+    page.wait_for_load_state('networkidle')
+    assert not [lab for lab in labs if lab['theme'] == 'security']
+    assert page.locator('#theme-labs').is_hidden()
+
     # Hash navigation also works at a narrow touch viewport.
     mobile = browser.new_page(viewport={"width": 390, "height": 844})
     mobile.goto(f'{site}#certificate=lfcs')
@@ -114,6 +170,14 @@ with sync_playwright() as playwright:
     ]
     assert mobile.evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth')
 
+    # The labs view is reachable by direct URL state at 390px, keeps every
+    # lab, and does not force the page to scroll sideways.
+    mobile.goto(f'{site}#labs')
+    mobile.wait_for_load_state('networkidle')
+    assert mobile.locator('#labs-view .lab-card').count() == len(labs)
+    assert mobile.locator('#question-zone').is_hidden()
+    assert mobile.evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth')
+
     # The study-order panel follows the theme hash at 390px too: collapsed by
     # default, expandable without sideways scrolling, and gone without a theme.
     mobile.goto(f'{site}#theme=security')
@@ -124,6 +188,7 @@ with sync_playwright() as playwright:
     assert mobile.evaluate("document.querySelector('#study-order .study-order-panel').open") is True
     assert mobile.locator('#study-order .path-step').count() == len(security_order['steps'])
     assert mobile.evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth')
+    assert mobile.locator('#theme-labs').is_hidden()
     mobile.goto(f'{site}#collection=must-know')
     mobile.wait_for_load_state('networkidle')
     assert mobile.locator('#study-order').is_hidden()
