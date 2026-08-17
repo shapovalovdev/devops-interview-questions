@@ -539,6 +539,11 @@
         { "question": "questions/linux-networking/traffic-control-qdisc.md", "why": "The qdisc investigation shows shaping and queueing the routes never mentioned." },
         { "question": "questions/linux-networking/linux-network-capacity-strategy.md", "why": "The capacity strategy prices the host network the diagnostics kept honest." },
         { "question": "questions/linux-networking/linux-network-incident-command.md", "why": "Incident command spends the whole diagnostic stack under real pressure." },
+        { "question": "questions/linux-networking/nftables-vs-iptables-motivation.md", "why": "The nftables motivation explains why new hosts default to a framework that replaces the iptables habits most runbooks still carry." },
+        { "question": "questions/linux-networking/nftables-ruleset-reading.md", "why": "Reading a ruleset turns firewall output from noise into the ordered policy it actually is." },
+        { "question": "questions/linux-networking/refused-vs-dropped-diagnosis.md", "why": "The refused-versus-dropped split tells the responder whether the firewall or the listener failed first." },
+        { "question": "questions/linux-networking/default-deny-host-firewall-design.md", "why": "The default-deny design turns the diagnostic tier into an engineered policy built to fail closed." },
+        { "question": "questions/linux-networking/iptables-nft-compatibility.md", "why": "The iptables-nft compatibility layer explains why legacy scripts still shape traffic on modern nftables hosts." },
         { "question": "questions/linux-networking/zero-trust-host-network-boundaries.md", "why": "Zero-trust boundaries close the Theme by removing the trusted-host assumption everything above leaned on." }
       ]
     },

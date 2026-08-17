@@ -492,21 +492,26 @@ window.questions = [
   {"title": "Diagnose a systemd service that repeatedly fails", "theme": "linux", "difficulty": "middle", "type": "troubleshooting", "tags": ["linux", "debugging", "troubleshooting", "lfcs"], "path": "questions/linux/systemd-service-failure.html"},
   {"title": "Validate Linux bond failover behavior", "theme": "linux-networking", "difficulty": "middle", "type": "scenario", "tags": ["linux", "networking", "availability", "troubleshooting", "lfcs"], "path": "questions/linux-networking/bond-failover-validation.html"},
   {"title": "Triage Linux connection-tracking exhaustion", "theme": "linux-networking", "difficulty": "senior", "type": "troubleshooting", "tags": ["linux", "networking", "tcp", "troubleshooting", "monitoring"], "path": "questions/linux-networking/conntrack-exhaustion-triage.html"},
+  {"title": "Design a default-deny host firewall with nftables", "theme": "linux-networking", "difficulty": "senior", "type": "scenario", "tags": ["linux", "networking", "security", "least-privilege", "tcp"], "path": "questions/linux-networking/default-deny-host-firewall-design.html"},
   {"title": "Explain a Linux default route", "theme": "linux-networking", "difficulty": "junior", "type": "theory", "tags": ["linux", "networking"], "path": "questions/linux-networking/default-route-basics.html"},
   {"title": "Explain Linux DNS resolver configuration", "theme": "linux-networking", "difficulty": "junior", "type": "theory", "tags": ["linux", "networking", "dns", "troubleshooting", "lfcs"], "path": "questions/linux-networking/dns-resolver-configuration.html"},
   {"title": "Set a Linux dual-stack host strategy", "theme": "linux-networking", "difficulty": "staff", "type": "scenario", "tags": ["linux", "networking", "dns", "reliability", "governance"], "path": "questions/linux-networking/dual-stack-host-strategy.html"},
   {"title": "Triage a Linux host firewall path", "theme": "linux-networking", "difficulty": "middle", "type": "troubleshooting", "tags": ["linux", "networking", "security", "troubleshooting", "lfcs"], "path": "questions/linux-networking/firewall-path-triage.html"},
   {"title": "Govern Linux host network changes", "theme": "linux-networking", "difficulty": "staff", "type": "scenario", "tags": ["linux", "networking", "governance", "reliability", "deployment"], "path": "questions/linux-networking/host-network-change-governance.html"},
   {"title": "Inspect Linux interface state and addresses", "theme": "linux-networking", "difficulty": "junior", "type": "troubleshooting", "tags": ["linux", "networking", "troubleshooting", "lfcs"], "path": "questions/linux-networking/interface-state-and-addresses.html"},
+  {"title": "Explain iptables-nft compatibility on modern distros", "theme": "linux-networking", "difficulty": "middle", "type": "theory", "tags": ["linux", "networking", "security", "migration"], "path": "questions/linux-networking/iptables-nft-compatibility.html"},
   {"title": "Build a Linux network capacity strategy", "theme": "linux-networking", "difficulty": "staff", "type": "scenario", "tags": ["linux", "networking", "capacity-planning", "monitoring", "reliability"], "path": "questions/linux-networking/linux-network-capacity-strategy.html"},
   {"title": "Lead a Linux networking incident response", "theme": "linux-networking", "difficulty": "staff", "type": "scenario", "tags": ["linux", "networking", "incident-response", "reliability", "troubleshooting"], "path": "questions/linux-networking/linux-network-incident-command.html"},
   {"title": "Design Linux host network observability", "theme": "linux-networking", "difficulty": "senior", "type": "scenario", "tags": ["linux", "networking", "monitoring", "reliability", "ckne"], "path": "questions/linux-networking/linux-network-observability.html"},
   {"title": "Diagnose an MTU mismatch on Linux", "theme": "linux-networking", "difficulty": "middle", "type": "troubleshooting", "tags": ["linux", "networking", "tcp", "troubleshooting"], "path": "questions/linux-networking/mtu-mismatch-triage.html"},
   {"title": "Triage a failed Linux neighbour entry", "theme": "linux-networking", "difficulty": "middle", "type": "troubleshooting", "tags": ["linux", "networking", "troubleshooting"], "path": "questions/linux-networking/neighbour-table-triage.html"},
   {"title": "Debug connectivity across a Linux network namespace", "theme": "linux-networking", "difficulty": "middle", "type": "troubleshooting", "tags": ["linux", "networking", "containers", "troubleshooting", "ckne"], "path": "questions/linux-networking/network-namespace-connectivity.html"},
+  {"title": "Read an nftables ruleset", "theme": "linux-networking", "difficulty": "junior", "type": "theory", "tags": ["linux", "networking", "security"], "path": "questions/linux-networking/nftables-ruleset-reading.html"},
+  {"title": "Explain why nftables replaces iptables", "theme": "linux-networking", "difficulty": "junior", "type": "theory", "tags": ["linux", "networking", "security"], "path": "questions/linux-networking/nftables-vs-iptables-motivation.html"},
   {"title": "Capture Linux packets without losing diagnostic value", "theme": "linux-networking", "difficulty": "middle", "type": "scenario", "tags": ["linux", "networking", "troubleshooting", "security", "ckne"], "path": "questions/linux-networking/packet-capture-scope.html"},
   {"title": "Interpret a Linux ping result safely", "theme": "linux-networking", "difficulty": "junior", "type": "troubleshooting", "tags": ["linux", "networking", "troubleshooting"], "path": "questions/linux-networking/ping-interpretation.html"},
   {"title": "Diagnose Linux policy routing rules", "theme": "linux-networking", "difficulty": "middle", "type": "troubleshooting", "tags": ["linux", "networking", "troubleshooting"], "path": "questions/linux-networking/policy-routing-with-rules.html"},
+  {"title": "Distinguish connection refused from a firewall drop", "theme": "linux-networking", "difficulty": "middle", "type": "troubleshooting", "tags": ["linux", "networking", "security", "troubleshooting", "tcp"], "path": "questions/linux-networking/refused-vs-dropped-diagnosis.html"},
   {"title": "Diagnose reverse-path filtering drops", "theme": "linux-networking", "difficulty": "senior", "type": "troubleshooting", "tags": ["linux", "networking", "security", "troubleshooting"], "path": "questions/linux-networking/reverse-path-filtering.html"},
   {"title": "Debug a Linux route with ip route get", "theme": "linux-networking", "difficulty": "middle", "type": "troubleshooting", "tags": ["linux", "networking", "troubleshooting", "lfcs"], "path": "questions/linux-networking/route-get-debugging.html"},
   {"title": "Identify the process listening on a Linux port", "theme": "linux-networking", "difficulty": "junior", "type": "troubleshooting", "tags": ["linux", "networking", "tcp", "troubleshooting"], "path": "questions/linux-networking/socket-listener-inspection.html"},
@@ -5134,6 +5139,41 @@ window.studyOrders = [
         "difficulty": "staff",
         "href": "questions/linux-networking/linux-network-incident-command.html",
         "why": "Incident command spends the whole diagnostic stack under real pressure."
+      },
+      {
+        "title": "Explain why nftables replaces iptables",
+        "theme": "linux-networking",
+        "difficulty": "junior",
+        "href": "questions/linux-networking/nftables-vs-iptables-motivation.html",
+        "why": "The nftables motivation explains why new hosts default to a framework that replaces the iptables habits most runbooks still carry."
+      },
+      {
+        "title": "Read an nftables ruleset",
+        "theme": "linux-networking",
+        "difficulty": "junior",
+        "href": "questions/linux-networking/nftables-ruleset-reading.html",
+        "why": "Reading a ruleset turns firewall output from noise into the ordered policy it actually is."
+      },
+      {
+        "title": "Distinguish connection refused from a firewall drop",
+        "theme": "linux-networking",
+        "difficulty": "middle",
+        "href": "questions/linux-networking/refused-vs-dropped-diagnosis.html",
+        "why": "The refused-versus-dropped split tells the responder whether the firewall or the listener failed first."
+      },
+      {
+        "title": "Design a default-deny host firewall with nftables",
+        "theme": "linux-networking",
+        "difficulty": "senior",
+        "href": "questions/linux-networking/default-deny-host-firewall-design.html",
+        "why": "The default-deny design turns the diagnostic tier into an engineered policy built to fail closed."
+      },
+      {
+        "title": "Explain iptables-nft compatibility on modern distros",
+        "theme": "linux-networking",
+        "difficulty": "middle",
+        "href": "questions/linux-networking/iptables-nft-compatibility.html",
+        "why": "The iptables-nft compatibility layer explains why legacy scripts still shape traffic on modern nftables hosts."
       },
       {
         "title": "Set zero-trust Linux host network boundaries",
