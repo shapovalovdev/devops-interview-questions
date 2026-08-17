@@ -651,20 +651,25 @@ window.questions = [
   {"title": "Diagnose a failed TCP three-way handshake", "theme": "networking", "difficulty": "middle", "type": "troubleshooting", "tags": ["tcp", "networking", "troubleshooting"], "path": "questions/networking/tcp-three-way-handshake.html"},
   {"title": "Choose between TCP and UDP", "theme": "networking", "difficulty": "junior", "type": "theory", "tags": ["tcp", "networking", "reliability"], "path": "questions/networking/tcp-versus-udp.html"},
   {"title": "Debug a TLS handshake failure", "theme": "networking", "difficulty": "middle", "type": "troubleshooting", "tags": ["tls", "http", "networking", "troubleshooting"], "path": "questions/networking/tls-handshake-failure.html"},
+  {"title": "Manage a large host fleet with Zabbix templates", "theme": "observability", "difficulty": "junior", "type": "scenario", "tags": ["observability", "monitoring", "zabbix", "automation", "configuration-management"], "path": "questions/observability/apply-zabbix-templates-at-scale.html"},
   {"title": "Build an actionable production alert", "theme": "observability", "difficulty": "middle", "type": "scenario", "tags": ["observability", "monitoring", "incident-response", "reliability", "prometheus", "pca"], "path": "questions/observability/build-an-actionable-alert.html"},
   {"title": "Choose useful application log levels", "theme": "observability", "difficulty": "junior", "type": "scenario", "tags": ["observability", "logging", "troubleshooting", "security", "pca"], "path": "questions/observability/choose-log-levels.html"},
   {"title": "Investigate a failed request with Cilium Hubble", "theme": "observability", "difficulty": "middle", "type": "troubleshooting", "tags": ["observability", "kubernetes", "networking", "troubleshooting", "debugging", "cca"], "path": "questions/observability/cilium-hubble-flow-observation.html"},
   {"title": "Combine black-box and white-box monitoring", "theme": "observability", "difficulty": "middle", "type": "theory", "tags": ["observability", "monitoring", "reliability", "troubleshooting", "prometheus", "pca"], "path": "questions/observability/compare-blackbox-whitebox.html"},
+  {"title": "Choose between Zabbix and Prometheus", "theme": "observability", "difficulty": "middle", "type": "theory", "tags": ["observability", "monitoring", "zabbix", "prometheus", "architecture"], "path": "questions/observability/compare-zabbix-and-prometheus.html"},
   {"title": "Control metric-label cardinality", "theme": "observability", "difficulty": "middle", "type": "troubleshooting", "tags": ["observability", "monitoring", "prometheus", "troubleshooting", "pca", "otca"], "path": "questions/observability/control-metric-cardinality.html"},
   {"title": "Debug gaps in production telemetry", "theme": "observability", "difficulty": "senior", "type": "troubleshooting", "tags": ["observability", "monitoring", "debugging", "troubleshooting", "prometheus", "pca", "otca"], "path": "questions/observability/debug-telemetry-gaps.html"},
+  {"title": "Decide when to deploy a Zabbix proxy", "theme": "observability", "difficulty": "middle", "type": "scenario", "tags": ["observability", "monitoring", "zabbix", "distributed-systems", "networking", "resilience"], "path": "questions/observability/decide-zabbix-proxy-placement.html"},
   {"title": "Define an SLI and SLO for an API", "theme": "observability", "difficulty": "junior", "type": "theory", "tags": ["observability", "monitoring", "reliability", "kcna", "prometheus", "pca"], "path": "questions/observability/define-an-sli-and-slo.html"},
   {"title": "Choose a counter, gauge, histogram, or summary", "theme": "observability", "difficulty": "junior", "type": "theory", "tags": ["observability", "monitoring", "prometheus", "reliability", "pca"], "path": "questions/observability/describe-metric-types.html"},
   {"title": "Design a useful service dashboard", "theme": "observability", "difficulty": "junior", "type": "scenario", "tags": ["observability", "monitoring", "reliability", "troubleshooting", "prometheus", "pca"], "path": "questions/observability/design-a-dashboard.html"},
   {"title": "Design an incident evidence strategy", "theme": "observability", "difficulty": "staff", "type": "scenario", "tags": ["observability", "incident-response", "governance", "security", "prometheus", "pca"], "path": "questions/observability/design-incident-evidence.html"},
   {"title": "Design multi-tenant observability boundaries", "theme": "observability", "difficulty": "staff", "type": "scenario", "tags": ["observability", "security", "governance", "platform-engineering", "prometheus", "pca"], "path": "questions/observability/design-multitenant-observability.html"},
   {"title": "Design trace sampling without losing incidents", "theme": "observability", "difficulty": "middle", "type": "scenario", "tags": ["observability", "monitoring", "troubleshooting", "cost-optimization", "pca", "otca"], "path": "questions/observability/design-telemetry-sampling.html"},
+  {"title": "Diagnose Zabbix trigger false positives", "theme": "observability", "difficulty": "senior", "type": "troubleshooting", "tags": ["observability", "monitoring", "zabbix", "incident-response", "slo"], "path": "questions/observability/diagnose-zabbix-trigger-false-positives.html"},
   {"title": "Establish an observability platform product", "theme": "observability", "difficulty": "staff", "type": "scenario", "tags": ["observability", "platform-engineering", "governance", "reliability", "prometheus", "pca", "cnpe", "cnpa", "otca"], "path": "questions/observability/establish-observability-platform.html"},
   {"title": "Explain a metrics time series and its labels", "theme": "observability", "difficulty": "junior", "type": "theory", "tags": ["observability", "monitoring", "prometheus", "pca"], "path": "questions/observability/explain-time-series-labels.html"},
+  {"title": "Explain Zabbix items, triggers, and actions", "theme": "observability", "difficulty": "junior", "type": "theory", "tags": ["observability", "monitoring", "zabbix", "healthchecks"], "path": "questions/observability/explain-zabbix-items-triggers-actions.html"},
   {"title": "Govern an organization-wide SLO program", "theme": "observability", "difficulty": "staff", "type": "scenario", "tags": ["observability", "monitoring", "governance", "reliability", "prometheus", "pca"], "path": "questions/observability/govern-an-slo-program.html"},
   {"title": "Govern telemetry cost across teams", "theme": "observability", "difficulty": "staff", "type": "scenario", "tags": ["observability", "governance", "cost-optimization", "platform-engineering", "prometheus", "pca", "cnpe", "cnpa"], "path": "questions/observability/govern-telemetry-cost.html"},
   {"title": "Instrument a distributed trace for an API request", "theme": "observability", "difficulty": "middle", "type": "scenario", "tags": ["observability", "monitoring", "debugging", "troubleshooting", "pca", "otca"], "path": "questions/observability/instrument-a-trace.html"},
@@ -676,6 +681,7 @@ window.questions = [
   {"title": "Explain an SLO error-budget burn-rate alert", "theme": "observability", "difficulty": "senior", "type": "theory", "tags": ["observability", "monitoring", "reliability", "incident-response", "prometheus", "pca"], "path": "questions/observability/slo-burn-rate.html"},
   {"title": "Compare metrics, logs, and traces during an incident", "theme": "observability", "difficulty": "middle", "type": "theory", "tags": ["observability", "monitoring", "debugging", "incident-response", "kcna", "prometheus", "pca", "otca", "must-know"], "path": "questions/observability/three-observability-signals.html"},
   {"title": "Use recording rules for expensive PromQL", "theme": "observability", "difficulty": "middle", "type": "scenario", "tags": ["observability", "monitoring", "prometheus", "reliability", "pca"], "path": "questions/observability/use-recording-rules.html"},
+  {"title": "Monitor discovered entities with Zabbix low-level discovery", "theme": "observability", "difficulty": "middle", "type": "scenario", "tags": ["observability", "monitoring", "zabbix", "automation"], "path": "questions/observability/use-zabbix-low-level-discovery.html"},
   {"title": "Validate telemetry data quality after a release", "theme": "observability", "difficulty": "middle", "type": "troubleshooting", "tags": ["observability", "monitoring", "deployment", "troubleshooting", "prometheus", "pca", "otca"], "path": "questions/observability/validate-telemetry-data-quality.html"},
   {"title": "Why can high-cardinality metrics become a performance incident?", "theme": "performance-engineering", "difficulty": "middle", "type": "theory", "tags": ["performance", "monitoring", "debugging", "capacity-planning"], "path": "questions/performance-engineering/avoid-metric-cardinality.html"},
   {"title": "What must stay controlled when you compare two performance runs?", "theme": "performance-engineering", "difficulty": "junior", "type": "scenario", "tags": ["performance", "monitoring", "debugging", "capacity-planning"], "path": "questions/performance-engineering/benchmark-control-variables.html"},
@@ -6184,11 +6190,32 @@ window.studyOrders = [
         "why": "Black-box against white-box chooses the vantage point per question."
       },
       {
+        "title": "Explain Zabbix items, triggers, and actions",
+        "theme": "observability",
+        "difficulty": "junior",
+        "href": "questions/observability/explain-zabbix-items-triggers-actions.html",
+        "why": "The Zabbix items-triggers-actions pipeline shows the same alerting concepts above carried by a concrete agent-based tool."
+      },
+      {
+        "title": "Manage a large host fleet with Zabbix templates",
+        "theme": "observability",
+        "difficulty": "junior",
+        "href": "questions/observability/apply-zabbix-templates-at-scale.html",
+        "why": "Template management scales the per-host pipeline into a fleet-wide standard instead of hand-built checks."
+      },
+      {
         "title": "Use recording rules for expensive PromQL",
         "theme": "observability",
         "difficulty": "middle",
         "href": "questions/observability/use-recording-rules.html",
         "why": "Recording rules make expensive PromQL affordable at query time."
+      },
+      {
+        "title": "Choose between Zabbix and Prometheus",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/compare-zabbix-and-prometheus.html",
+        "why": "The Zabbix-versus-Prometheus comparison prices the pull-based metrics model against agent-based monitoring before standardizing on one."
       },
       {
         "title": "Control metric-label cardinality",
@@ -6212,6 +6239,13 @@ window.studyOrders = [
         "why": "Reducing alert fatigue without hiding risk keeps the alerts trusted."
       },
       {
+        "title": "Diagnose Zabbix trigger false positives",
+        "theme": "observability",
+        "difficulty": "senior",
+        "href": "questions/observability/diagnose-zabbix-trigger-false-positives.html",
+        "why": "Trigger false-positive diagnosis applies the alert-fatigue tier to one tool's expressions, dependencies, and maintenance windows."
+      },
+      {
         "title": "Explain an SLO error-budget burn-rate alert",
         "theme": "observability",
         "difficulty": "senior",
@@ -6224,6 +6258,20 @@ window.studyOrders = [
         "difficulty": "middle",
         "href": "questions/observability/operate-a-telemetry-pipeline.html",
         "why": "The platform tier opens with pipeline reliability, the substrate everything rode."
+      },
+      {
+        "title": "Decide when to deploy a Zabbix proxy",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/decide-zabbix-proxy-placement.html",
+        "why": "Proxy placement is the distributed-monitoring tier of telemetry transport applied to monitoring of remote and isolated networks."
+      },
+      {
+        "title": "Monitor discovered entities with Zabbix low-level discovery",
+        "theme": "observability",
+        "difficulty": "middle",
+        "href": "questions/observability/use-zabbix-low-level-discovery.html",
+        "why": "Low-level discovery keeps per-entity monitoring in sync with reality without hand-maintained check lists."
       },
       {
         "title": "Debug gaps in production telemetry",
