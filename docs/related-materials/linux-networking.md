@@ -61,6 +61,21 @@ namespace and policy tier only once single-host diagnosis is reliable.
     — The capacity strategy prices the host network the diagnostics kept honest.
 16. [Lead a Linux networking incident response](../../questions/linux-networking/linux-network-incident-command.html)
     — Incident command spends the whole diagnostic stack under real pressure.
-17. [Set zero-trust Linux host network boundaries](../../questions/linux-networking/zero-trust-host-network-boundaries.html)
+17. [Explain why nftables replaces iptables](../../questions/linux-networking/nftables-vs-iptables-motivation.html)
+    — The nftables motivation explains why new hosts default to a framework that
+    replaces the iptables habits most runbooks still carry.
+18. [Read an nftables ruleset](../../questions/linux-networking/nftables-ruleset-reading.html)
+    — Reading a ruleset turns firewall output from noise into the ordered policy
+    it actually is.
+19. [Distinguish connection refused from a firewall drop](../../questions/linux-networking/refused-vs-dropped-diagnosis.html)
+    — The refused-versus-dropped split tells the responder whether the firewall
+    or the listener failed first.
+20. [Design a default-deny host firewall with nftables](../../questions/linux-networking/default-deny-host-firewall-design.html)
+    — The default-deny design turns the diagnostic tier into an engineered
+    policy built to fail closed.
+21. [Explain iptables-nft compatibility on modern distros](../../questions/linux-networking/iptables-nft-compatibility.html)
+    — The iptables-nft compatibility layer explains why legacy scripts still
+    shape traffic on modern nftables hosts.
+22. [Set zero-trust Linux host network boundaries](../../questions/linux-networking/zero-trust-host-network-boundaries.html)
     — Zero-trust boundaries close the Theme by removing the trusted-host
     assumption everything above leaned on.
