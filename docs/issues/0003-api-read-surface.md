@@ -34,6 +34,20 @@ This slice replaces slice 2's in-memory fake with the real Content store and imp
 - [ ] `pytest --cov=api --cov=contentdb --cov-branch --cov-fail-under=95` passes.
 - [ ] `python tests/run_all_tests.py` and `python scripts/build_site.py` still pass.
 
+## Inherited from slices 0001 and 0002
+
+- `contentdb.Store` (merged) opens the store **read-only** with `check_same_thread=False`. Your module
+  docstring must say how concurrent readers share it, as the issue requires.
+- Records cross the seam as **plain mappings** keyed by the epic's field names. `api/store.py` is
+  deliberately stdlib-only and two tests enforce that it never imports pydantic, fastapi, starlette, or
+  yaml. Adapt to Pydantic on the `api/` side of the seam, never inside it.
+- The service finds its store through `CONTENT_API_STORE` (`<module>:<callable>`); `create_app()` raises
+  `StoreNotConfigured` when it is absent. Wire the real `contentdb.Store` in through that same door.
+- Flipping an operation to `x-implementation: implemented` makes the census demand a test for every status
+  code the contract documents for it. That is deliberate: it is what stops an endpoint being claimed
+  without being covered.
+- `api/testing.py` holds the in-memory fake; keep it working, since the contract and census tests use it.
+
 ## Notes
 
 - Flip every read operation you implement from `x-implementation: stub` to `x-implementation: implemented` in `api/openapi.yaml`, which makes the coverage census demand a test for each of its documented status codes. See the epic's **A complete contract, with stubs marked** section.

@@ -93,6 +93,13 @@ GET    /api/v1/search?q=&kind=            # questions and labs together
 descending. The default is `id`, so pagination is deterministic. `q` on `/api/v1/search` is required — a
 search with no query is meaningless, and its absence is a documented `422`.
 
+**How the service finds its store**
+
+The environment variable `CONTENT_API_STORE` names the store factory as `<module>:<callable>`. With it
+unset and no `store=` passed, `create_app()` raises rather than serving anything — a service that
+silently invents content is worse than one that refuses to start. `api.demo:app` is the explicit,
+clearly named entrypoint for the in-memory fake. Slice 6's container configures the real store this way.
+
 **A complete contract, with stubs marked**
 
 The contract describes the whole v1 surface from the day it is written — every path, method, parameter,
