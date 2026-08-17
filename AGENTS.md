@@ -2,7 +2,7 @@
 
 ## Epic and release gate
 
-Implementation work is only dispatched against a live epic and its release. The epic [Make study orders data, not prose](https://github.com/shapovalovdev/devops-interview-questions/issues/142) and milestone [Study orders v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/4) closed 2026-08-16 — **there is no active epic; do not dispatch implementation work** until the next epic and milestone are charted with wayfinder and recorded in `CONTEXT.md` and here. Rules:
+Implementation work is only dispatched against a live epic and its release. The current epic is the wayfinder map [Land the Roman-track lab pipeline](https://github.com/shapovalovdev/devops-interview-questions/issues/152); the release gate is the GitHub milestone [Roman labs v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/5). Rules:
 
 - Do not assign implementation work on an issue outside the current milestone; chart a new epic and milestone first (wayfinder, with the repository owner).
 - When the milestone closes, stop dispatching until a new epic and release are charted and recorded in `CONTEXT.md` and here.

@@ -4,7 +4,7 @@ This repository is a public, topic-organized collection of DevOps interview ques
 
 ## Goal and current epic
 
-The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The epic [Make study orders data, not prose](https://github.com/shapovalovdev/devops-interview-questions/issues/142) and its release [Study orders v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/4) closed on 2026-08-16 with every issue verified: all 40 Themes' study orders live in `config/study-orders.json` (890 steps), the related-materials prose is generated from that single authority under a no-diff gate, and the site's Theme view renders the order. The suite runs 169 checks across 54 test modules. There is currently **no active epic**: dispatch is paused until the next epic is charted with wayfinder and recorded here and in `AGENTS.md`.
+The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The current epic is the wayfinder map [Land the Roman-track lab pipeline](https://github.com/shapovalovdev/devops-interview-questions/issues/152): the Redis, ArgoCD, and PostgreSQL PITR labs land under repository validation, making future Roman-track lab batches routine. Its release gate is the GitHub milestone [Roman labs v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/5). Work is only dispatched on issues attached to that milestone; when the milestone closes, a new epic and release must be charted before further implementation work starts.
 
 ## Language
 
