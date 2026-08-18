@@ -321,3 +321,69 @@ class BuildsTheRealCorpus(unittest.TestCase):
     def test_the_store_is_never_committed(self):
         ignored = (ROOT / ".gitignore").read_text(encoding="utf-8").split()
         self.assertIn("build/", ignored)
+
+
+class ReadsADocumentWithoutAFileBehindIt(FixtureCorpus):
+    """The corpus rules apply to text, so the Content API can run them on a write.
+
+    Slice 4's write surface has to answer "would this record be a legal
+    Question?" before anything is stored, and the only honest way to answer is
+    to ask the code that reads the corpus. `read_question_document` and
+    `read_lab_document` are that entry point: same rules, same errors, same
+    `content_hash`, no file. The tests below pin the equivalence, because a
+    document reader that quietly diverged from the file reader would hand the
+    API a second, laxer definition of a valid Question.
+    """
+
+    def question_text(self, theme: str, slug: str) -> tuple[str, str]:
+        path = self.root / "questions" / theme / f"{slug}.md"
+        return path.read_text(encoding="utf-8"), f"questions/{theme}/{slug}.md"
+
+    def vocabularies(self):
+        return corpus.declared_themes(self.root), corpus.known_tags(self.root)
+
+    def test_a_document_reads_exactly_as_the_file_it_came_from(self):
+        themes, tags = self.vocabularies()
+        specification = fixtures.QUESTIONS[0]
+        text, context = self.question_text(specification.theme, specification.slug)
+        from_file = corpus.read_question(
+            self.root,
+            self.root / "questions" / specification.theme / f"{specification.slug}.md",
+            themes,
+            tags,
+            "2026-08-17T00:00:00Z",
+        )
+        from_text = corpus.read_question_document(text, context, themes, tags, "2026-08-17T00:00:00Z")
+        self.assertEqual(from_file, from_text)
+
+    def test_a_documents_hash_is_the_hash_of_the_bytes_export_would_write(self):
+        themes, tags = self.vocabularies()
+        specification = fixtures.QUESTIONS[0]
+        text, context = self.question_text(specification.theme, specification.slug)
+        record = corpus.read_question_document(text, context, themes, tags, "2026-08-17T00:00:00Z")
+        self.assertEqual(record["content_hash"], hashlib.sha256(text.encode("utf-8")).hexdigest())
+
+    def test_a_document_breaking_a_rule_fails_the_same_way_a_file_does(self):
+        themes, tags = self.vocabularies()
+        specification = fixtures.QUESTIONS[0]
+        text, context = self.question_text(specification.theme, specification.slug)
+        broken = text.replace(f"theme: {specification.theme}", "theme: atlantis", 1)
+        with self.assertRaises(corpus.CorpusError) as caught:
+            corpus.read_question_document(broken, context, themes, tags, "2026-08-17T00:00:00Z")
+        self.assertIn(context, str(caught.exception))
+        self.assertIn("theme", str(caught.exception))
+
+    def test_a_lab_document_needs_its_question_to_resolve(self):
+        themes, tags = self.vocabularies()
+        specification = fixtures.LABS[0]
+        path = self.root / "labs" / specification.theme / f"{specification.slug}.md"
+        text = path.read_text(encoding="utf-8")
+        context = f"labs/{specification.theme}/{specification.slug}.md"
+        question_id = specification.question_ref.removesuffix(".md")
+        resolved = corpus.read_lab_document(
+            text, context, themes, tags, {question_id}, "2026-08-17T00:00:00Z"
+        )
+        self.assertEqual(resolved["question_ref"], question_id)
+        with self.assertRaises(corpus.CorpusError) as caught:
+            corpus.read_lab_document(text, context, themes, tags, set(), "2026-08-17T00:00:00Z")
+        self.assertIn("question_ref", str(caught.exception))
