@@ -50,6 +50,12 @@ devops_questions/
 
 The site is fully static and ships as a Docker image: `docker build -t devops-questions . && docker run -p 8080:8080 devops-questions`. The full publishing matrix — GitHub Pages, Docker, and any plain static web server over `build/site/` — is documented in [`docs/publishing.md`](./docs/publishing.md).
 
+## Questions and Labs over an API
+
+The corpus is also built into a queryable SQLite Content store and served by a versioned Content API.
+Markdown in git stays the durable record: writes are exported back to files and CI refuses any Drift between
+the two. See [`docs/content-api.md`](./docs/content-api.md).
+
 ## Content policy and attribution
 
 All questions in this repository are original or substantively paraphrased. The initial coverage was informed by the public [Swfuse DevOps interview collection](https://github.com/Swfuse/devops-interview/blob/main/interview.md), which is credited as a source baseline; its text is not reproduced here. Topic coverage is also mapped broadly to the [roadmap.sh DevOps roadmap](https://roadmap.sh/devops).
