@@ -302,3 +302,102 @@ def test_every_committed_lab_prepares_a_learner_for_a_question_that_exists(corpu
     for lab in labs["items"]:
         reference = corpus_client.get(f"/api/v1/questions/{lab['question_ref']}")
         assert reference.status_code == 200, f"{lab['id']} points at {lab['question_ref']}"
+
+
+# ------------------------------------------------------------- taxonomy
+
+
+def test_the_theme_catalogue_is_returned_whole_in_the_shared_envelope(fixture_client):
+    body = fixture_client.get("/api/v1/themes").json()
+    assert set(body) == {"items", "total", "limit", "offset"}
+    assert body["total"] == len(body["items"]), "a bounded catalogue is one page"
+    assert body["limit"] == len(body["items"]) and body["offset"] == 0
+    assert [item["name"] for item in body["items"]] == ["kubernetes", "linux", "queue-messaging"]
+    for item in body["items"]:
+        assert set(item) == {"name", "state", "question_count", "lab_count", "difficulty_counts"}
+
+
+def test_a_theme_reports_the_counts_the_corpus_supports(fixture_client):
+    body = fixture_client.get("/api/v1/themes/kubernetes").json()
+    assert body["name"] == "kubernetes"
+    assert body["question_count"] == sum(body["difficulty_counts"].values())
+    assert body["lab_count"] == 1
+
+
+def test_a_theme_has_an_etag_even_though_no_file_backs_it(fixture_client):
+    """Themes are derived, so their validator is a digest of what is served."""
+    first = fixture_client.get("/api/v1/themes/kubernetes")
+    other = fixture_client.get("/api/v1/themes/linux")
+    assert first.headers["ETag"].startswith('"sha256:')
+    assert first.headers["ETag"] != other.headers["ETag"]
+    assert fixture_client.get("/api/v1/themes/kubernetes").headers["ETag"] == first.headers["ETag"]
+    again = fixture_client.get(
+        "/api/v1/themes/kubernetes", headers={"If-None-Match": first.headers["ETag"]}
+    )
+    assert again.status_code == 304 and again.content == b""
+
+
+def test_an_unknown_theme_is_a_404_problem_document(fixture_client):
+    response = fixture_client.get("/api/v1/themes/atlantis")
+    assert response.status_code == 404
+    assert "atlantis" in problem(response)["detail"]
+
+
+def test_the_tag_catalogue_counts_both_kinds(fixture_client):
+    body = fixture_client.get("/api/v1/tags").json()
+    assert body["total"] == len(body["items"]) == body["limit"]
+    names = [item["name"] for item in body["items"]]
+    assert names == sorted(names), "a catalogue nobody can page must at least be ordered"
+    security = next(item for item in body["items"] if item["name"] == "security")
+    assert security["question_count"] >= 1 and security["lab_count"] >= 1
+
+
+def test_the_theme_counts_match_a_filesystem_scan_of_the_committed_corpus(corpus_client):
+    """Derived counts are only useful if they are the corpus's own counts."""
+    body = corpus_client.get("/api/v1/themes").json()
+    assert body["items"]
+    for theme in body["items"]:
+        scanned = scan_front_matter(ROOT / "questions" / theme["name"])
+        assert theme["question_count"] == len(scanned), theme["name"]
+        assert sum(theme["difficulty_counts"].values()) == theme["question_count"]
+
+
+# -------------------------------------------------------- learning paths
+
+
+def test_a_learning_path_lists_its_steps_in_order(fixture_client):
+    listed = fixture_client.get("/api/v1/learning-paths").json()
+    assert listed["total"] == len(listed["items"]) == listed["limit"]
+    slugs = [path["slug"] for path in listed["items"]]
+    assert "kubernetes-track" in slugs
+
+    body = fixture_client.get("/api/v1/learning-paths/kubernetes-track").json()
+    assert set(body) == {"slug", "title", "description", "steps"}
+    assert [step["question_id"] for step in body["steps"]] == [
+        "kubernetes/pod-scheduling",
+        "kubernetes/admission-policy",
+    ]
+    assert all(step["why"] for step in body["steps"]), "a step without a why is just an ordering"
+
+
+def test_a_learning_path_is_conditional_too(fixture_client):
+    first = fixture_client.get("/api/v1/learning-paths/kubernetes-track")
+    again = fixture_client.get(
+        "/api/v1/learning-paths/kubernetes-track", headers={"If-None-Match": first.headers["ETag"]}
+    )
+    assert again.status_code == 304 and again.content == b""
+
+
+def test_an_unknown_learning_path_slug_is_a_404(fixture_client):
+    response = fixture_client.get("/api/v1/learning-paths/nothing-here")
+    assert response.status_code == 404
+    assert "nothing-here" in problem(response)["detail"]
+
+
+def test_every_committed_learning_path_step_resolves_to_a_question(corpus_client):
+    paths = corpus_client.get("/api/v1/learning-paths").json()["items"]
+    assert paths, "the committed corpus holds learning paths"
+    for path in paths:
+        assert path["steps"], f"{path['slug']} has no steps"
+        for step in path["steps"]:
+            assert corpus_client.get(f"/api/v1/questions/{step['question_id']}").status_code == 200

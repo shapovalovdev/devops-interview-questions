@@ -264,6 +264,18 @@ def conditional(
     return payload
 
 
+def catalogue(envelope: type[BaseModel], page: Any) -> Any:
+    """Envelope a bounded catalogue: Themes, tags, and learning paths.
+
+    These three are derived from the corpus and small enough to return whole,
+    which the contract records by publishing no `limit` or `offset` parameter
+    for them. The envelope is still the one every list shares — `limit` simply
+    reports the size of the page returned, so a client parses one shape.
+    """
+    items = list(page.items)
+    return envelope(items=items, total=page.total, limit=len(items), offset=0)
+
+
 def missing(kind: str, identifier: str) -> NoReturn:
     """Answer for an id the corpus does not hold."""
     raise HTTPException(
@@ -694,10 +706,10 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Taxonomy"],
         summary="List every canonical Theme with its counts.",
         response_model=ThemePage,
-        responses=problem_responses(501),
+        responses=problem_responses(500),
     )
-    def list_themes() -> ThemePage:
-        not_implemented("listThemes")
+    def list_themes(store: Annotated[Store, Depends(get_store)]) -> ThemePage:
+        return catalogue(ThemePage, store.list_themes())
 
     @app.get(
         "/api/v1/themes/{name}",
@@ -705,13 +717,18 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Taxonomy"],
         summary="Read one Theme by its canonical name.",
         response_model=Theme,
-        responses=problem_responses(501),
+        responses=item_responses(404, 500),
     )
     def get_theme(
+        response: Response,
+        store: Annotated[Store, Depends(get_store)],
         name: str,
         if_none_match: Annotated[str | None, Header(alias="If-None-Match")] = None,
-    ) -> Theme:
-        not_implemented("getTheme")
+    ) -> Any:
+        record = store.get_theme(name)
+        if record is None:
+            missing("Theme", name)
+        return conditional(Theme.model_validate(record), record, if_none_match, response)
 
     @app.get(
         "/api/v1/tags",
@@ -719,10 +736,10 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Taxonomy"],
         summary="List every tag with its counts.",
         response_model=TagPage,
-        responses=problem_responses(501),
+        responses=problem_responses(500),
     )
-    def list_tags() -> TagPage:
-        not_implemented("listTags")
+    def list_tags(store: Annotated[Store, Depends(get_store)]) -> TagPage:
+        return catalogue(TagPage, store.list_tags())
 
     # --------------------------------------------------------- Learning paths
 
@@ -732,10 +749,10 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Learning paths"],
         summary="List every learning path.",
         response_model=LearningPathPage,
-        responses=problem_responses(501),
+        responses=problem_responses(500),
     )
-    def list_learning_paths() -> LearningPathPage:
-        not_implemented("listLearningPaths")
+    def list_learning_paths(store: Annotated[Store, Depends(get_store)]) -> LearningPathPage:
+        return catalogue(LearningPathPage, store.list_learning_paths())
 
     @app.get(
         "/api/v1/learning-paths/{slug}",
@@ -743,13 +760,18 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Learning paths"],
         summary="Read one learning path, with its ordered steps.",
         response_model=LearningPath,
-        responses=problem_responses(501),
+        responses=item_responses(404, 500),
     )
     def get_learning_path(
+        response: Response,
+        store: Annotated[Store, Depends(get_store)],
         slug: str,
         if_none_match: Annotated[str | None, Header(alias="If-None-Match")] = None,
-    ) -> LearningPath:
-        not_implemented("getLearningPath")
+    ) -> Any:
+        record = store.get_learning_path(slug)
+        if record is None:
+            missing("learning path", slug)
+        return conditional(LearningPath.model_validate(record), record, if_none_match, response)
 
     # ----------------------------------------------------------------- Search
 

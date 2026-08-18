@@ -496,7 +496,7 @@ paths:
         Themes are derived from `config/content-manifest.json` and the corpus,
         so the collection is small and is returned whole; the envelope still
         applies, with `limit` reporting the size of the page returned.
-      x-implementation: stub
+      x-implementation: implemented
       responses:
         '200':
           description: Every Theme.
@@ -512,7 +512,7 @@ paths:
       operationId: getTheme
       tags: [Taxonomy]
       summary: Read one Theme by its canonical name.
-      x-implementation: stub
+      x-implementation: implemented
       parameters:
         - name: name
           in: path
@@ -546,7 +546,7 @@ paths:
       description: |
         Tags come from `TAGS.md` and the corpus and are returned whole, with
         `limit` reporting the size of the page returned.
-      x-implementation: stub
+      x-implementation: implemented
       responses:
         '200':
           description: Every tag.
@@ -565,7 +565,7 @@ paths:
       description: |
         Learning paths come from `config/learning-paths.json` and are returned
         whole, with `limit` reporting the size of the page returned.
-      x-implementation: stub
+      x-implementation: implemented
       responses:
         '200':
           description: Every learning path.
@@ -581,7 +581,7 @@ paths:
       operationId: getLearningPath
       tags: [Learning paths]
       summary: Read one learning path, with its ordered steps.
-      x-implementation: stub
+      x-implementation: implemented
       parameters:
         - name: slug
           in: path

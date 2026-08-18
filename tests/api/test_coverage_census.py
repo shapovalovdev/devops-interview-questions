@@ -30,9 +30,13 @@ import yaml
 from support import (
     CONTRACT_PATH,
     DEMO_LAB,
+    DEMO_LEARNING_PATH,
     DEMO_QUESTION,
+    DEMO_THEME,
     UNKNOWN_LAB,
+    UNKNOWN_LEARNING_PATH,
     UNKNOWN_QUESTION,
+    UNKNOWN_THEME,
     ExplodingStore,
     STUB_REQUESTS,
     client_for,
@@ -108,6 +112,32 @@ def implemented_producers() -> dict[tuple[str, str, str], Callable[[], int]]:
         ).status_code,
         ("/api/v1/labs/{theme}/{slug}", "get", "404"): lambda: client.get(UNKNOWN_LAB).status_code,
         ("/api/v1/labs/{theme}/{slug}", "get", "500"): lambda: failing.get(DEMO_LAB).status_code,
+        ("/api/v1/themes", "get", "200"): lambda: client.get("/api/v1/themes").status_code,
+        ("/api/v1/themes", "get", "500"): lambda: failing.get("/api/v1/themes").status_code,
+        ("/api/v1/themes/{name}", "get", "200"): lambda: client.get(DEMO_THEME).status_code,
+        ("/api/v1/themes/{name}", "get", "304"): lambda: revalidate(client, DEMO_THEME).status_code,
+        ("/api/v1/themes/{name}", "get", "404"): lambda: client.get(UNKNOWN_THEME).status_code,
+        ("/api/v1/themes/{name}", "get", "500"): lambda: failing.get(DEMO_THEME).status_code,
+        ("/api/v1/tags", "get", "200"): lambda: client.get("/api/v1/tags").status_code,
+        ("/api/v1/tags", "get", "500"): lambda: failing.get("/api/v1/tags").status_code,
+        ("/api/v1/learning-paths", "get", "200"): lambda: client.get(
+            "/api/v1/learning-paths"
+        ).status_code,
+        ("/api/v1/learning-paths", "get", "500"): lambda: failing.get(
+            "/api/v1/learning-paths"
+        ).status_code,
+        ("/api/v1/learning-paths/{slug}", "get", "200"): lambda: client.get(
+            DEMO_LEARNING_PATH
+        ).status_code,
+        ("/api/v1/learning-paths/{slug}", "get", "304"): lambda: revalidate(
+            client, DEMO_LEARNING_PATH
+        ).status_code,
+        ("/api/v1/learning-paths/{slug}", "get", "404"): lambda: client.get(
+            UNKNOWN_LEARNING_PATH
+        ).status_code,
+        ("/api/v1/learning-paths/{slug}", "get", "500"): lambda: failing.get(
+            DEMO_LEARNING_PATH
+        ).status_code,
     }
 
 
