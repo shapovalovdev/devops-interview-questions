@@ -3,6 +3,7 @@
 | | |
 | --- | --- |
 | **Status** | `blocked` |
+| **GitHub** | [#174](https://github.com/shapovalovdev/devops-interview-questions/issues/174) |
 | **Label** | `enhancement` |
 | **Epic** | [Content API v1](./0000-epic-content-api.md) |
 | **Depends on** | 0003, 0004 |

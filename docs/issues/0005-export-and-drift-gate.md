@@ -2,7 +2,8 @@
 
 | | |
 | --- | --- |
-| **Status** | `blocked` |
+| **Status** | `ready-for-agent` |
+| **GitHub** | [#173](https://github.com/shapovalovdev/devops-interview-questions/issues/173) |
 | **Label** | `enhancement` |
 | **Epic** | [Content API v1](./0000-epic-content-api.md) |
 | **Depends on** | 0001 |

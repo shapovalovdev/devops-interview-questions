@@ -3,6 +3,7 @@
 | | |
 | --- | --- |
 | **Status** | `open` |
+| **GitHub** | [#168](https://github.com/shapovalovdev/devops-interview-questions/issues/168) |
 | **Label** | `epic` |
 | **Release** | Content API v1 |
 

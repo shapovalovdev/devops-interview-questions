@@ -6,4 +6,4 @@ Create ready work as GitHub issues and infer the repository from the configured 
 
 ## Local fallback
 
-When the GitHub API is unavailable, the queue lives in [`docs/issues/`](../issues/README.md) as version-controlled Markdown, one file per issue, with a **Status** row the coordinator moves and a completion report appended on finish. It is the tracker of record while it is in use; push the files up as real issues once the API returns, keeping the numbering.
+GitHub Issues is the tracker of record. Long-form issue specifications and completion reports live in [`docs/issues/`](../issues/README.md) — one file per issue, each linked from its GitHub issue. When the GitHub API is unavailable, that directory is the fallback queue; push the files up as real issues once it returns, keeping the numbering.
