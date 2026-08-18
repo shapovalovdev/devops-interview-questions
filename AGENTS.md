@@ -2,7 +2,7 @@
 
 ## Epic and release gate
 
-Implementation work is only dispatched against a live epic and its release. The active epic is [Epic: immutable corpus snapshot service](https://github.com/shapovalovdev/devops-interview-questions/issues/176), release **Snapshot service v1** ([milestone 11](https://github.com/shapovalovdev/devops-interview-questions/milestone/11)), charted 2026-08-18. The previous epic, [serve Questions and Labs from a Content store through a Content API](https://github.com/shapovalovdev/devops-interview-questions/issues/168) (Content API v1, milestone 10), closed 2026-08-18. Rules:
+Implementation work is only dispatched against a live epic and its release. The epic [Epic: immutable corpus snapshot service](https://github.com/shapovalovdev/devops-interview-questions/issues/176) and release [Snapshot service v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/11) closed 2026-08-18 — **there is no active epic; do not dispatch implementation work** until the next epic and milestone are charted with wayfinder and recorded in `CONTEXT.md` and here. Rules:
 
 - Do not assign implementation work on an issue outside the current milestone; chart a new epic and milestone first (wayfinder, with the repository owner).
 - When the milestone closes, stop dispatching until a new epic and release are charted and recorded in `CONTEXT.md` and here.
