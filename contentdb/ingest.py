@@ -14,7 +14,7 @@ published. Four things buy it:
   survives;
 - `page_size` is pinned rather than inherited from the running SQLite build;
 - every insert is ordered — records arrive sorted by `id`, tags and sources by
-  position — so page contents never depend on directory-walk order;
+  their position in the source file, which Export needs to reproduce it — so page contents never depend on directory-walk order;
 - nothing derived from wall-clock time is written; `updated_at` comes from git
   commit history (see :mod:`contentdb.corpus`), and `VACUUM` normalises the
   free list before the file is published.
@@ -132,8 +132,12 @@ def _write(connection: sqlite3.Connection, corpus: Corpus) -> bool:
         ],
     )
     connection.executemany(
-        "INSERT INTO question_tags (question_id, tag) VALUES (?, ?)",
-        [(question["id"], tag) for question in corpus.questions for tag in sorted(question["tags"])],
+        "INSERT INTO question_tags (question_id, position, tag) VALUES (?, ?, ?)",
+        [
+            (question["id"], position, tag)
+            for question in corpus.questions
+            for position, tag in enumerate(question["tags"])
+        ],
     )
     connection.executemany(
         "INSERT INTO question_sources (question_id, position, url, source_type, verified_on)"
@@ -168,8 +172,8 @@ def _write(connection: sqlite3.Connection, corpus: Corpus) -> bool:
         ],
     )
     connection.executemany(
-        "INSERT INTO lab_tags (lab_id, tag) VALUES (?, ?)",
-        [(lab["id"], tag) for lab in corpus.labs for tag in sorted(lab["tags"])],
+        "INSERT INTO lab_tags (lab_id, position, tag) VALUES (?, ?, ?)",
+        [(lab["id"], position, tag) for lab in corpus.labs for position, tag in enumerate(lab["tags"])],
     )
 
     connection.executemany(

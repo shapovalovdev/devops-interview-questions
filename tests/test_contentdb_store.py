@@ -75,7 +75,10 @@ class ReadsQuestions(StoreFixture):
                 "prompt", "answer_guide", "body_markdown", "source_path", "content_hash", "updated_at",
             },
         )
-        self.assertEqual(record["tags"], ["cks", "kubernetes", "security"])
+        # The fixture writes these tags as `[kubernetes, security, cks]`, and the
+        # store hands them back in that order: Export has to reproduce the source
+        # file byte for byte, so author order is preserved rather than sorted.
+        self.assertEqual(record["tags"], ["kubernetes", "security", "cks"])
         self.assertEqual(record["sources"][0]["source_type"], "official-docs")
         self.assertIs(type(record["sources"][0]), dict)
         self.assertEqual(len(record["answer_guide"]), 3)
