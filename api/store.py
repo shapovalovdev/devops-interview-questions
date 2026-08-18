@@ -152,13 +152,38 @@ class Page:
     total: int
 
 
+class RecordInUse(RuntimeError):
+    """Raised when a record cannot be deleted because something still points at it.
+
+    Deleting a Question that a Lab prepares a learner for, or that a learning
+    path walks through, would leave the corpus in a state the validators reject
+    — a dangling `question_ref` is a build failure, not a tidy-up job for later.
+    The store refuses, names what is pointing, and the API answers `409`.
+    """
+
+    def __init__(self, message: str, references: Sequence[str] = ()):
+        super().__init__(message)
+        self.references = tuple(references)
+
+
+class StoreIsReadOnly(RuntimeError):
+    """Raised when a store that can only read is asked to write.
+
+    It is not a fault and not the client's mistake: it is a fact about how this
+    deployment was configured, which the contract publishes as `503`. A store
+    that does not implement the write seam at all lands here too, rather than as
+    an `AttributeError` a client would see as `500`.
+    """
+
+
 @runtime_checkable
 class Store(Protocol):
     """Every read the Content API performs goes through this protocol.
 
-    The write surface belongs to slice 4, which also owns the `content_hash`
-    and Export semantics that make a write meaningful; declaring those methods
-    here now would be guessing at an agreement that has not been made.
+    Writes are a separate protocol, `WritableStore`, because a store that only
+    reads is a legitimate deployment: with no Write credential configured the
+    service serves the corpus and refuses every mutation, and nothing in the
+    read surface should have to grow a method it never calls to say so.
     """
 
     def list_questions(self, query: QuestionQuery) -> Page: ...
@@ -180,3 +205,51 @@ class Store(Protocol):
     def get_learning_path(self, slug: str) -> Record | None: ...
 
     def search(self, query: SearchQuery) -> Page: ...
+
+
+@runtime_checkable
+class WritableStore(Protocol):
+    """Every write the Content API performs goes through this protocol.
+
+    Two verbs cover the four HTTP methods, because at the level of the store
+    there are only two things that can happen to a record: it is written, or it
+    is gone. `POST`, `PUT`, and `PATCH` differ in what the API checks *before*
+    it calls — a duplicate id, a missing id, a stale precondition — and by the
+    time a record reaches here those questions have been answered and it is one
+    complete, validated record either way.
+
+    `method` is the HTTP method the write arrived as. It is carried down rather
+    than inferred because it is what the audit trail records: "this id changed"
+    is much less useful to a Drift investigation than "this id was replaced by a
+    `PUT` at this time and ended at this hash".
+
+    A write returns the record as the store now holds it, read back rather than
+    echoed, so the response a client gets and the answer a later `GET` gives
+    cannot disagree.
+    """
+
+    def write_question(self, record: Record, method: str) -> Record: ...
+
+    def delete_question(self, question_id: str, method: str) -> None: ...
+
+    def write_lab(self, record: Record, method: str) -> Record: ...
+
+    def delete_lab(self, lab_id: str, method: str) -> None: ...
+
+    def audit_trail(self, identifier: str | None = None) -> Sequence[Record]: ...
+
+
+def writable(store: object) -> "WritableStore":
+    """The store as a writer, or the reason this deployment cannot write.
+
+    `isinstance` against a `runtime_checkable` protocol only proves the methods
+    exist, which is exactly the guarantee needed here: the alternative is an
+    `AttributeError` in the middle of a request, reported to the client as a
+    `500` that blames the service for a deployment choice.
+    """
+    if not isinstance(store, WritableStore):
+        raise StoreIsReadOnly(
+            f"{type(store).__module__}.{type(store).__qualname__} implements the read seam but not "
+            "the write seam in api/store.py, so this deployment serves the corpus read-only."
+        )
+    return store

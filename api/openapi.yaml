@@ -5,15 +5,22 @@
 # generated from the service, because a contract derived from an
 # implementation cannot catch the implementation drifting.
 #
-# The contract describes the whole v1 surface from the day it is written.  An
-# operation that is not implemented yet carries `x-implementation: stub` and
-# answers `501` until the slice that owns it lands; an implemented one carries
-# `x-implementation: implemented`.  `501` is deliberately absent from the
-# documented responses below: it is a fact about today's build, not a promise
-# of the published scheme, and the marker is what records it.  The coverage
-# census (`tests/api/test_coverage_census.py`) reads the marker to decide
-# whether an operation owes a test per documented status code or a single
-# `501` test.  By the end of the epic no `stub` marker may remain.
+# The contract describes the whole v1 surface from the day it is written.
+# Every operation carries an `x-implementation` marker saying whether this
+# build serves it or still answers `501`, and the marker — not the response
+# list — is what records that: `501` is a fact about today's build, never a
+# promise of the published scheme, so it appears nowhere below.  The contract
+# test compares response codes only for operations the marker says are served,
+# and the coverage census (`tests/api/test_coverage_census.py`) reads it to
+# decide whether an operation owes a test per documented status code or a
+# single `501` test.
+#
+# As of slice 4 every operation in this file is marked `implemented` and the
+# whole v1 surface is served, which closes the epic's "no operation is left
+# unimplemented" release condition.  The marker stays because it is what makes
+# the two tests strict, and because a v2 operation added ahead of its slice
+# would need it again.  Grepping this file for the unimplemented marker is a
+# legitimate release check, so this comment deliberately does not spell it out.
 #
 # Conventions that hold everywhere and are therefore stated once:
 #
@@ -122,7 +129,7 @@ paths:
       operationId: createQuestion
       tags: [Questions]
       summary: Create a Question.
-      x-implementation: stub
+      x-implementation: implemented
       parameters:
         - $ref: '#/components/parameters/WriteCredential'
       requestBody:
@@ -134,6 +141,9 @@ paths:
       responses:
         '201':
           description: The Question was created.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
           content:
             application/json:
               schema:
@@ -179,7 +189,7 @@ paths:
       operationId: replaceQuestion
       tags: [Questions]
       summary: Replace a Question wholesale.
-      x-implementation: stub
+      x-implementation: implemented
       parameters:
         - $ref: '#/components/parameters/ThemePath'
         - $ref: '#/components/parameters/SlugPath'
@@ -219,7 +229,7 @@ paths:
       operationId: patchQuestion
       tags: [Questions]
       summary: Change only the supplied fields of a Question.
-      x-implementation: stub
+      x-implementation: implemented
       parameters:
         - $ref: '#/components/parameters/ThemePath'
         - $ref: '#/components/parameters/SlugPath'
@@ -259,7 +269,7 @@ paths:
       operationId: deleteQuestion
       tags: [Questions]
       summary: Delete a Question.
-      x-implementation: stub
+      x-implementation: implemented
       parameters:
         - $ref: '#/components/parameters/ThemePath'
         - $ref: '#/components/parameters/SlugPath'
@@ -274,6 +284,16 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+        '409':
+          description: |
+            The Question is still referenced.  A Lab's `question_ref` or a
+            learning-path step points at it, and deleting it would leave the
+            corpus in a state Ingest refuses to build, so the request is
+            refused and the problem document names what points at it.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '412':
           $ref: '#/components/responses/PreconditionFailed'
         '428':
@@ -328,7 +348,7 @@ paths:
       operationId: createLab
       tags: [Labs]
       summary: Create a Lab.
-      x-implementation: stub
+      x-implementation: implemented
       parameters:
         - $ref: '#/components/parameters/WriteCredential'
       requestBody:
@@ -340,6 +360,9 @@ paths:
       responses:
         '201':
           description: The Lab was created.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
           content:
             application/json:
               schema:
@@ -385,7 +408,7 @@ paths:
       operationId: replaceLab
       tags: [Labs]
       summary: Replace a Lab wholesale.
-      x-implementation: stub
+      x-implementation: implemented
       parameters:
         - $ref: '#/components/parameters/ThemePath'
         - $ref: '#/components/parameters/SlugPath'
@@ -425,7 +448,7 @@ paths:
       operationId: patchLab
       tags: [Labs]
       summary: Change only the supplied fields of a Lab.
-      x-implementation: stub
+      x-implementation: implemented
       parameters:
         - $ref: '#/components/parameters/ThemePath'
         - $ref: '#/components/parameters/SlugPath'
@@ -465,7 +488,7 @@ paths:
       operationId: deleteLab
       tags: [Labs]
       summary: Delete a Lab.
-      x-implementation: stub
+      x-implementation: implemented
       parameters:
         - $ref: '#/components/parameters/ThemePath'
         - $ref: '#/components/parameters/SlugPath'
@@ -924,6 +947,7 @@ components:
 
     QuestionWrite:
       type: object
+      additionalProperties: false
       description: The client-supplied half of a Question; derived fields are computed.
       required:
         - theme
@@ -966,6 +990,7 @@ components:
 
     QuestionPatch:
       type: object
+      additionalProperties: false
       description: Only the supplied fields change; everything omitted is left alone.
       properties:
         title:
@@ -1043,6 +1068,7 @@ components:
 
     LabWrite:
       type: object
+      additionalProperties: false
       required:
         - theme
         - slug
@@ -1079,6 +1105,7 @@ components:
 
     LabPatch:
       type: object
+      additionalProperties: false
       properties:
         title:
           type: string

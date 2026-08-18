@@ -2,7 +2,7 @@
 
 | | |
 | --- | --- |
-| **Status** | `ready-for-agent` |
+| **Status** | `in-progress` |
 | **GitHub** | [#172](https://github.com/shapovalovdev/devops-interview-questions/issues/172) |
 | **Label** | `enhancement` |
 | **Epic** | [Content API v1](./0000-epic-content-api.md) |
@@ -62,3 +62,62 @@ This slice makes the Content API writable: create, replace, patch, and delete Qu
   commands you ran with their results, test and coverage numbers, and anything left for human review.
   GitHub Issues are unavailable, so this file is the tracker — update its **Status** row as you go
   (`ready-for-agent` → `in-progress` → `needs-review`).
+
+## Completion report
+
+The dispatched agent implemented the service and was killed by a session limit while building the test
+helpers; the coordinator finished the suite, closed two gaps, and verified everything.
+
+### What the agent built
+
+`api/writes.py` (the Write credential, corpus-rule validation, the audit trail), the write half of
+`api/content.py` against the real store, the routes in `api/app.py`, and a refactor of `contentdb/corpus.py`
+so its rules can read a document in memory rather than only a file on disk. **No `x-implementation: stub`
+remains** in the contract.
+
+The validation design is worth recording: a candidate write is rendered through `contentdb.export` and then
+re-read through `contentdb.corpus`, so the only records the store can hold are ones Export can reproduce.
+That makes "the API cannot create a record that breaks the Drift gate" a structural property rather than a
+promise.
+
+### What the coordinator added
+
+- `tests/api/test_writes.py` — 69 checks, failure paths first: every write refused without a credential,
+  with the wrong credential, and with the credential unconfigured (`503`); `428` and `412` across all six
+  mutations; the concurrent-writer race; `409` on duplicate create and on deleting a Question a Lab points
+  at; `422` per corpus rule with the offending field named; and an assertion that no refusal body ever
+  contains a credential.
+- `tests/api/test_write_corpus.py` — the write surface against a **real Ingest-built store**, not the fake:
+  create/read/replace/delete, persistence across reopening the database, the audit trail, and the loop that
+  matters — API write → Export → Ingest, proving a written record comes back through Markdown.
+- Rewrote the coverage census: with no stubs left, it now produces every documented status of all eight
+  write operations itself, and its meta-test proves the marker is load-bearing against a synthetic contract
+  rather than a real stub.
+
+### A defect found while writing the census
+
+`PATCH` accepted a field the contract does not publish — patching `theme` returned `200` and silently
+changed nothing, so a client would believe it had moved the Question. Identity is deliberately not patchable.
+The four write schemas now set `additionalProperties: false`, the Pydantic models `extra="forbid"`, and an
+unpublished field is a `422`.
+
+### Verification
+
+```
+pytest --cov=api --cov=contentdb --cov-branch --cov-fail-under=95  → 378 passed, 95.09%
+python tests/run_all_tests.py                                      → 195 checks / 62 modules
+python scripts/build_site.py                                       → 1179 pages, stdlib only
+python -m contentdb.drift                                          → clean, exit 0
+grep -c "x-implementation: stub" api/openapi.yaml                  → 0
+```
+
+Two sabotage checks, applied and reverted: making the credential check accept anything fails **12** tests;
+disabling the `If-Match` precondition fails **19**. (A third attempt was a no-op — inserting `pass` before a
+`raise` — and its green run proved nothing; it was redone properly.)
+
+### Left for human review
+
+- The Write credential is read from the environment and never logged or echoed; a test asserts it appears in
+  no refusal body. Choosing and distributing the real value is an operational decision for slice 0006.
+- `DELETE` on a Question a Lab references answers `409`. That is referential integrity, not a limitation:
+  the alternative is a `question_ref` that cannot be exported.

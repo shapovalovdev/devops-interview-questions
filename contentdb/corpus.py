@@ -127,17 +127,33 @@ def _context(root: Path, path: Path) -> str:
     return path.relative_to(root).as_posix()
 
 
-def _parse(root: Path, path: Path) -> tuple[dict[str, object], str, str]:
-    """Front matter, body, and content hash for one corpus file."""
-    context = _context(root, path)
-    raw = path.read_bytes()
+def _parse_document(text: str, context: str) -> tuple[dict[str, object], str, str]:
+    """Front matter, body, and content hash for one corpus *document*.
+
+    The rules below apply to the text of a document, not to a file, which is
+    what lets the Content API run them on a candidate record before anything is
+    stored: slice 4 renders a proposed write through :mod:`contentdb.export` and
+    reads the result back through here, so a write is validated by the same code
+    that validates the corpus rather than by a second copy of the rules that
+    could drift away from it.
+
+    The hash is taken over the UTF-8 encoding of `text`, which is byte for byte
+    the file Export writes, so a record read here carries the `content_hash`
+    Ingest would compute after that file is committed.
+    """
     try:
-        fields, body = frontmatter.split(raw.decode("utf-8"), context)
+        fields, body = frontmatter.split(text, context)
     except frontmatter.FrontMatterError as error:
         raise CorpusError(str(error)) from error
+    return fields, body, hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _document_text(path: Path, context: str) -> str:
+    """One corpus file as text, or a `CorpusError` saying it is not readable."""
+    try:
+        return path.read_bytes().decode("utf-8")
     except UnicodeDecodeError as error:
         raise CorpusError(f"{context}: file is not valid UTF-8") from error
-    return fields, body, hashlib.sha256(raw).hexdigest()
 
 
 def _scalar(fields: dict[str, object], name: str, context: str) -> str:
@@ -170,10 +186,10 @@ def _one_of(value: str, allowed: tuple[str, ...], name: str, context: str) -> st
     return value
 
 
-def _theme(fields: dict[str, object], path: Path, themes: dict[str, str], context: str) -> str:
+def _theme(fields: dict[str, object], folder: str, themes: dict[str, str], context: str) -> str:
     theme = _scalar(fields, "theme", context)
-    if theme != path.parent.name:
-        raise CorpusError(f"{context}: theme must match its folder {path.parent.name!r}, got {theme!r}")
+    if theme != folder:
+        raise CorpusError(f"{context}: theme must match its folder {folder!r}, got {theme!r}")
     if theme not in themes:
         raise CorpusError(f"{context}: theme is not declared in config/content-manifest.json: {theme!r}")
     return theme
@@ -227,14 +243,37 @@ def _answer_guide(body: str, context: str) -> tuple[str, ...]:
     return points
 
 
-def read_question(root: Path, path: Path, themes: dict[str, str], vocabulary: set[str], updated_at: str) -> dict:
-    context = _context(root, path)
-    fields, body, content_hash = _parse(root, path)
-    theme = _theme(fields, path, themes, context)
+def _placement(context: str) -> tuple[str, str]:
+    """The folder and stem a corpus path carries, which pin a record's identity.
+
+    A `source_path` is `questions/<theme>/<slug>.md`, so the folder is the Theme
+    the front matter has to agree with and the stem is the slug. Deriving both
+    from the path string rather than from a `Path` object is what lets the
+    document readers below work on text the Content API has not written to disk.
+    """
+    placement = Path(context)
+    return placement.parent.name, placement.stem
+
+
+def read_question_document(
+    text: str, context: str, themes: dict[str, str], vocabulary: set[str], updated_at: str
+) -> dict:
+    """Read one Question from the text of its Markdown document.
+
+    `context` is the document's `source_path`; it names the file in every error
+    message and carries the Theme folder and slug that the front matter must
+    agree with. Nothing here touches the filesystem, which is the point: the
+    Content API's write surface validates a proposed Question by rendering it
+    and reading it back through this function, so "valid to write" and "valid in
+    the corpus" cannot drift apart into two different answers.
+    """
+    folder, stem = _placement(context)
+    fields, body, content_hash = _parse_document(text, context)
+    theme = _theme(fields, folder, themes, context)
     return {
-        "id": f"{theme}/{path.stem}",
+        "id": f"{theme}/{stem}",
         "theme": theme,
-        "slug": path.stem,
+        "slug": stem,
         "title": _scalar(fields, "title", context),
         "difficulty": _one_of(_scalar(fields, "difficulty", context), DIFFICULTIES, "difficulty", context),
         "type": _one_of(_scalar(fields, "type", context), QUESTION_TYPES, "type", context),
@@ -242,6 +281,55 @@ def read_question(root: Path, path: Path, themes: dict[str, str], vocabulary: se
         "sources": _sources(fields, context),
         "prompt": _prompt(body, context),
         "answer_guide": _answer_guide(body, context),
+        "body_markdown": body,
+        "source_path": context,
+        "content_hash": content_hash,
+        "updated_at": updated_at,
+    }
+
+
+def read_question(root: Path, path: Path, themes: dict[str, str], vocabulary: set[str], updated_at: str) -> dict:
+    """Read one Question from its file under `root`."""
+    context = _context(root, path)
+    return read_question_document(_document_text(path, context), context, themes, vocabulary, updated_at)
+
+
+def read_lab_document(
+    text: str,
+    context: str,
+    themes: dict[str, str],
+    vocabulary: set[str],
+    question_ids: set[str],
+    updated_at: str,
+) -> dict:
+    """Read one Lab from the text of its Markdown document.
+
+    `question_ids` is the set the reference has to land in. Ingest passes every
+    Question it just read; the Content API passes the ids its store can resolve,
+    so a Lab that points at nothing is refused identically in both.
+    """
+    folder, stem = _placement(context)
+    fields, body, content_hash = _parse_document(text, context)
+    theme = _theme(fields, folder, themes, context)
+    reference = _scalar(fields, "question_ref", context)
+    match = QUESTION_REF.match(reference)
+    if not match:
+        raise CorpusError(f"{context}: question_ref must read '<theme>/<slug>.md', got {reference!r}")
+    # The corpus writes `question_ref` as a path; the epic pins it as a Question
+    # `id`, so the `.md` is dropped on the way in and Export puts it back.
+    question_id = match.group(1)
+    if question_id not in question_ids:
+        raise CorpusError(f"{context}: question_ref does not resolve to a Question: {question_id}")
+    return {
+        "id": f"{theme}/{stem}",
+        "theme": theme,
+        "slug": stem,
+        "title": _scalar(fields, "title", context),
+        "difficulty": _one_of(_scalar(fields, "difficulty", context), DIFFICULTIES, "difficulty", context),
+        "question_ref": question_id,
+        "why": _scalar(fields, "why", context),
+        "checklist": _string_list(fields, "checklist", context),
+        "tags": _tags(fields, vocabulary, context),
         "body_markdown": body,
         "source_path": context,
         "content_hash": content_hash,
@@ -257,33 +345,11 @@ def read_lab(
     question_ids: set[str],
     updated_at: str,
 ) -> dict:
+    """Read one Lab from its file under `root`."""
     context = _context(root, path)
-    fields, body, content_hash = _parse(root, path)
-    theme = _theme(fields, path, themes, context)
-    reference = _scalar(fields, "question_ref", context)
-    match = QUESTION_REF.match(reference)
-    if not match:
-        raise CorpusError(f"{context}: question_ref must read '<theme>/<slug>.md', got {reference!r}")
-    # The corpus writes `question_ref` as a path; the epic pins it as a Question
-    # `id`, so the `.md` is dropped on the way in and Export puts it back.
-    question_id = match.group(1)
-    if question_id not in question_ids:
-        raise CorpusError(f"{context}: question_ref does not resolve to a Question: {question_id}")
-    return {
-        "id": f"{theme}/{path.stem}",
-        "theme": theme,
-        "slug": path.stem,
-        "title": _scalar(fields, "title", context),
-        "difficulty": _one_of(_scalar(fields, "difficulty", context), DIFFICULTIES, "difficulty", context),
-        "question_ref": question_id,
-        "why": _scalar(fields, "why", context),
-        "checklist": _string_list(fields, "checklist", context),
-        "tags": _tags(fields, vocabulary, context),
-        "body_markdown": body,
-        "source_path": context,
-        "content_hash": content_hash,
-        "updated_at": updated_at,
-    }
+    return read_lab_document(
+        _document_text(path, context), context, themes, vocabulary, question_ids, updated_at
+    )
 
 
 def read_learning_paths(root: Path, question_ids: set[str]) -> tuple[dict, ...]:

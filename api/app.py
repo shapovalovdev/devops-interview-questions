@@ -1,17 +1,27 @@
 """The FastAPI application that serves the contract in `api/openapi.yaml`.
 
-Every **read** the contract publishes is implemented here against the `Store`
-seam: Questions and Labs, one by one and as filtered pages; the derived Theme,
-tag, and learning-path catalogues; and search across both kinds together. The
-**write** operations are present as routes with the right address, parameters,
-and request body, and answer `501` until slice 4 lands; `api/openapi.yaml`
-records which is which in `x-implementation`, and the coverage census reads that
-marker to decide what each operation owes a test.
+Every operation the contract publishes is implemented here against the `Store`
+seam. The **reads**: Questions and Labs, one by one and as filtered pages; the
+derived Theme, tag, and learning-path catalogues; and search across both kinds
+together. The **writes**: create, replace, patch, and delete for Questions and
+Labs, each guarded by the Write credential and by optimistic concurrency. No
+operation carries `x-implementation: stub` any more, and nothing here answers
+`501`.
 
 Single-item reads are conditional. Each answers an `ETag` — the item's
 `content_hash` where a file backs it — and a matching `If-None-Match` earns a
-`304` with no body. Slice 4's `If-Match` concurrency is built on the same
-validator, which is why it is worth being exact about here.
+`304` with no body. The write surface is built on that same validator: `If-Match`
+carries the `content_hash` a read handed over, so "the version I read" and "the
+version I am replacing" are the same string, and a successful write answers with
+the new one.
+
+**A write is checked in a fixed order, and the order is part of the contract.**
+Can this service write at all (`503`), did the client authenticate (`401`), is
+the credential right (`403`), does the record exist (`404`), did the client say
+which version it is replacing (`428`), is that still the current version
+(`412`), and only then: is the content legal (`422`). Each answer is the most
+useful thing that can be said at that point, and none of them is reachable by a
+request that should have been stopped earlier.
 
 Two invariants are worth stating here because they are easy to lose:
 
@@ -67,16 +77,21 @@ from api.models import (
     Theme,
     ThemePage,
 )
+from api import writes
 from api.store import (
     InvalidQuery,
     LabQuery,
     QuestionQuery,
     Record,
+    RecordInUse,
     SearchQuery,
     Store,
     StoreContractViolation,
+    StoreIsReadOnly,
+    WritableStore,
     is_page,
     search_hit,
+    writable,
 )
 
 SERVICE_NAME = "content-api"
@@ -383,19 +398,158 @@ def question_link(store: Store, question_ref: str) -> list[str]:
     return [f'</api/v1/questions/{question_ref}>; rel="related"; title="The Question this Lab prepares you for"']
 
 
-def not_implemented(operation_id: str) -> NoReturn:
-    """Answer for an operation the contract publishes but this build stubs."""
-    raise HTTPException(
-        status_code=501,
-        detail=(
-            f"{operation_id} is part of the published v1 contract but carries "
-            "x-implementation: stub in api/openapi.yaml; it is not implemented in this build."
-        ),
-    )
-
-
 def get_store(request: Request) -> Store:
     return request.app.state.store
+
+
+# ------------------------------------------------------------- Writing
+
+#: Every write documents the same validator it answers with. The status codes
+#: differ per method and are listed at each route, because the contract lists
+#: them there and the contract test compares the two sets exactly.
+WRITTEN_DOCUMENTATION = {
+    200: {
+        "description": HTTPStatus.OK.phrase,
+        "headers": {
+            "ETag": {
+                "description": "The item's new `content_hash`, quoted.",
+                "schema": {"type": "string"},
+            }
+        },
+    }
+}
+
+
+def write_responses(*statuses: int) -> dict[int | str, dict[str, Any]]:
+    """The response set `PUT` and `PATCH` share: a new validator, then failures."""
+    return {**WRITTEN_DOCUMENTATION, **problem_responses(*statuses)}
+
+
+def require_write_access(request: Request, presented: str | None, store: Store) -> WritableStore:
+    """Answer the three questions that come before any mutation is considered.
+
+    In this order, and the order is the point:
+
+    1. *Is this service allowed to write at all?* With no Write credential
+       configured the answer is `503` and nothing else is examined. A deployment
+       that forgot to set one is read-only, never open, and never quietly
+       accepting a blank key.
+    2. *Did the client bring a credential?* No header is `401` — "authenticate",
+       not "you are wrong".
+    3. *Is it the right one?* A wrong one is `403`, compared in constant time,
+       and neither the presented value nor the expected one appears in the
+       problem document, in a header, or in a log line. An error body that
+       echoed the credential would put it in every client's console.
+
+    A store that cannot write lands on `503` too: that is a fact about the
+    deployment, exactly like a missing credential, and not the client's mistake.
+    """
+    expected = request.app.state.write_credential
+    if expected is None:
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "This Content API is serving read-only: no Write credential is configured, so "
+                f"every mutating request is refused. Set {writes.WRITE_CREDENTIAL_VARIABLE} in the "
+                "service environment to enable writes."
+            ),
+        )
+    if presented is None:
+        raise HTTPException(
+            status_code=401,
+            detail="This request must carry the Write credential in the X-API-Key header.",
+        )
+    if not writes.credential_matches(expected, presented):
+        raise HTTPException(
+            status_code=403,
+            detail="The X-API-Key header does not carry the Write credential this service accepts.",
+        )
+    return writable(store)
+
+
+def precondition_matches(if_match: str, content_hash: str) -> bool:
+    """Whether the client's `If-Match` names the version the store actually holds.
+
+    RFC 9110 allows a list, the wildcard, and the weak form of a tag; a client
+    that echoes back the `W/`-prefixed validator it was handed is still holding
+    the same representation, and refusing it would fail a write for a syntax
+    detail rather than for a conflict.
+    """
+    for candidate in if_match.split(","):
+        candidate = candidate.strip()
+        if candidate == "*":
+            return True
+        if candidate.removeprefix("W/").strip('"') == content_hash:
+            return True
+    return False
+
+
+def require_precondition(if_match: str | None, record: Record) -> None:
+    """Refuse a blind overwrite, and refuse one aimed at a version that has moved.
+
+    A missing `If-Match` is `428`: the client never read the item, so it cannot
+    know what it is about to destroy. A stale one is `412`: it read the item,
+    somebody else has written since, and the write it is proposing was decided
+    against content that no longer exists.
+    """
+    content_hash = str(record["content_hash"])
+    if not if_match or not if_match.strip():
+        raise HTTPException(
+            status_code=428,
+            detail=(
+                "This request must carry If-Match with the item's current content_hash — the ETag "
+                "a read hands over — so that concurrent writers cannot silently overwrite each other."
+            ),
+        )
+    if not precondition_matches(if_match, content_hash):
+        raise HTTPException(
+            status_code=412,
+            detail=(
+                "If-Match names a version this item no longer has: it has been written since you "
+                f'read it. Read it again, and retry against the ETag "{content_hash}".'
+            ),
+        )
+
+
+def require_same_identity(payload: Mapping[str, Any], theme: str, slug: str, kind: str) -> None:
+    """A body that renames the record it is replacing is refused, not obeyed.
+
+    The URL identifies the record; the body repeats `theme` and `slug` because
+    the same schema serves `POST`, where they are the only identity there is.
+    When the two disagree the client is asking for a move, which is a create and
+    a delete wearing one status code, and guessing which it meant is worse than
+    saying so.
+    """
+    if str(payload.get("theme", "")) != theme:
+        raise writes.WriteRejected(
+            "theme",
+            f"the body describes theme {payload.get('theme')!r} but the URL names {theme!r}; "
+            f"a {kind} cannot be moved by replacing it.",
+        )
+    if str(payload.get("slug", "")) != slug:
+        raise writes.WriteRejected(
+            "slug",
+            f"the body describes slug {payload.get('slug')!r} but the URL names {slug!r}; "
+            f"a {kind} cannot be renamed by replacing it.",
+        )
+
+
+def resolvable(store: Store, question_ref: str) -> set[str]:
+    """The Question ids a Lab's reference is allowed to name, drawn from the store.
+
+    `contentdb.corpus` takes the set of every Question it just read; the API
+    cannot afford to enumerate a corpus per request, so it asks the store about
+    the one reference in hand. The rule being enforced is identical — the
+    reference must resolve — and the answer comes from the same place a read
+    would get it.
+    """
+    return {question_ref} if store.get_question(question_ref) is not None else set()
+
+
+def written(response: Response, record: Record, model: type[BaseModel]) -> Any:
+    """Answer a successful write with the stored record and its new validator."""
+    response.headers["ETag"] = f'"{record["content_hash"]}"'
+    return model.model_validate(record)
 
 
 def _validation_errors(exception: RequestValidationError) -> list[dict[str, str]]:
@@ -408,15 +562,26 @@ def _validation_errors(exception: RequestValidationError) -> list[dict[str, str]
     ]
 
 
-def create_app(store: Store | None = None) -> FastAPI:
+def create_app(store: Store | None = None, environ: Mapping[str, str] | None = None) -> FastAPI:
     """Build the Content API over `store`, or over the configured Content store.
 
     Passing a store explicitly is how the tests and the demo entrypoint inject
     one. Passing nothing falls through to `store_from_environment()`, which
     raises rather than fabricating a corpus.
+
+    `environ` is the environment this application reads its configuration from,
+    and it is a parameter rather than a global read so that a test can build a
+    service with a Write credential without exporting one into the process that
+    is running the suite. It defaults to the real environment, which is what a
+    deployment gets.
+
+    **The Write credential is resolved once, here.** A service either starts
+    able to write or starts read-only, and which one it is does not change under
+    it between two requests. Rotating the credential is a restart.
     """
+    environ = os.environ if environ is None else environ
     if store is None:
-        store = store_from_environment()
+        store = store_from_environment(environ)
     check_store_conforms(store)
 
     app = FastAPI(
@@ -432,6 +597,26 @@ def create_app(store: Store | None = None) -> FastAPI:
         openapi_tags=CONTRACT_TAGS,
     )
     app.state.store = store
+    app.state.environ = environ
+    app.state.write_credential = writes.write_credential(environ)
+    #: Loaded on the first write rather than at startup: a read-only deployment
+    #: has no use for the Theme and tag vocabularies, and making the service
+    #: refuse to start without `TAGS.md` beside it would break every deployment
+    #: that ships only the store.
+    app.state.vocabulary = None
+
+    def vocabulary() -> writes.Vocabulary:
+        if app.state.vocabulary is None:
+            try:
+                app.state.vocabulary = writes.Vocabulary.load(environ=environ)
+            except OSError as error:
+                raise StoreIsReadOnly(
+                    "This Content API cannot validate a write: the Theme and tag vocabularies are "
+                    f"read from config/content-manifest.json and TAGS.md, and they are not readable "
+                    f"({error}). Point {writes.CORPUS_ROOT_VARIABLE} at the corpus this store was "
+                    "built from."
+                ) from error
+        return app.state.vocabulary
 
     generated_openapi = app.openapi
 
@@ -483,6 +668,35 @@ def create_app(store: Store | None = None) -> FastAPI:
             instance=request.url.path,
             errors=[{"field": "q", "message": str(exception)}],
         )
+
+    @app.exception_handler(writes.WriteRejected)
+    async def _on_write_rejected(request: Request, exception: writes.WriteRejected) -> JSONResponse:
+        """A write that breaks a corpus rule is the client's to fix, and it is told which.
+
+        The contract promises a problem document naming the offending field, and
+        this is the only place that promise is kept: the message comes from
+        `contentdb`, which is what would have refused the same content at Ingest
+        time, so a client is told the same thing a reviewer would be.
+        """
+        return problem_response(
+            status=422,
+            detail=(
+                "The write would produce a record the Markdown corpus rules reject, so it was not "
+                "stored."
+            ),
+            instance=request.url.path,
+            errors=[{"field": exception.field, "message": exception.message}],
+        )
+
+    @app.exception_handler(RecordInUse)
+    async def _on_record_in_use(request: Request, exception: RecordInUse) -> JSONResponse:
+        """Deleting something the corpus still points at is a conflict, not a fault."""
+        return problem_response(status=409, detail=str(exception), instance=request.url.path)
+
+    @app.exception_handler(StoreIsReadOnly)
+    async def _on_read_only_store(request: Request, exception: StoreIsReadOnly) -> JSONResponse:
+        """This deployment cannot write, which the contract publishes as `503`."""
+        return problem_response(status=503, detail=str(exception), instance=request.url.path)
 
     @app.exception_handler(StoreContractViolation)
     async def _on_store_contract_violation(
@@ -571,13 +785,41 @@ def create_app(store: Store | None = None) -> FastAPI:
         summary="Create a Question.",
         status_code=201,
         response_model=Question,
-        responses=problem_responses(422, 501),
+        responses={
+            201: {
+                "description": "The Question was created.",
+                "headers": {
+                    "ETag": {
+                        "description": "The new Question's `content_hash`, quoted.",
+                        "schema": {"type": "string"},
+                    }
+                },
+            },
+            **problem_responses(401, 403, 409, 422, 503),
+        },
     )
     def create_question(
+        request: Request,
+        response: Response,
+        store: Annotated[Store, Depends(get_store)],
         question: QuestionWrite,
         x_api_key: Annotated[str | None, Header(alias="X-API-Key")] = None,
-    ) -> Question:
-        not_implemented("createQuestion")
+    ) -> Any:
+        writer = require_write_access(request, x_api_key, store)
+        # Validation before the duplicate check: a body that could never be a
+        # legal Question is malformed whatever else is in the store, and telling
+        # a client "that id is taken" about content it would have had to fix
+        # anyway sends it round the loop twice.
+        record = writes.question_record(question.model_dump(mode="json"), vocabulary())
+        if store.get_question(str(record["id"])) is not None:
+            raise HTTPException(
+                status_code=409,
+                detail=(
+                    f"A Question {record['id']!r} already exists in this Content store. "
+                    "Replace it with PUT, carrying its current ETag in If-Match."
+                ),
+            )
+        return written(response, writer.write_question(record, "POST"), Question)
 
     @app.get(
         "/api/v1/questions/{theme}/{slug}",
@@ -612,16 +854,32 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Questions"],
         summary="Replace a Question wholesale.",
         response_model=Question,
-        responses=problem_responses(422, 501),
+        responses=write_responses(401, 403, 404, 412, 422, 428, 503),
     )
     def replace_question(
+        request: Request,
+        response: Response,
+        store: Annotated[Store, Depends(get_store)],
         theme: str,
         slug: str,
         question: QuestionWrite,
         x_api_key: Annotated[str | None, Header(alias="X-API-Key")] = None,
         if_match: Annotated[str | None, Header(alias="If-Match")] = None,
-    ) -> Question:
-        not_implemented("replaceQuestion")
+    ) -> Any:
+        writer = require_write_access(request, x_api_key, store)
+        identifier = f"{theme}/{slug}"
+        existing = store.get_question(identifier)
+        # Identity first, then the precondition, then the body. A client aiming
+        # at something that is not there needs to hear `404` whatever else it
+        # got wrong, and a body validated against a version that has already
+        # moved is a body decided on the wrong facts.
+        if existing is None:
+            missing("Question", identifier)
+        require_precondition(if_match, existing)
+        payload = question.model_dump(mode="json")
+        require_same_identity(payload, theme, slug, "Question")
+        record = writes.question_record(payload, vocabulary())
+        return written(response, writer.write_question(record, "PUT"), Question)
 
     @app.patch(
         "/api/v1/questions/{theme}/{slug}",
@@ -629,16 +887,31 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Questions"],
         summary="Change only the supplied fields of a Question.",
         response_model=Question,
-        responses=problem_responses(422, 501),
+        responses=write_responses(401, 403, 404, 412, 422, 428, 503),
     )
     def patch_question(
+        request: Request,
+        response: Response,
+        store: Annotated[Store, Depends(get_store)],
         theme: str,
         slug: str,
         question: QuestionPatch,
         x_api_key: Annotated[str | None, Header(alias="X-API-Key")] = None,
         if_match: Annotated[str | None, Header(alias="If-Match")] = None,
-    ) -> Question:
-        not_implemented("patchQuestion")
+    ) -> Any:
+        writer = require_write_access(request, x_api_key, store)
+        identifier = f"{theme}/{slug}"
+        existing = store.get_question(identifier)
+        if existing is None:
+            missing("Question", identifier)
+        require_precondition(if_match, existing)
+        # `exclude_unset` is what makes this a patch rather than a replace with
+        # optional fields: a field the client did not mention keeps its stored
+        # value, and `None` is never confused with "leave it alone".
+        changes = question.model_dump(mode="json", exclude_unset=True)
+        payload = writes.merge(existing, changes, writes.QUESTION_PATCH_FIELDS)
+        record = writes.question_record(payload, vocabulary())
+        return written(response, writer.write_question(record, "PATCH"), Question)
 
     @app.delete(
         "/api/v1/questions/{theme}/{slug}",
@@ -646,15 +919,27 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Questions"],
         summary="Delete a Question.",
         status_code=204,
-        responses=problem_responses(501),
+        responses=problem_responses(401, 403, 404, 409, 412, 428, 503),
     )
     def delete_question(
+        request: Request,
+        store: Annotated[Store, Depends(get_store)],
         theme: str,
         slug: str,
         x_api_key: Annotated[str | None, Header(alias="X-API-Key")] = None,
         if_match: Annotated[str | None, Header(alias="If-Match")] = None,
-    ) -> None:
-        not_implemented("deleteQuestion")
+    ) -> Response:
+        writer = require_write_access(request, x_api_key, store)
+        identifier = f"{theme}/{slug}"
+        existing = store.get_question(identifier)
+        if existing is None:
+            missing("Question", identifier)
+        require_precondition(if_match, existing)
+        # A Question a Lab or a learning path still points at cannot go: the
+        # store refuses and the handler above turns that into the `409` the
+        # contract documents.
+        writer.delete_question(identifier, "DELETE")
+        return Response(status_code=204)
 
     # ------------------------------------------------------------------- Labs
 
@@ -700,13 +985,40 @@ def create_app(store: Store | None = None) -> FastAPI:
         summary="Create a Lab.",
         status_code=201,
         response_model=Lab,
-        responses=problem_responses(422, 501),
+        responses={
+            201: {
+                "description": "The Lab was created.",
+                "headers": {
+                    "ETag": {
+                        "description": "The new Lab's `content_hash`, quoted.",
+                        "schema": {"type": "string"},
+                    }
+                },
+            },
+            **problem_responses(401, 403, 409, 422, 503),
+        },
     )
     def create_lab(
+        request: Request,
+        response: Response,
+        store: Annotated[Store, Depends(get_store)],
         lab: LabWrite,
         x_api_key: Annotated[str | None, Header(alias="X-API-Key")] = None,
-    ) -> Lab:
-        not_implemented("createLab")
+    ) -> Any:
+        writer = require_write_access(request, x_api_key, store)
+        payload = lab.model_dump(mode="json")
+        record = writes.lab_record(
+            payload, vocabulary(), resolvable(store, str(payload.get("question_ref", "")))
+        )
+        if store.get_lab(str(record["id"])) is not None:
+            raise HTTPException(
+                status_code=409,
+                detail=(
+                    f"A Lab {record['id']!r} already exists in this Content store. "
+                    "Replace it with PUT, carrying its current ETag in If-Match."
+                ),
+            )
+        return written(response, writer.write_lab(record, "POST"), Lab)
 
     @app.get(
         "/api/v1/labs/{theme}/{slug}",
@@ -741,16 +1053,30 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Labs"],
         summary="Replace a Lab wholesale.",
         response_model=Lab,
-        responses=problem_responses(422, 501),
+        responses=write_responses(401, 403, 404, 412, 422, 428, 503),
     )
     def replace_lab(
+        request: Request,
+        response: Response,
+        store: Annotated[Store, Depends(get_store)],
         theme: str,
         slug: str,
         lab: LabWrite,
         x_api_key: Annotated[str | None, Header(alias="X-API-Key")] = None,
         if_match: Annotated[str | None, Header(alias="If-Match")] = None,
-    ) -> Lab:
-        not_implemented("replaceLab")
+    ) -> Any:
+        writer = require_write_access(request, x_api_key, store)
+        identifier = f"{theme}/{slug}"
+        existing = store.get_lab(identifier)
+        if existing is None:
+            missing("Lab", identifier)
+        require_precondition(if_match, existing)
+        payload = lab.model_dump(mode="json")
+        require_same_identity(payload, theme, slug, "Lab")
+        record = writes.lab_record(
+            payload, vocabulary(), resolvable(store, str(payload.get("question_ref", "")))
+        )
+        return written(response, writer.write_lab(record, "PUT"), Lab)
 
     @app.patch(
         "/api/v1/labs/{theme}/{slug}",
@@ -758,16 +1084,30 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Labs"],
         summary="Change only the supplied fields of a Lab.",
         response_model=Lab,
-        responses=problem_responses(422, 501),
+        responses=write_responses(401, 403, 404, 412, 422, 428, 503),
     )
     def patch_lab(
+        request: Request,
+        response: Response,
+        store: Annotated[Store, Depends(get_store)],
         theme: str,
         slug: str,
         lab: LabPatch,
         x_api_key: Annotated[str | None, Header(alias="X-API-Key")] = None,
         if_match: Annotated[str | None, Header(alias="If-Match")] = None,
-    ) -> Lab:
-        not_implemented("patchLab")
+    ) -> Any:
+        writer = require_write_access(request, x_api_key, store)
+        identifier = f"{theme}/{slug}"
+        existing = store.get_lab(identifier)
+        if existing is None:
+            missing("Lab", identifier)
+        require_precondition(if_match, existing)
+        changes = lab.model_dump(mode="json", exclude_unset=True)
+        payload = writes.merge(existing, changes, writes.LAB_PATCH_FIELDS)
+        record = writes.lab_record(
+            payload, vocabulary(), resolvable(store, str(payload.get("question_ref", "")))
+        )
+        return written(response, writer.write_lab(record, "PATCH"), Lab)
 
     @app.delete(
         "/api/v1/labs/{theme}/{slug}",
@@ -775,15 +1115,26 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Labs"],
         summary="Delete a Lab.",
         status_code=204,
-        responses=problem_responses(501),
+        responses=problem_responses(401, 403, 404, 412, 428, 503),
     )
     def delete_lab(
+        request: Request,
+        store: Annotated[Store, Depends(get_store)],
         theme: str,
         slug: str,
         x_api_key: Annotated[str | None, Header(alias="X-API-Key")] = None,
         if_match: Annotated[str | None, Header(alias="If-Match")] = None,
-    ) -> None:
-        not_implemented("deleteLab")
+    ) -> Response:
+        writer = require_write_access(request, x_api_key, store)
+        identifier = f"{theme}/{slug}"
+        existing = store.get_lab(identifier)
+        if existing is None:
+            missing("Lab", identifier)
+        require_precondition(if_match, existing)
+        # Nothing in the corpus refers to a Lab, so there is no `409` here and
+        # the contract does not document one.
+        writer.delete_lab(identifier, "DELETE")
+        return Response(status_code=204)
 
     # --------------------------------------------------------------- Taxonomy
 

@@ -18,7 +18,8 @@ from collections.abc import Iterable, Sequence
 from dataclasses import dataclass, field
 from typing import Any
 
-from api.store import Record, SORT_KEYS, LabQuery, Page, QuestionQuery, SearchQuery
+from api.store import Record, SORT_KEYS, LabQuery, Page, QuestionQuery, RecordInUse, SearchQuery
+from api.writes import timestamp
 
 #: Difficulty sorts by seniority, not alphabetically; the two happen to agree
 #: today, but the corpus should not depend on that coincidence.
@@ -92,6 +93,11 @@ class InMemoryStore:
     themes: list[Record] = field(default_factory=list)
     tags: list[Record] = field(default_factory=list)
     learning_paths: list[Record] = field(default_factory=list)
+    #: The append-only write trail, matching what the real store keeps in its
+    #: `content_writes` table. The fake carries it for the same reason it
+    #: carries counts: a test that passes here and fails against SQLite is a
+    #: fake that has stopped standing in for the real thing.
+    writes: list[Record] = field(default_factory=list)
 
     def list_questions(self, query: QuestionQuery) -> Page:
         matched = sorted_records(
@@ -149,6 +155,101 @@ class InMemoryStore:
         ]
         return _window(hits, query.limit, query.offset)
 
+    # -- Writes ------------------------------------------------------------
+    #
+    # The fake implements the write seam so the demo entrypoint and the fast
+    # half of the suite can exercise it, and it implements it *the same way* the
+    # SQLite store does — replacing rather than appending, recounting Themes and
+    # tags from the records rather than adjusting them, and refusing to delete a
+    # Question something still points at. A fake that were merely permissive
+    # would let a test pass that the real store rejects, which is precisely the
+    # class of divergence the committed-corpus sweep exists to catch.
+
+    def write_question(self, record: Record, method: str) -> Record:
+        self._replace(self.questions, record)
+        self._recount()
+        self._record_write("question", record, method)
+        return self.get_question(str(record["id"]))
+
+    def delete_question(self, question_id: str, method: str) -> None:
+        references = [lab["id"] for lab in self.labs if lab["question_ref"] == question_id]
+        references += [
+            path["slug"]
+            for path in self.learning_paths
+            if any(step["question_id"] == question_id for step in path["steps"])
+        ]
+        if references:
+            raise RecordInUse(
+                f"{question_id} cannot be deleted while the corpus still points at it: "
+                f"{', '.join(references)}.",
+                references,
+            )
+        self._remove(self.questions, question_id)
+        self._recount()
+        self._record_write("question", {"id": question_id}, method)
+
+    def write_lab(self, record: Record, method: str) -> Record:
+        self._replace(self.labs, record)
+        self._recount()
+        self._record_write("lab", record, method)
+        return self.get_lab(str(record["id"]))
+
+    def delete_lab(self, lab_id: str, method: str) -> None:
+        self._remove(self.labs, lab_id)
+        self._recount()
+        self._record_write("lab", {"id": lab_id}, method)
+
+    def audit_trail(self, identifier: str | None = None) -> list[Record]:
+        if identifier is None:
+            return list(self.writes)
+        return [entry for entry in self.writes if entry["id"] == identifier]
+
+    @staticmethod
+    def _replace(records: list[Record], record: Record) -> None:
+        for position, existing in enumerate(records):
+            if existing["id"] == record["id"]:
+                records[position] = dict(record)
+                return
+        records.append(dict(record))
+
+    @staticmethod
+    def _remove(records: list[Record], identifier: str) -> None:
+        records[:] = [record for record in records if record["id"] != identifier]
+
+    def _record_write(self, kind: str, record: Record, method: str) -> None:
+        self.writes.append(
+            {
+                "sequence": len(self.writes) + 1,
+                "kind": kind,
+                "id": record["id"],
+                "method": method,
+                "written_at": timestamp(),
+                "content_hash": record.get("content_hash"),
+            }
+        )
+
+    def _recount(self) -> None:
+        """Rebuild the Theme and tag catalogues from the records, as the store does."""
+        for theme in self.themes:
+            owned = [record for record in self.questions if record["theme"] == theme["name"]]
+            theme["question_count"] = len(owned)
+            theme["lab_count"] = sum(1 for lab in self.labs if lab["theme"] == theme["name"])
+            theme["difficulty_counts"] = {
+                difficulty: sum(1 for record in owned if record["difficulty"] == difficulty)
+                for difficulty in DIFFICULTY_ORDER
+            }
+        used: dict[str, list[int]] = {}
+        for record in self.questions:
+            for tag in record["tags"]:
+                used.setdefault(tag, [0, 0])[0] += 1
+        for record in self.labs:
+            for tag in record["tags"]:
+                used.setdefault(tag, [0, 0])[1] += 1
+        self.tags[:] = [
+            {"name": name, "question_count": counts[0], "lab_count": counts[1]}
+            for name, counts in sorted(used.items())
+        ]
+
 
 def question_record(
     theme: str,
@@ -160,7 +261,15 @@ def question_record(
     prompt: str,
     updated_at: str,
 ) -> dict[str, Any]:
-    """A Question record shaped exactly as the epic pins the resource."""
+    """A Question record shaped exactly as the epic pins the resource.
+
+    The body is a real corpus document, not a placeholder: `prompt` is the
+    paragraph under the `# ` heading and `answer_guide` is the `- ` points under
+    `## Answer guide`, because that is where `contentdb.corpus` reads them from.
+    A fake whose records could not survive a write would make every write test
+    against it a test of the fake.
+    """
+    guide = f"Name the trade-off behind {title.lower()}."
     return {
         "id": f"{theme}/{slug}",
         "theme": theme,
@@ -177,8 +286,8 @@ def question_record(
             }
         ],
         "prompt": prompt,
-        "answer_guide": [f"Name the trade-off behind {title.lower()}."],
-        "body_markdown": f"# {title}\n\n{prompt}\n",
+        "answer_guide": [guide],
+        "body_markdown": f"\n# {title}\n\n{prompt}\n\n## Answer guide\n\n- {guide}",
         "source_path": f"questions/{theme}/{slug}.md",
         "content_hash": f"sha256:{theme}-{slug}",
         "updated_at": updated_at,
@@ -195,7 +304,13 @@ def lab_record(
     why: str,
     updated_at: str,
 ) -> dict[str, Any]:
-    """A Lab record shaped exactly as the epic pins the resource."""
+    """A Lab record shaped exactly as the epic pins the resource.
+
+    A Lab's fields are all front matter, so its body is carried through
+    verbatim; it still gets a real one, so that rendering a Lab from this fake
+    produces the document a corpus file would.
+    """
+    step = f"Work through {title.lower()} on a throwaway cluster."
     return {
         "id": f"{theme}/{slug}",
         "theme": theme,
@@ -205,8 +320,8 @@ def lab_record(
         "tags": tags,
         "question_ref": question_ref,
         "why": why,
-        "checklist": [f"Work through {title.lower()} on a throwaway cluster."],
-        "body_markdown": f"# {title}\n\n{why}\n",
+        "checklist": [step],
+        "body_markdown": f"\n# {title}\n\n{why}\n\n## Steps\n\n- {step}",
         "source_path": f"labs/{theme}/{slug}.md",
         "content_hash": f"sha256:{theme}-{slug}",
         "updated_at": updated_at,
