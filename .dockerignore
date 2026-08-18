@@ -1,5 +1,6 @@
-# Keep the build context lean: the builder only needs questions/, docs/,
-# assets/, config/, the root pages, and scripts/build_site.py.
+# Keep the build context lean. The site image needs questions/, docs/, assets/,
+# config/, the root pages, and scripts/build_site.py; the API image
+# (Dockerfile.api) additionally needs api/, contentdb/, and requirements-api.txt.
 .git
 .github
 .claude

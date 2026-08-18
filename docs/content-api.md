@@ -59,3 +59,85 @@ All three are standard-library only and run with nothing installed, because they
 
 The decision behind this design, and the alternatives rejected, are recorded in
 [ADR 0001](./adr/0001-sqlite-content-store-behind-a-fastapi-content-api.md).
+
+## Running the service
+
+The API is a separate image from the static site, and the site does not depend on it. Both come up together
+with Compose:
+
+```bash
+docker compose up --build          # site on :8080, API on :8000
+```
+
+Or the API alone:
+
+```bash
+docker build -f Dockerfile.api -t devops-questions-api .
+docker run -p 8000:8000 devops-questions-api
+curl http://127.0.0.1:8000/api/v1/health
+```
+
+The Content store is built into the image at build time, so a container starts with the whole corpus and no
+volume to mount. `openapi.json` is served at the root; the hand-written contract it is checked against is
+`api/openapi.yaml` in the repository.
+
+Locally, without Docker:
+
+```bash
+pip install -r requirements-api.txt
+python -m contentdb.ingest --output build/content.db
+CONTENT_API_STORE=api.content:content_store CONTENT_STORE_PATH=build/content.db \
+  uvicorn api.app:app --reload
+```
+
+## Configuration
+
+| Variable | Meaning |
+| --- | --- |
+| `CONTENT_API_STORE` | The store factory, as `<module>:<callable>`. Use `api.content:content_store`. |
+| `CONTENT_STORE_PATH` | The Content store file the factory opens. |
+| `CONTENT_API_CORPUS_ROOT` | Where `config/content-manifest.json` and `TAGS.md` live. Writes are validated against them. |
+| `CONTENT_API_WRITE_KEY` | The Write credential. **Unset means the service serves read-only** and refuses every write with `503`. |
+
+With no store configured the service refuses to start rather than serving invented content, and a store that
+satisfies the `Store` protocol structurally but not its contract is refused at start-up with a message naming
+the method that disagreed.
+
+## Writing through the API
+
+Reads are anonymous. Every mutating request carries `X-API-Key`, and every `PUT`, `PATCH`, and `DELETE`
+carries `If-Match` with the item's current `ETag`:
+
+```bash
+KEY=$(openssl rand -base64 24)
+docker run -p 8000:8000 -e CONTENT_API_WRITE_KEY="$KEY" devops-questions-api
+
+ETAG=$(curl -sS -D- -o/dev/null http://127.0.0.1:8000/api/v1/questions/kubernetes/some-slug \
+       | awk '/^etag:/ {print $2}' | tr -d '\r')
+curl -X PATCH http://127.0.0.1:8000/api/v1/questions/kubernetes/some-slug \
+     -H "X-API-Key: $KEY" -H "If-Match: $ETAG" -H 'Content-Type: application/json' \
+     -d '{"difficulty": "senior"}'
+```
+
+Refusals are RFC 9457 problem documents: `401` without a credential, `403` with the wrong one, `503` when
+none is configured, `428` without a validator, `412` with a stale one, `409` on a duplicate create or on
+deleting a Question a Lab still points at, and `422` when the write would break a corpus rule — with the
+offending field named.
+
+A write is still not landed until it is Markdown in `main`: Export it, review the diff, and commit.
+
+## Tests
+
+| Command | What it covers |
+| --- | --- |
+| `pytest --cov=api --cov=contentdb --cov-branch --cov-fail-under=95` | The API suite and the coverage gate |
+| `python tests/e2e/test_content_api_e2e.py` | The packaged service, over real HTTP, in a container |
+| `python tests/run_all_tests.py` | The standard-library corpus suite, which never imports FastAPI |
+
+Two guards keep the contract honest, and both are meant to fail loudly. The **contract test** compares the
+served schema against `api/openapi.yaml`; the **coverage census** requires every status code the contract
+documents to be produced by a real request. Neither may be weakened to make a change pass.
+
+The end-to-end suite exists because `TestClient` cannot see packaging. It has already earned that: it caught
+an image that served reads but refused every write, because the Theme and Tag vocabularies were not in it,
+and a store file that was writable in a directory the service user could not write to.

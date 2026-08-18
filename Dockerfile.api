@@ -1,0 +1,59 @@
+# The Content API service.
+#
+# Kept separate from the static site's `Dockerfile` on purpose: that image is
+# nginx over pre-rendered HTML and depends on nothing, and merging the two would
+# put FastAPI into the critical path of publishing the site.  See ADR 0001.
+#
+# The builder ingests the committed corpus so the Content store ships inside the
+# image: the service then starts with data and no volume to mount, and a
+# container is reproducible from the commit it was built at.
+
+FROM python:3.13-alpine AS builder
+WORKDIR /build
+COPY requirements-api.txt ./
+RUN python3 -m venv /opt/venv && /opt/venv/bin/pip install --no-cache-dir -r requirements-api.txt
+# Ingest runs on the standard library alone, which is why the corpus can be
+# built before the virtualenv is ever used.
+COPY contentdb ./contentdb
+COPY questions ./questions
+COPY labs ./labs
+COPY config ./config
+COPY TAGS.md ./
+RUN python3 -m contentdb.ingest --root /build --output /build/content.db
+
+FROM python:3.13-alpine
+# `content.db` is copied writable and owned by the service user: `api/content.py`
+# opens a second `mode=rw` connection on the first write, so a read-only file
+# would make every write fail at runtime rather than at start-up.
+RUN adduser -D -H -u 10001 content
+WORKDIR /srv
+COPY --from=builder /opt/venv /opt/venv
+# The store lives in a directory the service user owns, not just as a file it
+# owns: SQLite writes its journal beside the database, so a writable file in a
+# root-owned directory still fails with "attempt to write a readonly database".
+RUN mkdir -p /srv/data && chown content:content /srv/data
+COPY --from=builder --chown=content:content /build/content.db /srv/data/content.db
+COPY --chown=content:content api ./api
+COPY --chown=content:content contentdb ./contentdb
+# A write is validated against the Theme and Tag vocabularies, which are read
+# from the corpus rather than from the store. Without these two files the
+# service starts, serves reads, and then refuses every write with a 503 — which
+# is exactly what the end-to-end suite caught.
+COPY --chown=content:content config ./config
+COPY --chown=content:content TAGS.md ./TAGS.md
+
+ENV PATH="/opt/venv/bin:$PATH" \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    CONTENT_API_STORE="api.content:content_store" \
+    CONTENT_STORE_PATH="/srv/data/content.db" \
+    CONTENT_API_CORPUS_ROOT="/srv"
+# CONTENT_API_WRITE_KEY is deliberately not set. Unset means the service starts
+# read-only and refuses every write with 503, which is the right default for an
+# image that has not been handed a credential.
+
+USER content
+EXPOSE 8000
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+  CMD python3 -c "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health').status==200 else 1)"
+CMD ["uvicorn", "api.app:app", "--host", "0.0.0.0", "--port", "8000"]

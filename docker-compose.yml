@@ -1,0 +1,27 @@
+# The whole stack: the static site, and the Content API beside it.
+#
+#   docker compose up --build
+#
+# The site is the canonical publication and needs nothing to run. The API is
+# optional, and it serves the same corpus from the Content store baked into its
+# image at build time.
+services:
+  site:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8000:8000"
+    environment:
+      # Writes are refused with 503 unless a Write credential is configured.
+      # Set CONTENT_API_WRITE_KEY in the shell (or an .env file that is never
+      # committed) to enable them; leaving it empty keeps the API read-only,
+      # which is the safe default for anything reachable from a network.
+      CONTENT_API_WRITE_KEY: "${CONTENT_API_WRITE_KEY:-}"
