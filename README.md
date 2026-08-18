@@ -52,9 +52,17 @@ The site is fully static and ships as a Docker image: `docker build -t devops-qu
 
 ## Questions and Labs over an API
 
-The corpus is also built into a queryable SQLite Content store and served by a versioned Content API.
-Markdown in git stays the durable record: writes are exported back to files and CI refuses any Drift between
-the two. See [`docs/content-api.md`](./docs/content-api.md).
+The corpus is also built into a queryable SQLite Content store and served by a versioned Content API, so a
+trainer, a mobile client, or an interview bot can ask questions of the database instead of parsing Markdown:
+
+```bash
+docker compose up --build      # static site on :8080, Content API on :8000
+curl "http://127.0.0.1:8000/api/v1/questions?theme=kubernetes&difficulty=senior"
+```
+
+Reads are anonymous; writes need a credential and a matching `If-Match`. Markdown in git stays the durable
+record — writes are exported back to files and CI refuses any Drift between the two. The endpoints,
+configuration, and workflow are documented in [`docs/content-api.md`](./docs/content-api.md).
 
 ## Content policy and attribution
 

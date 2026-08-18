@@ -2,7 +2,7 @@
 
 | | |
 | --- | --- |
-| **Status** | `ready-for-agent` |
+| **Status** | `needs-review` |
 | **GitHub** | [#174](https://github.com/shapovalovdev/devops-interview-questions/issues/174) |
 | **Label** | `enhancement` |
 | **Epic** | [Content API v1](./0000-epic-content-api.md) |
@@ -58,3 +58,59 @@ The API works under `pytest`. This slice makes it something you can run, and pro
   commands you ran with their results, test and coverage numbers, and anything left for human review.
   GitHub Issues are unavailable, so this file is the tracker — update its **Status** row as you go
   (`ready-for-agent` → `in-progress` → `needs-review`).
+
+## Completion report
+
+Implemented by the coordinator directly, since every remaining agent slot had been lost to environmental
+failures and this was the last slice.
+
+### What shipped
+
+- `Dockerfile.api` — multi-stage, non-root (uid 10001), `HEALTHCHECK` on `/api/v1/health`, with the Content
+  store ingested at build time so a container starts with the whole corpus and no volume. The static site's
+  `Dockerfile` is untouched and still dependency-free.
+- `docker-compose.yml` — the site and the API side by side, with the Write credential supplied by
+  environment variable and defaulting to absent.
+- `tests/e2e/test_content_api_e2e.py` — 18 checks over real HTTP (`urllib`, no `TestClient`, no imports from
+  `api/`): health, non-root, the served schema, filtering, the Lab→Question link, conditional `304`, search,
+  problem documents, and the full authenticated write journey with its `401`, `403`, `412`, `428`, and `422`
+  refusals. A second container, given no credential, proves reads work and every write is `503`. Containers
+  are removed in `tearDownClass` even on failure.
+- `.github/workflows/content-api.yml` — three jobs: the API suite under the coverage gate with coverage in
+  the job summary, the end-to-end suite against a built image, and a Compose job asserting both services
+  answer.
+- `docs/content-api.md` extended with running, configuration, writing, and testing; `README.md` now shows the
+  two commands that get someone querying the database.
+
+### Two real defects the end-to-end suite caught
+
+Both were invisible to 378 passing `TestClient` tests, which is precisely why this slice exists:
+
+1. **The image served reads but refused every write with `503`** — `config/content-manifest.json` and
+   `TAGS.md` were not in it, and writes are validated against those vocabularies. Fixed by shipping them and
+   setting `CONTENT_API_CORPUS_ROOT`.
+2. **`attempt to write a readonly database`** — the store file was owned by the service user but sat in a
+   root-owned directory, and SQLite writes its journal beside the database. Fixed by giving the store its own
+   writable directory.
+
+### Verification
+
+```
+python tests/e2e/test_content_api_e2e.py    → Ran 18 tests, OK (real containers, built and torn down)
+pytest --cov=api --cov=contentdb --cov-branch --cov-fail-under=95 → 378 passed, 95.09%
+python tests/run_all_tests.py               → 195 checks / 62 modules
+python scripts/build_site.py                → 1179 pages, standard library only
+python -m contentdb.drift                   → clean, exit 0
+docker build -t devops-questions .          → the static site image still builds
+docker compose up --build                   → site serves "DevOps Question Field Manual", API reports healthy
+```
+
+The Compose check was first run against a port already held by an unrelated local service and returned that
+service's title; it was re-run on free ports before being believed.
+
+### Left for human review
+
+- CI binds 8080 and 8000. Both are free on hosted runners; a self-hosted runner with either occupied would
+  need the ports overridden.
+- The image ships no Write credential, so a container is read-only until one is supplied. That is the
+  intended default for anything reachable from a network.

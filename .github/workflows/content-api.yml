@@ -1,0 +1,77 @@
+name: Content API
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  api-tests:
+    name: API tests and the coverage gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # updated_at comes from each file's commit time; a shallow clone would
+          # pin every record to the epoch.
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install the API and test dependencies
+        run: python -m pip install --upgrade pip -r requirements-dev.txt
+      - name: Run the API suite under the coverage gate
+        run: |
+          pytest --cov=api --cov=contentdb --cov-branch --cov-fail-under=95 \
+            --cov-report=term-missing --cov-report=markdown:coverage.md -q
+      - name: Report coverage in the job summary
+        if: always()
+        run: |
+          {
+            echo "## Content API coverage"
+            echo
+            cat coverage.md 2>/dev/null || echo "(coverage report not produced)"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  end-to-end:
+    name: End-to-end against the packaged service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the API image and exercise a running container
+        # The suite builds the image, starts it, waits for health, and speaks
+        # real HTTP to it. It removes its containers even when it fails.
+        run: python tests/e2e/test_content_api_e2e.py
+      - name: Show container logs on failure
+        if: failure()
+        run: docker ps -a && docker logs devops-questions-api-e2e || true
+
+  compose:
+    name: The whole stack comes up together
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bring up the site and the API
+        run: docker compose up --build --detach
+      - name: Wait for both services and check each answers
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1 \
+               && curl -fsS http://127.0.0.1:8000/api/v1/health >/dev/null 2>&1; then
+              echo "both services are up after ${i}s"
+              curl -fsS http://127.0.0.1:8080/ | grep -q "<title>DevOps Question Field Manual</title>"
+              curl -fsS "http://127.0.0.1:8000/api/v1/questions?limit=1" | grep -q '"total"'
+              exit 0
+            fi
+            sleep 1
+          done
+          docker compose logs
+          echo "the stack did not come up within 60s" >&2
+          exit 1
+      - name: Tear the stack down
+        if: always()
+        run: docker compose down --volumes --remove-orphans
