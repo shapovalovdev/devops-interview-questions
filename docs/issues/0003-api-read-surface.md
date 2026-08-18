@@ -211,6 +211,11 @@ Both files were restored and the suite re-run green before committing.
 - `contentdb/ingest.py` sits at 77% branch coverage: its `main()` argument parsing and the
   FTS5-unavailable fallback are exercised by `tests/test_contentdb_ingest.py` only in part. Nothing in
   this slice touched `contentdb/`, and the total is above the gate, so it was left alone.
+- **On merge with `main`:** this branch was cut before slice 0005 landed, and `main` has since added
+  Export and the Drift gate, including `tests/test_contentdb_export.py`. The coverage gate now measures
+  all of `contentdb`, so that file needs adding to `testpaths` in `pytest.ini` beside the three
+  `tests/test_contentdb_*.py` modules already listed, or `contentdb/export.py` will be counted without
+  its own tests and the 95% gate may fail for reasons that have nothing to do with this slice.
 - Slice 6 owns packaging; nothing here sets `CONTENT_API_STORE` in the image. A deployment runs
   `python -m contentdb.ingest --output build/content.db` and then
   `CONTENT_API_STORE=api.content:content_store uvicorn api.app:app`.
