@@ -286,7 +286,7 @@ paths:
       operationId: listLabs
       tags: [Labs]
       summary: List Labs, filtered, sorted, and paginated.
-      x-implementation: stub
+      x-implementation: implemented
       parameters:
         - name: theme
           in: query
@@ -360,7 +360,7 @@ paths:
       operationId: getLab
       tags: [Labs]
       summary: Read one Lab by its id.
-      x-implementation: stub
+      x-implementation: implemented
       parameters:
         - $ref: '#/components/parameters/ThemePath'
         - $ref: '#/components/parameters/SlugPath'

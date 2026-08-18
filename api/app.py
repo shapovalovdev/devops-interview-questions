@@ -565,9 +565,10 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Labs"],
         summary="List Labs, filtered, sorted, and paginated.",
         response_model=LabPage,
-        responses=problem_responses(422, 501),
+        responses=problem_responses(422, 500),
     )
     def list_labs(
+        store: Annotated[Store, Depends(get_store)],
         theme: str | None = None,
         difficulty: Difficulty | None = None,
         tag: str | None = None,
@@ -579,19 +580,19 @@ def create_app(store: Store | None = None) -> FastAPI:
         offset: Annotated[int, Query(ge=0, description="Number of items to skip before the page starts.")] = 0,
         sort: SortKey = SortKey.id,
     ) -> LabPage:
-        # The query is built even though the operation is a stub, so that slice 3
-        # inherits a route whose parameters already reach the seam intact.
-        LabQuery(
-            theme=theme,
-            difficulty=difficulty.value if difficulty else None,
-            tag=tag,
-            question_ref=question_ref,
-            q=q,
-            sort=sort.value,
-            limit=limit,
-            offset=offset,
+        page = store.list_labs(
+            LabQuery(
+                theme=theme,
+                difficulty=difficulty.value if difficulty else None,
+                tag=tag,
+                question_ref=question_ref,
+                q=q,
+                sort=sort.value,
+                limit=limit,
+                offset=offset,
+            )
         )
-        not_implemented("listLabs")
+        return LabPage(items=page.items, total=page.total, limit=limit, offset=offset)
 
     @app.post(
         "/api/v1/labs",
@@ -614,14 +615,26 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Labs"],
         summary="Read one Lab by its id.",
         response_model=Lab,
-        responses=problem_responses(501),
+        responses=item_responses(404, 500),
     )
     def get_lab(
+        response: Response,
+        store: Annotated[Store, Depends(get_store)],
         theme: str,
         slug: str,
         if_none_match: Annotated[str | None, Header(alias="If-None-Match")] = None,
-    ) -> Lab:
-        not_implemented("getLab")
+    ) -> Any:
+        identifier = f"{theme}/{slug}"
+        record = store.get_lab(identifier)
+        if record is None:
+            missing("Lab", identifier)
+        return conditional(
+            Lab.model_validate(record),
+            record,
+            if_none_match,
+            response,
+            question_link(store, str(record["question_ref"])),
+        )
 
     @app.put(
         "/api/v1/labs/{theme}/{slug}",

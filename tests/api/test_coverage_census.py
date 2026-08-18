@@ -29,7 +29,9 @@ import yaml
 
 from support import (
     CONTRACT_PATH,
+    DEMO_LAB,
     DEMO_QUESTION,
+    UNKNOWN_LAB,
     UNKNOWN_QUESTION,
     ExplodingStore,
     STUB_REQUESTS,
@@ -97,6 +99,15 @@ def implemented_producers() -> dict[tuple[str, str, str], Callable[[], int]]:
         ("/api/v1/questions/{theme}/{slug}", "get", "500"): lambda: failing.get(
             DEMO_QUESTION
         ).status_code,
+        ("/api/v1/labs", "get", "200"): lambda: client.get("/api/v1/labs").status_code,
+        ("/api/v1/labs", "get", "422"): lambda: client.get("/api/v1/labs?limit=0").status_code,
+        ("/api/v1/labs", "get", "500"): lambda: failing.get("/api/v1/labs").status_code,
+        ("/api/v1/labs/{theme}/{slug}", "get", "200"): lambda: client.get(DEMO_LAB).status_code,
+        ("/api/v1/labs/{theme}/{slug}", "get", "304"): lambda: revalidate(
+            client, DEMO_LAB
+        ).status_code,
+        ("/api/v1/labs/{theme}/{slug}", "get", "404"): lambda: client.get(UNKNOWN_LAB).status_code,
+        ("/api/v1/labs/{theme}/{slug}", "get", "500"): lambda: failing.get(DEMO_LAB).status_code,
     }
 
 

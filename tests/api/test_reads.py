@@ -117,6 +117,38 @@ def test_a_question_reports_the_labs_that_prepare_a_learner_for_it(fixture_clien
     assert "/api/v1/labs?question_ref=kubernetes%2Fadmission-policy" in links
     assert "</api/v1/labs/kubernetes/admission-lab>" in links, links
 
+    linked = fixture_client.get("/api/v1/labs?question_ref=kubernetes/admission-policy").json()
+    assert [lab["id"] for lab in linked["items"]] == ["kubernetes/admission-lab"]
+    assert linked["total"] == 1
+
+
+def test_a_lab_points_back_at_a_question_the_api_can_serve(fixture_client):
+    """The other direction: `question_ref` is resolved, not left as a string."""
+    lab = fixture_client.get(FIXTURE_LAB)
+    assert lab.status_code == 200
+    reference = lab.json()["question_ref"]
+    assert reference == "kubernetes/admission-policy"
+    assert f"</api/v1/questions/{reference}>" in lab.headers["Link"]
+    assert fixture_client.get(f"/api/v1/questions/{reference}").status_code == 200
+
+
+def test_a_lab_whose_reference_dangles_is_still_served_without_a_link(make_client):
+    """A broken `question_ref` is a corpus defect, not a reason to hide the Lab."""
+    from api.testing import demo_corpus, lab_record
+
+    store = demo_corpus()
+    store.labs.append(
+        lab_record(
+            "kubernetes", "demo-orphan", "A Lab pointing nowhere", "middle",
+            ["kubernetes"], "kubernetes/nothing-here", "It references a Question that is gone.",
+            "2026-08-11T09:00:00Z",
+        )
+    )
+    response = make_client(store).get("/api/v1/labs/kubernetes/demo-orphan")
+    assert response.status_code == 200
+    assert response.json()["question_ref"] == "kubernetes/nothing-here"
+    assert "Link" not in response.headers, "a link that 404s is worse than no link"
+
 
 def test_a_question_with_no_labs_still_advertises_the_query(fixture_client):
     response = fixture_client.get("/api/v1/questions/kubernetes/pod-scheduling")
@@ -202,3 +234,71 @@ def test_every_committed_question_still_satisfies_the_contract(corpus_client):
     assert len(body["items"]) == 200
     for item in body["items"]:
         assert item["id"] and re.fullmatch(r"[0-9a-f]{64}", item["content_hash"]), item
+
+
+# ---------------------------------------------------------------- Labs
+
+
+def test_a_lab_is_served_with_every_field_the_contract_requires(fixture_client):
+    body = fixture_client.get(FIXTURE_LAB).json()
+    assert set(body) == {
+        "id", "theme", "slug", "title", "difficulty", "tags", "question_ref", "why",
+        "checklist", "body_markdown", "source_path", "content_hash", "updated_at",
+    }
+    assert body["checklist"], "a Lab without a checklist is not a Lab"
+
+
+def test_the_lab_etag_and_conditional_read_behave_like_the_questions(fixture_client):
+    first = fixture_client.get(FIXTURE_LAB)
+    assert first.headers["ETag"] == f'"{first.json()["content_hash"]}"'
+    again = fixture_client.get(FIXTURE_LAB, headers={"If-None-Match": first.headers["ETag"]})
+    assert again.status_code == 304
+    assert again.content == b""
+
+
+def test_an_unknown_lab_is_a_404_problem_document(fixture_client):
+    response = fixture_client.get("/api/v1/labs/kubernetes/nothing-here")
+    assert response.status_code == 404
+    assert "kubernetes/nothing-here" in problem(response)["detail"]
+
+
+@pytest.mark.parametrize(
+    ("query", "expected"),
+    [
+        ("", ["kubernetes/admission-lab", "linux/disk-lab", "linux/systemd-lab"]),
+        ("theme=linux", ["linux/disk-lab", "linux/systemd-lab"]),
+        ("difficulty=junior", ["linux/disk-lab"]),
+        ("tag=security", ["kubernetes/admission-lab"]),
+        ("question_ref=linux/disk-full", ["linux/disk-lab"]),
+        ("q=systemd", ["linux/systemd-lab"]),
+        ("theme=linux&difficulty=senior", ["linux/systemd-lab"]),
+        ("theme=linux&tag=security", []),
+        ("sort=-id", ["linux/systemd-lab", "linux/disk-lab", "kubernetes/admission-lab"]),
+    ],
+)
+def test_every_documented_lab_filter_narrows_the_result(fixture_client, query, expected):
+    body = fixture_client.get(f"/api/v1/labs?{query}").json()
+    assert [item["id"] for item in body["items"]] == expected
+    assert body["total"] == len(expected)
+
+
+def test_the_lab_page_uses_the_same_envelope_and_pages_deterministically(fixture_client):
+    body = fixture_client.get("/api/v1/labs?limit=2").json()
+    assert set(body) == {"items", "total", "limit", "offset"}
+    assert body["total"] == 3 and body["limit"] == 2 and body["offset"] == 0
+    second = fixture_client.get("/api/v1/labs?limit=2&offset=2").json()
+    assert [item["id"] for item in body["items"]] + [item["id"] for item in second["items"]] == [
+        "kubernetes/admission-lab",
+        "linux/disk-lab",
+        "linux/systemd-lab",
+    ]
+
+
+def test_every_committed_lab_prepares_a_learner_for_a_question_that_exists(corpus_client):
+    """The link is the reason Labs are in the API; a dangling one is a defect."""
+    labs = corpus_client.get("/api/v1/labs?limit=200").json()
+    assert labs["total"] == len(labs["items"]), "the corpus holds fewer Labs than one page"
+    assert labs["items"], "the committed corpus holds Labs"
+    for lab in labs["items"]:
+        reference = corpus_client.get(f"/api/v1/questions/{lab['question_ref']}")
+        assert reference.status_code == 200, f"{lab['id']} points at {lab['question_ref']}"

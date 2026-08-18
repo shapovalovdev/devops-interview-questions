@@ -81,11 +81,7 @@ STUB_REQUESTS: dict[tuple[str, str], dict[str, Any]] = {
     ("/api/v1/questions/{theme}/{slug}", "delete"): {
         "url": "/api/v1/questions/kubernetes/demo-admission-guardrails",
     },
-    ("/api/v1/labs", "get"): {"url": "/api/v1/labs"},
     ("/api/v1/labs", "post"): {"url": "/api/v1/labs", "json": LAB_WRITE},
-    ("/api/v1/labs/{theme}/{slug}", "get"): {
-        "url": "/api/v1/labs/kubernetes/demo-admission-guardrails",
-    },
     ("/api/v1/labs/{theme}/{slug}", "put"): {
         "url": "/api/v1/labs/kubernetes/demo-admission-guardrails",
         "json": LAB_WRITE,
