@@ -481,3 +481,89 @@ def test_search_over_the_committed_corpus_finds_real_content(corpus_client):
     assert len(body["items"]) == 10
     for hit in body["items"]:
         assert hit["item"]["content_hash"]
+
+
+# ------------------------------------------- every single-item read, alike
+
+
+#: The four reads the contract gives an ETag and a `304`. They are checked
+#: together because a conditional read a client can only use on some of them is
+#: worse than none: the client has to special-case which, and will get it wrong.
+SINGLE_ITEM_READS = [
+    FIXTURE_QUESTION,
+    FIXTURE_LAB,
+    "/api/v1/themes/kubernetes",
+    "/api/v1/learning-paths/kubernetes-track",
+]
+
+
+@pytest.mark.parametrize("url", SINGLE_ITEM_READS)
+def test_every_single_item_read_offers_a_validator(fixture_client, url):
+    response = fixture_client.get(url)
+    assert response.status_code == 200
+    etag = response.headers["ETag"]
+    assert etag.startswith('"') and etag.endswith('"'), f"{url} served an unquoted ETag: {etag}"
+    assert fixture_client.get(url).headers["ETag"] == etag, "an ETag must be stable"
+
+
+@pytest.mark.parametrize("url", SINGLE_ITEM_READS)
+def test_every_single_item_read_answers_304_with_no_body(fixture_client, url):
+    etag = fixture_client.get(url).headers["ETag"]
+    response = fixture_client.get(url, headers={"If-None-Match": etag})
+    assert response.status_code == 304
+    assert response.content == b"", f"{url} sent a body with its 304"
+    assert response.headers["ETag"] == etag, "a 304 still identifies what the client holds"
+    assert "content-type" not in response.headers
+
+
+@pytest.mark.parametrize("url", SINGLE_ITEM_READS)
+def test_a_validator_from_a_different_item_is_never_a_304(fixture_client, url):
+    """The `304` has to depend on the item, or it is just a cached `304`."""
+    other = fixture_client.get("/api/v1/themes/linux").headers["ETag"]
+    response = fixture_client.get(url, headers={"If-None-Match": other})
+    assert response.status_code == 200 or url.endswith("/themes/linux")
+
+
+def test_two_items_that_differ_do_not_share_a_validator(fixture_client):
+    tags = {fixture_client.get(url).headers["ETag"] for url in SINGLE_ITEM_READS}
+    assert len(tags) == len(SINGLE_ITEM_READS), "distinct items must have distinct ETags"
+
+
+# ------------------------------------- what is missing, and what is empty
+
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "/api/v1/questions/kubernetes/nothing-here",
+        "/api/v1/labs/kubernetes/nothing-here",
+        "/api/v1/themes/nothing-here",
+        "/api/v1/learning-paths/nothing-here",
+    ],
+)
+def test_every_unknown_id_is_a_404_problem_document(fixture_client, url):
+    response = fixture_client.get(url)
+    assert response.status_code == 404
+    assert problem(response)["instance"] == url
+
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "/api/v1/questions?tag=nothing-here",
+        "/api/v1/questions?theme=atlantis",
+        "/api/v1/labs?tag=nothing-here",
+        "/api/v1/labs?question_ref=atlantis/nothing-here",
+        "/api/v1/search?q=admission&kind=lab&offset=99",
+    ],
+)
+def test_a_filter_that_matches_nothing_is_an_empty_page_not_a_404(fixture_client, url):
+    """An unknown filter *value* is a legitimate question with an empty answer.
+
+    The contract has no operation that reads one tag, so an unknown tag can only
+    appear as a filter; answering `404` there would confuse "you asked for
+    something that does not exist" with "nothing matches what you asked".
+    """
+    response = fixture_client.get(url)
+    assert response.status_code == 200
+    assert response.json()["items"] == []
