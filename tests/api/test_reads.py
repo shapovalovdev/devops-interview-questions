@@ -567,3 +567,102 @@ def test_a_filter_that_matches_nothing_is_an_empty_page_not_a_404(fixture_client
     response = fixture_client.get(url)
     assert response.status_code == 200
     assert response.json()["items"] == []
+
+
+# --------------------------- every read, against the committed corpus
+
+
+def committed_corpus_reads(client) -> list[str]:
+    """One URL per read the contract publishes, addressed at real content.
+
+    The ids are discovered from the corpus rather than written down, so this
+    keeps working when a Question is renamed — which is the only way a sweep
+    like this survives contact with a corpus somebody edits daily.
+    """
+    question = client.get("/api/v1/questions?limit=1").json()["items"][0]["id"]
+    lab = client.get("/api/v1/labs?limit=1").json()["items"][0]["id"]
+    theme = client.get("/api/v1/themes").json()["items"][0]["name"]
+    path = client.get("/api/v1/learning-paths").json()["items"][0]["slug"]
+    return [
+        "/api/v1/health",
+        "/api/v1/questions?limit=5",
+        f"/api/v1/questions/{question}",
+        "/api/v1/labs?limit=5",
+        f"/api/v1/labs/{lab}",
+        "/api/v1/themes",
+        f"/api/v1/themes/{theme}",
+        "/api/v1/tags",
+        "/api/v1/learning-paths",
+        f"/api/v1/learning-paths/{path}",
+        "/api/v1/search?q=kubernetes&limit=5",
+    ]
+
+
+def test_every_read_endpoint_answers_from_the_committed_corpus(corpus_client):
+    """The test class that catches a fake diverging from the real store.
+
+    Search shipped broken once because the suite exercised it only against the
+    in-memory fake: the fake yielded `{kind, score, item}` and the real store
+    yielded bare rows, so the first real request answered `500` with
+    `KeyError: 'score'` while every test was green. A sweep that touches every
+    endpoint against a store Ingest built is the cheapest thing that would have
+    caught it, so it now runs on all eleven.
+    """
+    urls = committed_corpus_reads(corpus_client)
+    assert len(urls) == 11, "eleven read operations are published; the sweep must cover each"
+    for url in urls:
+        response = corpus_client.get(url)
+        assert response.status_code == 200, f"{url} answered {response.status_code}: {response.text[:200]}"
+        body = response.json()
+        if "items" in body:
+            assert set(body) == {"items", "total", "limit", "offset"}, url
+            assert body["items"], f"{url} answered an empty page from a corpus that is not empty"
+        else:
+            assert body, url
+
+
+def test_every_single_item_read_is_conditional_over_the_committed_corpus(corpus_client):
+    """ETags too: a validator that only works on fixture data is not a validator."""
+    collections = {"/api/v1/health", "/api/v1/themes", "/api/v1/tags", "/api/v1/learning-paths"}
+    single = [
+        url
+        for url in committed_corpus_reads(corpus_client)
+        if "?" not in url and url not in collections
+    ]
+    assert len(single) == 4, single
+    for url in single:
+        etag = corpus_client.get(url).headers["ETag"]
+        again = corpus_client.get(url, headers={"If-None-Match": etag})
+        assert again.status_code == 304, url
+        assert again.content == b"", url
+
+
+def test_search_over_the_committed_corpus_returns_whole_items_of_both_kinds(corpus_client):
+    """The exact request that failed in review, plus what it should have proved."""
+    lab = corpus_client.get("/api/v1/labs?limit=1").json()["items"][0]
+    term = max(re.findall(r"[a-z]{5,}", lab["title"].lower()), key=len)
+
+    restricted = corpus_client.get(f"/api/v1/search?q={term}&kind=lab&limit=200")
+    assert restricted.status_code == 200, restricted.text[:200]
+    hits = restricted.json()["items"]
+    assert hits, f"no Lab matches {term!r}, drawn from the title of {lab['id']}"
+    for hit in hits:
+        assert set(hit) == {"kind", "score", "item"}
+        assert hit["kind"] == "lab"
+        assert hit["item"]["question_ref"], "a Lab hit carries a whole Lab, not a summary row"
+        assert isinstance(hit["score"], (int, float))
+
+    both = corpus_client.get("/api/v1/search?q=replication&limit=50")
+    assert both.status_code == 200
+    kinds = {hit["kind"] for hit in both.json()["items"]}
+    assert kinds <= {"question", "lab"} and kinds
+    for hit in both.json()["items"]:
+        expected = "type" if hit["kind"] == "question" else "question_ref"
+        assert expected in hit["item"], hit["kind"]
+
+
+def test_the_score_falls_across_a_real_page_boundary(corpus_client):
+    first = corpus_client.get("/api/v1/search?q=kubernetes&limit=1").json()["items"][0]
+    second = corpus_client.get("/api/v1/search?q=kubernetes&limit=1&offset=1").json()["items"][0]
+    assert first["score"] > second["score"], "rank is global, so page two cannot restart at the top"
+    assert first["item"]["id"] != second["item"]["id"]

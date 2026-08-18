@@ -211,7 +211,8 @@ Both files were restored and the suite re-run green before committing.
 - `contentdb/ingest.py` sits at 77% branch coverage: its `main()` argument parsing and the
   FTS5-unavailable fallback are exercised by `tests/test_contentdb_ingest.py` only in part. Nothing in
   this slice touched `contentdb/`, and the total is above the gate, so it was left alone.
-- **On merge with `main`:** this branch was cut before slice 0005 landed, and `main` has since added
+- ~~**On merge with `main`:**~~ *(done — the coordinator rebased the branch and applied this.)* This
+  branch was cut before slice 0005 landed, and `main` has since added
   Export and the Drift gate, including `tests/test_contentdb_export.py`. The coverage gate now measures
   all of `contentdb`, so that file needs adding to `testpaths` in `pytest.ini` beside the three
   `tests/test_contentdb_*.py` modules already listed, or `contentdb/export.py` will be counted without
@@ -219,3 +220,95 @@ Both files were restored and the suite re-run green before committing.
 - Slice 6 owns packaging; nothing here sets `CONTENT_API_STORE` in the image. A deployment runs
   `python -m contentdb.ingest --output build/content.db` and then
   `CONTENT_API_STORE=api.content:content_store uvicorn api.app:app`.
+
+## Follow-up: the search seam defect found in review
+
+The coordinator's verification pass reported `GET /api/v1/search` answering `KeyError: 'score'` against
+a store built from the committed corpus. The defect is real and is fixed. The diagnosis differs from
+the one in the report, in a way that matters for what had to change.
+
+### What actually happens
+
+Search is **correct** through the documented wiring, and reproducing it says so:
+
+```
+$ python -m contentdb.ingest --root . --output <tmp>/real.db
+$ CONTENT_STORE_PATH=<tmp>/real.db CONTENT_API_STORE=api.content:content_store  # create_app()
+GET /api/v1/search?q=replication&kind=lab  -> 200  total 1  ('lab', 1.0, 'databases/postgresql-replication-pitr')
+GET /api/v1/search?q=replication           -> 200  total 69 ('question', 1.0, 'databases/replication-lag-response')
+```
+
+It fails exactly when the adapter is bypassed and `contentdb.store.Store` is handed to `create_app()`
+directly:
+
+```
+$ create_app(store=contentdb.store.Store(<tmp>/real.db))
+isinstance(raw, api.store.Store) -> True          # the protocol checks method names, nothing more
+GET /api/v1/search?q=replication&kind=lab -> 500  # KeyError: 'score'
+GET /api/v1/themes                        -> 500  # AttributeError: 'tuple' has no attribute 'items'
+GET /api/v1/tags                          -> 500
+GET /api/v1/learning-paths                -> 500
+GET /api/v1/questions?limit=1             -> 200  # the one shape that happens to line up
+```
+
+So this was not a fake that diverged from the real store — `api/content.py` has reshaped hits since the
+first commit, and `test_a_search_hit_carries_its_kind_score_and_whole_item` has exercised search
+through a real Ingest-built store since then; removing the adapter's reshaping fails twelve tests. It
+was a **wiring hazard**: `Store` is `runtime_checkable`, so an object passes `isinstance` by having the
+right method *names* while returning shapes the service cannot serve, and nothing said so until a
+request arrived. Search was the loudest symptom; three catalogues failed the same way.
+
+### What changed
+
+- **`create_app()` refuses a store that answers in the wrong shape** (`StoreDoesNotConform`, a
+  `StoreNotConfigured`). It probes `list_questions(limit=1)`, `list_themes`, `list_tags`, and
+  `list_learning_paths`, and fails if an answer is not a `Page`, naming the method, the type that came
+  back, and `CONTENT_API_STORE=api.content:content_store` as the fix. A store whose reads *raise* is
+  left alone: being unreachable is the `500` the contract already documents, and refusing to boot over
+  it would turn an outage into an unbootable service.
+- **`api/store.py` says what a search hit is, and enforces it.** `SEARCH_HIT_FIELDS` and `search_hit()`
+  live beside the protocol they belong to; a hit missing `kind`, `score`, or `item` now raises
+  `StoreContractViolation` naming the promised shape, the keys that arrived, and `api/content.py`,
+  instead of a bare `KeyError`. The client still gets the same `500` — it can do nothing with the
+  detail — but the log names the fault.
+- **`score` stays derived from rank on the API side**, which is the option the coordinator allowed and
+  what the adapter already did: `1 / (1 + rank)`, strictly decreasing, global rather than per page. The
+  store's bm25 score does not cross the seam and the adapter does not invent one; a new test pins that
+  page two does not restart at the top score, over the committed corpus.
+- **Every read endpoint is now exercised against the committed corpus.** This was the gap worth
+  closing: `test_every_read_endpoint_answers_from_the_committed_corpus` discovers real ids and walks
+  all eleven reads, `test_every_single_item_read_is_conditional_over_the_committed_corpus` re-reads the
+  four single items with their ETags for a `304`, and
+  `test_search_over_the_committed_corpus_returns_whole_items_of_both_kinds` runs the exact request from
+  the review and asserts each hit is `{kind, score, item}` with a whole Lab under `item`.
+
+### Verification, sabotaged first
+
+Removing the reshaping from `ContentStore.search` — the code path whose absence produced the reported
+error — fails **12 tests**, including the new committed-corpus sweep and search checks. Wiring
+`contentdb.store.Store` in directly is now refused before the service accepts a request, and
+`test_the_contentdb_store_itself_is_refused_at_startup` holds it there.
+
+```
+$ .venv/bin/python -m pytest --cov=api --cov=contentdb --cov-branch --cov-fail-under=95 -q
+api/app.py                   225      0     46      0   100%
+api/content.py                80      0      2      0   100%
+api/store.py                  49      0      2      0   100%
+contentdb/drift.py            56      5     16      2    88%
+contentdb/export.py          100      1     30      1    98%
+TOTAL                       1261     38    238     19    96%
+Required test coverage of 95% reached. Total coverage: 96.06%
+303 passed, 4 warnings, 6 subtests passed in 8.78s
+
+$ .venv/bin/python tests/run_all_tests.py
+Ran 194 checks across 62 test modules.                    # exit 0
+
+$ .venv/bin/python scripts/build_site.py --output <tmp>
+Rendered 1179 Markdown pages into <tmp>                   # exit 0
+
+$ .venv/bin/python -m contentdb.drift
+No drift: every Question and Lab round-trips through the Content store unchanged.   # exit 0
+```
+
+The coordinator's two uncommitted fixups (`pytest.ini` listing `tests/test_contentdb_export.py`, and
+that file's new CLI tests) are committed on the branch so the gate is reproducible from it alone.

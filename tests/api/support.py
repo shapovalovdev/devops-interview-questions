@@ -146,6 +146,30 @@ def revalidate(client: TestClient, url: str) -> Any:
     return client.get(url, headers={"If-None-Match": etag})
 
 
+class RawHitStore(InMemoryStore):
+    """A store whose search answers the way `contentdb.store.Store` does.
+
+    Bare rows keyed `{kind, id, theme, title, snippet}` — no `score`, no nested
+    `item`. This is exactly what reached the service when the real store was
+    wired in without `api/content.py`, and it is why the seam now says what a
+    hit is instead of trusting whoever implements it.
+    """
+
+    def search(self, query: SearchQuery) -> Page:
+        return Page(
+            items=[
+                {
+                    "kind": "question",
+                    "id": "kubernetes/demo-admission-guardrails",
+                    "theme": "kubernetes",
+                    "title": "Design admission guardrails",
+                    "snippet": "…admission…",
+                }
+            ],
+            total=1,
+        )
+
+
 class MalformedStore(InMemoryStore):
     """A store that answers with a record the contract cannot describe."""
 
@@ -185,6 +209,7 @@ __all__ = [
     "QUESTION_WRITE",
     "QuestionQuery",
     "ROOT",
+    "RawHitStore",
     "STUB_REQUESTS",
     "UNKNOWN_LAB",
     "UNKNOWN_LEARNING_PATH",

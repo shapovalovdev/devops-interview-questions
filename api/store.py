@@ -93,6 +93,43 @@ class SearchQuery:
     offset: int = 0
 
 
+#: The keys a search hit carries across the seam, mirroring `SearchHit` in the
+#: contract. They are named here, not in `api/app.py`, because this module is
+#: what a store implementation reads to learn what it owes.
+SEARCH_HIT_FIELDS = ("kind", "score", "item")
+
+
+class StoreContractViolation(RuntimeError):
+    """Raised when a store answers in a shape this seam does not describe.
+
+    The `Store` protocol is `runtime_checkable`, which means `isinstance` checks
+    that the methods *exist* and nothing about what they return. An object can
+    therefore pass the check and still hand back a tuple where a `Page` was
+    promised, or a bare record where a hit was. That gap is not hypothetical: it
+    shipped, as a `KeyError: 'score'` on every search, when a store was wired in
+    without the adapter that reshapes it. This exception exists so the next
+    occurrence names the seam and the fix instead of a missing dictionary key.
+    """
+
+
+def is_page(value: object) -> bool:
+    """Whether a store's answer is a `Page` — anything carrying items and a total."""
+    return hasattr(value, "items") and hasattr(value, "total")
+
+
+def search_hit(record: Record) -> tuple[str, float, Record]:
+    """Unpack one search hit, or say precisely how the store broke the seam."""
+    absent = [field for field in SEARCH_HIT_FIELDS if field not in record]
+    if absent:
+        raise StoreContractViolation(
+            f"a search hit is missing {absent}: the seam carries "
+            f"{{'kind': 'question' | 'lab', 'score': float, 'item': record}}, and this store "
+            f"answered with keys {sorted(record)}. A store whose search returns bare records "
+            "has to be adapted before it reaches the service — see api/content.py."
+        )
+    return str(record["kind"]), float(record["score"]), record["item"]
+
+
 class InvalidQuery(ValueError):
     """Raised when free text is not something the store can parse as a query.
 

@@ -67,7 +67,17 @@ from api.models import (
     Theme,
     ThemePage,
 )
-from api.store import InvalidQuery, LabQuery, QuestionQuery, Record, SearchQuery, Store
+from api.store import (
+    InvalidQuery,
+    LabQuery,
+    QuestionQuery,
+    Record,
+    SearchQuery,
+    Store,
+    StoreContractViolation,
+    is_page,
+    search_hit,
+)
 
 SERVICE_NAME = "content-api"
 CONTRACT_VERSION = "v1"
@@ -91,6 +101,16 @@ CONTRACT_TAGS = [
 
 class StoreNotConfigured(RuntimeError):
     """Raised when the service is asked to start without a Content store."""
+
+
+class StoreDoesNotConform(StoreNotConfigured):
+    """Raised when the configured store answers in a shape the seam forbids.
+
+    It is a `StoreNotConfigured`, because from the operator's side it is the same
+    mistake — the service was pointed at something that cannot serve the
+    contract — and every caller that already refuses to start on one refuses on
+    the other.
+    """
 
 
 def store_from_environment(environ: Mapping[str, str] | None = None) -> Store:
@@ -127,6 +147,48 @@ def store_from_environment(environ: Mapping[str, str] | None = None) -> Store:
             "which does not define it."
         )
     return factory()
+
+
+#: One cheap call per list read whose answer must be a `Page`. `list_questions`
+#: is windowed to a single row so the probe costs nothing on a large corpus.
+def store_probes(store: Store) -> tuple[tuple[str, Any], ...]:
+    return (
+        ("list_questions", lambda: store.list_questions(QuestionQuery(limit=1))),
+        ("list_themes", store.list_themes),
+        ("list_tags", store.list_tags),
+        ("list_learning_paths", store.list_learning_paths),
+    )
+
+
+def check_store_conforms(store: Store) -> None:
+    """Refuse at startup a store that answers in the wrong shape.
+
+    `isinstance(store, Store)` only checks that the methods exist, so an object
+    can satisfy the protocol and still return `contentdb`'s own tuples and bare
+    search rows. That is how a build shipped where every search answered `500`
+    with `KeyError: 'score'` while the whole test suite was green: the fake
+    conformed and the real store, wired in without its adapter, did not.
+
+    A store whose reads *raise* is left alone. Being unreachable is a runtime
+    failure the contract already describes as `500`, and refusing to start over
+    it would turn a transient outage into an unbootable service. Only an answer
+    that arrives in the wrong shape is a wiring mistake, and only that is fatal.
+    """
+    for name, call in store_probes(store):
+        try:
+            answer = call()
+        except Exception:  # noqa: BLE001 - see the docstring: this is not our failure
+            continue
+        if not is_page(answer):
+            raise StoreDoesNotConform(
+                f"{type(store).__module__}.{type(store).__qualname__}.{name}() answered with "
+                f"{type(answer).__name__}, but the Store seam promises a Page of plain mappings "
+                "(see api/store.py). The Content store in contentdb/ answers its catalogues as "
+                "tuples and its search as bare rows on purpose, and api/content.py is the adapter "
+                "that reshapes them: set CONTENT_API_STORE=api.content:content_store, or pass "
+                "api.content.ContentStore.open(path) to create_app(), rather than the contentdb "
+                "store itself."
+            )
 
 
 def problem_response(
@@ -355,6 +417,7 @@ def create_app(store: Store | None = None) -> FastAPI:
     """
     if store is None:
         store = store_from_environment()
+    check_store_conforms(store)
 
     app = FastAPI(
         title="Content API",
@@ -419,6 +482,22 @@ def create_app(store: Store | None = None) -> FastAPI:
             detail="The free-text query could not be parsed; check quoting and operators.",
             instance=request.url.path,
             errors=[{"field": "q", "message": str(exception)}],
+        )
+
+    @app.exception_handler(StoreContractViolation)
+    async def _on_store_contract_violation(
+        request: Request, exception: StoreContractViolation
+    ) -> JSONResponse:
+        """A store that broke the seam is a fault, and it is ours, not the client's.
+
+        The body stays the same `500` every other fault produces — a client can
+        do nothing with the detail — but the exception has already said in the
+        log which shape arrived and which was promised.
+        """
+        return problem_response(
+            status=500,
+            detail="The service failed to handle this request.",
+            instance=request.url.path,
         )
 
     @app.exception_handler(Exception)
@@ -807,16 +886,11 @@ def create_app(store: Store | None = None) -> FastAPI:
         # and the model is chosen from that rather than guessed from the fields:
         # a Question and a Lab overlap enough that a union would sometimes pick
         # the wrong one and silently drop what only the other has.
-        items = [
-            SearchHit(
-                kind=hit["kind"],
-                score=hit["score"],
-                item=(Question if hit["kind"] == ItemKind.question.value else Lab).model_validate(
-                    hit["item"]
-                ),
-            )
-            for hit in page.items
-        ]
+        items = []
+        for hit in page.items:
+            kind, score, item = search_hit(hit)
+            model = Question if kind == ItemKind.question.value else Lab
+            items.append(SearchHit(kind=kind, score=score, item=model.model_validate(item)))
         return SearchPage(items=items, total=page.total, limit=limit, offset=offset)
 
     return app

@@ -17,7 +17,7 @@ import pytest
 
 from support import ROOT  # noqa: F401  - puts the repository root on sys.path
 
-from api.app import STORE_ENVIRONMENT_VARIABLE, create_app
+from api.app import STORE_ENVIRONMENT_VARIABLE, StoreDoesNotConform, create_app
 from api.content import (
     DEFAULT_STORE_PATH,
     INGEST_COMMAND,
@@ -207,3 +207,62 @@ def test_the_factory_reads_the_configured_path(monkeypatch, tmp_path):
     monkeypatch.setenv(STORE_PATH_VARIABLE, str(tmp_path / "nowhere.db"))
     with pytest.raises(ContentStoreUnavailable):
         content_store()
+
+
+# ------------------------------- the shape the seam promises, enforced
+
+
+def test_the_contentdb_store_itself_is_refused_at_startup(fixture_store):
+    """The defect this section exists for, in one assertion.
+
+    `Store` is `runtime_checkable`, so the Content store passes `isinstance`:
+    it has every method by name. It answers three of them with tuples and its
+    search with bare rows, which the API cannot serve — the symptom was
+    `KeyError: 'score'` on every search, in a build whose whole suite was green
+    because the fake conformed and the real store never got there. Wiring it in
+    without `api/content.py` now fails before the service accepts a request.
+    """
+    from contentdb.store import Store as ContentdbStore
+
+    raw = ContentdbStore(fixture_store._store.path)
+    assert isinstance(raw, Store), "the protocol checks names, which is the whole problem"
+    with pytest.raises(StoreDoesNotConform) as error:
+        create_app(store=raw)
+    message = str(error.value)
+    assert "list_themes" in message and "tuple" in message
+    assert "api.content:content_store" in message, "the refusal has to name the fix"
+
+
+def test_the_adapter_is_accepted_where_the_raw_store_is_not(fixture_store):
+    application = create_app(store=fixture_store)
+    assert application.state.store is fixture_store
+
+
+def test_a_store_that_is_merely_unreachable_still_starts(fixture_store):
+    """Being down is a runtime 500, not a wiring mistake; it must not block boot."""
+    from support import ExplodingStore
+
+    application = create_app(store=ExplodingStore())
+    assert application.state.store is not None
+
+
+def test_a_search_hit_without_a_score_names_the_seam_rather_than_a_missing_key():
+    from api.store import StoreContractViolation, search_hit
+
+    with pytest.raises(StoreContractViolation) as error:
+        search_hit({"kind": "question", "id": "kubernetes/x", "title": "x"})
+    message = str(error.value)
+    assert "score" in message and "item" in message
+    assert "api/content.py" in message, "the error has to say where the adaptation belongs"
+    assert search_hit({"kind": "lab", "score": 2, "item": {"id": "x"}}) == ("lab", 2.0, {"id": "x"})
+
+
+def test_a_store_that_breaks_the_hit_shape_is_a_500_not_a_crash(make_client):
+    """It is our fault, so it is a 500 — but the log says which shape arrived."""
+    from support import RawHitStore
+
+    response = make_client(RawHitStore()).get("/api/v1/search?q=admission")
+    assert response.status_code == 500
+    body = response.json()
+    assert body["status"] == 500
+    assert "score" not in body["detail"], "a client can do nothing with the seam's detail"
