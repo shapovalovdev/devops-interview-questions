@@ -51,6 +51,7 @@ from api.models import (
     QuestionPatch,
     QuestionType,
     QuestionWrite,
+    SearchHit,
     SearchPage,
     SortKey,
     TagPage,
@@ -160,8 +161,6 @@ def only_documented_validation_errors(schema: dict[str, Any]) -> dict[str, Any]:
     """
     for item in schema.get("paths", {}).values():
         for operation in item.values():
-            if not isinstance(operation, dict):
-                continue
             responses = operation.get("responses", {})
             content = responses.get("422", {}).get("content", {})
             content.pop("application/json", None)
@@ -781,9 +780,10 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Search"],
         summary="Search Questions and Labs together, ranked by relevance.",
         response_model=SearchPage,
-        responses=problem_responses(422, 501),
+        responses=problem_responses(422, 500),
     )
     def search(
+        store: Annotated[Store, Depends(get_store)],
         q: Annotated[str, Query(min_length=1, description="The search text; it is required.")],
         kind: Annotated[
             ItemKind | None, Query(description="Restrict the result to one kind of item.")
@@ -791,8 +791,24 @@ def create_app(store: Store | None = None) -> FastAPI:
         limit: Annotated[int, Query(ge=1, le=200, description="Maximum number of items in the page.")] = 50,
         offset: Annotated[int, Query(ge=0, description="Number of items to skip before the page starts.")] = 0,
     ) -> SearchPage:
-        SearchQuery(q=q, kind=kind.value if kind else None, limit=limit, offset=offset)
-        not_implemented("search")
+        page = store.search(
+            SearchQuery(q=q, kind=kind.value if kind else None, limit=limit, offset=offset)
+        )
+        # One ranked list carries two kinds of item, so the hit says which it is
+        # and the model is chosen from that rather than guessed from the fields:
+        # a Question and a Lab overlap enough that a union would sometimes pick
+        # the wrong one and silently drop what only the other has.
+        items = [
+            SearchHit(
+                kind=hit["kind"],
+                score=hit["score"],
+                item=(Question if hit["kind"] == ItemKind.question.value else Lab).model_validate(
+                    hit["item"]
+                ),
+            )
+            for hit in page.items
+        ]
+        return SearchPage(items=items, total=page.total, limit=limit, offset=offset)
 
     return app
 

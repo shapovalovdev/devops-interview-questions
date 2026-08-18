@@ -138,6 +138,15 @@ def implemented_producers() -> dict[tuple[str, str, str], Callable[[], int]]:
         ("/api/v1/learning-paths/{slug}", "get", "500"): lambda: failing.get(
             DEMO_LEARNING_PATH
         ).status_code,
+        ("/api/v1/search", "get", "200"): lambda: client.get(
+            "/api/v1/search?q=admission"
+        ).status_code,
+        # `q` is required and has a minimum length, so an empty one is the
+        # smallest request a client could actually send and get a 422 for.
+        ("/api/v1/search", "get", "422"): lambda: client.get("/api/v1/search?q=").status_code,
+        ("/api/v1/search", "get", "500"): lambda: failing.get(
+            "/api/v1/search?q=admission"
+        ).status_code,
     }
 
 

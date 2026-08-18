@@ -611,7 +611,7 @@ paths:
       operationId: search
       tags: [Search]
       summary: Search Questions and Labs together, ranked by relevance.
-      x-implementation: stub
+      x-implementation: implemented
       parameters:
         - name: q
           in: query

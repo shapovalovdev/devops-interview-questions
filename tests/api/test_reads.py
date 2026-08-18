@@ -401,3 +401,83 @@ def test_every_committed_learning_path_step_resolves_to_a_question(corpus_client
         assert path["steps"], f"{path['slug']} has no steps"
         for step in path["steps"]:
             assert corpus_client.get(f"/api/v1/questions/{step['question_id']}").status_code == 200
+
+
+# ---------------------------------------------------------------- search
+
+
+def test_search_returns_both_kinds_in_one_ranked_list(fixture_client):
+    body = fixture_client.get("/api/v1/search?q=admission").json()
+    assert set(body) == {"items", "total", "limit", "offset"}
+    assert body["total"] >= 2
+    kinds = {hit["kind"] for hit in body["items"]}
+    assert kinds == {"question", "lab"}, "one list, two kinds, or the endpoint is pointless"
+    for hit in body["items"]:
+        assert set(hit) == {"kind", "score", "item"}
+        assert hit["item"]["id"]
+        if hit["kind"] == "question":
+            assert hit["item"]["type"], "a Question hit carries a whole Question"
+        else:
+            assert hit["item"]["question_ref"], "a Lab hit carries a whole Lab"
+
+
+def test_hits_are_ranked_and_the_score_never_rises_down_the_page(fixture_client):
+    scores = [hit["score"] for hit in fixture_client.get("/api/v1/search?q=admission").json()["items"]]
+    assert scores == sorted(scores, reverse=True)
+
+
+@pytest.mark.parametrize("kind", ["question", "lab"])
+def test_kind_restricts_the_result_to_one_resource(fixture_client, kind):
+    body = fixture_client.get(f"/api/v1/search?q=admission&kind={kind}").json()
+    assert body["items"], f"the fixture corpus has an admission {kind}"
+    assert {hit["kind"] for hit in body["items"]} == {kind}
+    whole = fixture_client.get("/api/v1/search?q=admission").json()
+    assert body["total"] <= whole["total"]
+
+
+def test_the_two_kinds_together_account_for_the_whole_result(fixture_client):
+    questions = fixture_client.get("/api/v1/search?q=admission&kind=question").json()
+    labs = fixture_client.get("/api/v1/search?q=admission&kind=lab").json()
+    both = fixture_client.get("/api/v1/search?q=admission").json()
+    assert questions["total"] + labs["total"] == both["total"]
+
+
+def test_search_pages_without_repeating_a_hit(fixture_client):
+    first = fixture_client.get("/api/v1/search?q=kubernetes&limit=1").json()
+    second = fixture_client.get("/api/v1/search?q=kubernetes&limit=1&offset=1").json()
+    assert first["limit"] == 1 and second["offset"] == 1
+    assert first["items"][0]["item"]["id"] != second["items"][0]["item"]["id"]
+    assert first["items"][0]["score"] > second["items"][0]["score"]
+
+
+def test_a_search_that_matches_nothing_is_an_empty_page(fixture_client):
+    body = fixture_client.get("/api/v1/search?q=zzzznothingmatchesthis").json()
+    assert body == {"items": [], "total": 0, "limit": 50, "offset": 0}
+
+
+def test_an_unparseable_search_is_a_422_naming_the_parameter(fixture_client):
+    """FTS5 syntax the client got wrong is a bad request, not a server fault."""
+    response = fixture_client.get('/api/v1/search?q="unbalanced')
+    assert response.status_code == 422
+    body = problem(response)
+    assert any(error["field"] == "q" for error in body["errors"])
+
+
+def test_an_unparseable_free_text_filter_is_a_422_on_the_lists_too(fixture_client):
+    for url in ('/api/v1/questions?q="unbalanced', '/api/v1/labs?q="unbalanced'):
+        response = fixture_client.get(url)
+        assert response.status_code == 422, url
+        assert problem(response)["errors"][0]["field"] == "q"
+
+
+@pytest.mark.parametrize("query", ["", "kind=quiz&q=admission", "q=admission&limit=0"])
+def test_a_malformed_search_request_is_a_422(fixture_client, query):
+    assert fixture_client.get(f"/api/v1/search?{query}").status_code == 422
+
+
+def test_search_over_the_committed_corpus_finds_real_content(corpus_client):
+    body = corpus_client.get("/api/v1/search?q=kubernetes&limit=10").json()
+    assert body["total"] > 10, "the committed corpus says plenty about Kubernetes"
+    assert len(body["items"]) == 10
+    for hit in body["items"]:
+        assert hit["item"]["content_hash"]
