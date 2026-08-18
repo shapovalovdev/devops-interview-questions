@@ -1,10 +1,17 @@
 """The FastAPI application that serves the contract in `api/openapi.yaml`.
 
-This slice is the tracer bullet: `GET /api/v1/health` and `GET /api/v1/questions`
-are implemented end to end against the `Store` seam, and every other operation
-the contract publishes is present as a route that answers `501`. Slices 3 and 4
-therefore find a scaffold with the right address, parameters, and request body
-already agreed, instead of a blank file.
+Every **read** the contract publishes is implemented here against the `Store`
+seam: Questions and Labs, one by one and as filtered pages; the derived Theme,
+tag, and learning-path catalogues; and search across both kinds together. The
+**write** operations are present as routes with the right address, parameters,
+and request body, and answer `501` until slice 4 lands; `api/openapi.yaml`
+records which is which in `x-implementation`, and the coverage census reads that
+marker to decide what each operation owes a test.
+
+Single-item reads are conditional. Each answers an `ETag` — the item's
+`content_hash` where a file backs it — and a matching `If-None-Match` earns a
+`304` with no body. Slice 4's `If-Match` concurrency is built on the same
+validator, which is why it is worth being exact about here.
 
 Two invariants are worth stating here because they are easy to lose:
 
@@ -16,20 +23,25 @@ from `api/openapi.yaml`, and the file is never generated from these routes.
 raises `StoreNotConfigured` naming what to set, rather than quietly serving
 fabricated Questions that a client cannot distinguish from the real ones. The
 in-memory fake lives in `api/testing.py` and is reachable only from the tests and
-from the explicitly named demo entrypoint, `api.demo:app`.
+from the explicitly named demo entrypoint, `api.demo:app`. A real deployment
+points `CONTENT_API_STORE` at `api.content:content_store`, which opens the
+SQLite Content store read-only or refuses to start.
 """
 
 from __future__ import annotations
 
+import hashlib
 import importlib
 import os
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from http import HTTPStatus
 from typing import Annotated, Any, NoReturn
+from urllib.parse import quote
 
-from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
+from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from api.models import (
@@ -48,13 +60,24 @@ from api.models import (
     QuestionPatch,
     QuestionType,
     QuestionWrite,
+    SearchHit,
     SearchPage,
     SortKey,
     TagPage,
     Theme,
     ThemePage,
 )
-from api.store import LabQuery, QuestionQuery, SearchQuery, Store
+from api.store import (
+    InvalidQuery,
+    LabQuery,
+    QuestionQuery,
+    Record,
+    SearchQuery,
+    Store,
+    StoreContractViolation,
+    is_page,
+    search_hit,
+)
 
 SERVICE_NAME = "content-api"
 CONTRACT_VERSION = "v1"
@@ -78,6 +101,16 @@ CONTRACT_TAGS = [
 
 class StoreNotConfigured(RuntimeError):
     """Raised when the service is asked to start without a Content store."""
+
+
+class StoreDoesNotConform(StoreNotConfigured):
+    """Raised when the configured store answers in a shape the seam forbids.
+
+    It is a `StoreNotConfigured`, because from the operator's side it is the same
+    mistake — the service was pointed at something that cannot serve the
+    contract — and every caller that already refuses to start on one refuses on
+    the other.
+    """
 
 
 def store_from_environment(environ: Mapping[str, str] | None = None) -> Store:
@@ -116,6 +149,48 @@ def store_from_environment(environ: Mapping[str, str] | None = None) -> Store:
     return factory()
 
 
+#: One cheap call per list read whose answer must be a `Page`. `list_questions`
+#: is windowed to a single row so the probe costs nothing on a large corpus.
+def store_probes(store: Store) -> tuple[tuple[str, Any], ...]:
+    return (
+        ("list_questions", lambda: store.list_questions(QuestionQuery(limit=1))),
+        ("list_themes", store.list_themes),
+        ("list_tags", store.list_tags),
+        ("list_learning_paths", store.list_learning_paths),
+    )
+
+
+def check_store_conforms(store: Store) -> None:
+    """Refuse at startup a store that answers in the wrong shape.
+
+    `isinstance(store, Store)` only checks that the methods exist, so an object
+    can satisfy the protocol and still return `contentdb`'s own tuples and bare
+    search rows. That is how a build shipped where every search answered `500`
+    with `KeyError: 'score'` while the whole test suite was green: the fake
+    conformed and the real store, wired in without its adapter, did not.
+
+    A store whose reads *raise* is left alone. Being unreachable is a runtime
+    failure the contract already describes as `500`, and refusing to start over
+    it would turn a transient outage into an unbootable service. Only an answer
+    that arrives in the wrong shape is a wiring mistake, and only that is fatal.
+    """
+    for name, call in store_probes(store):
+        try:
+            answer = call()
+        except Exception:  # noqa: BLE001 - see the docstring: this is not our failure
+            continue
+        if not is_page(answer):
+            raise StoreDoesNotConform(
+                f"{type(store).__module__}.{type(store).__qualname__}.{name}() answered with "
+                f"{type(answer).__name__}, but the Store seam promises a Page of plain mappings "
+                "(see api/store.py). The Content store in contentdb/ answers its catalogues as "
+                "tuples and its search as bare rows on purpose, and api/content.py is the adapter "
+                "that reshapes them: set CONTENT_API_STORE=api.content:content_store, or pass "
+                "api.content.ContentStore.open(path) to create_app(), rather than the contentdb "
+                "store itself."
+            )
+
+
 def problem_response(
     status: int,
     detail: str,
@@ -138,6 +213,33 @@ def problem_response(
     return JSONResponse(status_code=status, media_type=PROBLEM_MEDIA_TYPE, content=body)
 
 
+def only_documented_validation_errors(schema: dict[str, Any]) -> dict[str, Any]:
+    """Drop the `422` FastAPI adds to every operation that parses a parameter.
+
+    FastAPI documents a validation error on any operation with a parameter or a
+    body, including `GET /api/v1/questions/{theme}/{slug}`, whose two path
+    segments are strings that cannot fail validation. The contract documents
+    `422` only where a client can actually provoke one, and the coverage census
+    demands a real request per documented status — so an unprovokable `422` in
+    the served schema is a promise no test could ever keep.
+
+    The rule is mechanical: this service answers every error as
+    `application/problem+json`, so a `422` that carries only the framework's own
+    `application/json` validation model was added by the framework and is
+    removed. Where the operation really does declare one, the problem document
+    survives and the framework's model is dropped beside it, because two
+    incompatible error shapes on one status is worse than either.
+    """
+    for item in schema.get("paths", {}).values():
+        for operation in item.values():
+            responses = operation.get("responses", {})
+            content = responses.get("422", {}).get("content", {})
+            content.pop("application/json", None)
+            if "422" in responses and not content:
+                del responses["422"]
+    return schema
+
+
 def problem_responses(*statuses: int) -> dict[int | str, dict[str, Any]]:
     """Declare, for the generated schema, that these statuses are problem docs."""
     return {
@@ -147,6 +249,138 @@ def problem_responses(*statuses: int) -> dict[int | str, dict[str, Any]]:
         }
         for status in statuses
     }
+
+
+#: Every single-item read documents the same two things beyond its body: the
+#: ETag it answers with, and the `304` a matching `If-None-Match` earns.
+ETAG_DOCUMENTATION = {
+    "headers": {
+        "ETag": {
+            "description": "The item's `content_hash`, quoted.",
+            "schema": {"type": "string"},
+        }
+    }
+}
+NOT_MODIFIED_DOCUMENTATION = {
+    "description": "The client's ETag still matches; no body is returned."
+}
+
+#: How many linked Labs a Question's `Link` header will name. A Question has a
+#: handful of Labs at most, and a header is not a place to page.
+LINKED_LABS_LIMIT = 50
+
+
+def item_responses(*statuses: int) -> dict[int | str, dict[str, Any]]:
+    """Declare the response set every single-item read shares."""
+    return {
+        200: dict(ETAG_DOCUMENTATION),
+        304: dict(NOT_MODIFIED_DOCUMENTATION),
+        **problem_responses(*statuses),
+    }
+
+
+def etag_for(record: Record, payload: BaseModel) -> str:
+    """The ETag for one item, quoted as an HTTP entity tag.
+
+    A Question and a Lab are files, and the contract publishes their
+    `content_hash` — the sha256 of the source file — as the validator, so a
+    client can compare what it holds against what git holds. A Theme, a tag, and
+    a learning path have no file behind them: they are derived from the corpus.
+    Rather than invent a hash the corpus does not have, their ETag is a digest of
+    the representation the client is about to receive, which gives the same
+    guarantee a validator has to give — it changes exactly when the body does.
+    """
+    content_hash = record.get("content_hash")
+    if isinstance(content_hash, str) and content_hash:
+        return f'"{content_hash}"'
+    return f'"sha256:{hashlib.sha256(payload.model_dump_json().encode("utf-8")).hexdigest()}"'
+
+
+def etag_matches(if_none_match: str | None, etag: str) -> bool:
+    """Whether the client's `If-None-Match` already covers this ETag.
+
+    RFC 9110 allows a list, the wildcard `*`, and weak tags; a client that sends
+    back the `W/`-prefixed form of the tag it was given still holds the same
+    representation, and answering it `200` would waste the round trip the header
+    exists to save.
+    """
+    if not if_none_match:
+        return False
+    for candidate in if_none_match.split(","):
+        candidate = candidate.strip()
+        if candidate == "*" or candidate.removeprefix("W/") == etag:
+            return True
+    return False
+
+
+def conditional(
+    payload: BaseModel,
+    record: Record,
+    if_none_match: str | None,
+    response: Response,
+    links: Sequence[str] = (),
+) -> Any:
+    """Answer a single-item read, as `304` when the client is already current.
+
+    The `304` carries the validator and the links but no body: that is the whole
+    point of the exchange, and a body would make the saved bandwidth a lie.
+    """
+    headers = {"ETag": etag_for(record, payload)}
+    if links:
+        headers["Link"] = ", ".join(links)
+    if etag_matches(if_none_match, headers["ETag"]):
+        return Response(status_code=304, headers=headers)
+    response.headers.update(headers)
+    return payload
+
+
+def catalogue(envelope: type[BaseModel], page: Any) -> Any:
+    """Envelope a bounded catalogue: Themes, tags, and learning paths.
+
+    These three are derived from the corpus and small enough to return whole,
+    which the contract records by publishing no `limit` or `offset` parameter
+    for them. The envelope is still the one every list shares — `limit` simply
+    reports the size of the page returned, so a client parses one shape.
+    """
+    items = list(page.items)
+    return envelope(items=items, total=page.total, limit=len(items), offset=0)
+
+
+def missing(kind: str, identifier: str) -> NoReturn:
+    """Answer for an id the corpus does not hold."""
+    raise HTTPException(
+        status_code=404,
+        detail=f"No {kind} {identifier!r} exists in this Content store.",
+    )
+
+
+def lab_links(store: Store, question_id: str) -> list[str]:
+    """The Labs that prepare a learner for this Question, as RFC 8288 links.
+
+    The epic pins a Question's fields and none of them is a list of Labs, so the
+    link lives in the header rather than in the body: `question_ref` points one
+    way, and this points back, without either resource growing a field the
+    contract does not describe. The collection link is always present — it is
+    the query a client can re-run — and each Lab that exists today is named
+    beside it.
+    """
+    page = store.list_labs(LabQuery(question_ref=question_id, limit=LINKED_LABS_LIMIT))
+    collection = f"/api/v1/labs?question_ref={quote(question_id, safe='')}"
+    links = [f'<{collection}>; rel="related"; title="Labs that prepare a learner for this Question"']
+    links += [f'</api/v1/labs/{lab["id"]}>; rel="related"' for lab in page.items]
+    return links
+
+
+def question_link(store: Store, question_ref: str) -> list[str]:
+    """The Question a Lab prepares a learner for, if the reference resolves.
+
+    A `question_ref` that names nothing is a corpus defect the validators catch;
+    the API neither hides it nor fails the read, it simply does not publish a
+    link it cannot honour.
+    """
+    if store.get_question(question_ref) is None:
+        return []
+    return [f'</api/v1/questions/{question_ref}>; rel="related"; title="The Question this Lab prepares you for"']
 
 
 def not_implemented(operation_id: str) -> NoReturn:
@@ -183,6 +417,7 @@ def create_app(store: Store | None = None) -> FastAPI:
     """
     if store is None:
         store = store_from_environment()
+    check_store_conforms(store)
 
     app = FastAPI(
         title="Content API",
@@ -213,7 +448,7 @@ def create_app(store: Store | None = None) -> FastAPI:
         schema.setdefault("components", {}).setdefault("schemas", {}).update(
             {"Problem": problem, **nested}
         )
-        return schema
+        return only_documented_validation_errors(schema)
 
     app.openapi = openapi_with_problem_schema  # type: ignore[method-assign]
 
@@ -231,6 +466,37 @@ def create_app(store: Store | None = None) -> FastAPI:
         return problem_response(
             status=exception.status_code,
             detail=str(exception.detail),
+            instance=request.url.path,
+        )
+
+    @app.exception_handler(InvalidQuery)
+    async def _on_invalid_query(request: Request, exception: InvalidQuery) -> JSONResponse:
+        """Free text the store cannot parse is the client's fault, not a fault.
+
+        The store raises this only for a query string it could not read — an
+        unbalanced quote, a dangling operator — which the contract documents as
+        `422`. Everything else a store raises stays a `500`.
+        """
+        return problem_response(
+            status=422,
+            detail="The free-text query could not be parsed; check quoting and operators.",
+            instance=request.url.path,
+            errors=[{"field": "q", "message": str(exception)}],
+        )
+
+    @app.exception_handler(StoreContractViolation)
+    async def _on_store_contract_violation(
+        request: Request, exception: StoreContractViolation
+    ) -> JSONResponse:
+        """A store that broke the seam is a fault, and it is ours, not the client's.
+
+        The body stays the same `500` every other fault produces — a client can
+        do nothing with the detail — but the exception has already said in the
+        log which shape arrived and which was promised.
+        """
+        return problem_response(
+            status=500,
+            detail="The service failed to handle this request.",
             instance=request.url.path,
         )
 
@@ -319,14 +585,26 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Questions"],
         summary="Read one Question by its id.",
         response_model=Question,
-        responses=problem_responses(501),
+        responses=item_responses(404, 500),
     )
     def get_question(
+        response: Response,
+        store: Annotated[Store, Depends(get_store)],
         theme: str,
         slug: str,
         if_none_match: Annotated[str | None, Header(alias="If-None-Match")] = None,
-    ) -> Question:
-        not_implemented("getQuestion")
+    ) -> Any:
+        identifier = f"{theme}/{slug}"
+        record = store.get_question(identifier)
+        if record is None:
+            missing("Question", identifier)
+        return conditional(
+            Question.model_validate(record),
+            record,
+            if_none_match,
+            response,
+            lab_links(store, identifier),
+        )
 
     @app.put(
         "/api/v1/questions/{theme}/{slug}",
@@ -386,9 +664,10 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Labs"],
         summary="List Labs, filtered, sorted, and paginated.",
         response_model=LabPage,
-        responses=problem_responses(422, 501),
+        responses=problem_responses(422, 500),
     )
     def list_labs(
+        store: Annotated[Store, Depends(get_store)],
         theme: str | None = None,
         difficulty: Difficulty | None = None,
         tag: str | None = None,
@@ -400,19 +679,19 @@ def create_app(store: Store | None = None) -> FastAPI:
         offset: Annotated[int, Query(ge=0, description="Number of items to skip before the page starts.")] = 0,
         sort: SortKey = SortKey.id,
     ) -> LabPage:
-        # The query is built even though the operation is a stub, so that slice 3
-        # inherits a route whose parameters already reach the seam intact.
-        LabQuery(
-            theme=theme,
-            difficulty=difficulty.value if difficulty else None,
-            tag=tag,
-            question_ref=question_ref,
-            q=q,
-            sort=sort.value,
-            limit=limit,
-            offset=offset,
+        page = store.list_labs(
+            LabQuery(
+                theme=theme,
+                difficulty=difficulty.value if difficulty else None,
+                tag=tag,
+                question_ref=question_ref,
+                q=q,
+                sort=sort.value,
+                limit=limit,
+                offset=offset,
+            )
         )
-        not_implemented("listLabs")
+        return LabPage(items=page.items, total=page.total, limit=limit, offset=offset)
 
     @app.post(
         "/api/v1/labs",
@@ -435,14 +714,26 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Labs"],
         summary="Read one Lab by its id.",
         response_model=Lab,
-        responses=problem_responses(501),
+        responses=item_responses(404, 500),
     )
     def get_lab(
+        response: Response,
+        store: Annotated[Store, Depends(get_store)],
         theme: str,
         slug: str,
         if_none_match: Annotated[str | None, Header(alias="If-None-Match")] = None,
-    ) -> Lab:
-        not_implemented("getLab")
+    ) -> Any:
+        identifier = f"{theme}/{slug}"
+        record = store.get_lab(identifier)
+        if record is None:
+            missing("Lab", identifier)
+        return conditional(
+            Lab.model_validate(record),
+            record,
+            if_none_match,
+            response,
+            question_link(store, str(record["question_ref"])),
+        )
 
     @app.put(
         "/api/v1/labs/{theme}/{slug}",
@@ -502,10 +793,10 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Taxonomy"],
         summary="List every canonical Theme with its counts.",
         response_model=ThemePage,
-        responses=problem_responses(501),
+        responses=problem_responses(500),
     )
-    def list_themes() -> ThemePage:
-        not_implemented("listThemes")
+    def list_themes(store: Annotated[Store, Depends(get_store)]) -> ThemePage:
+        return catalogue(ThemePage, store.list_themes())
 
     @app.get(
         "/api/v1/themes/{name}",
@@ -513,13 +804,18 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Taxonomy"],
         summary="Read one Theme by its canonical name.",
         response_model=Theme,
-        responses=problem_responses(501),
+        responses=item_responses(404, 500),
     )
     def get_theme(
+        response: Response,
+        store: Annotated[Store, Depends(get_store)],
         name: str,
         if_none_match: Annotated[str | None, Header(alias="If-None-Match")] = None,
-    ) -> Theme:
-        not_implemented("getTheme")
+    ) -> Any:
+        record = store.get_theme(name)
+        if record is None:
+            missing("Theme", name)
+        return conditional(Theme.model_validate(record), record, if_none_match, response)
 
     @app.get(
         "/api/v1/tags",
@@ -527,10 +823,10 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Taxonomy"],
         summary="List every tag with its counts.",
         response_model=TagPage,
-        responses=problem_responses(501),
+        responses=problem_responses(500),
     )
-    def list_tags() -> TagPage:
-        not_implemented("listTags")
+    def list_tags(store: Annotated[Store, Depends(get_store)]) -> TagPage:
+        return catalogue(TagPage, store.list_tags())
 
     # --------------------------------------------------------- Learning paths
 
@@ -540,10 +836,10 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Learning paths"],
         summary="List every learning path.",
         response_model=LearningPathPage,
-        responses=problem_responses(501),
+        responses=problem_responses(500),
     )
-    def list_learning_paths() -> LearningPathPage:
-        not_implemented("listLearningPaths")
+    def list_learning_paths(store: Annotated[Store, Depends(get_store)]) -> LearningPathPage:
+        return catalogue(LearningPathPage, store.list_learning_paths())
 
     @app.get(
         "/api/v1/learning-paths/{slug}",
@@ -551,13 +847,18 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Learning paths"],
         summary="Read one learning path, with its ordered steps.",
         response_model=LearningPath,
-        responses=problem_responses(501),
+        responses=item_responses(404, 500),
     )
     def get_learning_path(
+        response: Response,
+        store: Annotated[Store, Depends(get_store)],
         slug: str,
         if_none_match: Annotated[str | None, Header(alias="If-None-Match")] = None,
-    ) -> LearningPath:
-        not_implemented("getLearningPath")
+    ) -> Any:
+        record = store.get_learning_path(slug)
+        if record is None:
+            missing("learning path", slug)
+        return conditional(LearningPath.model_validate(record), record, if_none_match, response)
 
     # ----------------------------------------------------------------- Search
 
@@ -567,9 +868,10 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Search"],
         summary="Search Questions and Labs together, ranked by relevance.",
         response_model=SearchPage,
-        responses=problem_responses(422, 501),
+        responses=problem_responses(422, 500),
     )
     def search(
+        store: Annotated[Store, Depends(get_store)],
         q: Annotated[str, Query(min_length=1, description="The search text; it is required.")],
         kind: Annotated[
             ItemKind | None, Query(description="Restrict the result to one kind of item.")
@@ -577,8 +879,19 @@ def create_app(store: Store | None = None) -> FastAPI:
         limit: Annotated[int, Query(ge=1, le=200, description="Maximum number of items in the page.")] = 50,
         offset: Annotated[int, Query(ge=0, description="Number of items to skip before the page starts.")] = 0,
     ) -> SearchPage:
-        SearchQuery(q=q, kind=kind.value if kind else None, limit=limit, offset=offset)
-        not_implemented("search")
+        page = store.search(
+            SearchQuery(q=q, kind=kind.value if kind else None, limit=limit, offset=offset)
+        )
+        # One ranked list carries two kinds of item, so the hit says which it is
+        # and the model is chosen from that rather than guessed from the fields:
+        # a Question and a Lab overlap enough that a union would sometimes pick
+        # the wrong one and silently drop what only the other has.
+        items = []
+        for hit in page.items:
+            kind, score, item = search_hit(hit)
+            model = Question if kind == ItemKind.question.value else Lab
+            items.append(SearchHit(kind=kind, score=score, item=model.model_validate(item)))
+        return SearchPage(items=items, total=page.total, limit=limit, offset=offset)
 
     return app
 

@@ -70,9 +70,6 @@ STUB_REQUESTS: dict[tuple[str, str], dict[str, Any]] = {
         "url": "/api/v1/questions",
         "json": QUESTION_WRITE,
     },
-    ("/api/v1/questions/{theme}/{slug}", "get"): {
-        "url": "/api/v1/questions/kubernetes/demo-admission-guardrails",
-    },
     ("/api/v1/questions/{theme}/{slug}", "put"): {
         "url": "/api/v1/questions/kubernetes/demo-admission-guardrails",
         "json": QUESTION_WRITE,
@@ -84,11 +81,7 @@ STUB_REQUESTS: dict[tuple[str, str], dict[str, Any]] = {
     ("/api/v1/questions/{theme}/{slug}", "delete"): {
         "url": "/api/v1/questions/kubernetes/demo-admission-guardrails",
     },
-    ("/api/v1/labs", "get"): {"url": "/api/v1/labs"},
     ("/api/v1/labs", "post"): {"url": "/api/v1/labs", "json": LAB_WRITE},
-    ("/api/v1/labs/{theme}/{slug}", "get"): {
-        "url": "/api/v1/labs/kubernetes/demo-admission-guardrails",
-    },
     ("/api/v1/labs/{theme}/{slug}", "put"): {
         "url": "/api/v1/labs/kubernetes/demo-admission-guardrails",
         "json": LAB_WRITE,
@@ -100,14 +93,6 @@ STUB_REQUESTS: dict[tuple[str, str], dict[str, Any]] = {
     ("/api/v1/labs/{theme}/{slug}", "delete"): {
         "url": "/api/v1/labs/kubernetes/demo-admission-guardrails",
     },
-    ("/api/v1/themes", "get"): {"url": "/api/v1/themes"},
-    ("/api/v1/themes/{name}", "get"): {"url": "/api/v1/themes/kubernetes"},
-    ("/api/v1/tags", "get"): {"url": "/api/v1/tags"},
-    ("/api/v1/learning-paths", "get"): {"url": "/api/v1/learning-paths"},
-    ("/api/v1/learning-paths/{slug}", "get"): {
-        "url": "/api/v1/learning-paths/demo-kubernetes-basics",
-    },
-    ("/api/v1/search", "get"): {"url": "/api/v1/search?q=admission"},
 }
 
 
@@ -119,10 +104,70 @@ def send(client: TestClient, path: str, method: str) -> Any:
 
 
 class ExplodingStore(InMemoryStore):
-    """A store that fails the way a real one eventually will: unexpectedly."""
+    """A store that fails the way a real one eventually will: unexpectedly.
 
-    def list_questions(self, query: QuestionQuery) -> Page:
+    Every read raises, not only the first one that was implemented: the contract
+    documents a `500` on each read operation, and the census can only prove one
+    is really produced if the failure is available to every route.
+    """
+
+    def _fail(self, *_arguments: Any, **_keywords: Any) -> Page:
         raise RuntimeError("the Content store is unreachable: sqlite3.OperationalError")
+
+    list_questions = _fail
+    get_question = _fail
+    list_labs = _fail
+    get_lab = _fail
+    list_themes = _fail
+    get_theme = _fail
+    list_tags = _fail
+    list_learning_paths = _fail
+    get_learning_path = _fail
+    search = _fail
+
+
+#: The ids the demo corpus holds, and one it deliberately does not, so a test
+#: naming a `404` cannot accidentally name something real.
+DEMO_QUESTION = "/api/v1/questions/kubernetes/demo-admission-guardrails"
+DEMO_LAB = "/api/v1/labs/kubernetes/demo-admission-guardrails"
+DEMO_THEME = "/api/v1/themes/kubernetes"
+DEMO_LEARNING_PATH = "/api/v1/learning-paths/demo-kubernetes-basics"
+UNKNOWN_QUESTION = "/api/v1/questions/kubernetes/nothing-here"
+UNKNOWN_LAB = "/api/v1/labs/kubernetes/nothing-here"
+UNKNOWN_THEME = "/api/v1/themes/nothing-here"
+UNKNOWN_LEARNING_PATH = "/api/v1/learning-paths/nothing-here"
+
+
+def revalidate(client: TestClient, url: str) -> Any:
+    """Read an item, then ask for it again with the ETag it just handed over."""
+    first = client.get(url)
+    assert first.status_code == 200, f"{url} answered {first.status_code}, so it has no ETag"
+    etag = first.headers["ETag"]
+    return client.get(url, headers={"If-None-Match": etag})
+
+
+class RawHitStore(InMemoryStore):
+    """A store whose search answers the way `contentdb.store.Store` does.
+
+    Bare rows keyed `{kind, id, theme, title, snippet}` — no `score`, no nested
+    `item`. This is exactly what reached the service when the real store was
+    wired in without `api/content.py`, and it is why the seam now says what a
+    hit is instead of trusting whoever implements it.
+    """
+
+    def search(self, query: SearchQuery) -> Page:
+        return Page(
+            items=[
+                {
+                    "kind": "question",
+                    "id": "kubernetes/demo-admission-guardrails",
+                    "theme": "kubernetes",
+                    "title": "Design admission guardrails",
+                    "snippet": "…admission…",
+                }
+            ],
+            total=1,
+        )
 
 
 class MalformedStore(InMemoryStore):
@@ -151,6 +196,10 @@ def client_for(store: Any) -> TestClient:
 
 __all__ = [
     "CONTRACT_PATH",
+    "DEMO_LAB",
+    "DEMO_LEARNING_PATH",
+    "DEMO_QUESTION",
+    "DEMO_THEME",
     "ExplodingStore",
     "InMemoryStore",
     "LAB_WRITE",
@@ -160,12 +209,18 @@ __all__ = [
     "QUESTION_WRITE",
     "QuestionQuery",
     "ROOT",
+    "RawHitStore",
     "STUB_REQUESTS",
+    "UNKNOWN_LAB",
+    "UNKNOWN_LEARNING_PATH",
+    "UNKNOWN_QUESTION",
+    "UNKNOWN_THEME",
     "SearchQuery",
     "client_for",
     "create_app",
     "demo_app",
     "demo_client",
     "demo_corpus",
+    "revalidate",
     "send",
 ]

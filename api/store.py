@@ -1,9 +1,10 @@
 """The Store seam: how the Content API asks the Content store for records.
 
-Slice 1 owns the real SQLite Content store in `contentdb/`. This slice must not
-depend on it, so the API codes against the `Store` protocol below and tests
-against the in-memory fake in `api/testing.py`. Slice 3 swaps the real store in
-behind the same protocol.
+The service codes against the `Store` protocol below and never against a
+particular store. Two implementations satisfy it: `api/content.py` adapts the
+SQLite Content store in `contentdb/`, which is what a deployment serves, and
+`api/testing.py` holds an in-memory fake for the tests and the demo entrypoint.
+Neither is named anywhere in `api/app.py`.
 
 Two rules make that swap possible, and they are the reason this module looks the
 way it does.
@@ -16,8 +17,9 @@ Pydantic model appears anywhere below, so a store implementation never has to
 learn the API's serialization layer.
 
 **This module imports nothing outside the standard library.** `contentdb` is
-standard-library only, so an implementation that had to import `api/` to satisfy
-the protocol could not exist. Because the protocol is structural, `contentdb`
+standard-library only — it runs inside the static site build, where nothing is
+installed — so an implementation that had to import `api/` to satisfy the
+protocol could not exist. Because the protocol is structural, `contentdb`
 does not have to import this module either: it can mirror `QuestionQuery` and
 `Page` with its own dataclasses, or return any object carrying the same fields.
 A test in `tests/api/test_store.py` imports this module in a clean interpreter
@@ -75,12 +77,66 @@ class LabQuery:
 
 @dataclass(frozen=True)
 class SearchQuery:
-    """Everything `GET /api/v1/search` asks the store for. Slice 3 implements it."""
+    """Everything `GET /api/v1/search` asks the store for.
+
+    A store answers it with `Page` of *hit* mappings rather than of items:
+    `{"kind": "question" | "lab", "score": float, "item": Record}`, mirroring the
+    contract's `SearchHit`. The nesting is what lets one ranked list carry two
+    kinds of item without the API guessing which it is holding, and `score` is
+    the store's own relevance — the contract defines it as comparable only
+    within one response, so a store may derive it from rank.
+    """
 
     q: str
     kind: str | None = None
     limit: int = 50
     offset: int = 0
+
+
+#: The keys a search hit carries across the seam, mirroring `SearchHit` in the
+#: contract. They are named here, not in `api/app.py`, because this module is
+#: what a store implementation reads to learn what it owes.
+SEARCH_HIT_FIELDS = ("kind", "score", "item")
+
+
+class StoreContractViolation(RuntimeError):
+    """Raised when a store answers in a shape this seam does not describe.
+
+    The `Store` protocol is `runtime_checkable`, which means `isinstance` checks
+    that the methods *exist* and nothing about what they return. An object can
+    therefore pass the check and still hand back a tuple where a `Page` was
+    promised, or a bare record where a hit was. That gap is not hypothetical: it
+    shipped, as a `KeyError: 'score'` on every search, when a store was wired in
+    without the adapter that reshapes it. This exception exists so the next
+    occurrence names the seam and the fix instead of a missing dictionary key.
+    """
+
+
+def is_page(value: object) -> bool:
+    """Whether a store's answer is a `Page` — anything carrying items and a total."""
+    return hasattr(value, "items") and hasattr(value, "total")
+
+
+def search_hit(record: Record) -> tuple[str, float, Record]:
+    """Unpack one search hit, or say precisely how the store broke the seam."""
+    absent = [field for field in SEARCH_HIT_FIELDS if field not in record]
+    if absent:
+        raise StoreContractViolation(
+            f"a search hit is missing {absent}: the seam carries "
+            f"{{'kind': 'question' | 'lab', 'score': float, 'item': record}}, and this store "
+            f"answered with keys {sorted(record)}. A store whose search returns bare records "
+            "has to be adapted before it reaches the service — see api/content.py."
+        )
+    return str(record["kind"]), float(record["score"]), record["item"]
+
+
+class InvalidQuery(ValueError):
+    """Raised when free text is not something the store can parse as a query.
+
+    It is the store's way of saying "this is the client's fault, not mine": the
+    API answers it with the contract's `422` rather than the `500` a generic
+    failure earns. Everything else a store raises is a fault, and stays one.
+    """
 
 
 @dataclass(frozen=True)

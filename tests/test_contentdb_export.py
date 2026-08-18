@@ -239,5 +239,63 @@ class DriftGate(unittest.TestCase):
         self.assertIn("no record", differences[0])
 
 
+class CommandLine(unittest.TestCase):
+    """The CLIs report failure by exit code, not by traceback."""
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="contentdb-export-cli-"))
+        self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
+        self.root = fixtures.write_corpus(self.tmp / "corpus")
+        self.database = self.tmp / "content.db"
+        ingest.build(self.root, self.database)
+
+    def test_export_writes_the_corpus_and_reports_success(self):
+        target = self.tmp / "fresh"
+        for directory in export.SAFE_ROOTS:
+            (target / directory).mkdir(parents=True)
+        self.assertEqual(
+            export.main(["--database", str(self.database), "--output", str(target)]), 0
+        )
+        self.assertTrue((target / "questions").rglob("*.md"))
+
+    def test_export_without_a_store_fails_instead_of_raising(self):
+        self.assertEqual(
+            export.main(["--database", str(self.tmp / "absent.db"), "--output", str(self.tmp)]), 1
+        )
+
+    def test_export_refuses_a_hostile_source_path_through_the_cli(self):
+        connection = sqlite3.connect(self.database)
+        connection.execute("UPDATE questions SET source_path = '../escaped.md' WHERE id = (SELECT MIN(id) FROM questions)")
+        connection.commit()
+        connection.close()
+        self.assertEqual(
+            export.main(["--database", str(self.database), "--output", str(self.root)]), 1
+        )
+        self.assertFalse((self.tmp / "escaped.md").exists())
+
+    def test_drift_reports_a_corpus_it_cannot_ingest(self):
+        broken = self.tmp / "broken"
+        shutil.copytree(self.root, broken)
+        victim = next(iter((broken / "questions").rglob("*.md")))
+        victim.write_text("no front matter here\n", encoding="utf-8")
+        self.assertEqual(drift.main(["--root", str(broken)]), 1)
+
+
+class TargetSafety(unittest.TestCase):
+    """`target` refuses a path that escapes the tree even when its shape is legal."""
+
+    def test_a_symlinked_theme_cannot_smuggle_a_write_outside_the_root(self):
+        tmp = Path(tempfile.mkdtemp(prefix="contentdb-export-symlink-"))
+        self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
+        root = tmp / "repo"
+        (root / "questions").mkdir(parents=True)
+        outside = tmp / "outside"
+        outside.mkdir()
+        (root / "questions" / "smuggled").symlink_to(outside, target_is_directory=True)
+        with self.assertRaises(ExportError) as caught:
+            export.target(root, "questions/smuggled/note.md")
+        self.assertIn("outside", str(caught.exception))
+
+
 if __name__ == "__main__":
     unittest.main()
