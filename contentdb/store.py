@@ -250,10 +250,15 @@ class Store:
             raise
 
     def _tags(self, table: str, column: str, identifier: str) -> list[str]:
+        """A record's Tags in the order its Markdown file lists them.
+
+        Author order is not decoration: Export has to reproduce the source file
+        byte for byte, so the store keeps the position rather than normalising
+        to alphabetical."""
         return [
             row[0]
             for row in self.connection.execute(
-                f"SELECT tag FROM {table} WHERE {column} = ? ORDER BY tag", (identifier,)
+                f"SELECT tag FROM {table} WHERE {column} = ? ORDER BY position", (identifier,)
             )
         ]
 

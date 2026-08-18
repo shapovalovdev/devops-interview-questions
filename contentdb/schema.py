@@ -48,6 +48,7 @@ CREATE INDEX idx_questions_type ON questions(type);
 
 CREATE TABLE question_tags (
     question_id TEXT NOT NULL REFERENCES questions(id) ON DELETE CASCADE,
+    position    INTEGER NOT NULL,
     tag         TEXT NOT NULL REFERENCES tags(name),
     PRIMARY KEY (question_id, tag)
 );
@@ -81,8 +82,9 @@ CREATE INDEX idx_labs_difficulty ON labs(difficulty);
 CREATE INDEX idx_labs_question_ref ON labs(question_ref);
 
 CREATE TABLE lab_tags (
-    lab_id TEXT NOT NULL REFERENCES labs(id) ON DELETE CASCADE,
-    tag    TEXT NOT NULL REFERENCES tags(name),
+    lab_id   TEXT NOT NULL REFERENCES labs(id) ON DELETE CASCADE,
+    position INTEGER NOT NULL,
+    tag      TEXT NOT NULL REFERENCES tags(name),
     PRIMARY KEY (lab_id, tag)
 );
 CREATE INDEX idx_lab_tags_tag ON lab_tags(tag);
