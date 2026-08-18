@@ -4,6 +4,7 @@ on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -50,6 +51,56 @@ jobs:
       - name: Show container logs on failure
         if: failure()
         run: docker ps -a && docker logs devops-questions-api-e2e || true
+
+  snapshot-artifact:
+    name: Build and verify the snapshot release artifact
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Build and verify an offline snapshot
+        run: |
+          python3 scripts/build_snapshot_artifact.py --output-dir build/snapshots
+          archive=$(printf '%s\n' build/snapshots/content-snapshot-*.tar.gz)
+          python3 scripts/build_snapshot_artifact.py --verify "$archive" --checksum "$archive.sha256"
+
+  publish-snapshot:
+    name: Publish the immutable snapshot release
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: snapshot-artifact
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Build the digest-addressed snapshot
+        run: python3 scripts/build_snapshot_artifact.py --output-dir build/snapshots
+      - name: Create the release or verify the immutable existing asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          archive=$(printf '%s\n' build/snapshots/content-snapshot-*.tar.gz)
+          checksum="$archive.sha256"
+          digest=${archive#build/snapshots/content-snapshot-}
+          digest=${digest%.tar.gz}
+          tag="snapshot-$digest"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            mkdir released
+            gh release download "$tag" --pattern "$(basename "$archive")" --dir released
+            gh release download "$tag" --pattern "$(basename "$checksum")" --dir released
+            python3 scripts/build_snapshot_artifact.py --verify "released/$(basename "$archive")" --checksum "released/$(basename "$checksum")"
+          else
+            gh release create "$tag" "$archive" "$checksum" --title "Content snapshot $digest" --notes "Immutable Content API snapshot for corpus digest $digest."
+          fi
 
   compose:
     name: The whole stack comes up together
