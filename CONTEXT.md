@@ -6,7 +6,7 @@ This repository is a public, topic-organized collection of DevOps interview ques
 
 The standing goal is a source-verified Question database a learner can navigate by deliberate sequence, not just by search. The epic [Publish the site anywhere, not only GitHub Pages](https://github.com/shapovalovdev/devops-interview-questions/issues/164) and its release [Publish anywhere v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/8) closed on 2026-08-17 with every issue verified.
 
-The active epic, charted 2026-08-17, is [serve Questions and Labs from a Content store through a Content API](https://github.com/shapovalovdev/devops-interview-questions/issues/168), release **Content API v1**: the corpus becomes a queryable Content store with a versioned CRUD Content API over it, Markdown stays the durable record through Export and a Drift gate, and the whole surface is covered by API and end-to-end tests. See [ADR 0001](docs/adr/0001-sqlite-content-store-behind-a-fastapi-content-api.md) for the decision and [`docs/issues/`](docs/issues/README.md) for the queue.
+The active epic, charted 2026-08-18, is [Epic: immutable corpus snapshot service](https://github.com/shapovalovdev/devops-interview-questions/issues/176), release **Snapshot service v1**: `GET /api/v1/meta` exposes the source commit, corpus content digest, API version, build timestamp, and CC BY attribution; every response carries the snapshot identifier; snapshots publish as digest-addressed artifacts so downstream consumers (devops-learning-platform) can pin one snapshot without a live-API dependency. Reads stay anonymous; writes are unchanged; CORS and browser access are explicitly out of scope.
 
 ## Language
 
