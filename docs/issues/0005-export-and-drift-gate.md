@@ -2,7 +2,7 @@
 
 | | |
 | --- | --- |
-| **Status** | `ready-for-agent` |
+| **Status** | `needs-review` |
 | **GitHub** | [#173](https://github.com/shapovalovdev/devops-interview-questions/issues/173) |
 | **Label** | `enhancement` |
 | **Epic** | [Content API v1](./0000-epic-content-api.md) |
@@ -54,3 +54,71 @@ Ingest is one-way: Markdown becomes a Content store. This slice builds the retur
   commands you ran with their results, test and coverage numbers, and anything left for human review.
   GitHub Issues are unavailable, so this file is the tracker — update its **Status** row as you go
   (`ready-for-agent` → `in-progress` → `needs-review`).
+
+## Completion report
+
+Implemented by the coordinator directly, after three dispatched agents died to environmental failures
+(a stall, the machine sleeping, a session limit) without writing a line between them.
+
+Commits on `feature/content-export-drift`: `35547ef`, `e7aedaa`, `5c44568`.
+
+### Round-trip result
+
+**1111 of 1111 files round-trip byte for byte — 1100 Questions and 11 Labs — read back out of a built
+store, not merely out of freshly parsed records.** No file needed a special case, and no corpus file was
+edited to make the renderer pass.
+
+That was only possible after fixing a real defect in the merged Ingest, which the round trip exposed:
+
+- `contentdb/corpus.py` sorted and de-duplicated each record's tags;
+- `contentdb/ingest.py` sorted them again into `question_tags` / `lab_tags`;
+- `contentdb/store.py` sorted them a third time on read.
+
+1025 of the 1111 corpus files list their tags non-alphabetically, so author order — information the corpus
+carries — was being discarded three times over. Both tag tables now carry an explicit `position`, following
+the precedent `question_sources` already set, and the store returns tags in file order. One merged test
+asserted the sorted behavior and was updated, with a comment explaining why.
+
+Fidelity was tractable because Ingest already keeps `body_markdown` verbatim, so only front matter is
+re-rendered. The corpus's uniformity was measured, not assumed: one field order per kind, plain scalars for
+Questions and double-quoted for Labs, every file newline-terminated, no CRLF, no title containing `:`, no
+quoted value containing an embedded quote. The renderer asserts those invariants and raises rather than
+approximating when one does not hold.
+
+### Commands run, real output
+
+```
+$ python tests/run_all_tests.py
+Ran 192 checks across 62 test modules.                         exit 0   (baseline 188 / 61)
+
+$ python tests/test_contentdb_export.py
+Ran 16 tests in 2.117s   OK
+
+$ python -m contentdb.drift
+No drift: every Question and Lab round-trips through the Content store unchanged.   exit 0
+
+$ python -m contentdb.export --database build/content.db --output .   # twice
+Exported 1111 files: 0 written, 1111 already current.
+Exported 1111 files: 0 written, 1111 already current.
+   → git status clean both times: Export reproduces the corpus and is idempotent
+
+$ python -m contentdb.ingest --output a.db && python -m contentdb.ingest --output b.db
+   → identical sha256; the position column did not cost determinism
+
+$ python scripts/build_site.py
+Rendered 1178 Markdown pages                                   exit 0, standard library only
+```
+
+### The gate was proved to bite
+
+A store row was tampered with directly (`UPDATE questions SET title = 'Tampered title'`), exported, and
+compared. `drift.compare` returned exactly one difference, a unified diff naming the file and both titles.
+Covered as a test, alongside a store that has lost a record entirely.
+
+### Left for human review
+
+- CI now checks out with `fetch-depth: 0`. `updated_at` is each file's git commit time, so a shallow clone
+  pins every record to the epoch. This makes the content job clone the full history — a cost worth knowing
+  about, though the alternative is a Drift check comparing against a store CI cannot reproduce.
+- `docs/content-api.md` documents the Export → review → commit workflow. Slice 0006 is expected to extend
+  the same file with how to run and package the service; it should add sections rather than rewrite it.
