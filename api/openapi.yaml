@@ -154,7 +154,7 @@ paths:
       operationId: getQuestion
       tags: [Questions]
       summary: Read one Question by its id.
-      x-implementation: stub
+      x-implementation: implemented
       parameters:
         - $ref: '#/components/parameters/ThemePath'
         - $ref: '#/components/parameters/SlugPath'

@@ -29,11 +29,14 @@ import yaml
 
 from support import (
     CONTRACT_PATH,
+    DEMO_QUESTION,
+    UNKNOWN_QUESTION,
     ExplodingStore,
     STUB_REQUESTS,
     client_for,
     demo_client,
     demo_corpus,
+    revalidate,
     send,
 )
 
@@ -80,6 +83,20 @@ def implemented_producers() -> dict[tuple[str, str, str], Callable[[], int]]:
             "/api/v1/questions?limit=0"
         ).status_code,
         ("/api/v1/questions", "get", "500"): lambda: failing.get("/api/v1/questions").status_code,
+        ("/api/v1/questions/{theme}/{slug}", "get", "200"): lambda: client.get(
+            DEMO_QUESTION
+        ).status_code,
+        # The `304` is produced the way a client produces one: read the item,
+        # then ask again with the ETag the read handed over.
+        ("/api/v1/questions/{theme}/{slug}", "get", "304"): lambda: revalidate(
+            client, DEMO_QUESTION
+        ).status_code,
+        ("/api/v1/questions/{theme}/{slug}", "get", "404"): lambda: client.get(
+            UNKNOWN_QUESTION
+        ).status_code,
+        ("/api/v1/questions/{theme}/{slug}", "get", "500"): lambda: failing.get(
+            DEMO_QUESTION
+        ).status_code,
     }
 
 

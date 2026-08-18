@@ -127,12 +127,27 @@ class InMemoryStore:
         return next((record for record in self.learning_paths if record["slug"] == slug), None)
 
     def search(self, query: SearchQuery) -> Page:
-        hits: list[Record] = []
+        """Rank matches the way the seam documents: hits, not bare items.
+
+        A hit nests its item under `item` and carries the `kind` that says which
+        of the two resources it is, because one ranked list holds both. The
+        score is derived from rank — the contract only promises it is comparable
+        within one response — which is also what the real store does, since
+        SQLite's bm25 score does not cross the seam.
+        """
+        matched: list[tuple[str, Record]] = []
         if query.kind in (None, "question"):
-            hits += [r for r in self.questions if _contains(r, query.q, ("title", "prompt"))]
+            matched += [("question", r) for r in self.questions if _contains(r, query.q, ("title", "prompt"))]
         if query.kind in (None, "lab"):
-            hits += [r for r in self.labs if _contains(r, query.q, ("title", "why"))]
-        return _window(sorted(hits, key=lambda record: record["id"]), query.limit, query.offset)
+            matched += [("lab", r) for r in self.labs if _contains(r, query.q, ("title", "why"))]
+        # A stable sort by `id` keeps Questions ahead of the Labs that share
+        # their id, so a hit list never reorders between two identical requests.
+        ranked = sorted(matched, key=lambda pair: pair[1]["id"])
+        hits: list[Record] = [
+            {"kind": kind, "score": 1.0 / (1.0 + rank), "item": record}
+            for rank, (kind, record) in enumerate(ranked)
+        ]
+        return _window(hits, query.limit, query.offset)
 
 
 def question_record(

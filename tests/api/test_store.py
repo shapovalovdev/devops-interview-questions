@@ -210,4 +210,12 @@ def test_the_lab_query_filters_the_way_the_contract_describes(query, expected):
     ],
 )
 def test_search_spans_questions_and_labs(query, expected):
-    assert [r["id"] for r in demo_corpus().search(query).items] == expected
+    assert [hit["item"]["id"] for hit in demo_corpus().search(query).items] == expected
+
+
+def test_a_search_hit_says_which_kind_it_is_and_ranks_descending():
+    """One ranked list carries both kinds, so a hit has to name its own."""
+    hits = demo_corpus().search(SearchQuery(q="admission")).items
+    assert [hit["kind"] for hit in hits] == ["question", "lab"]
+    assert [hit["score"] for hit in hits] == sorted((h["score"] for h in hits), reverse=True)
+    assert set(hits[0]) == {"kind", "score", "item"}

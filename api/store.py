@@ -75,12 +75,29 @@ class LabQuery:
 
 @dataclass(frozen=True)
 class SearchQuery:
-    """Everything `GET /api/v1/search` asks the store for. Slice 3 implements it."""
+    """Everything `GET /api/v1/search` asks the store for.
+
+    A store answers it with `Page` of *hit* mappings rather than of items:
+    `{"kind": "question" | "lab", "score": float, "item": Record}`, mirroring the
+    contract's `SearchHit`. The nesting is what lets one ranked list carry two
+    kinds of item without the API guessing which it is holding, and `score` is
+    the store's own relevance — the contract defines it as comparable only
+    within one response, so a store may derive it from rank.
+    """
 
     q: str
     kind: str | None = None
     limit: int = 50
     offset: int = 0
+
+
+class InvalidQuery(ValueError):
+    """Raised when free text is not something the store can parse as a query.
+
+    It is the store's way of saying "this is the client's fault, not mine": the
+    API answers it with the contract's `422` rather than the `500` a generic
+    failure earns. Everything else a store raises is a fault, and stays one.
+    """
 
 
 @dataclass(frozen=True)

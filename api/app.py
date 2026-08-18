@@ -21,15 +21,18 @@ from the explicitly named demo entrypoint, `api.demo:app`.
 
 from __future__ import annotations
 
+import hashlib
 import importlib
 import os
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from http import HTTPStatus
 from typing import Annotated, Any, NoReturn
+from urllib.parse import quote
 
-from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
+from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from api.models import (
@@ -54,7 +57,7 @@ from api.models import (
     Theme,
     ThemePage,
 )
-from api.store import LabQuery, QuestionQuery, SearchQuery, Store
+from api.store import InvalidQuery, LabQuery, QuestionQuery, Record, SearchQuery, Store
 
 SERVICE_NAME = "content-api"
 CONTRACT_VERSION = "v1"
@@ -138,6 +141,35 @@ def problem_response(
     return JSONResponse(status_code=status, media_type=PROBLEM_MEDIA_TYPE, content=body)
 
 
+def only_documented_validation_errors(schema: dict[str, Any]) -> dict[str, Any]:
+    """Drop the `422` FastAPI adds to every operation that parses a parameter.
+
+    FastAPI documents a validation error on any operation with a parameter or a
+    body, including `GET /api/v1/questions/{theme}/{slug}`, whose two path
+    segments are strings that cannot fail validation. The contract documents
+    `422` only where a client can actually provoke one, and the coverage census
+    demands a real request per documented status — so an unprovokable `422` in
+    the served schema is a promise no test could ever keep.
+
+    The rule is mechanical: this service answers every error as
+    `application/problem+json`, so a `422` that carries only the framework's own
+    `application/json` validation model was added by the framework and is
+    removed. Where the operation really does declare one, the problem document
+    survives and the framework's model is dropped beside it, because two
+    incompatible error shapes on one status is worse than either.
+    """
+    for item in schema.get("paths", {}).values():
+        for operation in item.values():
+            if not isinstance(operation, dict):
+                continue
+            responses = operation.get("responses", {})
+            content = responses.get("422", {}).get("content", {})
+            content.pop("application/json", None)
+            if "422" in responses and not content:
+                del responses["422"]
+    return schema
+
+
 def problem_responses(*statuses: int) -> dict[int | str, dict[str, Any]]:
     """Declare, for the generated schema, that these statuses are problem docs."""
     return {
@@ -147,6 +179,126 @@ def problem_responses(*statuses: int) -> dict[int | str, dict[str, Any]]:
         }
         for status in statuses
     }
+
+
+#: Every single-item read documents the same two things beyond its body: the
+#: ETag it answers with, and the `304` a matching `If-None-Match` earns.
+ETAG_DOCUMENTATION = {
+    "headers": {
+        "ETag": {
+            "description": "The item's `content_hash`, quoted.",
+            "schema": {"type": "string"},
+        }
+    }
+}
+NOT_MODIFIED_DOCUMENTATION = {
+    "description": "The client's ETag still matches; no body is returned."
+}
+
+#: How many linked Labs a Question's `Link` header will name. A Question has a
+#: handful of Labs at most, and a header is not a place to page.
+LINKED_LABS_LIMIT = 50
+
+
+def item_responses(*statuses: int) -> dict[int | str, dict[str, Any]]:
+    """Declare the response set every single-item read shares."""
+    return {
+        200: dict(ETAG_DOCUMENTATION),
+        304: dict(NOT_MODIFIED_DOCUMENTATION),
+        **problem_responses(*statuses),
+    }
+
+
+def etag_for(record: Record, payload: BaseModel) -> str:
+    """The ETag for one item, quoted as an HTTP entity tag.
+
+    A Question and a Lab are files, and the contract publishes their
+    `content_hash` — the sha256 of the source file — as the validator, so a
+    client can compare what it holds against what git holds. A Theme, a tag, and
+    a learning path have no file behind them: they are derived from the corpus.
+    Rather than invent a hash the corpus does not have, their ETag is a digest of
+    the representation the client is about to receive, which gives the same
+    guarantee a validator has to give — it changes exactly when the body does.
+    """
+    content_hash = record.get("content_hash")
+    if isinstance(content_hash, str) and content_hash:
+        return f'"{content_hash}"'
+    return f'"sha256:{hashlib.sha256(payload.model_dump_json().encode("utf-8")).hexdigest()}"'
+
+
+def etag_matches(if_none_match: str | None, etag: str) -> bool:
+    """Whether the client's `If-None-Match` already covers this ETag.
+
+    RFC 9110 allows a list, the wildcard `*`, and weak tags; a client that sends
+    back the `W/`-prefixed form of the tag it was given still holds the same
+    representation, and answering it `200` would waste the round trip the header
+    exists to save.
+    """
+    if not if_none_match:
+        return False
+    for candidate in if_none_match.split(","):
+        candidate = candidate.strip()
+        if candidate == "*" or candidate.removeprefix("W/") == etag:
+            return True
+    return False
+
+
+def conditional(
+    payload: BaseModel,
+    record: Record,
+    if_none_match: str | None,
+    response: Response,
+    links: Sequence[str] = (),
+) -> Any:
+    """Answer a single-item read, as `304` when the client is already current.
+
+    The `304` carries the validator and the links but no body: that is the whole
+    point of the exchange, and a body would make the saved bandwidth a lie.
+    """
+    headers = {"ETag": etag_for(record, payload)}
+    if links:
+        headers["Link"] = ", ".join(links)
+    if etag_matches(if_none_match, headers["ETag"]):
+        return Response(status_code=304, headers=headers)
+    response.headers.update(headers)
+    return payload
+
+
+def missing(kind: str, identifier: str) -> NoReturn:
+    """Answer for an id the corpus does not hold."""
+    raise HTTPException(
+        status_code=404,
+        detail=f"No {kind} {identifier!r} exists in this Content store.",
+    )
+
+
+def lab_links(store: Store, question_id: str) -> list[str]:
+    """The Labs that prepare a learner for this Question, as RFC 8288 links.
+
+    The epic pins a Question's fields and none of them is a list of Labs, so the
+    link lives in the header rather than in the body: `question_ref` points one
+    way, and this points back, without either resource growing a field the
+    contract does not describe. The collection link is always present — it is
+    the query a client can re-run — and each Lab that exists today is named
+    beside it.
+    """
+    page = store.list_labs(LabQuery(question_ref=question_id, limit=LINKED_LABS_LIMIT))
+    collection = f"/api/v1/labs?question_ref={quote(question_id, safe='')}"
+    links = [f'<{collection}>; rel="related"; title="Labs that prepare a learner for this Question"']
+    links += [f'</api/v1/labs/{lab["id"]}>; rel="related"' for lab in page.items]
+    return links
+
+
+def question_link(store: Store, question_ref: str) -> list[str]:
+    """The Question a Lab prepares a learner for, if the reference resolves.
+
+    A `question_ref` that names nothing is a corpus defect the validators catch;
+    the API neither hides it nor fails the read, it simply does not publish a
+    link it cannot honour.
+    """
+    if store.get_question(question_ref) is None:
+        return []
+    return [f'</api/v1/questions/{question_ref}>; rel="related"; title="The Question this Lab prepares you for"']
 
 
 def not_implemented(operation_id: str) -> NoReturn:
@@ -213,7 +365,7 @@ def create_app(store: Store | None = None) -> FastAPI:
         schema.setdefault("components", {}).setdefault("schemas", {}).update(
             {"Problem": problem, **nested}
         )
-        return schema
+        return only_documented_validation_errors(schema)
 
     app.openapi = openapi_with_problem_schema  # type: ignore[method-assign]
 
@@ -232,6 +384,21 @@ def create_app(store: Store | None = None) -> FastAPI:
             status=exception.status_code,
             detail=str(exception.detail),
             instance=request.url.path,
+        )
+
+    @app.exception_handler(InvalidQuery)
+    async def _on_invalid_query(request: Request, exception: InvalidQuery) -> JSONResponse:
+        """Free text the store cannot parse is the client's fault, not a fault.
+
+        The store raises this only for a query string it could not read — an
+        unbalanced quote, a dangling operator — which the contract documents as
+        `422`. Everything else a store raises stays a `500`.
+        """
+        return problem_response(
+            status=422,
+            detail="The free-text query could not be parsed; check quoting and operators.",
+            instance=request.url.path,
+            errors=[{"field": "q", "message": str(exception)}],
         )
 
     @app.exception_handler(Exception)
@@ -319,14 +486,26 @@ def create_app(store: Store | None = None) -> FastAPI:
         tags=["Questions"],
         summary="Read one Question by its id.",
         response_model=Question,
-        responses=problem_responses(501),
+        responses=item_responses(404, 500),
     )
     def get_question(
+        response: Response,
+        store: Annotated[Store, Depends(get_store)],
         theme: str,
         slug: str,
         if_none_match: Annotated[str | None, Header(alias="If-None-Match")] = None,
-    ) -> Question:
-        not_implemented("getQuestion")
+    ) -> Any:
+        identifier = f"{theme}/{slug}"
+        record = store.get_question(identifier)
+        if record is None:
+            missing("Question", identifier)
+        return conditional(
+            Question.model_validate(record),
+            record,
+            if_none_match,
+            response,
+            lab_links(store, identifier),
+        )
 
     @app.put(
         "/api/v1/questions/{theme}/{slug}",

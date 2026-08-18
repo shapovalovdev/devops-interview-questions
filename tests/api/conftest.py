@@ -21,6 +21,64 @@ if str(ROOT) not in sys.path:
 
 from support import client_for, demo_client, demo_corpus  # noqa: E402
 
+if str(ROOT / "tests") not in sys.path:
+    sys.path.insert(0, str(ROOT / "tests"))
+
+import contentdb_fixtures  # noqa: E402  - a tests/ sibling, not a test module
+
+from api.content import ContentStore  # noqa: E402
+from contentdb import ingest  # noqa: E402
+
+
+def _ingested(root: Path, database: Path) -> ContentStore:
+    """Build a Content store the way a deployment does, then open it read-only.
+
+    Every store-backed fixture goes through Ingest rather than through a
+    hand-built SQLite file, because the point of these tests is that the API
+    serves what Ingest produced — a fixture assembled by hand could agree with
+    the API and disagree with the corpus.
+    """
+    ingest.build(root, database)
+    return ContentStore.open(database)
+
+
+@pytest.fixture(scope="session")
+def fixture_store(tmp_path_factory):
+    """The real Content store over the small corpus in `tests/contentdb_fixtures.py`.
+
+    Predictable answers ("this filter matches exactly one Question") need a
+    corpus that does not change when somebody writes a Question, which the
+    committed one does daily.
+    """
+    directory = tmp_path_factory.mktemp("api-fixture-corpus")
+    store = _ingested(contentdb_fixtures.write_corpus(directory / "corpus"), directory / "content.db")
+    yield store
+    store.close()
+
+
+@pytest.fixture(scope="session")
+def fixture_client(fixture_store):
+    """A client over the fixture corpus, served through the real Content store."""
+    return client_for(fixture_store)
+
+
+@pytest.fixture(scope="session")
+def corpus_store(tmp_path_factory):
+    """The real Content store over the committed corpus.
+
+    This is the fixture that catches schema drift in real content: a Question
+    whose front matter the API cannot serve fails here and nowhere else.
+    """
+    directory = tmp_path_factory.mktemp("api-real-corpus")
+    store = _ingested(ROOT, directory / "content.db")
+    yield store
+    store.close()
+
+
+@pytest.fixture(scope="session")
+def corpus_client(corpus_store):
+    return client_for(corpus_store)
+
 
 @pytest.fixture
 def client():
