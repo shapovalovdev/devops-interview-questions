@@ -1,9 +1,10 @@
 """The Store seam: how the Content API asks the Content store for records.
 
-Slice 1 owns the real SQLite Content store in `contentdb/`. This slice must not
-depend on it, so the API codes against the `Store` protocol below and tests
-against the in-memory fake in `api/testing.py`. Slice 3 swaps the real store in
-behind the same protocol.
+The service codes against the `Store` protocol below and never against a
+particular store. Two implementations satisfy it: `api/content.py` adapts the
+SQLite Content store in `contentdb/`, which is what a deployment serves, and
+`api/testing.py` holds an in-memory fake for the tests and the demo entrypoint.
+Neither is named anywhere in `api/app.py`.
 
 Two rules make that swap possible, and they are the reason this module looks the
 way it does.
@@ -16,8 +17,9 @@ Pydantic model appears anywhere below, so a store implementation never has to
 learn the API's serialization layer.
 
 **This module imports nothing outside the standard library.** `contentdb` is
-standard-library only, so an implementation that had to import `api/` to satisfy
-the protocol could not exist. Because the protocol is structural, `contentdb`
+standard-library only — it runs inside the static site build, where nothing is
+installed — so an implementation that had to import `api/` to satisfy the
+protocol could not exist. Because the protocol is structural, `contentdb`
 does not have to import this module either: it can mirror `QuestionQuery` and
 `Page` with its own dataclasses, or return any object carrying the same fields.
 A test in `tests/api/test_store.py` imports this module in a clean interpreter

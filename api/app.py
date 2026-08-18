@@ -1,10 +1,17 @@
 """The FastAPI application that serves the contract in `api/openapi.yaml`.
 
-This slice is the tracer bullet: `GET /api/v1/health` and `GET /api/v1/questions`
-are implemented end to end against the `Store` seam, and every other operation
-the contract publishes is present as a route that answers `501`. Slices 3 and 4
-therefore find a scaffold with the right address, parameters, and request body
-already agreed, instead of a blank file.
+Every **read** the contract publishes is implemented here against the `Store`
+seam: Questions and Labs, one by one and as filtered pages; the derived Theme,
+tag, and learning-path catalogues; and search across both kinds together. The
+**write** operations are present as routes with the right address, parameters,
+and request body, and answer `501` until slice 4 lands; `api/openapi.yaml`
+records which is which in `x-implementation`, and the coverage census reads that
+marker to decide what each operation owes a test.
+
+Single-item reads are conditional. Each answers an `ETag` — the item's
+`content_hash` where a file backs it — and a matching `If-None-Match` earns a
+`304` with no body. Slice 4's `If-Match` concurrency is built on the same
+validator, which is why it is worth being exact about here.
 
 Two invariants are worth stating here because they are easy to lose:
 
@@ -16,7 +23,9 @@ from `api/openapi.yaml`, and the file is never generated from these routes.
 raises `StoreNotConfigured` naming what to set, rather than quietly serving
 fabricated Questions that a client cannot distinguish from the real ones. The
 in-memory fake lives in `api/testing.py` and is reachable only from the tests and
-from the explicitly named demo entrypoint, `api.demo:app`.
+from the explicitly named demo entrypoint, `api.demo:app`. A real deployment
+points `CONTENT_API_STORE` at `api.content:content_store`, which opens the
+SQLite Content store read-only or refuses to start.
 """
 
 from __future__ import annotations
