@@ -947,6 +947,7 @@ components:
 
     QuestionWrite:
       type: object
+      additionalProperties: false
       description: The client-supplied half of a Question; derived fields are computed.
       required:
         - theme
@@ -989,6 +990,7 @@ components:
 
     QuestionPatch:
       type: object
+      additionalProperties: false
       description: Only the supplied fields change; everything omitted is left alone.
       properties:
         title:
@@ -1066,6 +1068,7 @@ components:
 
     LabWrite:
       type: object
+      additionalProperties: false
       required:
         - theme
         - slug
@@ -1102,6 +1105,7 @@ components:
 
     LabPatch:
       type: object
+      additionalProperties: false
       properties:
         title:
           type: string

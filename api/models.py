@@ -17,7 +17,7 @@ from datetime import date, datetime
 from enum import Enum
 from typing import Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class Difficulty(str, Enum):
@@ -86,6 +86,11 @@ class Question(BaseModel):
 
 
 class QuestionWrite(BaseModel):
+    # A field the contract does not publish is refused rather than ignored: a
+    # client that patched `theme` and got a 200 would believe it had moved the
+    # Question, when identity is not patchable at all.
+    model_config = ConfigDict(extra="forbid")
+
     theme: str
     slug: str
     title: str
@@ -99,6 +104,11 @@ class QuestionWrite(BaseModel):
 
 
 class QuestionPatch(BaseModel):
+    # A field the contract does not publish is refused rather than ignored: a
+    # client that patched `theme` and got a 200 would believe it had moved the
+    # Question, when identity is not patchable at all.
+    model_config = ConfigDict(extra="forbid")
+
     title: str | None = None
     difficulty: Difficulty | None = None
     type: QuestionType | None = None
@@ -126,6 +136,11 @@ class Lab(BaseModel):
 
 
 class LabWrite(BaseModel):
+    # A field the contract does not publish is refused rather than ignored: a
+    # client that patched `theme` and got a 200 would believe it had moved the
+    # Question, when identity is not patchable at all.
+    model_config = ConfigDict(extra="forbid")
+
     theme: str
     slug: str
     title: str
@@ -138,6 +153,11 @@ class LabWrite(BaseModel):
 
 
 class LabPatch(BaseModel):
+    # A field the contract does not publish is refused rather than ignored: a
+    # client that patched `theme` and got a 200 would believe it had moved the
+    # Question, when identity is not patchable at all.
+    model_config = ConfigDict(extra="forbid")
+
     title: str | None = None
     difficulty: Difficulty | None = None
     tags: list[str] | None = None

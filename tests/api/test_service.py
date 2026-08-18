@@ -13,11 +13,11 @@ import json
 import pytest
 
 from support import (
+    TEST_WRITE_CREDENTIAL,
     ExplodingStore,
     InMemoryStore,
     MalformedStore,
     QUESTION_WRITE,
-    STUB_REQUESTS,
     demo_corpus,
     send,
 )
@@ -238,38 +238,29 @@ def test_an_empty_store_is_an_empty_page_not_a_failure(make_client):
     assert body == {"items": [], "total": 0, "limit": 50, "offset": 0}
 
 
-# ------------------------------------------------------------------- stubs
+# ------------------------------------------------- the headers writes depend on
 
 
-@pytest.mark.parametrize(("path", "method"), sorted(STUB_REQUESTS))
-def test_every_stubbed_operation_answers_501_as_a_problem_document(client, path, method):
-    response = send(client, path, method)
-    assert response.status_code == 501, (
-        f"{method.upper()} {path} answered {response.status_code}; the contract marks it "
-        "x-implementation: stub, so it owes a 501"
-    )
-    body = problem(response)
-    assert "x-implementation: stub" in body["detail"]
-    assert "api/openapi.yaml" in body["detail"]
+def test_a_missing_credential_is_an_authorization_failure_not_a_schema_failure(client):
+    """`X-API-Key` is optional in the schema so the service can answer `401`.
 
-
-def test_a_write_without_a_credential_reaches_the_stub_rather_than_failing_validation(client):
-    """`X-API-Key` is optional in the schema so that slice 4 can answer `401`.
-
-    If the header were declared required, a missing credential would be a schema
-    `422` and the contract's `401` could never be reached.
+    Declared required, a missing credential would be a schema `422` and the
+    contract's `401` could never be reached — the refusal would be about the
+    shape of the request rather than about who sent it.
     """
-    without = client.post("/api/v1/questions", json=QUESTION_WRITE)
-    with_credential = client.post(
-        "/api/v1/questions", json=QUESTION_WRITE, headers={"X-API-Key": "not-checked-yet"}
+    response = client.post("/api/v1/questions", json=QUESTION_WRITE)
+    assert response.status_code == 401
+    assert problem(response)["status"] == 401
+
+
+def test_a_missing_if_match_is_a_precondition_failure_not_a_schema_failure(client):
+    """Same reasoning for the validator: `428` is a precondition, not a shape."""
+    response = client.delete(
+        "/api/v1/questions/kubernetes/demo-admission-guardrails",
+        headers={"X-API-Key": TEST_WRITE_CREDENTIAL},
     )
-    assert without.status_code == 501
-    assert with_credential.status_code == 501
-
-
-def test_a_delete_without_if_match_reaches_the_stub_rather_than_failing_validation(client):
-    response = client.delete("/api/v1/questions/kubernetes/demo-admission-guardrails")
-    assert response.status_code == 501
+    assert response.status_code == 428
+    assert problem(response)["status"] == 428
 
 
 def test_a_malformed_write_body_is_still_a_422(client):

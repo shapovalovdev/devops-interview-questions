@@ -261,7 +261,15 @@ def question_record(
     prompt: str,
     updated_at: str,
 ) -> dict[str, Any]:
-    """A Question record shaped exactly as the epic pins the resource."""
+    """A Question record shaped exactly as the epic pins the resource.
+
+    The body is a real corpus document, not a placeholder: `prompt` is the
+    paragraph under the `# ` heading and `answer_guide` is the `- ` points under
+    `## Answer guide`, because that is where `contentdb.corpus` reads them from.
+    A fake whose records could not survive a write would make every write test
+    against it a test of the fake.
+    """
+    guide = f"Name the trade-off behind {title.lower()}."
     return {
         "id": f"{theme}/{slug}",
         "theme": theme,
@@ -278,8 +286,8 @@ def question_record(
             }
         ],
         "prompt": prompt,
-        "answer_guide": [f"Name the trade-off behind {title.lower()}."],
-        "body_markdown": f"# {title}\n\n{prompt}\n",
+        "answer_guide": [guide],
+        "body_markdown": f"\n# {title}\n\n{prompt}\n\n## Answer guide\n\n- {guide}",
         "source_path": f"questions/{theme}/{slug}.md",
         "content_hash": f"sha256:{theme}-{slug}",
         "updated_at": updated_at,
@@ -296,7 +304,13 @@ def lab_record(
     why: str,
     updated_at: str,
 ) -> dict[str, Any]:
-    """A Lab record shaped exactly as the epic pins the resource."""
+    """A Lab record shaped exactly as the epic pins the resource.
+
+    A Lab's fields are all front matter, so its body is carried through
+    verbatim; it still gets a real one, so that rendering a Lab from this fake
+    produces the document a corpus file would.
+    """
+    step = f"Work through {title.lower()} on a throwaway cluster."
     return {
         "id": f"{theme}/{slug}",
         "theme": theme,
@@ -306,8 +320,8 @@ def lab_record(
         "tags": tags,
         "question_ref": question_ref,
         "why": why,
-        "checklist": [f"Work through {title.lower()} on a throwaway cluster."],
-        "body_markdown": f"# {title}\n\n{why}\n",
+        "checklist": [step],
+        "body_markdown": f"\n# {title}\n\n{why}\n\n## Steps\n\n- {step}",
         "source_path": f"labs/{theme}/{slug}.md",
         "content_hash": f"sha256:{theme}-{slug}",
         "updated_at": updated_at,

@@ -38,7 +38,11 @@ from support import (
     UNKNOWN_QUESTION,
     UNKNOWN_THEME,
     ExplodingStore,
-    STUB_REQUESTS,
+    DEMO_REFERENCED_QUESTION,
+    WRITE_REQUESTS,
+    WRONG_WRITE_CREDENTIAL,
+    lab_body,
+    question_body,
     client_for,
     demo_client,
     demo_corpus,
@@ -150,13 +154,99 @@ def implemented_producers() -> dict[tuple[str, str, str], Callable[[], int]]:
     }
 
 
-def stub_producers() -> dict[tuple[str, str, str], Callable[[], int]]:
-    """One request per stubbed operation, each owing a `501`."""
-    client = demo_client()
-    return {
-        (path, method, "501"): (lambda p=path, m=method: send(client, p, m).status_code)
-        for path, method in STUB_REQUESTS
-    }
+def write_producers() -> dict[tuple[str, str, str], Callable[[], int]]:
+    """One request per documented response of every write operation.
+
+    Each producer builds its own client, because a write mutates the store and a
+    census that shared one would depend on the order its entries happened to run
+    in. The requests are the ones a client would really make: a refusal is
+    produced by withholding the credential or the validator, never by reaching
+    past the service.
+    """
+    producers: dict[tuple[str, str, str], Callable[[], int]] = {}
+
+    def add(path: str, method: str, status: str, **kwargs: Any) -> None:
+        producers[(path, method, status)] = lambda: send(
+            demo_client(kwargs.pop("credential_for_client", ...))
+            if "credential_for_client" in kwargs
+            else demo_client(),
+            path,
+            method,
+            **kwargs,
+        ).status_code
+
+    for path, method in WRITE_REQUESTS:
+        # The refusals every write shares.
+        producers[(path, method, "401")] = (
+            lambda p=path, m=method: send(demo_client(), p, m, credential=None).status_code
+        )
+        producers[(path, method, "403")] = (
+            lambda p=path, m=method: send(
+                demo_client(), p, m, credential=WRONG_WRITE_CREDENTIAL
+            ).status_code
+        )
+        producers[(path, method, "503")] = (
+            lambda p=path, m=method: send(demo_client(credential=None), p, m).status_code
+        )
+
+        success = "201" if method == "post" else ("204" if method == "delete" else "200")
+        producers[(path, method, success)] = (
+            lambda p=path, m=method: send(demo_client(), p, m).status_code
+        )
+
+        if method in ("put", "patch", "delete"):
+            producers[(path, method, "428")] = (
+                lambda p=path, m=method: send(demo_client(), p, m, if_match="").status_code
+            )
+            producers[(path, method, "412")] = (
+                lambda p=path, m=method: send(demo_client(), p, m, if_match='"stale"').status_code
+            )
+            absent = (
+                "/api/v1/labs/kubernetes/nothing-here"
+                if "labs" in path
+                else "/api/v1/questions/kubernetes/nothing-here"
+            )
+            producers[(path, method, "404")] = (
+                lambda p=path, m=method, u=absent: send(
+                    demo_client(), p, m, url=u, if_match='"anything"'
+                ).status_code
+            )
+
+    # A create whose id already exists.
+    for path in ("/api/v1/questions", "/api/v1/labs"):
+        def duplicate(p=path):
+            client = demo_client()
+            send(client, p, "post")
+            return send(client, p, "post").status_code
+
+        producers[(path, "post", "409")] = duplicate
+
+    # A body the corpus rules reject.
+    producers[("/api/v1/questions", "post", "422")] = lambda: send(
+        demo_client(), "/api/v1/questions", "post", json=question_body(theme="not-a-theme")
+    ).status_code
+    producers[("/api/v1/labs", "post", "422")] = lambda: send(
+        demo_client(), "/api/v1/labs", "post", json=lab_body(question_ref="kubernetes/nothing-here")
+    ).status_code
+    for path in ("/api/v1/questions/{theme}/{slug}", "/api/v1/labs/{theme}/{slug}"):
+        for method in ("put", "patch"):
+            body = (
+                {"difficulty": "wizard"}
+                if method == "patch"
+                else (lab_body if "labs" in path else question_body)(theme="not-a-theme")
+            )
+            producers[(path, method, "422")] = (
+                lambda p=path, m=method, b=body: send(demo_client(), p, m, json=b).status_code
+            )
+
+    # Deleting a Question a Lab still points at cannot be exported, so it is refused.
+    producers[("/api/v1/questions/{theme}/{slug}", "delete", "409")] = lambda: send(
+        demo_client(),
+        "/api/v1/questions/{theme}/{slug}",
+        "delete",
+        url=f"/api/v1/questions/{DEMO_REFERENCED_QUESTION}",
+    ).status_code
+    return producers
 
 
 def test_the_census_covers_every_response_the_contract_promises():
@@ -170,7 +260,7 @@ def test_the_census_covers_every_response_the_contract_promises():
     )
     assert required, "the census found nothing to check, which means it is not checking"
 
-    producers = {**implemented_producers(), **stub_producers()}
+    producers = {**implemented_producers(), **write_producers()}
 
     unproduced = sorted(required - set(producers))
     unpromised = sorted(set(producers) - required)
@@ -203,17 +293,30 @@ def test_the_census_demands_more_the_moment_an_operation_is_implemented():
     """
     contract = load_contract()
     key = ("/api/v1/questions", "post")
+
+    # Every operation is implemented now, so the stub side of the rule is proved
+    # against a copy: marking a live operation `stub` must collapse everything
+    # it owes down to a single `501`, and restoring the marker must bring the
+    # whole set back. Reading it off a real stub stopped being possible when
+    # slice 0004 removed the last one.
+    documented = {"201", "401", "403", "409", "422", "503"}
+    assert promised_responses(contract)[key] == documented
+
+    contract["paths"][key[0]][key[1]][MARKER] = STUB
     assert promised_responses(contract)[key] == {"501"}
 
     contract["paths"][key[0]][key[1]][MARKER] = IMPLEMENTED
-    assert promised_responses(contract)[key] == {"201", "401", "403", "409", "422", "503"}
+    assert promised_responses(contract)[key] == documented
 
 
-def test_no_stub_operation_secretly_works():
-    """A stub that quietly returns data would make the census lie by omission."""
-    client = demo_client()
-    store = demo_corpus()
-    assert store.questions, "the demo corpus must hold data, or a 501 proves nothing"
-    for path, method in sorted(STUB_REQUESTS):
-        response = send(client, path, method)
-        assert response.status_code == 501, f"{method.upper()} {path} answered {response.status_code}"
+def test_no_operation_is_still_a_stub():
+    """The release gate: slice 0004 was the last one allowed to leave a stub."""
+    contract = load_contract()
+    stubs = sorted(
+        f"{method.upper()} {path}"
+        for path, item in contract["paths"].items()
+        for method, operation in item.items()
+        if method in METHODS and operation.get(MARKER) == STUB
+    )
+    assert stubs == [], f"the contract still marks these as stubs: {stubs}"
+    assert demo_corpus().questions, "the demo corpus must hold data, or none of this proves anything"
