@@ -184,7 +184,11 @@ def _tags(fields: dict[str, object], vocabulary: set[str], context: str) -> tupl
     unknown = sorted(set(tags) - vocabulary)
     if unknown:
         raise CorpusError(f"{context}: tags include a Tag missing from TAGS.md: {unknown}")
-    return tuple(sorted(set(tags)))
+    # Author order is information the corpus carries, and Export has to put it
+    # back byte for byte, so it is preserved rather than sorted: 1025 of the
+    # 1111 corpus files list their tags non-alphabetically.  `dict.fromkeys`
+    # still drops a repeated Tag, of which the corpus currently has none.
+    return tuple(dict.fromkeys(tags))
 
 
 def _sources(fields: dict[str, object], context: str) -> tuple[dict, ...]:
