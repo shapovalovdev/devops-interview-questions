@@ -64,6 +64,17 @@ Reads are anonymous; writes need a credential and a matching `If-Match`. Markdow
 record — writes are exported back to files and CI refuses any Drift between the two. The endpoints,
 configuration, and workflow are documented in [`docs/content-api.md`](./docs/content-api.md).
 
+Each `main` snapshot is also published as a GitHub Release named `snapshot-<content_digest>`. Its
+`content-snapshot-<content_digest>.tar.gz` asset contains `content.db`, the exact `/api/v1/meta` payload in
+`snapshot.json`, and `SHA256SUMS` for those files. The adjacent `.tar.gz.sha256` release asset checks the
+archive itself; it is separate because an archive cannot contain a truthful checksum of its own final bytes.
+Verify a downloaded snapshot without a running API using:
+
+```bash
+python3 scripts/build_snapshot_artifact.py --verify content-snapshot-<content_digest>.tar.gz \
+  --checksum content-snapshot-<content_digest>.tar.gz.sha256
+```
+
 ## Content policy and attribution
 
 All questions in this repository are original or substantively paraphrased. The initial coverage was informed by the public [Swfuse DevOps interview collection](https://github.com/Swfuse/devops-interview/blob/main/interview.md), which is credited as a source baseline; its text is not reproduced here. Topic coverage is also mapped broadly to the [roadmap.sh DevOps roadmap](https://roadmap.sh/devops).
