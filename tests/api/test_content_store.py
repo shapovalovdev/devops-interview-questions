@@ -187,7 +187,7 @@ def test_the_service_reaches_the_real_store_through_content_api_store(monkeypatc
     from contentdb import ingest
 
     database = tmp_path / "content.db"
-    ingest.build(root, database)
+    ingest.build(root, database, **contentdb_fixtures.PROVENANCE)
 
     monkeypatch.setenv(STORE_PATH_VARIABLE, str(database))
     monkeypatch.setenv(STORE_ENVIRONMENT_VARIABLE, "api.content:content_store")

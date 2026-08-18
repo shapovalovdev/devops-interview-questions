@@ -70,6 +70,31 @@ class Corpus:
     learning_paths: tuple[dict, ...]
 
 
+def content_digest(corpus: Corpus) -> str:
+    """The corpus-wide content digest, computed by a pinned recipe.
+
+    Take every Question and every Lab the corpus holds; for each, form the
+    line ``f"{id} {content_hash}\\n"``; sort the lines lexicographically by
+    ``id``; concatenate them; return the sha256 of the UTF-8 bytes. The recipe
+    is order-independent (the sort), total (one changed byte in one file moves
+    the digest), and covers Questions and Labs together.
+
+    It is duplicated on purpose: `contentdb` may not import `api/`, and
+    `api/store.py` may import nothing outside the standard library, so the
+    seam carries its own copy for the in-memory store to stand in with, and
+    `tests/api/test_meta.py` pins the two implementations to the same answer
+    over the same records. The recipe is also published in
+    `api/openapi.yaml`, so a downstream consumer can recompute the digest from
+    the API's own listing endpoints and verify a snapshot.
+    """
+    pairs = sorted(
+        (str(record["id"]), str(record["content_hash"]))
+        for record in (*corpus.questions, *corpus.labs)
+    )
+    material = "".join(f"{identifier} {content_hash}\n" for identifier, content_hash in pairs)
+    return hashlib.sha256(material.encode("utf-8")).hexdigest()
+
+
 def known_tags(root: Path) -> set[str]:
     """The Tag vocabulary, read the way the existing validators read it."""
     text = (root / "TAGS.md").read_text(encoding="utf-8")

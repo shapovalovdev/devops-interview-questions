@@ -164,6 +164,22 @@ class Store:
         ).fetchone()
         return self._learning_path(row) if row else None
 
+    # -- Snapshot provenance -------------------------------------------------
+
+    def get_meta(self) -> dict:
+        """The snapshot's own metadata, as Ingest recorded it.
+
+        `source_commit`, `content_digest`, and `build_timestamp`, keyed by
+        name — the store's answer to "which corpus snapshot am I?", which the
+        Content API publishes at `GET /api/v1/meta` and in the
+        `X-Content-Snapshot` header. A store Ingest built always carries the
+        table, so no fallback is invented here.
+        """
+        return {
+            str(key): str(value)
+            for key, value in self.connection.execute("SELECT key, value FROM store_meta")
+        }
+
     # -- Search ------------------------------------------------------------
 
     def search(self, query: SearchQuery) -> Page:

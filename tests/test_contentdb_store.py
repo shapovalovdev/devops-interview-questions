@@ -46,7 +46,7 @@ class StoreFixture(unittest.TestCase):
         cls.tmp = Path(tempfile.mkdtemp(prefix="contentdb-store-"))
         cls.root = fixtures.write_corpus(cls.tmp / "corpus")
         cls.database = cls.tmp / "content.db"
-        cls.summary = ingest.build(cls.root, cls.database)
+        cls.summary = ingest.build(cls.root, cls.database, **fixtures.PROVENANCE)
         cls.store = store.Store(cls.database)
 
     @classmethod
@@ -287,7 +287,7 @@ class WithoutFullTextSearch(unittest.TestCase):
         self.addCleanup(shutil.rmtree, self.tmp, True)
         root = fixtures.write_corpus(self.tmp / "corpus")
         self.database = self.tmp / "content.db"
-        ingest.build(root, self.database)
+        ingest.build(root, self.database, **fixtures.PROVENANCE)
         connection = sqlite3.connect(self.database)
         connection.execute("DROP TABLE content_search")
         connection.commit()
@@ -314,7 +314,7 @@ class RefusesToOpenNonsense(unittest.TestCase):
         self.addCleanup(shutil.rmtree, tmp, True)
         root = fixtures.write_corpus(tmp / "corpus")
         database = tmp / "content.db"
-        ingest.build(root, database)
+        ingest.build(root, database, **fixtures.PROVENANCE)
         with store.Store(database) as opened:
             with self.assertRaises(sqlite3.OperationalError):
                 opened.connection.execute("DELETE FROM questions")

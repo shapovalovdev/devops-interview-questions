@@ -30,15 +30,17 @@ from api.content import ContentStore  # noqa: E402
 from contentdb import ingest  # noqa: E402
 
 
-def _ingested(root: Path, database: Path) -> ContentStore:
+def _ingested(root: Path, database: Path, **provenance: str) -> ContentStore:
     """Build a Content store the way a deployment does, then open it read-only.
 
     Every store-backed fixture goes through Ingest rather than through a
     hand-built SQLite file, because the point of these tests is that the API
     serves what Ingest produced — a fixture assembled by hand could agree with
-    the API and disagree with the corpus.
+    the API and disagree with the corpus. Fixture corpora live outside any Git
+    repository, so their provenance is handed in; the committed corpus (also
+    served here) resolves its own from git.
     """
-    ingest.build(root, database)
+    ingest.build(root, database, **provenance)
     return ContentStore.open(database)
 
 
@@ -51,7 +53,11 @@ def fixture_store(tmp_path_factory):
     committed one does daily.
     """
     directory = tmp_path_factory.mktemp("api-fixture-corpus")
-    store = _ingested(contentdb_fixtures.write_corpus(directory / "corpus"), directory / "content.db")
+    store = _ingested(
+        contentdb_fixtures.write_corpus(directory / "corpus"),
+        directory / "content.db",
+        **contentdb_fixtures.PROVENANCE,
+    )
     yield store
     store.close()
 

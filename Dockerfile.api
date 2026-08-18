@@ -10,6 +10,8 @@
 
 FROM python:3.13-alpine AS builder
 WORKDIR /build
+ARG SOURCE_COMMIT
+ARG BUILD_TIMESTAMP
 COPY requirements-api.txt ./
 RUN python3 -m venv /opt/venv && /opt/venv/bin/pip install --no-cache-dir -r requirements-api.txt
 # Ingest runs on the standard library alone, which is why the corpus can be
@@ -19,7 +21,11 @@ COPY questions ./questions
 COPY labs ./labs
 COPY config ./config
 COPY TAGS.md ./
-RUN python3 -m contentdb.ingest --root /build --output /build/content.db
+# Docker contexts deliberately exclude .git, so provenance must come from the
+# caller that checked out the corpus rather than a mutable runtime inspection.
+RUN test -n "$SOURCE_COMMIT" && test -n "$BUILD_TIMESTAMP" \
+    && python3 -m contentdb.ingest --root /build --output /build/content.db \
+        --source-commit "$SOURCE_COMMIT" --build-timestamp "$BUILD_TIMESTAMP"
 
 FROM python:3.13-alpine
 # `content.db` is copied writable and owned by the service user: `api/content.py`

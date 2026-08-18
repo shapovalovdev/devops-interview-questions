@@ -94,7 +94,7 @@ class ExportWrites(unittest.TestCase):
         self.tmp = Path(tempfile.mkdtemp(prefix="contentdb-export-write-"))
         self.root = fixtures.write_corpus(self.tmp / "corpus")
         self.database = self.tmp / "content.db"
-        ingest.build(self.root, self.database)
+        ingest.build(self.root, self.database, **fixtures.PROVENANCE)
         self.store = store.Store(self.database)
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.addCleanup(self.store.close)
@@ -207,7 +207,7 @@ class DriftGate(unittest.TestCase):
         self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
         root = fixtures.write_corpus(tmp / "corpus")
         database = tmp / "content.db"
-        ingest.build(root, database)
+        ingest.build(root, database, **fixtures.PROVENANCE)
 
         connection = sqlite3.connect(database)
         victim = connection.execute("SELECT id, source_path FROM questions ORDER BY id").fetchone()
@@ -247,7 +247,7 @@ class CommandLine(unittest.TestCase):
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.root = fixtures.write_corpus(self.tmp / "corpus")
         self.database = self.tmp / "content.db"
-        ingest.build(self.root, self.database)
+        ingest.build(self.root, self.database, **fixtures.PROVENANCE)
 
     def test_export_writes_the_corpus_and_reports_success(self):
         target = self.tmp / "fresh"

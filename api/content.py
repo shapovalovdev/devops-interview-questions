@@ -283,6 +283,12 @@ class ContentStore:
     def get_learning_path(self, slug: str) -> Record | None:
         return self._read(self._store.get_learning_path, slug)
 
+    # -- Snapshot provenance -------------------------------------------------
+
+    def get_meta(self) -> Record:
+        """The snapshot identity Ingest recorded, read through the shared lock."""
+        return dict(self._read(self._store.get_meta))
+
     # -- Search ------------------------------------------------------------
 
     def search(self, query: SearchQuery) -> Page:

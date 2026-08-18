@@ -18,12 +18,29 @@ from collections.abc import Iterable, Sequence
 from dataclasses import dataclass, field
 from typing import Any
 
-from api.store import Record, SORT_KEYS, LabQuery, Page, QuestionQuery, RecordInUse, SearchQuery
+from api.store import (
+    Record,
+    SORT_KEYS,
+    LabQuery,
+    Page,
+    QuestionQuery,
+    RecordInUse,
+    SearchQuery,
+    corpus_digest,
+)
 from api.writes import timestamp
 
 #: Difficulty sorts by seniority, not alphabetically; the two happen to agree
 #: today, but the corpus should not depend on that coincidence.
 DIFFICULTY_ORDER = {"junior": 0, "middle": 1, "senior": 2, "staff": 3}
+
+#: The demo corpus's provenance. Obviously fake on purpose: forty zeros is
+#: never a real commit, and a fixed timestamp says "this value is a fixture",
+#: not a claim about when anything happened. The digest, by contrast, is
+#: really computed from the records the fake holds, so the snapshot header and
+#: `GET /api/v1/meta` agree with what the store would actually serve.
+DEMO_SOURCE_COMMIT = "0" * 40
+DEMO_BUILD_TIMESTAMP = "2026-08-18T00:00:00Z"
 
 
 def _sort_value(record: Record, key: str) -> Any:
@@ -131,6 +148,19 @@ class InMemoryStore:
 
     def get_learning_path(self, slug: str) -> Record | None:
         return next((record for record in self.learning_paths if record["slug"] == slug), None)
+
+    def get_meta(self) -> Record:
+        """The snapshot identity, derived from the records the fake holds.
+
+        The digest is computed, not hardcoded, so the fake stands in for the
+        real store honestly: a test that writes through the fake sees the
+        digest move, exactly as the pinned recipe says it must.
+        """
+        return {
+            "source_commit": DEMO_SOURCE_COMMIT,
+            "content_digest": corpus_digest(self.questions, self.labs),
+            "build_timestamp": DEMO_BUILD_TIMESTAMP,
+        }
 
     def search(self, query: SearchQuery) -> Page:
         """Rank matches the way the seam documents: hits, not bare items.

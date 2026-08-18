@@ -270,3 +270,11 @@ def write_corpus(root: Path) -> Path:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(lab_markdown(spec), encoding="utf-8")
     return root
+
+
+#: Provenance handed to Ingest for fixture corpora, which live in a temporary
+#: directory outside any Git repository (a fixture commit of all zeros can
+#: never be mistaken for a real one):
+#:
+#:     ingest.build(root, database, **fixtures.PROVENANCE)
+PROVENANCE = {"source_commit": "0" * 40, "build_timestamp": "2026-08-18T00:00:00Z"}

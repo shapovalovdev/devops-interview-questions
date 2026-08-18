@@ -16,7 +16,9 @@ published. Four things buy it:
 - every insert is ordered — records arrive sorted by `id`, tags and sources by
   their position in the source file, which Export needs to reproduce it — so page contents never depend on directory-walk order;
 - nothing derived from wall-clock time is written; `updated_at` comes from git
-  commit history (see :mod:`contentdb.corpus`), and `VACUUM` normalises the
+  commit history (see :mod:`contentdb.corpus`), the snapshot's `source_commit`
+  and `build_timestamp` come from the same history (`build_timestamp` is the
+  commit's time, not the run's), and `VACUUM` normalises the
   free list before the file is published.
 
 The file is written to a sibling temporary path and renamed into place at the
@@ -35,15 +37,23 @@ import argparse
 import json
 import os
 import sqlite3
+import subprocess
 import sys
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 
-from .corpus import Corpus, CorpusError, read_corpus
+from .corpus import Corpus, CorpusError, content_digest, read_corpus
 from .schema import FTS_DDL, FTS_TABLE, SCHEMA_DDL
 
 
 PAGE_SIZE = 4096
+
+#: Where `build_timestamp` falls back to when git cannot answer — the same
+#: convention `updated_at` uses. A build outside a repository that was handed
+#: a commit explicitly but no timestamp gets the epoch, which says "unknown"
+#: without breaking determinism.
+EPOCH_BUILD_TIMESTAMP = "1970-01-01T00:00:00Z"
 
 
 @dataclass(frozen=True)
@@ -56,13 +66,74 @@ class Summary:
     tags: int
     learning_paths: int
     search: bool
+    source_commit: str = ""
+    content_digest: str = ""
 
     def describe(self) -> str:
         index = "with full-text search" if self.search else "WITHOUT full-text search (FTS5 unavailable)"
-        return (
+        described = (
             f"Ingested {self.questions} Questions and {self.labs} Labs across {self.themes} Themes, "
             f"{self.tags} Tags, and {self.learning_paths} learning paths, {index}."
         )
+        if self.content_digest:
+            described += (
+                f" Snapshot {self.content_digest} from commit {self.source_commit}."
+            )
+        return described
+
+
+def source_commit_at(root: Path) -> str:
+    """The commit the repository at `root` has checked out, or a clear refusal.
+
+    Provenance is a property of the snapshot, so a build that cannot name its
+    commit stops rather than recording a guess. Environments without a
+    repository — a container image, whose build context carries no `.git` —
+    hand the commit in explicitly (`--source-commit`) and never reach here.
+    """
+    try:
+        completed = subprocess.run(
+            ["git", "-C", str(root), "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as error:
+        detail = getattr(error, "stderr", "") or error
+        raise CorpusError(
+            f"cannot record the source commit: {root} is not a readable Git repository "
+            f"({str(detail).strip()}). The snapshot's provenance is part of the store, so "
+            "Ingest refuses to build without it; pass --source-commit (and optionally "
+            "--build-timestamp) when building outside a repository, as a container image does."
+        ) from error
+    commit = completed.stdout.strip()
+    if not commit:
+        raise CorpusError(
+            f"git at {root} answered with no commit; pass --source-commit to name it explicitly."
+        )
+    return commit
+
+
+def build_timestamp_for(root: Path, commit: str) -> str:
+    """When `commit` was made, in UTC — a function of the commit, not of now.
+
+    The store is byte-for-byte reproducible from the same inputs, so the build
+    timestamp cannot be the wall-clock time the run happened to run at; the
+    commit's own time is the deterministic answer to "when was this snapshot
+    produced". Where git cannot answer, the epoch records "unknown" the same
+    way `updated_at` does, keeping the build deterministic there too.
+    """
+    try:
+        seconds = int(
+            subprocess.run(
+                ["git", "-C", str(root), "show", "-s", "--format=%ct", commit],
+                capture_output=True,
+                text=True,
+                check=True,
+            ).stdout.strip()
+        )
+        return datetime.fromtimestamp(seconds, timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    except (OSError, subprocess.CalledProcessError, ValueError):
+        return EPOCH_BUILD_TIMESTAMP
 
 
 def _connect(path: Path) -> sqlite3.Connection:
@@ -86,9 +157,14 @@ def _create_search_index(connection: sqlite3.Connection) -> bool:
     return True
 
 
-def _write(connection: sqlite3.Connection, corpus: Corpus) -> bool:
+def _write(connection: sqlite3.Connection, corpus: Corpus, meta: dict[str, str]) -> bool:
     connection.executescript(SCHEMA_DDL)
     search = _create_search_index(connection)
+
+    connection.executemany(
+        "INSERT INTO store_meta (key, value) VALUES (?, ?)",
+        sorted(meta.items()),
+    )
 
     connection.executemany(
         "INSERT INTO themes (name, state, question_count, lab_count, difficulty_counts)"
@@ -212,15 +288,37 @@ def _write(connection: sqlite3.Connection, corpus: Corpus) -> bool:
     return search
 
 
-def build(root: Path, output: Path) -> Summary:
+def build(
+    root: Path,
+    output: Path,
+    *,
+    source_commit: str | None = None,
+    build_timestamp: str | None = None,
+) -> Summary:
     """Read the corpus under `root` and write the Content store to `output`.
 
     Raises :class:`contentdb.corpus.CorpusError` — before creating any file —
-    if the corpus cannot be read or breaks a catalog rule.
+    if the corpus cannot be read or breaks a catalog rule, or if `root` is not
+    a readable Git repository and no `source_commit` was handed in: the
+    snapshot's provenance is recorded in the store, so a build that cannot
+    name its commit stops rather than record a guess.
+
+    `source_commit` and `build_timestamp` carry provenance explicitly for
+    builds without a repository (a container image, whose build context
+    carries no `.git`). Both stay out of the digest: the digest is a function
+    of the corpus alone, so the same corpus answers the same digest whatever
+    commit labels it.
     """
     root = Path(root)
     output = Path(output)
     corpus = read_corpus(root)
+    commit = source_commit or source_commit_at(root)
+    stamp = build_timestamp or build_timestamp_for(root, commit)
+    meta = {
+        "source_commit": commit,
+        "content_digest": content_digest(corpus),
+        "build_timestamp": stamp,
+    }
 
     output.parent.mkdir(parents=True, exist_ok=True)
     staging = output.with_name(output.name + ".building")
@@ -228,7 +326,7 @@ def build(root: Path, output: Path) -> Summary:
     connection = _connect(staging)
     try:
         with connection:
-            search = _write(connection, corpus)
+            search = _write(connection, corpus, meta)
         # VACUUM rewrites the file with no free pages, so two runs cannot differ
         # by the incidental layout left behind by insert order within a page.
         connection.execute("VACUUM")
@@ -243,6 +341,8 @@ def build(root: Path, output: Path) -> Summary:
         tags=len(corpus.tags),
         learning_paths=len(corpus.learning_paths),
         search=search,
+        source_commit=commit,
+        content_digest=meta["content_digest"],
     )
 
 
@@ -263,9 +363,24 @@ def main(argv: list[str] | None = None) -> int:
         default=Path("build/content.db"),
         help="path to write the Content store to (default: build/content.db)",
     )
+    parser.add_argument(
+        "--source-commit",
+        default=None,
+        help="commit SHA to record as provenance when building outside a Git repository",
+    )
+    parser.add_argument(
+        "--build-timestamp",
+        default=None,
+        help="ISO 8601 build timestamp to record when building outside a Git repository",
+    )
     arguments = parser.parse_args(argv)
     try:
-        summary = build(arguments.root, arguments.output)
+        summary = build(
+            arguments.root,
+            arguments.output,
+            source_commit=arguments.source_commit,
+            build_timestamp=arguments.build_timestamp,
+        )
     except CorpusError as error:
         print(f"Ingest failed: {error}", file=sys.stderr)
         return 1
