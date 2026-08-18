@@ -2,7 +2,7 @@
 
 | | |
 | --- | --- |
-| **Status** | `needs-review` |
+| **Status** | `closed` |
 | **GitHub** | [#171](https://github.com/shapovalovdev/devops-interview-questions/issues/171) |
 | **Label** | `enhancement` |
 | **Epic** | [Content API v1](./0000-epic-content-api.md) |

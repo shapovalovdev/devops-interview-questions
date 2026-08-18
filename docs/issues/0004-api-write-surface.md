@@ -2,7 +2,7 @@
 
 | | |
 | --- | --- |
-| **Status** | `blocked` |
+| **Status** | `ready-for-agent` |
 | **GitHub** | [#172](https://github.com/shapovalovdev/devops-interview-questions/issues/172) |
 | **Label** | `enhancement` |
 | **Epic** | [Content API v1](./0000-epic-content-api.md) |
@@ -37,6 +37,20 @@ This slice makes the Content API writable: create, replace, patch, and delete Qu
 - [ ] The coverage census passes with every write status code covered: 200, 201, 204, 401, 403, 404, 409, 412, 422, 428, 503.
 - [ ] `pytest --cov=api --cov=contentdb --cov-branch --cov-fail-under=95` passes.
 - [ ] `python tests/run_all_tests.py` and `python scripts/build_site.py` still pass.
+
+## Inherited from slice 0003
+
+- `api/content.py` is the adapter between the API and `contentdb`; `CONTENT_API_STORE=api.content:content_store`
+  is the documented wiring. Do not hand `create_app` a raw `contentdb.store.Store` — it satisfies the
+  protocol structurally but not the seam, and startup now refuses it with `StoreDoesNotConform`.
+- Reads share one read-only SQLite connection serialized under a re-entrant lock, because CPython caches
+  prepared statements per connection and two threads reusing one raised `InterfaceError`. Your writer must
+  respect that lock rather than opening a second path to the file without thought.
+- Every read endpoint is swept against a store built from the committed corpus. Extend that sweep to writes;
+  it is the test class that catches an in-memory fake diverging from the real store, and it has already
+  earned its place twice.
+- Flipping the last eight `x-implementation: stub` markers is your slice's job. When they are gone the
+  release gate's "no stub remains" condition is met.
 
 ## Notes
 
