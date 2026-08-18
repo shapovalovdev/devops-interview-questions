@@ -186,8 +186,9 @@ class ContractTest(unittest.TestCase):
         """A shrunken contract must not be able to make this suite pass."""
         self.assertEqual(
             len(self.contract_ops),
-            19,
-            "api/openapi.yaml should describe all 19 v1 operations from the epic; "
+            20,
+            "api/openapi.yaml should describe all 20 v1 operations — the epic's original 19 "
+            "plus GET /api/v1/meta from the snapshot-service epic; "
             f"it describes {sorted(name(key) for key in self.contract_ops)}",
         )
 

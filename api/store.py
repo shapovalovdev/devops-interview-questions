@@ -28,6 +28,7 @@ and asserts that Pydantic never gets pulled in, so the rule cannot rot.
 
 from __future__ import annotations
 
+import hashlib
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any, Protocol, runtime_checkable
@@ -94,9 +95,34 @@ class SearchQuery:
 
 
 #: The keys a search hit carries across the seam, mirroring `SearchHit` in the
-#: contract. They are named here, not in `api/app.py`, because this module is
-#: what a store implementation reads to learn what it owes.
+# contract. They are named here, not in `api/app.py`, because this module is
+# what a store implementation reads to learn what it owes.
 SEARCH_HIT_FIELDS = ("kind", "score", "item")
+
+#: The snapshot fields a store owes through `get_meta`, mirroring `Meta` in the
+#: contract. A store that cannot answer all three cannot be served: the
+#: snapshot header is on every response, so its identity is not optional.
+SNAPSHOT_FIELDS = ("source_commit", "content_digest", "build_timestamp")
+
+
+def corpus_digest(questions: Sequence[Record], labs: Sequence[Record]) -> str:
+    """The corpus-wide content digest, computed by the contract's pinned recipe.
+
+    One `"<id> <content_hash>\\n"` line per Question and per Lab, the lines
+    sorted lexicographically by `id`, concatenated; sha256 of the UTF-8 bytes.
+    `contentdb.corpus.content_digest` computes the same value at Ingest time —
+    `contentdb` may not import `api/` and this module may import nothing
+    outside the standard library, so the recipe exists twice and a test pins
+    the two copies to the same answer. The recipe is published in
+    `api/openapi.yaml` so a downstream consumer can recompute it from the
+    listing endpoints alone.
+    """
+    pairs = sorted(
+        (str(record["id"]), str(record["content_hash"]))
+        for record in (*questions, *labs)
+    )
+    material = "".join(f"{identifier} {content_hash}\n" for identifier, content_hash in pairs)
+    return hashlib.sha256(material.encode("utf-8")).hexdigest()
 
 
 class StoreContractViolation(RuntimeError):
@@ -184,6 +210,10 @@ class Store(Protocol):
     reads is a legitimate deployment: with no Write credential configured the
     service serves the corpus and refuses every mutation, and nothing in the
     read surface should have to grow a method it never calls to say so.
+
+    `get_meta` is the one exception to "reads may fail at runtime": the
+    snapshot identity it returns is needed on every response, so the service
+    resolves it once at startup and refuses to start without it.
     """
 
     def list_questions(self, query: QuestionQuery) -> Page: ...
@@ -205,6 +235,8 @@ class Store(Protocol):
     def get_learning_path(self, slug: str) -> Record | None: ...
 
     def search(self, query: SearchQuery) -> Page: ...
+
+    def get_meta(self) -> Record: ...
 
 
 @runtime_checkable

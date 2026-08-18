@@ -51,7 +51,7 @@ class WritesAgainstTheRealStore(unittest.TestCase):
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.root = corpus_fixtures.write_corpus(self.tmp / "corpus")
         self.database = self.tmp / "content.db"
-        ingest.build(self.root, self.database)
+        ingest.build(self.root, self.database, **corpus_fixtures.PROVENANCE)
         self.store = ContentStore.open(self.database)
         self.addCleanup(self.store.close)
         self.client = TestClient(
@@ -232,7 +232,7 @@ class WritesAgainstTheRealStore(unittest.TestCase):
         export.write(self.root, record, "question")
 
         rebuilt = self.tmp / "rebuilt.db"
-        ingest.build(self.root, rebuilt)
+        ingest.build(self.root, rebuilt, **corpus_fixtures.PROVENANCE)
         from contentdb.store import Store
 
         reingested = Store(rebuilt)

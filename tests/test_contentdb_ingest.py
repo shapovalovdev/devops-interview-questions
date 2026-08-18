@@ -43,6 +43,20 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+#: Provenance handed to Ingest explicitly for fixture corpora, which live in a
+#: temporary directory outside any Git repository. A fixture commit of all
+#: zeros can never be mistaken for a real one, and a fixed timestamp keeps the
+#: byte-identity checks meaningful.
+FIXTURE_COMMIT = "0" * 40
+FIXTURE_TIMESTAMP = "2026-08-18T00:00:00Z"
+
+
+def fixture_build(root: Path, output: Path):
+    return ingest.build(
+        root, output, source_commit=FIXTURE_COMMIT, build_timestamp=FIXTURE_TIMESTAMP
+    )
+
+
 class FixtureCorpus(unittest.TestCase):
     """Base class giving each test a private, writable copy of the fixture corpus."""
 
@@ -53,7 +67,7 @@ class FixtureCorpus(unittest.TestCase):
         self.output = self.tmp / "content.db"
 
     def build(self):
-        return ingest.build(self.root, self.output)
+        return fixture_build(self.root, self.output)
 
     def refuses(self, needles: tuple[str, ...]):
         with self.assertRaises(corpus.CorpusError) as caught:
@@ -76,6 +90,13 @@ class FixtureCorpus(unittest.TestCase):
         self.assertIn(old, text, f"fixture no longer contains {old!r}")
         path.write_text(text.replace(old, new, 1), encoding="utf-8")
         return path
+
+    def meta(self, database: Path | None = None) -> dict:
+        """The `store_meta` table of a built store, as a dict."""
+        connection = sqlite3.connect(database or self.output)
+        rows = connection.execute("SELECT key, value FROM store_meta").fetchall()
+        connection.close()
+        return dict(rows)
 
 
 class BuildsTheFixtureCorpus(FixtureCorpus):
@@ -139,7 +160,7 @@ class BuildsTheFixtureCorpus(FixtureCorpus):
         self.build()
         first = digest(self.output)
         second_output = self.tmp / "second.db"
-        ingest.build(self.root, second_output)
+        fixture_build(self.root, second_output)
         self.assertEqual(first, digest(second_output))
 
     def test_rebuild_over_an_existing_file_replaces_it(self):
@@ -147,6 +168,99 @@ class BuildsTheFixtureCorpus(FixtureCorpus):
         first = digest(self.output)
         self.build()
         self.assertEqual(first, digest(self.output))
+
+
+class RecordsSnapshotProvenance(FixtureCorpus):
+    """The store names the corpus snapshot it was built from."""
+
+    def test_the_commit_and_timestamp_handed_in_are_recorded(self):
+        self.build()
+        meta = self.meta()
+        self.assertEqual(meta["source_commit"], FIXTURE_COMMIT)
+        self.assertEqual(meta["build_timestamp"], FIXTURE_TIMESTAMP)
+
+    def test_the_digest_is_computed_by_the_pinned_recipe(self):
+        summary = self.build()
+        read = corpus.read_corpus(self.root)
+        self.assertEqual(summary.content_digest, corpus.content_digest(read))
+        self.assertEqual(self.meta()["content_digest"], corpus.content_digest(read))
+
+    def test_two_runs_over_the_same_corpus_answer_the_same_digest(self):
+        self.build()
+        first = self.meta()["content_digest"]
+        second_output = self.tmp / "again.db"
+        fixture_build(self.root, second_output)
+        self.assertEqual(first, self.meta(second_output)["content_digest"])
+
+    def test_any_content_change_moves_the_digest(self):
+        self.build()
+        before = self.meta()["content_digest"]
+        self.rewrite_question(
+            "linux", "disk-full", "Recover a full filesystem", "Recover a full filesystem fast"
+        )
+        self.build()
+        self.assertNotEqual(before, self.meta()["content_digest"])
+
+    def test_the_digest_ignores_the_provenance_labels(self):
+        """The digest is a function of the corpus alone, not of its labels."""
+        self.build()
+        before = self.meta()["content_digest"]
+        ingest.build(
+            self.root,
+            self.tmp / "labelled.db",
+            source_commit="f" * 40,
+            build_timestamp="2001-02-03T04:05:06Z",
+        )
+        self.assertEqual(before, self.meta(self.tmp / "labelled.db")["content_digest"])
+
+    def test_the_summary_describes_the_snapshot(self):
+        summary = self.build()
+        text = summary.describe()
+        self.assertIn("Snapshot", text)
+        self.assertIn(FIXTURE_COMMIT, text)
+        self.assertIn(summary.content_digest, text)
+
+
+class ResolvesProvenance(FixtureCorpus):
+    """Where the commit comes from, and what happens where git cannot answer."""
+
+    def test_a_root_outside_a_repository_is_refused_with_the_fix(self):
+        with self.assertRaises(corpus.CorpusError) as caught:
+            ingest.build(self.root, self.output)
+        message = str(caught.exception)
+        self.assertIn("source commit", message)
+        self.assertIn("--source-commit", message)
+        self.assertFalse(self.output.exists(), "a refused Ingest must not write a store")
+
+    def test_an_explicit_commit_without_a_timestamp_falls_back_to_the_epoch(self):
+        ingest.build(self.root, self.output, source_commit="deadbeef")
+        self.assertEqual(self.meta()["build_timestamp"], ingest.EPOCH_BUILD_TIMESTAMP)
+        self.assertEqual(self.meta()["source_commit"], "deadbeef")
+
+    def test_the_command_line_accepts_explicit_provenance(self):
+        completed = subprocess.run(
+            [
+                sys.executable, "-m", "contentdb.ingest",
+                "--root", str(self.root), "--output", str(self.output),
+                "--source-commit", "cafe123", "--build-timestamp", "2020-01-01T00:00:00Z",
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        meta = self.meta()
+        self.assertEqual(meta["source_commit"], "cafe123")
+        self.assertEqual(meta["build_timestamp"], "2020-01-01T00:00:00Z")
+
+    def test_git_answering_with_no_commit_is_refused(self):
+        from unittest import mock
+
+        with mock.patch.object(ingest.subprocess, "run") as run:
+            run.return_value = mock.Mock(stdout="\n", returncode=0)
+            with self.assertRaises(corpus.CorpusError) as caught:
+                ingest.build(self.root, self.output)
+        self.assertIn("--source-commit", str(caught.exception))
 
 
 class RefusesContentItCannotTrust(FixtureCorpus):
@@ -268,6 +382,31 @@ class BuildsTheRealCorpus(unittest.TestCase):
 
     def test_two_runs_produce_identical_bytes(self):
         self.assertEqual(digest(self.first), digest(self.second))
+
+    def test_provenance_is_answered_from_the_repository(self):
+        """The real corpus carries no override, so git at the root answers."""
+        meta = dict(
+            self.connection.execute("SELECT key, value FROM store_meta").fetchall()
+        )
+        head = subprocess.run(
+            ["git", "-C", str(ROOT), "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+        self.assertEqual(meta["source_commit"], head)
+        self.assertRegex(meta["build_timestamp"], r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
+        self.assertNotEqual(meta["build_timestamp"], ingest.EPOCH_BUILD_TIMESTAMP)
+        self.assertEqual(self.summary.source_commit, head)
+        self.assertTrue(self.summary.content_digest)
+
+    def test_the_real_corpus_digest_follows_the_recipe(self):
+        meta = dict(
+            self.connection.execute("SELECT key, value FROM store_meta").fetchall()
+        )
+        self.assertEqual(meta["content_digest"], self.summary.content_digest)
+        self.assertEqual(len(meta["content_digest"]), 64)
+        self.assertRegex(meta["content_digest"], r"^[0-9a-f]{64}$")
 
     def test_content_hash_is_the_sha256_of_the_source_file(self):
         for table in ("questions", "labs"):

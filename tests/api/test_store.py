@@ -99,6 +99,7 @@ def test_a_standard_library_only_class_satisfies_the_protocol():
         def list_learning_paths(self): return Page(items=[], total=0)
         def get_learning_path(self, slug): return None
         def search(self, query): return Page(items=[], total=0)
+        def get_meta(self): return {}
 
     assert isinstance(Contentdb(), Store)
 

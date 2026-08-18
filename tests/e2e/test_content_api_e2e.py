@@ -127,8 +127,13 @@ class ContentApiEndToEnd(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         run("docker", "rm", "-f", CONTAINER, check=False)
+        source_commit = run("git", "-C", str(ROOT), "rev-parse", "HEAD").stdout.strip()
+        build_timestamp = run("git", "-C", str(ROOT), "show", "-s", "--format=%cI", "HEAD").stdout.strip()
         build = run(
-            "docker", "build", "-f", str(ROOT / "Dockerfile.api"), "-t", IMAGE, str(ROOT), check=False
+            "docker", "build", "-f", str(ROOT / "Dockerfile.api"), "-t", IMAGE,
+            "--build-arg", f"SOURCE_COMMIT={source_commit}",
+            "--build-arg", f"BUILD_TIMESTAMP={build_timestamp}",
+            str(ROOT), check=False
         )
         assert build.returncode == 0, f"the API image did not build:\n{build.stderr[-2000:]}"
         started = run(
@@ -173,6 +178,20 @@ class ContentApiEndToEnd(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertEqual(body["status"], "ok")
         self.assertEqual(body["contract_version"], "v1")
+
+    def test_it_announces_its_immutable_snapshot_on_success_and_error(self):
+        status, body, headers = request("GET", "/meta")
+        self.assertEqual(status, 200)
+        self.assertEqual(body["api_version"], "v1")
+        self.assertEqual(body["license"]["spdx_id"], "CC-BY-4.0")
+        self.assertEqual(body["attribution"], "https://github.com/shapovalovdev/devops-interview-questions")
+        self.assertEqual(len(body["source_commit"]), 40)
+        self.assertEqual(len(body["content_digest"]), 64)
+        self.assertEqual(headers["X-Content-Snapshot"], body["content_digest"])
+
+        missing_status, _, missing_headers = request("GET", "/questions/no-such-theme/no-such-question")
+        self.assertEqual(missing_status, 404)
+        self.assertEqual(missing_headers["X-Content-Snapshot"], body["content_digest"])
 
     def test_it_runs_as_a_non_root_user(self):
         identity = run("docker", "exec", CONTAINER, "id", "-u")
@@ -310,8 +329,13 @@ class ReadOnlyContainer(unittest.TestCase):
         if not docker_available():
             raise unittest.SkipTest("Docker is not available; the end-to-end suite cannot run")
         run("docker", "rm", "-f", cls.CONTAINER, check=False)
+        source_commit = run("git", "-C", str(ROOT), "rev-parse", "HEAD").stdout.strip()
+        build_timestamp = run("git", "-C", str(ROOT), "show", "-s", "--format=%cI", "HEAD").stdout.strip()
         build = run(
-            "docker", "build", "-f", str(ROOT / "Dockerfile.api"), "-t", IMAGE, str(ROOT), check=False
+            "docker", "build", "-f", str(ROOT / "Dockerfile.api"), "-t", IMAGE,
+            "--build-arg", f"SOURCE_COMMIT={source_commit}",
+            "--build-arg", f"BUILD_TIMESTAMP={build_timestamp}",
+            str(ROOT), check=False
         )
         assert build.returncode == 0, f"the API image did not build:\n{build.stderr[-2000:]}"
         run("docker", "run", "-d", "--name", cls.CONTAINER, "-p", f"{cls.PORT}:8000", IMAGE)

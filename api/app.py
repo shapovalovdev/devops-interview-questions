@@ -36,6 +36,12 @@ in-memory fake lives in `api/testing.py` and is reachable only from the tests an
 from the explicitly named demo entrypoint, `api.demo:app`. A real deployment
 points `CONTENT_API_STORE` at `api.content:content_store`, which opens the
 SQLite Content store read-only or refuses to start.
+
+**Every answer names its snapshot.** The store records which corpus commit it
+was built from and a corpus-wide content digest; `GET /api/v1/meta` publishes
+them and `SnapshotHeaderMiddleware` stamps the digest on every response header,
+error responses included, so a downstream consumer can tell which immutable
+snapshot any answer — or any refusal — came from.
 """
 
 from __future__ import annotations
@@ -64,6 +70,8 @@ from api.models import (
     LabWrite,
     LearningPath,
     LearningPathPage,
+    License,
+    Meta,
     Problem,
     Question,
     QuestionPage,
@@ -85,6 +93,7 @@ from api.store import (
     Record,
     RecordInUse,
     SearchQuery,
+    SNAPSHOT_FIELDS,
     Store,
     StoreContractViolation,
     StoreIsReadOnly,
@@ -98,6 +107,22 @@ SERVICE_NAME = "content-api"
 CONTRACT_VERSION = "v1"
 PROBLEM_MEDIA_TYPE = "application/problem+json"
 PROBLEM_SCHEMA_REF = "#/components/schemas/Problem"
+
+#: The response header that names the corpus snapshot every answer came from.
+#: It holds the snapshot's `content_digest` and is stamped by app-level
+#: middleware on **every** response — success and error alike — so no route
+#: can forget it and no client can mistake one snapshot for another.
+SNAPSHOT_HEADER = "X-Content-Snapshot"
+
+#: The license the corpus is published under, served at `GET /api/v1/meta`.
+CORPUS_LICENSE = License(
+    name="CC BY 4.0",
+    spdx_id="CC-BY-4.0",
+    url="https://creativecommons.org/licenses/by/4.0/",
+)
+
+#: Where attribution is owed: the repository the corpus lives in.
+ATTRIBUTION_URL = "https://github.com/shapovalovdev/devops-interview-questions"
 
 #: Names the environment variable that points the service at a Content store.
 #: Its value is `<module>:<callable>`, a zero-argument callable returning a
@@ -204,6 +229,76 @@ def check_store_conforms(store: Store) -> None:
                 "api.content.ContentStore.open(path) to create_app(), rather than the contentdb "
                 "store itself."
             )
+
+
+def snapshot_metadata(store: Store) -> Record:
+    """The snapshot identity this service will announce, resolved once.
+
+    Every response this service sends carries the snapshot header, so the
+    snapshot's identity is configuration, not a per-request read: a store that
+    cannot name its snapshot cannot be served at all, and this refuses at
+    startup rather than letting a service answer a client's every question
+    except "who are you". This is deliberately stricter than
+    `check_store_conforms`, which leaves a store whose reads merely raise
+    alone: those failures are runtime `500`s, while a missing identity is a
+    wiring mistake that could never self-heal.
+    """
+    try:
+        meta = store.get_meta()
+    except Exception as error:  # noqa: BLE001 - any failure is the same refusal
+        raise StoreDoesNotConform(
+            f"{type(store).__module__}.{type(store).__qualname__}.get_meta() failed ({error}), but the "
+            "snapshot identity is stamped on every response this service sends: set "
+            "CONTENT_API_STORE=api.content:content_store over a store built by "
+            "`python -m contentdb.ingest`, which records source_commit, content_digest, and "
+            "build_timestamp."
+        ) from error
+    if not isinstance(meta, Mapping) or any(
+        not isinstance(meta.get(field), str) or not meta.get(field) for field in SNAPSHOT_FIELDS
+    ):
+        raise StoreDoesNotConform(
+            f"{type(store).__module__}.{type(store).__qualname__}.get_meta() answered with "
+            f"{meta!r}, but the snapshot identity needs a non-empty string for each of "
+            f"{list(SNAPSHOT_FIELDS)}. See api/store.py for what the seam owes."
+        )
+    return dict(meta)
+
+
+class SnapshotHeaderMiddleware:
+    """Stamp `X-Content-Snapshot` on every HTTP response, errors included.
+
+    A pure ASGI wrapper rather than a route decorator, for two reasons. First,
+    no route can opt out or forget: the header is added where the response
+    bytes leave the service, not where each handler happens to remember it.
+    Second, it is installed **outside** the whole middleware stack — wrapped
+    around what `build_middleware_stack()` returns — so even the outermost
+    500 renderer, which sits above every user middleware and answers when a
+    handler raises past them all, sends its problem document through this
+    wrapper and carries the header too.
+
+    The digest is read from `app.state` (resolved once at startup by
+    `snapshot_metadata`) rather than from the store per request: a store that
+    fails mid-flight still produces responses, and every one of them still
+    names the snapshot it came from.
+    """
+
+    def __init__(self, app: Any) -> None:
+        self.app = app
+
+    async def __call__(self, scope: Any, receive: Any, send: Any) -> None:
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+        digest = scope["app"].state.content_digest
+
+        async def send_with_snapshot(message: Any) -> None:
+            if message["type"] == "http.response.start":
+                headers = list(message.get("headers") or [])
+                headers.append((SNAPSHOT_HEADER.lower().encode("ascii"), digest.encode("ascii")))
+                message = {**message, "headers": headers}
+            await send(message)
+
+        await self.app(scope, receive, send_with_snapshot)
 
 
 def problem_response(
@@ -583,6 +678,7 @@ def create_app(store: Store | None = None, environ: Mapping[str, str] | None = N
     if store is None:
         store = store_from_environment(environ)
     check_store_conforms(store)
+    content_meta = snapshot_metadata(store)
 
     app = FastAPI(
         title="Content API",
@@ -599,6 +695,10 @@ def create_app(store: Store | None = None, environ: Mapping[str, str] | None = N
     app.state.store = store
     app.state.environ = environ
     app.state.write_credential = writes.write_credential(environ)
+    #: The snapshot identity, resolved once: the header on every response and
+    #: `GET /api/v1/meta` serve this, never a per-request store read.
+    app.state.content_meta = content_meta
+    app.state.content_digest = str(content_meta["content_digest"])
     #: Loaded on the first write rather than at startup: a read-only deployment
     #: has no use for the Theme and tag vocabularies, and making the service
     #: refuse to start without `TAGS.md` beside it would break every deployment
@@ -735,6 +835,26 @@ def create_app(store: Store | None = None, environ: Mapping[str, str] | None = N
     )
     def get_health() -> HealthReport:
         return HealthReport(status="ok", service=SERVICE_NAME, contract_version=CONTRACT_VERSION)
+
+    @app.get(
+        "/api/v1/meta",
+        operation_id="getMeta",
+        tags=["Service"],
+        summary="Identify the immutable corpus snapshot this service serves.",
+        response_model=Meta,
+    )
+    def get_meta() -> Meta:
+        # Serves the identity resolved at startup: the store state Ingest
+        # recorded, plus the contract's own version and licensing, which are
+        # facts about this service rather than about the store.
+        return Meta(
+            source_commit=str(app.state.content_meta["source_commit"]),
+            content_digest=str(app.state.content_meta["content_digest"]),
+            api_version=CONTRACT_VERSION,
+            build_timestamp=str(app.state.content_meta["build_timestamp"]),
+            license=CORPUS_LICENSE,
+            attribution=ATTRIBUTION_URL,
+        )
 
     # -------------------------------------------------------------- Questions
 
@@ -1243,6 +1363,17 @@ def create_app(store: Store | None = None, environ: Mapping[str, str] | None = N
             model = Question if kind == ItemKind.question.value else Lab
             items.append(SearchHit(kind=kind, score=score, item=model.model_validate(item)))
         return SearchPage(items=items, total=page.total, limit=limit, offset=offset)
+
+    # The snapshot header goes on outside everything, including the outermost
+    # 500 renderer no user middleware sits above: wrapping the built stack
+    # puts this around `ServerErrorMiddleware` itself. See the class for why
+    # that placement is the whole point.
+    stack_factory = app.build_middleware_stack
+
+    def stack_that_stamps_the_snapshot() -> Any:
+        return SnapshotHeaderMiddleware(stack_factory())
+
+    app.build_middleware_stack = stack_that_stamps_the_snapshot  # type: ignore[method-assign]
 
     return app
 

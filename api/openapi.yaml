@@ -34,6 +34,13 @@
 # - `If-Match` on `PUT`, `PATCH`, and `DELETE` carries the item's
 #   `content_hash`.  It is declared optional for the same reason: a missing
 #   precondition is a documented `428`, not a malformed request.
+# - Every response — success and error alike, and there is no opt-out — carries
+#   the `X-Content-Snapshot` header holding the `content_digest` of the corpus
+#   snapshot the service is serving, so a client can tell which snapshot any
+#   answer, including a refusal, came from.  The header is declared under
+#   `components/headers` and on `/api/v1/meta`; it is stated here rather than
+#   repeated on all twenty operations because it is a property of the service,
+#   not of any one operation.
 
 openapi: 3.1.0
 
@@ -75,10 +82,59 @@ paths:
       responses:
         '200':
           description: The service is up.
+          headers:
+            X-Content-Snapshot:
+              $ref: '#/components/headers/X-Content-Snapshot'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthReport'
+
+  /api/v1/meta:
+    get:
+      operationId: getMeta
+      tags: [Service]
+      summary: Identify the immutable corpus snapshot this service serves.
+      description: |
+        The snapshot's provenance and identity, read from the Content store's
+        own metadata rather than from runtime inspection: Ingest records all
+        three store-side fields when it builds the store, and this endpoint
+        reports them.
+
+        **The `content_digest` recipe, pinned so a downstream consumer can
+        recompute and verify it.** Take every Question and every Lab the
+        snapshot holds; for each, form the line `<id> <content_hash>` followed
+        by a newline (`\n`), where `id` is `<theme>/<slug>` and `content_hash`
+        is the item's sha256 `content_hash` exactly as the API publishes it;
+        sort the lines lexicographically by `id`; concatenate them; take the
+        sha256 of the UTF-8 bytes of the result. The digest is
+        order-independent (the sort) and total (an item added, removed, or
+        changed in one byte changes it), and it covers Questions and Labs
+        together. The recipe needs nothing but `GET /api/v1/questions` and
+        `GET /api/v1/labs`, walked to the end of both lists.
+
+        `build_timestamp` is the commit time of `source_commit` in UTC (or the
+        explicitly recorded timestamp of a build handed one, as a container
+        image is), **not** the wall-clock time the Ingest run happened to run
+        at: the store is a deterministic artifact — two builds from the same
+        corpus are byte-identical — so everything the store records, this
+        included, is a function of the commit. The build timestamp is
+        documentation for humans and is not part of the digest.
+
+        `api_version` is the major version of this contract (`v1`), and the
+        license and attribution name the terms the corpus is published under:
+        CC BY 4.0, and the repository the corpus lives in.
+      x-implementation: implemented
+      responses:
+        '200':
+          description: The snapshot's provenance and identity.
+          headers:
+            X-Content-Snapshot:
+              $ref: '#/components/headers/X-Content-Snapshot'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meta'
 
   /api/v1/questions:
     get:
@@ -760,6 +816,16 @@ components:
       schema:
         type: string
 
+    X-Content-Snapshot:
+      description: |
+        The `content_digest` of the corpus snapshot this response came from —
+        the same value `GET /api/v1/meta` reports. Present on every response
+        the service sends, error responses included; no operation can opt out.
+      required: true
+      schema:
+        type: string
+        pattern: '^[0-9a-f]{64}$'
+
   responses:
 
     NotModified:
@@ -872,6 +938,65 @@ components:
         contract_version:
           type: string
           description: The major version of the contract this build serves.
+
+    License:
+      type: object
+      description: The terms the corpus is published under.
+      required: [name, spdx_id, url]
+      properties:
+        name:
+          type: string
+          description: The human-readable license name.
+        spdx_id:
+          type: string
+          description: The SPDX license identifier.
+        url:
+          type: string
+          description: Where the license text lives.
+
+    Meta:
+      type: object
+      description: |
+        The identity of the immutable corpus snapshot this service serves. The
+        three store-side fields are recorded by Ingest when the store is built;
+        see `GET /api/v1/meta` for the `content_digest` recipe a downstream
+        consumer uses to recompute and verify the digest.
+      required:
+        - source_commit
+        - content_digest
+        - api_version
+        - build_timestamp
+        - license
+        - attribution
+      properties:
+        source_commit:
+          type: string
+          description: >
+            The Git commit SHA of the corpus the store was ingested from, as
+            `git rev-parse HEAD` answered at Ingest time (or the commit a
+            build without a repository handed Ingest explicitly).
+        content_digest:
+          type: string
+          pattern: '^[0-9a-f]{64}$'
+          description: >
+            The corpus-wide content digest: sha256 over the sorted
+            `(id, content_hash)` pairs of the Questions and Labs the snapshot
+            holds. Same corpus, same digest; any content change, different
+            digest.
+        api_version:
+          type: string
+          description: The major version of the contract this build serves.
+        build_timestamp:
+          type: string
+          format: date-time
+          description: >
+            When this snapshot was produced: the commit time of
+            `source_commit` in UTC. Not part of the digest.
+        license:
+          $ref: '#/components/schemas/License'
+        attribution:
+          type: string
+          description: The repository the corpus lives in, where attribution is owed.
 
     Source:
       type: object

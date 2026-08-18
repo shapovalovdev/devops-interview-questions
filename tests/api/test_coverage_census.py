@@ -85,6 +85,7 @@ def implemented_producers() -> dict[tuple[str, str, str], Callable[[], int]]:
     failing = client_for(ExplodingStore())
     return {
         ("/api/v1/health", "get", "200"): lambda: client.get("/api/v1/health").status_code,
+        ("/api/v1/meta", "get", "200"): lambda: client.get("/api/v1/meta").status_code,
         ("/api/v1/questions", "get", "200"): lambda: client.get("/api/v1/questions").status_code,
         # The 422 is a real out-of-range limit, not a fabricated one: the census
         # is only worth running if the requests it makes are requests a client
@@ -254,8 +255,9 @@ def test_the_census_covers_every_response_the_contract_promises():
     owed = promised_responses(contract)
     required = {(path, method, status) for (path, method), codes in owed.items() for status in codes}
 
-    assert len(owed) == 19, (
-        "the census expects the epic's 19 v1 operations; api/openapi.yaml describes "
+    assert len(owed) == 20, (
+        "the census expects the 20 v1 operations — the epic's original 19 plus "
+        "GET /api/v1/meta from the snapshot-service epic; api/openapi.yaml describes "
         f"{len(owed)}. If an operation was added or removed, say so on the epic first."
     )
     assert required, "the census found nothing to check, which means it is not checking"

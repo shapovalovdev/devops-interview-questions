@@ -41,6 +41,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Build the API image and exercise a running container
         # The suite builds the image, starts it, waits for health, and speaks
         # real HTTP to it. It removes its containers even when it fails.
@@ -54,8 +56,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Bring up the site and the API
-        run: docker compose up --build --detach
+        run: |
+          SOURCE_COMMIT="$(git rev-parse HEAD)" \
+          BUILD_TIMESTAMP="$(git show -s --format=%cI HEAD)" \
+          docker compose up --build --detach
       - name: Wait for both services and check each answers
         run: |
           set -euo pipefail

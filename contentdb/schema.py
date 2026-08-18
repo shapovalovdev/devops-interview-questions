@@ -103,6 +103,17 @@ CREATE TABLE learning_path_steps (
     why         TEXT NOT NULL,
     PRIMARY KEY (path_slug, position)
 );
+
+-- The snapshot's own provenance, written once by Ingest and read by the
+-- Content API's `GET /api/v1/meta` and snapshot response header: which commit
+-- the corpus was ingested from (`source_commit`), the pinned corpus-wide
+-- digest (`content_digest`, see `contentdb.corpus.content_digest`), and when
+-- that commit was made (`build_timestamp` — the commit's time, not the
+-- wall-clock time of the Ingest run, so two builds stay byte-identical).
+CREATE TABLE store_meta (
+    key   TEXT PRIMARY KEY,
+    value TEXT NOT NULL
+);
 """
 
 FTS_DDL = """

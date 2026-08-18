@@ -62,6 +62,25 @@ class HealthReport(BaseModel):
     contract_version: str
 
 
+class License(BaseModel):
+    """The terms the corpus is published under."""
+
+    name: str
+    spdx_id: str
+    url: str
+
+
+class Meta(BaseModel):
+    """The identity of the immutable corpus snapshot this service serves."""
+
+    source_commit: str
+    content_digest: str
+    api_version: str
+    build_timestamp: datetime
+    license: License
+    attribution: str
+
+
 class Source(BaseModel):
     url: str
     source_type: str

@@ -1,6 +1,7 @@
 # The whole stack: the static site, and the Content API beside it.
 #
-#   docker compose up --build
+#   SOURCE_COMMIT="$(git rev-parse HEAD)" \
+#   BUILD_TIMESTAMP="$(git show -s --format=%cI HEAD)" docker compose up --build
 #
 # The site is the canonical publication and needs nothing to run. The API is
 # optional, and it serves the same corpus from the Content store baked into its
@@ -17,6 +18,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.api
+      args:
+        # The build context intentionally has no .git. A snapshot must name
+        # the corpus commit it was built from rather than guessing at runtime.
+        # Empty defaults let `docker compose down` inspect this file without
+        # the build-only variables. Dockerfile.api itself refuses an empty
+        # value during a build, so `docker compose up --build` still requires
+        # explicit immutable provenance.
+        SOURCE_COMMIT: "${SOURCE_COMMIT:-}"
+        BUILD_TIMESTAMP: "${BUILD_TIMESTAMP:-}"
     ports:
       - "8000:8000"
     environment:
