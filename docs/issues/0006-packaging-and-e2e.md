@@ -2,7 +2,7 @@
 
 | | |
 | --- | --- |
-| **Status** | `blocked` |
+| **Status** | `ready-for-agent` |
 | **GitHub** | [#174](https://github.com/shapovalovdev/devops-interview-questions/issues/174) |
 | **Label** | `enhancement` |
 | **Epic** | [Content API v1](./0000-epic-content-api.md) |
@@ -34,6 +34,20 @@ The API works under `pytest`. This slice makes it something you can run, and pro
 - [ ] The coverage gate and the coverage census pass in CI.
 - [ ] `docker build -t devops-questions .` (the static site image) still builds and smoke-tests green, and `python scripts/build_site.py` still runs with no third-party package installed.
 - [ ] `docs/content-api.md` exists, is accurate against the shipped API, and is linked from `README.md`.
+
+## Inherited from slices 0003 and 0004
+
+- The service is configured by three environment variables: `CONTENT_API_STORE` (`<module>:<callable>`,
+  use `api.content:content_store`), `CONTENT_API_STORE_PATH` for the database, and the Write credential
+  variable named in `api/writes.py`. With the credential unset the service starts read-only and refuses
+  every write with `503` — that is the correct default for a container that has not been given one.
+- `api/content.py` opens the store read-only and lazily opens a second `mode=rw` connection on the first
+  write. Your image must therefore ship a **writable** database file, not a read-only mount, if writes are
+  to work in the container.
+- Validation renders each candidate through `contentdb.export` and re-reads it through `contentdb.corpus`,
+  so a write cannot create a record the Drift gate would reject.
+- The suite is at 378 tests, 95.09% combined branch coverage. Your end-to-end suite is additional to it, not
+  a replacement: it exists to catch what only appears once the thing is packaged and served.
 
 ## Notes
 
