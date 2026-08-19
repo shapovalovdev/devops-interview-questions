@@ -86,6 +86,24 @@ from api.models import (
     ThemePage,
 )
 from api import writes
+from api.helpers import (
+    ETAG_DOCUMENTATION,
+    LINKED_LABS_LIMIT,
+    NOT_MODIFIED_DOCUMENTATION,
+    PROBLEM_MEDIA_TYPE,
+    PROBLEM_SCHEMA_REF,
+    catalogue,
+    conditional,
+    etag_for,
+    etag_matches,
+    item_responses,
+    missing,
+    only_documented_validation_errors,
+    problem_response,
+    problem_responses,
+)
+from api.routes import catalogue as catalogue_routes
+from api.routes import StoreDep, VocabularyDep, get_store, get_vocabulary
 from api.store import (
     InvalidQuery,
     LabQuery,
@@ -105,8 +123,6 @@ from api.store import (
 
 SERVICE_NAME = "content-api"
 CONTRACT_VERSION = "v1"
-PROBLEM_MEDIA_TYPE = "application/problem+json"
-PROBLEM_SCHEMA_REF = "#/components/schemas/Problem"
 
 #: The response header that names the corpus snapshot every answer came from.
 #: It holds the snapshot's `content_digest` and is stamped by app-level
@@ -300,168 +316,6 @@ class SnapshotHeaderMiddleware:
 
         await self.app(scope, receive, send_with_snapshot)
 
-
-def problem_response(
-    status: int,
-    detail: str,
-    instance: str,
-    errors: list[dict[str, str]] | None = None,
-) -> JSONResponse:
-    """Build an RFC 9457 problem document. It never carries a stack trace."""
-    body: dict[str, Any] = {
-        # `about:blank` is RFC 9457's own marker for "the status code is the
-        # whole story"; a made-up URI would promise documentation that does not
-        # exist yet. Slice 4 introduces real type URIs alongside real failures.
-        "type": "about:blank",
-        "title": HTTPStatus(status).phrase,
-        "status": status,
-        "detail": detail,
-        "instance": instance,
-    }
-    if errors:
-        body["errors"] = errors
-    return JSONResponse(status_code=status, media_type=PROBLEM_MEDIA_TYPE, content=body)
-
-
-def only_documented_validation_errors(schema: dict[str, Any]) -> dict[str, Any]:
-    """Drop the `422` FastAPI adds to every operation that parses a parameter.
-
-    FastAPI documents a validation error on any operation with a parameter or a
-    body, including `GET /api/v1/questions/{theme}/{slug}`, whose two path
-    segments are strings that cannot fail validation. The contract documents
-    `422` only where a client can actually provoke one, and the coverage census
-    demands a real request per documented status — so an unprovokable `422` in
-    the served schema is a promise no test could ever keep.
-
-    The rule is mechanical: this service answers every error as
-    `application/problem+json`, so a `422` that carries only the framework's own
-    `application/json` validation model was added by the framework and is
-    removed. Where the operation really does declare one, the problem document
-    survives and the framework's model is dropped beside it, because two
-    incompatible error shapes on one status is worse than either.
-    """
-    for item in schema.get("paths", {}).values():
-        for operation in item.values():
-            responses = operation.get("responses", {})
-            content = responses.get("422", {}).get("content", {})
-            content.pop("application/json", None)
-            if "422" in responses and not content:
-                del responses["422"]
-    return schema
-
-
-def problem_responses(*statuses: int) -> dict[int | str, dict[str, Any]]:
-    """Declare, for the generated schema, that these statuses are problem docs."""
-    return {
-        status: {
-            "description": HTTPStatus(status).phrase,
-            "content": {PROBLEM_MEDIA_TYPE: {"schema": {"$ref": PROBLEM_SCHEMA_REF}}},
-        }
-        for status in statuses
-    }
-
-
-#: Every single-item read documents the same two things beyond its body: the
-#: ETag it answers with, and the `304` a matching `If-None-Match` earns.
-ETAG_DOCUMENTATION = {
-    "headers": {
-        "ETag": {
-            "description": "The item's `content_hash`, quoted.",
-            "schema": {"type": "string"},
-        }
-    }
-}
-NOT_MODIFIED_DOCUMENTATION = {
-    "description": "The client's ETag still matches; no body is returned."
-}
-
-#: How many linked Labs a Question's `Link` header will name. A Question has a
-#: handful of Labs at most, and a header is not a place to page.
-LINKED_LABS_LIMIT = 50
-
-
-def item_responses(*statuses: int) -> dict[int | str, dict[str, Any]]:
-    """Declare the response set every single-item read shares."""
-    return {
-        200: dict(ETAG_DOCUMENTATION),
-        304: dict(NOT_MODIFIED_DOCUMENTATION),
-        **problem_responses(*statuses),
-    }
-
-
-def etag_for(record: Record, payload: BaseModel) -> str:
-    """The ETag for one item, quoted as an HTTP entity tag.
-
-    A Question and a Lab are files, and the contract publishes their
-    `content_hash` — the sha256 of the source file — as the validator, so a
-    client can compare what it holds against what git holds. A Theme, a tag, and
-    a learning path have no file behind them: they are derived from the corpus.
-    Rather than invent a hash the corpus does not have, their ETag is a digest of
-    the representation the client is about to receive, which gives the same
-    guarantee a validator has to give — it changes exactly when the body does.
-    """
-    content_hash = record.get("content_hash")
-    if isinstance(content_hash, str) and content_hash:
-        return f'"{content_hash}"'
-    return f'"sha256:{hashlib.sha256(payload.model_dump_json().encode("utf-8")).hexdigest()}"'
-
-
-def etag_matches(if_none_match: str | None, etag: str) -> bool:
-    """Whether the client's `If-None-Match` already covers this ETag.
-
-    RFC 9110 allows a list, the wildcard `*`, and weak tags; a client that sends
-    back the `W/`-prefixed form of the tag it was given still holds the same
-    representation, and answering it `200` would waste the round trip the header
-    exists to save.
-    """
-    if not if_none_match:
-        return False
-    for candidate in if_none_match.split(","):
-        candidate = candidate.strip()
-        if candidate == "*" or candidate.removeprefix("W/") == etag:
-            return True
-    return False
-
-
-def conditional(
-    payload: BaseModel,
-    record: Record,
-    if_none_match: str | None,
-    response: Response,
-    links: Sequence[str] = (),
-) -> Any:
-    """Answer a single-item read, as `304` when the client is already current.
-
-    The `304` carries the validator and the links but no body: that is the whole
-    point of the exchange, and a body would make the saved bandwidth a lie.
-    """
-    headers = {"ETag": etag_for(record, payload)}
-    if links:
-        headers["Link"] = ", ".join(links)
-    if etag_matches(if_none_match, headers["ETag"]):
-        return Response(status_code=304, headers=headers)
-    response.headers.update(headers)
-    return payload
-
-
-def catalogue(envelope: type[BaseModel], page: Any) -> Any:
-    """Envelope a bounded catalogue: Themes, tags, and learning paths.
-
-    These three are derived from the corpus and small enough to return whole,
-    which the contract records by publishing no `limit` or `offset` parameter
-    for them. The envelope is still the one every list shares — `limit` simply
-    reports the size of the page returned, so a client parses one shape.
-    """
-    items = list(page.items)
-    return envelope(items=items, total=page.total, limit=len(items), offset=0)
-
-
-def missing(kind: str, identifier: str) -> NoReturn:
-    """Answer for an id the corpus does not hold."""
-    raise HTTPException(
-        status_code=404,
-        detail=f"No {kind} {identifier!r} exists in this Content store.",
-    )
 
 
 def lab_links(store: Store, question_id: str) -> list[str]:
@@ -705,18 +559,6 @@ def create_app(store: Store | None = None, environ: Mapping[str, str] | None = N
     #: that ships only the store.
     app.state.vocabulary = None
 
-    def vocabulary() -> writes.Vocabulary:
-        if app.state.vocabulary is None:
-            try:
-                app.state.vocabulary = writes.Vocabulary.load(environ=environ)
-            except OSError as error:
-                raise StoreIsReadOnly(
-                    "This Content API cannot validate a write: the Theme and tag vocabularies are "
-                    f"read from config/content-manifest.json and TAGS.md, and they are not readable "
-                    f"({error}). Point {writes.CORPUS_ROOT_VARIABLE} at the corpus this store was "
-                    "built from."
-                ) from error
-        return app.state.vocabulary
 
     generated_openapi = app.openapi
 
@@ -843,15 +685,19 @@ def create_app(store: Store | None = None, environ: Mapping[str, str] | None = N
         summary="Identify the immutable corpus snapshot this service serves.",
         response_model=Meta,
     )
-    def get_meta() -> Meta:
+    def get_meta(request: Request) -> Meta:
         # Serves the identity resolved at startup: the store state Ingest
         # recorded, plus the contract's own version and licensing, which are
         # facts about this service rather than about the store.
+        #
+        # Reads `request.app.state` rather than the enclosing `app`, so this is
+        # the last route handler in the module that closed over create_app().
+        meta = request.app.state.content_meta
         return Meta(
-            source_commit=str(app.state.content_meta["source_commit"]),
-            content_digest=str(app.state.content_meta["content_digest"]),
+            source_commit=str(meta["source_commit"]),
+            content_digest=str(meta["content_digest"]),
             api_version=CONTRACT_VERSION,
-            build_timestamp=str(app.state.content_meta["build_timestamp"]),
+            build_timestamp=str(meta["build_timestamp"]),
             license=CORPUS_LICENSE,
             attribution=ATTRIBUTION_URL,
         )
@@ -922,6 +768,7 @@ def create_app(store: Store | None = None, environ: Mapping[str, str] | None = N
         request: Request,
         response: Response,
         store: Annotated[Store, Depends(get_store)],
+        vocabulary: VocabularyDep,
         question: QuestionWrite,
         x_api_key: Annotated[str | None, Header(alias="X-API-Key")] = None,
     ) -> Any:
@@ -980,6 +827,7 @@ def create_app(store: Store | None = None, environ: Mapping[str, str] | None = N
         request: Request,
         response: Response,
         store: Annotated[Store, Depends(get_store)],
+        vocabulary: VocabularyDep,
         theme: str,
         slug: str,
         question: QuestionWrite,
@@ -1013,6 +861,7 @@ def create_app(store: Store | None = None, environ: Mapping[str, str] | None = N
         request: Request,
         response: Response,
         store: Annotated[Store, Depends(get_store)],
+        vocabulary: VocabularyDep,
         theme: str,
         slug: str,
         question: QuestionPatch,
@@ -1122,6 +971,7 @@ def create_app(store: Store | None = None, environ: Mapping[str, str] | None = N
         request: Request,
         response: Response,
         store: Annotated[Store, Depends(get_store)],
+        vocabulary: VocabularyDep,
         lab: LabWrite,
         x_api_key: Annotated[str | None, Header(alias="X-API-Key")] = None,
     ) -> Any:
@@ -1179,6 +1029,7 @@ def create_app(store: Store | None = None, environ: Mapping[str, str] | None = N
         request: Request,
         response: Response,
         store: Annotated[Store, Depends(get_store)],
+        vocabulary: VocabularyDep,
         theme: str,
         slug: str,
         lab: LabWrite,
@@ -1210,6 +1061,7 @@ def create_app(store: Store | None = None, environ: Mapping[str, str] | None = N
         request: Request,
         response: Response,
         store: Annotated[Store, Depends(get_store)],
+        vocabulary: VocabularyDep,
         theme: str,
         slug: str,
         lab: LabPatch,
@@ -1256,113 +1108,10 @@ def create_app(store: Store | None = None, environ: Mapping[str, str] | None = N
         writer.delete_lab(identifier, "DELETE")
         return Response(status_code=204)
 
-    # --------------------------------------------------------------- Taxonomy
-
-    @app.get(
-        "/api/v1/themes",
-        operation_id="listThemes",
-        tags=["Taxonomy"],
-        summary="List every canonical Theme with its counts.",
-        response_model=ThemePage,
-        responses=problem_responses(500),
-    )
-    def list_themes(store: Annotated[Store, Depends(get_store)]) -> ThemePage:
-        return catalogue(ThemePage, store.list_themes())
-
-    @app.get(
-        "/api/v1/themes/{name}",
-        operation_id="getTheme",
-        tags=["Taxonomy"],
-        summary="Read one Theme by its canonical name.",
-        response_model=Theme,
-        responses=item_responses(404, 500),
-    )
-    def get_theme(
-        response: Response,
-        store: Annotated[Store, Depends(get_store)],
-        name: str,
-        if_none_match: Annotated[str | None, Header(alias="If-None-Match")] = None,
-    ) -> Any:
-        record = store.get_theme(name)
-        if record is None:
-            missing("Theme", name)
-        return conditional(Theme.model_validate(record), record, if_none_match, response)
-
-    @app.get(
-        "/api/v1/tags",
-        operation_id="listTags",
-        tags=["Taxonomy"],
-        summary="List every tag with its counts.",
-        response_model=TagPage,
-        responses=problem_responses(500),
-    )
-    def list_tags(store: Annotated[Store, Depends(get_store)]) -> TagPage:
-        return catalogue(TagPage, store.list_tags())
-
-    # --------------------------------------------------------- Learning paths
-
-    @app.get(
-        "/api/v1/learning-paths",
-        operation_id="listLearningPaths",
-        tags=["Learning paths"],
-        summary="List every learning path.",
-        response_model=LearningPathPage,
-        responses=problem_responses(500),
-    )
-    def list_learning_paths(store: Annotated[Store, Depends(get_store)]) -> LearningPathPage:
-        return catalogue(LearningPathPage, store.list_learning_paths())
-
-    @app.get(
-        "/api/v1/learning-paths/{slug}",
-        operation_id="getLearningPath",
-        tags=["Learning paths"],
-        summary="Read one learning path, with its ordered steps.",
-        response_model=LearningPath,
-        responses=item_responses(404, 500),
-    )
-    def get_learning_path(
-        response: Response,
-        store: Annotated[Store, Depends(get_store)],
-        slug: str,
-        if_none_match: Annotated[str | None, Header(alias="If-None-Match")] = None,
-    ) -> Any:
-        record = store.get_learning_path(slug)
-        if record is None:
-            missing("learning path", slug)
-        return conditional(LearningPath.model_validate(record), record, if_none_match, response)
-
-    # ----------------------------------------------------------------- Search
-
-    @app.get(
-        "/api/v1/search",
-        operation_id="search",
-        tags=["Search"],
-        summary="Search Questions and Labs together, ranked by relevance.",
-        response_model=SearchPage,
-        responses=problem_responses(422, 500),
-    )
-    def search(
-        store: Annotated[Store, Depends(get_store)],
-        q: Annotated[str, Query(min_length=1, description="The search text; it is required.")],
-        kind: Annotated[
-            ItemKind | None, Query(description="Restrict the result to one kind of item.")
-        ] = None,
-        limit: Annotated[int, Query(ge=1, le=200, description="Maximum number of items in the page.")] = 50,
-        offset: Annotated[int, Query(ge=0, description="Number of items to skip before the page starts.")] = 0,
-    ) -> SearchPage:
-        page = store.search(
-            SearchQuery(q=q, kind=kind.value if kind else None, limit=limit, offset=offset)
-        )
-        # One ranked list carries two kinds of item, so the hit says which it is
-        # and the model is chosen from that rather than guessed from the fields:
-        # a Question and a Lab overlap enough that a union would sometimes pick
-        # the wrong one and silently drop what only the other has.
-        items = []
-        for hit in page.items:
-            kind, score, item = search_hit(hit)
-            model = Question if kind == ItemKind.question.value else Lab
-            items.append(SearchHit(kind=kind, score=score, item=model.model_validate(item)))
-        return SearchPage(items=items, total=page.total, limit=limit, offset=offset)
+    # The catalogue reads -- Themes, tags, learning paths, and search -- live in
+    # `api/routes/catalogue.py`. They close over nothing, so they moved verbatim;
+    # `tests/api/test_contract.py` proves the served schema is unchanged.
+    app.include_router(catalogue_routes.router)
 
     # The snapshot header goes on outside everything, including the outermost
     # 500 renderer no user middleware sits above: wrapping the built stack
