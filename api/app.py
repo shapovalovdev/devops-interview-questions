@@ -103,6 +103,7 @@ from api.helpers import (
     problem_responses,
 )
 from api.routes import catalogue as catalogue_routes
+from api.routes.resource import ResourceSpec, resource_routes
 from api.routes import StoreDep, VocabularyDep, get_store, get_vocabulary
 from api.store import (
     InvalidQuery,
@@ -511,6 +512,33 @@ def _validation_errors(exception: RequestValidationError) -> list[dict[str, str]
     ]
 
 
+#: Question, expressed as the differences from any other resource kind.
+#: `resolve_references` is unset: a Question points at nothing that has to be
+#: resolved before its record is built. A Lab does, which is why the spec models
+#: that as an option rather than pretending the two kinds are identical.
+QUESTION_RESOURCE = ResourceSpec(
+    kind="Question",
+    segment="questions",
+    tag="Questions",
+    model=Question,
+    write_model=QuestionWrite,
+    patch_model=QuestionPatch,
+    read=lambda store, identifier: store.get_question(identifier),
+    write=lambda writer, record, method: writer.write_question(record, method),
+    remove=lambda writer, identifier, method: writer.delete_question(identifier, method),
+    build=lambda payload, vocabulary: writes.question_record(payload, vocabulary),
+    patch_fields=writes.QUESTION_PATCH_FIELDS,
+    links=lambda store, identifier: lab_links(store, identifier),
+    summaries={
+        "create": "Create a Question.",
+        "get": "Read one Question by its id.",
+        "replace": "Replace a Question wholesale.",
+        "patch": "Change only the supplied fields of a Question.",
+        "delete": "Delete a Question.",
+    },
+)
+
+
 def create_app(store: Store | None = None, environ: Mapping[str, str] | None = None) -> FastAPI:
     """Build the Content API over `store`, or over the configured Content store.
 
@@ -744,173 +772,24 @@ def create_app(store: Store | None = None, environ: Mapping[str, str] | None = N
         # validation failure surfaces as a 500 rather than as a malformed body.
         return QuestionPage(items=page.items, total=page.total, limit=limit, offset=offset)
 
-    @app.post(
-        "/api/v1/questions",
-        operation_id="createQuestion",
-        tags=["Questions"],
-        summary="Create a Question.",
-        status_code=201,
-        response_model=Question,
-        responses={
-            201: {
-                "description": "The Question was created.",
-                "headers": {
-                    "ETag": {
-                        "description": "The new Question's `content_hash`, quoted.",
-                        "schema": {"type": "string"},
-                    }
-                },
-            },
-            **problem_responses(401, 403, 409, 422, 503),
-        },
-    )
-    def create_question(
-        request: Request,
-        response: Response,
-        store: Annotated[Store, Depends(get_store)],
-        vocabulary: VocabularyDep,
-        question: QuestionWrite,
-        x_api_key: Annotated[str | None, Header(alias="X-API-Key")] = None,
-    ) -> Any:
-        writer = require_write_access(request, x_api_key, store)
-        # Validation before the duplicate check: a body that could never be a
-        # legal Question is malformed whatever else is in the store, and telling
-        # a client "that id is taken" about content it would have had to fix
-        # anyway sends it round the loop twice.
-        record = writes.question_record(question.model_dump(mode="json"), vocabulary())
-        if store.get_question(str(record["id"])) is not None:
-            raise HTTPException(
-                status_code=409,
-                detail=(
-                    f"A Question {record['id']!r} already exists in this Content store. "
-                    "Replace it with PUT, carrying its current ETag in If-Match."
-                ),
-            )
-        return written(response, writer.write_question(record, "POST"), Question)
-
-    @app.get(
-        "/api/v1/questions/{theme}/{slug}",
-        operation_id="getQuestion",
-        tags=["Questions"],
-        summary="Read one Question by its id.",
-        response_model=Question,
-        responses=item_responses(404, 500),
-    )
-    def get_question(
-        response: Response,
-        store: Annotated[Store, Depends(get_store)],
-        theme: str,
-        slug: str,
-        if_none_match: Annotated[str | None, Header(alias="If-None-Match")] = None,
-    ) -> Any:
-        identifier = f"{theme}/{slug}"
-        record = store.get_question(identifier)
-        if record is None:
-            missing("Question", identifier)
-        return conditional(
-            Question.model_validate(record),
-            record,
-            if_none_match,
-            response,
-            lab_links(store, identifier),
+    # The five item operations -- create, read, replace, patch, delete -- are
+    # generated from a ResourceSpec in api/routes/resource.py, so the ordered
+    # write check (503, 401, 403, 404, 428, 412, 422) has one implementation.
+    # `list` stays here: a Question is filtered by `type` and a Lab by
+    # `question_ref`, which is real kind-specific query surface rather than
+    # duplicated logic. tests/api/test_write_parity.py holds both kinds to the
+    # same answers, and tests/api/test_contract.py holds the served schema
+    # byte-identical to api/openapi.yaml.
+    app.include_router(
+        resource_routes(
+            QUESTION_RESOURCE,
+            require_write_access=require_write_access,
+            require_precondition=require_precondition,
+            require_same_identity=require_same_identity,
+            written=written,
+            write_responses=write_responses,
         )
-
-    @app.put(
-        "/api/v1/questions/{theme}/{slug}",
-        operation_id="replaceQuestion",
-        tags=["Questions"],
-        summary="Replace a Question wholesale.",
-        response_model=Question,
-        responses=write_responses(401, 403, 404, 412, 422, 428, 503),
     )
-    def replace_question(
-        request: Request,
-        response: Response,
-        store: Annotated[Store, Depends(get_store)],
-        vocabulary: VocabularyDep,
-        theme: str,
-        slug: str,
-        question: QuestionWrite,
-        x_api_key: Annotated[str | None, Header(alias="X-API-Key")] = None,
-        if_match: Annotated[str | None, Header(alias="If-Match")] = None,
-    ) -> Any:
-        writer = require_write_access(request, x_api_key, store)
-        identifier = f"{theme}/{slug}"
-        existing = store.get_question(identifier)
-        # Identity first, then the precondition, then the body. A client aiming
-        # at something that is not there needs to hear `404` whatever else it
-        # got wrong, and a body validated against a version that has already
-        # moved is a body decided on the wrong facts.
-        if existing is None:
-            missing("Question", identifier)
-        require_precondition(if_match, existing)
-        payload = question.model_dump(mode="json")
-        require_same_identity(payload, theme, slug, "Question")
-        record = writes.question_record(payload, vocabulary())
-        return written(response, writer.write_question(record, "PUT"), Question)
-
-    @app.patch(
-        "/api/v1/questions/{theme}/{slug}",
-        operation_id="patchQuestion",
-        tags=["Questions"],
-        summary="Change only the supplied fields of a Question.",
-        response_model=Question,
-        responses=write_responses(401, 403, 404, 412, 422, 428, 503),
-    )
-    def patch_question(
-        request: Request,
-        response: Response,
-        store: Annotated[Store, Depends(get_store)],
-        vocabulary: VocabularyDep,
-        theme: str,
-        slug: str,
-        question: QuestionPatch,
-        x_api_key: Annotated[str | None, Header(alias="X-API-Key")] = None,
-        if_match: Annotated[str | None, Header(alias="If-Match")] = None,
-    ) -> Any:
-        writer = require_write_access(request, x_api_key, store)
-        identifier = f"{theme}/{slug}"
-        existing = store.get_question(identifier)
-        if existing is None:
-            missing("Question", identifier)
-        require_precondition(if_match, existing)
-        # `exclude_unset` is what makes this a patch rather than a replace with
-        # optional fields: a field the client did not mention keeps its stored
-        # value, and `None` is never confused with "leave it alone".
-        changes = question.model_dump(mode="json", exclude_unset=True)
-        payload = writes.merge(existing, changes, writes.QUESTION_PATCH_FIELDS)
-        record = writes.question_record(payload, vocabulary())
-        return written(response, writer.write_question(record, "PATCH"), Question)
-
-    @app.delete(
-        "/api/v1/questions/{theme}/{slug}",
-        operation_id="deleteQuestion",
-        tags=["Questions"],
-        summary="Delete a Question.",
-        status_code=204,
-        responses=problem_responses(401, 403, 404, 409, 412, 428, 503),
-    )
-    def delete_question(
-        request: Request,
-        store: Annotated[Store, Depends(get_store)],
-        theme: str,
-        slug: str,
-        x_api_key: Annotated[str | None, Header(alias="X-API-Key")] = None,
-        if_match: Annotated[str | None, Header(alias="If-Match")] = None,
-    ) -> Response:
-        writer = require_write_access(request, x_api_key, store)
-        identifier = f"{theme}/{slug}"
-        existing = store.get_question(identifier)
-        if existing is None:
-            missing("Question", identifier)
-        require_precondition(if_match, existing)
-        # A Question a Lab or a learning path still points at cannot go: the
-        # store refuses and the handler above turns that into the `409` the
-        # contract documents.
-        writer.delete_question(identifier, "DELETE")
-        return Response(status_code=204)
-
-    # ------------------------------------------------------------------- Labs
 
     @app.get(
         "/api/v1/labs",
