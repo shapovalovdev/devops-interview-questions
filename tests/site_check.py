@@ -108,6 +108,36 @@ with sync_playwright() as playwright:
     assert all(why.strip() for why in lab_cards.locator('.step-why').all_inner_texts())
     lab_links = lab_cards.locator('a').evaluate_all('(links) => links.map((link) => link.getAttribute("href"))')
     assert lab_links == [lab['questionHref'] for lab in labs]
+
+    # View state is one tagged union, so entering the Labs view from an active
+    # learning path yields the Labs view and nothing else.
+    #
+    # The five-variable version passed these same assertions: every handler
+    # reset its four siblings by hand, and readHash() reparsed the whole URL, so
+    # the invariant did hold.  It held by convention across five call sites
+    # rather than by construction, which is what changed -- a sixth entry point
+    # that forgot one reset would have broken it silently, and nothing here
+    # would have noticed.  These assertions exist so that from now on something
+    # would.
+    page.goto(f'{site}#path=sre-track')
+    page.wait_for_function("() => !document.querySelector('#path-view').hidden")
+    page.locator('#labs-entry').click()
+    page.wait_for_function("() => !document.querySelector('#labs-view').hidden")
+    assert page.url.endswith('#labs'), f'entering labs must replace the path, got {page.url}'
+    assert page.locator('#path-view').is_hidden(), 'a path and the Labs view were both live'
+    assert page.locator('#question-zone').is_hidden()
+    assert page.locator('#labs-view .lab-card').count() == len(labs)
+    # ...and the reverse: choosing a path from the Labs view leaves no labs flag.
+    page.goto(f'{site}#labs')
+    page.wait_for_function("() => !document.querySelector('#labs-view').hidden")
+    page.locator('#path-filters button[data-path="sre-track"]').click()
+    page.wait_for_function("() => document.querySelector('#labs-view').hidden")
+    assert page.url.endswith('#path=sre-track'), f'the labs flag survived a path choice: {page.url}'
+    assert page.locator('#path-view').is_visible()
+    # Hand the Labs view back to the assertions below, which continue from it.
+    page.goto(f'{site}#labs')
+    page.wait_for_function("() => !document.querySelector('#labs-view').hidden")
+
     # Question pages are Jekyll-built from Markdown, so the .html target is
     # verified through its published-source .md counterpart.
     assert all(Path(href).suffix == '.html' and Path(href).with_suffix('.md').resolve().is_file() for href in lab_links)
