@@ -2,13 +2,11 @@
 
 from __future__ import annotations
 
+import re
 import shutil
 import subprocess
 import unittest
 from pathlib import Path
-
-import yaml
-
 
 ROOT = Path(__file__).resolve().parents[1]
 CHART = ROOT / "deploy" / "content-api"
@@ -16,8 +14,8 @@ OVERLAY = ROOT / "kustomize" / "k3d"
 SMOKE_SCRIPT = ROOT / "scripts" / "smoke_k3d_content_api.sh"
 
 
-def render_helm() -> list[dict[str, object]]:
-    output = subprocess.run(
+def render_helm() -> str:
+    return subprocess.run(
         [
             "helm", "template", "content-api-test", str(CHART),
             "--set", "image.repository=registry.example/content-api",
@@ -27,7 +25,16 @@ def render_helm() -> list[dict[str, object]]:
         text=True,
         capture_output=True,
     ).stdout
-    return [document for document in yaml.safe_load_all(output) if document]
+
+
+def documents_by_kind(rendered: str) -> dict[str, str]:
+    """Split Helm/Kustomize output without adding a YAML dependency to stdlib CI."""
+    documents: dict[str, str] = {}
+    for document in rendered.split("\n---\n"):
+        match = re.search(r"^kind: (\w+)$", document, flags=re.MULTILINE)
+        if match:
+            documents[match.group(1)] = document
+    return documents
 
 
 class ContentApiKubernetesTest(unittest.TestCase):
@@ -35,40 +42,45 @@ class ContentApiKubernetesTest(unittest.TestCase):
     def setUpClass(cls) -> None:
         if shutil.which("helm") is None or shutil.which("kustomize") is None:
             raise unittest.SkipTest("helm and kustomize are required for Kubernetes render tests")
-        cls.documents = render_helm()
-        output = subprocess.run(
+        cls.chart_documents = documents_by_kind(render_helm())
+        overlay = subprocess.run(
             ["kustomize", "build", "--enable-helm", "--load-restrictor", "LoadRestrictionsNone", str(OVERLAY)],
             check=True,
             text=True,
             capture_output=True,
         ).stdout
-        cls.overlay_documents = [document for document in yaml.safe_load_all(output) if document]
+        cls.overlay_documents = documents_by_kind(overlay)
 
     def test_chart_owns_the_only_workload_and_service(self) -> None:
-        self.assertEqual({document["kind"] for document in self.documents}, {"Deployment", "Service", "ServiceAccount"})
-        self.assertEqual({document["kind"] for document in self.overlay_documents}, {"Deployment", "Service", "ServiceAccount"})
+        expected = {"Deployment", "Service", "ServiceAccount"}
+        self.assertEqual(set(self.chart_documents), expected)
+        self.assertEqual(set(self.overlay_documents), expected)
+        service = self.chart_documents["Service"]
+        self.assertIn("type: ClusterIP", service)
+        self.assertIn("port: 8000", service)
 
     def test_deployment_is_restricted_and_only_sqlite_is_writable(self) -> None:
-        deployment = next(document for document in self.documents if document["kind"] == "Deployment")
-        pod = deployment["spec"]["template"]["spec"]
-        container = pod["containers"][0]
-        self.assertFalse(pod["automountServiceAccountToken"])
-        self.assertEqual(pod["securityContext"]["runAsUser"], 10001)
-        self.assertEqual(pod["securityContext"]["fsGroup"], 10001)
-        self.assertEqual(pod["securityContext"]["seccompProfile"]["type"], "RuntimeDefault")
-        self.assertTrue(container["securityContext"]["readOnlyRootFilesystem"])
-        self.assertFalse(container["securityContext"]["allowPrivilegeEscalation"])
-        self.assertEqual(container["securityContext"]["capabilities"]["drop"], ["ALL"])
-        self.assertEqual(container["volumeMounts"], [{"name": "content-store", "mountPath": "/srv/data"}])
-        init = pod["initContainers"][0]
-        self.assertEqual(init["command"], ["cp", "/srv/data/content.db", "/work/content.db"])
-        self.assertTrue(init["securityContext"]["readOnlyRootFilesystem"])
-        self.assertFalse(init["securityContext"]["allowPrivilegeEscalation"])
-        self.assertEqual(init["securityContext"]["capabilities"]["drop"], ["ALL"])
-        self.assertEqual(container["readinessProbe"]["httpGet"]["path"], "/api/v1/health")
-        self.assertEqual(container["livenessProbe"]["httpGet"]["path"], "/api/v1/health")
-        self.assertEqual(container["resources"]["requests"], {"cpu": "100m", "memory": "128Mi"})
-        self.assertEqual(container["resources"]["limits"], {"cpu": "500m", "memory": "256Mi"})
+        deployment = self.chart_documents["Deployment"]
+        for expected in (
+            "serviceAccountName: content-api-test",
+            "automountServiceAccountToken: false",
+            "runAsNonRoot: true",
+            "runAsUser: 10001",
+            "runAsGroup: 10001",
+            "fsGroup: 10001",
+            "type: RuntimeDefault",
+            "allowPrivilegeEscalation: false",
+            "readOnlyRootFilesystem: true",
+            "drop:\n                - ALL",
+            'command: ["cp", "/srv/data/content.db", "/work/content.db"]',
+            "mountPath: /srv/data",
+            "path: /api/v1/health",
+            "cpu: 100m",
+            "memory: 128Mi",
+            "cpu: 500m",
+            "memory: 256Mi",
+        ):
+            self.assertIn(expected, deployment)
 
     def test_chart_requires_a_valid_digest_outside_local_overlay(self) -> None:
         result = subprocess.run(
