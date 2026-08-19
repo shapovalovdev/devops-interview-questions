@@ -8687,7 +8687,7 @@ window.studyOrders = [
 
 window.labs = [
   {
-    "title": "Redis как кэш Flask-приложения: от ручного кэша к TTL и eviction",
+    "title": "Redis as a Flask application cache: from a hand-rolled cache to TTL and eviction",
     "theme": "caching",
     "difficulty": "middle",
     "tags": [
@@ -8705,7 +8705,7 @@ window.labs = [
     "slug": "caching/redis-practical"
   },
   {
-    "title": "ArgoCD: деплой Helm-чарта из Git вместо ручного helm upgrade",
+    "title": "ArgoCD: deploying a Helm chart from Git instead of a hand-run helm upgrade",
     "theme": "ci-cd",
     "difficulty": "middle",
     "tags": [
@@ -8753,7 +8753,7 @@ window.labs = [
     "slug": "configuration-management/ansible-wait-logic"
   },
   {
-    "title": "PostgreSQL: streaming-репликация, failover вручную и PITR",
+    "title": "PostgreSQL: streaming replication, manual failover and PITR",
     "theme": "databases",
     "difficulty": "middle",
     "tags": [
@@ -8770,7 +8770,7 @@ window.labs = [
     "slug": "databases/postgresql-replication-pitr"
   },
   {
-    "title": "Kubernetes break-fix: kubeadm-кластер и диагностика CNI/ingress",
+    "title": "Kubernetes break-fix: a kubeadm cluster and CNI/ingress diagnosis",
     "theme": "kubernetes",
     "difficulty": "middle",
     "tags": [
@@ -8802,7 +8802,7 @@ window.labs = [
     "slug": "linux/systemd-service-failure"
   },
   {
-    "title": "Мониторинг и логи на существующем стенде: Prometheus + Alertmanager + Loki + Grafana",
+    "title": "Monitoring and logs on an existing stand: Prometheus + Alertmanager + Loki + Grafana",
     "theme": "observability",
     "difficulty": "middle",
     "tags": [
@@ -8836,7 +8836,7 @@ window.labs = [
     "slug": "qemu-kvm/live-migrate-with-measured-downtime"
   },
   {
-    "title": "RabbitMQ на практике: асинхронная обработка вокруг существующего приложения",
+    "title": "RabbitMQ in practice: asynchronous processing around an existing application",
     "theme": "queue-messaging",
     "difficulty": "middle",
     "tags": [

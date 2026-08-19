@@ -1,48 +1,48 @@
 ---
-title: "Redis как кэш Flask-приложения: от ручного кэша к TTL и eviction"
+title: "Redis as a Flask application cache: from a hand-rolled cache to TTL and eviction"
 theme: "caching"
 difficulty: "middle"
 question_ref: "caching/redis-maxmemory-tuning.md"
 tags: [caching, redis, docker, prometheus, monitoring, memory, healthchecks]
 why: "A cache layer is named in most infrastructure job descriptions, and Redis by name in many of them, yet candidates usually stop at installing it. This lab teaches hit-ratio thinking: cache-aside in the Flask app, TTL and invalidation choices, maxmemory eviction experiments with allkeys-lru versus volatile-star policies, and cache failure modes like stampede — the interview questions behind the install command."
 checklist:
-  - "Redis добавлен в docker-compose стендa с healthcheck (redis-cli ping) и зависит_от-связью с Flask; контейнер healthy."
-  - "Cache-aside слой в Flask закэшировал тяжёлую выборку из PostgreSQL: повторный запрос идёт из Redis (проверено логами/TTL ключа)."
-  - "Ключи именованы осознанно (префикс сущности + id), время жизни видно через TTL."
-  - "TTL подобран и обоснован для медленно и быстро меняющихся данных; инвалидация при UPDATE через приложение показана."
-  - "Поведение при устаревании определено: перечитать из PG или отдать stale — решение задокументировано."
-  - "Эксперимент с maxmemory: при малом лимите allkeys-lru вытесняет ключи, noeviction возвращает OOM-ошибки; volatile-ttl без TTL-ключей ведёт себя как noeviction."
-  - "Решение по persistence зафиксировано: RDB/AOF включены или выключены для кэша — с обоснованием цены восстановления."
-  - "redis_exporter подключён к Prometheus; в Grafana виден hit ratio (keyspace hits/misses) и evicted_keys."
-  - "Нагрузочный тест (ab/wrk/скрипт) показывает рост hit ratio после прогрева; до прогрева — падение на холодном кэше."
-  - "Даны ответы своими словами: что такое cache stampede и как его смягчить, что такое hit ratio, чем кэш отличается от очереди."
+  - "Redis is added to the stand's docker-compose with a healthcheck (redis-cli ping) and a depends_on link from Flask; the container reports healthy."
+  - "A cache-aside layer in Flask has cached a heavy read from PostgreSQL: the repeat request is served from Redis (proven by logs or the key's TTL)."
+  - "Keys are named deliberately (entity prefix + id), and their lifetime is visible through TTL."
+  - "TTLs are chosen and justified for slow-moving and fast-moving data; invalidation on UPDATE through the application is demonstrated."
+  - "The staleness behaviour is decided: re-read from PG or serve stale — the decision is documented."
+  - "The maxmemory experiment is done: under a small limit allkeys-lru evicts keys, noeviction returns OOM errors, and volatile-ttl with no TTL keys behaves like noeviction."
+  - "The persistence decision is recorded: RDB/AOF on or off for a cache, with the cost of recovery argued."
+  - "redis_exporter is wired into Prometheus; Grafana shows the hit ratio (keyspace hits/misses) and evicted_keys."
+  - "A load test (ab/wrk/a script) shows the hit ratio rising after warm-up, and a drop on a cold cache before it."
+  - "Answered in your own words: what a cache stampede is and how to soften it, what hit ratio is, and how a cache differs from a queue."
 ---
 
-# Lab: Redis как кэш Flask-приложения — от ручного кэша к TTL и eviction
+# Lab: Redis as a Flask application cache — from a hand-rolled cache to TTL and eviction
 
-## Контекст стенда
+## The stand
 
-Существующий стенд: 3 VM на Ubuntu — Flask-приложение + nginx, PostgreSQL, Ansible control. Приложение уже обрабатывает запросы; в нём есть «тяжёлая» выборка из PostgreSQL (отчёт, агрегация, список с JOIN'ами), которая выполняется дольше ~200 мс. Цель лабы — вынести этот путь чтения в Redis и довести кэш до состояния, которое не стыдно показать на интервью: с TTL, eviction-политикой, метриками и пониманием режимов отказа.
+The existing stand: 3 Ubuntu VMs — the Flask application + nginx, PostgreSQL, and the Ansible control host. The application already serves requests, and it contains one "heavy" read from PostgreSQL (a report, an aggregation, a list with JOINs) that takes longer than ~200 ms. The point of the lab is to move that read path into Redis and take the cache to a state worth showing at an interview: with a TTL, an eviction policy, metrics, and an understanding of its failure modes.
 
-Ментальная рамка на всю лабу: **кэш — это про hit ratio и деградацию, а не про установку**. Каждое упражнение заканчивается не «работает», а «понимаю, что сломается и как это видно на графике».
+The mental frame for the whole lab: **a cache is about hit ratio and degradation, not about installation**. Each exercise ends not at "it works" but at "I understand what will break and how that shows on a graph".
 
-Время на лаб: 5–7 часов.
+Time for the lab: 5-7 hours.
 
-Полезные ссылки:
+Useful references:
 
-- Эвристики и политики eviction в Redis: <https://redis.io/docs/latest/develop/reference/eviction/>
-- Persistence в Redis (RDB/AOF): <https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/>
-- Команда INFO и её поля: <https://redis.io/docs/latest/commands/info/>
-- redis_exporter для Prometheus: <https://github.com/oliver006/redis_exporter>
+- Eviction heuristics and policies in Redis: <https://redis.io/docs/latest/develop/reference/eviction/>
+- Persistence in Redis (RDB/AOF): <https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/>
+- The INFO command and its fields: <https://redis.io/docs/latest/commands/info/>
+- redis_exporter for Prometheus: <https://github.com/oliver006/redis_exporter>
 - Docker Compose: <https://docs.docker.com/compose/>
 - Flask: <https://flask.palletsprojects.com/>
 
 ---
 
-## Exercise 1: Redis в docker-compose + healthcheck
+## Exercise 1: Redis in docker-compose + healthcheck
 
-1. Добавь сервис Redis в существующий `docker-compose.yml` приложения: фиксированная версия образа (не `latest`), порт только внутри сети compose (не публикуй 6379 наружу без нужды).
-2. Пропиши `healthcheck`:
+1. Add a Redis service to the application's existing `docker-compose.yml`: a pinned image version (not `latest`), and the port kept inside the compose network (do not publish 6379 outwards without a reason).
+2. Declare a `healthcheck`:
 
    ```yaml
    healthcheck:
@@ -52,45 +52,45 @@ checklist:
      retries: 5
    ```
 
-3. Свяжи Flask-сервис с Redis через `depends_on` с `condition: service_healthy` — приложение не должно стартовать в мир, где Redis ещё не отвечает.
-4. Проверь: `docker compose ps` показывает `healthy`, а `docker compose logs flask` — успешное подключение при старте.
-5. Проверь отказоустойчивость старта: `docker compose stop redis && docker compose up -d flask` — что произойдёт? Приложение должно либо дождаться, либо упасть с внятной ошибкой, но не виснуть молча.
+3. Tie the Flask service to Redis with `depends_on` and `condition: service_healthy` — the application should not start into a world where Redis is not answering yet.
+4. Check: `docker compose ps` reports `healthy`, and `docker compose logs flask` shows a successful connection at start-up.
+5. Test start-up resilience: `docker compose stop redis && docker compose up -d flask` — what happens? The application should either wait or fail with a clear error, but never hang silently.
 
-## Exercise 2: Кэширующий слой в Flask — cache-aside
+## Exercise 2: The caching layer in Flask — cache-aside
 
-1. Найди в приложении тяжёлую выборку из PostgreSQL (или создай её: `SELECT ... GROUP BY ...` по большой таблице, чтобы запрос занимал 100–500 мс).
-2. Реализуй паттерн **cache-aside** (lazy loading): приложение сначала ищет ключ в Redis, при промахе читает PostgreSQL и записывает результат обратно. Серийизация — JSON или msgpack.
-3. Ключи именуй по схеме `entity:id` или `report:region:date` — осознанный дизайн ключа, а не `cache_17`.
-4. Померь эффект: логируй время ответа до и после. Первый запрос — промах (время как было), повторные — единицы миллисекунд.
-5. Обязательно обработай недоступность Redis: если кэш не отвечает, приложение должно идти в PostgreSQL (кэш ускоряет, а не является единственной точкой правды). Продемонстрируй: `docker compose stop redis` — приложение отвечает медленно, но отвечает.
+1. Find the heavy PostgreSQL read in the application (or create one: `SELECT ... GROUP BY ...` over a large table, so the query takes 100-500 ms).
+2. Implement the **cache-aside** pattern (lazy loading): the application looks for the key in Redis first, and on a miss reads PostgreSQL and writes the result back. Serialise with JSON or msgpack.
+3. Name keys on a scheme like `entity:id` or `report:region:date` — a deliberate key design, not `cache_17`.
+4. Measure the effect: log the response time before and after. The first request is a miss (as slow as it was), the repeats are single-digit milliseconds.
+5. Handle Redis being unavailable, without fail: if the cache does not answer, the application must go to PostgreSQL — a cache makes things faster, it is not the single source of truth. Demonstrate it: `docker compose stop redis` — the application answers slowly, but it answers.
 
-## Exercise 3: TTL и инвалидация
+## Exercise 3: TTL and invalidation
 
-1. Назначь TTL на каждый ключ (`SET ... EX <seconds>` или `setex`). Подбери разные TTL для разных данных: медленно меняющийся справочник — часы, «живая» агрегация — секунды.
-2. Проверь: `TTL <key>` показывает остаток; после истечения ключ исчезает, следующий запрос — снова промах и перечитывание из PG.
-3. Реализуй инвалидацию при записи: на `UPDATE`/`DELETE` затронутой сущности приложение удаляет или перезаписывает ключ (`DEL`, или запись новых значений). Кэш никогда не должен отдавать данные старше, чем источник, дольше чем на TTL.
-4. **Вопрос на решение:** что отдаём при устаревании — перечитать из PG (простой cache-aside) или сначала отдать старое, а обновить фоном (stale-while-revalidate)? Реализуй простой вариант, второй — опиши словами и объясни, когда он оправдан.
+1. Set a TTL on every key (`SET ... EX <seconds>` or `setex`). Choose different TTLs for different data: a slow-moving reference table gets hours, a live aggregation gets seconds.
+2. Check: `TTL <key>` shows the remainder; once it expires the key disappears, and the next request is a miss and a re-read from PG.
+3. Implement invalidation on write: on `UPDATE`/`DELETE` of the affected entity, the application deletes or overwrites the key (`DEL`, or writing the new values). The cache must never serve data older than the source by more than the TTL.
+4. **A decision to make:** on staleness, do you re-read from PG (plain cache-aside) or serve the old value and refresh in the background (stale-while-revalidate)? Implement the simple one, describe the second in words, and explain when it is justified.
 
-## Exercise 4: Eviction-политики и эксперимент с maxmemory
+## Exercise 4: Eviction policies and the maxmemory experiment
 
-1. Установи в конфиге Redis маленький `maxmemory` (например, 2–4 MB) — так, чтобы кэш заведомо не влез.
-2. С `maxmemory-policy allkeys-lru` наполни кэш скриптом (сотни ключей по несколько KB). Наблюдай в `redis-cli INFO memory`: `used_memory` упирается в лимит, в `INFO stats` растёт `evicted_keys`.
-3. Переключи на `noeviction`: увидь, что записи начинают падать с ошибкой `OOM command not allowed`. Объясни, почему это плохой дефолт для чистого кэша.
-4. Переключи на `volatile-ttl` и убери TTL у части ключей: убедись, что ключи без TTL не вытесняются, и при отсутствии TTL-ключей политика ведёт себя как `noeviction` — классическая ловушка.
-5. Сформулируй правило выбора: `allkeys-lru` — когда Redis только кэш; `volatile-*` — когда в одном инстансе живут и кэш-ключи с TTL, и ключи, которые нельзя терять (и почему так делать — компромисс).
+1. Set a small `maxmemory` in the Redis config (2-4 MB, say) — small enough that the cache certainly will not fit.
+2. With `maxmemory-policy allkeys-lru`, fill the cache from a script (hundreds of keys, a few KB each). Watch `redis-cli INFO memory`: `used_memory` presses against the limit, and `evicted_keys` climbs in `INFO stats`.
+3. Switch to `noeviction`: watch writes start failing with `OOM command not allowed`. Explain why that is a poor default for a pure cache.
+4. Switch to `volatile-ttl` and remove the TTL from some of the keys: confirm that keys without a TTL are not evicted, and that with no TTL keys at all the policy behaves like `noeviction` — the classic trap.
+5. State the selection rule: `allkeys-lru` when Redis is only a cache; `volatile-*` when one instance holds both cache keys with a TTL and keys that must not be lost (and why doing that is a compromise).
 
-## Exercise 5: Наблюдаемость — redis_exporter → Prometheus/Grafana
+## Exercise 5: Observability — redis_exporter → Prometheus/Grafana
 
-1. Подними `redis_exporter` (compose) и добавь его таргетом в существующий Prometheus стенда.
-2. В Grafana построй панель с **hit ratio**: `rate(redis_keyspace_hits_total[5m]) / (rate(redis_keyspace_hits_total[5m]) + rate(redis_keyspace_misses_total[5m]))`, плюс `redis_evicted_keys_total`, `redis_memory_used_bytes`, `redis_connected_clients`.
-3. Прогрей кэш нагрузочным скриптом (`ab`, `wrk` или цикл на Python): hit ratio должен расти до ~0.9+; останови Redis или почисти ключи (`FLUSHDB`) — увидь падение в 0 и всплеск misses.
-4. Ответь письменно: какой hit ratio считается приемлемым для твоего случая и при каком значении кэш перестаёт окупаться?
+1. Stand up `redis_exporter` (in compose) and add it as a target to the stand's existing Prometheus.
+2. In Grafana, build a panel for the **hit ratio**: `rate(redis_keyspace_hits_total[5m]) / (rate(redis_keyspace_hits_total[5m]) + rate(redis_keyspace_misses_total[5m]))`, plus `redis_evicted_keys_total`, `redis_memory_used_bytes`, and `redis_connected_clients`.
+3. Warm the cache with a load script (`ab`, `wrk`, or a Python loop): the hit ratio should climb to ~0.9+; then stop Redis or clear the keys (`FLUSHDB`) and watch it fall to 0 with a spike in misses.
+4. Answer in writing: what hit ratio counts as acceptable for your case, and at what value does the cache stop paying for itself?
 
-## Exercise 6: Защита и понимание — persistence и три вопроса
+## Exercise 6: Defence and understanding — persistence and three questions
 
-1. **Persistence для кэша — нужен ли?** Разберись с RDB и AOF: что даёт каждый, сколько стоит по записи и по диску. Для чистого кэша обычно persistence отключают (`save ""`, `appendonly no`): после рестарта кэш просто прогревается заново. Зафиксируй решение и его цену (холодный старт, удар по PG при прогреве).
-2. Проверь осознанность на трёх вопросах — ответь своими словами, без гугла, потом сверься с банком вопросов:
-   - Что такое **cache stampede** и как его смягчить (TTL-шум, блокировка перечитывания, прогрев)?
-   - Что такое **hit ratio** и почему это главная метрика кэша, а не объём памяти?
-   - Чем **кэш отличается от очереди сообщений** (Redis здесь часто используют и так, и так — в чём разница semantics: скорость чтения против гарантии доставки)?
-3. Проговори сценарий отказа: Redis упал в проде — что видит пользователь, что показывает hit ratio, как деградирует PostgreSQL. Это любимый формат вопросов «а что если…» на интервью.
+1. **Does a cache need persistence?** Work through RDB and AOF: what each gives you, and what it costs in writes and in disk. For a pure cache, persistence is usually turned off (`save ""`, `appendonly no`): after a restart the cache simply warms up again. Record the decision and its price (a cold start, and the hit PG takes during warm-up).
+2. Test your understanding on three questions — answer in your own words, without a search engine, then check yourself against the question bank:
+   - What is a **cache stampede**, and how do you soften it (TTL jitter, a lock around the re-read, warm-up)?
+   - What is **hit ratio**, and why is it the cache's headline metric rather than memory used?
+   - How does a **cache differ from a message queue** (Redis is often used as both here — what is the difference in semantics: read speed against delivery guarantees)?
+3. Talk through the failure scenario: Redis has died in production — what does the user see, what does the hit ratio show, and how does PostgreSQL degrade. This is the favourite "what if..." format at interviews.

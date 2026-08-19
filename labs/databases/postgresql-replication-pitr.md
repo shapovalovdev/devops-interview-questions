@@ -1,5 +1,5 @@
 ---
-title: "PostgreSQL: streaming-репликация, failover вручную и PITR"
+title: "PostgreSQL: streaming replication, manual failover and PITR"
 theme: "databases"
 difficulty: "middle"
 question_ref: "databases/high-availability-failover.md"
@@ -20,149 +20,149 @@ checklist:
 
 # Lab: PostgreSQL — streaming replication, manual failover and PITR
 
-Стенд: 3 Ubuntu VM (например `vm1-primary`, `vm2-replica`, `vm3-app`). На `vm3-app` крутится Flask-приложение с PostgreSQL-бэкендом. Деплой предпочтителен через Ansible — это прод-навык и он делает стенд воспроизводимым.
+The stand: 3 Ubuntu VMs (`vm1-primary`, `vm2-replica`, `vm3-app`, say). A Flask application with a PostgreSQL backend runs on `vm3-app`. Deploying through Ansible is preferred — it is a production skill, and it makes the stand reproducible.
 
 ## Exercise 0: Deploy baseline (Ansible)
 
-Разверни PostgreSQL 16 на двух VM роли `primary` и `replica`, приложение — на `vm3-app`.
+Deploy PostgreSQL 16 onto two VMs in the roles `primary` and `replica`, and the application onto `vm3-app`.
 
-1. Напиши минимальный playbook `pg.yml` с двумя host groups (`pg_primary`, `pg_replica`):
+1. Write a minimal playbook `pg.yml` with two host groups (`pg_primary`, `pg_replica`):
    ```bash
    ansible-playbook -i inventory pg.yml
    ```
-2. Роли: `apt install postgresql`, `systemd enable --now postgresql`, создание пользователя `app` и БД `appdb` — только на primary.
-3. Проверь: `pg_isready -h vm1-primary -p 5432`.
+2. The roles: `apt install postgresql`, `systemd enable --now postgresql`, and creating the user `app` and the database `appdb` — on the primary only.
+3. Check: `pg_isready -h vm1-primary -p 5432`.
 
-Полезно: https://www.postgresql.org/docs/current/warm-standby.html
+Useful: https://www.postgresql.org/docs/current/warm-standby.html
 
 ## Exercise 1: Primary + 1 streaming replica
 
-1. На primary создай пользователя репликации:
+1. On the primary, create the replication user:
    ```sql
    CREATE ROLE replicator WITH REPLICATION LOGIN PASSWORD '...';
    ```
-2. В `postgresql.conf` primary:
+2. In the primary's `postgresql.conf`:
    ```ini
    listen_addresses = '*'
    max_wal_senders = 10
    wal_level = replica
    ```
-   В `pg_hba.conf` разреши подключение replicator с адреса реплики.
-3. Инициализируй реплику через base backup:
+   In `pg_hba.conf`, allow replicator to connect from the replica's address.
+3. Initialise the replica from a base backup:
    ```bash
    pg_basebackup -h vm1-primary -U replicator -D /var/lib/postgresql/16/main \
      -Fp -Xs -P -R --slot=replica1
    ```
-   Флаг `-R` сам запишет `primary_conninfo` и `standby.signal`.
-4. Стартуй реплику и проверь режим:
+   The `-R` flag writes `primary_conninfo` and `standby.signal` for you.
+4. Start the replica and check the mode:
    ```sql
    SELECT pg_is_in_recovery();
    ```
 
-## Exercise 2: Проверка репликации и читающая реплика для приложения
+## Exercise 2: Verify replication, and give the application a read replica
 
-1. На primary:
+1. On the primary:
    ```sql
    CREATE TABLE t (id int);
    INSERT INTO t VALUES (42);
    ```
-   На реплике (она read-only):
+   On the replica (which is read-only):
    ```sql
-   TABLE t;            -- строка приехала
+   TABLE t;            -- the row arrived
    INSERT INTO t VALUES (1);  -- ERROR: read-only
    ```
-2. Лаг и состояние слота — на primary:
+2. Lag and slot state, on the primary:
    ```sql
    SELECT client_addr, state, sync_state,
           write_lag, flush_lag, replay_lag
    FROM pg_stat_replication;
    ```
-   Объясни себе разницу между write/flush/replay lag.
-3. В Flask-приложении раздели DSN: пишет → primary, читает → replica (например, через два пула или `dbname=... options='-c default_transaction_read_only=on'`).
-4. Убедись, что страница со списком данных работает, пока приложение ходит на реплику.
+   Explain to yourself the difference between write, flush and replay lag.
+3. Split the DSN in the Flask application: writes go to the primary, reads to the replica (through two pools, say, or `dbname=... options='-c default_transaction_read_only=on'`).
+4. Confirm the page listing the data still works while the application reads from the replica.
 
-Диагностика лага: https://www.postgresql.org/docs/current/monitoring-stats.html
+Diagnosing lag: https://www.postgresql.org/docs/current/monitoring-stats.html
 
-## Exercise 3: Ручной failover
+## Exercise 3: Manual failover
 
-1. Сымитируй аварию: `systemctl stop postgresql@16-main` на primary (или погаси VM).
-2. Промоти реплику:
+1. Simulate the failure: `systemctl stop postgresql@16-main` on the primary (or power the VM off).
+2. Promote the replica:
    ```bash
    su - postgres -c "/usr/lib/postgresql/16/bin/pg_ctl promote \
      -D /var/lib/postgresql/16/main"
    ```
-   Проверь: `SELECT pg_is_in_recovery();` → `f`.
-3. Переведи приложение на новую primary (поменяй DSN / роль в inventory, перезапусти).
-4. **Что ломается:** старый primary после включения — это «split-brain-кандидат»: у него свой timeline, и запись туда = потеряные/расходящиеся данные. Никогда не пиши на два мастера.
-5. Верни старый primary в кластер как реплику:
+   Check: `SELECT pg_is_in_recovery();` -> `f`.
+3. Point the application at the new primary (change the DSN / the role in the inventory, then restart).
+4. **What breaks:** the old primary, once it comes back up, is a split-brain candidate: it has its own timeline, and writing to it means lost or diverging data. Never write to two masters.
+5. Bring the old primary back into the cluster as a replica:
    ```bash
-   # на старом primary: остановлен, затем
+   # on the old primary: stopped, then
    pg_rewind --target-pgdata=/var/lib/postgresql/16/main \
      --source-server="host=vm2-replica user=replicator password=..."
    ```
-   Создай `standby.signal`, поправь `primary_conninfo`, стартуй. Проверь, что он догоняет новый мастер по `pg_stat_replication` на vm2.
+   Create `standby.signal`, fix up `primary_conninfo`, and start it. Confirm it catches the new master up through `pg_stat_replication` on vm2.
 
-Что делает pg_rewind: https://www.postgresql.org/docs/current/app-pgrewind.html
+What pg_rewind does: https://www.postgresql.org/docs/current/app-pgrewind.html
 
-## Exercise 4: PITR — archived WAL + восстановление «до момента»
+## Exercise 4: PITR — archived WAL and recovery to a point in time
 
-1. На primary (уже новом):
+1. On the primary (the new one):
    ```ini
    archive_mode = on
    archive_command = 'test ! -f /var/lib/postgresql/archive/%f && cp %p /var/lib/postgresql/archive/%f'
    wal_level = replica
    ```
-   Архив положи на отдельную директорию/диск (в проде — отдельный хост или S3).
-2. Проверь, что WAL архивируется: `SELECT * FROM pg_stat_archiver;`.
-3. Сними физический base backup (это точка старта для PITR):
+   Put the archive on a separate directory or disk (in production, a separate host or S3).
+2. Confirm WAL is being archived: `SELECT * FROM pg_stat_archiver;`.
+3. Take a physical base backup (this is the starting point for PITR):
    ```bash
    pg_basebackup -h vm2-replica -U replicator -D /var/lib/postgresql/backup -Fp -Xs -P
    ```
-4. **Эксперимент «удалил таблицу»**: запиши текущее время
+4. **The "I dropped a table" experiment**: note the current time
    ```sql
    SELECT now();
    DROP TABLE important_data;
    ```
-5. Восстановись на резервной копии: скопируй backup в новый `PGDATA`, в `postgresql.conf`:
+5. Recover from the backup: copy it into a new `PGDATA`, and in `postgresql.conf`:
    ```ini
    restore_command = 'cp /var/lib/postgresql/archive/%f %p'
-   recovery_target_time = '<время из п.4>'
+   recovery_target_time = '<the time from step 4>'
    ```
-   + `touch recovery.signal`, стартуй. Проверь, что таблица снова на месте.
-6. После проверки — `SELECT pg_wal_replay_resume();` и пойми, почему промот/пауза на recovery target важны.
+   Then `touch recovery.signal` and start it. Confirm the table is back.
+6. Once verified, run `SELECT pg_wal_replay_resume();` and work out why the promote/pause at the recovery target matters.
 
-Теория: https://www.postgresql.org/docs/current/continuous-archiving.html
+Theory: https://www.postgresql.org/docs/current/continuous-archiving.html
 
-## Exercise 5: Стратегия бэкапов: pg_dump vs physical basebackup
+## Exercise 5: Backup strategy: pg_dump against a physical basebackup
 
-Составь таблицу «когда что» для своего стенда и запиши вывод в README стенда:
+Build a "when to use which" table for your stand and write the conclusion into the stand's README:
 
-- `pg_dump` / `pg_dumpall` — логический: перенос на другую мажорную версию, частичный дамп (одна БД/таблица), малый размер. Но: нет PITR, медленный restore больших БД.
-- Physical basebackup + WAL archive — основа PITR и реплик: моментальные снимки всего кластера, непрерывное восстановление. Но: та же мажорная версия, размер всего кластера.
-- Правило: логические дампы — для миграций и «скорой помощи», физические + WAL — для RPO/RTO.
+- `pg_dump` / `pg_dumpall` — logical: moving to a different major version, a partial dump (one database or table), small size. But: no PITR, and a slow restore for large databases.
+- A physical basebackup + WAL archive — the basis of PITR and of replicas: point-in-time snapshots of the whole cluster and continuous recovery. But: the same major version, and the size of the whole cluster.
+- The rule: logical dumps for migrations and first aid, physical plus WAL for RPO/RTO.
 
-Сравнение: https://www.postgresql.org/docs/current/backup-dump.html
+A comparison: https://www.postgresql.org/docs/current/backup-dump.html
 
-## Exercise 6: Patroni-мост (НЕ ставим — понимаем)
+## Exercise 6: The bridge to Patroni (we do not install it — we understand it)
 
-Patroni мы в этой лабе не устанавливаем. Составь список из Exercise 1–4: что именно ты делал руками, и что из этого автоматизирует Patroni + etcd:
+We do not install Patroni in this lab. From Exercises 1-4, list what exactly you did by hand and which of it Patroni plus etcd automates:
 
-- выбор нового лидера при аварии (твой Exercise 3 — promote руками);
-- перезапуск старого мастера как реплики (pg_rewind — Patroni делает сам);
-- единый endpoint (DNS/HAProxy), чтобы приложение не переконфигурировать;
-- контроль lag и restarter-скрипты.
+- electing a new leader on failure (your Exercise 3 — promoting by hand);
+- restarting the old master as a replica (pg_rewind — Patroni does it itself);
+- a single endpoint (DNS/HAProxy), so the application never has to be reconfigured;
+- lag monitoring and restarter scripts.
 
-Затем ответь письменно на 3 вопроса:
+Then answer three questions in writing:
 
-1. Синхронная vs асинхронная репликация: что меняется для latency записи и для durability при аварии мастера?
-2. При асинхронной репликации и failover — какие именно транзакции теряются и от чего зависит объём потери?
-3. RPO и RTO простыми словами — каковы они в твоём стенде с Exercise 4 и без него?
+1. Synchronous against asynchronous replication: what changes for write latency, and for durability when the master fails?
+2. With asynchronous replication and a failover — which transactions exactly are lost, and what determines how much is lost?
+3. RPO and RTO in plain words — what are they for your stand with Exercise 4, and without it?
 
-Что автоматизирует Patroni: https://patroni.readthedocs.io/
+What Patroni automates: https://patroni.readthedocs.io/
 
-## Что должно получиться
+## What you should end up with
 
-- Воспроизводимый Ansible-деплой primary + replica + app.
-- Promotion и rejoin по шагам, записанные в конспект.
-- Архив WAL, base backup и успешный PITR «до удаления таблицы».
-- Таблица pg_dump vs basebackup и три письменных ответа на вопросы.
+- A reproducible Ansible deploy of primary + replica + app.
+- The promotion and the rejoin, step by step, written up in your notes.
+- A WAL archive, a base backup, and a successful PITR to just before the table was dropped.
+- The pg_dump against basebackup table, and three written answers to the questions.

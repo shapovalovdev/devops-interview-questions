@@ -1,85 +1,85 @@
 ---
-title: "Мониторинг и логи на существующем стенде: Prometheus + Alertmanager + Loki + Grafana"
+title: "Monitoring and logs on an existing stand: Prometheus + Alertmanager + Loki + Grafana"
 theme: "observability"
 difficulty: "middle"
 question_ref: "observability/build-an-actionable-alert.md"
 tags: [observability, monitoring, logging, prometheus, ansible]
 why: "Monitoring is named in nearly every infrastructure job description and logging in most; Loki covers the practical logging side more cheaply and simply than ELK, and correlating metrics with logs in a single dashboard is a standing interview theme. The lab closes the common gap for anyone arriving with Zabbix or Grafana experience but only pet-level Prometheus: transferring that experience onto the Prometheus stack and learning to tie an alert to its cause through logs."
 checklist:
-  - "Prometheus и node_exporter подняты на всех 3 VM; все таргеты видны как UP в /targets."
-  - "Scrape-конфиги объявлены декларативно (Ansible role или docker-compose) и воспроизводятся повторным запуском."
-  - "Настроены 2–3 алерт-правила: instance down, disk usage > 85%, Flask 5xx/latency; правила загружены без ошибок (проверка через /rules)."
-  - "Alertmanager доставляет алерт в реальный канал (email/webhook/Telegram), а не только в UI."
-  - "Каждый алерт проверен генерацией реального события: остановлен exporter, заполнен диск, сгенерированы 5xx."
-  - "Loki + Promtail запущены; journald и логи Flask/PostgreSQL реально приходят в Loki."
-  - "LogQL-запросы работают: фильтрация по сервису, grep по ошибке, подсчёт rate за интервал."
-  - "Единый Grafana-дашборд показывает метрики и логи рядом; корреляция по времени работает."
-  - "Сломай-и-почини: уроненный exporter вызывает алерт; причина найдена по логам в Loki, а не по подсказке."
-  - "Повторный deploy через Ansible (или docker-compose up) идемпотентен: nothing changed / контейнеры не пересоздаются без причины."
+  - "Prometheus and node_exporter are up on all 3 VMs; every target shows UP in /targets."
+  - "Scrape configs are declared declaratively (an Ansible role or docker-compose) and reproduce on a second run."
+  - "2-3 alert rules are configured: instance down, disk usage > 85%, Flask 5xx/latency; the rules load without errors (check /rules)."
+  - "Alertmanager delivers an alert to a real channel (email/webhook/Telegram), not only to the UI."
+  - "Every alert has been proven by generating a real event: stop an exporter, fill a disk, generate 5xx."
+  - "Loki + Promtail are running; journald and the Flask/PostgreSQL logs genuinely arrive in Loki."
+  - "LogQL queries work: filter by service, grep for an error, count the rate over an interval."
+  - "A single Grafana dashboard shows metrics and logs side by side; correlation by time works."
+  - "Break-and-fix: a downed exporter raises an alert, and the cause is found from the logs in Loki rather than from a hint."
+  - "A repeat deploy through Ansible (or docker-compose up) is idempotent: nothing changed, and containers are not recreated without reason."
 ---
 
-# Lab: Мониторинг и логи на существующем стенде: Prometheus + Alertmanager + Loki + Grafana
+# Lab: Monitoring and logs on an existing stand: Prometheus + Alertmanager + Loki + Grafana
 
-## Контекст и окружение
+## Context and environment
 
-Стенд из предыдущих лабов: 3 VM на Ubuntu — `vm1` (Flask-приложение + nginx), `vm2` (PostgreSQL), `vm3` (Ansible control + app-хост). Всё управление — через Ansible. Задача — навесить полноценный observability-стек на живой стенд, не сломав приложение.
+The stand from the previous labs: 3 Ubuntu VMs — `vm1` (Flask application + nginx), `vm2` (PostgreSQL), `vm3` (Ansible control + app host). Everything is managed through Ansible. The task is to fit a full observability stack onto a live stand without breaking the application.
 
-**Ключевое решение, которое нужно защитить:** деплой стека через Ansible role (systemd-сервисы) или через docker-compose на выделенной ноде. У обоих подходов есть цена: Ansible — больше ролей и шаблонов, зато единый менеджмент со стендом; docker-compose — быстрее поднять, но появляется вторая система деплоя. Выбор нужно аргументировать, а не взять по умолчанию.
+**The key decision you have to defend:** deploy the stack through an Ansible role (systemd services) or through docker-compose on a dedicated node. Both have a price: Ansible means more roles and templates but keeps one management story for the whole stand; docker-compose is faster to stand up but introduces a second deployment system. Argue the choice rather than taking one by default.
 
-Время на лаб: 6–8 часов. Машины: 3 VM, по 2 vCPU / 2–4 GB RAM.
+Time for the lab: 6-8 hours. Machines: 3 VMs, 2 vCPU / 2-4 GB RAM each.
 
 ---
 
-## Exercise 1: Prometheus + node_exporter на все 3 VM
+## Exercise 1: Prometheus + node_exporter on all 3 VMs
 
-1. Установи Prometheus (сервер) и node_exporter (на все 3 VM) выбранным способом.
-2. Напиши scrape-конфиг: статические таргеты для всех 3 VM (`:9100`), плюс app-метрики Flask (`/metrics` или через экспортер — если Flask их не отдаёт, добавь `prometheus_client` в приложение или поставь blackbox_exporter на http-эндпоинт).
-3. Проверь: `http://<prometheus>:9090/targets` — все таргеты UP.
-4. Сделай так, чтобы список таргетов не приходилось править руками при добавлении VM (inventory Ansible → шаблон `prometheus.yml.j2`, или file-based SD).
+1. Install Prometheus (the server) and node_exporter (on all 3 VMs) by your chosen method.
+2. Write the scrape config: static targets for all 3 VMs (`:9100`), plus the Flask app metrics (`/metrics`, or through an exporter — if Flask does not expose them, add `prometheus_client` to the application or put blackbox_exporter in front of the HTTP endpoint).
+3. Check: `http://<prometheus>:9090/targets` — every target UP.
+4. Arrange things so the target list does not have to be edited by hand when a VM is added (Ansible inventory → a `prometheus.yml.j2` template, or file-based SD).
 
-## Exercise 2: Осмысленные алерты через Alertmanager
+## Exercise 2: Meaningful alerts through Alertmanager
 
-1. Подними Alertmanager и соедини его с Prometheus.
-2. Напиши 2–3 alert-правила, каждое из которых проходит тест «actionable alert» (см. question_ref):
-   - `instance down` — `up == 0` больше 1–2 минут;
+1. Stand up Alertmanager and connect it to Prometheus.
+2. Write 2-3 alert rules, each of which passes the "actionable alert" test (see question_ref):
+   - `instance down` — `up == 0` for more than 1-2 minutes;
    - disk usage > 85% — `node_filesystem_avail_bytes / node_filesystem_size_bytes`;
-   - Flask 5xx rate или p95 latency — по метрикам приложения.
-3. Для каждого алерта: severity, описание с первым диагностическим шагом, routing в Alertmanager (например, critical → Telegram/webhook, warning → email).
-4. **Проверка не «на глаз»:** каждый алерт обязан сработать от реального события (см. Exercise 5). Алерт, который ни разу не стрелял, считается не существующим.
+   - Flask 5xx rate or p95 latency — from the application metrics.
+3. For each alert: a severity, a description carrying the first diagnostic step, and routing in Alertmanager (for example, critical → Telegram/webhook, warning → email).
+4. **Checking is not done by eye:** every alert must fire from a real event (see Exercise 5). An alert that has never fired counts as one that does not exist.
 
-## Exercise 3: Loki + Promtail: journald и логи сервисов
+## Exercise 3: Loki + Promtail: journald and service logs
 
-1. Подними Loki (single-binary достаточно) и Promtail на каждой VM.
-2. Настрой Promtail: `journal`-scrape (unit-ы Flask, PostgreSQL, node_exporter) + файловые логи Flask/nginx, если они пишутся в файлы. Добавь метки: `host`, `unit`, `service`.
-3. Проверь приход данных: запрос в Grafana Explore — `{job="journal", host="vm1"}` и `{service="flask"}`.
-4. Ответь на вопрос защиты: почему метки в Loki — это не то же самое, что метки в Prometheus, и что будет с Loki при высококардинальных метках вроде user_id.
+1. Stand up Loki (single-binary is enough) and Promtail on each VM.
+2. Configure Promtail: a `journal` scrape (the Flask, PostgreSQL and node_exporter units) plus the file logs of Flask/nginx if they are written to files. Add the labels `host`, `unit`, `service`.
+3. Confirm the data arrives: query in Grafana Explore — `{job="journal", host="vm1"}` and `{service="flask"}`.
+4. Answer the defence question: why labels in Loki are not the same thing as labels in Prometheus, and what happens to Loki under high-cardinality labels such as user_id.
 
-## Exercise 4: Единый Grafana-дашборд: метрики + логи рядом
+## Exercise 4: A single Grafana dashboard: metrics and logs side by side
 
-1. Подключи Grafana к обоим источникам: Prometheus и Loki.
-2. Собери один дашборд на стенд: CPU/memory/disk по VM, availability Flask, rate 5xx — и рядом log-панель с логами приложения за то же окно времени.
-3. Проверь корреляцию: при инциденте из Exercise 5 в один клик видно всплеск метрики и соответствующие строки логов в том же временном окне.
-4. Отработай ad-hoc LogQL: найти все 5xx за последний час, посчитать `rate` ошибок по сервисам, найти конкретный traceback.
+1. Connect Grafana to both sources: Prometheus and Loki.
+2. Build one dashboard for the stand: CPU/memory/disk per VM, Flask availability, 5xx rate — and beside them a log panel showing the application logs over the same time window.
+3. Check the correlation: during the incident from Exercise 5, one click should show the metric spike and the corresponding log lines in the same time window.
+4. Practise ad-hoc LogQL: find every 5xx in the last hour, count the error `rate` per service, find one specific traceback.
 
-## Exercise 5: Сломай-и-почини (мост к chaos-sandbox Phase 2)
+## Exercise 5: Break-and-fix (the bridge to chaos-sandbox Phase 2)
 
-1. Урони node_exporter на одной из VM: `sudo systemctl stop node_exporter`.
-2. Пройди полный цикл реагирования: алерт пришёл → в Grafana видно, какой таргет пропал → по логам journald в Loki (`{unit="node_exporter"}`) найди причину остановки.
-3. Повтори с более сложным сценарием: урони Flask так, чтобы nginx отдавал 5xx (или сгенерируй ошибки нагрузкой на сломанном бэкенде) — алерт по 5xx должен прийти, а причина — находиться в логах, а не угадываться.
-4. Запиши TTR (time-to-recovery) для обоих инцидентов. Это прямая подготовка к Phase 2 chaos-sandbox: реконструкция инцидента по Grafana/Loki и blameless post-mortem.
-5. Почини. Убедись, что алерт resolved пришёл тем же каналом.
+1. Drop node_exporter on one of the VMs: `sudo systemctl stop node_exporter`.
+2. Walk the whole response cycle: the alert arrives → Grafana shows which target disappeared → the journald logs in Loki (`{unit="node_exporter"}`) give you the reason it stopped.
+3. Repeat with a harder scenario: break Flask so that nginx returns 5xx (or generate errors by loading the broken backend) — the 5xx alert must arrive, and the cause must be found in the logs rather than guessed.
+4. Record the TTR (time to recovery) for both incidents. This is direct preparation for chaos-sandbox Phase 2: reconstructing an incident from Grafana/Loki and writing a blameless post-mortem.
+5. Fix it. Confirm the resolved alert arrives through the same channel.
 
-## Exercise 6: Идемпотентность всего стека мониторинга
+## Exercise 6: Idempotence of the whole monitoring stack
 
-1. Весь стек мониторинга должен подниматься одним запуском Ansible-playbook (или `docker-compose up -d`) с нуля на чистых VM.
-2. Запусти deploy повторно на живом стенде: сервисы не должны перезапускаться, конфиги — меняться, дашборды — дублироваться. Grafana-дашборды и datasource-ы декларативно (provisioning, не руками в UI).
-3. Проверь: `ansible-playbook ... --check --diff` не показывает изменений; alert-правила и Promtail-конфигы шаблонизированы.
-4. Защита: что произойдёт со стеком мониторинга при полном пересоздании стенда, и где ты это зафиксировал в коде, а не в памяти.
+1. The entire monitoring stack must come up from scratch on clean VMs in a single Ansible playbook run (or `docker-compose up -d`).
+2. Run the deploy again against the live stand: services must not restart, configs must not change, dashboards must not duplicate. Grafana dashboards and data sources are declarative (provisioning, not clicked into the UI).
+3. Check: `ansible-playbook ... --check --diff` shows no changes; the alert rules and Promtail configs are templated.
+4. Defence: what happens to the monitoring stack when the stand is recreated from nothing, and where you recorded that in code rather than in your memory.
 
 ---
 
-## Критерии сдачи
+## Completion criteria
 
-- Все пункты checklist закрыты скриншотами/выводом команд.
-- Выбор Ansible vs docker-compose аргументирован (минимум 2 осмысленных аргумента за и 1 против своего выбора).
-- Exercise 5 показан end-to-end: алерт → дашборд → логи → фикс → resolved.
+- Every checklist item is closed with a screenshot or command output.
+- The Ansible vs docker-compose choice is argued (at least 2 sound arguments for, and 1 against, your own choice).
+- Exercise 5 is shown end to end: alert → dashboard → logs → fix → resolved.
