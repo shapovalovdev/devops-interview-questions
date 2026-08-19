@@ -13,6 +13,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 CHART = ROOT / "deploy" / "content-api"
 OVERLAY = ROOT / "kustomize" / "k3d"
+SMOKE_SCRIPT = ROOT / "scripts" / "smoke_k3d_content_api.sh"
 
 
 def render_helm() -> list[dict[str, object]]:
@@ -77,6 +78,17 @@ class ContentApiKubernetesTest(unittest.TestCase):
         )
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("must not be latest", result.stderr)
+
+    def test_k3d_smoke_verifies_the_default_import_reaches_containerd(self) -> None:
+        script = SMOKE_SCRIPT.read_text(encoding="utf-8")
+        self.assertIn('k3d image import "$image:$source_commit" -c "$cluster"', script)
+        self.assertNotIn("--mode direct", script)
+        self.assertIn("--provenance=false", script)
+        self.assertIn("image=docker.io/library/devops-questions-content-api", script)
+        self.assertIn('ctr -n k8s.io images list -q', script)
+        self.assertIn('grep -Eq "(^|/)${image}:${source_commit}$"', script)
+        self.assertIn("--dump-header - --output /dev/null", script)
+        self.assertNotIn("--head", script)
 
 
 if __name__ == "__main__":

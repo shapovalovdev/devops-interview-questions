@@ -87,8 +87,9 @@ scripts/smoke_k3d_content_api.sh
 ```
 
 The script requires a k3d cluster named `proto` (context `k3d-proto`), Docker, Helm, Kustomize, and kubectl.
-It passes `SOURCE_COMMIT` and `BUILD_TIMESTAMP` to `Dockerfile.api`, checks `/api/v1/health`,
-`/api/v1/meta`, and `X-Content-Snapshot`, and always deletes `content-api-206` on exit.
+It passes `SOURCE_COMMIT` and `BUILD_TIMESTAMP` to `Dockerfile.api`, uses k3d's default image-import mode,
+confirms the commit-tagged image is visible in the node's `k8s.io` containerd namespace, checks
+`/api/v1/health`, `/api/v1/meta`, and `X-Content-Snapshot`, and always deletes `content-api-206` on exit.
 
 ## Content policy and attribution
 
