@@ -8699,7 +8699,7 @@ window.labs = [
       "memory",
       "healthchecks"
     ],
-    "why": "A cache layer is named in four of the eight analyzed vacancies (Interlizing, efin, T1 pattern names Redis explicitly), yet candidates usually stop at installing it. This lab teaches hit-ratio thinking: cache-aside in the Flask app, TTL and invalidation choices, maxmemory eviction experiments with allkeys-lru versus volatile-star policies, and cache failure modes like stampede — the interview questions behind the install command.",
+    "why": "A cache layer is named in most infrastructure job descriptions, and Redis by name in many of them, yet candidates usually stop at installing it. This lab teaches hit-ratio thinking: cache-aside in the Flask app, TTL and invalidation choices, maxmemory eviction experiments with allkeys-lru versus volatile-star policies, and cache failure modes like stampede — the interview questions behind the install command.",
     "questionTitle": "Tune Redis maxmemory and eviction behaviour",
     "questionHref": "questions/caching/redis-maxmemory-tuning.html",
     "slug": "caching/redis-practical"
@@ -8717,7 +8717,7 @@ window.labs = [
       "git",
       "delivery"
     ],
-    "why": "ArgoCD is a hard requirement in efin A-tier vacancies and GitOps is a frequent senior interview topic. This lab teaches pull-based deployment and drift thinking rather than mere tool installation, closing the gap between running helm upgrade by hand and declarative delivery where Git is the single source of truth.",
+    "why": "ArgoCD is a hard requirement in many senior platform roles and GitOps is a frequent senior interview topic. This lab teaches pull-based deployment and drift thinking rather than mere tool installation, closing the gap between running helm upgrade by hand and declarative delivery where Git is the single source of truth.",
     "questionTitle": "Choose a pull-based reconciler or a push-based deployment pipeline",
     "questionHref": "questions/ci-cd/gitops-pull-versus-push-delivery.html",
     "slug": "ci-cd/argocd-gitops-deploy"
@@ -8764,7 +8764,7 @@ window.labs = [
       "reliability",
       "ansible"
     ],
-    "why": "Backups, replication and migrations are a direct Interlizing job requirement, and T1 asks for Patroni diagnostics: doing failover and recovery by hand builds the exact mental model Patroni automates, without installing it yet.",
+    "why": "Backups, replication and point-in-time recovery are standing requirements for database operations roles, and Patroni diagnostics come up wherever PostgreSQL high availability is run: doing failover and recovery by hand builds the exact mental model Patroni automates, without installing it yet.",
     "questionTitle": "Design PostgreSQL high availability and failover",
     "questionHref": "questions/databases/high-availability-failover.html",
     "slug": "databases/postgresql-replication-pitr"
@@ -8781,7 +8781,7 @@ window.labs = [
       "troubleshooting",
       "fault-injection"
     ],
-    "why": "Kubernetes appears in all eight target vacancies, and interviewers distinguish 'used k3s' from 'can repair a cluster'. This break-fix lab drills diagnosis through kubectl describe, logs, and events, plus control-plane understanding (etcd, apiserver, certificates), rather than deployment alone.",
+    "why": "Kubernetes is near-universal in infrastructure roles, and interviewers distinguish 'used k3s' from 'can repair a cluster'. This break-fix lab drills diagnosis through kubectl describe, logs, and events, plus control-plane understanding (etcd, apiserver, certificates), rather than deployment alone.",
     "questionTitle": "Triage a Kubernetes node that becomes NotReady",
     "questionHref": "questions/kubernetes/node-not-ready-triage.html",
     "slug": "kubernetes/kubeadm-cni-ingress-break-fix"
@@ -8812,7 +8812,7 @@ window.labs = [
       "prometheus",
       "ansible"
     ],
-    "why": "Monitoring appears in eight of the eight analyzed vacancies and logging in six of eight; Loki covers the practical logging side more cheaply and simply than ELK, and correlating metrics with logs in a single dashboard is exactly what Ostrovok, T1, and efin interviews ask for. A candidate with production Zabbix+Grafana experience and pet-level Prometheus closes the main gap here: transferring scattered Zabbix experience onto the Prometheus stack and learning to tie an alert to its cause through logs.",
+    "why": "Monitoring is named in nearly every infrastructure job description and logging in most; Loki covers the practical logging side more cheaply and simply than ELK, and correlating metrics with logs in a single dashboard is a standing interview theme. The lab closes the common gap for anyone arriving with Zabbix or Grafana experience but only pet-level Prometheus: transferring that experience onto the Prometheus stack and learning to tie an alert to its cause through logs.",
     "questionTitle": "Build an actionable production alert",
     "questionHref": "questions/observability/build-an-actionable-alert.html",
     "slug": "observability/prometheus-loki-telemetry"
@@ -8846,7 +8846,7 @@ window.labs = [
       "observability",
       "reliability"
     ],
-    "why": "Message brokers appear in four of the eight current vacancies, while the queue-messaging bank holds about thirty questions with no practical footing. RabbitMQ is the cheapest entry into the topic: one evening with a compose stand teaches the basic vocabulary (exchange, binding, ack, DLQ) and removes the fear of those interview questions. Interlizing vacancies require RabbitMQ clusters and efin asks Kafka concepts, and both interview branches start with understanding how a broker differs from a log.",
+    "why": "Message brokers are a standing interview topic, while the queue-messaging Theme holds Questions with no practical footing. RabbitMQ is the cheapest entry into the topic: one evening with a compose stand teaches the basic vocabulary (exchange, binding, ack, DLQ) and removes the fear of those interview questions. Roles that run RabbitMQ clusters and roles that ask for Kafka concepts both start from the same place: understanding how a broker differs from a log.",
     "questionTitle": "Design RabbitMQ dead-letter handling",
     "questionHref": "questions/queue-messaging/design-rabbitmq-dead-lettering.html",
     "slug": "queue-messaging/rabbitmq-practical"

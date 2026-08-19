@@ -4,7 +4,7 @@ theme: "kubernetes"
 difficulty: "middle"
 question_ref: "kubernetes/node-not-ready-triage.md"
 tags: [kubernetes, cni, networking, certificates, troubleshooting, fault-injection]
-why: "Kubernetes appears in all eight target vacancies, and interviewers distinguish 'used k3s' from 'can repair a cluster'. This break-fix lab drills diagnosis through kubectl describe, logs, and events, plus control-plane understanding (etcd, apiserver, certificates), rather than deployment alone."
+why: "Kubernetes is near-universal in infrastructure roles, and interviewers distinguish 'used k3s' from 'can repair a cluster'. This break-fix lab drills diagnosis through kubectl describe, logs, and events, plus control-plane understanding (etcd, apiserver, certificates), rather than deployment alone."
 checklist:
   - "Стенд поднят: 1 control-plane + минимум 1 worker, все узлы Ready, CNI-подузы Running."
   - "Тестовое приложение задеплоено и доступно через ingress с рабочим endpoint."

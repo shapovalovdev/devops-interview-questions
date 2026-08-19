@@ -4,7 +4,7 @@ theme: "caching"
 difficulty: "middle"
 question_ref: "caching/redis-maxmemory-tuning.md"
 tags: [caching, redis, docker, prometheus, monitoring, memory, healthchecks]
-why: "A cache layer is named in four of the eight analyzed vacancies (Interlizing, efin, T1 pattern names Redis explicitly), yet candidates usually stop at installing it. This lab teaches hit-ratio thinking: cache-aside in the Flask app, TTL and invalidation choices, maxmemory eviction experiments with allkeys-lru versus volatile-star policies, and cache failure modes like stampede — the interview questions behind the install command."
+why: "A cache layer is named in most infrastructure job descriptions, and Redis by name in many of them, yet candidates usually stop at installing it. This lab teaches hit-ratio thinking: cache-aside in the Flask app, TTL and invalidation choices, maxmemory eviction experiments with allkeys-lru versus volatile-star policies, and cache failure modes like stampede — the interview questions behind the install command."
 checklist:
   - "Redis добавлен в docker-compose стендa с healthcheck (redis-cli ping) и зависит_от-связью с Flask; контейнер healthy."
   - "Cache-aside слой в Flask закэшировал тяжёлую выборку из PostgreSQL: повторный запрос идёт из Redis (проверено логами/TTL ключа)."

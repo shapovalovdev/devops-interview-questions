@@ -4,7 +4,7 @@ theme: "ci-cd"
 difficulty: "middle"
 question_ref: "ci-cd/gitops-pull-versus-push-delivery.md"
 tags: [ci-cd, kubernetes, argo-cd, gitops, deployment, git, delivery]
-why: "ArgoCD is a hard requirement in efin A-tier vacancies and GitOps is a frequent senior interview topic. This lab teaches pull-based deployment and drift thinking rather than mere tool installation, closing the gap between running helm upgrade by hand and declarative delivery where Git is the single source of truth."
+why: "ArgoCD is a hard requirement in many senior platform roles and GitOps is a frequent senior interview topic. This lab teaches pull-based deployment and drift thinking rather than mere tool installation, closing the gap between running helm upgrade by hand and declarative delivery where Git is the single source of truth."
 checklist:
   - "Install ArgoCD into the cluster and reach the UI/API with the initial admin password."
   - "Connect the Git repository holding the orders-devops Helm chart as an ArgoCD repo."
@@ -157,4 +157,4 @@ checklist:
 *   Работающее приложение, развернутое без единого `helm upgrade` после настройки.
 *   Демонстрация drift-detection и self-heal на живом кластере.
 *   Pre-sync hook с миграцией, выполняющийся до основного Deployment.
-*   Устные ответы на четыре вопроса Exercise 6 — по формату собеседования (efin A-tier спрашивает ArgoCD обязательно).
+*   Устные ответы на четыре вопроса Exercise 6 — по формату собеседования (ArgoCD — обязательная тема для GitOps-ролей).
