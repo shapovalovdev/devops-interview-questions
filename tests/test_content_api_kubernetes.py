@@ -89,6 +89,7 @@ class ContentApiKubernetesTest(unittest.TestCase):
         self.assertIn('grep -Eq "(^|/)${image}:${source_commit}$"', script)
         self.assertIn("--dump-header - --output /dev/null", script)
         self.assertNotIn("--head", script)
+        self.assertIn("for attempt in $(seq 1 30); do", script)
 
 
 if __name__ == "__main__":

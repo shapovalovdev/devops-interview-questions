@@ -54,7 +54,16 @@ kubectl --context "$context" -n "$namespace" rollout status "deployment/$release
 kubectl --context "$context" -n "$namespace" port-forward "service/$release" 18000:8000 >/tmp/content-api-206-port-forward.log 2>&1 &
 port_forward=$!
 trap 'kill "$port_forward" 2>/dev/null || true; rm -rf "$overlay"; cleanup' EXIT
-sleep 2
+for attempt in $(seq 1 30); do
+  if curl --fail --silent http://127.0.0.1:18000/api/v1/health >/dev/null; then
+    break
+  fi
+  if [ "$attempt" = 30 ]; then
+    cat /tmp/content-api-206-port-forward.log >&2
+    exit 1
+  fi
+  sleep 1
+done
 curl --fail --show-error http://127.0.0.1:18000/api/v1/health
 curl --fail --show-error http://127.0.0.1:18000/api/v1/meta
 curl --fail --show-error --dump-header - --output /dev/null http://127.0.0.1:18000/api/v1/health \
