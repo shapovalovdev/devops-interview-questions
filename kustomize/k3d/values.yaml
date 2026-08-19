@@ -1,0 +1,5 @@
+image:
+  repository: devops-questions-content-api
+  tag: local
+  local: true
+  pullPolicy: IfNotPresent
