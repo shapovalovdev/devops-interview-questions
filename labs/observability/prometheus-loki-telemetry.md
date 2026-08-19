@@ -4,7 +4,7 @@ theme: "observability"
 difficulty: "middle"
 question_ref: "observability/build-an-actionable-alert.md"
 tags: [observability, monitoring, logging, prometheus, ansible]
-why: "Monitoring appears in eight of the eight analyzed vacancies and logging in six of eight; Loki covers the practical logging side more cheaply and simply than ELK, and correlating metrics with logs in a single dashboard is exactly what Ostrovok, T1, and efin interviews ask for. A candidate with production Zabbix+Grafana experience and pet-level Prometheus closes the main gap here: transferring scattered Zabbix experience onto the Prometheus stack and learning to tie an alert to its cause through logs."
+why: "Monitoring is named in nearly every infrastructure job description and logging in most; Loki covers the practical logging side more cheaply and simply than ELK, and correlating metrics with logs in a single dashboard is a standing interview theme. The lab closes the common gap for anyone arriving with Zabbix or Grafana experience but only pet-level Prometheus: transferring that experience onto the Prometheus stack and learning to tie an alert to its cause through logs."
 checklist:
   - "Prometheus и node_exporter подняты на всех 3 VM; все таргеты видны как UP в /targets."
   - "Scrape-конфиги объявлены декларативно (Ansible role или docker-compose) и воспроизводятся повторным запуском."

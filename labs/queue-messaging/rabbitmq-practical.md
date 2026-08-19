@@ -4,7 +4,7 @@ theme: "queue-messaging"
 difficulty: "middle"
 question_ref: "queue-messaging/design-rabbitmq-dead-lettering.md"
 tags: [rabbitmq, message-queues, event-driven, observability, reliability]
-why: "Message brokers appear in four of the eight current vacancies, while the queue-messaging bank holds about thirty questions with no practical footing. RabbitMQ is the cheapest entry into the topic: one evening with a compose stand teaches the basic vocabulary (exchange, binding, ack, DLQ) and removes the fear of those interview questions. Interlizing vacancies require RabbitMQ clusters and efin asks Kafka concepts, and both interview branches start with understanding how a broker differs from a log."
+why: "Message brokers are a standing interview topic, while the queue-messaging Theme holds Questions with no practical footing. RabbitMQ is the cheapest entry into the topic: one evening with a compose stand teaches the basic vocabulary (exchange, binding, ack, DLQ) and removes the fear of those interview questions. Roles that run RabbitMQ clusters and roles that ask for Kafka concepts both start from the same place: understanding how a broker differs from a log."
 checklist:
   - "RabbitMQ поднят через docker-compose, management UI доступен на порту 15672."
   - "Создан vhost, пользователь и permissions через rabbitmqctl или UI."

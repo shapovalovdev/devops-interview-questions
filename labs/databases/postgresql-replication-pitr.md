@@ -4,7 +4,7 @@ theme: "databases"
 difficulty: "middle"
 question_ref: "databases/high-availability-failover.md"
 tags: [databases, postgresql, availability, storage, reliability, ansible]
-why: "Backups, replication and migrations are a direct Interlizing job requirement, and T1 asks for Patroni diagnostics: doing failover and recovery by hand builds the exact mental model Patroni automates, without installing it yet."
+why: "Backups, replication and point-in-time recovery are standing requirements for database operations roles, and Patroni diagnostics come up wherever PostgreSQL high availability is run: doing failover and recovery by hand builds the exact mental model Patroni automates, without installing it yet."
 checklist:
   - "Deploy PostgreSQL primary and one streaming replica across two VMs, initialized with pg_basebackup (Ansible playbook preferred)."
   - "Create a table on the primary and confirm the row reaches the replica."
