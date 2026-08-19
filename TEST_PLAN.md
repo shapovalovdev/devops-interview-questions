@@ -26,11 +26,18 @@ Every `*.md` file under `questions/<theme>/` is an active Question. It must appe
 
 `config/content-manifest.json` is the single coverage contract. The CI validator
 checks that every canonical Theme is declared, tracks its delivery state, and
-enforces the exact 25-Question `5 junior / 10 middle / 5 senior / 5 staff`
-mix for complete Themes. In-progress Themes may never exceed that target or
-any difficulty allocation; overlapping Questions must be retired or reassigned
-before the Theme is marked complete. Planned Themes cannot contain active
-Questions. The same manifest declares every published certification tag, its
+enforces the Coverage target for complete Themes.
+
+The Coverage target is a **floor, not a cap**. The manifest states this itself in
+`theme_policy.count_semantics`, which `tests/validate_content_manifest.py` asserts
+is `"floor"`; read `theme_policy` for the current baseline rather than trusting a
+count repeated here. A complete Theme carries at least `minimum_question_count`
+active Questions and at least the baseline count in every difficulty band of
+`minimum_difficulty_distribution`. A Theme that has grown past the baseline
+through certification or roadmap coverage keeps that verified material — Questions
+are never retired to satisfy an exact count. Overlapping Questions must still be
+retired or reassigned before a Theme is marked complete. Planned Themes cannot
+contain active Questions. The same manifest declares every published certification tag, its
 curriculum map, and its minimum mapped Question count. Certification IDs are
 for tags and maps, never canonical Theme folders.
 
