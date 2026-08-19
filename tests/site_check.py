@@ -12,8 +12,10 @@ study_orders = json.loads(Path('config/study-orders.json').read_text(encoding='u
 security_order = next(order for order in study_orders if order['theme'] == 'security')
 
 with sync_playwright() as playwright:
-    browser = playwright.chromium.launch(headless=True)
+    browser = playwright.chromium.launch(headless=True, timeout=30_000)
     page = browser.new_page(viewport={"width": 1280, "height": 900})
+    page.set_default_timeout(10_000)
+    page.set_default_navigation_timeout(10_000)
     page.goto(site)
     page.wait_for_load_state('networkidle')
     cards = page.locator('.question-card')
@@ -179,6 +181,8 @@ with sync_playwright() as playwright:
 
     # Hash navigation also works at a narrow touch viewport.
     mobile = browser.new_page(viewport={"width": 390, "height": 844})
+    mobile.set_default_timeout(10_000)
+    mobile.set_default_navigation_timeout(10_000)
     mobile.goto(f'{site}#certificate=lfcs')
     mobile.wait_for_load_state('networkidle')
     lfcs_count = mobile.evaluate("window.questions.filter((question) => question.tags.includes('lfcs')).length")
