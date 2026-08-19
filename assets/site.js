@@ -23,11 +23,24 @@
   const pathFilters = document.querySelector('#path-filters');
   const pathView = document.querySelector('#path-view');
   const questionZone = document.querySelector('#question-zone');
-  let activeTheme = 'all';
-  let activeCertification = 'all';
-  let activeCollection = 'all';
-  let activePath = 'all';
-  let activeLabs = false;
+  // Exactly one selection is active at a time. That was always true -- every
+  // handler reset the other four by hand -- but it was enforced by convention
+  // across five variables rather than by construction, so nothing stopped a
+  // path and the Labs view being on at once. The URL layer already said it
+  // properly: setHash() has only ever written a single key.
+  //
+  //   { kind: 'all' }
+  //   { kind: 'theme',         theme }
+  //   { kind: 'certification', tag }
+  //   { kind: 'collection',    collection }
+  //   { kind: 'path',          slug }
+  //   { kind: 'labs' }
+  let view = { kind: 'all' };
+
+  //: The Theme in view, or null when the selection is not a Theme. The study
+  //: order and the per-Theme lab strip both belong to a Theme and to nothing
+  //: else, so they ask this rather than comparing against an 'all' sentinel.
+  const selectedTheme = () => (view.kind === 'theme' ? view.theme : null);
 
   document.querySelector('#question-count').textContent = data.length;
   document.querySelector('#theme-count').textContent = themes.length;
@@ -37,7 +50,7 @@
 
   function renderFilters() {
     filters.innerHTML = ['all', ...themes].map((theme) => `
-      <button class="filter ${theme === activeTheme ? 'active' : ''}" type="button" data-theme="${theme}">
+      <button class="filter ${view.kind === 'theme' ? (theme === view.theme ? 'active' : '') : (theme === 'all' ? 'active' : '')}" type="button" data-theme="${theme}">
         ${theme === 'all' ? 'all themes' : label(theme)}
       </button>`).join('');
   }
@@ -47,7 +60,7 @@
       <p class="filter-heading">Certification tracks <span>${certifications.length}</span></p>
       <div class="filter-buttons">
         ${certifications.map((certification) => `
-          <button class="filter certification-filter ${certification.tag === activeCertification ? 'active' : ''}" type="button" data-certificate="${certification.tag}" aria-pressed="${certification.tag === activeCertification}">
+          <button class="filter certification-filter ${view.kind === 'certification' && certification.tag === view.tag ? 'active' : ''}" type="button" data-certificate="${certification.tag}" aria-pressed="${view.kind === 'certification' && certification.tag === view.tag}">
             ${certification.tag.toUpperCase()}
           </button>`).join('')}
       </div>`;
@@ -59,41 +72,55 @@
       <p class="filter-heading">Learning paths <span>${learningPaths.length}</span></p>
       <div class="filter-buttons">
         ${learningPaths.map((path) => `
-          <button class="filter path-filter ${path.slug === activePath ? 'active' : ''}" type="button" data-path="${path.slug}" aria-pressed="${path.slug === activePath}">
+          <button class="filter path-filter ${view.kind === 'path' && path.slug === view.slug ? 'active' : ''}" type="button" data-path="${path.slug}" aria-pressed="${view.kind === 'path' && path.slug === view.slug}">
             ${escapeHtml(path.title)} <span class="filter-count">${path.steps.length}</span>
           </button>`).join('')}
       </div>`;
   }
 
-  function setHash(key, value) {
+  //: One view, one hash key. The parameter names are the published URL surface
+  //: -- shared links carry them -- so they stay exactly as they were.
+  const HASH_KEY = { theme: 'theme', certification: 'certificate', collection: 'collection', path: 'path' };
+
+  function setHash() {
     const params = new URLSearchParams();
-    if (key === 'theme' && value !== 'all') params.set('theme', value);
-    if (key === 'certificate' && value !== 'all') params.set('certificate', value);
-    if (key === 'collection' && value !== 'all') params.set('collection', value);
-    if (key === 'path' && value !== 'all') params.set('path', value);
-    const hash = params.toString();
+    if (view.kind === 'theme') params.set(HASH_KEY.theme, view.theme);
+    if (view.kind === 'certification') params.set(HASH_KEY.certification, view.tag);
+    if (view.kind === 'collection') params.set(HASH_KEY.collection, view.collection);
+    if (view.kind === 'path') params.set(HASH_KEY.path, view.slug);
+    if (view.kind === 'labs') params.set('labs', '');
+    const hash = params.toString().replace(/labs=$/, 'labs');
     history.pushState(null, '', hash ? `#${hash}` : `${location.pathname}${location.search}`);
   }
 
+  //: Read the hash into a view, keeping the first key that names something
+  //: real. An unknown Theme or a retired path slug falls through to 'all'
+  //: rather than producing a view that renders nothing.
   function readHash() {
     const params = new URLSearchParams(location.hash.slice(1));
-    const theme = params.get('theme');
-    const certification = params.get('certificate');
-    const collection = params.get('collection');
-    const path = params.get('path');
-    activeTheme = themes.includes(theme) ? theme : 'all';
-    activeCertification = certifications.some((item) => item.tag === certification) ? certification : 'all';
-    activeCollection = collection === 'must-know' ? collection : 'all';
-    activePath = learningPaths.some((item) => item.slug === path) ? path : 'all';
-    activeLabs = params.has('labs');
-    mustKnowFilter.setAttribute('aria-pressed', String(activeCollection === 'must-know'));
-    mustKnowFilter.classList.toggle('active', activeCollection === 'must-know');
+    const theme = params.get(HASH_KEY.theme);
+    const certification = params.get(HASH_KEY.certification);
+    const collection = params.get(HASH_KEY.collection);
+    const path = params.get(HASH_KEY.path);
+
+    if (params.has('labs')) view = { kind: 'labs' };
+    else if (themes.includes(theme)) view = { kind: 'theme', theme };
+    else if (certifications.some((item) => item.tag === certification)) view = { kind: 'certification', tag: certification };
+    else if (collection === 'must-know') view = { kind: 'collection', collection };
+    else if (learningPaths.some((item) => item.slug === path)) view = { kind: 'path', slug: path };
+    else view = { kind: 'all' };
+
+    mustKnowFilter.setAttribute('aria-pressed', String(view.kind === 'collection'));
+    mustKnowFilter.classList.toggle('active', view.kind === 'collection');
   }
 
   function renderPath() {
-    const path = learningPaths.find((item) => item.slug === activePath);
-    questionZone.hidden = Boolean(path) || activeLabs;
-    pathView.hidden = !path || activeLabs;
+    // Three regions, one selection: each is visible exactly when the view is
+    // its own kind. No expression combines a path with a labs flag any more,
+    // because no state exists in which both are set.
+    const path = view.kind === 'path' ? learningPaths.find((item) => item.slug === view.slug) : undefined;
+    questionZone.hidden = view.kind === 'path' || view.kind === 'labs';
+    pathView.hidden = !path;
     if (!path) {
       pathView.innerHTML = '';
       return;
@@ -125,7 +152,7 @@
   }
 
   function renderStudyOrder() {
-    const order = studyOrders.find((item) => item.theme === activeTheme);
+    const order = studyOrders.find((item) => item.theme === selectedTheme());
     if (!order) {
       studyOrderView.hidden = true;
       studyOrderView.innerHTML = '';
@@ -153,7 +180,7 @@
   }
 
   function renderThemeLabs() {
-    const themeLabs = labs.filter((lab) => lab.theme === activeTheme);
+    const themeLabs = labs.filter((lab) => lab.theme === selectedTheme());
     if (!themeLabs.length) {
       themeLabsView.hidden = true;
       themeLabsView.innerHTML = '';
@@ -180,8 +207,8 @@
   }
 
   function renderLabs() {
-    labsView.hidden = !activeLabs;
-    if (!activeLabs) {
+    labsView.hidden = view.kind !== 'labs';
+    if (view.kind !== 'labs') {
       labsView.innerHTML = '';
       return;
     }
@@ -227,14 +254,22 @@
     renderLabs();
   }
 
+  //: Which Questions the current view admits. 'path' and 'labs' never reach
+  //: here -- their regions replace the grid rather than filter it.
+  function matchesView(question) {
+    switch (view.kind) {
+      case 'theme': return question.theme === view.theme;
+      case 'certification': return question.tags.includes(view.tag);
+      case 'collection': return question.tags.includes(view.collection);
+      default: return true;
+    }
+  }
+
   function renderQuestions() {
     const query = search.value.trim().toLowerCase();
     const shown = data.filter((question) => {
       const text = [question.title, question.theme, question.type, ...question.tags].join(' ').toLowerCase();
-      return (activeTheme === 'all' || question.theme === activeTheme)
-        && (activeCertification === 'all' || question.tags.includes(activeCertification))
-        && (activeCollection === 'all' || question.tags.includes(activeCollection))
-        && text.includes(query);
+      return matchesView(question) && text.includes(query);
     });
     resultLine.textContent = `${shown.length.toString().padStart(2, '0')} RECORD${shown.length === 1 ? '' : 'S'} FOUND`;
     grid.innerHTML = shown.length ? shown.map((question, index) => `
@@ -249,39 +284,28 @@
   filters.addEventListener('click', (event) => {
     const button = event.target.closest('button[data-theme]');
     if (!button) return;
-    activeTheme = button.dataset.theme;
-    activeCertification = 'all';
-    activeCollection = 'all';
-    activePath = 'all';
-    activeLabs = false;
-    setHash('theme', activeTheme);
+    view = button.dataset.theme === 'all' ? { kind: 'all' } : { kind: 'theme', theme: button.dataset.theme };
+    setHash();
     render();
   });
   certificationFilters.addEventListener('click', (event) => {
     const button = event.target.closest('button[data-certificate]');
     if (!button) return;
-    activeCertification = button.dataset.certificate;
-    activeTheme = 'all';
-    activeCollection = 'all';
-    activePath = 'all';
-    activeLabs = false;
-    setHash('certificate', activeCertification);
+    view = { kind: 'certification', tag: button.dataset.certificate };
+    setHash();
     render();
   });
   pathFilters.addEventListener('click', (event) => {
     const button = event.target.closest('button[data-path]');
     if (!button) return;
-    activePath = activePath === button.dataset.path ? 'all' : button.dataset.path;
-    activeTheme = 'all'; activeCertification = 'all'; activeCollection = 'all';
-    activeLabs = false;
-    setHash('path', activePath);
+    const same = view.kind === 'path' && view.slug === button.dataset.path;
+    view = same ? { kind: 'all' } : { kind: 'path', slug: button.dataset.path };
+    setHash();
     render();
   });
   mustKnowFilter.addEventListener('click', () => {
-    activeCollection = activeCollection === 'must-know' ? 'all' : 'must-know';
-    activeTheme = 'all'; activeCertification = 'all'; activePath = 'all';
-    activeLabs = false;
-    setHash('collection', activeCollection);
+    view = view.kind === 'collection' ? { kind: 'all' } : { kind: 'collection', collection: 'must-know' };
+    setHash();
     render();
   });
   window.addEventListener('hashchange', () => {
