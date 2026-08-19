@@ -146,3 +146,85 @@ class LabLinkAuditTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class LabPublicationContractTests(unittest.TestCase):
+    """Hold `validate_labs.py`'s docstring to what the code actually does.
+
+    The docstring used to assert that a lab "is not listed in
+    `assets/questions.js` and does not appear in the site navigation".  Both
+    halves were false, and the cost was not cosmetic: because this module is
+    what a maintainer reads to learn what a lab *is*, nobody treated lab prose
+    as public content, and six labs shipped naming four companies and the
+    author's own job search.
+
+    These tests bind the two together.  If a future change stops publishing
+    labs, the reality assertions fail; if someone rewrites the docstring to
+    deny publication again, the docstring assertions fail.  Neither side can
+    drift alone.
+    """
+
+    ROOT = Path(__file__).resolve().parents[1]
+
+    def docstring(self) -> str:
+        import validate_labs
+
+        return validate_labs.__doc__ or ""
+
+    #: The docstring quotes the old false claim in order to explain how it cost
+    #: something, so a blind substring scan cannot tell "asserts X" from
+    #: "reports that X was once claimed".  Only the text *before* this marker
+    #: is the module speaking in its own voice.
+    HISTORICAL_NOTE = "This docstring used to say the opposite"
+
+    def test_the_docstring_states_that_labs_are_published(self) -> None:
+        text = self.docstring()
+        self.assertIn(
+            "window.labs",
+            text,
+            "validate_labs.py's docstring must name where labs are published",
+        )
+        self.assertIn(
+            "A lab is published",
+            text,
+            "the docstring must state plainly that labs are published, since that is what "
+            "a maintainer reads to learn what a lab is",
+        )
+
+        claim, _, _ = text.partition(self.HISTORICAL_NOTE)
+        flattened = " ".join(claim.split())
+        for denial in (
+            "is not listed in `assets/questions.js`",
+            "does not appear in the site navigation",
+        ):
+            self.assertNotIn(
+                denial,
+                flattened,
+                "the docstring denies that labs are published, which is false -- see "
+                "scripts/generate_question_catalog.py and assets/site.js",
+            )
+
+    def test_the_generator_really_publishes_labs(self) -> None:
+        generator = (self.ROOT / "scripts" / "generate_question_catalog.py").read_text(encoding="utf-8")
+        self.assertIn(
+            'window.labs = ',
+            generator,
+            "generate_question_catalog.py no longer writes window.labs; the docstring in "
+            "validate_labs.py now overstates what is published and must be corrected too",
+        )
+
+        catalog = (self.ROOT / "assets" / "questions.js").read_text(encoding="utf-8")
+        self.assertIn("window.labs = [", catalog, "assets/questions.js publishes no labs")
+
+    def test_the_site_really_renders_them(self) -> None:
+        markup = (self.ROOT / "index.html").read_text(encoding="utf-8")
+        for view in ("labs-view", "theme-labs"):
+            self.assertIn(
+                view,
+                markup,
+                f"index.html no longer carries #{view}; labs may no longer be in the site "
+                "navigation, which would make validate_labs.py's docstring wrong again",
+            )
+
+        behaviour = (self.ROOT / "assets" / "site.js").read_text(encoding="utf-8")
+        self.assertIn("window.labs", behaviour, "site.js no longer reads window.labs")

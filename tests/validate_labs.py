@@ -1,12 +1,25 @@
 #!/usr/bin/env python3
 """Validate every hands-on lab under `labs/` against the repository catalogs.
 
-A lab is a repository artifact, not a published Question: it is not listed in
-`assets/questions.js` and does not appear in the site navigation.  It still
-carries structured front matter that points into the Question corpus, the Theme
-list, and the Tag vocabulary, so it can rot exactly the way an unchecked
-Question can — a renamed Question leaves `question_ref` dangling, and a tag
-invented in a lab never reaches `TAGS.md`.
+**A lab is published.**  `scripts/generate_question_catalog.py` writes every
+lab into `window.labs` in `assets/questions.js`, publishing its `title`,
+`theme`, `difficulty`, `tags`, `why`, `slug`, and the title and href of the
+Question it prepares for.  `assets/site.js` renders that array twice: as the
+standalone Labs view (`#labs-view`), and as a per-Theme "Hands-on labs" panel
+(`#theme-labs`).  A lab's prose is public on the same terms as a Question's.
+
+This docstring used to say the opposite — that a lab "is not listed in
+`assets/questions.js` and does not appear in the site navigation".  Both halves
+were false, and the cost was not cosmetic: because this file is what a
+maintainer reads to learn what a lab *is*, nobody treated lab prose as public
+content, and six labs shipped naming four companies and the author's own job
+search.  `tests/test_labs_carry_no_personal_references.py` now guards the
+content; `test_the_docstring_matches_reality` below guards this claim.
+
+A lab also carries structured front matter that points into the Question
+corpus, the Theme list, and the Tag vocabulary, so it can rot exactly the way an
+unchecked Question can — a renamed Question leaves `question_ref` dangling, and
+a tag invented in a lab never reaches `TAGS.md`.
 
 This validator holds labs to the catalog rules the Question corpus already
 obeys.  Lab URLs are audited for liveness by
