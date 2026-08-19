@@ -5,7 +5,8 @@ image:
   tag: ""
   digest: ""
   pullPolicy: IfNotPresent
-  # Only the k3d development overlay may opt out of immutable tag validation.
+  # Only the k3d development overlay may use a tag. All other renders require
+  # a sha256 digest so Kubernetes cannot resolve a mutable image identity.
   local: false
 
 resources:

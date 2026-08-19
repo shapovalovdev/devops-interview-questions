@@ -90,6 +90,8 @@ The script requires a k3d cluster named `proto` (context `k3d-proto`), Docker, H
 It passes `SOURCE_COMMIT` and `BUILD_TIMESTAMP` to `Dockerfile.api`, uses k3d's default image-import mode,
 confirms the commit-tagged image is visible in the node's `k8s.io` containerd namespace, checks
 `/api/v1/health`, `/api/v1/meta`, and `X-Content-Snapshot`, and always deletes `content-api-206` on exit.
+The k3d overlay is the only local render allowed to use its commit tag; every non-local chart render must
+supply `image.digest` as `sha256:<64 lowercase hexadecimal characters>` and is rendered as `repository@digest`.
 
 ## Content policy and attribution
 

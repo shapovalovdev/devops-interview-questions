@@ -21,7 +21,7 @@ def render_helm() -> list[dict[str, object]]:
         [
             "helm", "template", "content-api-test", str(CHART),
             "--set", "image.repository=registry.example/content-api",
-            "--set", "image.tag=abcdef0123456789",
+            "--set", "image.digest=sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         ],
         check=True,
         text=True,
@@ -70,14 +70,30 @@ class ContentApiKubernetesTest(unittest.TestCase):
         self.assertEqual(container["resources"]["requests"], {"cpu": "100m", "memory": "128Mi"})
         self.assertEqual(container["resources"]["limits"], {"cpu": "500m", "memory": "256Mi"})
 
-    def test_chart_rejects_latest_outside_local_overlay(self) -> None:
+    def test_chart_requires_a_valid_digest_outside_local_overlay(self) -> None:
         result = subprocess.run(
-            ["helm", "template", "content-api-test", str(CHART), "--set", "image.repository=registry.example/content-api", "--set", "image.tag=latest"],
+            ["helm", "template", "content-api-test", str(CHART), "--set", "image.repository=registry.example/content-api", "--set", "image.tag=immutable-looking-tag"],
             text=True,
             capture_output=True,
         )
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn("must not be latest", result.stderr)
+        self.assertIn("image.digest is required", result.stderr)
+        malformed = subprocess.run(
+            ["helm", "template", "content-api-test", str(CHART), "--set", "image.repository=registry.example/content-api", "--set", "image.digest=sha256:not-a-digest"],
+            text=True,
+            capture_output=True,
+        )
+        self.assertNotEqual(malformed.returncode, 0)
+        self.assertIn("must be a sha256 digest", malformed.stderr)
+
+    def test_chart_allows_a_tag_only_for_the_local_overlay(self) -> None:
+        output = subprocess.run(
+            ["helm", "template", "content-api-test", str(CHART), "--set", "image.repository=content-api", "--set", "image.tag=commit-tag", "--set", "image.local=true"],
+            check=True,
+            text=True,
+            capture_output=True,
+        ).stdout
+        self.assertIn('image: "content-api:commit-tag"', output)
 
     def test_k3d_smoke_verifies_the_default_import_reaches_containerd(self) -> None:
         script = SMOKE_SCRIPT.read_text(encoding="utf-8")
