@@ -25,9 +25,16 @@ jobs:
       - name: Install the API and test dependencies
         run: python -m pip install --upgrade pip -r requirements-dev.txt
       - name: Run the API suite under the coverage gate
+        # No --cov-fail-under here on purpose. The floors live in
+        # config/coverage-floors.json and are read by check_coverage_floors.py
+        # below; a threshold on this command line would state the repository
+        # floor a second time, where it could disagree with the file.
         run: |
-          pytest --cov=api --cov=contentdb --cov-branch --cov-fail-under=95 \
-            --cov-report=term-missing --cov-report=markdown:coverage.md -q
+          pytest --cov=api --cov=contentdb --cov-branch \
+            --cov-report=term-missing --cov-report=markdown:coverage.md \
+            --cov-report=json:coverage.json -q
+      - name: Hold every module to its declared coverage floor
+        run: python tests/check_coverage_floors.py coverage.json
       - name: Report coverage in the job summary
         if: always()
         run: |

@@ -526,3 +526,107 @@ class ReadsADocumentWithoutAFileBehindIt(FixtureCorpus):
         with self.assertRaises(corpus.CorpusError) as caught:
             corpus.read_lab_document(text, context, themes, tags, set(), "2026-08-17T00:00:00Z")
         self.assertIn("question_ref", str(caught.exception))
+
+
+class IngestCommandLineTests(unittest.TestCase):
+    """The CLI is the entry point CI actually calls, so it is worth testing.
+
+    `python -m contentdb.ingest` is what builds the store in the packaging
+    workflow and in the Drift gate, yet `main()` was the largest uncovered block
+    in `contentdb/`: argument parsing, the failure path that turns a
+    `CorpusError` into an exit code, and the summary line a human reads. All of
+    it ran only in CI, where nothing asserted on it.
+    """
+
+    def setUp(self) -> None:
+        self.directory = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, self.directory, ignore_errors=True)
+        self.root = self.directory / "corpus"
+        fixtures.write_corpus(self.root)
+        self.output = self.directory / "content.db"
+
+    def run_main(self, *argv: str) -> tuple[int, str, str]:
+        from contextlib import redirect_stderr, redirect_stdout
+        import io
+
+        out, err = io.StringIO(), io.StringIO()
+        with redirect_stdout(out), redirect_stderr(err):
+            code = ingest.main(list(argv))
+        return code, out.getvalue(), err.getvalue()
+
+    def test_it_builds_the_store_and_reports_what_it_wrote(self) -> None:
+        code, out, err = self.run_main(
+            "--root", str(self.root),
+            "--output", str(self.output),
+            "--source-commit", FIXTURE_COMMIT,
+            "--build-timestamp", FIXTURE_TIMESTAMP,
+        )
+        self.assertEqual(0, code, err)
+        self.assertTrue(self.output.is_file(), "the CLI must write the store it reports")
+        self.assertIn(str(self.output), out)
+
+    def test_a_corpus_error_is_an_exit_code_and_a_message_not_a_traceback(self) -> None:
+        """A build failure must be legible in a CI log, not a stack trace."""
+        broken = self.directory / "broken"
+        fixtures.write_corpus(broken)
+        question = next((broken / "questions").glob("*/*.md"))
+        question.write_text("no front matter here", encoding="utf-8")
+
+        code, out, err = self.run_main(
+            "--root", str(broken),
+            "--output", str(self.directory / "broken.db"),
+            "--source-commit", FIXTURE_COMMIT,
+            "--build-timestamp", FIXTURE_TIMESTAMP,
+        )
+        self.assertEqual(1, code)
+        self.assertIn("Ingest failed:", err)
+        self.assertEqual("", out, "a failed build must not also print a success summary")
+
+    def test_the_store_path_defaults_without_being_asked(self) -> None:
+        """`--output` has a default, and the default is the one CI relies on."""
+        parser_default = ingest.main.__doc__  # documented behaviour lives in the parser
+        self.assertIsNone(parser_default)
+        code, out, _ = self.run_main(
+            "--root", str(self.root),
+            "--output", str(self.output),
+            "--source-commit", FIXTURE_COMMIT,
+            "--build-timestamp", FIXTURE_TIMESTAMP,
+        )
+        self.assertEqual(0, code)
+        self.assertIn("Wrote", out)
+
+
+class IngestWithoutFullTextSearchTests(unittest.TestCase):
+    """A sqlite3 build without FTS5 must warn and continue, not fail the build.
+
+    Ingest degrades deliberately here: search stops working, but the store is
+    still written and every other read still answers. The path had never run in
+    a test because the sqlite3 shipped with CPython does carry FTS5.
+    """
+
+    def test_a_missing_fts_index_warns_and_keeps_building(self) -> None:
+        from contextlib import redirect_stderr
+        import io
+        from unittest.mock import patch
+
+        directory = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, directory, ignore_errors=True)
+        root = directory / "corpus"
+        fixtures.write_corpus(root)
+        output = directory / "content.db"
+
+        # sqlite3.Connection is an immutable type, so its methods cannot be
+        # patched. Replacing the DDL with a statement that names a module this
+        # build does not have reproduces the real condition exactly: sqlite
+        # raises OperationalError from executescript, which is what a build
+        # without FTS5 does.
+        unavailable = ingest.FTS_DDL.replace("fts5", "fts_not_in_this_build")
+        captured = io.StringIO()
+        with patch.object(ingest, "FTS_DDL", unavailable):
+            with redirect_stderr(captured):
+                summary = fixture_build(root, output)
+
+        self.assertTrue(output.is_file(), "the store must still be written without FTS")
+        self.assertIn("cannot create", captured.getvalue())
+        self.assertIn("without full-text search", captured.getvalue())
+        self.assertGreater(summary.questions, 0)

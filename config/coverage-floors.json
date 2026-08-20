@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "policy": "The coverage floors this repository enforces, stated here and nowhere else. tests/check_coverage_floors.py is the only thing that reads them, and the pytest invocation carries no --cov-fail-under, so the numbers cannot drift between a config file and a command line. Decision 192 chose per-module floors over one repository-wide number: with a single flat floor the gate fails for whoever pushes next rather than for whoever regressed, and the next agent to touch ingest.py inherits corpus.py's debt. A floor is a ratchet. It records what a module has already reached, so it may be raised when coverage improves and lowered only deliberately, with the reason in the commit that lowers it.",
+  "default": 95.0,
+  "total": 96.0,
+  "modules": {
+    "api/content.py": 92.0,
+    "api/guards.py": 94.0,
+    "api/writes.py": 93.0,
+    "contentdb/corpus.py": 91.5
+  },
+  "exceptions_rationale": {
+    "api/content.py": "SQLite failure paths that need a store that breaks mid-transaction; the adapter's happy path and its contract violations are covered.",
+    "api/guards.py": "Two branches in the precondition helpers that need a record whose content_hash changes between the read and the write.",
+    "api/writes.py": "Error-message construction in _blame for field combinations the corpus rules make unreachable together.",
+    "contentdb/corpus.py": "Parser guards against malformed front matter that validate_questions.py refuses earlier, so the corpus cannot reach them."
+  }
+}
