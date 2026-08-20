@@ -1,0 +1,127 @@
+{
+  "id": "kubernetes-operations",
+  "name": "Certified Kubernetes Administrator & Operations",
+  "description": "Production Kubernetes administration, control plane architecture, CNI networking, ingress triage, and policy enforcement",
+  "icon": "☸️",
+  "color": "#326ce5",
+  "target_audience": "Kubernetes Operators, Cluster Administrators, and Platform Engineers",
+  "certifications": [
+    "CKA",
+    "CKS"
+  ],
+  "steps": [
+    {
+      "id": "step-k8s-arch",
+      "skill_id": "k8s-arch",
+      "title": "Kubernetes Control Plane & Kubeadm",
+      "description": "Architect HA control planes, etcd clustering, API server flags, and certificates lifecycle.",
+      "difficulty": "middle",
+      "theme": "kubernetes",
+      "question_id": "kubernetes/kubeadm-cluster-lifecycle",
+      "lab_slug": "kubernetes/kubeadm-cni-ingress-break-fix",
+      "concepts": [
+        "kube-apiserver & etcd",
+        "kube-controller-manager",
+        "kube-scheduler",
+        "PKI Certificate Rotation"
+      ],
+      "prerequisites": []
+    },
+    {
+      "id": "step-k8s-deploy-ops",
+      "skill_id": "k8s-deploy-ops",
+      "title": "Workload Controllers & Rollouts",
+      "description": "Master Deployments, StatefulSets, DaemonSets, and zero-downtime rolling updates.",
+      "difficulty": "middle",
+      "theme": "kubernetes",
+      "question_id": "kubernetes/deployment-rollout-and-rollback",
+      "lab_slug": "kubernetes/kubeadm-cni-ingress-break-fix",
+      "concepts": [
+        "maxSurge & maxUnavailable",
+        "StatefulSet Ordinal Indexing",
+        "DaemonSet Node Selection",
+        "Rollback Checkpoints"
+      ],
+      "prerequisites": [
+        "step-k8s-arch"
+      ]
+    },
+    {
+      "id": "step-k8s-net-cni",
+      "skill_id": "k8s-net-cni",
+      "title": "CNI Plugins & Cilium Network Policies",
+      "description": "Diagnose Pod-to-Pod packet routing, CoreDNS service resolution, CNI plugins, and eBPF network filtering.",
+      "difficulty": "senior",
+      "theme": "kubernetes",
+      "question_id": "kubernetes/cilium-policy-enforcement-modes",
+      "lab_slug": "kubernetes/kubeadm-cni-ingress-break-fix",
+      "concepts": [
+        "CNI IPAM & Veth Pairs",
+        "CoreDNS ClusterIP Resolution",
+        "Cilium eBPF Datapath",
+        "L3/L4/L7 NetworkPolicies"
+      ],
+      "prerequisites": [
+        "step-k8s-deploy-ops"
+      ]
+    },
+    {
+      "id": "step-k8s-storage",
+      "skill_id": "k8s-storage",
+      "title": "StorageClasses, PVs & Volume Snapshots",
+      "description": "Manage dynamic CSI volume provisioning, reclaim policies, access modes, and volume expansion.",
+      "difficulty": "middle",
+      "theme": "kubernetes",
+      "question_id": "kubernetes/persistent-volume-claim-lifecycle",
+      "lab_slug": "databases/postgresql-replication-pitr",
+      "concepts": [
+        "CSI Controller & Node Drivers",
+        "StorageClass Provisioners",
+        "PVC Binding Lifecycle",
+        "Volume Expansion & Snapshots"
+      ],
+      "prerequisites": [
+        "step-k8s-deploy-ops"
+      ]
+    },
+    {
+      "id": "step-k8s-rbac-sec",
+      "skill_id": "k8s-rbac-sec",
+      "title": "RBAC, ServiceAccounts & Workload Identity",
+      "description": "Configure least-privilege Roles, ClusterRoleBindings, projection tokens, and audit logging.",
+      "difficulty": "senior",
+      "theme": "kubernetes",
+      "question_id": "kubernetes/rbac-least-privilege",
+      "lab_slug": "kubernetes/kubeadm-cni-ingress-break-fix",
+      "concepts": [
+        "Roles vs ClusterRoles",
+        "Projected ServiceAccount Tokens",
+        "Admission Webhooks",
+        "Audit Policy Rules"
+      ],
+      "prerequisites": [
+        "step-k8s-arch"
+      ]
+    },
+    {
+      "id": "step-k8s-policy-kyverno",
+      "skill_id": "k8s-policy-kyverno",
+      "title": "Admission Guardrails with Kyverno",
+      "description": "Write declarative mutating and validating admission policies to block root containers and enforce resource limits.",
+      "difficulty": "senior",
+      "theme": "kubernetes",
+      "question_id": "kubernetes/kyverno-policy-authoring-design",
+      "lab_slug": "kubernetes/kubeadm-cni-ingress-break-fix",
+      "concepts": [
+        "ValidatingWebhookConfiguration",
+        "Non-Root Image Enforcement",
+        "Auto-Generating NetworkPolicies",
+        "Policy Exception Workflows"
+      ],
+      "prerequisites": [
+        "step-k8s-rbac-sec",
+        "step-k8s-net-cni"
+      ]
+    }
+  ]
+}

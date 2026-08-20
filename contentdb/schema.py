@@ -90,18 +90,36 @@ CREATE TABLE lab_tags (
 CREATE INDEX idx_lab_tags_tag ON lab_tags(tag);
 
 CREATE TABLE learning_paths (
-    slug          TEXT PRIMARY KEY,
-    title         TEXT NOT NULL,
-    description   TEXT NOT NULL,
-    prerequisites TEXT NOT NULL
+    slug            TEXT PRIMARY KEY,
+    title           TEXT NOT NULL,
+    description     TEXT NOT NULL,
+    icon            TEXT,
+    color           TEXT,
+    target_audience TEXT,
+    certifications  TEXT NOT NULL DEFAULT '[]',
+    prerequisites   TEXT NOT NULL DEFAULT '[]'
 );
 
 CREATE TABLE learning_path_steps (
     path_slug   TEXT NOT NULL REFERENCES learning_paths(slug) ON DELETE CASCADE,
     position    INTEGER NOT NULL,
-    question_id TEXT NOT NULL REFERENCES questions(id),
-    why         TEXT NOT NULL,
+    step_id     TEXT NOT NULL,
+    skill_id    TEXT,
+    title       TEXT,
+    difficulty  TEXT,
+    theme       TEXT,
+    question_id TEXT REFERENCES questions(id),
+    lab_slug    TEXT,
+    concepts    TEXT NOT NULL DEFAULT '[]',
+    why         TEXT,
     PRIMARY KEY (path_slug, position)
+);
+
+CREATE TABLE learning_path_prerequisites (
+    path_slug       TEXT NOT NULL REFERENCES learning_paths(slug) ON DELETE CASCADE,
+    step_id         TEXT NOT NULL,
+    depends_on_step TEXT NOT NULL,
+    PRIMARY KEY (path_slug, step_id, depends_on_step)
 );
 
 -- The snapshot's own provenance, written once by Ingest and read by the

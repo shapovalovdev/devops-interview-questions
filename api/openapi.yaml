@@ -1283,13 +1283,32 @@ components:
 
     LearningPathStep:
       type: object
-      required: [question_id, why]
       properties:
+        step_id:
+          type: string
+        skill_id:
+          type: string
+        title:
+          type: string
+        difficulty:
+          type: string
+        theme:
+          type: string
         question_id:
           type: string
+        lab_slug:
+          type: string
+        concepts:
+          type: array
+          items:
+            type: string
         why:
           type: string
           description: Why this step belongs here, in this order.
+        prerequisites:
+          type: array
+          items:
+            type: string
 
     LearningPath:
       type: object
@@ -1301,6 +1320,20 @@ components:
           type: string
         description:
           type: string
+        icon:
+          type: string
+        color:
+          type: string
+        target_audience:
+          type: string
+        certifications:
+          type: array
+          items:
+            type: string
+        prerequisites:
+          type: array
+          items:
+            type: string
         steps:
           type: array
           items:

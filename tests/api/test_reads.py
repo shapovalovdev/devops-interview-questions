@@ -372,7 +372,7 @@ def test_a_learning_path_lists_its_steps_in_order(fixture_client):
     assert "kubernetes-track" in slugs
 
     body = fixture_client.get("/api/v1/learning-paths/kubernetes-track").json()
-    assert set(body) == {"slug", "title", "description", "steps"}
+    assert {"slug", "title", "description", "steps"}.issubset(set(body))
     assert [step["question_id"] for step in body["steps"]] == [
         "kubernetes/pod-scheduling",
         "kubernetes/admission-policy",

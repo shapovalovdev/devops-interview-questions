@@ -154,13 +154,17 @@ class Store:
 
     def list_learning_paths(self) -> tuple[dict, ...]:
         rows = self.connection.execute(
-            "SELECT slug, title, description, prerequisites FROM learning_paths ORDER BY slug"
+            """SELECT slug, title, description, icon, color, target_audience,
+                      certifications, prerequisites
+               FROM learning_paths ORDER BY slug"""
         ).fetchall()
         return tuple(self._learning_path(row) for row in rows)
 
     def get_learning_path(self, slug: str) -> dict | None:
         row = self.connection.execute(
-            "SELECT slug, title, description, prerequisites FROM learning_paths WHERE slug = ?", (slug,)
+            """SELECT slug, title, description, icon, color, target_audience,
+                      certifications, prerequisites
+               FROM learning_paths WHERE slug = ?""", (slug,)
         ).fetchone()
         return self._learning_path(row) if row else None
 
@@ -305,14 +309,27 @@ class Store:
 
     def _learning_path(self, row: sqlite3.Row) -> dict:
         record = dict(row)
-        record["prerequisites"] = json.loads(record["prerequisites"])
-        record["steps"] = [
-            dict(step)
-            for step in self.connection.execute(
-                "SELECT question_id, why FROM learning_path_steps WHERE path_slug = ? ORDER BY position",
-                (record["slug"],),
-            )
-        ]
+        record["certifications"] = json.loads(record.get("certifications") or "[]")
+        record["prerequisites"] = json.loads(record.get("prerequisites") or "[]")
+        steps = []
+        for step in self.connection.execute(
+            """SELECT position, step_id, skill_id, title, difficulty, theme,
+                      question_id, lab_slug, concepts, why
+               FROM learning_path_steps WHERE path_slug = ? ORDER BY position""",
+            (record["slug"],),
+        ):
+            s = dict(step)
+            s["concepts"] = json.loads(s.get("concepts") or "[]")
+            prereqs = [
+                r["depends_on_step"]
+                for r in self.connection.execute(
+                    "SELECT depends_on_step FROM learning_path_prerequisites WHERE path_slug = ? AND step_id = ?",
+                    (record["slug"], s["step_id"]),
+                )
+            ]
+            s["prerequisites"] = prereqs
+            steps.append(s)
+        record["steps"] = steps
         return record
 
     def _hit(self, row: sqlite3.Row) -> dict:
