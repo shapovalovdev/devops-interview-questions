@@ -27,6 +27,11 @@ before the route decorator sees it, which is the same information reaching
 FastAPI by a different road.  The proof that it is the same is
 `tests/api/test_contract.py`: the served schema must stay byte-identical to
 `api/openapi.yaml`, which is authored by hand and is the source of truth.
+
+The write guards come from `api/guards.py`.  They were briefly passed in as
+arguments instead, purely because they lived in `api/app.py`, which imports this
+module -- an import-cycle workaround dressed as a design.  Moving them below
+both callers removed the cycle and the ceremony with it.
 """
 
 from __future__ import annotations
@@ -38,6 +43,13 @@ from typing import Annotated, Any
 from fastapi import APIRouter, Header, HTTPException, Request, Response
 from pydantic import BaseModel
 
+from api.guards import (
+    require_precondition,
+    require_same_identity,
+    require_write_access,
+    write_responses,
+    written,
+)
 from api.helpers import conditional, item_responses, missing, problem_responses
 from api.routes import StoreDep, VocabularyDep
 from api.store import Record, Store, WritableStore
@@ -79,25 +91,23 @@ class ResourceSpec:
     patch_fields: Sequence[str]
     links: Callable[[Store, str], list[str]]
     summaries: Mapping[str, str]
+
+    delete_statuses: Sequence[int] = (401, 403, 404, 409, 412, 428, 503)
+    """The problem statuses DELETE publishes.
+
+    Not the same for both kinds, and the difference is the contract's rather
+    than the implementation's: a Question can be referred to by a Lab or a
+    learning path, so deleting one can conflict and the contract documents
+    `409`. Nothing in the corpus refers to a Lab, so its DELETE has no `409` to
+    document and must not grow one. Hardcoding the Question set here would have
+    added a status to the Lab contract that no request can produce.
+    """
+
     resolve_references: Callable[[Store, Mapping[str, Any]], Any] | None = None
 
 
-def resource_routes(
-    spec: ResourceSpec,
-    *,
-    require_write_access: Callable[..., WritableStore],
-    require_precondition: Callable[..., None],
-    require_same_identity: Callable[..., None],
-    written: Callable[..., Any],
-    write_responses: Callable[..., dict[Any, Any]],
-) -> APIRouter:
-    """Build the five item operations for one resource kind.
-
-    The write helpers arrive as arguments rather than by import so that this
-    module does not depend on `api.app`, which imports it.  They are the shared
-    implementation either way -- passing them keeps the direction of the
-    dependency honest instead of adding a second copy to break the cycle.
-    """
+def resource_routes(spec: ResourceSpec) -> APIRouter:
+    """Build the five item operations for one resource kind."""
     router = APIRouter()
     collection = f"/api/v1/{spec.segment}"
     item = f"{collection}/{{theme}}/{{slug}}"
@@ -303,7 +313,7 @@ def resource_routes(
         tags=[spec.tag],
         summary=spec.summaries["delete"],
         status_code=204,
-        responses=problem_responses(401, 403, 404, 409, 412, 428, 503),
+        responses=problem_responses(*spec.delete_statuses),
     )(remove)
 
     return router
