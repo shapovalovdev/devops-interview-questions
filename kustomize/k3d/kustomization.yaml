@@ -11,7 +11,3 @@ helmCharts:
     additionalValuesFiles:
       - values.yaml
     includeCRDs: false
-images:
-  - name: devops-questions-content-api
-    newName: devops-questions-content-api
-    newTag: local

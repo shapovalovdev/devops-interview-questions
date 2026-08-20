@@ -27,13 +27,13 @@ def render_helm() -> str:
     ).stdout
 
 
-def documents_by_kind(rendered: str) -> dict[str, str]:
+def documents_by_kind(rendered: str) -> dict[str, list[str]]:
     """Split Helm/Kustomize output without adding a YAML dependency to stdlib CI."""
-    documents: dict[str, str] = {}
+    documents: dict[str, list[str]] = {}
     for document in rendered.split("\n---\n"):
         match = re.search(r"^kind: (\w+)$", document, flags=re.MULTILINE)
         if match:
-            documents[match.group(1)] = document
+            documents.setdefault(match.group(1), []).append(document)
     return documents
 
 
@@ -55,12 +55,15 @@ class ContentApiKubernetesTest(unittest.TestCase):
         expected = {"Deployment", "Service", "ServiceAccount"}
         self.assertEqual(set(self.chart_documents), expected)
         self.assertEqual(set(self.overlay_documents), expected)
-        service = self.chart_documents["Service"]
+        for kind in expected:
+            self.assertEqual(len(self.chart_documents[kind]), 1, f"Chart produced duplicate {kind}")
+            self.assertEqual(len(self.overlay_documents[kind]), 1, f"Overlay produced duplicate {kind}")
+        service = self.chart_documents["Service"][0]
         self.assertIn("type: ClusterIP", service)
         self.assertIn("port: 8000", service)
 
-    def test_deployment_is_restricted_and_only_sqlite_is_writable(self) -> None:
-        deployment = self.chart_documents["Deployment"]
+    def test_deployment_is_restricted_and_runs_pure_read_only_from_baked_image(self) -> None:
+        deployment = self.chart_documents["Deployment"][0]
         for expected in (
             "serviceAccountName: content-api-test",
             "automountServiceAccountToken: false",
@@ -72,15 +75,33 @@ class ContentApiKubernetesTest(unittest.TestCase):
             "allowPrivilegeEscalation: false",
             "readOnlyRootFilesystem: true",
             "drop:\n                - ALL",
-            'command: ["cp", "/srv/data/content.db", "/work/content.db"]',
-            "mountPath: /srv/data",
+            "startupProbe:",
+            "readinessProbe:",
+            "livenessProbe:",
             "path: /api/v1/health",
+            "initialDelaySeconds: 1",
+            "periodSeconds: 2",
+            "failureThreshold: 30",
             "cpu: 100m",
             "memory: 128Mi",
             "cpu: 500m",
             "memory: 256Mi",
         ):
             self.assertIn(expected, deployment)
+        
+        # Pure read-only from baked image: no init containers, no writable mounts, no emptyDir volumes
+        self.assertNotIn("initContainers:", deployment)
+        self.assertNotIn("volumeMounts:", deployment)
+        self.assertNotIn("emptyDir:", deployment)
+        self.assertNotIn("command: [\"cp\", \"/srv/data/content.db\"", deployment)
+
+    def test_k3d_overlay_has_single_source_image_identity_and_no_images_transformer(self) -> None:
+        kustomization = (OVERLAY / "kustomization.yaml").read_text(encoding="utf-8")
+        self.assertNotIn("images:", kustomization)
+        values = (OVERLAY / "values.yaml").read_text(encoding="utf-8")
+        self.assertIn("repository: devops-questions-content-api", values)
+        self.assertIn("tag: local", values)
+        self.assertIn("local: true", values)
 
     def test_chart_requires_a_valid_digest_outside_local_overlay(self) -> None:
         result = subprocess.run(
@@ -111,6 +132,7 @@ class ContentApiKubernetesTest(unittest.TestCase):
         script = SMOKE_SCRIPT.read_text(encoding="utf-8")
         self.assertIn('k3d image import "$image:$source_commit" -c "$cluster"', script)
         self.assertNotIn("--mode direct", script)
+        self.assertNotIn("perl -0pi", script)
         self.assertIn("--provenance=false", script)
         self.assertIn("image=docker.io/library/devops-questions-content-api", script)
         self.assertIn('ctr -n k8s.io images list -q', script)
@@ -118,6 +140,9 @@ class ContentApiKubernetesTest(unittest.TestCase):
         self.assertIn("--dump-header - --output /dev/null", script)
         self.assertNotIn("--head", script)
         self.assertIn("for attempt in $(seq 1 30); do", script)
+        self.assertIn("meta.source_commit", script)
+        self.assertIn("X-Content-Snapshot", script)
+        self.assertIn("restarts", script)
 
 
 if __name__ == "__main__":

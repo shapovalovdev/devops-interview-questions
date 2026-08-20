@@ -27,23 +27,6 @@ spec:
         fsGroup: 10001
         seccompProfile:
           type: RuntimeDefault
-      initContainers:
-        # The writable volume masks the image's /srv/data, so seed it before the
-        # API starts. SQLite needs this directory for its journal even read APIs
-        # open the database in mode=rw on a mutation attempt.
-        - name: seed-content-store
-          image: {{ include "content-api.image" . | quote }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["cp", "/srv/data/content.db", "/work/content.db"]
-          securityContext:
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            capabilities:
-              drop:
-                - ALL
-          volumeMounts:
-            - name: content-store
-              mountPath: /work
       containers:
         - name: content-api
           image: {{ include "content-api.image" . | quote }}
@@ -60,6 +43,13 @@ spec:
                 - ALL
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          startupProbe:
+            httpGet:
+              path: /api/v1/health
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 2
+            failureThreshold: 30
           readinessProbe:
             httpGet:
               path: /api/v1/health
@@ -72,10 +62,3 @@ spec:
               port: http
             initialDelaySeconds: 5
             periodSeconds: 10
-          volumeMounts:
-            # SQLite journals beside content.db; no other runtime path is writable.
-            - name: content-store
-              mountPath: /srv/data
-      volumes:
-        - name: content-store
-          emptyDir: {}
