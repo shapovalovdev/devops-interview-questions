@@ -128,6 +128,7 @@ kubectl --context "$context" -n "$namespace" apply -f "$rendered"
 kubectl --context "$context" -n "$namespace" rollout status "deployment/$release" --timeout=180s
 
 port_forward_log=$overlay/port-forward.log
+: > "$port_forward_log"
 kubectl --context "$context" -n "$namespace" port-forward --address 127.0.0.1 "service/$release" :8000 >"$port_forward_log" 2>&1 &
 port_forward=$!
 local_port=

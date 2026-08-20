@@ -185,6 +185,7 @@ class ContentApiKubernetesTest(unittest.TestCase):
         self.assertIn('headers.get("x-content-snapshot") != content_digest', script)
         self.assertIn("assert_no_restarts", script)
         self.assertIn("restartCount", script)
+        self.assertIn(': > "$port_forward_log"', script)
         self.assertNotIn("namespace=content-api-206", script)
         self.assertNotIn("--head", script)
 
