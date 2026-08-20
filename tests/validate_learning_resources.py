@@ -48,6 +48,11 @@ BROWSER_USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 )
+#: This validator accepts --check-live. tests/run_validators.py reads this
+#: rather than keeping a table of which validator takes which flag, which would
+#: be the same listing problem one file further along.
+SUPPORTS_LIVE_CHECK = True
+
 MAX_ATTEMPTS = 3
 DEFAULT_RETRY_DELAY_SECONDS = 0.5
 MAX_RETRY_AFTER_SECONDS = 30.0

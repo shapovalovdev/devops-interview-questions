@@ -24,15 +24,14 @@ jobs:
         with:
           python-version: '3.13'
       - name: Validate Markdown sources and catalog coverage
-        run: |
-          python tests/validate_content_manifest.py
-          python tests/validate_certification_question_workflow.py
-          python tests/validate_questions.py
-          python tests/validate_labs.py
-          python tests/test_theme_coverage_policy.py
-          python tests/validate_learning_resources.py --check-live
-          python tests/test_validate_learning_resources.py
-          python tests/test_validate_labs.py
+        # Every tests/validate_*.py is discovered and run, so a new validator
+        # needs no edit here. tests/test_validator_discovery.py proves the
+        # discovered set matches the disk, and refuses a validator named in
+        # this file: listing one here would state the set twice.
+        #
+        # The test_*.py modules that used to be listed are already discovered
+        # by run_all_tests.py below -- naming them here ran them twice.
+        run: python tests/run_validators.py --check-live
 
       - name: Refuse Drift between the corpus and the Content store
         # Markdown in git stays the durable record only if a store built from it
