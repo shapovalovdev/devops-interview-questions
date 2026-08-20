@@ -2,6 +2,7 @@ import errno
 import io
 import socket
 import ssl
+import sys
 import threading
 import time
 import unittest
@@ -386,3 +387,81 @@ class LiveCheckSchedulingTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class LiveCheckReportingTests(unittest.TestCase):
+    """The real failure must be the last thing the reader sees.
+
+    Twice in one day a broken link was missed because the run printed it before
+    twenty-six indeterminate lines. That ordering was not intentional: the
+    indeterminate list goes to stdout, the AssertionError goes to stderr, and
+    stdout is block-buffered when piped -- which CI always does. So the list was
+    written at process exit, *after* the failure had already been reported, and
+    the reader took the last thing on the screen for the result.
+
+    These tests pin the two things that fix it: stdout is flushed before the
+    assertion, and the message says how many links broke against how many were
+    merely inconclusive.
+    """
+
+    @staticmethod
+    def _checks():
+        from validate_learning_resources import LinkCheck
+
+        return [
+            LinkCheck("https://dead.example/gone", "broken", "HTTP 404", 1),
+            LinkCheck("https://slow.example/a", "rate limited", "HTTP 429", 3),
+            LinkCheck("https://slow.example/b", "rate limited", "HTTP 403", 3),
+        ]
+
+    def _run(self):
+        """Run the reporting tail of validate_live over a fixed set of checks."""
+        import validate_learning_resources as module
+
+        order: list[str] = []
+        checks = self._checks()
+
+        class RecordingStream(io.StringIO):
+            """Records when the code under test flushes, relative to the raise.
+
+            `redirect_stdout` replaces `sys.stdout`, so the flush that matters is
+            this object's -- patching the real stdout's would watch a stream the
+            code never touches.
+            """
+
+            def flush(self) -> None:
+                order.append("flush")
+                super().flush()
+
+        printed = RecordingStream()
+        with patch.object(module, "check_url", side_effect=checks):
+            with redirect_stdout(printed):
+                try:
+                    module.validate_live(
+                        {check.url for check in checks}, 1, pacer=HostPacer(0.0), workers=1
+                    )
+                except AssertionError as error:
+                    order.append("assert")
+                    return printed.getvalue(), str(error), order
+        self.fail("validate_live did not raise on a broken link")
+
+    def test_stdout_is_flushed_before_the_assertion(self) -> None:
+        _, _, order = self._run()
+        self.assertIn("flush", order, "validate_live must flush stdout before raising")
+        self.assertLess(
+            order.index("flush"),
+            order.index("assert"),
+            "the indeterminate list must reach the log before the failure, or the reader "
+            "sees the failure first and twenty-six irrelevant lines after it",
+        )
+
+    def test_the_failure_message_counts_both_kinds(self) -> None:
+        _, message, _ = self._run()
+        self.assertIn("1 of 3 checked", message)
+        self.assertIn("2 others were indeterminate", message)
+        self.assertIn("https://dead.example/gone", message)
+
+    def test_the_indeterminate_block_says_it_did_not_fail(self) -> None:
+        printed, _, _ = self._run()
+        self.assertIn("did not fail this run", printed)
+        self.assertIn("2 liveness-indeterminate", printed)
