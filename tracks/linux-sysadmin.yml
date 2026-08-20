@@ -1,0 +1,88 @@
+id: linux-sysadmin
+name: Linux Systems Administration & Kernel Internals
+description: Core Linux systems administration, systemd unit life-cycles, process management, storage LVM, and kernel capabilities
+icon: "🐧"
+color: "#10b981"
+target_audience: Linux Systems Administrators, Infrastructure Engineers, and RHCSA/LFCS Candidates
+certifications:
+  - RHCSA
+steps:
+  - id: step-linux-proc-signals
+    skill_id: linux-proc-signals
+    title: Linux Process States & Signals
+    description: Master process hierarchy, fork/exec, signals (SIGTERM/SIGKILL), and zombie process cleanup.
+    difficulty: junior
+    theme: linux
+    question_id: linux/process-states
+    lab_slug: linux/systemd-service-failure
+    concepts:
+      - Process States (R, S, D, Z, T)
+      - fork() and execve()
+      - Signal Delivery (15 vs 9)
+      - Orphan & Zombie Lifecycle
+    prerequisites: []
+
+  - id: step-linux-systemd
+    skill_id: linux-systemd
+    title: systemd Units, Timers & Service CrashLoops
+    description: Configure custom unit files, systemd timers over cron, dependency ordering, and automated crash recovery.
+    difficulty: middle
+    theme: linux
+    question_id: linux/systemd-service-failure
+    lab_slug: linux/systemd-service-failure
+    concepts:
+      - Unit Directives (Requires, After, Wants)
+      - Type=notify and Watchdog
+      - systemd.timer vs crond
+      - journalctl Log Filtering
+    prerequisites:
+      - step-linux-proc-signals
+
+  - id: step-linux-fs-storage
+    skill_id: linux-fs-storage
+    title: Linux Filesystems, LVM & Mounts
+    description: Configure LVM volume groups, logical volumes, XFS/ext4 filesystems, and /etc/fstab automount resilience.
+    difficulty: middle
+    theme: linux
+    question_id: linux/configure-lvm-storage
+    lab_slug: databases/postgresql-replication-pitr
+    concepts:
+      - Physical & Logical Volumes
+      - ext4 vs XFS Inodes & Journaling
+      - /etc/fstab Mount Options
+      - fsck Repair Safety
+    prerequisites:
+      - step-linux-proc-signals
+
+  - id: step-linux-sec-caps
+    skill_id: linux-sec-caps
+    title: Linux Permissions, Capabilities & SSSD
+    description: Apply least-privilege POSIX ACLs, ambient Linux capabilities, and enterprise directory identity through SSSD.
+    difficulty: middle
+    theme: linux
+    question_id: linux/linux-capabilities-least-privilege
+    lab_slug: linux/systemd-service-failure
+    concepts:
+      - POSIX rwx & umask
+      - Capable Checks (CAP_NET_BIND_SERVICE)
+      - SSSD LDAP Integration
+      - sudoers Policy Controls
+    prerequisites:
+      - step-linux-systemd
+
+  - id: step-linux-kernel-cgroups
+    skill_id: linux-kernel-cgroups
+    title: Kernel cgroups v2, OOM & Performance Diagnostics
+    description: Diagnose system load, OOM killer invocations, cgroups v2 resource accounting, and strace/perf profiling.
+    difficulty: senior
+    theme: linux
+    question_id: linux/cgroups-resource-isolation
+    lab_slug: sre/chaos-on-a-leash
+    concepts:
+      - cgroups v2 Controllers
+      - oom_score_adj Tuning
+      - strace System Call Tracing
+      - Top/vmstat/iostat Saturation Analysis
+    prerequisites:
+      - step-linux-systemd
+      - step-linux-fs-storage

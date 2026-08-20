@@ -253,25 +253,56 @@ def _write(connection: sqlite3.Connection, corpus: Corpus, meta: dict[str, str])
     )
 
     connection.executemany(
-        "INSERT INTO learning_paths (slug, title, description, prerequisites) VALUES (?, ?, ?, ?)",
+        """INSERT INTO learning_paths (
+            slug, title, description, icon, color, target_audience, certifications, prerequisites
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
         [
             (
                 path["slug"],
                 path["title"],
                 path["description"],
-                json.dumps(list(path["prerequisites"]), ensure_ascii=False),
+                path.get("icon", "🗺️"),
+                path.get("color", "#38bdf8"),
+                path.get("target_audience", ""),
+                json.dumps(list(path.get("certifications", ())), ensure_ascii=False),
+                json.dumps(list(path.get("prerequisites", ())), ensure_ascii=False),
             )
             for path in corpus.learning_paths
         ],
     )
     connection.executemany(
-        "INSERT INTO learning_path_steps (path_slug, position, question_id, why) VALUES (?, ?, ?, ?)",
+        """INSERT INTO learning_path_steps (
+            path_slug, position, step_id, skill_id, title, difficulty, theme, question_id, lab_slug, concepts, why
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
         [
-            (path["slug"], position, step["question_id"], step["why"])
+            (
+                path["slug"],
+                position,
+                step.get("step_id", f"step-{position}"),
+                step.get("skill_id", ""),
+                step.get("title", ""),
+                step.get("difficulty", "middle"),
+                step.get("theme", ""),
+                step.get("question_id"),
+                step.get("lab_slug"),
+                json.dumps(list(step.get("concepts", ())), ensure_ascii=False),
+                step.get("why", ""),
+            )
             for path in corpus.learning_paths
             for position, step in enumerate(path["steps"])
         ],
     )
+    prereq_rows = []
+    for path in corpus.learning_paths:
+        for step in path["steps"]:
+            step_id = step.get("step_id", f"step-{0}")
+            for prereq in step.get("prerequisites", ()):
+                prereq_rows.append((path["slug"], step_id, prereq))
+    if prereq_rows:
+        connection.executemany(
+            "INSERT INTO learning_path_prerequisites (path_slug, step_id, depends_on_step) VALUES (?, ?, ?)",
+            prereq_rows,
+        )
 
     if search:
         connection.executemany(

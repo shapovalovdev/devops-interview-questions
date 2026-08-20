@@ -377,39 +377,161 @@ def read_lab(
     )
 
 
-def read_learning_paths(root: Path, question_ids: set[str]) -> tuple[dict, ...]:
-    """Resolve `config/learning-paths.json` into the epic's LearningPath shape.
+def _validate_cycle_freedom(track_slug: str, steps: list[dict]) -> None:
+    """Verify that prerequisites form a valid Directed Acyclic Graph (DAG) with no cycles."""
+    step_ids = {s["step_id"] for s in steps}
+    adj: dict[str, list[str]] = {s["step_id"]: [] for s in steps}
 
-    The declaration calls the reader-facing blurb `audience`; the epic calls it
-    `description`.  The field is renamed here rather than in the API so that
-    every consumer of the store sees the pinned name, and `prerequisites` is
-    carried through because the site already publishes it.
-    """
-    source = root / "config" / "learning-paths.json"
-    if not source.is_file():
-        return ()
-    declaration = json.loads(source.read_text(encoding="utf-8"))
-    paths = []
-    for path in declaration.get("paths", []):
-        slug = path["slug"]
-        steps = []
-        for step in path["steps"]:
-            reference = step["question"]
-            question_id = reference[len("questions/"):].removesuffix(".md")
-            if not reference.startswith("questions/") or question_id not in question_ids:
+    for step in steps:
+        step_id = step["step_id"]
+        for prereq in step.get("prerequisites", ()):
+            if prereq not in step_ids:
                 raise CorpusError(
-                    f"config/learning-paths.json: {slug} step points at a missing Question: {reference}"
+                    f"track {track_slug}: step '{step_id}' references unknown prerequisite '{prereq}'"
                 )
-            steps.append({"question_id": question_id, "why": step["why"]})
-        paths.append(
-            {
-                "slug": slug,
-                "title": path["title"],
-                "description": path.get("audience", ""),
-                "prerequisites": tuple(path.get("prerequisites", ())),
-                "steps": tuple(steps),
-            }
-        )
+            if prereq == step_id:
+                raise CorpusError(f"track {track_slug}: step '{step_id}' cannot depend on itself")
+            adj[prereq].append(step_id)
+
+    visited: dict[str, int] = {s["step_id"]: 0 for s in steps}
+
+    def dfs(node: str, path: list[str]) -> None:
+        visited[node] = 1
+        for neighbor in adj[node]:
+            if visited[neighbor] == 1:
+                cycle = " -> ".join(path + [neighbor])
+                raise CorpusError(f"track {track_slug}: prerequisite cycle detected: {cycle}")
+            if visited[neighbor] == 0:
+                dfs(neighbor, path + [neighbor])
+        visited[node] = 2
+
+    for step in steps:
+        if visited[step["step_id"]] == 0:
+            dfs(step["step_id"], [step["step_id"]])
+
+
+def read_learning_paths(root: Path, question_ids: set[str]) -> tuple[dict, ...]:
+    """Read track manifests from `tracks/` and legacy paths from `config/learning-paths.json`."""
+    paths: list[dict] = []
+    seen_slugs: set[str] = set()
+
+    # 1. Modern YAML track manifests in tracks/
+    tracks_dir = root / "tracks"
+    if tracks_dir.is_dir():
+        import yaml
+        for track_path in sorted(list(tracks_dir.glob("*.yml")) + list(tracks_dir.glob("*.yaml"))):
+            try:
+                data = yaml.safe_load(track_path.read_text(encoding="utf-8"))
+            except Exception as err:
+                raise CorpusError(f"{track_path}: cannot parse YAML track manifest ({err})") from err
+
+            if not isinstance(data, dict):
+                raise CorpusError(f"{track_path}: track manifest root must be a dictionary")
+
+            slug = str(data.get("id", track_path.stem))
+            title = str(data.get("name", ""))
+            description = str(data.get("description", ""))
+            icon = str(data.get("icon", "🗺️"))
+            color = str(data.get("color", "#38bdf8"))
+            target_audience = str(data.get("target_audience", ""))
+            certifications = tuple(str(c) for c in data.get("certifications", ()))
+            prerequisites = tuple(str(p) for p in data.get("prerequisites", ()))
+
+            steps = []
+            raw_steps = data.get("steps", [])
+            if not isinstance(raw_steps, list):
+                raise CorpusError(f"{track_path}: 'steps' must be a list")
+
+            step_ids = set()
+            for idx, step in enumerate(raw_steps):
+                step_id = str(step.get("id", f"step-{idx}"))
+                if step_id in step_ids:
+                    raise CorpusError(f"{track_path}: duplicate step id '{step_id}'")
+                step_ids.add(step_id)
+
+                q_id = step.get("question_id")
+                if q_id:
+                    q_id = str(q_id)
+                    if q_id not in question_ids:
+                        raise CorpusError(f"{track_path}: step '{step_id}' points at a missing Question '{q_id}'")
+
+                steps.append(
+                    {
+                        "step_id": step_id,
+                        "skill_id": str(step.get("skill_id", step_id)),
+                        "title": str(step.get("title", "")),
+                        "difficulty": str(step.get("difficulty", "middle")),
+                        "theme": str(step.get("theme", "")),
+                        "question_id": q_id,
+                        "lab_slug": str(step.get("lab_slug")) if step.get("lab_slug") else None,
+                        "concepts": tuple(str(c) for c in step.get("concepts", ())),
+                        "why": str(step.get("why", step.get("description", ""))),
+                        "prerequisites": tuple(str(p) for p in step.get("prerequisites", ())),
+                    }
+                )
+
+            _validate_cycle_freedom(slug, steps)
+
+            paths.append(
+                {
+                    "slug": slug,
+                    "title": title,
+                    "description": description,
+                    "icon": icon,
+                    "color": color,
+                    "target_audience": target_audience,
+                    "certifications": certifications,
+                    "prerequisites": prerequisites,
+                    "steps": tuple(steps),
+                }
+            )
+            seen_slugs.add(slug)
+
+    # 2. Legacy config/learning-paths.json (if not superseded by track)
+    source = root / "config" / "learning-paths.json"
+    if source.is_file():
+        declaration = json.loads(source.read_text(encoding="utf-8"))
+        for path in declaration.get("paths", []):
+            slug = path["slug"]
+            if slug in seen_slugs:
+                continue
+            steps = []
+            for step in path["steps"]:
+                reference = step["question"]
+                question_id = reference[len("questions/"):].removesuffix(".md")
+                if not reference.startswith("questions/") or question_id not in question_ids:
+                    raise CorpusError(
+                        f"config/learning-paths.json: {slug} step points at a missing Question: {reference}"
+                    )
+                steps.append(
+                    {
+                        "step_id": f"step-{len(steps)}",
+                        "skill_id": question_id,
+                        "title": "",
+                        "difficulty": "middle",
+                        "theme": question_id.split("/")[0] if "/" in question_id else "",
+                        "question_id": question_id,
+                        "lab_slug": None,
+                        "concepts": (),
+                        "why": step["why"],
+                        "prerequisites": (),
+                    }
+                )
+            paths.append(
+                {
+                    "slug": slug,
+                    "title": path["title"],
+                    "description": path.get("audience", ""),
+                    "icon": "🗺️",
+                    "color": "#38bdf8",
+                    "target_audience": path.get("audience", ""),
+                    "certifications": (),
+                    "prerequisites": tuple(path.get("prerequisites", ())),
+                    "steps": tuple(steps),
+                }
+            )
+            seen_slugs.add(slug)
+
     return tuple(sorted(paths, key=lambda path: path["slug"]))
 
 

@@ -17,7 +17,7 @@ from datetime import date, datetime
 from enum import Enum
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class Difficulty(str, Enum):
@@ -201,14 +201,27 @@ class Tag(BaseModel):
 
 
 class LearningPathStep(BaseModel):
-    question_id: str
-    why: str
+    step_id: str | None = None
+    skill_id: str | None = None
+    title: str | None = None
+    difficulty: str | None = None
+    theme: str | None = None
+    question_id: str | None = None
+    lab_slug: str | None = None
+    concepts: list[str] = Field(default_factory=list)
+    why: str | None = None
+    prerequisites: list[str] = Field(default_factory=list)
 
 
 class LearningPath(BaseModel):
     slug: str
     title: str
     description: str
+    icon: str | None = "🗺️"
+    color: str | None = "#38bdf8"
+    target_audience: str | None = ""
+    certifications: list[str] = Field(default_factory=list)
+    prerequisites: list[str] = Field(default_factory=list)
     steps: list[LearningPathStep]
 
 
