@@ -53,8 +53,18 @@ jobs:
         with:
           python-version: '3.13'
       - name: Install browser test dependencies
+        # GitHub-hosted Ubuntu already has Chromium's runtime libraries.
+        # Avoiding `--with-deps` keeps Playwright from running apt against a
+        # flaky mirror before it downloads the browser.
+        timeout-minutes: 10
         run: |
           python -m pip install --upgrade pip playwright
-          python -m playwright install --with-deps chromium
+          if ! timeout --foreground 8m python -m playwright install chromium; then
+            echo "::error title=Playwright browser installation failed::Chromium installation exceeded its 8-minute limit or failed. Check the Playwright download service, then rerun."
+            exit 1
+          fi
       - name: Verify search, filters, and rendered Question links
+        # This is a second boundary in case Chromium itself or a browser action
+        # stops responding despite the individual Playwright operation limits.
+        timeout-minutes: 5
         run: python tests/site_check.py

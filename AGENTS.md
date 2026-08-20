@@ -2,7 +2,7 @@
 
 ## Epic and release gate
 
-Implementation work is only dispatched against a live epic and its release. The active epic, charted 2026-08-19, is [Epic: every rule stated once](https://github.com/shapovalovdev/devops-interview-questions/issues/190), release [Single source of truth v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/12). The previous epic, [immutable corpus snapshot service](https://github.com/shapovalovdev/devops-interview-questions/issues/176) (Snapshot service v1, milestone 11), closed 2026-08-18. Rules:
+Implementation work is only dispatched against a live epic and its release. The active epic, charted 2026-08-19, is [Epic: deploy immutable snapshot service to k3s](https://github.com/shapovalovdev/devops-interview-questions/issues/205), release [Snapshot service k3s v1](https://github.com/shapovalovdev/devops-interview-questions/milestone/13). The previous epic, [Epic: every rule stated once](https://github.com/shapovalovdev/devops-interview-questions/issues/190) (Single source of truth v1, milestone 12), is superseded by this release. Rules:
 
 - Do not assign implementation work on an issue outside the current milestone; chart a new epic and milestone first (wayfinder, with the repository owner).
 - When the milestone closes, stop dispatching until a new epic and release are charted and recorded in `CONTEXT.md` and here.

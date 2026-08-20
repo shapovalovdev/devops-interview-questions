@@ -1,0 +1,6 @@
+apiVersion: v2
+name: content-api
+description: Read-only Content API serving an immutable corpus snapshot.
+type: application
+version: 0.1.0
+appVersion: "v1"

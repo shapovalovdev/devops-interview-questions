@@ -75,6 +75,24 @@ python3 scripts/build_snapshot_artifact.py --verify content-snapshot-<content_di
   --checksum content-snapshot-<content_digest>.tar.gz.sha256
 ```
 
+## k3d Content API
+
+`deploy/content-api` is the single source of Kubernetes resources for the read-only API. The
+`kustomize/k3d` overlay consumes that chart with Kustomize's Helm generator; it does not duplicate a
+Deployment or Service. To build an image that names the checked-out corpus, import it into `k3d-proto`,
+deploy the isolated namespace, smoke the API, and remove only that namespace:
+
+```bash
+scripts/smoke_k3d_content_api.sh
+```
+
+The script requires a k3d cluster named `proto` (context `k3d-proto`), Docker, Helm, Kustomize, and kubectl.
+It passes `SOURCE_COMMIT` and `BUILD_TIMESTAMP` to `Dockerfile.api`, uses k3d's default image-import mode,
+confirms the commit-tagged image is visible in the node's `k8s.io` containerd namespace, checks
+`/api/v1/health`, `/api/v1/meta`, and `X-Content-Snapshot`, and always deletes `content-api-206` on exit.
+The k3d overlay is the only local render allowed to use its commit tag; every non-local chart render must
+supply `image.digest` as `sha256:<64 lowercase hexadecimal characters>` and is rendered as `repository@digest`.
+
 ## Content policy and attribution
 
 All questions in this repository are original or substantively paraphrased. The initial coverage was informed by the public [Swfuse DevOps interview collection](https://github.com/Swfuse/devops-interview/blob/main/interview.md), which is credited as a source baseline; its text is not reproduced here. Topic coverage is also mapped broadly to the [roadmap.sh DevOps roadmap](https://roadmap.sh/devops).
