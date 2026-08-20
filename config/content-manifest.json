@@ -11,166 +11,212 @@
     "count_semantics": "floor",
     "rationale": "The coverage target is a floor, not a cap. A complete Theme carries at least 25 active Questions and at least the baseline count in every difficulty band. Themes that legitimately grew past the baseline through certification or roadmap coverage keep that material instead of discarding verified Questions to satisfy an exact count."
   },
+  "lab_policy": {
+    "minimum_labs_per_theme": 1,
+    "count_semantics": "floor",
+    "enforcement": "declared-themes-only",
+    "rationale": "Labs are corpus material on the same terms as Questions (issue 191), so their coverage belongs in this manifest rather than in anyone's memory. The count is a floor: a Theme that declares lab coverage carries at least minimum_labs_per_theme, and growing past that is welcome. Enforcement is declared-themes-only because 30 of the 40 Themes carry no Lab yet; a floor applied to all of them would fail the build today and teach everyone to ignore it. A Theme opts in by setting labs to complete, and from that moment the floor is enforced and cannot silently regress. The reverse is enforced too: a Theme with Labs on disk must declare them, so coverage cannot drift in either direction."
+  },
   "themes": [
     {
       "name": "advanced-containers",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "backend-architecture",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "caching",
-      "state": "complete"
+      "state": "complete",
+      "labs": "complete"
     },
     {
       "name": "certification-last-minute-review",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "chaos-engineering",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "ci-cd",
-      "state": "complete"
+      "state": "complete",
+      "labs": "complete"
     },
     {
       "name": "cloud",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "configuration-management",
-      "state": "complete"
+      "state": "complete",
+      "labs": "complete"
     },
     {
       "name": "container-networking",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "containers",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "databases",
-      "state": "complete"
+      "state": "complete",
+      "labs": "complete"
     },
     {
       "name": "distributed-systems",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "finops",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "hardware",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "infrastructure-as-code",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "kubernetes",
-      "state": "complete"
+      "state": "complete",
+      "labs": "complete"
     },
     {
       "name": "linux",
-      "state": "complete"
+      "state": "complete",
+      "labs": "complete"
     },
     {
       "name": "linux-networking",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "linux-performance",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "linux-troubleshooting",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "logging",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "network-storage",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "networking",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "observability",
-      "state": "complete"
+      "state": "complete",
+      "labs": "complete"
     },
     {
       "name": "performance-engineering",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "platform-engineering",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "processes",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "qemu-kvm",
-      "state": "complete"
+      "state": "complete",
+      "labs": "complete"
     },
     {
       "name": "queue-messaging",
-      "state": "complete"
+      "state": "complete",
+      "labs": "complete"
     },
     {
       "name": "security",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "serverless",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "service-mesh",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "shell-scripting",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "sre",
-      "state": "complete"
+      "state": "complete",
+      "labs": "complete"
     },
     {
       "name": "storage",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "systems-performance",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "testing-strategy",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "troubleshooting",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "version-control",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     },
     {
       "name": "web-servers",
-      "state": "complete"
+      "state": "complete",
+      "labs": "planned"
     }
   ],
   "certifications": [

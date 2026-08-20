@@ -85,8 +85,8 @@ A normalized label that maps a canonical Question to one or more CNCF or Linux F
 _Avoid_: Certification-specific copy
 
 **Lab**:
-A guided hands-on exercise that prepares a learner for one specific Question, stated as a checklist of steps a learner performs on real infrastructure.
-_Avoid_: Tutorial, exercise page, walkthrough
+A guided hands-on exercise that prepares a learner for one specific Question, stated as a checklist of steps a learner performs on real infrastructure. A Lab is published corpus material on the same terms as a Question: English, employer-neutral, and served from `window.labs` in the site's Labs view. `config/content-manifest.json` is the authority on how many Labs a Theme carries, in `lab_policy`; a Theme opts into the floor by declaring `labs: complete`, and CI enforces it from that point in both directions.
+_Avoid_: Tutorial, exercise page, walkthrough, unpublished artifact
 
 **Content store**:
 The queryable database record of every Question and Lab, holding the same fields the Markdown corpus carries.
