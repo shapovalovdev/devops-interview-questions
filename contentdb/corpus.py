@@ -415,15 +415,26 @@ def read_learning_paths(root: Path, question_ids: set[str]) -> tuple[dict, ...]:
     paths: list[dict] = []
     seen_slugs: set[str] = set()
 
-    # 1. Modern YAML track manifests in tracks/
+    # 1. Track manifests in tracks/
     tracks_dir = root / "tracks"
     if tracks_dir.is_dir():
-        import yaml
-        for track_path in sorted(list(tracks_dir.glob("*.yml")) + list(tracks_dir.glob("*.yaml"))):
+        track_files = sorted(tracks_dir.glob("*.json"))
+        if not track_files:
             try:
-                data = yaml.safe_load(track_path.read_text(encoding="utf-8"))
+                import yaml  # noqa: F401
+                track_files = sorted(list(tracks_dir.glob("*.yml")) + list(tracks_dir.glob("*.yaml")))
+            except ImportError:
+                track_files = []
+
+        for track_path in track_files:
+            try:
+                if track_path.suffix == ".json":
+                    data = json.loads(track_path.read_text(encoding="utf-8"))
+                else:
+                    import yaml
+                    data = yaml.safe_load(track_path.read_text(encoding="utf-8"))
             except Exception as err:
-                raise CorpusError(f"{track_path}: cannot parse YAML track manifest ({err})") from err
+                raise CorpusError(f"{track_path}: cannot parse track manifest ({err})") from err
 
             if not isinstance(data, dict):
                 raise CorpusError(f"{track_path}: track manifest root must be a dictionary")

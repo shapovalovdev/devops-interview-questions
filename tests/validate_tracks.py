@@ -4,8 +4,8 @@
 from __future__ import annotations
 
 import sys
+import json
 from pathlib import Path
-import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 TRACKS_DIR = ROOT / "tracks"
@@ -16,15 +16,26 @@ VALID_DIFFICULTIES = {"junior", "middle", "senior", "staff"}
 
 
 def load_tracks() -> list[dict]:
-    """Load all track manifest YAML files."""
+    """Load all track manifest JSON and YAML files."""
     assert TRACKS_DIR.is_dir(), f"Track manifests directory not found at {TRACKS_DIR}"
-    track_files = sorted(list(TRACKS_DIR.glob("*.yml")) + list(TRACKS_DIR.glob("*.yaml")))
+    track_files = sorted(TRACKS_DIR.glob("*.json"))
+    if not track_files:
+        try:
+            import yaml
+            track_files = sorted(list(TRACKS_DIR.glob("*.yml")) + list(TRACKS_DIR.glob("*.yaml")))
+        except ImportError:
+            track_files = []
+
     assert track_files, f"No track manifests found in {TRACKS_DIR}"
     tracks = []
     for path in track_files:
         with open(path, "r", encoding="utf-8") as f:
-            data = yaml.safe_load(f)
-            assert isinstance(data, dict), f"{path}: manifest root must be a YAML mapping"
+            if path.suffix == ".json":
+                data = json.load(f)
+            else:
+                import yaml
+                data = yaml.safe_load(f)
+            assert isinstance(data, dict), f"{path}: manifest root must be a mapping"
             tracks.append(data)
     return tracks
 

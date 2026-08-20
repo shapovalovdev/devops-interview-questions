@@ -5,9 +5,9 @@ from __future__ import annotations
 import shutil
 import sys
 import tempfile
+import json
 import unittest
 from pathlib import Path
-import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -30,9 +30,11 @@ class ContentDbTracksTest(unittest.TestCase):
     def write_track_manifest(self, filename: str, data: dict) -> Path:
         tracks_dir = self.root / "tracks"
         tracks_dir.mkdir(parents=True, exist_ok=True)
+        if not filename.endswith(".json"):
+            filename = filename.rsplit(".", 1)[0] + ".json"
         path = tracks_dir / filename
         with open(path, "w", encoding="utf-8") as f:
-            yaml.dump(data, f)
+            json.dump(data, f, indent=2)
         return path
 
     def test_valid_track_manifest_ingestion_and_store_reads(self):
