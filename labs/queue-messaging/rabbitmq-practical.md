@@ -1,95 +1,95 @@
 ---
-title: "RabbitMQ на практике: асинхронная обработка вокруг существующего приложения"
+title: "RabbitMQ in practice: asynchronous processing around an existing application"
 theme: "queue-messaging"
 difficulty: "middle"
 question_ref: "queue-messaging/design-rabbitmq-dead-lettering.md"
 tags: [rabbitmq, message-queues, event-driven, observability, reliability]
 why: "Message brokers are a standing interview topic, while the queue-messaging Theme holds Questions with no practical footing. RabbitMQ is the cheapest entry into the topic: one evening with a compose stand teaches the basic vocabulary (exchange, binding, ack, DLQ) and removes the fear of those interview questions. Roles that run RabbitMQ clusters and roles that ask for Kafka concepts both start from the same place: understanding how a broker differs from a log."
 checklist:
-  - "RabbitMQ поднят через docker-compose, management UI доступен на порту 15672."
-  - "Создан vhost, пользователь и permissions через rabbitmqctl или UI."
-  - "Flask-эндпоинт публикует задачу в очередь и сразу отвечает 202."
-  - "Consumer-воркер забирает задачи и пишет результаты в PostgreSQL."
-  - "Асинхронный путь проверен end-to-end: POST → очередь → воркер → строка в PG."
-  - "Direct-exchange с routing key по приоритетам описан и продемонстрирован."
-  - "Consumer уронен: retry зациклился, poison-сообщение ушло в DLQ."
-  - "DLQ разобрана вручную: сообщение изучено и переопубликовано или отброшено осознанно."
-  - "Метрика глубины очереди видна в Grafana (management API или rabbitmq_exporter)."
-  - "Даны ответы на три защитных вопроса (durability, ack, at-least-once) своими словами."
+  - "RabbitMQ is up through docker-compose, with the management UI reachable on port 15672."
+  - "A vhost, a user and permissions are created through rabbitmqctl or the UI."
+  - "A Flask endpoint publishes a task to a queue and answers 202 immediately."
+  - "A consumer worker takes tasks off the queue and writes results into PostgreSQL."
+  - "The asynchronous path is proven end to end: POST -> queue -> worker -> a row in PG."
+  - "A direct exchange with a routing key per priority is described and demonstrated."
+  - "The consumer has been killed: the retry looped, and the poison message went to the DLQ."
+  - "The DLQ has been worked by hand: the message was inspected and either republished or dropped deliberately."
+  - "Queue depth is visible in Grafana (through the management API or rabbitmq_exporter)."
+  - "The three defence questions (durability, ack, at-least-once) are answered in your own words."
 ---
 
-# Lab: RabbitMQ на практике — асинхронная обработка вокруг существующего приложения
+# Lab: RabbitMQ in practice — asynchronous processing around an existing application
 
-## Контекст кандидата
+## Where you are starting from
 
-Ты — прод-инженер без опыта с брокерами сообщений. Есть привычный стенд: 3 Ubuntu VM, приложение Flask + PostgreSQL. Всё синхронно: пользователь просит отчёт — Flask генерирует его в запросе, запрос висит 30 секунд. Цель лабы — вынести тяжёлую работу за пределы HTTP-запроса и по пути освоить словарь брокера: exchange, binding, routing key, ack, dead-letter.
+You are a production engineer with no broker experience. You have the usual stand: 3 Ubuntu VMs running a Flask + PostgreSQL application. Everything is synchronous: a user asks for a report, Flask generates it inside the request, and the request hangs for 30 seconds. The point of the lab is to move the heavy work outside the HTTP request and, on the way, to learn the broker vocabulary: exchange, binding, routing key, ack, dead-letter.
 
 ## Environment
 
-*   **VM:** стенд из 3 Ubuntu VM (например `vm1-control`, `vm2-db`, `vm3-app`).
-*   **Приложение:** Flask + PostgreSQL (существующее, из предыдущих лаб).
-*   **Брокер:** RabbitMQ 3.x в docker-compose на `vm3-app`, с management-плагином (UI на `:15672`).
+*   **VMs:** the 3-VM Ubuntu stand (for example `vm1-control`, `vm2-db`, `vm3-app`).
+*   **Application:** Flask + PostgreSQL (the existing one, from the earlier labs).
+*   **Broker:** RabbitMQ 3.x in docker-compose on `vm3-app`, with the management plugin (UI on `:15672`).
 
-## Exercise 1: Поднять RabbitMQ + management UI, vhost/user/perms
+## Exercise 1: Stand up RabbitMQ + the management UI, vhost/user/perms
 
-1. На `vm3-app` создай `docker-compose.yml` с сервисом `rabbitmq:3-management` и пробросом портов `5672` и `15672`.
-2. Подними: `docker compose up -d`. Открой `http://<vm3-ip>:15672`, войди `guest/guest` (помни: guest работает только с localhost — либо зайди через SSH-туннель, либо заведи отдельного пользователя).
-3. Создай vhost `reports`, пользователя `app` с паролем и выдай permissions на vhost:
+1. On `vm3-app`, write a `docker-compose.yml` with a `rabbitmq:3-management` service publishing ports `5672` and `15672`.
+2. Bring it up: `docker compose up -d`. Open `http://<vm3-ip>:15672` and log in as `guest/guest` (remember: guest only works from localhost — either go through an SSH tunnel or create a separate user).
+3. Create the vhost `reports` and the user `app` with a password, and grant permissions on the vhost:
    ```bash
    docker compose exec rabbitmq rabbitmqctl add_vhost reports
    docker compose exec rabbitmq rabbitmqctl add_user app <password>
    docker compose exec rabbitmq rabbitmqctl set_permissions -p reports app ".*" ".*" ".*"
    ```
-4. В UI проверь, что vhost и пользователь видны, соединений ещё нет.
+4. In the UI, confirm the vhost and the user are visible and that there are no connections yet.
 
-## Exercise 2: Producer — Flask-эндпоинт кладёт задачу в очередь
+## Exercise 2: Producer — a Flask endpoint puts a task on the queue
 
-1. Добавь в Flask-приложение эндпоинт `POST /reports` с телом `{"period": "2026-07"}`.
-2. Вместо синхронной генерации опубликуй сообщение (например, через `pika` на Python) в exchange с routing key, а клиенту верни `202 Accepted` с идентификатором задачи.
-3. Сначала опубликуй в default exchange напрямую в очередь `reports.tasks` — самый короткий путь, убедись, что сообщение видно в UI (заголовок очереди, `Get messages`).
-4. Замерь время ответа эндпоинта до и после: было ~30 с, стало десятки миллисекунд.
+1. Add an endpoint `POST /reports` to the Flask application, with a body of `{"period": "2026-07"}`.
+2. Instead of generating synchronously, publish a message (through `pika` on Python, for example) to an exchange with a routing key, and return `202 Accepted` to the client with a task identifier.
+3. Publish to the default exchange straight into the `reports.tasks` queue first — the shortest path — and confirm the message is visible in the UI (the queue header, then `Get messages`).
+4. Measure the endpoint's response time before and after: it was ~30 s, it is now tens of milliseconds.
 
-## Exercise 3: Consumer — воркер разбирает задачи и пишет результат в PG
+## Exercise 3: Consumer — a worker drains tasks and writes the result to PG
 
-1. Напиши отдельный процесс-воркер (`python worker.py`), который подключается к `reports.tasks`, читает задачи и генерирует тот же отчёт, что раньше делал Flask.
-2. Результат записи клади в PostgreSQL (таблица `reports(id, period, status, generated_at)`), а статус обновляй: `queued → done` (или `failed`).
-3. Подтверждай сообщение (`basic_ack`) только после успешной записи в PG. Обрати внимание: если уронить воркер между обработкой и ack — сообщение вернётся в очередь. Это не баг, это семантика.
-4. Прогони end-to-end: `curl POST /reports` → сообщение в очереди → воркер подобрал → строка в PG со статусом `done`.
+1. Write a separate worker process (`python worker.py`) that connects to `reports.tasks`, reads tasks, and generates the same report Flask used to.
+2. Write the result into PostgreSQL (a table `reports(id, period, status, generated_at)`), updating the status: `queued → done` (or `failed`).
+3. Acknowledge the message (`basic_ack`) **only** after the write to PG has succeeded. Note what follows: kill the worker between processing and the ack and the message returns to the queue. That is not a bug, that is the semantics.
+4. Run it end to end: `curl POST /reports` → a message on the queue → the worker picks it up → a row in PG with status `done`.
 
-## Exercise 4: Exchange/queue/binding — routing key с приоритетами
+## Exercise 4: Exchange/queue/binding — a routing key per priority
 
-1. Заведи direct exchange `reports.ex` и две очереди: `reports.tasks.high` и `reports.tasks.low`.
-2. Сделай binding: routing key `report.high` → очередь high, `report.low` → очередь low. Опиши в одну строку, чем direct отличается от topic и fanout (по одной фразе на каждую).
-3. В producer добавь приоритет в payload или в routing key и публикуй в нужный ключ.
-4. В management UI на вкладке exchange отправь тестовое сообщение с ключом `report.high` и убедись, что оно попало только в high-очередь.
-5. (Опционально) второй воркер на high-очередь и наблюдение, что срочные отчёты обгоняют фоновые.
+1. Declare a direct exchange `reports.ex` and two queues: `reports.tasks.high` and `reports.tasks.low`.
+2. Bind them: routing key `report.high` → the high queue, `report.low` → the low queue. Describe in one line each how direct differs from topic and from fanout.
+3. In the producer, add a priority to the payload or to the routing key, and publish to the right key.
+4. In the management UI, on the exchange tab, send a test message with the key `report.high` and confirm it landed only in the high queue.
+5. (Optional) run a second worker on the high queue and watch urgent reports overtake background ones.
 
-## Exercise 5: Dead-letter — retry → DLQ, разбор вручную
+## Exercise 5: Dead-letter — retry → DLQ, worked by hand
 
-1. Объяви `reports.tasks` с аргументами `x-dead-letter-exchange` и `x-dead-letter-routing-key`, указывающими на DLX `reports.dlx` и очередь `reports.dlq`.
-2. В воркере при ошибке обработки делай `basic_nack` с `requeue=false` — так poison-сообщение уходит в DLQ, а не крутится циклом.
-3. Урони consumer (`kill` воркера) на середине обработки — посмотри в UI, что unacked-сообщение вернулось в очередь (redelivered = true).
-4. Опубликуй задачу, которая гарантированно падает (например, несуществующий период → исключение в воркере). Покажи в UI цепочку: попытка → nack → DLQ. Сверь сценарий с вопросом банка `queue-messaging/design-rabbitmq-dead-lettering.md`.
-5. Разбери DLQ вручную: прочитай сообщение, посмотри заголовки `x-death` (сколько раз и почему умерло), затем либо переопубликуй исправленным, либо удали осознанно. «Молча выпилить бизнес-сообщение» — анти-паттерн из ответа банка.
+1. Declare `reports.tasks` with the arguments `x-dead-letter-exchange` and `x-dead-letter-routing-key` pointing at the DLX `reports.dlx` and the queue `reports.dlq`.
+2. In the worker, on a processing error, issue `basic_nack` with `requeue=false` — that sends the poison message to the DLQ instead of spinning it round the loop.
+3. Kill the consumer (`kill` the worker) halfway through processing, and watch in the UI that the unacked message came back to the queue (redelivered = true).
+4. Publish a task that is guaranteed to fail (a non-existent period raising an exception in the worker, say). Show the chain in the UI: attempt → nack → DLQ. Check the scenario against the bank question `queue-messaging/design-rabbitmq-dead-lettering.md`.
+5. Work the DLQ by hand: read the message, look at the `x-death` headers (how many times it died and why), then either republish it corrected or delete it deliberately. "Quietly dropping a business message" is the anti-pattern named in the bank's answer.
 
-## Exercise 6: Наблюдаемость — queue depth в Grafana
+## Exercise 6: Observability — queue depth in Grafana
 
-1. Собери метрику глубины очереди любым из двух путей:
-    * management API: `curl -u app:<pass> http://<vm3-ip>:15672/api/queues/reports` → поле `messages`;
-    * или готовый `rabbitmq_exporter` (docker, рядом с брокером).
-2. Добавь источник в существующий Prometheus/Grafana-стек, сделай дашборд-панель: глубина `reports.tasks`, `reports.dlq`, rate publish/deliver.
-3. Нагрузи эндпоинт циклом из 100 запросов и останови воркер — покажи на графике рост глубины очереди, затем запуск воркера и дренаж. Сформулируй: какая глубина очереди для тебя «пора звонить» и почему.
+1. Collect the queue-depth metric by either route:
+    * the management API: `curl -u app:<pass> http://<vm3-ip>:15672/api/queues/reports` → the `messages` field;
+    * or the ready-made `rabbitmq_exporter` (in docker, beside the broker).
+2. Add the source to the existing Prometheus/Grafana stack and build a dashboard panel: the depth of `reports.tasks` and `reports.dlq`, plus the publish/deliver rate.
+3. Load the endpoint with a loop of 100 requests and stop the worker — show the queue depth climbing on the graph, then start the worker and watch it drain. State it plainly: what queue depth means "time to call someone" for you, and why.
 
-## Exercise 7: Защита — RabbitMQ vs Kafka, три вопроса на понимание
+## Exercise 7: Defence — RabbitMQ vs Kafka, three questions of understanding
 
-Подготовь ответы своими словами (по одному абзацу, без пересказа документации):
+Prepare answers in your own words (a paragraph each, not a retelling of the documentation):
 
-1. **Durability.** Что значит durable queue + persistent message в RabbitMQ, что гарантируется и что нет? Почему этого обычно хватает для отчётов, но не хватает там, где просят реплеи за неделю?
-2. **Ack.** Чем consumer ack отличается от publisher confirm? Что происходит с unacked-сообщением при падении воркера и почему это делает обработку at-least-once, а не exactly-once?
-3. **At-least-once.** Раз сообщение может прийти дважды — что обязан делать consumer, чтобы это не ломало бизнес-логику? Приведи свой пример из лабы (запись в PG).
+1. **Durability.** What do a durable queue plus a persistent message guarantee in RabbitMQ, and what do they not? Why is that usually enough for reports but not enough where a week of replay is asked for?
+2. **Ack.** How does a consumer ack differ from a publisher confirm? What happens to an unacked message when the worker dies, and why does that make the processing at-least-once rather than exactly-once?
+3. **At-least-once.** Given a message can arrive twice, what must the consumer do so that this does not break the business logic? Give your own example from this lab (the write to PG).
 
-Затем сверься с вопросами банка: `queue-messaging/choose-a-queue-or-log.md` и `queue-messaging/explain-delivery-semantics.md` — ответ на «когда RabbitMQ, когда Kafka» обязан опираться на разницу «очередь vs распределённый лог».
+Then check yourself against the bank questions `queue-messaging/choose-a-queue-or-log.md` and `queue-messaging/explain-delivery-semantics.md` — an answer to "when RabbitMQ, when Kafka" has to rest on the difference between a queue and a distributed log.
 
-## Критерии готовности
+## Readiness criteria
 
-Брокер поднят через compose; асинхронный путь работает end-to-end (202 → очередь → PG); приоритеты на routing key продемонстрированы; DLQ показана и разобрана вручную; глубина очереди видна в Grafana; на три защитных вопроса есть внятные ответы.
+The broker is up through compose; the asynchronous path works end to end (202 → queue → PG); priorities on the routing key are demonstrated; the DLQ is shown and worked by hand; queue depth is visible in Grafana; and the three defence questions have clear answers.
