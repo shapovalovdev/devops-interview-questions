@@ -455,11 +455,26 @@ def validate_live(
     ]
     failures = [check for check in checks if check.category in {"broken", "network error"}]
     if transient:
-        print("Liveness-indeterminate learning-resource URLs (retried, not declared broken):")
+        print(
+            f"{len(transient)} liveness-indeterminate learning-resource URL(s) "
+            "(retried, not declared broken, did not fail this run):"
+        )
         for check in transient:
             print(f"{check.url}: {check.category} after {check.attempts} attempts ({check.detail})")
-    assert not failures, "Broken learning-resource links:\n" + "\n".join(
-        f"{check.url}: {check.category} ({check.detail})" for check in failures
+
+    # Flush before raising. stdout is block-buffered when piped, which CI always
+    # does, so without this the indeterminate list above is written at process
+    # exit -- *after* the AssertionError has already gone to stderr. The reader
+    # then sees the one line that matters first, followed by dozens that do not,
+    # and the eye takes the last thing on the screen for the failure. That
+    # misread happened twice in one day before this line existed.
+    sys.stdout.flush()
+
+    assert not failures, (
+        f"Broken learning-resource links: {len(failures)} of {len(checks)} checked"
+        + (f"; {len(transient)} others were indeterminate and did not fail" if transient else "")
+        + "\n"
+        + "\n".join(f"{check.url}: {check.category} ({check.detail})" for check in failures)
     )
 
 
