@@ -10,6 +10,13 @@
       "evidence": "Across four CI runs the failing set changed every time (800-92/final, then 800-92/r1/ipd and 800-122/final, then 800-122/final plus 800-34/r1/final) while the other NIST citations in the same run passed. Every failing URL returned HTTP 200 from a normal client, both with the audit User-Agent and a browser User-Agent. Host pacing at one request per second and three browser-agent confirmations spaced 2s, 5s and 15s did not clear it.",
       "verified_manually_on": "2026-08-11",
       "urls_in_use": 15
+    },
+    {
+      "host": "www.thoughtworks.com",
+      "reason": "Answers GitHub-hosted runners with HTTP 404 for pages that exist. A 404 is normally the one status this gate can trust as evidence of rot, so an unreachable-but-present page on this host is indistinguishable from a withdrawn article and the live gate cannot judge it.",
+      "evidence": "The Technology Radar entry /radar/techniques/production-data-in-test-environments returned HTTP 404 from a GitHub-hosted runner on 2026-08-20, failing PR #219 which changes only api/ and no Question content. The same URL returned HTTP 200 from a normal client on the same day across all four combinations the checker can use: HEAD and GET, with the audit User-Agent and with the browser User-Agent. The status therefore tracks the client network rather than the resource, and no retry or User-Agent change reaches it.",
+      "verified_manually_on": "2026-08-20",
+      "urls_in_use": 1
     }
   ]
 }
