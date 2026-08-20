@@ -53,9 +53,14 @@ rollout and the path to global enforcement are recorded in
 `docs/research/link-audit-rollout.md`.
 
 `tests/validate_labs.py` holds every hands-on lab under `labs/<theme>/` to the
-same catalog rules the Question corpus obeys. A lab is a repository artifact and
-is deliberately absent from `assets/questions.js` and the site filters, but its
-front matter points into shared catalogs, so the validator requires:
+same catalog rules the Question corpus obeys. A lab **is published**:
+`scripts/generate_question_catalog.py` writes every one into `window.labs` in
+`assets/questions.js`, and `assets/site.js` renders them in the Labs view and in
+the per-Theme "Hands-on labs" panel. (This paragraph previously claimed the
+opposite, as did the validator's own docstring until issue 198 — the same false
+statement in two places, which is exactly the defect the *Single source of
+truth* epic exists to remove.) Its front matter also points into shared
+catalogs, so the validator requires:
 
 - all seven front-matter fields — `title`, `theme`, `difficulty`,
   `question_ref`, `tags`, `why`, `checklist` — present and non-empty;
@@ -66,6 +71,15 @@ front matter points into shared catalogs, so the validator requires:
 - every Tag present in `TAGS.md`;
 - at least three written-out checklist steps and a `why` that explains the lab;
 - a lab title heading, at least one instruction section, and HTTPS-only links.
+
+How many Labs a Theme carries is declared in `config/content-manifest.json`
+under `lab_policy`, and `tests/validate_content_manifest.py` enforces it. Read
+that block rather than trusting a count repeated here. The count is a floor, and
+enforcement is `declared-themes-only`: a Theme opts in by setting `labs:
+complete`, and from then on it may not fall below `minimum_labs_per_theme`, nor
+may a Theme carry Labs without declaring them. Themes still declaring `labs:
+planned` are reported rather than failed — most Themes carry no Lab yet, and a
+check that is red the day it lands is one everyone learns to skip.
 
 Lab URLs are audited for liveness by `tests/validate_learning_resources.py` on
 the same terms as Question URLs, so a dead lab link fails CI. Lab audit scope is

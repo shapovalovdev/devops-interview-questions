@@ -111,10 +111,71 @@ def test_contributing_documents_how_to_run_the_checks() -> None:
     )
 
 
+def test_no_document_denies_that_labs_are_published() -> None:
+    """The claim that Labs are unpublished was written down twice.
+
+    `tests/validate_labs.py`'s docstring said it, and issue 198 corrected it
+    there. `TEST_PLAN.md` said the same thing in its own words -- "a lab is a
+    repository artifact and is deliberately absent from `assets/questions.js`
+    and the site filters" -- and stayed wrong, because fixing one copy of a
+    duplicated claim is not fixing the claim.
+
+    Both halves are false: `scripts/generate_question_catalog.py` writes every
+    Lab into `window.labs`, and `assets/site.js` renders them. The cost was not
+    cosmetic: while the prose said Labs were unpublished, nobody read Lab text
+    as public content, and six Labs shipped naming four companies (196).
+
+    This checks every document, so the next copy cannot hide in a third file.
+    """
+    documents = {
+        path: path.read_text(encoding="utf-8")
+        for path in (TEST_PLAN, CONTRIBUTING, ROOT / "CONTEXT.md", ROOT / "README.md")
+        if path.is_file()
+    }
+    denials = (
+        r"absent from\s+`?assets/questions\.js",
+        r"not listed in\s+`?assets/questions\.js",
+        r"does not appear in the site",
+        r"is not published",
+    )
+    failures = []
+    for path, prose in documents.items():
+        flattened = " ".join(prose.split())
+        for pattern in denials:
+            match = re.search(pattern, flattened, re.IGNORECASE)
+            if match:
+                failures.append(f"  {path.name}: {match.group(0)!r}")
+    assert not failures, (
+        "a document claims Labs are not published, which is false -- see "
+        "scripts/generate_question_catalog.py (window.labs) and assets/site.js:\n"
+        + "\n".join(failures)
+    )
+
+
+def test_the_lab_coverage_policy_cites_the_manifest() -> None:
+    """Same rule as the Coverage target: cite the authority, do not restate it."""
+    policy = json.loads(MANIFEST.read_text(encoding="utf-8"))["lab_policy"]
+    assert policy["count_semantics"] == "floor", (
+        "this test encodes a floor policy; the manifest now says "
+        f"{policy['count_semantics']!r} and this check needs rewriting"
+    )
+    prose = TEST_PLAN.read_text(encoding="utf-8")
+    assert "lab_policy" in prose, (
+        "TEST_PLAN.md must cite config/content-manifest.json's lab_policy as the authority on "
+        "Lab coverage rather than restating a count that can drift"
+    )
+    assert "declared-themes-only" in prose, (
+        "TEST_PLAN.md must say that the Lab floor is enforced only for Themes that declare "
+        "coverage, or a reader will expect it to fail on every Theme without a Lab"
+    )
+
+
 def main() -> None:
     test_test_plan_does_not_describe_the_coverage_target_as_exact()
     test_contributing_publishes_every_difficulty_the_validator_accepts()
     test_contributing_documents_how_to_run_the_checks()
+    test_no_document_denies_that_labs_are_published()
+    test_the_lab_coverage_policy_cites_the_manifest()
     print("Contributor docs agree with the validators they describe.")
 
 
