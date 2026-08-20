@@ -86,10 +86,18 @@ deploy the isolated namespace, smoke the API, and remove only that namespace:
 scripts/smoke_k3d_content_api.sh
 ```
 
-The script requires a k3d cluster named `proto` (context `k3d-proto`), Docker, Helm, Kustomize, and kubectl.
-It passes `SOURCE_COMMIT` and `BUILD_TIMESTAMP` to `Dockerfile.api`, uses k3d's default image-import mode,
-confirms the commit-tagged image is visible in the node's `k8s.io` containerd namespace, checks
-`/api/v1/health`, `/api/v1/meta`, and `X-Content-Snapshot`, and always deletes `content-api-206` on exit.
+The script requires a k3d cluster named `proto` (context `k3d-proto`), Docker, Helm, Kustomize, kubectl,
+curl, Perl, and Python 3. It refuses tracked or untracked worktree changes and, when passed an optional
+commit, requires that exact commit to be checked out. It passes that commit's `SOURCE_COMMIT` and
+`BUILD_TIMESTAMP` to `Dockerfile.api`, uses k3d's default image-import mode, and confirms the tagged image
+is visible in the node's `k8s.io` containerd namespace. The smoke then checks `/api/v1/health`, proves
+`meta.source_commit` is the built commit, proves `X-Content-Snapshot` equals `meta.content_digest`, and
+fails on any container restart. Each run creates a unique namespace and deletes it only while its UID
+still matches the namespace that run created.
+
+The chart starts the API against `/srv/data/content.db` baked into the image. The SQLite read connection
+uses `mode=ro`, and the absent Write credential rejects mutations before the lazy writable connection can
+open, so the Pod needs neither an init container nor a writable corpus volume under `readOnlyRootFilesystem`.
 The k3d overlay is the only local render allowed to use its commit tag; every non-local chart render must
 supply `image.digest` as `sha256:<64 lowercase hexadecimal characters>` and is rendered as `repository@digest`.
 
