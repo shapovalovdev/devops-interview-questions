@@ -418,21 +418,9 @@ def read_learning_paths(root: Path, question_ids: set[str]) -> tuple[dict, ...]:
     # 1. Track manifests in tracks/
     tracks_dir = root / "tracks"
     if tracks_dir.is_dir():
-        track_files = sorted(tracks_dir.glob("*.json"))
-        if not track_files:
+        for track_path in sorted(tracks_dir.glob("*.json")):
             try:
-                import yaml  # noqa: F401
-                track_files = sorted(list(tracks_dir.glob("*.yml")) + list(tracks_dir.glob("*.yaml")))
-            except ImportError:
-                track_files = []
-
-        for track_path in track_files:
-            try:
-                if track_path.suffix == ".json":
-                    data = json.loads(track_path.read_text(encoding="utf-8"))
-                else:
-                    import yaml
-                    data = yaml.safe_load(track_path.read_text(encoding="utf-8"))
+                data = json.loads(track_path.read_text(encoding="utf-8"))
             except Exception as err:
                 raise CorpusError(f"{track_path}: cannot parse track manifest ({err})") from err
 

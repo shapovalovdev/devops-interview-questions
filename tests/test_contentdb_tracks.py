@@ -201,11 +201,61 @@ class ContentDbTracksTest(unittest.TestCase):
                 },
             ],
         }
-        self.write_track_manifest("dup_step.yml", dup_step_track)
+        self.write_track_manifest("dup_step.json", dup_step_track)
 
         with self.assertRaises(CorpusError) as ctx:
             read_corpus(self.root)
         self.assertIn("duplicate step id", str(ctx.exception).lower())
+
+    def test_invalid_json_raises_corpus_error(self):
+        tracks_dir = self.root / "tracks"
+        tracks_dir.mkdir(parents=True, exist_ok=True)
+        (tracks_dir / "invalid.json").write_text("{not valid json", encoding="utf-8")
+
+        with self.assertRaises(CorpusError) as ctx:
+            read_corpus(self.root)
+        self.assertIn("cannot parse track manifest", str(ctx.exception))
+
+    def test_non_dict_manifest_root_raises_corpus_error(self):
+        tracks_dir = self.root / "tracks"
+        tracks_dir.mkdir(parents=True, exist_ok=True)
+        (tracks_dir / "array.json").write_text('["not", "a", "dict"]', encoding="utf-8")
+
+        with self.assertRaises(CorpusError) as ctx:
+            read_corpus(self.root)
+        self.assertIn("must be a dictionary", str(ctx.exception))
+
+    def test_non_list_steps_raises_corpus_error(self):
+        invalid_steps = {
+            "id": "bad-steps",
+            "name": "Bad Steps",
+            "description": "steps is not a list",
+            "steps": "invalid",
+        }
+        self.write_track_manifest("bad_steps.json", invalid_steps)
+
+        with self.assertRaises(CorpusError) as ctx:
+            read_corpus(self.root)
+        self.assertIn("'steps' must be a list", str(ctx.exception))
+
+    def test_step_without_question_id_allowed(self):
+        concept_only_track = {
+            "id": "concept-track",
+            "name": "Concept Track",
+            "description": "Step with no question_id",
+            "steps": [
+                {
+                    "id": "step-theory",
+                    "title": "Pure Theory",
+                    "difficulty": "junior",
+                    "theme": "kubernetes",
+                    "concepts": ["Architecture"],
+                }
+            ],
+        }
+        self.write_track_manifest("concept.json", concept_only_track)
+        corpus = read_corpus(self.root)
+        self.assertTrue(any(p["slug"] == "concept-track" for p in corpus.learning_paths))
 
 
 if __name__ == "__main__":
