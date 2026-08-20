@@ -23,12 +23,12 @@ What should happen to an application’s NFS locks after an NFS server restart?
 ## References
 
 - [RFC 8881: NFS state and crash recovery](https://www.rfc-editor.org/rfc/rfc8881.html)
-- Further reading (blog): [Linux NFS project resources](https://www.spinics.net/lists/linux-nfs/)
+- Further reading (blog): [linux-nfs mailing list archive](https://lore.kernel.org/linux-nfs/)
 
 ## What to learn next
 
 - Official documentation: [Linux NFS client guide](https://docs.kernel.org/admin-guide/nfs/index.html)
 - Manual or specification: [RFC 8881: NFSv4.1](https://www.rfc-editor.org/rfc/rfc8881.html)
-- Maintainer or personal blog: [Linux NFS project resources](https://www.spinics.net/lists/linux-nfs/)
+- Maintainer or personal blog: [linux-nfs mailing list archive](https://lore.kernel.org/linux-nfs/)
 - Technical blog: [Red Hat Blog: NFS](https://www.redhat.com/en/blog/channel/red-hat-enterprise-linux)
 - Hands-on guide: [Ubuntu Server: NFS](https://ubuntu.com/server/docs/how-to/networking/install-nfs/)
